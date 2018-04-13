@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="爬虫小记">
+<meta name="keywords" content="python, spider, report">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用 python 实现自动抢报告">
+<meta property="og:url" content="http://cycoe.coding.me/Personal-Page/2017/10/28/利用python实现自动抢报告/index.html">
+<meta property="og:site_name" content="Cycoe&#39;s Home Page">
+<meta property="og:description" content="爬虫小记">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/ui.png">
+<meta property="og:updated_time" content="2018-04-13T03:37:54.636Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="利用 python 实现自动抢报告">
+<meta name="twitter:description" content="爬虫小记">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/ui.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://cycoe.coding.me/Personal-Page/2017/10/28/利用python实现自动抢报告/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>利用 python 实现自动抢报告 | Cycoe's Home Page</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cycoe's Home Page</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Simple is better than complex. Complex is better than complicated.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.coding.me/Personal-Page/2017/10/28/利用python实现自动抢报告/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cycoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cycoe's Home Page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">利用 python 实现自动抢报告
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-28T00:00:00+08:00">2017-10-28</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/spider/" itemprop="url" rel="index"><span itemprop="name">spider</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">爬虫小记</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>上了研究生才知道北化的研究生每年需要听 15 个报告，而且最重要的是这些报告都是算分数的，而且更重要的是你的分数是和最后的奖学金评定挂钩的。这也就决定了大家为了那么点报告分数挤教务网都挤破了头（北化的服务器大家都懂），虽然场面不如开学抢课那么火爆，却需要长时间挂着教务网疯狂刷新，为了交换个讲座也需要大半夜起来，生怕被别人截胡。为了解放生产力，同时熟悉爬虫技术、神经网络技术、装饰器等进阶内容，写了这个爬虫来练练手。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/ui.png" alt="ui"></p>
+<h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a><strong>声明</strong></h2><p><strong>该爬虫是本人(cycoe)练习 python 编程技巧和神经网络所编写，使用造成的任何责任与本人无关</strong></p>
+<p><a href="https://github.com/cycoe/class_robber" target="_blank" rel="noopener">项目地址</a></p>
+<h2 id="问题分解"><a href="#问题分解" class="headerlink" title="问题分解"></a>问题分解</h2><p>想要顺利的拿到抢讲座的 session，需要如下的步骤：</p>
+<ol>
+<li>处理登陆问题，包括处理验证码、页面表单和 cookies</li>
+<li>获取报告列表</li>
+<li>获取抢报告的地址</li>
+<li>提交表单数据</li>
+</ol>
+<h2 id="框架设计"><a href="#框架设计" class="headerlink" title="框架设计"></a>框架设计</h2><p>好的框架应具有良好的可维护性和扩展性，目前正朝着这个方向努力</p>
+<ol>
+<li>采用交互式的命令行设计，分离 login, robSpeech 等方法</li>
+<li>将 login, robSpeech, robClass 等方法封装成 Robber 对象</li>
+<li>将底层的 requests 封装成 Spider 对象</li>
+</ol>
+<h2 id="逐步解决"><a href="#逐步解决" class="headerlink" title="逐步解决"></a>逐步解决</h2><ol>
+<li><p>通过 firefox 或 chrome 的 debug 模式可以查看在访问网页时的 request 和 response。仿照浏览器在访问教务网时提交的 headers 构造如下字典</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Spider</span><span class="params">(object)</span>:</span></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">formatHeaders</span><span class="params">(referer=None, contentLength=None, originHost=None)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        封装请求的 headers</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        :param referer: 跳转标记，告诉 web 服务器自己是从哪个页面跳转过来的</span></span><br><span class="line"><span class="string">        :param contentLength: 作用未知</span></span><br><span class="line"><span class="string">        :param originHost: 原始主机地址</span></span><br><span class="line"><span class="string">        :returns: headers 字典</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        headers = &#123;</span><br><span class="line">            <span class="string">'Accept'</span>: <span class="string">'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'</span>,</span><br><span class="line">            <span class="string">'Accept-Encoding'</span>: <span class="string">'gzip, deflate'</span>,</span><br><span class="line">            <span class="string">'Accept-Language'</span>: <span class="string">'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7'</span>,</span><br><span class="line">            <span class="string">'Cache-Control'</span>: <span class="string">'max-age=0'</span>,</span><br><span class="line">            <span class="string">'Connection'</span>: <span class="string">'keep-alive'</span>,</span><br><span class="line">            <span class="string">'Content-Type'</span>: <span class="string">'application/x-www-form-urlencoded'</span>,</span><br><span class="line">            <span class="string">'DNT'</span>: <span class="string">'1'</span>,</span><br><span class="line">            <span class="string">'Host'</span>: <span class="string">'graduate.buct.edu.cn:8080'</span>,</span><br><span class="line">            <span class="string">'Upgrade-Insecure-Requests'</span>: <span class="string">'1'</span>,</span><br><span class="line">            <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (X11;Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36'</span>,</span><br><span class="line">            <span class="string">'Referer'</span>: referer,</span><br><span class="line">            <span class="string">'Content-Length'</span>: contentLength,</span><br><span class="line">            <span class="string">'Origin'</span>: originHost,</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>封装 request 请求需要的 prepareBody 对象，<code>response = session.send(prepareBody)</code>，response 就是我们拿到的服务器的响应对象，可通过 <code>response.text</code> 得到网页内容，<code>response.status_code</code> 得到状态码，<code>response.url</code> 得到响应的地址。</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">prepare</span><span class="params">(self,</span></span></span><br><span class="line"><span class="function"><span class="params">            referer=None,</span></span></span><br><span class="line"><span class="function"><span class="params">            originHost=None,</span></span></span><br><span class="line"><span class="function"><span class="params">            method=<span class="string">'GET'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">            url=None,</span></span></span><br><span class="line"><span class="function"><span class="params">            data=None,</span></span></span><br><span class="line"><span class="function"><span class="params">            params=None)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    生成用于请求的 prepare</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    :param referer: 跳转标记，告诉 web 服务器自己是从哪个页面跳转过来的</span></span><br><span class="line"><span class="string">    :param originHost: 原始主机地址</span></span><br><span class="line"><span class="string">    :param method: 请求方法 in ['GET', 'POST']</span></span><br><span class="line"><span class="string">    :param url: 请求的 url 地址</span></span><br><span class="line"><span class="string">    :param data: 封装的 post 数据</span></span><br><span class="line"><span class="string">    :param params: post 参数</span></span><br><span class="line"><span class="string">    :return: prepare 对象</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    headers = self.formatHeaders(referer=referer, originHost=originHost)</span><br><span class="line">    req = Request(method, url, headers=headers, data=data, params=params)</span><br><span class="line">    <span class="keyword">return</span> self.session.prepare_request(req)</span><br><span class="line"></span><br><span class="line">prepareBody = prepare(referer=<span class="keyword">None</span>,</span><br><span class="line">                       originHost=<span class="keyword">None</span>,</span><br><span class="line">                       method=<span class="string">'GET'</span>,</span><br><span class="line">                       url=UrlBean.jwglLoginUrl,</span><br><span class="line">                       data=<span class="keyword">None</span>,</span><br><span class="line">                       params=<span class="keyword">None</span>)</span><br><span class="line">response = session.send(prepareBody)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>请求登录网址，提交表单数据。根据 response 返回的响应体内容判断是否登陆成功</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getVIEWSTATE</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    正则获取页面的 __VIEWSTATE</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    :returns: 页面的 __VIEWSTATE</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    VIEWSTATE = re.findall(<span class="string">'&lt;.*name="__VIEWSTATE".*value="(.*)?".*/&gt;'</span>, self.response.text)</span><br><span class="line">    <span class="keyword">if</span> len(VIEWSTATE) &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> VIEWSTATE</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getEVENTVALIDATION</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    正则获取页面的 __EVENTVALIDATION</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    :returns: 页面的 __EVENTVALIDATION</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    EVENTVALIDATION = re.findall(<span class="string">'&lt;.*name="__EVENTVALIDATION".*value="(.*)?".*/&gt;'</span>, self.response.text)</span><br><span class="line">    <span class="keyword">if</span> len(EVENTVALIDATION) &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> EVENTVALIDATION</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    登录教务网</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 在登录前请求一次登录页面，获取网页的隐藏表单数据</span></span><br><span class="line">    prepareBody = self.prepare(referer=<span class="keyword">None</span>,</span><br><span class="line">                               originHost=<span class="keyword">None</span>,</span><br><span class="line">                               method=<span class="string">'GET'</span>,</span><br><span class="line">                               url=UrlBean.jwglLoginUrl,</span><br><span class="line">                               data=<span class="keyword">None</span>,</span><br><span class="line">                               params=<span class="keyword">None</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 登陆主循环</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        self.response = self.session.send(prepareBody)</span><br><span class="line">        self.VIEWSTATE = self.getVIEWSTATE()</span><br><span class="line">        self.EVENTVALIDATION = self.getEVENTVALIDATION()</span><br><span class="line">        <span class="keyword">if</span> self.VIEWSTATE <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span> <span class="keyword">and</span> self.EVENTVALIDATION <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        Logger.log(<span class="string">"Retrying fetching login page viewState..."</span>, level=Logger.warning)</span><br><span class="line"></span><br><span class="line">    reInput = <span class="keyword">True</span>      <span class="comment"># 是否需要重新输入用户名和密码</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        <span class="comment"># 输入用户名和密码</span></span><br><span class="line">        <span class="keyword">if</span> reInput:</span><br><span class="line">            <span class="keyword">if</span> Config.checkUserFile():</span><br><span class="line">                Config.readUserInfo()</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                Config.userName = input(<span class="string">"&gt; UserName: "</span>)</span><br><span class="line">                Config.password = input(<span class="string">"&gt; Password: "</span>)</span><br><span class="line">            reInput = <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">        prepareBody = self.prepare(referer=UrlBean.jwglLoginUrl,</span><br><span class="line">                                   originHost=<span class="keyword">None</span>,</span><br><span class="line">                                   method=<span class="string">'GET'</span>,</span><br><span class="line">                                   url=UrlBean.verifyCodeUrl,</span><br><span class="line">                                   data=<span class="keyword">None</span>,</span><br><span class="line">                                   params=<span class="keyword">None</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">            codeImg = self.session.send(prepareBody)  <span class="comment"># 获取验证码图片</span></span><br><span class="line">            <span class="keyword">if</span> codeImg.status_code == <span class="number">200</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                Logger.log(<span class="string">"retrying fetching vertify code..."</span>, level=Logger.warning)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> open(<span class="string">'check.gif'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> fr:  <span class="comment"># 保存验证码图片</span></span><br><span class="line">            <span class="keyword">for</span> chunk <span class="keyword">in</span> codeImg:</span><br><span class="line">                fr.write(chunk)</span><br><span class="line"></span><br><span class="line">        print_vertify_code()</span><br><span class="line">        verCode = input(<span class="string">"input verify code:"</span>)</span><br><span class="line">        <span class="comment"># verCode = self.classifier.recognizer("check.gif")  # 识别验证码</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 构造登陆表单</span></span><br><span class="line">        postData = &#123;</span><br><span class="line">            <span class="string">'__VIEWSTATE'</span>: self.VIEWSTATE,</span><br><span class="line">            <span class="string">'__EVENTVALIDATION'</span>: self.EVENTVALIDATION,</span><br><span class="line">            <span class="string">'_ctl0:txtusername'</span>: Config.userName,</span><br><span class="line">            <span class="string">'_ctl0:txtpassword'</span>: Config.password,</span><br><span class="line">            <span class="string">'_ctl0:txtyzm'</span>: verCode,</span><br><span class="line">            <span class="string">'_ctl0:ImageButton1.x'</span>: <span class="string">'43'</span>,</span><br><span class="line">            <span class="string">'_ctl0:ImageButton1.y'</span>: <span class="string">'21'</span>,</span><br><span class="line">        &#125;</span><br><span class="line">        prepareBody = self.prepare(referer=UrlBean.jwglLoginUrl,</span><br><span class="line">                                   originHost=UrlBean.jwglOriginUrl,</span><br><span class="line">                                   method=<span class="string">'POST'</span>,</span><br><span class="line">                                   url=UrlBean.jwglLoginUrl,</span><br><span class="line">                                   data=postData,</span><br><span class="line">                                   params=<span class="keyword">None</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 获取登陆 response</span></span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">            self.response = self.session.send(prepareBody)</span><br><span class="line">            <span class="keyword">if</span> self.response.status_code == <span class="number">200</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 根据返回的 html 判断是否登录成功</span></span><br><span class="line">        <span class="keyword">if</span> re.search(<span class="string">'用户名不存在'</span>, self.response.text):</span><br><span class="line">            Logger.log(<span class="string">'No such a user!'</span>, [<span class="string">'Cleaning password file'</span>], level=Logger.error)</span><br><span class="line">            print(OutputFormater.table([[<span class="string">'No such a user!'</span>], [<span class="string">'Cleaning password file'</span>]], padding=<span class="number">2</span>))</span><br><span class="line">            Config.cleanUserInfo()</span><br><span class="line">            reInput = <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">elif</span> re.search(<span class="string">'密码错误'</span>, self.response.text):</span><br><span class="line">            Logger.log(<span class="string">'Wrong password!'</span>, [<span class="string">'Cleaning password file'</span>], level=Logger.error)</span><br><span class="line">            print(OutputFormater.table([[<span class="string">'Wrong password!'</span>], [<span class="string">'Cleaning password file'</span>]], padding=<span class="number">2</span>))</span><br><span class="line">            Config.cleanUserInfo()</span><br><span class="line">            reInput = <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">elif</span> re.search(<span class="string">'请输入验证码'</span>, self.response.text):</span><br><span class="line">            Logger.log(<span class="string">'Please input vertify code!'</span>, [<span class="string">'Retrying...'</span>], level=Logger.error)</span><br><span class="line">            print(OutputFormater.table([[<span class="string">'Please input vertify code!'</span>], [<span class="string">'Retrying...'</span>]], padding=<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">elif</span> re.search(<span class="string">'验证码错误'</span>, self.response.text):</span><br><span class="line">            Logger.log(<span class="string">'Wrong vertify code!'</span>, [<span class="string">'Retrying...'</span>], level=Logger.error)</span><br><span class="line">            print(OutputFormater.table([[<span class="string">'Wrong vertify code!'</span>], [<span class="string">'Retrying...'</span>]], padding=<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            Logger.log(<span class="string">'Login successfully!'</span>, [<span class="string">'UserName: '</span> + Config.userName, <span class="string">'Password: '</span> + Config.password], level=Logger.warning)</span><br><span class="line">            print(OutputFormater.table([[<span class="string">'Login successfully!'</span>]], padding=<span class="number">2</span>))</span><br><span class="line">            Config.dumpUserInfo()</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>拿到已登陆的 session 后，抢课和抢报告都是非常方便的，只要按照浏览器提交的数据构造 headers 和表单数据后就可以获得正常的 response</p>
+</li>
+</ol>
+<h2 id="暗坑总结"><a href="#暗坑总结" class="headerlink" title="暗坑总结"></a>暗坑总结</h2><ol>
+<li>刚开始抓到的网页内容中文都是乱码，后来 google 解决，发现是 python 的编码和 asp 框架的编码问题造成的，python 中的编码问题真的是让人头大</li>
+<li>由于网站的防爬虫设计，会在 html 源码中插入很多隐藏的表单数据，如此处的 <code>__VIEWSTATE</code> 和 <code>__EVENTVALIDATION</code>，这两个是非常重要的参数。否则无法成功登陆</li>
+<li>两次访问之间要有一定的时间间隔，如此处用了一个随机函数的闭包来获得随机时间的间隔</li>
+<li>使用装饰器解决了在访问抢课网页前判断登录的问题</li>
+<li>接下来将循环封装成函数，加入最大循环次数和超时</li>
+<li>完善边界检查和异常处理</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/09/Archlinux安装小记/" rel="next" title="Archlinux 安装小记">
+                <i class="fa fa-chevron-left"></i> Archlinux 安装小记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/03/如何提高抢到报告的概率/" rel="prev" title="如何提高抢到报告的概率？">
+                如何提高抢到报告的概率？ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Cycoe</p>
+              <p class="site-description motion-element" itemprop="description">Cycoe's Personal Blog</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#声明"><span class="nav-number">1.</span> <span class="nav-text">声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题分解"><span class="nav-number">2.</span> <span class="nav-text">问题分解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#框架设计"><span class="nav-number">3.</span> <span class="nav-text">框架设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逐步解决"><span class="nav-number">4.</span> <span class="nav-text">逐步解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#暗坑总结"><span class="nav-number">5.</span> <span class="nav-text">暗坑总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cycoe</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a> v6.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

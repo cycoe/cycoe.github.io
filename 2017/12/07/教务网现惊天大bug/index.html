@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="爬虫小记">
+<meta name="keywords" content="python, spider, sploit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="教务网现惊天大 bug？！谈谈弱密码如何暴露你的信息">
+<meta property="og:url" content="http://cycoe.coding.me/Personal-Page/2017/12/07/教务网现惊天大bug/index.html">
+<meta property="og:site_name" content="Cycoe&#39;s Home Page">
+<meta property="og:description" content="爬虫小记">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/source_code.png">
+<meta property="og:updated_time" content="2018-04-13T03:38:23.955Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="教务网现惊天大 bug？！谈谈弱密码如何暴露你的信息">
+<meta name="twitter:description" content="爬虫小记">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://cycoe.coding.me/Personal-Page/2017/12/07/教务网现惊天大bug/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>教务网现惊天大 bug？！谈谈弱密码如何暴露你的信息 | Cycoe's Home Page</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cycoe's Home Page</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Simple is better than complex. Complex is better than complicated.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.coding.me/Personal-Page/2017/12/07/教务网现惊天大bug/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cycoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cycoe's Home Page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">教务网现惊天大 bug？！谈谈弱密码如何暴露你的信息
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-07T00:00:00+08:00">2017-12-07</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/spider/" itemprop="url" rel="index"><span itemprop="name">spider</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/spider/sploit/" itemprop="url" rel="index"><span itemprop="name">sploit</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">爬虫小记</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="漏洞发现"><a href="#漏洞发现" class="headerlink" title="漏洞发现"></a>漏洞发现</h2><p>最近在为之前写的爬虫做批注的时候发现了一段有趣的代码，代码如下<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">MisUtils.initAttempt()</span><br><span class="line"><span class="keyword">while</span> MisUtils.descAttempt():</span><br><span class="line">    self.response = self.session.send(prepareBody)</span><br><span class="line">    <span class="keyword">if</span> self.response.status_code == <span class="number">200</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> MisUtils.descAttempt():</span><br><span class="line">    Logger.log(<span class="string">'Up to max attempts!'</span>, [<span class="string">'Maybe remote server unreachable'</span>], level=Logger.error)</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> re.search(<span class="string">'用户名不存在'</span>, self.response.text):</span><br><span class="line">    print(Logger.log(<span class="string">'No such a user!'</span>, [<span class="string">'Cleaning password file'</span>], level=Logger.error))</span><br><span class="line">    reInput = <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> re.search(<span class="string">'密码错误'</span>, self.response.text):</span><br><span class="line">    print(Logger.log(<span class="string">'Wrong password!'</span>, [<span class="string">'Cleaning password file'</span>], level=Logger.error))</span><br><span class="line">    reInput = <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> re.search(<span class="string">'请输入验证码'</span>, self.response.text):</span><br><span class="line">    print(Logger.log(<span class="string">'Please input vertify code!'</span>, [<span class="string">'Retrying...'</span>], level=Logger.error))</span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> re.search(<span class="string">'验证码错误'</span>, self.response.text):</span><br><span class="line">    print(Logger.log(<span class="string">'Wrong vertify code!'</span>, [<span class="string">'Retrying...'</span>], level=Logger.error))</span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(Logger.log(<span class="string">'Login successfully!'</span>, [<span class="string">'UserName: '</span> + MisUtils.confDict[<span class="string">'userName'</span>]], level=Logger.error))</span><br><span class="line">    MisUtils.dumpConfFile()</span><br><span class="line">    <span class="keyword">break</span></span><br></pre></td></tr></table></figure></p>
+<p>当时写的时候没注意，现在回过头来看看，惊奇地发现教务网对于用户名和密码的验证顺序是如下的优先级：</p>
+<ol>
+<li>首先验证用户名是否存在</li>
+<li>再验证密码是否正确</li>
+<li>然后验证码是否为空</li>
+<li>最后才是验证码是否正确</li>
+</ol>
+<p>这。。。我只想说，谁写的验证逻辑。。。我要这验证码有何用？！！！</p>
+<h2 id="漏洞验证"><a href="#漏洞验证" class="headerlink" title="漏洞验证"></a>漏洞验证</h2><p>接下来去教务网上验证一下整个验证逻辑是否如所想的那样</p>
+<ol>
+<li>首先在用户名输入框中随意输入一串数字，并保持密码和验证码都为空，尝试登录发现弹出“用户名不存在”的 JS 脚本<br><img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login1.png" alt="login1"></li>
+<li>再输入我正确的学号，仍保持密码和验证码都为空，尝试登录弹出“密码错误”的 JS 脚本<br><img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login2.png" alt="login2"></li>
+<li>输入正确的学号和密码，并保持验证码为空，尝试登录弹出“请输入验证码”的 JS 脚本<br><img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login3.png" alt="login3"></li>
+<li>输入正确的学号和密码，但是输入错误的验证码，尝试登录弹出“验证码错误”的 JS 脚本<br><img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login4.png" alt="login4"></li>
+</ol>
+<p>通过以上流程，可以总结得以下两条有价值的信息：</p>
+<ol>
+<li>当你输入的用户名不存在时，不管密码和验证码输的啥，总是会提示“用户名不存在”；当你输入的用户名存在，并且密码为空时，会提示“密码错误”。</li>
+<li>当你输入的用户名存在，但是密码错误时，不管验证码输的啥，总会提示“密码错误”；当输入的密码正确并且验证码为空时，会提示“请输入验证码”。</li>
+</ol>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>通过上面的两条信息可以至少做到两件事情</p>
+<h3 id="枚举用户名"><a href="#枚举用户名" class="headerlink" title="枚举用户名"></a>枚举用户名</h3><p>目前所有在读研究生的入学时间大部分为 2013-2017 年，学号的前四位为入学年份，中间三位与所在的专业有关，最后三位为流水号。对所有形如 2013XXXXXX 的学号进行尝试登录，根据信息 1，能够枚举出所有 13 年入学的学生学号。</p>
+<h3 id="暴破"><a href="#暴破" class="headerlink" title="暴破"></a>暴破</h3><p>利用上一步得到的用户名列表，再配合字典就可以进行在线的密码暴破，这种破解方法一般来说是非常低效的，严重依赖于网络状况和服务器的机能。尝试发现在单线程的情况下，每秒只能对服务器进行 1k 次左右的访问。也就是说如果使用 16 位的数字加字母作为密码，最多需要 2.5 百万亿年的时间才能成功破解。看起来是非常安全吧。<br>然而实际情况又是什么样呢？教务网的初始密码为身份证号中的生日，一般来说我们在第一次登录时都会改密码，但还总会有人抱着侥幸的心理用初始密码，这就为暴破带来了捷径。<br>以生日作为密码具有非常明显的结构，如 2017 年入学学生的生日大多在 1994-1996 之间，利用下面简单的字典生成器可得到 1994-1996 年所有的日期列表：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">big_month_ = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">10</span>, <span class="number">12</span>]</span><br><span class="line">small_month_ = [<span class="number">4</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">11</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen_</span><span class="params">(begin, end)</span>:</span></span><br><span class="line">    password_ = []</span><br><span class="line">    <span class="keyword">for</span> year <span class="keyword">in</span> range(begin, end + <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">for</span> month <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">13</span>):</span><br><span class="line">            <span class="keyword">if</span> month <span class="keyword">in</span> big_month_:</span><br><span class="line">                month_len = <span class="number">31</span></span><br><span class="line">            <span class="keyword">elif</span> month <span class="keyword">in</span> small_month_:</span><br><span class="line">                month_len = <span class="number">30</span></span><br><span class="line">            <span class="keyword">elif</span> month == <span class="number">2</span>:</span><br><span class="line">                <span class="keyword">if</span> year % <span class="number">4</span> != <span class="number">0</span> <span class="keyword">or</span> (year % <span class="number">100</span> == <span class="number">0</span> <span class="keyword">and</span> year % <span class="number">400</span> != <span class="number">0</span>):</span><br><span class="line">                    month_len = <span class="number">28</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    month_len = <span class="number">29</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                month_len = <span class="number">31</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> day <span class="keyword">in</span> range(<span class="number">1</span>, month_len + <span class="number">1</span>):</span><br><span class="line">                password_.append(str(year) + str(month).zfill(<span class="number">2</span>) + str(day).zfill(<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'password.dict'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> fr:</span><br><span class="line">        <span class="keyword">for</span> password <span class="keyword">in</span> password_:</span><br><span class="line">            fr.write(password)</span><br><span class="line">            fr.write(<span class="string">'\n'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    gen_(<span class="number">1994</span>, <span class="number">1996</span>)</span><br></pre></td></tr></table></figure></p>
+<p>利用得到的用户名列表和密码字典就可以对所有未修改的用户密码进行暴破。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>最后结果怎么样？使用 100 个线程，并设置单个线程的访问频率为 1 次/秒进行暴破，10 分钟破解出了接近 40 个用户密码！并且平均每四个人里就有一个人没有修改密码！<br>可能很多人会觉得教务网密码不涉及钱财也就不那么在意。但其实教务网上有详细的个人资料，包括你的姓名、照片和家庭住址。另外还有你的课表，你某时某刻会在哪个教室出现都会被人知道啊！<br>所以，弱密码的危害显而易见，很多的信息泄漏也都是由弱密码引起的。给自己换个复杂点的密码吧，毕竟密码这种东西一寸长一寸强。现在也快到年底了，骗子也要赚钱备年货了，希望大家能够保护好自己的信息，不要给骗子可乘之机。<br>最后讨伐一下这个软件提供商，一个商业化的系统里面竟然有如此明显的逻辑漏洞，只希望快点被修复吧。<br><img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/source_code.png" alt="source_code"></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/03/如何提高抢到报告的概率/" rel="next" title="如何提高抢到报告的概率？">
+                <i class="fa fa-chevron-left"></i> 如何提高抢到报告的概率？
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/12/template/" rel="prev" title="template page">
+                template page <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Cycoe</p>
+              <p class="site-description motion-element" itemprop="description">Cycoe's Personal Blog</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞发现"><span class="nav-number">1.</span> <span class="nav-text">漏洞发现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞验证"><span class="nav-number">2.</span> <span class="nav-text">漏洞验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞利用"><span class="nav-number">3.</span> <span class="nav-text">漏洞利用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#枚举用户名"><span class="nav-number">3.1.</span> <span class="nav-text">枚举用户名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#暴破"><span class="nav-number">3.2.</span> <span class="nav-text">暴破</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cycoe</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a> v6.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
