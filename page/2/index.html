@@ -629,6 +629,181 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2017/03/11/如何同步GitHub上游更新/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cycoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cycoe's Home Page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/03/11/如何同步GitHub上游更新/" itemprop="url">
+                  如何同步GitHub上游更新
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-11T00:00:00+08:00">2017-03-11</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/GitHub/" itemprop="url" rel="index"><span itemprop="name">GitHub</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/11/如何同步GitHub上游更新/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/03/11/如何同步GitHub上游更新/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在 GitHub 上进行项目的团队协作，一般都是 fork 组织仓库到自己的账号下，提交补丁后再提交 Pull Request。上游仓库一直保持更新。<br>由于最近在做 <a href="https://github.com/LCTT/TranslateProject.git" target="_blank" rel="noopener">LCTT</a> 项目，经常需要同步上游其他人的翻译，下面就以 <a href="https://github.com/LCTT/TranslateProject.git" target="_blank" rel="noopener">LCTT</a> 项目为例，记录一下 GitHub 上 fork 仓库同步上游更新的操作。</p>
+<hr>
+<ol>
+<li><p>使用 <code>git remote -v</code> 查看当前的远程仓库别名，输出如下：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LCTT    https://github.com/LCTT/TranslateProject.git (fetch)</span><br><span class="line">LCTT    https://github.com/LCTT/TranslateProject.git (push)</span><br><span class="line">origin  git@github.com:cycoe/TranslateProject.git (fetch)</span><br><span class="line">origin  git@github.com:cycoe/TranslateProject.git (push)</span><br></pre></td></tr></table></figure>
+<p> 其中 <code>origin</code> 是自己账号下的对应远端仓库地址别名， <code>LCTT</code> 是设定好的上游仓库地址的别名。此处 LCTT 项目已经帮我们设置好了就不需要另外设置。<br> 如果没有设置上游仓库地址，可通过 <code>git remote add 上游仓库别名 上游仓库地址</code> 命令来设置上游仓库的别名。</p>
+</li>
+<li><p>同步上游仓库更新到本地，并合并更新到本地仓库 master 分支</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git fetch LCTT          <span class="comment">#从上游仓库抓取更新</span></span><br><span class="line">git checkout master     <span class="comment">#切换到 master 分支</span></span><br><span class="line">git merge LCTT/master   <span class="comment">#合并上游更新到 master 分支</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>git push</code> 命令推送本地仓库到 fork 仓库</p>
+</li>
+</ol>
+<hr>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2017/03/11/first-post/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -796,7 +971,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2017/03/11/如何同步GitHub上游更新/">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2017/03/09/用GitHub-Pages和jekyll搭建个人主页/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Cycoe">
@@ -815,8 +990,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/03/11/如何同步GitHub上游更新/" itemprop="url">
-                  如何同步GitHub上游更新
+                <a class="post-title-link" href="/2017/03/09/用GitHub-Pages和jekyll搭建个人主页/" itemprop="url">
+                  用GitHub-Pages和jekyll搭建个人主页
                 </a>
               
             
@@ -836,7 +1011,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-11T00:00:00+08:00">2017-03-11</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-09T00:00:00+08:00">2017-03-09</time>
             
 
             
@@ -872,9 +1047,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/11/如何同步GitHub上游更新/#comments" itemprop="discussionUrl">
+                <a href="/2017/03/09/用GitHub-Pages和jekyll搭建个人主页/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/11/如何同步GitHub上游更新/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/03/09/用GitHub-Pages和jekyll搭建个人主页/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -904,20 +1079,29 @@
       
         
           
-            <p>在 GitHub 上进行项目的团队协作，一般都是 fork 组织仓库到自己的账号下，提交补丁后再提交 Pull Request。上游仓库一直保持更新。<br>由于最近在做 <a href="https://github.com/LCTT/TranslateProject.git" target="_blank" rel="noopener">LCTT</a> 项目，经常需要同步上游其他人的翻译，下面就以 <a href="https://github.com/LCTT/TranslateProject.git" target="_blank" rel="noopener">LCTT</a> 项目为例，记录一下 GitHub 上 fork 仓库同步上游更新的操作。</p>
+            <p>闲来无事，打算搭建个人主页。查阅了各种资料，发现目前最省钱省力的方法就是在 GitHub Pages 上利用 jekyll 静态网页生成器搭建。<br>对于 Web 开发小白来说，自己写网页代码不太现实。 好在GitHub 上有许多其他大神制作好的 jekyll 模板，直接 fork 过来修改一下就可以使用，其余的精力都可以用在文章内容本身上。</p>
 <hr>
-<ol>
-<li><p>使用 <code>git remote -v</code> 查看当前的远程仓库别名，输出如下：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LCTT    https://github.com/LCTT/TranslateProject.git (fetch)</span><br><span class="line">LCTT    https://github.com/LCTT/TranslateProject.git (push)</span><br><span class="line">origin  git@github.com:cycoe/TranslateProject.git (fetch)</span><br><span class="line">origin  git@github.com:cycoe/TranslateProject.git (push)</span><br></pre></td></tr></table></figure>
-<p> 其中 <code>origin</code> 是自己账号下的对应远端仓库地址别名， <code>LCTT</code> 是设定好的上游仓库地址的别名。此处 LCTT 项目已经帮我们设置好了就不需要另外设置。<br> 如果没有设置上游仓库地址，可通过 <code>git remote add 上游仓库别名 上游仓库地址</code> 命令来设置上游仓库的别名。</p>
+<h2 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h2><ol>
+<li>在 GitHub 上找到自己喜欢的 jekyll 模板， fork 到自己的仓库下，然后点击 Setting 修改仓库名称为 <code>username.github.io</code></li>
+<li>将 fork 后的项目 clone 至本地</li>
+<li>打开 <code>_config.yml</code> 文件修改其中的信息，包括网站名称、用户信息等</li>
+<li>将 html 或 MarkDown 格式的文章和博客添加到 <code>_posts</code> 文件夹</li>
+<li><p>使用以下命令即可提交更新并推送更新至远端仓库</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -am <span class="string">"post update"</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>同步上游仓库更新到本地，并合并更新到本地仓库 master 分支</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git fetch LCTT          <span class="comment">#从上游仓库抓取更新</span></span><br><span class="line">git checkout master     <span class="comment">#切换到 master 分支</span></span><br><span class="line">git merge LCTT/master   <span class="comment">#合并上游更新到 master 分支</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>git push</code> 命令推送本地仓库到 fork 仓库</p>
+<li><p>完成以上步骤后，你就应该可以通过 <code>username.github.io</code> 访问你的主页了 :clap: ！</p>
 </li>
 </ol>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><pre><code>comments_provider: duoshuo
+duoshuo_username: cycoe
+disqus_username: cycoe
+lazy_load_duoshuo: true
+</code></pre><p><strong>此处的usrname一定要填自己申请的账号名</strong></p>
+<h2 id="进阶配置"><a href="#进阶配置" class="headerlink" title="进阶配置"></a>进阶配置</h2><ol>
+<li>申请域名</li>
+</ol>
 <hr>
+<p>本博客使用的主题为 <em>mzlogin</em> 的 <a href="https://github.com/mzlogin/mzlogin.github.io" target="_blank" rel="noopener">码志</a> 主题</p>
 
           
         
@@ -1109,190 +1293,6 @@
 <li>硫醇有机锡则具有全能型特征,能同时以各种机制稳定PVC,转化产物也不具催化活性,因此兼具优异的初期和长期热稳定效果。</li>
 </ol>
 <hr>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2017/03/09/用GitHub-Pages和jekyll搭建个人主页/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Cycoe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cycoe's Home Page">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/09/用GitHub-Pages和jekyll搭建个人主页/" itemprop="url">
-                  用GitHub-Pages和jekyll搭建个人主页
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-                
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-09T00:00:00+08:00">2017-03-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/GitHub/" itemprop="url" rel="index"><span itemprop="name">GitHub</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/03/09/用GitHub-Pages和jekyll搭建个人主页/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/09/用GitHub-Pages和jekyll搭建个人主页/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>闲来无事，打算搭建个人主页。查阅了各种资料，发现目前最省钱省力的方法就是在 GitHub Pages 上利用 jekyll 静态网页生成器搭建。<br>对于 Web 开发小白来说，自己写网页代码不太现实。 好在GitHub 上有许多其他大神制作好的 jekyll 模板，直接 fork 过来修改一下就可以使用，其余的精力都可以用在文章内容本身上。</p>
-<hr>
-<h2 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h2><ol>
-<li>在 GitHub 上找到自己喜欢的 jekyll 模板， fork 到自己的仓库下，然后点击 Setting 修改仓库名称为 <code>username.github.io</code></li>
-<li>将 fork 后的项目 clone 至本地</li>
-<li>打开 <code>_config.yml</code> 文件修改其中的信息，包括网站名称、用户信息等</li>
-<li>将 html 或 MarkDown 格式的文章和博客添加到 <code>_posts</code> 文件夹</li>
-<li><p>使用以下命令即可提交更新并推送更新至远端仓库</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -am <span class="string">"post update"</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>完成以上步骤后，你就应该可以通过 <code>username.github.io</code> 访问你的主页了 :clap: ！</p>
-</li>
-</ol>
-<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><pre><code>comments_provider: duoshuo
-duoshuo_username: cycoe
-disqus_username: cycoe
-lazy_load_duoshuo: true
-</code></pre><p><strong>此处的usrname一定要填自己申请的账号名</strong></p>
-<h2 id="进阶配置"><a href="#进阶配置" class="headerlink" title="进阶配置"></a>进阶配置</h2><ol>
-<li>申请域名</li>
-</ol>
-<hr>
-<p>本博客使用的主题为 <em>mzlogin</em> 的 <a href="https://github.com/mzlogin/mzlogin.github.io" target="_blank" rel="noopener">码志</a> 主题</p>
 
           
         
