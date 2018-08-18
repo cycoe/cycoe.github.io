@@ -109,7 +109,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://cycoe.cc/2018/04/14/Spawn-your-blog-site-with-hexo/hexo_dir.png">
 <meta property="og:image" content="http://cycoe.cc/2018/04/14/Spawn-your-blog-site-with-hexo/html_dir.png">
-<meta property="og:updated_time" content="2018-06-05T15:20:28.930Z">
+<meta property="og:updated_time" content="2018-08-17T11:48:47.678Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spawn your blog site with hexo">
 <meta name="twitter:description" content="最近，由於 GitHub 在國內的訪問越來越不穩定，我決定將博客遷移至 Coding（一個國內的代碼託管平臺）。Coding 與 GitHub 類似的可以直接展示靜態的個人主頁，整個配置流程與 GitHub 類似。但是之前使用的是 Jekyll 博客生成器進行構建，Jekyll 的優點是可以直接將代碼 Push 上去，GitHub 可以直接根據 Jekyll 格式的目錄進行部署，無需本地的部署環境">
@@ -432,7 +432,7 @@
 <li>Plugin ‘godlygeek/tabular’</li>
 <li>Plugin ‘gabrielelana/vim-markdown’</li>
 </ul>
-<h2 id="部署博客"><a href="#部署博客" class="headerlink" title="部署博客"></a>部署博客</h2><p>hexo 可以用 <code>$ hexo d -g</code> 命令方便的对博客系统进行部署，但首先需要在博客配置文件 <code>_config.yml</code>  的 Deployment 节中做配置<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span>  <span class="comment"># 此处是部署的方式</span></span><br><span class="line"><span class="attr">  repo:</span>  <span class="comment"># 此处是所有需要部署的仓库，仓库的设置与 Jekyll 类似</span></span><br><span class="line"><span class="attr">      coding:</span> <span class="string">git@git.coding.net:cycoe/cycoe.git</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="部署博客"><a href="#部署博客" class="headerlink" title="部署博客"></a>部署博客</h2><p>hexo 可以用 <code>$ hexo d -g</code> 命令方便的对博客系统进行部署，但首先需要在博客配置文件 <code>_config.yml</code>  的 Deployment 节中做配置<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span> <span class="comment"># 此处是部署的方式</span></span><br><span class="line"><span class="attr">  repo:</span>     <span class="comment"># 此处是所有需要部署的仓库，仓库的设置与 Jekyll 类似</span></span><br><span class="line"><span class="attr">      coding:</span> <span class="string">git@git.coding.net:cycoe/cycoe.git</span></span><br></pre></td></tr></table></figure></p>
 <p>然后在 <a href="coding.net" title="Coding">Coding</a> 上新建一个名为 cycoe 的空仓库（由于  <a href="coding.net" title="Coding">Coding</a> 本身的限制，该仓库应与用户名同名），在本机的博客根目录运行 <code>hexo d -g</code> 即可将博客部署至 <a href="coding.net" title="Coding">Coding</a>。然后打开仓库设置，将此仓库设置为 Coding Pages 即可。</p>
 <h2 id="2018-06-05-更新"><a href="#2018-06-05-更新" class="headerlink" title="2018-06-05 更新"></a>2018-06-05 更新</h2><p>最近 <a href="coding.net" title="Coding">Coding</a> 不知是怎么了，我的博客总是打不开。凑巧最近刚租了个包月的服务器，于是决定将整个博客迁移到自己的服务器上。</p>
 <p><a href="https://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 和 Jekyll 博客系统的部署原理不太一样，<code>$ hexo g</code> 是 <code>$ hexo generate</code> 的缩写，其原理是在本地使用 Hexo 引擎将 <code>_posts</code> 目录的 Markdown 文件生成网页结构，结果保存在 <code>public</code> 目录下，可直接由 Apache 或 Nginx 驱动。</p>
@@ -579,7 +579,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -629,7 +629,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
