@@ -401,7 +401,7 @@
     \end{align}</script><p>令 </p>
 <script type="math/tex; mode=display">L(W) = \dfrac2n(XW-Y)X\Delta W</script><p>为 \(E(W)\) 在 \(W\) 处的导数，同时</p>
 <script type="math/tex; mode=display">
-    \begin(align)
+    \begin{align}
     L(\Delta W) &= <\nabla E(W), \Delta W>\\
     &= <\dfrac2nX^T(XW-Y), \Delta X>\\
     &= \dfrac2n(XW-Y)X\Delta W\\
@@ -2525,6 +2525,8 @@
   
     
       
+        
+      
     
       
     
@@ -2546,6 +2548,29 @@
     
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 
