@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Nocturnal by CycoeGitHub 地址如果在使用过程中发现 bug，可到此处进行反馈，或者直接提交修复 PR，感谢支持！ 声明Nocturnal 是我课余时间练习 python 代码编写的程序，针对使用引起的一切后果本人概不负责。 关于捐赠Nocturnal 不并强制要求捐赠，但为了防止软件被滥用而出现的一系列问题，因此需要提供解密密钥才能使用，具体操作如下：  打开软件，此时会自">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nocturnal使用说明">
+<meta property="og:url" content="http://cycoe.cc/2018/09/06/Nocturnal使用说明/index.html">
+<meta property="og:site_name" content="Cycoe&#39;s Home Page">
+<meta property="og:description" content="Nocturnal by CycoeGitHub 地址如果在使用过程中发现 bug，可到此处进行反馈，或者直接提交修复 PR，感谢支持！ 声明Nocturnal 是我课余时间练习 python 代码编写的程序，针对使用引起的一切后果本人概不负责。 关于捐赠Nocturnal 不并强制要求捐赠，但为了防止软件被滥用而出现的一系列问题，因此需要提供解密密钥才能使用，具体操作如下：  打开软件，此时会自">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-10-24T14:57:48.631Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nocturnal使用说明">
+<meta name="twitter:description" content="Nocturnal by CycoeGitHub 地址如果在使用过程中发现 bug，可到此处进行反馈，或者直接提交修复 PR，感谢支持！ 声明Nocturnal 是我课余时间练习 python 代码编写的程序，针对使用引起的一切后果本人概不负责。 关于捐赠Nocturnal 不并强制要求捐赠，但为了防止软件被滥用而出现的一系列问题，因此需要提供解密密钥才能使用，具体操作如下：  打开软件，此时会自">
+
+
+
+
+
+
+  <link rel="canonical" href="http://cycoe.cc/2018/09/06/Nocturnal使用说明/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Nocturnal使用说明 | Cycoe's Home Page</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cycoe's Home Page</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Simple is better than complex. Complex is better than complicated.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2018/09/06/Nocturnal使用说明/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cycoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cycoe's Home Page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Nocturnal使用说明
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-06T00:00:00+08:00">2018-09-06</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/06/Nocturnal使用说明/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/09/06/Nocturnal使用说明/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Nocturnal-by-Cycoe"><a href="#Nocturnal-by-Cycoe" class="headerlink" title="Nocturnal by Cycoe"></a>Nocturnal by Cycoe</h1><p><a href="https://git.coding.net/cycoe/Nocturnal.git" title="Nocturnal GitHub" target="_blank" rel="noopener">GitHub 地址</a><br>如果在使用过程中发现 bug，可到<a href="https://git.coding.net/cycoe/Nocturnal.git" title="Nocturnal GitHub" target="_blank" rel="noopener">此处</a>进行反馈，或者直接提交修复 PR，感谢支持！</p>
+<h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a><strong>声明</strong></h2><p>Nocturnal 是我课余时间练习 python 代码编写的程序，针对使用引起的一切后果本人概不负责。</p>
+<h2 id="关于捐赠"><a href="#关于捐赠" class="headerlink" title="关于捐赠"></a>关于捐赠</h2><p>Nocturnal 不并强制要求捐赠，但为了防止软件被滥用而出现的一系列问题，因此需要提供解密密钥才能使用，具体操作如下：</p>
+<ol>
+<li>打开软件，此时会自动弹出一个命令提示符窗口和一个二维码</li>
+<li>微信扫描二维码添加我为好友</li>
+<li><p>你能在命令提示符窗口上看到类似这样一段话</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">你的 id 为 2160。请将 id 发给开发者获取解锁密钥</span><br><span class="line">请输入解密密钥:</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将其中的 id 发给我，我会生成解密密钥</p>
+</li>
+<li>输入密钥后即可使用</li>
+<li>（可选）如果你觉得这个软件给你带来了便利，你可以给开发者包个红包，建议 5 元</li>
+</ol>
+<h2 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h2><h3 id="命令帮助"><a href="#命令帮助" class="headerlink" title="命令帮助"></a>命令帮助</h3><table>
+<thead>
+<tr>
+<th>命令全称</th>
+<th>缩写</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>help</td>
+<td>h</td>
+<td>打印帮助信息</td>
+</tr>
+<tr>
+<td>emailLogin</td>
+<td>el</td>
+<td>绑定通知邮箱</td>
+</tr>
+<tr>
+<td>grade</td>
+<td>g</td>
+<td>成绩抓取模式</td>
+</tr>
+<tr>
+<td>report</td>
+<td>r</td>
+<td>选报告模式</td>
+</tr>
+<tr>
+<td>class</td>
+<td>c</td>
+<td>选课模式</td>
+</tr>
+<tr>
+<td>add</td>
+<td>a</td>
+<td>添加待选课程名称</td>
+</tr>
+<tr>
+<td>delete</td>
+<td>de</td>
+<td>删除待选课程名称</td>
+</tr>
+<tr>
+<td>list</td>
+<td>l</td>
+<td>列出待选课程名称</td>
+</tr>
+<tr>
+<td>donate</td>
+<td>d</td>
+<td>捐赠</td>
+</tr>
+<tr>
+<td>quit</td>
+<td>q</td>
+<td>退出</td>
+</tr>
+</tbody>
+</table>
+<p>以上表格第一列为命令的全称，第二列为命令的缩写，输入全称与缩写拥有同样的效果。</p>
+<h3 id="软件符号说明"><a href="#软件符号说明" class="headerlink" title="软件符号说明"></a>软件符号说明</h3><p>Nocturnal 使用字符界面（TUI）进行交互，双击 <code>Nocturnal.exe</code> 打开软件后可看到一个黑底白字的字符界面，这不是因为软件运行出错，而是 Nocturnal 本来就是这样的。现在你应该能在界面上看到一些表格，最上面的表格为 Nocturnal 的基本信息，中间的表格为使用帮助。在最下方你可以看到类似这样的提示符 <code>[0] &gt;&gt;&gt;</code>，该提示符表明此时你可以输入命令运行相关功能，<code>[0]</code> 中的数字表示后台正在运行的任务数量。</p>
+<h3 id="成绩抓取模式"><a href="#成绩抓取模式" class="headerlink" title="成绩抓取模式"></a>成绩抓取模式</h3><p>在 <code>[0] &gt;&gt;&gt;</code> 后输入 <code>grade</code> 或 <code>g</code> 回车即可运行成绩抓取功能。第一次使用时会自动提示你输入用户名和密码，也就是你的教务网学号和密码。运行成功后不会有提示，但 Nocturnal 就会在后台自动抓取成绩，并在出新成绩时自动通知。</p>
+<h3 id="选报告模式"><a href="#选报告模式" class="headerlink" title="选报告模式"></a>选报告模式</h3><p>在 <code>[0] &gt;&gt;&gt;</code> 后输入 <code>report</code> 或 <code>r</code> 回车即可运行选报告模式，运行成功后 Nocturnal 会在后台自动抓取报告列表，并在有新报告放出时自动选报告，并通过邮件通知你。</p>
+<h3 id="选课模式"><a href="#选课模式" class="headerlink" title="选课模式"></a>选课模式</h3><p>选课模式与成绩抓取模式和选报告模式不同，选课模式需要在前台运行。选课模式通过匹配关键字实现，针对每门课程可以添加多个关键字。比如你想要选 ‘高分子研究方法’ 这门课，则可以在一级关键字后输入 ‘高分子研究方法’ 并回车。但一般课程会有多个时间开课，如果想要指定特定时间或特定老师的课程，则可在二级关键字后输入 ‘周一’ 或 ‘某某某老师’ 即可。Nocturnal 会首先检查一级关键字，如果一级关键字对应多个候选，那么会继续以二级关键字进行过滤，优先选择符合二级关键字的候选。但如果二级关键字过滤后没有可选课程，那么会返回一级关键字的候选列表，并随机选取一个候选作为最终选择。<strong>总而言之，Nocturnal 中的关键字列表并不是选课的唯一列表，而是一个优先列表，Nocturnal 会按关键字列表所给的优先顺序依照选取所有可选课程。</strong></p>
+<p><strong>注意：选课模式还未经过测试，选课完成后务必登录教务网检查已选课程。</strong></p>
+<p>具体流程如下：</p>
+<ol>
+<li>输入 <code>a</code> 回车添加需要选的课程名称，输入 <code>a</code> 后提示如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[0] &gt;&gt;&gt; a</span><br><span class="line">please input 1th key</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><code>&gt;</code> 表示此时你可输入一级关键字，一般我们会将课程名称作为一级关键字，如此时你可输入 ‘高分子研究方法’ 回车添加一个关键字，完成后程序会提示你输入二级关键字如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[0] &gt;&gt;&gt; a</span><br><span class="line">please input 1th key</span><br><span class="line">&gt; 高分子研究方法</span><br><span class="line">please input 2th key</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
+<p>此时你可直接输入回车来结束关键字的输入（在输入任一关键字时，你都可通过直接回车来结束输入），或者输入 ‘周六’ 回车作为想要上课的时间。</p>
+<p>重复以上步骤直至你输入了所有想要选的课程。</p>
+<ol start="2">
+<li>输入 <code>l</code> 查看已经输入的课程列表</li>
+<li>输入 <code>d</code> 删除不想选的课程</li>
+</ol>
+<h3 id="邮件通知"><a href="#邮件通知" class="headerlink" title="邮件通知"></a>邮件通知</h3><p>Nocturnal 目前只有通过邮箱一种方式对你进行通知，你可通过输入 <code>el</code> 来绑定邮箱，Nocturnal 会提示你一步一步进行操作。&lt;接收邮箱&gt;为你要接收通知的邮箱，建议使用 qq 邮箱，这样使用微信绑定 qq 邮箱后就可以的即时地收到邮件通知消息。&lt;发送邮箱&gt;可以使用任意邮箱，但发送邮箱需要输入密码。<smtp 主机地址=""> 为发送邮箱的主机地址，qq 邮箱对应的是 ‘smtp.qq.com’，163 邮箱对应 ‘smtp.163.com’，其他邮箱请自行百度。&lt;端口&gt; 默认值为 ‘25’（<strong>注意：使用端口 25 意味着不使用 SSL 加密，希望邮件加密的同学请自行百度</strong>）。每步输入过程中，提示符后括号中为原始值，如果你不希望更改原始值，直接回车即可。</smtp></p>
+<h2 id="更新日志"><a href="#更新日志" class="headerlink" title="更新日志"></a>更新日志</h2><h3 id="Date-2017-1-3"><a href="#Date-2017-1-3" class="headerlink" title="Date: 2017-1-3"></a>Date: 2017-1-3</h3><p><strong>Version: V4.0</strong></p>
+<h3 id="Date-2017-12-15"><a href="#Date-2017-12-15" class="headerlink" title="Date: 2017-12-15"></a>Date: 2017-12-15</h3><p><strong>Version: V3.1</strong></p>
+<p>[bug fix]</p>
+<ul>
+<li>修复掉线后不能重新登录的问题</li>
+<li>修复达到最大重试次数后不会自动停止的问题</li>
+</ul>
+<p>[optimization]</p>
+<ul>
+<li>重新登录时清理内存</li>
+<li>简化代码结构</li>
+<li>新增等待时的动画效果</li>
+<li>完善自定义邮箱登录</li>
+</ul>
+<h3 id="Date-2017-12-14"><a href="#Date-2017-12-14" class="headerlink" title="Date: 2017-12-14"></a>Date: 2017-12-14</h3><p><strong>Version: V3.0</strong></p>
+<p>[bug fix]</p>
+<ul>
+<li>修复选报告时的崩溃问题</li>
+</ul>
+<p>[optimization]</p>
+<ul>
+<li>重磅更新！新增验证码自动识别，花了大力气才写出来，现在无需手动输入验证码登录</li>
+<li>更新了选报告的入口，优化了休眠逻辑</li>
+<li>命令行提示已汉化</li>
+<li>优化邮件提醒，现在只会发送最新选到的报告列表</li>
+<li>新增报告黑名单，选到的报告自动加入黑名单列表中，防止手动退了后又重复选上</li>
+<li>新增捐赠入口，希望大家多多支持！</li>
+<li>打包成安装文件，不用再手动解压</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/12/Vim-一款让我相见恨晚的编辑器/" rel="next" title="Vim- 一款让我相见恨晚的编辑器">
+                <i class="fa fa-chevron-left"></i> Vim- 一款让我相见恨晚的编辑器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/23/一种通过最小二乘法求转变点的方法/" rel="prev" title="一种通过最小二乘法求转变点的方法">
+                一种通过最小二乘法求转变点的方法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Cycoe</p>
+              <p class="site-description motion-element" itemprop="description">Cycoe's Personal Blog</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/cycoe" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Nocturnal-by-Cycoe"><span class="nav-number">1.</span> <span class="nav-text">Nocturnal by Cycoe</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#声明"><span class="nav-number">1.1.</span> <span class="nav-text">声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于捐赠"><span class="nav-number">1.2.</span> <span class="nav-text">关于捐赠</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用说明"><span class="nav-number">1.3.</span> <span class="nav-text">使用说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令帮助"><span class="nav-number">1.3.1.</span> <span class="nav-text">命令帮助</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软件符号说明"><span class="nav-number">1.3.2.</span> <span class="nav-text">软件符号说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#成绩抓取模式"><span class="nav-number">1.3.3.</span> <span class="nav-text">成绩抓取模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选报告模式"><span class="nav-number">1.3.4.</span> <span class="nav-text">选报告模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选课模式"><span class="nav-number">1.3.5.</span> <span class="nav-text">选课模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#邮件通知"><span class="nav-number">1.3.6.</span> <span class="nav-text">邮件通知</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新日志"><span class="nav-number">1.4.</span> <span class="nav-text">更新日志</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Date-2017-1-3"><span class="nav-number">1.4.1.</span> <span class="nav-text">Date: 2017-1-3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Date-2017-12-15"><span class="nav-number">1.4.2.</span> <span class="nav-text">Date: 2017-12-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Date-2017-12-14"><span class="nav-number">1.4.3.</span> <span class="nav-text">Date: 2017-12-14</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cycoe</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a> v6.1.0</div>
+
+
+
+  <div class="footer-custom">Hosted by <a target="_blank" rel="external nofollow" href="https://pages.coding.me"><b>Coding Pages</b></a></div>
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'http://cycoe.cc/2018/09/06/Nocturnal使用说明/';
+        this.page.identifier = '2018/09/06/Nocturnal使用说明/';
+        this.page.title = 'Nocturnal使用说明';
+      };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script>
+  
+
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
