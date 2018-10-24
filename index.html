@@ -1,0 +1,2564 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Cycoe&apos;s Personal Blog">
+<meta name="keywords" content="python, 化学, 渗透测试">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cycoe&#39;s Home Page">
+<meta property="og:url" content="http://cycoe.cc/index.html">
+<meta property="og:site_name" content="Cycoe&#39;s Home Page">
+<meta property="og:description" content="Cycoe&apos;s Personal Blog">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cycoe&#39;s Home Page">
+<meta name="twitter:description" content="Cycoe&apos;s Personal Blog">
+
+
+
+
+
+
+  <link rel="canonical" href="http://cycoe.cc/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Cycoe's Home Page</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cycoe's Home Page</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Simple is better than complex. Complex is better than complicated.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  
+  <li class="menu-item menu-item-home menu-item-active">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2018/10/23/一种通过最小二乘法求转变点的方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cycoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cycoe's Home Page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/23/一种通过最小二乘法求转变点的方法/" itemprop="url">
+                  一种通过最小二乘法求转变点的方法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-23T21:52:47+08:00">2018-10-23</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/23/一种通过最小二乘法求转变点的方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/23/一种通过最小二乘法求转变点的方法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h2><p>假设存在 k 个样本点 \(X_1, X_2, \ldots, X_k\)，定义向量<br>\(X_i = (x_{i1}, x_{i2}, \ldots, x_{in})^T\)，为方便计算在 \(X_i\) 前插入常量 1。<br>则需要求 \(W = (w_0, w_1, w_2, \ldots, w_n)\) 使 \(\hat{Y} = XW\)。</p>
+<p>定义均方误差 \(E = \dfrac{1}{n}\sum(y_i-\hat{y}_i)^2 = \dfrac{1}{n}||Y-\hat{Y}||_2^2\)，则可转变为寻找 W 使得 E 最小，即寻找 \(W = \mathrm{argmin}\dfrac{1}{n}||Y-XW||_2^2\)。</p>
+<p>对于</p>
+<script type="math/tex; mode=display">E(W) = \dfrac{1}{n}</script><p>则可推导</p>
+<script type="math/tex; mode=display">
+    \begin{align}
+    E(W+\Delta W) - E(W) &= \dfrac{1}{n}||Y-X(W+\Delta W)||_2^2-\dfrac{1}{n}||Y-XW||_2^2\\
+    &= \dfrac1n||Y-XW||_2^2-\dfrac2n(Y-XW)(X\Delta W)+\dfrac1n||X\Delta W||_2^2-\dfrac1n||Y-XW||_2^2\\
+    &= \dfrac2n(XW-Y)X\Delta W+\mathcal{O}(||\Delta X||)\\
+    \end{align}</script><p>令 </p>
+<script type="math/tex; mode=display">L(W) = \dfrac2n(XW-Y)X\Delta W</script><p>为 \(E(W)\) 在 \(W\) 处的导数，同时</p>
+<script type="math/tex; mode=display">
+    \begin(align)
+    L(\Delta W) &= <\nabla E(W), \Delta W>\\
+    &= <\dfrac2nX^T(XW-Y), \Delta X>\\
+    &= \dfrac2n(XW-Y)X\Delta W\\
+    \end{align}</script><p>则</p>
+<script type="math/tex; mode=display">
+    \begin{align}
+    \nabla E(W) = \dfrac2nX^T(XW-Y) &= 0\\
+    X^TXW &= X^TY\\
+    W &= (X^TX)^{-1}X^TY
+    \end{align}</script><p>最终得</p>
+<script type="math/tex; mode=display">E=\dfrac1n||Y-\hat{Y}||_2^2=\dfrac1n||X(X^TX)^{-1}X^TY-Y||_2^2</script>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2018/09/06/Nocturnal使用说明/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cycoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cycoe's Home Page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/06/Nocturnal使用说明/" itemprop="url">
+                  Nocturnal使用说明
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-06T00:00:00+08:00">2018-09-06</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/06/Nocturnal使用说明/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/09/06/Nocturnal使用说明/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Nocturnal-by-Cycoe"><a href="#Nocturnal-by-Cycoe" class="headerlink" title="Nocturnal by Cycoe"></a>Nocturnal by Cycoe</h1><p><a href="https://git.coding.net/cycoe/Nocturnal.git" title="Nocturnal GitHub" target="_blank" rel="noopener">GitHub 地址</a><br>如果在使用过程中发现 bug，可到<a href="https://git.coding.net/cycoe/Nocturnal.git" title="Nocturnal GitHub" target="_blank" rel="noopener">此处</a>进行反馈，或者直接提交修复 PR，感谢支持！</p>
+<h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a><strong>声明</strong></h2><p>Nocturnal 是我课余时间练习 python 代码编写的程序，针对使用引起的一切后果本人概不负责。</p>
+<h2 id="关于捐赠"><a href="#关于捐赠" class="headerlink" title="关于捐赠"></a>关于捐赠</h2><p>Nocturnal 不并强制要求捐赠，但为了防止软件被滥用而出现的一系列问题，因此需要提供解密密钥才能使用，具体操作如下：</p>
+<ol>
+<li>打开软件，此时会自动弹出一个命令提示符窗口和一个二维码</li>
+<li>微信扫描二维码添加我为好友</li>
+<li><p>你能在命令提示符窗口上看到类似这样一段话</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">你的 id 为 2160。请将 id 发给开发者获取解锁密钥</span><br><span class="line">请输入解密密钥:</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将其中的 id 发给我，我会生成解密密钥</p>
+</li>
+<li>输入密钥后即可使用</li>
+<li>（可选）如果你觉得这个软件给你带来了便利，你可以给开发者包个红包，建议 5 元</li>
+</ol>
+<h2 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h2><h3 id="命令帮助"><a href="#命令帮助" class="headerlink" title="命令帮助"></a>命令帮助</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>命令全称</th>
+<th>缩写</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>help</td>
+<td>h</td>
+<td>打印帮助信息</td>
+</tr>
+<tr>
+<td>emailLogin</td>
+<td>el</td>
+<td>绑定通知邮箱</td>
+</tr>
+<tr>
+<td>grade</td>
+<td>g</td>
+<td>成绩抓取模式</td>
+</tr>
+<tr>
+<td>report</td>
+<td>r</td>
+<td>选报告模式</td>
+</tr>
+<tr>
+<td>class</td>
+<td>c</td>
+<td>选课模式</td>
+</tr>
+<tr>
+<td>add</td>
+<td>a</td>
+<td>添加待选课程名称</td>
+</tr>
+<tr>
+<td>delete</td>
+<td>de</td>
+<td>删除待选课程名称</td>
+</tr>
+<tr>
+<td>list</td>
+<td>l</td>
+<td>列出待选课程名称</td>
+</tr>
+<tr>
+<td>donate</td>
+<td>d</td>
+<td>捐赠</td>
+</tr>
+<tr>
+<td>quit</td>
+<td>q</td>
+<td>退出</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>以上表格第一列为命令的全称，第二列为命令的缩写，输入全称与缩写拥有同样的效果。</p>
+<h3 id="软件符号说明"><a href="#软件符号说明" class="headerlink" title="软件符号说明"></a>软件符号说明</h3><p>Nocturnal 使用字符界面（TUI）进行交互，双击 <code>Nocturnal.exe</code> 打开软件后可看到一个黑底白字的字符界面，这不是因为软件运行出错，而是 Nocturnal 本来就是这样的。现在你应该能在界面上看到一些表格，最上面的表格为 Nocturnal 的基本信息，中间的表格为使用帮助。在最下方你可以看到类似这样的提示符 <code>[0] &gt;&gt;&gt;</code>，该提示符表明此时你可以输入命令运行相关功能，<code>[0]</code> 中的数字表示后台正在运行的任务数量。</p>
+<h3 id="成绩抓取模式"><a href="#成绩抓取模式" class="headerlink" title="成绩抓取模式"></a>成绩抓取模式</h3><p>在 <code>[0] &gt;&gt;&gt;</code> 后输入 <code>grade</code> 或 <code>g</code> 回车即可运行成绩抓取功能。第一次使用时会自动提示你输入用户名和密码，也就是你的教务网学号和密码。运行成功后不会有提示，但 Nocturnal 就会在后台自动抓取成绩，并在出新成绩时自动通知。</p>
+<h3 id="选报告模式"><a href="#选报告模式" class="headerlink" title="选报告模式"></a>选报告模式</h3><p>在 <code>[0] &gt;&gt;&gt;</code> 后输入 <code>report</code> 或 <code>r</code> 回车即可运行选报告模式，运行成功后 Nocturnal 会在后台自动抓取报告列表，并在有新报告放出时自动选报告，并通过邮件通知你。</p>
+<h3 id="选课模式"><a href="#选课模式" class="headerlink" title="选课模式"></a>选课模式</h3><p>选课模式与成绩抓取模式和选报告模式不同，选课模式需要在前台运行。选课模式通过匹配关键字实现，针对每门课程可以添加多个关键字。比如你想要选 ‘高分子研究方法’ 这门课，则可以在一级关键字后输入 ‘高分子研究方法’ 并回车。但一般课程会有多个时间开课，如果想要指定特定时间或特定老师的课程，则可在二级关键字后输入 ‘周一’ 或 ‘某某某老师’ 即可。Nocturnal 会首先检查一级关键字，如果一级关键字对应多个候选，那么会继续以二级关键字进行过滤，优先选择符合二级关键字的候选。但如果二级关键字过滤后没有可选课程，那么会返回一级关键字的候选列表，并随机选取一个候选作为最终选择。<strong>总而言之，Nocturnal 中的关键字列表并不是选课的唯一列表，而是一个优先列表，Nocturnal 会按关键字列表所给的优先顺序依照选取所有可选课程。</strong></p>
+<p><strong>注意：选课模式还未经过测试，选课完成后务必登录教务网检查已选课程。</strong></p>
+<p>具体流程如下：</p>
+<ol>
+<li>输入 <code>a</code> 回车添加需要选的课程名称，输入 <code>a</code> 后提示如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[0] &gt;&gt;&gt; a</span><br><span class="line">please input 1th key</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><code>&gt;</code> 表示此时你可输入一级关键字，一般我们会将课程名称作为一级关键字，如此时你可输入 ‘高分子研究方法’ 回车添加一个关键字，完成后程序会提示你输入二级关键字如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[0] &gt;&gt;&gt; a</span><br><span class="line">please input 1th key</span><br><span class="line">&gt; 高分子研究方法</span><br><span class="line">please input 2th key</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
+<p>此时你可直接输入回车来结束关键字的输入（在输入任一关键字时，你都可通过直接回车来结束输入），或者输入 ‘周六’ 回车作为想要上课的时间。</p>
+<p>重复以上步骤直至你输入了所有想要选的课程。</p>
+<ol>
+<li>输入 <code>l</code> 查看已经输入的课程列表</li>
+<li>输入 <code>d</code> 删除不想选的课程</li>
+</ol>
+<h3 id="邮件通知"><a href="#邮件通知" class="headerlink" title="邮件通知"></a>邮件通知</h3><p>Nocturnal 目前只有通过邮箱一种方式对你进行通知，你可通过输入 <code>el</code> 来绑定邮箱，Nocturnal 会提示你一步一步进行操作。&lt;接收邮箱&gt;为你要接收通知的邮箱，建议使用 qq 邮箱，这样使用微信绑定 qq 邮箱后就可以的即时地收到邮件通知消息。&lt;发送邮箱&gt;可以使用任意邮箱，但发送邮箱需要输入密码。<smtp 主机地址=""> 为发送邮箱的主机地址，qq 邮箱对应的是 ‘smtp.qq.com’，163 邮箱对应 ‘smtp.163.com’，其他邮箱请自行百度。&lt;端口&gt; 默认值为 ‘25’（<strong>注意：使用端口 25 意味着不使用 SSL 加密，希望邮件加密的同学请自行百度</strong>）。每步输入过程中，提示符后括号中为原始值，如果你不希望更改原始值，直接回车即可。</smtp></p>
+<h2 id="更新日志"><a href="#更新日志" class="headerlink" title="更新日志"></a>更新日志</h2><h3 id="Date-2017-1-3"><a href="#Date-2017-1-3" class="headerlink" title="Date: 2017-1-3"></a>Date: 2017-1-3</h3><p><strong>Version: V4.0</strong></p>
+<h3 id="Date-2017-12-15"><a href="#Date-2017-12-15" class="headerlink" title="Date: 2017-12-15"></a>Date: 2017-12-15</h3><p><strong>Version: V3.1</strong></p>
+<p>[bug fix]</p>
+<ul>
+<li>修复掉线后不能重新登录的问题</li>
+<li>修复达到最大重试次数后不会自动停止的问题</li>
+</ul>
+<p>[optimization]</p>
+<ul>
+<li>重新登录时清理内存</li>
+<li>简化代码结构</li>
+<li>新增等待时的动画效果</li>
+<li>完善自定义邮箱登录</li>
+</ul>
+<h3 id="Date-2017-12-14"><a href="#Date-2017-12-14" class="headerlink" title="Date: 2017-12-14"></a>Date: 2017-12-14</h3><p><strong>Version: V3.0</strong></p>
+<p>[bug fix]</p>
+<ul>
+<li>修复选报告时的崩溃问题</li>
+</ul>
+<p>[optimization]</p>
+<ul>
+<li>重磅更新！新增验证码自动识别，花了大力气才写出来，现在无需手动输入验证码登录</li>
+<li>更新了选报告的入口，优化了休眠逻辑</li>
+<li>命令行提示已汉化</li>
+<li>优化邮件提醒，现在只会发送最新选到的报告列表</li>
+<li>新增报告黑名单，选到的报告自动加入黑名单列表中，防止手动退了后又重复选上</li>
+<li>新增捐赠入口，希望大家多多支持！</li>
+<li>打包成安装文件，不用再手动解压</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2018/08/12/Vim-一款让我相见恨晚的编辑器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cycoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cycoe's Home Page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/12/Vim-一款让我相见恨晚的编辑器/" itemprop="url">
+                  Vim- 一款让我相见恨晚的编辑器
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-12T22:34:49+08:00">2018-08-12</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/12/Vim-一款让我相见恨晚的编辑器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/08/12/Vim-一款让我相见恨晚的编辑器/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Vim-简介"><a href="#Vim-简介" class="headerlink" title="Vim 简介"></a>Vim 简介</h2><blockquote>
+<p><a href="https://github.com/vim/vim" title="Vim" target="_blank" rel="noopener">Vim</a> is a greatly improved version of the good old UNIX editor Vi. Many new features have been added: multi-level undo, syntax highlighting, command line history, on-line help, spell checking, filename completion, block operations, script language, etc. There is also a Graphical User Interface (GUI) available.</p>
+</blockquote>
+<p>以上关于 Vim 的描述来自 <a href="https://github.com/vim/vim" title="Vim" target="_blank" rel="noopener">Vim</a> 的官方 GitHub 仓库。Vim 是一款古老且强大的编辑器，从其诞生之日起到现在已经有二十多年的历史（比我的年龄都要大 orz）。很多人听说它的大名一般是因为它与 <a href="https://github.com/emacs-mirror/emacs" title="Emacs" target="_blank" rel="noopener">Emacs</a> 并称编辑器之神与神之编辑器。为什么会有这样的名号？除了它们的功能极其强大之外，还因为它们极其难以上手。以下图片为网友戏称的常用编辑器的学习曲线。</p>
+<img src="/2018/08/12/Vim-一款让我相见恨晚的编辑器/learning_curve.jpg" title="常用编辑器的学习曲线">
+<p>即便如此，Vim 和 <a href="https://github.com/emacs-mirror/emacs" title="Emacs" target="_blank" rel="noopener">Emacs</a> 仍流行到了现在，以至于后来经常能在各处看到的 Vimer（Vim 党）和 Emacser（Emacs 党）的编辑器之争，虽然有的时候可能只是类似于“php 是世界上最好的语言”之类的梗，但足以看出 Vim 确实非常强大，并且用上了就再也回不去了。</p>
+<h2 id="安装-Vim"><a href="#安装-Vim" class="headerlink" title="安装 Vim"></a>安装 Vim</h2><p>Vim 在所有的 Linux 发行版上都易于获得，只需要使用对应的包管理器进行安装即可，Windows 上也有编译好的二进制包，但实际在安装过程中仍会面临几个选择。</p>
+<p>以 Archlinux 为例，Archlinux 的官方仓库中包含的 Vim 在编译过程中并没有编译进 python、lua 等支持，导致很多插件无法使用，因此为了能使用上 Vim 的完全体，可以选择 Gvim。Gvim 是基于 Vim 的一个带有图形界面的版本，并在编译过程中包含进了所有可用组件。如果选择 Vim 分支，强烈建议使用 Gvim，并且使用 8.0 之后的版本。下载链接在<a href="https://github.com/vim/vim-win32-installer/releases" title="Vim Download" target="_blank" rel="noopener">此处</a>。</p>
+<p>另一个可供选择的版本是 Neovim，Neovim 是 Vim 的一个 fork 版本，比 Vim 具有更多的特性（Neovim 先首先支持的异步架构和内置 terminal，随后 Vim 也提供了支持），目前开发活跃，推荐进行尝试。下载链接在<a href="https://github.com/neovim/neovim/releases/" title="Neovim Download" target="_blank" rel="noopener">此处</a>。</p>
+<p>以上的所有版本在下文中都将统一称为 ‘Vim’（虽然事实上 Vim 与 Neovim 并不是同一个项目，但在配置和使用方法上是类似的）。无论安装哪个版本，安装完成后从应用启动菜单或命令行应该就能成功启动。恭喜你！此时已经完成了安装 Vim 的第一步，现在你看到的是一个黑底白字的字符界面。不过别着急，接下来我们会一步一步将 Vim 配置成称手的编辑器。</p>
+<h2 id="退出-Vim-使用-Vim-的第一大难题？"><a href="#退出-Vim-使用-Vim-的第一大难题？" class="headerlink" title="退出 Vim - 使用 Vim 的第一大难题？"></a>退出 Vim - 使用 Vim 的第一大难题？</h2><p>虽然客观上讲，退出 Vim 相较于 Vim 其他功能要容易的多，但是确实是第一次使用 Vim 会遇到的一个问题。相对于其他的编辑器，Vim 没有直观的退出方式，以至于在 Stack Overflow 上有个专门的问题（<a href="https://stackoverflow.com/questions/11828270/how-to-exit-the-vim-editor" title="How to exit vim" target="_blank" rel="noopener">见此处</a>）解答如何退出 Vim。甚至有了如下的梗：<br><img src="/2018/08/12/Vim-一款让我相见恨晚的编辑器/exit_vim.jpg" title="如何退出Vim"></p>
+<p>看来确实有必要对 Vim 的退出方式做个总结，之列出平常最常用的几种退出方式</p>
+<ul>
+<li><code>:q</code> 正常退出</li>
+<li><code>:q!</code> 强制退出不保存</li>
+<li><code>:wq</code> 保存并退出</li>
+<li><code>:x</code> 保存并退出，与 <code>:wq</code> 不同之处在于如果文件未做修改则不更新时间戳</li>
+<li>强制关机</li>
+</ul>
+<h2 id="使用-Vim-前先看帮助文档"><a href="#使用-Vim-前先看帮助文档" class="headerlink" title="使用 Vim 前先看帮助文档"></a>使用 Vim 前先看帮助文档</h2><p>安装好 Vim 后，你可能想要马上尝试输入。但我强烈建议先阅读软件自带的帮助文档，一款优秀的软件都会带有一个详细的用户手册以及一个简要的使用说明，这有助于降低你在接触新软件时的痛苦感。你可以在 Vim 中随时通过输入 <code>:help&lt;CR&gt;</code>（<cr> 代表回车）来呼出帮助文档。</cr></p>
+<h2 id="配置-Vim-从-vimrc-开始"><a href="#配置-Vim-从-vimrc-开始" class="headerlink" title="配置 Vim - 从 .vimrc 开始"></a>配置 Vim - 从 .vimrc 开始</h2><p>由于 Vim 的流行，GitHub 上有各种各样现成的 ‘vimrc’（Vim 的配置文件）可供使用。对于不想自己折腾配置的用户来说，从 GitHub 上下载安装其他用户已经编辑好的 ‘vimrc’ 是最好的选择。甚至还有像 <a href="https://github.com/SpaceVim/SpaceVim" title="SpaceVim" target="_blank" rel="noopener">SpaceVim</a> 这样的模块化 Vim 配置可以一键安装使用，能大大减少配置所需的时间。</p>
+<p>另一些用户可能想要继续对 Vim 进行自定义配置，那么就需要对 ‘vimrc’ 进行修改。在 Linux 系统中，Gvim 与 Vim 的配置文件默认存放在 ‘$HOME/.vimrc’（Neovim 存放在 ‘$HOME/.config/nvim/init.vim’），Windows 下存放在 ‘$VIM/vimrc’。</p>
+<p>你可以选择自己新建一个文件从头开始。不过还是建议拷贝官方自带的配置示例，一方面可以省去一部分对常规配置的修改时间，另一方面，官方示例中对各配置语句对应有详细的注释。或者也可以选择从 GitHub 上寻找一个适合你的 ‘vimrc’，或者参考<a href="https://coding.net/u/cycoe/p/config/git/blob/master/init.vim" title="Cycoe 的 vimrc" target="_blank" rel="noopener">我的配置</a>。</p>
+<h3 id="常规配置"><a href="#常规配置" class="headerlink" title="常规配置"></a>常规配置</h3><p>在使用 Vim 之前，我们需要对其进行一些常规配置，来使它看起来更像一般的编辑器（以下步骤默认了你已经学会 Vim 的基本操作，包括移动光标、输入、模式切换等）。</p>
+<p>首先，通过输入 <code>:e $HOME/.vimrc&lt;CR&gt;</code> 打开配置文件（’$HOME/.vimrc’ 替换为你平台对应的配置文件路径）。这时，如果此前你已经拷贝了 Vim 的示例配置文件，或者是从网上下载安装了其他人的配置，那么你打开的文件里应该就有那些内容，如果此前还未做过配置，那么打开的就是一个空文件。</p>
+<p>接下来可以选择下面的配置中你需要的部分拷贝进你的 ‘vimrc’</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">" about vim setup</span></span><br><span class="line"><span class="keyword">set</span> nocompatible               <span class="comment">" disable compatible for vi</span></span><br><span class="line"><span class="keyword">set</span> <span class="keyword">shell</span>=/bin/bash            <span class="comment">" setup default shell</span></span><br><span class="line"><span class="keyword">set</span> shortmess=at               <span class="comment">" 启动时隐去援助提示</span></span><br><span class="line"><span class="keyword">set</span> mouse=<span class="keyword">a</span>                    <span class="comment">" active mouse control</span></span><br><span class="line"><span class="keyword">set</span> clipboard+=unnamed         <span class="comment">" support system clipboard</span></span><br><span class="line"><span class="keyword">let</span> mapleader=<span class="string">';'</span>              <span class="comment">" remap &lt;leader&gt;</span></span><br><span class="line"><span class="comment">" display setup</span></span><br><span class="line"><span class="keyword">set</span> relativenumber             <span class="comment">" display relative row number</span></span><br><span class="line"><span class="keyword">set</span> ruler                      <span class="comment">" 显示标尺，就是在右下角显示光标位置</span></span><br><span class="line"><span class="keyword">set</span> spell spelllang=en_us,cjk  <span class="comment">" Spell checking for English, escape Chinese</span></span><br><span class="line"><span class="keyword">set</span> langmenu=zh_CN.UTF-<span class="number">8</span></span><br><span class="line"><span class="keyword">set</span> helplang=<span class="keyword">cn</span>                <span class="comment">" 设置帮助文档为中文，需要 'yianwillis/vimcdoc'</span></span><br><span class="line"><span class="keyword">syntax</span> enable                  <span class="comment">" syntax highlight enable</span></span><br><span class="line"><span class="keyword">syntax</span> <span class="keyword">on</span>                      <span class="comment">" syntax highlight on</span></span><br><span class="line"><span class="keyword">set</span> background=dark            <span class="comment">" setup background color</span></span><br><span class="line"><span class="keyword">colorscheme</span> gruvbox            <span class="comment">" setup color scheme</span></span><br><span class="line"><span class="keyword">set</span> wildmenu                   <span class="comment">" select the candidates in interactive way</span></span><br><span class="line"><span class="keyword">set</span> backspace=<span class="built_in">indent</span>,eol,start <span class="comment">" more powerful backspacing</span></span><br><span class="line"><span class="keyword">set</span> cursorcolumn               <span class="comment">" 浅色高亮当前列</span></span><br><span class="line"><span class="keyword">set</span> cursorline                 <span class="comment">" 浅色高亮当前行</span></span><br><span class="line"><span class="keyword">set</span> novisualbell               <span class="comment">" 关闭视觉响铃</span></span><br><span class="line"><span class="keyword">set</span> laststatus=<span class="number">2</span>               <span class="comment">" 启动显示状态行</span></span><br><span class="line"><span class="keyword">set</span> showcmd                    <span class="comment">" show the command executed by shortcuts</span></span><br><span class="line"><span class="keyword">set</span> noshowmode                 <span class="comment">" don't show the mode status, avoid override argvs hint</span></span><br><span class="line"><span class="keyword">set</span> hlsearch                   <span class="comment">" highlight for searched results</span></span><br><span class="line"><span class="keyword">set</span> incsearch                  <span class="comment">" highlight for searching results</span></span><br><span class="line"><span class="keyword">set</span> showmatch                  <span class="comment">" show the match of brackets and Quotation mark</span></span><br><span class="line"><span class="keyword">set</span> ignorecase                 <span class="comment">" ignore case when searching and command completion</span></span><br><span class="line"><span class="keyword">set</span> gdefault                   <span class="comment">" default substitute in the whole line</span></span><br></pre></td></tr></table></figure>
+<p>其中，最重要的一条设置就是 <code>set nocompatible</code>，它的作用是关闭对 Vi 的兼容性。Vi 是一款更加古老的编辑器，可视作是 Vim 的前身。如果保留对 Vi 的兼容性也就意味着你放弃了很多 Vim 独有的特性。<code>set shell=/bin/bash</code> 显式地声明了 Vim 在运行脚本时调用的解释器，如果是 Windows 用户则需要去掉这行。</p>
+<p>此时保存配置文件并通过 <code>:so \$HOME/.vimrc&lt;CR&gt;</code> 重载配置后应该就能看到改变了。但此时你可能会注意到几条错误信息，不要紧张，这是因为我们在配置中引用了一些插件功能，但事实上我们现在还未安装插件，安装插件后你会看到错误就消失了。</p>
+<h3 id="安装插件管理器-管理插件的插件"><a href="#安装插件管理器-管理插件的插件" class="headerlink" title="安装插件管理器 - 管理插件的插件"></a>安装插件管理器 - 管理插件的插件</h3><p>Vim 有非常多的插件管理器可以使用，除去功能上的细微差异，我们可以将所有插件管理器分为异步型和同步型。可以简单地理解为异步型可以同时下载安装多个插件，而同步型一次只能处理一个。在 Vim 7.4 版本出来之前，插件管理器都是同步型的，包括大名鼎鼎的 Vundle。</p>
+<p>在我刚开始使用 Vim 的时候，Vim 和 Neovim 都已经支持异步架构，但由于当时查的是中文资料，很多都是非常老的文章。基本上所有文章都推荐使用 Vundle 作为插件管理器，事实上在你用过 vim-plug 之类的异步插件管理器后，你会无法再忍受 Vundle 的速度。这告诉我们技术型的文章还是要去 Google…</p>
+<p>不会有人再去使用 Vim 7.4 之前的版本了，所以这里我推荐使用 <a href="https://github.com/junegunn/vim-plug" title="vim-plug" target="_blank" rel="noopener">vim-plug</a> 作为插件管理器。vim-plug 的优点是异步下载安装、插件更新方便、支持插件按需加载，并且只包含一个文件。它的 <a href="https://github.com/junegunn/vim-plug" title="vim-plug" target="_blank" rel="noopener">GitHub 仓库</a>上有详细的安装教程。</p>
+<h3 id="安装插件-本体不够再打-mod"><a href="#安装插件-本体不够再打-mod" class="headerlink" title="安装插件 - 本体不够再打 mod"></a>安装插件 - 本体不够再打 mod</h3><p>虽然 Vim 并不是扩展性最好的编辑器，但它仍支持成千上万个插件。寻找插件最好的途径是 <a href="https://github.com" title="GitHub" target="_blank" rel="noopener">GitHub</a> 和 <a href="https://www.vim.org/scripts/" title="Vim Scripts" target="_blank" rel="noopener">Vim Scripts</a>。以下是我使用的插件列表：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">g:python3_host_prog</span> = <span class="string">"/usr/bin/python3"</span></span><br><span class="line"><span class="keyword">call</span> plug#begin(<span class="string">'~/.vim/plugged'</span>)</span><br><span class="line">Plug <span class="string">'tomasr/molokai'</span>                                             <span class="comment">" molokai color scheme</span></span><br><span class="line">Plug <span class="string">'morhetz/gruvbox'</span>                                            <span class="comment">" gruvbox colorscheme theme</span></span><br><span class="line">Plug <span class="string">'mhinz/vim-startify'</span>                                         <span class="comment">" an awesome startup screen</span></span><br><span class="line">Plug <span class="string">'vim-scripts/fcitx.vim'</span>                                      <span class="comment">" auto switch fcitx status</span></span><br><span class="line">Plug <span class="string">'manu-mannattil/vim-sdcv'</span>                                    <span class="comment">" a simple dictionary for vim</span></span><br><span class="line">Plug <span class="string">'vim-airline/vim-airline'</span>                                    <span class="comment">" add status line</span></span><br><span class="line">Plug <span class="string">'scrooloose/nerdtree'</span>, &#123; <span class="string">'on'</span>: <span class="string">'NERDTreeToggle'</span> &#125;            <span class="comment">" directory tree</span></span><br><span class="line">Plug <span class="string">'majutsushi/tagbar'</span>, &#123; <span class="string">'on'</span>: <span class="string">'TagbarToggle'</span> &#125;                <span class="comment">" Class structure viewer, need ctags installed</span></span><br><span class="line">Plug <span class="string">'mbbill/undotree'</span>, &#123; <span class="string">'on'</span>: <span class="string">'UndotreeToggle'</span> &#125;                <span class="comment">" undo tree manager</span></span><br><span class="line">Plug <span class="string">'tpope/vim-fugitive'</span>                                         <span class="comment">" git support</span></span><br><span class="line">Plug <span class="string">'junegunn/gv.vim'</span>                                            <span class="comment">" view git commits in Vim</span></span><br><span class="line">Plug <span class="string">'junegunn/fzf'</span>, &#123; <span class="string">'dir'</span>: <span class="string">'~/.fzf'</span>, <span class="string">'do'</span>: <span class="string">'./install --all'</span> &#125; <span class="comment">" fuzzy file searcher</span></span><br><span class="line">Plug <span class="string">'junegunn/fzf.vim'</span>                                           <span class="comment">" provide many other search functions</span></span><br><span class="line">Plug <span class="string">'tpope/vim-commentary'</span>                                       <span class="comment">" a better comment tool</span></span><br><span class="line">Plug <span class="string">'vim-scripts/EasyMotion'</span>                                     <span class="comment">" enhance default motions</span></span><br><span class="line">Plug <span class="string">'Yggdroot/indentLine'</span>                                        <span class="comment">" indent line indicator</span></span><br><span class="line">Plug <span class="string">'jiangmiao/auto-pairs'</span>                                       <span class="comment">" auto add pairs</span></span><br><span class="line">Plug <span class="string">'junegunn/rainbow_parentheses.vim'</span>                           <span class="comment">" a much simpler-using fork of above</span></span><br><span class="line">Plug <span class="string">'junegunn/limelight.vim'</span>                                     <span class="comment">" dim others</span></span><br><span class="line">Plug <span class="string">'junegunn/goyo.vim'</span>                                          <span class="comment">" provide a dim writing environment</span></span><br><span class="line">Plug <span class="string">'w0rp/ale'</span>                                                   <span class="comment">" syntax error check</span></span><br><span class="line">Plug <span class="string">'Valloric/YouCompleteMe'</span>,                                    <span class="comment">" auto complete</span></span><br><span class="line">            \&#123; <span class="string">'do'</span>: <span class="string">'./install.py --clang-completer'</span> &#125;</span><br><span class="line">Plug <span class="string">'SirVer/ultisnips'</span>                                           <span class="comment">" auto complete string</span></span><br><span class="line">Plug <span class="string">'honza/vim-snippets'</span>                                         <span class="comment">" complete rules for ultisnips</span></span><br><span class="line">Plug <span class="string">'junegunn/vim-easy-align'</span>                                    <span class="comment">" align tool</span></span><br><span class="line">Plug <span class="string">'godlygeek/tabular'</span>                                          <span class="comment">" advanced align tool</span></span><br><span class="line">Plug <span class="string">'gabrielelana/vim-markdown'</span>, &#123; <span class="string">'for'</span>: <span class="string">'markdown'</span> &#125;           <span class="comment">" markdown plugin</span></span><br><span class="line">Plug <span class="string">'joker1007/vim-markdown-quote-syntax'</span>, &#123; <span class="string">'for'</span>: <span class="string">'markdown'</span> &#125; <span class="comment">" syntax highlight for quoted code</span></span><br><span class="line">Plug <span class="string">'iamcco/mathjax-support-for-mkdp'</span>, &#123; <span class="string">'for'</span>: <span class="string">'markdown'</span> &#125;     <span class="comment">" mathjax support for markdown preview</span></span><br><span class="line">Plug <span class="string">'iamcco/markdown-preview.vim'</span>, &#123; <span class="string">'for'</span>: <span class="string">'markdown'</span> &#125;         <span class="comment">" markdown preview support</span></span><br><span class="line">Plug <span class="string">'vim-scripts/indentpython.vim'</span>, &#123; <span class="string">'for'</span>: <span class="string">'python'</span> &#125;          <span class="comment">" auto indent for python</span></span><br><span class="line">Plug <span class="string">'nvie/vim-flake8'</span>, &#123; <span class="string">'for'</span>: <span class="string">'python'</span> &#125;                       <span class="comment">" flake8 style code check, need install flake8</span></span><br><span class="line"><span class="comment">" 这两个插件被 neoformat 替代了</span></span><br><span class="line"><span class="string">" Plug 'tell-k/vim-autopep8', &#123; 'for': 'python' &#125;                 "</span> <span class="keyword">a</span> <span class="keyword">python</span> code format tool wrapper <span class="keyword">for</span> autopep8</span><br><span class="line"><span class="string">" Plug 'fisadev/vim-isort', &#123; 'for': 'python' &#125;                   "</span> imports sorter <span class="keyword">for</span> <span class="keyword">python</span></span><br><span class="line">Plug <span class="string">'vim-latex/vim-latex'</span>, &#123; <span class="string">'for'</span>: <span class="string">'tex'</span> &#125;                      <span class="comment">" latex edit environment</span></span><br><span class="line">Plug <span class="string">'skywind3000/asyncrun.vim'</span>                                   <span class="comment">" AsyncRun plugin</span></span><br><span class="line">Plug <span class="string">'hotoo/pangu.vim'</span>                                            <span class="comment">" Chinese text format</span></span><br><span class="line">Plug <span class="string">'vimwiki/vimwiki'</span>                                            <span class="comment">" write wiki in vim</span></span><br><span class="line">Plug <span class="string">'yianwillis/vimcdoc'</span>                                         <span class="comment">" a Chinese help handbook for Vim</span></span><br><span class="line">Plug <span class="string">'sbdchd/neoformat'</span>                                           <span class="comment">" a collection of format tools</span></span><br><span class="line">Plug <span class="string">'ludovicchabant/vim-gutentags'</span>                               <span class="comment">" generate tags for project</span></span><br><span class="line">Plug <span class="string">'mhinz/vim-signify'</span>                                          <span class="comment">" show file modifying status for git</span></span><br><span class="line">Plug <span class="string">'Shougo/echodoc.vim'</span>                                         <span class="comment">" show argvs hint on the command line</span></span><br><span class="line"><span class="string">"======================"</span></span><br><span class="line"><span class="string">"  text object 全家桶  "</span></span><br><span class="line"><span class="string">"======================"</span></span><br><span class="line">Plug <span class="string">'kana/vim-textobj-user'</span>                                            <span class="comment">" 用户自定义 text object</span></span><br><span class="line">Plug <span class="string">'kana/vim-textobj-indent'</span>                                          <span class="comment">" 缩进对象，关键字 &lt;i&gt;</span></span><br><span class="line">Plug <span class="string">'kana/vim-textobj-syntax'</span>                                          <span class="comment">" 语法对象</span></span><br><span class="line">Plug <span class="string">'kana/vim-textobj-function'</span>, &#123; <span class="string">'for'</span>:[<span class="string">'c'</span>, <span class="string">'cpp'</span>, <span class="string">'vim'</span>, <span class="string">'java'</span>] &#125; <span class="comment">" 函数对象，关键字 &lt;f&gt;</span></span><br><span class="line">Plug <span class="string">'sgur/vim-textobj-parameter'</span>                                       <span class="comment">" 参数对象，关键字 &lt;,&gt;</span></span><br><span class="line">Plug <span class="string">'coderifous/textobj-word-column.vim'</span>                               <span class="comment">" 列对象，关键字 &lt;c&gt;</span></span><br><span class="line">Plug <span class="string">'bps/vim-textobj-python'</span>                                           <span class="comment">" python 对象合集，&lt;c&gt; 类，&lt;f&gt; 函数</span></span><br><span class="line">Plug <span class="string">'tpope/vim-surround'</span>                                               <span class="comment">" deal with surround for text object</span></span><br><span class="line"><span class="keyword">call</span> plug#end()</span><br><span class="line"><span class="keyword">filetype</span> plugin <span class="built_in">indent</span> <span class="keyword">on</span></span><br></pre></td></tr></table></figure>
+<p>由于 vim-plug 的强大，我们只需要将上述配置粘贴进 vimrc 中，重载配置文件后运行 <code>:PlugInstall&lt;CR&gt;</code> 就会自动安装所有插件，甚至 vim-plug 会帮我们做好安装后的处理。</p>
+<h3 id="必装插件配置-大大提高生产力"><a href="#必装插件配置-大大提高生产力" class="headerlink" title="必装插件配置 - 大大提高生产力"></a>必装插件配置 - 大大提高生产力</h3><p>通过 vim-plug 安装的插件大部分都是即装即用的，但也包括小部分需要在安装完成后进行一定的配置才能舒适地使用。</p>
+<h4 id="YouCompleteMe-最强补全神器"><a href="#YouCompleteMe-最强补全神器" class="headerlink" title="YouCompleteMe - 最强补全神器"></a>YouCompleteMe - 最强补全神器</h4><p><a href="https://github.com/Valloric/YouCompleteMe" title="YouCompleteMe" target="_blank" rel="noopener">YouCompleteMe</a> 是谷歌程序员 Valloric 开发的一款智能补全插件。在 YouCompleteMe 出来之前，大部分补全插件都是基于 tag 分析，也就是从当前文件以及其他 buffer 中的文件文本中匹配类似字符串进行补全，说白了就是靠猜。而 YouCompleteMe 是真正支持程序语义分析的补全，能够理解程序语言进行补全，准确率大大提高，并且体验也提升了很多。</p>
+<p>盗用 YouCompleteMe 官方仓库上的一张效果图</p>
+<p><img src="https://camo.githubusercontent.com/1f3f922431d5363224b20e99467ff28b04e810e2/687474703a2f2f692e696d6775722e636f6d2f304f50346f6f642e676966" alt="YouCompleteMe 效果图" title="YouCompleteMe 效果图（来自 YouCompleteMe 官方仓库）"></p>
+<p>虽然 YouCompleteMe 效果看起来很炫酷，但它也被称为“最难安装的插件”。它的底层是用 C++ 写成的，为了能作为 Vim 的插件，外层又用 Python 做了封装，因此它也是最复杂的插件。<code>Plug &#39;Valloric/YouCompleteMe&#39;, { &#39;do&#39;: &#39;./install.py --clang-completer&#39; }</code> 命令要求 vim-plug 将 YouCompleteMe 插件下载下来后自动编译，但如果你的终端上缺少编译的依赖会导致编译失败，此时我们需要手动进行编译。</p>
+<p>在 Linux 下进行安装会相对比较容易，在编译之前你需要但不限于以下工具：</p>
+<ul>
+<li>cmake</li>
+<li>automake</li>
+<li>python3-dev（python2 或 python3）</li>
+</ul>
+<p>之后运行 <code>cd ~/.vim/plugged/YouCompleteMe/</code> 进入 YouCompleteMe 的安装目录，运行 <code>./install.py --clang-completer</code> 进行安装，如果不需要 C 语言补全支持的话无需 <code>--clang-completer</code> 选项。安装程序会自动下载 libclang 依赖，等待安装完成即可。Windows 的安装过程大部分相似，可参考 YouCompleteMe 的官方仓库文档。</p>
+<p>再次使用 Vim 打开一个 Python 或 cpp 文件应该就能自动补全了。但接下来你会发现 YouCompleteMe 弹出的补全菜单里只会包括前面你输入过的关键字，并没有进行语义识别，那不是和自带的 omni 补全没区别！还浪费我这么长时间安装！其实之前我也是这么想的，直到有一天我看到<a href="https://zhuanlan.zhihu.com/p/33046090" title="YouCompleteMe 中容易忽略的配置" target="_blank" rel="noopener">这篇文章</a>，我才发现原来我一直用的是半残的 YouCompleteMe，根本没发挥出它真正的实力。通过如下配置就能使 YouCompleteMe 的补全策略更贴近于常见的 IDE。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> completeopt=longest,<span class="keyword">menu</span>                                <span class="comment">" YCM 的提示方式，previews 会显示具体预览窗口，menu 不提示</span></span><br><span class="line"><span class="comment">" let g:ycm_add_preview_to_completeopt = 0</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_collect_identifiers_from_tags_files</span>=<span class="number">1</span>             <span class="comment">" 使用 ctags 生成的 tags 文件</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_min_num_of_chars_for_completion</span>=<span class="number">2</span>                 <span class="comment">" 从第 2 个键入字符就开始罗列匹配项</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_seed_identifiers_with_syntax</span>=<span class="number">1</span>                    <span class="comment">" 语法关键字补全</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_cache_omnifunc</span>=<span class="number">1</span>                                  <span class="comment">" 禁止缓存匹配项,每次都重新生成匹配项</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_complete_in_comments</span> = <span class="number">1</span>                          <span class="comment">" 在注释输入中也能补全</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_complete_in_strings</span> = <span class="number">1</span>                           <span class="comment">" 在字符串输入中也能补全</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_collect_identifiers_from_comments_and_strings</span> = <span class="number">1</span> <span class="comment">" 注释和字符串中的文字也会被收入补全</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_python_binary_path</span> = <span class="string">'/usr/bin/python'</span>            <span class="comment">" set default python binary</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_global_ycm_extra_conf</span> = <span class="string">'~/.ycm_extra_conf.py'</span>    <span class="comment">" set global ycm extra config path</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_confirm_extra_conf</span> = <span class="number">0</span>                            <span class="comment">" confirm for config file</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_use_ultisnips_completer</span>=<span class="number">1</span>                         <span class="comment">" 查询 ultisnips 提供的代码模板补全</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_key_invoke_completion</span> = <span class="string">'&lt;c-z&gt;'</span>                   <span class="comment">" 手动触发补全的按键</span></span><br><span class="line"><span class="comment">" 使 YCM 能在输入两个字母的时候自动基于语义补全</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_semantic_triggers</span> =  &#123;</span><br><span class="line">			\ <span class="string">'c,cpp,python,java,go,erlang,perl'</span>: [<span class="string">'re!\w&#123;2&#125;'</span>],</span><br><span class="line">			\ <span class="string">'cs,lua,javascript'</span>: [<span class="string">'re!\w&#123;2&#125;'</span>],</span><br><span class="line">			\ &#125;</span><br><span class="line"><span class="keyword">nnoremap</span> <span class="symbol">&lt;leader&gt;</span>d :YcmCompleter GoToDefinitionElseDeclaration<span class="symbol">&lt;CR&gt;</span> <span class="comment">" goto definition</span></span><br><span class="line"><span class="keyword">autocmd</span> InsertLeave * <span class="keyword">if</span> <span class="built_in">pumvisible</span>() == <span class="number">0</span>|<span class="keyword">pclose</span>|<span class="keyword">endif</span>            <span class="comment">" 离开插入模式后自动关闭预览窗口</span></span><br><span class="line"><span class="keyword">autocmd</span> VimEnter * EchoDocEnable</span><br></pre></td></tr></table></figure>
+<h4 id="ALE-第二好的异步语法检查工具"><a href="#ALE-第二好的异步语法检查工具" class="headerlink" title="ALE - 第二好的异步语法检查工具"></a>ALE - 第二好的异步语法检查工具</h4><p><a href="https://github.com/w0rp/ale" title="ALE 官方仓库" target="_blank" rel="noopener">ALE</a> 是一款非常强大的异步语法检查工具。在 Vim 支持异步之前，最好的语法检查工具是 <a href="https://github.com/vim-syntastic/syntastic" title="Syntastic 官方仓库" target="_blank" rel="noopener">Syntastic</a>，但由于它非异步的工作方式，导致语法检查会阻塞主线程，使用体验比较差。在新版 Vim 中，都会推荐 ALE 或其他支持异步的语法检查工具。事实上 ALE 并不仅仅是一款语法检查工具，它是包括了语法检查、代码风格格式化、自动补全功能的工具集。</p>
+<p>ALE 安装完成后，随意打开一个代码文件。如果语法存在错误，那么在窗口的最左侧会显示一列符号，包括 ‘&gt;&gt;’ 或 ‘—‘。将光标移至有标记的行，在最下方的 statusline 中会显示错误的具体信息。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">" let g:ale_set_loclist = 0           "</span> show the lint <span class="keyword">as</span> <span class="keyword">a</span> dot <span class="keyword">on</span> <span class="keyword">left</span> of <span class="keyword">a</span> <span class="built_in">line</span></span><br><span class="line"><span class="string">" let g:ale_set_quickfix = 1          "</span> show the lint in quickfix <span class="keyword">list</span></span><br><span class="line"><span class="string">" let g:ale_open_list = 1             "</span> show quickfix window <span class="keyword">to</span> show error message</span><br><span class="line"><span class="string">" let g:ale_keep_list_window_open = 1 "</span> keep quickfix window show whether errors exist</span><br><span class="line"><span class="string">" let g:ale_sign_column_always = 1    "</span> 保持左侧边栏始终可见</span><br><span class="line"><span class="keyword">nmap</span> <span class="symbol">&lt;silent&gt;</span> <span class="symbol">&lt;C-k&gt;</span> <span class="symbol">&lt;Plug&gt;</span>(ale_previous_wrap)</span><br><span class="line"><span class="keyword">nmap</span> <span class="symbol">&lt;silent&gt;</span> <span class="symbol">&lt;C-j&gt;</span> <span class="symbol">&lt;Plug&gt;</span>(ale_next_wrap)</span><br><span class="line"><span class="comment">" Check Python files with flake8 and pylint.</span></span><br><span class="line"><span class="comment">" let b:ale_linters = ['flake8', 'pylint']</span></span><br><span class="line"><span class="comment">" set fixers for different file types</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">b:ale_fixers</span> = &#123;</span><br><span class="line">            \ <span class="string">'python'</span>: [<span class="string">'isort'</span>, <span class="string">'autopep8'</span>],</span><br><span class="line">            \ <span class="string">'cpp'</span>: [<span class="string">'clang-format'</span>],</span><br><span class="line">            \ <span class="string">'markdown'</span>: [<span class="string">'prettier'</span>]&#125;</span><br><span class="line"><span class="comment">" let g:ale_linters_explicit = 1</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ale_completion_delay</span> = <span class="number">500</span>                     <span class="comment">" 补全的延迟</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ale_echo_delay</span> = <span class="number">20</span>                            <span class="comment">" 回显的延迟</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ale_lint_delay</span> = <span class="number">500</span>                           <span class="comment">" 停止输入后更新 lint 标记的延迟</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ale_echo_msg_format</span> = <span class="string">'[%linter%] &lt;%code&gt; %%s'</span> <span class="comment">" 自定义 lint 输出格式</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ale_lint_on_text_changed</span> = <span class="string">'normal'</span>            <span class="comment">" 当文字在 NORMAL 模式下发生更改的时候更新 lint，防止 YCM 频繁刷新</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ale_lint_on_insert_leave</span> = <span class="number">1</span>                   <span class="comment">" 离开 INSERT 模式时更新 lint</span></span><br></pre></td></tr></table></figure>
+<p>将错误信息表示在左侧只是一种方式，你也可以通过反注释前 4 行，利用 Vim 自带的 quickfix 窗口显示错误信息。虽然通过这种方式你能够更清晰的了解各个错误的具体信息，但需要占用一部分宝贵的屏幕空间。</p>
+<p>11 至 14 行设置了 ALE 的默认格式化工具，ALE 本身并不对代码进行格式化，而是针对不同文件类型调用合适的格式化工具进行处理（ALE 支持的格式化工具列表可参照<a href="https://github.com/w0rp/ale" title="ALE 官方仓库" target="_blank" rel="noopener">官方仓库</a>）。其中 <code>isort</code>、<code>autopep8</code>、<code>prettier</code> 都是 Python 编写的命令行工具，<code>clang-format</code> 是 <code>clang</code> 编译器带的 C++ 格式化工具。</p>
+<p>20、21 行是针对 YCM 做的额外配置，据悉可以解决 YCM 补全菜单频繁刷新的问题。</p>
+<!--links-->
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2018/06/29/convert-format-of-documents-with-pandoc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cycoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cycoe's Home Page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/29/convert-format-of-documents-with-pandoc/" itemprop="url">
+                  convert format of documents with pandoc
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-29T14:33:48+08:00">2018-06-29</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/29/convert-format-of-documents-with-pandoc/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/06/29/convert-format-of-documents-with-pandoc/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Pandoc 是一个强大的文档格式转换软件，可以对 html、markdown、ppt、doc、pdf 等多种格式进行相互转换，但在将 markdown 文件转换为 pdf 文件的过程中，发现会出现中文编码的问题，因此需要使用如下命令指定渲染的引擎 <code>pandoc -f markdown_github my.md -o my.pdf --pdf-engine=xelatex -V mainfont=&quot;Your Font&quot;</code></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2018/04/14/Spawn-your-blog-site-with-hexo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cycoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cycoe's Home Page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/14/Spawn-your-blog-site-with-hexo/" itemprop="url">
+                  Spawn your blog site with hexo
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-14T13:50:18+08:00">2018-04-14</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/14/Spawn-your-blog-site-with-hexo/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/04/14/Spawn-your-blog-site-with-hexo/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近，由於 GitHub 在國內的訪問越來越不穩定，我決定將博客遷移至 <a href="https://coding.net" title="Coding" target="_blank" rel="noopener">Coding</a>（一個國內的代碼託管平臺）。Coding 與 GitHub 類似的可以直接展示靜態的個人主頁，整個配置流程與 GitHub 類似。但是之前使用的是 Jekyll 博客生成器進行構建，Jekyll 的優點是可以直接將代碼 Push 上去，GitHub 可以直接根據 Jekyll 格式的目錄進行部署，無需本地的部署環境，但是由於 Ruby 的性能問題，整個部署過程需要至少幾分鐘，因此尋求其他的生成器解決辦法。後來瞭解到 <a href="https://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>，一個由 NodeJS 驅動的博客生成器，於是決定趁遷移嘗試一下。</p>
+<h2 id="環境安裝"><a href="#環境安裝" class="headerlink" title="環境安裝"></a>環境安裝</h2><h3 id="安裝-NodeJS"><a href="#安裝-NodeJS" class="headerlink" title="安裝 NodeJS"></a>安裝 NodeJS</h3><p>Hexo 既然是由 NodeJS 驅動的，那必然 NodeJS 環境是必不可少，另外爲了更方便地管理第三方庫，還需要安裝 npm 管理器。對於我使用的 ArchLinux 爲例，只需要運行以下命令即可完成安裝。</p>
+<p> <code>$ sudo pacman -S nodejs npm</code></p>
+<h3 id="安裝-hexo"><a href="#安裝-hexo" class="headerlink" title="安裝 hexo"></a>安裝 hexo</h3><ul>
+<li>先創建一個文件夾用於存放博客的資源文件，然後 <code>cd</code> 到該目錄下</li>
+<li>安裝 hexo：<code>sudo npm install hexo -g</code></li>
+<li>安裝完成後通過 <code>hexo -v</code> 查看版本</li>
+<li>通過 <code>hexo init</code> 將本目錄初始化爲博客的根目錄，可以看到目錄下自動生成了一些文件</li>
+</ul>
+<img src="/2018/04/14/Spawn-your-blog-site-with-hexo/hexo_dir.png" title="hexo 目錄">
+<ul>
+<li>各文件解釋如下：<ul>
+<li>node_modules：依賴包</li>
+<li>public：存放構建生成的頁面</li>
+<li>scaffolds：命令生成文章等的模板</li>
+<li>source：用命令創建的各種文章</li>
+<li>themes：主題目錄</li>
+<li>_config.yml：整個博客的配置</li>
+<li>db.json：source 解析得到的信息</li>
+<li>package.json：項目所需模塊的配置信息</li>
+</ul>
+</li>
+</ul>
+<h2 id="開始寫博客"><a href="#開始寫博客" class="headerlink" title="開始寫博客"></a>開始寫博客</h2><p>可以选择 typora 或者其他的 Markdown 编辑器进行编辑，此处我选择了 vim 进行文件编辑。要想要 vim 支持 Markdown 的语法高亮需要以下几个插件</p>
+<ul>
+<li>Plugin ‘godlygeek/tabular’</li>
+<li>Plugin ‘gabrielelana/vim-markdown’</li>
+</ul>
+<h2 id="部署博客"><a href="#部署博客" class="headerlink" title="部署博客"></a>部署博客</h2><p>hexo 可以用 <code>$ hexo d -g</code> 命令方便的对博客系统进行部署，但首先需要在博客配置文件 <code>_config.yml</code>  的 Deployment 节中做配置<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span> <span class="comment"># 此处是部署的方式</span></span><br><span class="line"><span class="attr">  repo:</span>     <span class="comment"># 此处是所有需要部署的仓库，仓库的设置与 Jekyll 类似</span></span><br><span class="line"><span class="attr">      coding:</span> <span class="string">git@git.coding.net:cycoe/cycoe.git</span></span><br></pre></td></tr></table></figure></p>
+<p>然后在 <a href="https://coding.net" title="Coding" target="_blank" rel="noopener">Coding</a> 上新建一个名为 cycoe 的空仓库（由于  <a href="https://coding.net" title="Coding" target="_blank" rel="noopener">Coding</a> 本身的限制，该仓库应与用户名同名），在本机的博客根目录运行 <code>hexo d -g</code> 即可将博客部署至 <a href="https://coding.net" title="Coding" target="_blank" rel="noopener">Coding</a>。然后打开仓库设置，将此仓库设置为 Coding Pages 即可。</p>
+<h2 id="2018-06-05-更新"><a href="#2018-06-05-更新" class="headerlink" title="2018-06-05 更新"></a>2018-06-05 更新</h2><p>最近 <a href="https://coding.net" title="Coding" target="_blank" rel="noopener">Coding</a> 不知是怎么了，我的博客总是打不开。凑巧最近刚租了个包月的服务器，于是决定将整个博客迁移到自己的服务器上。</p>
+<p><a href="https://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 和 Jekyll 博客系统的部署原理不太一样，<code>$ hexo g</code> 是 <code>$ hexo generate</code> 的缩写，其原理是在本地使用 Hexo 引擎将 <code>_posts</code> 目录的 Markdown 文件生成网页结构，结果保存在 <code>public</code> 目录下，可直接由 Apache 或 Nginx 驱动。</p>
+<img src="/2018/04/14/Spawn-your-blog-site-with-hexo/html_dir.png" title="网页目录结构">
+<p>而 <code>$ hexo deploy</code> 正是将 public 目录下的网页部署到 Git 仓库中。因此如果能将仓库克隆到服务器上进行部署，那么问题就能解决。</p>
+<h3 id="在服务器上建立-Git-仓库"><a href="#在服务器上建立-Git-仓库" class="headerlink" title="在服务器上建立 Git 仓库"></a>在服务器上建立 Git 仓库</h3><h4 id="初始化-Git-仓库"><a href="#初始化-Git-仓库" class="headerlink" title="初始化 Git 仓库"></a>初始化 Git 仓库</h4><p><code>$ sudo git init --bare sample.git</code></p>
+<p>Git 就会创建一个裸仓库，即会在当前路径下创建一个名为 <code>sample.git</code> 的仓库。裸仓库没有工作区，因为服务器上的 Git 仓库纯粹是为了共享，所以不让用户直接登录到服务器上去改工作区，并且服务器上的 Git 仓库通常都以 <code>.git</code> 结尾。然后，把 owner 改为服务器的用户名，不然没有权限将修改写入该仓库。</p>
+<p><code>$ sudo chown -R ubuntu:ubuntu sample.git</code></p>
+<h4 id="将仓库加到-Hexo-的配置文件"><a href="#将仓库加到-Hexo-的配置文件" class="headerlink" title="将仓库加到 Hexo 的配置文件"></a>将仓库加到 Hexo 的配置文件</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repo:</span></span><br><span class="line">    <span class="comment">#coding: git@git.coding.net:cycoe/cycoe.git</span></span><br><span class="line"><span class="attr">    my_server:</span> <span class="string">ubuntu@139.199.95.151:/home/ubuntu/git/blog.git</span></span><br></pre></td></tr></table></figure>
+<p>此处 @ 前的用户名一定要与服务器仓库的权限对应，: 后面是仓库的绝对路径。</p>
+<h4 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h4><p>此时运行 <code>$ hexo d- g</code> 即可将博客网页目录部署到仓库，但此时查看仓库会发现目录下并不是网页的结构，因为这个仓库是裸仓库，下面并没有工作区，所以看到的并不是我们 Push 上来的内容。</p>
+<h4 id="Git-Hook-事件"><a href="#Git-Hook-事件" class="headerlink" title="Git Hook 事件"></a>Git Hook 事件</h4><p>事实上，如果我们此时将该仓库克隆到另一个目录下就可以看到工作区了。首先 <code>cd</code> 到需要保存网页的路径下 <code>$ cd /home/ubuntu/www/</code>，然后运行 <code>$ git clone /home/ubuntu/git/blog.git</code> 将仓库克隆至当前路径。</p>
+<p>但是如果每次都要登上服务器手动克隆就违背我们自动化部署的初衷了。因此此处需要用到 Git 自带的 Hook 功能，简单来将讲就是在仓库发生变化前/后所要执行的操作。</p>
+<p>Hook 的事件放在裸仓库目录的 hooks 文件夹下，这里我们新建一个名为 <code>post-receive</code> 的事件，该事件是在仓库更新合并完成后自动运行，文件中加入如下内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">cd</span> /home/ubuntu/www/blog  <span class="comment"># cd 到网页的展示仓库</span></span><br><span class="line"><span class="built_in">unset</span> GIT_DIR  <span class="comment"># 非常重要！如果不解绑 GIT_DIR 环境变量无法切换路径</span></span><br><span class="line">git config --list</span><br><span class="line">git pull origin master</span><br></pre></td></tr></table></figure>
+<p>运行 <code>$ chmod +x post-receive</code> 赋予执行权限</p>
+<p>此时再在本机运行 <code>$ hexo d -g</code> 发现网页目录也自动更新了</p>
+<h2 id="2018-08-18-更新"><a href="#2018-08-18-更新" class="headerlink" title="2018-08-18 更新"></a>2018-08-18 更新</h2><p>今天写了一篇博客，运行 <code>$ hexo d -g</code> 想要更新博客，结果发现网页并没有变化。登上服务器一看 <code>/home/ubuntu/git/blog.git</code> 仓库已经更新了，怀疑是更新后没有成功运行 <code>post-receive</code>。但是自从上次设置好 <code>post-receive</code> 后就没有改过，按理说应该能够运行。运行 <code>$ ls -l</code> 命令后发现，<code>/home/ubuntu/git/blog.git</code> 目录的归属者是 <code>ubuntu</code>，而 <code>/home/ubuntu/www/blog</code> 目录的归属者是 <code>nginx</code>，应该是上次我在设置 nginx 的时候不小心把 <code>/home/ubuntu/www</code> 目录递归修改成归属 <code>nginx</code> 了。而 <code>post-receive</code> 所做的工作实际上是在我把更新 push 到 <code>/home/ubuntu/git/blog.git</code> 仓库后，<code>cd</code> 到了 <code>/home/ubuntu/www/blog</code> 目录并拉取更新。因此我是以 <code>ubuntu</code> 用户的身份做的 push，又是以 <code>ubuntu</code> 用户的身份运行的 <code>post-receive</code>，因此在 <code>/home/ubuntu/www/blog</code> 目录中是没有权限拉取更新的。</p>
+<p>既然已经发现了问题出在用户权限上。那就可以通过运行 <code>$ sudo chown -R ubuntu:users /home/ubuntu/www</code> 将整个目录都改为 <code>ubuntu</code> 所属，也就不关 <code>nginx</code> 用户什么事了，这样确实非常方便的解决了这个问题。另外 <code>post-receive</code> 在更改用户归属后执行权限丢失了，记得运行 <code>$ chmod +x post-receive</code> 重新赋予执行权限。事实上当初建立 <code>nginx</code> 用户也是因为安装了 nginx 服务，想要弄得更规范些。但因为懒一直没给 <code>nginx</code> 建立自己的 Home 目录，按理说把跟 nginx 相关的目录都扔到 <code>nginx</code> 用户对应的 Home 下是最好的。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2018/04/13/Planche-training-calendar/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cycoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cycoe's Home Page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/13/Planche-training-calendar/" itemprop="url">
+                  Planche training calendar
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-13T00:00:00+08:00">2018-04-13</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/personal/" itemprop="url" rel="index"><span itemprop="name">personal</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/13/Planche-training-calendar/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/04/13/Planche-training-calendar/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p> A planche is a skill in <a href="https://en.wikipedia.org/wiki/Gymnastics" target="_blank" rel="noopener">gymnastics</a> in which the <a href="https://en.wikipedia.org/wiki/Human_body" target="_blank" rel="noopener">body</a> is held parallel to the ground, giving the illusion of floating. It is a move that requires significant <a href="https://en.wikipedia.org/wiki/Physical_strength" target="_blank" rel="noopener">strength</a> and <a href="https://en.wikipedia.org/wiki/Balance" target="_blank" rel="noopener">balance</a>.</p>
+<img src="/2018/04/13/Planche-training-calendar/Planche.jpg" title="Planche">
+</blockquote>
+<p>刚进大学的时候 ，无意间在 B 站看到一个关于俄挺的视频，能够完成俄挺成了我的一个梦想。本科的时候陆陆续续地练过一段时间，练练俯卧撑和团身，团身也就是刚刚高团 2-3 秒的程度。后来因为实在没什么进展也就渐渐放弃了。前几天回家的路上吹了点小风就感冒了，意识到自己的小身板太弱，再加上最近想要增重，决定重新开始练习俄挺。</p>
+<h3 id="2018-04-05"><a href="#2018-04-05" class="headerlink" title="2018-04-05"></a>2018-04-05</h3><p>从今天开始练习，因为也好久没有做俯卧撑了，目前的水平实在太烂。</p>
+<ul>
+<li>标准俯卧撑 10 个</li>
+<li>冲肩维持 5 秒</li>
+</ul>
+<h3 id="2018-04-13"><a href="#2018-04-13" class="headerlink" title="2018-04-13"></a>2018-04-13</h3><p>练了一个星期的冲肩，每天都在坚持。</p>
+<img src="/2018/04/13/Planche-training-calendar/plank_lean.jpg">
+<ul>
+<li>冲肩维持 10 秒</li>
+<li>窄距俯卧撑 10 个</li>
+</ul>
+<h3 id="2018-06-10"><a href="#2018-06-10" class="headerlink" title="2018-06-10"></a>2018-06-10</h3><p>最近右手小臂疼的厉害，应该是跟前几天每天用鼠标做视频有关，看来要好好休息几天了，最近下调训练强度，少用鼠标。。不过值得激动的是，目前已经可以比较轻松地做团身了，高阶团身应该也能 10 来秒了，接下来准备练团身举腿。</p>
+<img src="/2018/04/13/Planche-training-calendar/tucked.jpg" title="tucked">
+<ul>
+<li>冲肩维持 30 秒</li>
+<li>窄距俯卧撑 25 个</li>
+<li>冲肩俯卧撑 15 个</li>
+<li>团身维持 10 秒</li>
+<li>引体向上 7 个</li>
+</ul>
+<h3 id="2018-07-25"><a href="#2018-07-25" class="headerlink" title="2018-07-25"></a>2018-07-25</h3><p>最近一个月因为手腕一直还是有点疼，尤其搬重物的时候，也就没怎么敢继续练团身，转而练习引体和前水平。打算先通过前水平锻炼背部力量，通过双力臂锻炼手腕力量，等基础打好后再练习俄挺。引体的话其实应该一组能做个 10 个左右，但是后面几组做的时候因为可能是翻腕了的原因，导致手腕还是会疼，发现在云梯上练习就没事了，可能是手的朝向的问题。</p>
+<p>双力臂其实还是没有太大进展，前水平的话一条腿伸直是能保持了，接下来就是要延长持续的时间，然后慢慢向双腿进步。在宿舍也可以每天都练前水平。</p>
+<p>另外利用操场上的杠铃可以做很多其他的训练，比如正手抬、反手拉、单手拉、卧推。利用器材可以取得更好的训练效果。</p>
+<p><strong>最后有个非常重要的想法：</strong>在家的这几天发现，想要找个健身器材齐全的公园实在不是很容易，因此希望能做个 App，街健爱好者可以在上面共享健身器材所在的位置，另外可以认识附近的街健爱好者。</p>
+<ul>
+<li>冲肩俯卧撑 20 个</li>
+<li>前水平团身 10 秒</li>
+<li>单杠硬拉 4 个</li>
+<li>引体 10 个</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2017/12/07/教务网现惊天大bug/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cycoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cycoe's Home Page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/07/教务网现惊天大bug/" itemprop="url">
+                  教务网现惊天大 bug？！谈谈弱密码如何暴露你的信息
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-07T00:00:00+08:00">2017-12-07</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/spider/" itemprop="url" rel="index"><span itemprop="name">spider</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/spider/sploit/" itemprop="url" rel="index"><span itemprop="name">sploit</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/12/07/教务网现惊天大bug/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/12/07/教务网现惊天大bug/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          爬虫小记
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/07/教务网现惊天大bug/">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2017/11/03/如何提高抢到报告的概率/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cycoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cycoe's Home Page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/03/如何提高抢到报告的概率/" itemprop="url">
+                  如何提高抢到报告的概率？
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-03T00:00:00+08:00">2017-11-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/spider/" itemprop="url" rel="index"><span itemprop="name">spider</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/03/如何提高抢到报告的概率/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/03/如何提高抢到报告的概率/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          爬虫小记
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/03/如何提高抢到报告的概率/">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2017/10/28/利用python实现自动抢报告/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cycoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cycoe's Home Page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/28/利用python实现自动抢报告/" itemprop="url">
+                  利用 python 实现自动抢报告
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-28T00:00:00+08:00">2017-10-28</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/spider/" itemprop="url" rel="index"><span itemprop="name">spider</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/28/利用python实现自动抢报告/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/28/利用python实现自动抢报告/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          爬虫小记
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/28/利用python实现自动抢报告/">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2017/07/09/Archlinux安装小记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cycoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cycoe's Home Page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/09/Archlinux安装小记/" itemprop="url">
+                  Archlinux 安装小记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-09T00:00:00+08:00">2017-07-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/09/Archlinux安装小记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/07/09/Archlinux安装小记/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
+<li>ethernet 用户无需对网络连接做过多设置，wifi 用户可使用 wifi-menu 工具进行无线网连接</li>
+<li>对 <code>/etc/pacman.d/mirrorlist</code> 文件中的源进行排序</li>
+</ol>
+<h3 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h3><ol>
+<li>利用 cfdisk 或 fdisk 工具进行分区</li>
+<li>使用 <code>mkfs.ext4 /dev/sdxY</code> 进行分区的格式化，btrfs 分区运行 <code>mkfs.btrfs -f /dev/sdxY</code></li>
+</ol>
+<h3 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h3><p>按顺序执行如下命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sdxY /mnt	# 挂载根分区</span><br><span class="line"></span><br><span class="line">mkdir /mnt/home</span><br><span class="line">mkdir /mnt/boot</span><br><span class="line">mkdir /mnt/boot/grub</span><br><span class="line">mkdir /mnt/boot/efi</span><br><span class="line"></span><br><span class="line">mount /dev/sdxY /mnt/home</span><br><span class="line">mount /dev/sdxY /mnt/boot/efi</span><br><span class="line">mount /dev/sdxY /mnt/boot/grub</span><br></pre></td></tr></table></figure></p>
+<p>若根分区为 btrfs 格式，则需要先使用如下命令挂载根分区<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sdxY /mnt		#挂载根分区</span><br><span class="line">cd /mnt</span><br><span class="line">btrfs subvolume create @	#创建名为 @ 的子卷</span><br><span class="line">cd ~</span><br><span class="line">umount /mnt</span><br><span class="line">mount /dev/sdxY /mnt -o subvol=@,compress=lzo</span><br></pre></td></tr></table></figure></p>
+<p>分区挂载完毕后可运行 <code>lsblk</code> 查看挂载信息</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>运行自动化安装工具 <code>pacstrap -i /mnt base</code></p>
+<ul>
+<li>需要 gcc 等开发工具的用户需要装上 base-devel 包</li>
+<li>btrfs 分区需要 btrfs-progs 包</li>
+<li>wifi 用户需要同时安装 dialog wpa_supplicant 来使用 wifi-menu</li>
+<li>引导管理器可选择 grub，efi 主板用户需加上 efibootmgr，多系统检测需要 os-prober<br>示例：<code>pacstrap -i /mnt base base-devel btrfs-progs dialog wpa_supplicant grub efibootmgr os-prober</code></li>
+</ul>
+<p>运行 <code>genfstab -U /mnt</code> 查看挂载信息是否正确，检查无误后运行 <code>genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</code> 将挂载信息写入 fstab</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ul>
+<li>使用 archlinux 自带的 <code>arch-chroot /mnt</code> 接管新系统</li>
+<li><code>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code>    # 设置时区</li>
+<li>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># nano /etc/locale.gen</span></span><br><span class="line">en_US.UTF-8 UTF-8</span><br><span class="line">zh_CN.UTF-8 UTF-8</span><br><span class="line">zh_TW.UTF-8 UTF-8</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Cycoe</p>
+              <p class="site-description motion-element" itemprop="description">Cycoe's Personal Blog</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/cycoe" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cycoe</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a> v6.1.0</div>
+
+
+
+  <div class="footer-custom">Hosted by <a target="_blank" rel="external nofollow" href="https://pages.coding.me"><b>Coding Pages</b></a></div>
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+  
+
+  
+
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
