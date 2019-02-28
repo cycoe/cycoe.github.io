@@ -99,18 +99,18 @@
 
 
 
-  <meta name="description" content="爬虫小记">
+  <meta name="description" content="爬蟲小記">
 <meta name="keywords" content="python, spider, report, math">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何提高抢到报告的概率？">
+<meta property="og:title" content="如何提高搶到報告的概率？">
 <meta property="og:url" content="http://cycoe.cc/2017/11/03/如何提高抢到报告的概率/index.html">
 <meta property="og:site_name" content="Cycoe&#39;s Home Page">
-<meta property="og:description" content="爬虫小记">
+<meta property="og:description" content="爬蟲小記">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-13T03:38:07.109Z">
+<meta property="og:updated_time" content="2019-02-28T01:03:03.299Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何提高抢到报告的概率？">
-<meta name="twitter:description" content="爬虫小记">
+<meta name="twitter:title" content="如何提高搶到報告的概率？">
+<meta name="twitter:description" content="爬蟲小記">
 
 
 
@@ -127,7 +127,7 @@
   };
 </script>
 
-  <title>如何提高抢到报告的概率？ | Cycoe's Home Page</title>
+  <title>如何提高搶到報告的概率？ | Cycoe's Home Page</title>
   
 
 
@@ -316,7 +316,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">如何提高抢到报告的概率？
+          <h1 class="post-title" itemprop="name headline">如何提高搶到報告的概率？
               
             
           </h1>
@@ -394,7 +394,7 @@
           
 
           
-              <div class="post-description">爬虫小记</div>
+              <div class="post-description">爬蟲小記</div>
           
 
         </div>
@@ -1120,19 +1120,19 @@
   border-bottom-color: #eee;
 }
 </style></head><body id="container" class="export export-html"><span i="1"><blockquote>
-<span i="1"><p>在之前写抢报告软件的过程中，遇到一个非常有趣的问题——如何提高抢到报告的概率？当然，无脑减小两次请求之间的间隔时间可以保证一定能抢到报告，但是也会加大服务器的负担，作为北京化工大学的优秀学子:smirk:，这么做是不可行的。脑中突然灵光一现，以固定 5 秒的时间间隔抢报告与以 0 到 10 之间的随机时间间隔抢报告，抢到报告的概率是一样的吗？刚好最近要考数理统计，那就用概率论的知识来解决这个问题吧（其实是不务正业:grin:）。</p>
+<span i="1"><p>在之前寫搶報告軟件的過程中，遇到一個非常有趣的問題——如何提高搶到報告的概率？當然，無腦減小兩次請求之間的間隔時間可以保證一定能搶到報告，但是也會加大服務器的負擔，作爲北京化工大學的優秀學子:smirk:，這麼做是不可行的。腦中突然靈光一現，以固定 5 秒的時間間隔搶報告與以 0 到 10 之間的隨機時間間隔搶報告，搶到報告的概率是一樣的嗎？剛好最近要考數理統計，那就用概率論的知識來解決這個問題吧（其實是不務正業:grin:）。</p>
 </span></blockquote>
-</span><span i="3"><h2 id="-">问题分析</h2>
-</span><span i="4"><p>从直观上来看，固定 5 秒的时间间隔与 0 到 10 之前的随机时间间隔的期望是相等的，实际情况计算后才知道。</p>
-</span><span i="5"><h3 id="-">间隔时间固定的情况</h3>
-</span><span i="6"><p>为了简化问题，首先将抢到报告的事件记为 <span id="math-1"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.743ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 750.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+</span><span i="3"><h2 id="-">問題分析</h2>
+</span><span i="4"><p>從直觀上來看，固定 5 秒的時間間隔與 0 到 10 之前的隨機時間間隔的期望是相等的，實際情況計算後才知道。</p>
+</span><span i="5"><h3 id="-">間隔時間固定的情況</h3>
+</span><span i="6"><p>爲了簡化問題，首先將搶到報告的事件記爲 <span id="math-1"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.743ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 750.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <path stroke-width="1" id="E1-MJMATHI-41" d="M208 74Q208 50 254 46Q272 46 272 35Q272 34 270 22Q267 8 264 4T251 0Q249 0 239 0T205 1T141 2Q70 2 50 0H42Q35 7 35 11Q37 38 48 46H62Q132 49 164 96Q170 102 345 401T523 704Q530 716 547 716H555H572Q578 707 578 706L606 383Q634 60 636 57Q641 46 701 46Q726 46 726 36Q726 34 723 22Q720 7 718 4T704 0Q701 0 690 0T651 1T578 2Q484 2 455 0H443Q437 6 437 9T439 27Q443 40 445 43L449 46H469Q523 49 533 63L521 213H283L249 155Q208 86 208 74ZM516 260Q516 271 504 416T490 562L463 519Q447 492 400 412L310 260L413 259Q516 259 516 260Z"/>
 </defs>
 <g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
  <use xlink:href="#E1-MJMATHI-41" x="0" y="0"/>
 </g>
-</svg></span>，将报告的存活时间（报告从可抢状态开始到被抢走的时间）的期望值记为 E<span id="math-2"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="9.309ex" height="2.843ex" style="vertical-align: -0.838ex;" viewbox="0 -863.1 4007.9 1223.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+</svg></span>，將報告的存活時間（報告從可搶狀態開始到被搶走的時間）的期望值記爲 E<span id="math-2"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="9.309ex" height="2.843ex" style="vertical-align: -0.838ex;" viewbox="0 -863.1 4007.9 1223.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <path stroke-width="1" id="E1-MJMAIN-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/>
 <path stroke-width="1" id="E1-MJMATHI-54" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"/>
@@ -1154,7 +1154,7 @@
  <use transform="scale(0.707)" xlink:href="#E1-MJMATHI-61" x="511" y="-213"/>
 </g>
 </g>
-</svg></span>，提交抢报告请求的时间间隔为 <span id="math-3"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.843ex" height="2.343ex" style="vertical-align: -0.671ex;" viewbox="0 -719.6 793.5 1008.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+</svg></span>，提交搶報告請求的時間間隔爲 <span id="math-3"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.843ex" height="2.343ex" style="vertical-align: -0.671ex;" viewbox="0 -719.6 793.5 1008.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <path stroke-width="1" id="E1-MJMATHI-74" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"/>
 <path stroke-width="1" id="E1-MJMATHI-73" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"/>
@@ -1163,7 +1163,7 @@
  <use xlink:href="#E1-MJMATHI-74" x="0" y="0"/>
  <use transform="scale(0.707)" xlink:href="#E1-MJMATHI-73" x="511" y="-213"/>
 </g>
-</svg></span>，则抢到报告的概率即为 <span id="math-4"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="11.212ex" height="3.843ex" style="vertical-align: -1.338ex;" viewbox="0 -1078.4 4827.4 1654.5" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+</svg></span>，則搶到報告的概率即爲 <span id="math-4"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="11.212ex" height="3.843ex" style="vertical-align: -1.338ex;" viewbox="0 -1078.4 4827.4 1654.5" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <path stroke-width="1" id="E1-MJMATHI-50" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"/>
 <path stroke-width="1" id="E1-MJMAIN-7B" d="M434 -231Q434 -244 428 -250H410Q281 -250 230 -184Q225 -177 222 -172T217 -161T213 -148T211 -133T210 -111T209 -84T209 -47T209 0Q209 21 209 53Q208 142 204 153Q203 154 203 155Q189 191 153 211T82 231Q71 231 68 234T65 250T68 266T82 269Q116 269 152 289T203 345Q208 356 208 377T209 529V579Q209 634 215 656T244 698Q270 724 324 740Q361 748 377 749Q379 749 390 749T408 750H428Q434 744 434 732Q434 719 431 716Q429 713 415 713Q362 710 332 689T296 647Q291 634 291 499V417Q291 370 288 353T271 314Q240 271 184 255L170 250L184 245Q202 239 220 230T262 196T290 137Q291 131 291 1Q291 -134 296 -147Q306 -174 339 -192T415 -213Q429 -213 431 -216Q434 -219 434 -231Z"/>
@@ -1194,7 +1194,7 @@
 </g>
 </g>
 </g>
-</svg></span>。针对 <span id="math-5"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="13.34ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 5743.7 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+</svg></span>。針對 <span id="math-5"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="13.34ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 5743.7 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <path stroke-width="1" id="E1-MJMATHI-74" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"/>
 <path stroke-width="1" id="E1-MJMATHI-61" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"/>
@@ -1217,7 +1217,7 @@
  <use xlink:href="#E1-MJMAIN-3D" x="4186" y="0"/>
  <use xlink:href="#E1-MJMAIN-35" x="5243" y="0"/>
 </g>
-</svg></span> 的情况，<span id="math-6"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="11.884ex" height="2.843ex" style="vertical-align: -0.838ex;" viewbox="0 -863.1 5116.6 1223.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+</svg></span> 的情況，<span id="math-6"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="11.884ex" height="2.843ex" style="vertical-align: -0.838ex;" viewbox="0 -863.1 5116.6 1223.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <path stroke-width="1" id="E1-MJMATHI-50" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"/>
 <path stroke-width="1" id="E1-MJMAIN-7B" d="M434 -231Q434 -244 428 -250H410Q281 -250 230 -184Q225 -177 222 -172T217 -161T213 -148T211 -133T210 -111T209 -84T209 -47T209 0Q209 21 209 53Q208 142 204 153Q203 154 203 155Q189 191 153 211T82 231Q71 231 68 234T65 250T68 266T82 269Q116 269 152 289T203 345Q208 356 208 377T209 529V579Q209 634 215 656T244 698Q270 724 324 740Q361 748 377 749Q379 749 390 749T408 750H428Q434 744 434 732Q434 719 431 716Q429 713 415 713Q362 710 332 689T296 647Q291 634 291 499V417Q291 370 288 353T271 314Q240 271 184 255L170 250L184 245Q202 239 220 230T262 196T290 137Q291 131 291 1Q291 -134 296 -147Q306 -174 339 -192T415 -213Q429 -213 431 -216Q434 -219 434 -231Z"/>
@@ -1240,7 +1240,7 @@
  <use xlink:href="#E1-MJMAIN-36" x="779" y="0"/>
 </g>
 </g>
-</svg></span>。即在报告平均存活时间为 3 秒，抢报告间隔固定为 5 秒的情况下，抢到报告的概率为 <span id="math-7"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="4.261ex" height="2.343ex" style="vertical-align: -0.338ex;" viewbox="0 -863.1 1834.5 1008.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+</svg></span>。即在報告平均存活時間爲 3 秒，搶報告間隔固定爲 5 秒的情況下，搶到報告的概率爲 <span id="math-7"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="4.261ex" height="2.343ex" style="vertical-align: -0.338ex;" viewbox="0 -863.1 1834.5 1008.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <path stroke-width="1" id="E1-MJMAIN-36" d="M42 313Q42 476 123 571T303 666Q372 666 402 630T432 550Q432 525 418 510T379 495Q356 495 341 509T326 548Q326 592 373 601Q351 623 311 626Q240 626 194 566Q147 500 147 364L148 360Q153 366 156 373Q197 433 263 433H267Q313 433 348 414Q372 400 396 374T435 317Q456 268 456 210V192Q456 169 451 149Q440 90 387 34T253 -22Q225 -22 199 -14T143 16T92 75T56 172T42 313ZM257 397Q227 397 205 380T171 335T154 278T148 216Q148 133 160 97T198 39Q222 21 251 21Q302 21 329 59Q342 77 347 104T352 209Q352 289 347 316T329 361Q302 397 257 397Z"/>
 <path stroke-width="1" id="E1-MJMAIN-30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"/>
@@ -1252,8 +1252,8 @@
  <use xlink:href="#E1-MJMAIN-25" x="1001" y="0"/>
 </g>
 </svg></span>。</p>
-</span><span i="8"><h3 id="-">间隔时间为均匀分布的情况</h3>
-</span><span i="9"><p>在该种情况下，我们构造抢报告的时间间隔的分布为 <span id="math-8"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="14.253ex" height="2.843ex" style="vertical-align: -0.838ex;" viewbox="0 -863.1 6136.7 1223.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+</span><span i="8"><h3 id="-">間隔時間爲均勻分佈的情況</h3>
+</span><span i="9"><p>在該種情況下，我們構造搶報告的時間間隔的分佈爲 <span id="math-8"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="14.253ex" height="2.843ex" style="vertical-align: -0.838ex;" viewbox="0 -863.1 6136.7 1223.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <path stroke-width="1" id="E1-MJMATHI-54" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"/>
 <path stroke-width="1" id="E1-MJMATHI-73" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"/>
@@ -1281,7 +1281,7 @@
 </g>
  <use xlink:href="#E1-MJMAIN-29" x="5747" y="0"/>
 </g>
-</svg></span>，其概率密度函数为：</p>
+</svg></span>，其概率密度函數爲：</p>
 </span><span i="10"><span id="math-9"><div style="width: 100%; text-align: center"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="28.918ex" height="9.509ex" style="vertical-align: -4.171ex;" viewbox="0 -2298.3 12450.9 4094.3" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <path stroke-width="1" id="E1-MJMATHI-66" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"/>
@@ -1378,14 +1378,14 @@
 </g>
 </g>
 </g>
-</svg></div></span></span><span i="14"><p>则对于任意的时间间隔 <span id="math-10"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.33ex" height="1.676ex" style="vertical-align: -0.338ex;" viewbox="0 -576.1 572.5 721.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+</svg></div></span></span><span i="14"><p>則對於任意的時間間隔 <span id="math-10"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.33ex" height="1.676ex" style="vertical-align: -0.338ex;" viewbox="0 -576.1 572.5 721.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <path stroke-width="1" id="E1-MJMATHI-78" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"/>
 </defs>
 <g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
  <use xlink:href="#E1-MJMATHI-78" x="0" y="0"/>
 </g>
-</svg></span>，根据上一节中的结果，抢到报告的概率 <span id="math-11"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="5.813ex" height="2.843ex" style="vertical-align: -0.838ex;" viewbox="0 -863.1 2503 1223.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+</svg></span>，根據上一節中的結果，搶到報告的概率 <span id="math-11"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="5.813ex" height="2.843ex" style="vertical-align: -0.838ex;" viewbox="0 -863.1 2503 1223.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <path stroke-width="1" id="E1-MJMATHI-50" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"/>
 <path stroke-width="1" id="E1-MJMAIN-7B" d="M434 -231Q434 -244 428 -250H410Q281 -250 230 -184Q225 -177 222 -172T217 -161T213 -148T211 -133T210 -111T209 -84T209 -47T209 0Q209 21 209 53Q208 142 204 153Q203 154 203 155Q189 191 153 211T82 231Q71 231 68 234T65 250T68 266T82 269Q116 269 152 289T203 345Q208 356 208 377T209 529V579Q209 634 215 656T244 698Q270 724 324 740Q361 748 377 749Q379 749 390 749T408 750H428Q434 744 434 732Q434 719 431 716Q429 713 415 713Q362 710 332 689T296 647Q291 634 291 499V417Q291 370 288 353T271 314Q240 271 184 255L170 250L184 245Q202 239 220 230T262 196T290 137Q291 131 291 1Q291 -134 296 -147Q306 -174 339 -192T415 -213Q429 -213 431 -216Q434 -219 434 -231Z"/>
@@ -1398,7 +1398,7 @@
  <use xlink:href="#E1-MJMATHI-41" x="1252" y="0"/>
  <use xlink:href="#E1-MJMAIN-7D" x="2002" y="0"/>
 </g>
-</svg></span> 的可表示为分段函数：</p>
+</svg></span> 的可表示爲分段函數：</p>
 </span><span i="15"><span id="math-12"><div style="width: 100%; text-align: center"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="32.711ex" height="9.176ex" style="vertical-align: -4.005ex;" viewbox="0 -2226.5 14083.9 3950.7" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <path stroke-width="1" id="E1-MJMATHI-50" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"/>
@@ -1513,7 +1513,7 @@
 </g>
 </g>
 </g>
-</svg></div></span></span><span i="19"><p>得到抢到报告的期望为</p>
+</svg></div></span></span><span i="19"><p>得到搶到報告的期望爲</p>
 </span><span i="20"><span id="math-13"><div style="width: 100%; text-align: center"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="40.417ex" height="24.843ex" style="vertical-align: -11.838ex;" viewbox="0 -5599.2 17401.5 10696.1" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <path stroke-width="1" id="E1-MJMATHI-45" d="M492 213Q472 213 472 226Q472 230 477 250T482 285Q482 316 461 323T364 330H312Q311 328 277 192T243 52Q243 48 254 48T334 46Q428 46 458 48T518 61Q567 77 599 117T670 248Q680 270 683 272Q690 274 698 274Q718 274 718 261Q613 7 608 2Q605 0 322 0H133Q31 0 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H757Q764 676 764 669Q764 664 751 557T737 447Q735 440 717 440H705Q698 445 698 453L701 476Q704 500 704 528Q704 558 697 578T678 609T643 625T596 632T532 634H485Q397 633 392 631Q388 629 386 622Q385 619 355 499T324 377Q347 376 372 376H398Q464 376 489 391T534 472Q538 488 540 490T557 493Q562 493 565 493T570 492T572 491T574 487T577 483L544 351Q511 218 508 216Q505 213 492 213Z"/>
@@ -1748,7 +1748,7 @@
 </g>
 </g>
 </g>
-</svg></div></span></span><span i="25"><p>针对抢报告时间满足 <span id="math-14"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="13.573ex" height="2.843ex" style="vertical-align: -0.838ex;" viewbox="0 -863.1 5843.7 1223.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+</svg></div></span></span><span i="25"><p>針對搶報告時間滿足 <span id="math-14"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="13.573ex" height="2.843ex" style="vertical-align: -0.838ex;" viewbox="0 -863.1 5843.7 1223.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <path stroke-width="1" id="E1-MJMATHI-54" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"/>
 <path stroke-width="1" id="E1-MJMATHI-73" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"/>
@@ -1774,7 +1774,7 @@
 </g>
  <use xlink:href="#E1-MJMAIN-29" x="5454" y="0"/>
 </g>
-</svg></span> 分布，报告平均存活时间为 3 秒的情况，将 <span id="math-15"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="13.34ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 5743.7 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+</svg></span> 分佈，報告平均存活時間爲 3 秒的情況，將 <span id="math-15"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="13.34ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 5743.7 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <path stroke-width="1" id="E1-MJMATHI-74" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"/>
 <path stroke-width="1" id="E1-MJMATHI-61" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"/>
@@ -1827,7 +1827,7 @@
  <use xlink:href="#E1-MJMAIN-36" x="1279" y="0"/>
 </g>
 </g>
-</svg></span>。也就是说不改变 <span id="math-17"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.361ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 1016.5 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+</svg></span>。也就是說不改變 <span id="math-17"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.361ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 1016.5 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <path stroke-width="1" id="E1-MJMATHI-54" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"/>
 <path stroke-width="1" id="E1-MJMATHI-73" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"/>
@@ -1836,7 +1836,7 @@
  <use xlink:href="#E1-MJMATHI-54" x="0" y="0"/>
  <use transform="scale(0.707)" xlink:href="#E1-MJMATHI-73" x="826" y="-213"/>
 </g>
-</svg></span> 期望的情况下，通过改变 <span id="math-18"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.361ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 1016.5 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+</svg></span> 期望的情況下，通過改變 <span id="math-18"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.361ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 1016.5 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <path stroke-width="1" id="E1-MJMATHI-54" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"/>
 <path stroke-width="1" id="E1-MJMATHI-73" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"/>
@@ -1845,9 +1845,9 @@
  <use xlink:href="#E1-MJMATHI-54" x="0" y="0"/>
  <use transform="scale(0.707)" xlink:href="#E1-MJMATHI-73" x="826" y="-213"/>
 </g>
-</svg></span> 的分布竟然提高了抢到报告的概率！！！我要赶快把这个修改合并到抢报告程序中！！！</p>
-</span><span i="26"><h3 id="-">总结</h3>
-</span><span i="27"><p>为什么两种方法抢到报告的概率不同呢？个人分析是由于在 <span id="math-19"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.361ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 1016.5 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+</svg></span> 的分佈竟然提高了搶到報告的概率！！！我要趕快把這個修改合併到搶報告程序中！！！</p>
+</span><span i="26"><h3 id="-">總結</h3>
+</span><span i="27"><p>爲什麼兩種方法搶到報告的概率不同呢？個人分析是由於在 <span id="math-19"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.361ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 1016.5 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <path stroke-width="1" id="E1-MJMATHI-54" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"/>
 <path stroke-width="1" id="E1-MJMATHI-73" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"/>
@@ -1856,7 +1856,7 @@
  <use xlink:href="#E1-MJMATHI-54" x="0" y="0"/>
  <use transform="scale(0.707)" xlink:href="#E1-MJMATHI-73" x="826" y="-213"/>
 </g>
-</svg></span> 满足均匀分布时，其中较小的 <span id="math-20"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.361ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 1016.5 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+</svg></span> 滿足均勻分佈時，其中較小的 <span id="math-20"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.361ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 1016.5 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <path stroke-width="1" id="E1-MJMATHI-54" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"/>
 <path stroke-width="1" id="E1-MJMATHI-73" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"/>
@@ -1865,7 +1865,7 @@
  <use xlink:href="#E1-MJMATHI-54" x="0" y="0"/>
  <use transform="scale(0.707)" xlink:href="#E1-MJMATHI-73" x="826" y="-213"/>
 </g>
-</svg></span> 带来了较大的成功概率，而较大的 <span id="math-21"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.361ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 1016.5 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+</svg></span> 帶來了較大的成功概率，而較大的 <span id="math-21"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.361ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 1016.5 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <path stroke-width="1" id="E1-MJMATHI-54" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"/>
 <path stroke-width="1" id="E1-MJMATHI-73" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"/>
@@ -1874,7 +1874,7 @@
  <use xlink:href="#E1-MJMATHI-54" x="0" y="0"/>
  <use transform="scale(0.707)" xlink:href="#E1-MJMATHI-73" x="826" y="-213"/>
 </g>
-</svg></span> 对整体概率的影响不大。正如有句话说的好，抢报告抢的早不如抢的巧。抢报告是玄学，需要天时地利人和。至于计算过程是否正确，就要看最后我的数理统计成绩了:joy:</p>
+</svg></span> 對整體概率的影響不大。正如有句話說的好，搶報告搶的早不如搶的巧。搶報告是玄學，需要天時地利人和。至於計算過程是否正確，就要看最後我的數理統計成績了:joy:</p>
 </span></body>
 </html>
 
@@ -1904,8 +1904,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/28/利用python实现自动抢报告/" rel="next" title="利用 python 实现自动抢报告">
-                <i class="fa fa-chevron-left"></i> 利用 python 实现自动抢报告
+              <a href="/2017/10/28/利用python实现自动抢报告/" rel="next" title="利用 python 實現自動搶報告">
+                <i class="fa fa-chevron-left"></i> 利用 python 實現自動搶報告
               </a>
             
           </div>
@@ -1914,8 +1914,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/07/教务网现惊天大bug/" rel="prev" title="教务网现惊天大 bug？！谈谈弱密码如何暴露你的信息">
-                教务网现惊天大 bug？！谈谈弱密码如何暴露你的信息 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/07/教务网现惊天大bug/" rel="prev" title="教務網現驚天大 bug？！談談弱密碼如何暴露你的信息">
+                教務網現驚天大 bug？！談談弱密碼如何暴露你的信息 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -2000,7 +2000,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2010,7 +2010,7 @@
                 
                 
                 <div class="site-state-item site-state-categories">
-                  
+                  <a href="/categories/index.html">
                     
                     
                       
@@ -2033,9 +2033,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">分类</span>
-                  
+                  </a>
                 </div>
               
 
@@ -2058,7 +2060,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -2103,7 +2109,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#-"><span class="nav-number">1.</span> <span class="nav-text">问题分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#-"><span class="nav-number">1.1.</span> <span class="nav-text">间隔时间固定的情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#-"><span class="nav-number">1.2.</span> <span class="nav-text">间隔时间为均匀分布的情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#-"><span class="nav-number">1.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#-"><span class="nav-number">1.</span> <span class="nav-text">問題分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#-"><span class="nav-number">1.1.</span> <span class="nav-text">間隔時間固定的情況</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#-"><span class="nav-number">1.2.</span> <span class="nav-text">間隔時間爲均勻分佈的情況</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#-"><span class="nav-number">1.3.</span> <span class="nav-text">總結</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -2123,7 +2129,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -2261,7 +2267,7 @@
       var disqus_config = function () {
         this.page.url = 'http://cycoe.cc/2017/11/03/如何提高抢到报告的概率/';
         this.page.identifier = '2017/11/03/如何提高抢到报告的概率/';
-        this.page.title = '如何提高抢到报告的概率？';
+        this.page.title = '如何提高搶到報告的概率？';
       };
       function loadComments () {
         var d = document, s = d.createElement('script');

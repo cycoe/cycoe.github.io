@@ -99,19 +99,19 @@
 
 
 
-  <meta name="description" content="机器学习小记">
+  <meta name="description" content="機器學習小記">
 <meta name="keywords" content="Python, Machine Learing, KNN">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[python机器学习-1]K近邻算法实现验证码识别">
+<meta property="og:title" content="[python機器學習-1]K近鄰算法實現驗證碼識別">
 <meta property="og:url" content="http://cycoe.cc/2017/03/12/KNN/index.html">
 <meta property="og:site_name" content="Cycoe&#39;s Home Page">
-<meta property="og:description" content="机器学习小记">
+<meta property="og:description" content="機器學習小記">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://p1.bpimg.com/587851/b8e80b83eb2b7e31.jpg">
-<meta property="og:updated_time" content="2018-04-13T03:36:34.668Z">
+<meta property="og:updated_time" content="2019-02-28T01:03:03.032Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[python机器学习-1]K近邻算法实现验证码识别">
-<meta name="twitter:description" content="机器学习小记">
+<meta name="twitter:title" content="[python機器學習-1]K近鄰算法實現驗證碼識別">
+<meta name="twitter:description" content="機器學習小記">
 <meta name="twitter:image" content="http://p1.bpimg.com/587851/b8e80b83eb2b7e31.jpg">
 
 
@@ -129,7 +129,7 @@
   };
 </script>
 
-  <title>[python机器学习-1]K近邻算法实现验证码识别 | Cycoe's Home Page</title>
+  <title>[python機器學習-1]K近鄰算法實現驗證碼識別 | Cycoe's Home Page</title>
   
 
 
@@ -318,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">[python机器学习-1]K近邻算法实现验证码识别
+          <h1 class="post-title" itemprop="name headline">[python機器學習-1]K近鄰算法實現驗證碼識別
               
             
           </h1>
@@ -389,7 +389,7 @@
           
 
           
-              <div class="post-description">机器学习小记</div>
+              <div class="post-description">機器學習小記</div>
           
 
         </div>
@@ -409,44 +409,44 @@
 <p>A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E.</p>
 </blockquote>
 <p><img src="http://p1.bpimg.com/587851/b8e80b83eb2b7e31.jpg" alt="image1" title="Walle"></p>
-<p>机器学习在最近几年有越来越火热的趋势。正巧打算做一个爬取教务网成绩的爬虫，碰到验证码识别的问题。于是通过各方了解后买了《机器学习实战》这本书，开坑机器学习。<br>机器学习的内容其实很广，涉及的知识也非常的杂，包括概率论、统计学、逼近论、凸分析、算法复杂度理论和编程等等。因为不是本科涉及的内容，只能一点一点的补。</p>
+<p>機器學習在最近幾年有越來越火熱的趨勢。正巧打算做一個爬取教務網成績的爬蟲，碰到驗證碼識別的問題。於是通過各方瞭解後買了《機器學習實戰》這本書，開坑機器學習。<br>機器學習的內容其實很廣，涉及的知識也非常的雜，包括概率論、統計學、逼近論、凸分析、算法複雜度理論和編程等等。因爲不是本科涉及的內容，只能一點一點的補。</p>
 <hr>
-<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p>机器学习分为监督学习和无监督学习两种，监督学习是指算法知道要预测的目标，即目标变量的分类信息；而无监督学习时，数据没有类别信息，也不会给定目标值。</p>
+<h2 id="分類"><a href="#分類" class="headerlink" title="分類"></a>分類</h2><p>機器學習分爲監督學習和無監督學習兩種，監督學習是指算法知道要預測的目標，即目標變量的分類信息；而無監督學習時，數據沒有類別信息，也不會給定目標值。</p>
 <div class="table-container">
 <table>
 <thead>
 <tr>
-<th style="text-align:center">监督学习</th>
-<th style="text-align:center">无监督学习</th>
+<th style="text-align:center">監督學習</th>
+<th style="text-align:center">無監督學習</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">k-近邻算法</td>
+<td style="text-align:center">k-近鄰算法</td>
 <td style="text-align:center">K-均值</td>
 </tr>
 <tr>
-<td style="text-align:center">朴素贝叶斯算法</td>
+<td style="text-align:center">樸素貝葉斯算法</td>
 <td style="text-align:center">DBSCAN</td>
 </tr>
 <tr>
-<td style="text-align:center">支持向量机</td>
+<td style="text-align:center">支持向量機</td>
 <td style="text-align:center">\</td>
 </tr>
 <tr>
-<td style="text-align:center">决策树</td>
+<td style="text-align:center">決策樹</td>
 <td style="text-align:center">\</td>
 </tr>
 </tbody>
 </table>
 </div>
-<h2 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h2><p>k-近邻算法的原理很简单，即选取 m 个已分类的样本作为训练集，每个样本拥有 n 个特征。待测试样本与每个训练样本求欧式距离，对得到的距离顺序排序。根据预设的 k 值（k 一般取一个比较小的数）取出前 k 个距离。最后统计每个类别出现的次数，取出现次数最多的类别作为待测样本的类别标签。<br>此处说明 KNN 算法的两个特征：  </p>
+<h2 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h2><p>k-近鄰算法的原理很簡單，即選取 m 個已分類的樣本作爲訓練集，每個樣本擁有 n 個特徵。待測試樣本與每個訓練樣本求歐式距離，對得到的距離順序排序。根據預設的 k 值（k 一般取一個比較小的數）取出前 k 個距離。最後統計每個類別出現的次數，取出現次數最多的類別作爲待測樣本的類別標籤。<br>此處說明 KNN 算法的兩個特徵：  </p>
 <ul>
-<li>各个特征等权重，不考虑各个特征对类别的贡献大小</li>
-<li>最终的分类方法其实是投票表决的方法</li>
+<li>各個特徵等權重，不考慮各個特徵對類別的貢獻大小</li>
+<li>最終的分類方法其實是投票表決的方法</li>
 </ul>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>为了提高代码的运行效率及编码效率，import 了 <code>Numpy</code> 库，具体的函数看 <a href="https://docs.scipy.org/doc/" target="_blank" rel="noopener">官方文档</a> ，或者 <a href="http://cycoe.win/wiki/Numpy/" target="_blank" rel="noopener">Numpy 教程</a> 。</p>
-<h3 id="分类函数"><a href="#分类函数" class="headerlink" title="分类函数"></a>分类函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">classify0</span><span class="params">(inX, dataSet, labels, k)</span>:</span> <span class="comment">#输入(待测样本向量，训练样本矩阵，标签向量，k)</span></span><br><span class="line">    dataSetSize = dataSet.shape[<span class="number">0</span>] <span class="comment">#shape函数用来读取矩阵的维的长度，返回值为(4L,2L)</span></span><br><span class="line">    diffMat = tile(inX, (dataSetSize, <span class="number">1</span>)) - dataSet <span class="comment">#tile函数用来重复 A=[1,2] tile(A,(2,3)) -&gt; [[1,2,1,2，1,2], [1,2,1,2,1,2]]</span></span><br><span class="line">    sqDiffMat = diffMat**<span class="number">2</span></span><br><span class="line">    sqDistances = sqDiffMat.sum(axis=<span class="number">1</span>)</span><br><span class="line">    distances = sqDistances**<span class="number">0.5</span></span><br><span class="line"></span><br><span class="line">    sortedDistIndicies = distances.argsort()</span><br><span class="line">    classCount = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span><br><span class="line">        votedLabel = labels[sortedDistIndicies[i]]</span><br><span class="line">        classCount[votedLabel] = classCount.get(votedLabel, <span class="number">0</span>) + <span class="number">1</span> <span class="comment">#dict.get(key, default_value)函数用来取键对应的值，若键不存在则值为defalut_vlaue</span></span><br><span class="line">    sortedClassCount = sorted(classCount.items(), key=operator.itemgetter(<span class="number">1</span>), reverse=<span class="keyword">True</span>) <span class="comment">#operator.itemgetter(1)表示根据多级列表的第二个元素进行排序</span></span><br><span class="line">    <span class="keyword">return</span> sortedClassCount[<span class="number">0</span>][<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="代碼"><a href="#代碼" class="headerlink" title="代碼"></a>代碼</h2><p>爲了提高代碼的運行效率及編碼效率，import 了 <code>Numpy</code> 庫，具體的函數看 <a href="https://docs.scipy.org/doc/" target="_blank" rel="noopener">官方文檔</a> ，或者 <a href="http://cycoe.win/wiki/Numpy/" target="_blank" rel="noopener">Numpy 教程</a> 。</p>
+<h3 id="分類函數"><a href="#分類函數" class="headerlink" title="分類函數"></a>分類函數</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">classify0</span><span class="params">(inX, dataSet, labels, k)</span>:</span> <span class="comment">#輸入(待測樣本向量，訓練樣本矩陣，標籤向量，k)</span></span><br><span class="line">    dataSetSize = dataSet.shape[<span class="number">0</span>] <span class="comment">#shape函數用來讀取矩陣的維的長度，返回值爲(4L,2L)</span></span><br><span class="line">    diffMat = tile(inX, (dataSetSize, <span class="number">1</span>)) - dataSet <span class="comment">#tile函數用來重複 A=[1,2] tile(A,(2,3)) -&gt; [[1,2,1,2，1,2], [1,2,1,2,1,2]]</span></span><br><span class="line">    sqDiffMat = diffMat**<span class="number">2</span></span><br><span class="line">    sqDistances = sqDiffMat.sum(axis=<span class="number">1</span>)</span><br><span class="line">    distances = sqDistances**<span class="number">0.5</span></span><br><span class="line"></span><br><span class="line">    sortedDistIndicies = distances.argsort()</span><br><span class="line">    classCount = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span><br><span class="line">        votedLabel = labels[sortedDistIndicies[i]]</span><br><span class="line">        classCount[votedLabel] = classCount.get(votedLabel, <span class="number">0</span>) + <span class="number">1</span> <span class="comment">#dict.get(key, default_value)函數用來取鍵對應的值，若鍵不存在則值爲defalut_vlaue</span></span><br><span class="line">    sortedClassCount = sorted(classCount.items(), key=operator.itemgetter(<span class="number">1</span>), reverse=<span class="keyword">True</span>) <span class="comment">#operator.itemgetter(1)表示根據多級列表的第二個元素進行排序</span></span><br><span class="line">    <span class="keyword">return</span> sortedClassCount[<span class="number">0</span>][<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
 <hr>
 
       
@@ -475,8 +475,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/11/如何同步GitHub上游更新/" rel="next" title="如何同步GitHub上游更新">
-                <i class="fa fa-chevron-left"></i> 如何同步GitHub上游更新
+              <a href="/2017/03/11/first-post/" rel="next" title="記第一次買域名以及搭建個人主頁">
+                <i class="fa fa-chevron-left"></i> 記第一次買域名以及搭建個人主頁
               </a>
             
           </div>
@@ -485,8 +485,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/15/postgraduate/" rel="prev" title="教育部公布2017年考研国家线！">
-                教育部公布2017年考研国家线！ <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/15/postgraduate/" rel="prev" title="教育部公佈2017年考研國家線！">
+                教育部公佈2017年考研國家線！ <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -571,7 +571,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -581,7 +581,7 @@
                 
                 
                 <div class="site-state-item site-state-categories">
-                  
+                  <a href="/categories/index.html">
                     
                     
                       
@@ -604,9 +604,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">分类</span>
-                  
+                  </a>
                 </div>
               
 
@@ -629,7 +631,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -674,7 +680,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#分类"><span class="nav-number">1.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思想"><span class="nav-number">2.</span> <span class="nav-text">核心思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分类函数"><span class="nav-number">3.1.</span> <span class="nav-text">分类函数</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#分類"><span class="nav-number">1.</span> <span class="nav-text">分類</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思想"><span class="nav-number">2.</span> <span class="nav-text">核心思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代碼"><span class="nav-number">3.</span> <span class="nav-text">代碼</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分類函數"><span class="nav-number">3.1.</span> <span class="nav-text">分類函數</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -694,7 +700,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -832,7 +838,7 @@
       var disqus_config = function () {
         this.page.url = 'http://cycoe.cc/2017/03/12/KNN/';
         this.page.identifier = '2017/03/12/KNN/';
-        this.page.title = '[python机器学习-1]K近邻算法实现验证码识别';
+        this.page.title = '[python機器學習-1]K近鄰算法實現驗證碼識別';
       };
       function loadComments () {
         var d = document, s = d.createElement('script');

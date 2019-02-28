@@ -299,6 +299,179 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2017/10/28/利用python实现自动抢报告/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cycoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cycoe's Home Page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/28/利用python实现自动抢报告/" itemprop="url">
+                  利用 python 實現自動搶報告
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-28T00:00:00+08:00">2017-10-28</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/spider/" itemprop="url" rel="index"><span itemprop="name">spider</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/28/利用python实现自动抢报告/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/28/利用python实现自动抢报告/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          爬蟲小記
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/28/利用python实现自动抢报告/">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2017/07/09/Archlinux安装小记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -319,7 +492,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2017/07/09/Archlinux安装小记/" itemprop="url">
-                  Archlinux 安装小记
+                  Archlinux 安裝小記
                 </a>
               
             
@@ -407,28 +580,28 @@
       
         
           
-            <h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
-<li>ethernet 用户无需对网络连接做过多设置，wifi 用户可使用 wifi-menu 工具进行无线网连接</li>
-<li>对 <code>/etc/pacman.d/mirrorlist</code> 文件中的源进行排序</li>
+            <h3 id="準備工作"><a href="#準備工作" class="headerlink" title="準備工作"></a>準備工作</h3><ol>
+<li>ethernet 用戶無需對網絡連接做過多設置，wifi 用戶可使用 wifi-menu 工具進行無線網連接</li>
+<li>對 <code>/etc/pacman.d/mirrorlist</code> 文件中的源進行排序</li>
 </ol>
-<h3 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h3><ol>
-<li>利用 cfdisk 或 fdisk 工具进行分区</li>
-<li>使用 <code>mkfs.ext4 /dev/sdxY</code> 进行分区的格式化，btrfs 分区运行 <code>mkfs.btrfs -f /dev/sdxY</code></li>
+<h3 id="分區"><a href="#分區" class="headerlink" title="分區"></a>分區</h3><ol>
+<li>利用 cfdisk 或 fdisk 工具進行分區</li>
+<li>使用 <code>mkfs.ext4 /dev/sdxY</code> 進行分區的格式化，btrfs 分區運行 <code>mkfs.btrfs -f /dev/sdxY</code></li>
 </ol>
-<h3 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h3><p>按顺序执行如下命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sdxY /mnt	# 挂载根分区</span><br><span class="line"></span><br><span class="line">mkdir /mnt/home</span><br><span class="line">mkdir /mnt/boot</span><br><span class="line">mkdir /mnt/boot/grub</span><br><span class="line">mkdir /mnt/boot/efi</span><br><span class="line"></span><br><span class="line">mount /dev/sdxY /mnt/home</span><br><span class="line">mount /dev/sdxY /mnt/boot/efi</span><br><span class="line">mount /dev/sdxY /mnt/boot/grub</span><br></pre></td></tr></table></figure></p>
-<p>若根分区为 btrfs 格式，则需要先使用如下命令挂载根分区<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sdxY /mnt		#挂载根分区</span><br><span class="line">cd /mnt</span><br><span class="line">btrfs subvolume create @	#创建名为 @ 的子卷</span><br><span class="line">cd ~</span><br><span class="line">umount /mnt</span><br><span class="line">mount /dev/sdxY /mnt -o subvol=@,compress=lzo</span><br></pre></td></tr></table></figure></p>
-<p>分区挂载完毕后可运行 <code>lsblk</code> 查看挂载信息</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>运行自动化安装工具 <code>pacstrap -i /mnt base</code></p>
+<h3 id="掛載"><a href="#掛載" class="headerlink" title="掛載"></a>掛載</h3><p>按順序執行如下命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sdxY /mnt	# 掛載根分區</span><br><span class="line"></span><br><span class="line">mkdir /mnt/home</span><br><span class="line">mkdir /mnt/boot</span><br><span class="line">mkdir /mnt/boot/grub</span><br><span class="line">mkdir /mnt/boot/efi</span><br><span class="line"></span><br><span class="line">mount /dev/sdxY /mnt/home</span><br><span class="line">mount /dev/sdxY /mnt/boot/efi</span><br><span class="line">mount /dev/sdxY /mnt/boot/grub</span><br></pre></td></tr></table></figure></p>
+<p>若根分區爲 btrfs 格式，則需要先使用如下命令掛載根分區<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sdxY /mnt		#掛載根分區</span><br><span class="line">cd /mnt</span><br><span class="line">btrfs subvolume create @	#創建名爲 @ 的子卷</span><br><span class="line">cd ~</span><br><span class="line">umount /mnt</span><br><span class="line">mount /dev/sdxY /mnt -o subvol=@,compress=lzo</span><br></pre></td></tr></table></figure></p>
+<p>分區掛載完畢後可運行 <code>lsblk</code> 查看掛載信息</p>
+<h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h3><p>運行自動化安裝工具 <code>pacstrap -i /mnt base</code></p>
 <ul>
-<li>需要 gcc 等开发工具的用户需要装上 base-devel 包</li>
-<li>btrfs 分区需要 btrfs-progs 包</li>
-<li>wifi 用户需要同时安装 dialog wpa_supplicant 来使用 wifi-menu</li>
-<li>引导管理器可选择 grub，efi 主板用户需加上 efibootmgr，多系统检测需要 os-prober<br>示例：<code>pacstrap -i /mnt base base-devel btrfs-progs dialog wpa_supplicant grub efibootmgr os-prober</code></li>
+<li>需要 gcc 等開發工具的用戶需要裝上 base-devel 包</li>
+<li>btrfs 分區需要 btrfs-progs 包</li>
+<li>wifi 用戶需要同時安裝 dialog wpa_supplicant 來使用 wifi-menu</li>
+<li>引導管理器可選擇 grub，efi 主板用戶需加上 efibootmgr，多系統檢測需要 os-prober<br>示例：<code>pacstrap -i /mnt base base-devel btrfs-progs dialog wpa_supplicant grub efibootmgr os-prober</code></li>
 </ul>
-<p>运行 <code>genfstab -U /mnt</code> 查看挂载信息是否正确，检查无误后运行 <code>genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</code> 将挂载信息写入 fstab</p>
+<p>運行 <code>genfstab -U /mnt</code> 查看掛載信息是否正確，檢查無誤後運行 <code>genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</code> 將掛載信息寫入 fstab</p>
 <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ul>
-<li>使用 archlinux 自带的 <code>arch-chroot /mnt</code> 接管新系统</li>
-<li><code>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code>    # 设置时区</li>
+<li>使用 archlinux 自帶的 <code>arch-chroot /mnt</code> 接管新系統</li>
+<li><code>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code>    # 設置時區</li>
 <li>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># nano /etc/locale.gen</span></span><br><span class="line">en_US.UTF-8 UTF-8</span><br><span class="line">zh_CN.UTF-8 UTF-8</span><br><span class="line">zh_TW.UTF-8 UTF-8</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -505,7 +678,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2017/04/11/静态编译安装Qt/" itemprop="url">
-                  静态编译安装 Qt
+                  靜態編譯安裝 Qt
                 </a>
               
             
@@ -593,28 +766,28 @@
       
         
           
-            <p>由于 pyqt 写的程序打包过程中依赖库的问题，打算用 c++ 版的 Qt 重写程序。<br>但若用系统自带的共享链接库进行编译，程序同样无法在其他机器上运行。因此，此时需要自己手动静态编译 Qt，<br>使用静态链接库编译的程序会自动将依赖的库加到最终编译出的机器码中。</p>
-<h2 id="安装依赖项"><a href="#安装依赖项" class="headerlink" title="安装依赖项"></a>安装依赖项</h2><ul>
-<li>Qt 的界面显示依赖 <code>freetype</code> 和 <code>fontconfig</code>，这两个一定要装上，否则编译不成功。</li>
-<li>安装完毕后创建 <code>freetype</code> 的软链接到标准的安装位置：<br><code>ln -s /usr/include/freetype2/freetype /usr/include/freetype</code></li>
+            <p>由於 pyqt 寫的程序打包過程中依賴庫的問題，打算用 c++ 版的 Qt 重寫程序。<br>但若用系統自帶的共享鏈接庫進行編譯，程序同樣無法在其他機器上運行。因此，此時需要自己手動靜態編譯 Qt，<br>使用靜態鏈接庫編譯的程序會自動將依賴的庫加到最終編譯出的機器碼中。</p>
+<h2 id="安裝依賴項"><a href="#安裝依賴項" class="headerlink" title="安裝依賴項"></a>安裝依賴項</h2><ul>
+<li>Qt 的界面顯示依賴 <code>freetype</code> 和 <code>fontconfig</code>，這兩個一定要裝上，否則編譯不成功。</li>
+<li>安裝完畢後創建 <code>freetype</code> 的軟鏈接到標準的安裝位置：<br><code>ln -s /usr/include/freetype2/freetype /usr/include/freetype</code></li>
 </ul>
-<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><ol>
-<li><a href="http://download.qt.io/official_releases/qt/" target="_blank" rel="noopener">下载</a>最新的 Qt everywhere 压缩包</li>
-<li>解压压缩包，<code>cd</code> 进压缩包目录</li>
-<li><p>运行以下命令对 <code>makefile</code> 进行配置</p>
+<h2 id="編譯"><a href="#編譯" class="headerlink" title="編譯"></a>編譯</h2><ol>
+<li><a href="http://download.qt.io/official_releases/qt/" target="_blank" rel="noopener">下載</a>最新的 Qt everywhere 壓縮包</li>
+<li>解壓壓縮包，<code>cd</code> 進壓縮包目錄</li>
+<li><p>運行以下命令對 <code>makefile</code> 進行配置</p>
  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure -confirm-license -opensource -static -fontconfig -release -no-qml-debug -qt-xcb -nomake tests -nomake examples -skip qtwebkit -prefix /usr/include/Qt-5.8.0-static</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>-static</code> -&gt; 选择静态编译模式</li>
-<li><code>-fontconfig</code> -&gt; 此项一定要加，否则会导致找不到字体</li>
-<li><code>-prefix</code> -&gt; 指定安装位置</li>
+<li><code>-static</code> -&gt; 選擇靜態編譯模式</li>
+<li><code>-fontconfig</code> -&gt; 此項一定要加，否則會導致找不到字體</li>
+<li><code>-prefix</code> -&gt; 指定安裝位置</li>
 </ul>
 </li>
-<li>运行 <code>make -j 3</code> 采用 3 线程编译</li>
-<li>最后 <code>sudo make install</code> 安装 Qt</li>
+<li>運行 <code>make -j 3</code> 採用 3 線程編譯</li>
+<li>最後 <code>sudo make install</code> 安裝 Qt</li>
 </ol>
 <h2 id="配置-Qt-Creator"><a href="#配置-Qt-Creator" class="headerlink" title="配置 Qt Creator"></a>配置 Qt Creator</h2><ol>
-<li>安装 Qt Creator</li>
-<li>打开 Qt Creator -&gt; tools -&gt; options -&gt; build，根据安装路径配置 Qt version 和 Kit</li>
+<li>安裝 Qt Creator</li>
+<li>打開 Qt Creator -&gt; tools -&gt; options -&gt; build，根據安裝路徑配置 Qt version 和 Kit</li>
 </ol>
 
           
@@ -689,7 +862,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2017/04/01/基于Jekyll引擎的博客服务器搭建/" itemprop="url">
-                  基于Jekyll引擎的博客服务器搭建
+                  基於Jekyll引擎的博客服務器搭建
                 </a>
               
             
@@ -776,7 +949,7 @@
 
       
         
-          在树莓派上搭建自己的博客服务器
+          在樹莓派上搭建自己的博客服務器
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/04/01/基于Jekyll引擎的博客服务器搭建/">
@@ -855,7 +1028,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2017/03/25/English_Interview/" itemprop="url">
-                  研究生复试英语面试稿子
+                  研究生複試英語面試稿子
                 </a>
               
             
@@ -1018,7 +1191,7 @@ That’s all. Thank you for giving me this opportunity!</font>
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2017/03/25/在SSD上使用Btrfs文件系统的相关优化/" itemprop="url">
-                  在SSD上使用Btrfs文件系统的相关优化
+                  在SSD上使用Btrfs文件系統的相關優化
                 </a>
               
             
@@ -1105,7 +1278,7 @@ That’s all. Thank you for giving me this opportunity!</font>
 
       
         
-          折腾Linux
+          折騰Linux
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/03/25/在SSD上使用Btrfs文件系统的相关优化/">
@@ -1184,7 +1357,7 @@ That’s all. Thank you for giving me this opportunity!</font>
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2017/03/15/postgraduate/" itemprop="url">
-                  教育部公布2017年考研国家线！
+                  教育部公佈2017年考研國家線！
                 </a>
               
             
@@ -1272,9 +1445,9 @@ That’s all. Thank you for giving me this opportunity!</font>
       
         
           
-            <p>2017 年全国硕士研究生招生考试考生进入复试的初试成绩基本要求（学术学位类）<br><img src="http://p1.bqimg.com/587851/0438370ee7029f60.jpg" alt="image1"><br>2017 年全国硕士研究生招生考试考生进入复试的初试成绩基本要求（专业学位类）<br><img src="http://p1.bqimg.com/587851/739361d9ab3fa8ac.jpg" alt="image2"></p>
-<p>为方便考生调剂，3 月 17 日至 4 月 30 日，教育部将在“中国研究生招生信息网”（<a href="http://yz.chsi.com.cn" target="_blank" rel="noopener">公网网址</a>，<a href="http://yz.chsi.cn" target="_blank" rel="noopener">教育网网址</a>）开通“全国硕士研究生招生调剂服务系统”。</p>
-<p>符合条件且有调剂愿望的考生可及时上网了解调剂信息和调剂系统的使用方法，按要求申请调剂。</p>
+            <p>2017 年全國碩士研究生招生考試考生進入複試的初試成績基本要求（學術學位類）<br><img src="http://p1.bqimg.com/587851/0438370ee7029f60.jpg" alt="image1"><br>2017 年全國碩士研究生招生考試考生進入複試的初試成績基本要求（專業學位類）<br><img src="http://p1.bqimg.com/587851/739361d9ab3fa8ac.jpg" alt="image2"></p>
+<p>爲方便考生調劑，3 月 17 日至 4 月 30 日，教育部將在“中國研究生招生信息網”（<a href="http://yz.chsi.com.cn" target="_blank" rel="noopener">公網網址</a>，<a href="http://yz.chsi.cn" target="_blank" rel="noopener">教育網網址</a>）開通“全國碩士研究生招生調劑服務系統”。</p>
+<p>符合條件且有調劑願望的考生可及時上網瞭解調劑信息和調劑系統的使用方法，按要求申請調劑。</p>
 
           
         
@@ -1348,7 +1521,7 @@ That’s all. Thank you for giving me this opportunity!</font>
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2017/03/12/KNN/" itemprop="url">
-                  [python机器学习-1]K近邻算法实现验证码识别
+                  [python機器學習-1]K近鄰算法實現驗證碼識別
                 </a>
               
             
@@ -1435,7 +1608,7 @@ That’s all. Thank you for giving me this opportunity!</font>
 
       
         
-          机器学习小记
+          機器學習小記
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/03/12/KNN/">
@@ -1443,6 +1616,173 @@ That’s all. Thank you for giving me this opportunity!</font>
             </a>
           </div>
           <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2017/03/11/first-post/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cycoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cycoe's Home Page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/03/11/first-post/" itemprop="url">
+                  記第一次買域名以及搭建個人主頁
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-11T00:00:00+08:00">2017-03-11</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/blog/" itemprop="url" rel="index"><span itemprop="name">blog</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/11/first-post/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/03/11/first-post/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>看到好基友 <a href="http://yinrs.win" target="_blank" rel="noopener">@Yinr</a> 搭建了個人主頁，也手癢花4塊錢在萬網上買了 <code>cycoe.win</code> 域名的一年使用權。fork 了 <code>mzlogin</code> 的項目（<a href="https://github.com/mzlogin/mzlogin.github.io" target="_blank" rel="noopener">項目主頁</a>在 GitHub Pages 上搭建了各人主頁，然後把 <code>cycoe.win</code> 域名解析到了 <code>cycoe.github.io</code> 上，經過一些小改，自己的主頁終於搭好了 :laughing: ！最後是去 163 的企業郵箱（<a href="http://ym.163.com" target="_blank" rel="noopener">163 企業郵箱註冊</a>）申請了基於 <code>cycoe.win</code> 域名的郵箱，我的新郵箱就是 <code>cycoe@cycoe.win</code>。</p>
+<h2 id="感謝"><a href="#感謝" class="headerlink" title="感謝"></a><strong>感謝</strong></h2><ul>
+<li>GitHub 提供的 GitHub Pages 服務</li>
+<li>mzlogin 的 Jekyll 模板</li>
+</ul>
+<hr>
+
+          
         
       
     </div>
@@ -1602,376 +1942,18 @@ That’s all. Thank you for giving me this opportunity!</font>
       
         
           
-            <p>在 GitHub 上进行项目的团队协作，一般都是 fork 组织仓库到自己的账号下，提交补丁后再提交 Pull Request。上游仓库一直保持更新。<br>由于最近在做 <a href="https://github.com/LCTT/TranslateProject.git" target="_blank" rel="noopener">LCTT</a> 项目，经常需要同步上游其他人的翻译，下面就以 <a href="https://github.com/LCTT/TranslateProject.git" target="_blank" rel="noopener">LCTT</a> 项目为例，记录一下 GitHub 上 fork 仓库同步上游更新的操作。</p>
+            <p>在 GitHub 上進行項目的團隊協作，一般都是 fork 組織倉庫到自己的賬號下，提交補丁後再提交 Pull Request。上游倉庫一直保持更新。<br>由於最近在做 <a href="https://github.com/LCTT/TranslateProject.git" target="_blank" rel="noopener">LCTT</a> 項目，經常需要同步上游其他人的翻譯，下面就以 <a href="https://github.com/LCTT/TranslateProject.git" target="_blank" rel="noopener">LCTT</a> 項目爲例，記錄一下 GitHub 上 fork 倉庫同步上游更新的操作。</p>
 <hr>
 <ol>
-<li><p>使用 <code>git remote -v</code> 查看当前的远程仓库别名，输出如下：</p>
+<li><p>使用 <code>git remote -v</code> 查看當前的遠程倉庫別名，輸出如下：</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LCTT    https://github.com/LCTT/TranslateProject.git (fetch)</span><br><span class="line">LCTT    https://github.com/LCTT/TranslateProject.git (push)</span><br><span class="line">origin  git@github.com:cycoe/TranslateProject.git (fetch)</span><br><span class="line">origin  git@github.com:cycoe/TranslateProject.git (push)</span><br></pre></td></tr></table></figure>
-<p> 其中 <code>origin</code> 是自己账号下的对应远端仓库地址别名， <code>LCTT</code> 是设定好的上游仓库地址的别名。此处 LCTT 项目已经帮我们设置好了就不需要另外设置。<br> 如果没有设置上游仓库地址，可通过 <code>git remote add 上游仓库别名 上游仓库地址</code> 命令来设置上游仓库的别名。</p>
+<p> 其中 <code>origin</code> 是自己賬號下的對應遠端倉庫地址別名， <code>LCTT</code> 是設定好的上游倉庫地址的別名。此處 LCTT 項目已經幫我們設置好了就不需要另外設置。<br> 如果沒有設置上游倉庫地址，可通過 <code>git remote add 上游倉庫別名 上游倉庫地址</code> 命令來設置上游倉庫的別名。</p>
 </li>
-<li><p>同步上游仓库更新到本地，并合并更新到本地仓库 master 分支</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git fetch LCTT          <span class="comment">#从上游仓库抓取更新</span></span><br><span class="line">git checkout master     <span class="comment">#切换到 master 分支</span></span><br><span class="line">git merge LCTT/master   <span class="comment">#合并上游更新到 master 分支</span></span><br></pre></td></tr></table></figure>
+<li><p>同步上游倉庫更新到本地，併合並更新到本地倉庫 master 分支</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git fetch LCTT          <span class="comment">#從上游倉庫抓取更新</span></span><br><span class="line">git checkout master     <span class="comment">#切換到 master 分支</span></span><br><span class="line">git merge LCTT/master   <span class="comment">#合併上游更新到 master 分支</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p><code>git push</code> 命令推送本地仓库到 fork 仓库</p>
+<li><p><code>git push</code> 命令推送本地倉庫到 fork 倉庫</p>
 </li>
-</ol>
-<hr>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2017/03/11/first-post/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Cycoe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cycoe's Home Page">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/11/first-post/" itemprop="url">
-                  记第一次买域名以及搭建个人主页
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-                
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-11T00:00:00+08:00">2017-03-11</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/blog/" itemprop="url" rel="index"><span itemprop="name">blog</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/03/11/first-post/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/11/first-post/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>看到好基友 <a href="http://yinrs.win" target="_blank" rel="noopener">@Yinr</a> 搭建了个人主页，也手痒花4块钱在万网上买了 <code>cycoe.win</code> 域名的一年使用权。fork 了 <code>mzlogin</code> 的项目（<a href="https://github.com/mzlogin/mzlogin.github.io" target="_blank" rel="noopener">项目主页</a>在 GitHub Pages 上搭建了各人主页，然后把 <code>cycoe.win</code> 域名解析到了 <code>cycoe.github.io</code> 上，经过一些小改，自己的主页终于搭好了 :laughing: ！最后是去 163 的企业邮箱（<a href="http://ym.163.com" target="_blank" rel="noopener">163 企业邮箱注册</a>）申请了基于 <code>cycoe.win</code> 域名的邮箱，我的新邮箱就是 <code>cycoe@cycoe.win</code>。</p>
-<h2 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a><strong>感谢</strong></h2><ul>
-<li>GitHub 提供的 GitHub Pages 服务</li>
-<li>mzlogin 的 Jekyll 模板</li>
-</ul>
-<hr>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2017/03/09/CPVC热稳定剂/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Cycoe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cycoe's Home Page">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/09/CPVC热稳定剂/" itemprop="url">
-                  CPVC热稳定剂
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-                
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-09T00:00:00+08:00">2017-03-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/chemistry/" itemprop="url" rel="index"><span itemprop="name">chemistry</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/03/09/CPVC热稳定剂/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/09/CPVC热稳定剂/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>热稳定剂是一类能防止或减少聚合物在加工使用过程中受热而发生降解或交联,延长复合材料使用寿命的添加剂。常用的稳定剂按照主要成分分类可分为盐基类、脂肪酸皂类、有机锡化合物、复合型热稳定剂及纯有机化合物类。</p>
-</blockquote>
-<hr>
-<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ol>
-<li>盐基类热稳定剂:盐基类稳定剂是指结合有“盐基”的无机和有机酸铅盐,这类稳定剂具有优良的耐热性、耐候性和电绝缘性,成本低,透明性差,有一定毒性,用量一般在0.5%~5.0%。</li>
-<li>脂肪酸类热稳定剂:该类热稳定剂是指由脂肪酸根与金属离子组成的化合物,也称金属皂类热稳定剂,其性能与酸根及金属离子的种类有关,一般用量为0.1%~3.0%。</li>
-<li>有机锡类热稳定剂:该类热稳定剂可与聚氯乙烯分子中的不稳定氯原子形成配位体,而且在配位体中有机锡的羧酸酯基与不稳定的氯原子置换。这类热稳定剂的特点是稳定性高、透明性好、耐热性优异,不足之处是价格较贵。</li>
-<li>复合型热稳定剂:该类热稳定剂是以盐基类或金属皂类为基础的液体或固体复合物以及有机锡为基础的复合物,其中金属盐类有钙—镁—锌、钡—钙—锌、钡—锌和钡—镉等;常用的有机酸如有机脂肪酸、环烷酸、油酸、苯甲酸和水杨酸等。</li>
-<li>有机化合物热稳定剂:该类热稳定剂除少数可单独使用的主稳定剂(主要是含氮的有机化合物)外,还包括高沸点的多元醇及亚磷酸酯,亚磷酸酯常与金属稳定剂并用,能提高复合材料的耐候性、透明性,改善制品的表面色泽。</li>
-</ol>
-<hr>
-<h3 id="PVC热稳定剂的作用机理"><a href="#PVC热稳定剂的作用机理" class="headerlink" title="PVC热稳定剂的作用机理"></a>PVC热稳定剂的作用机理</h3><ol>
-<li>吸收中和HCL,抑制其自动催化作用。这类稳定剂包括铅盐类、有机酸金属皂类、有机锡化合物、环氧化合物、酚盐及金属硫醇盐等。它们可与HCL反应,抑制PVC脱HCL的反应。</li>
-<li>置换PVC分子中不稳定的烯丙基氯原子抑制脱PVC。如有机锡稳定剂与PVC分子的不稳定氯原子发生配位结合,在配位体中,有机锡与不稳定氯原子置换。</li>
-<li>与多烯结构发生加成反应,破坏大共轭体系的形成,减少着色。不饱和酸的盐或酯含有双键,与PVC分子**轭双键发生双烯加成反应,从而破坏其共轭结构,抑制变色。</li>
-<li>捕捉自由基,阻止氧化反应。如加入酚类热稳定剂能阻滞脱HCL,是由于酚给出的H原子自由基能与降解的PVC大分子自由基偶合,形成不能与O2反应的物质,而具有热稳定作用。这种热稳定剂可具有一种或兼具几种作用。</li>
-</ol>
-<p>理想的PVC热稳定剂应是一种多功能物质,或者是一些材料的混合物,它们能够实现以下功能:一是置换活泼、不稳定的取代基;二是吸收并中和PVC加工过程中放出的HCL,消除HCL的自动催化降解作用;三是中和或钝化对降解起催化作用的金属离子及其他有害杂质;四是通过多种形式的化学反应可阻断不饱和键的继续增长,抑制降解着色;五是最好对紫外光有防护屏蔽作用。通常热稳定剂根据各自的特殊效能配合使用,单独使用的情况极少,而且大部分品种是粉末状,一些是毒性很大的化学物质。为了使用方便,防止粉尘中毒,减小毒性物质或代之以无毒性物质,近年国内外研制出许多种复合稳定剂,例如,世界著名的德国熊牌复合稳定剂系列,美国、德国、日本、荷兰等国的有机锡或复合有机锡稳定剂,都在中国占有相当的市场。因此,全力推广应用我国研制的具有高效、低成本、无粉尘污染及无毒或低毒性的新型复合稳定剂,是我国塑料工业发展的迫切需要。</p>
-<hr>
-<h3 id="PVC加工需用热稳定剂原理分析"><a href="#PVC加工需用热稳定剂原理分析" class="headerlink" title="PVC加工需用热稳定剂原理分析"></a>PVC加工需用热稳定剂原理分析</h3><p>理想的PVC结构是首—尾结构-CH2-CHCl-CH2-CHCl-,是相当稳定的。但是至今合成PVC的方法还不能像合成顺丁橡胶那样,在齐格尔催化剂的作用下使顺丁二烯进行定向有规聚合。<br>氯乙烯的聚合是自由基的无规聚合,它除了有稳定的首—尾结构,还有首—首结构-CH2-CHCl-CHCl-CH-,尾—尾结构-CHCl-CH2-CH2-CHCl-;有偶合歧化生成乙烯基结CH2=CH-CHCl-CH2-结构和烯丙基氯-CH2-CH=CH-CHCl-CH2等。<br>在PVC合成中生成烯丙基氯、叔碳氯和双键等是其分子链结构中不稳定因素,不稳定顺序为:PVC分子链内部的烯丙基氯&gt;叔碳氯&gt;端基烯丙基氯&gt;仲氯。PVC加工时易于降解正是因为PVC分子链的结构中存在着不稳定因素,如不进行稳定化改性,其分解温度为130℃左右,但要将PVC树脂加工成有用的制品,成型温度要在190℃以上。因此,必须添加热稳定剂对其结构进行稳定化改进。</p>
-<hr>
-<h3 id="各类热稳定剂受热变色评析"><a href="#各类热稳定剂受热变色评析" class="headerlink" title="各类热稳定剂受热变色评析"></a>各类热稳定剂受热变色评析</h3><p>理想的热稳定剂应同时具有吸收HCL、消除活性部位、向共轭多烯链加成、破坏碳正离子盐、防止自动氧化等功能,而又不产生对PVC降解有催化作用的产物。实际的热稳定剂因具有不同的功能而表现出不同的热稳定特性,大致可分为初期型、长期型、中间型和全能型四类。</p>
-<ol>
-<li>镉、锌皂属典型的初期型热稳定剂,能快速吸收HCL,并在Cd、Zn的催化下有效地以羧酸根取代PVC链上的不稳定氯原子,从而有效抑制初期降解和着色,但因其消耗快而转化产物CdC12、ZnC12,又是PVC脱HCL的高效催化剂,因而会引发PVC恶性降解使物料突然变黑,因此长期热稳定性差。</li>
-<li>钡、钙皂属典型的长期型热稳定剂,只有吸收HCL的功能,因此不能有效抑制PVC着色,但因转化产物BaC12、CaC12不具催化活性,不会引起PVC突然变黑,长期热稳定性较好。</li>
-<li>脂肪酸有机锡属中间型,既能吸收HCL,又能有效地以羧酸根取代PVC链上的不稳定氯原子,并且转化产物不具催化活性。</li>
-<li>硫醇有机锡则具有全能型特征,能同时以各种机制稳定PVC,转化产物也不具催化活性,因此兼具优异的初期和长期热稳定效果。</li>
 </ol>
 <hr>
 
@@ -2059,7 +2041,7 @@ That’s all. Thank you for giving me this opportunity!</font>
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2069,7 +2051,7 @@ That’s all. Thank you for giving me this opportunity!</font>
                 
                 
                 <div class="site-state-item site-state-categories">
-                  
+                  <a href="/categories/index.html">
                     
                     
                       
@@ -2092,9 +2074,11 @@ That’s all. Thank you for giving me this opportunity!</font>
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">分类</span>
-                  
+                  </a>
                 </div>
               
 
@@ -2117,7 +2101,11 @@ That’s all. Thank you for giving me this opportunity!</font>
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -2166,7 +2154,7 @@ That’s all. Thank you for giving me this opportunity!</font>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>

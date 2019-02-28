@@ -299,6 +299,460 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2018/11/13/正交试验设计/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cycoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cycoe's Home Page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/13/正交试验设计/" itemprop="url">
+                  正交试验设计
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-13T08:35:52+08:00">2018-11-13</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/statistics/" itemprop="url" rel="index"><span itemprop="name">statistics</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/13/正交试验设计/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/13/正交试验设计/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>正交试验设计是利用正交表来安排与分析多因素试验的一种设计方法。它是由试验因素的全部水平组合中，挑选部分有代表性的水平组合进行试验的，通过对这部分试验结果的分析了解全面试验的情况，找出最优的水平组合。可以通过代表性很强的少数次试验，摸清各个因素对试验指标的影响情况，确定出因素的主次顺序，找出较好的生产条件或最佳参数组合。</p>
+</blockquote>
+<h2 id="正交表的性质"><a href="#正交表的性质" class="headerlink" title="正交表的性质"></a>正交表的性质</h2><h3 id="正交性"><a href="#正交性" class="headerlink" title="正交性"></a>正交性</h3><ol>
+<li>均匀分散性：任一列中，不同数字出现的次数相等；</li>
+<li>整齐可比性：任两列中，同一横行所组成的数字对出现的次数相等；</li>
+<li>可置换性：<ol>
+<li>正交表各列的地位是平等的，表中各列之间可以相互置换，称为列间置换；</li>
+<li>正交表各行之间也可相互置换，称列间置换；</li>
+<li>正交表中同一列的水平数字也可以相互置换，称水平置换。</li>
+</ol>
+</li>
+</ol>
+<h3 id="分散均匀性"><a href="#分散均匀性" class="headerlink" title="分散均匀性"></a>分散均匀性</h3><ol>
+<li>任一列的各水平都出现，使得部分试验中包含所有因素的所有水平；</li>
+<li>任意两列间的所有组合全部出现，使任意两因素间都是全面试验。</li>
+</ol>
+<h3 id="综合可比性"><a href="#综合可比性" class="headerlink" title="综合可比性"></a>综合可比性</h3><ol>
+<li>任一列各水平出现的次数都相等；</li>
+<li>任两列间所有可能的组合出现的次数都相等，因此使任一因素各水平的试验条件相同。</li>
+</ol>
+<h2 id="拉丁方阵"><a href="#拉丁方阵" class="headerlink" title="拉丁方阵"></a>拉丁方阵</h2><p>拉丁方阵（Latin square）是一种 $n\times n$ 的方阵，在这种 $n\times n$ 的方阵里，恰有 $n$ 种不同的元素，每一种不同的元素在同一行或同一列里只出现一次。如下面的三阶拉丁方。</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+    1 & 2 & 3\\
+    2 & 3 & 1\\
+    3 & 1 & 2\\
+\end{bmatrix}</script><h3 id="标准型"><a href="#标准型" class="headerlink" title="标准型"></a>标准型</h3><p>当一个拉丁方阵的第一行与第一列的元素按顺序排列时，此为这个拉丁方阵的标准型，英语称为 “reduced Latin square, normalized Latin square, or Latin square in standard form”。</p>
+<h3 id="构造拉丁方"><a href="#构造拉丁方" class="headerlink" title="构造拉丁方"></a>构造拉丁方</h3><p>同阶的拉丁方有多个，构造其中的一个有一种通用的方法。</p>
+<p>若 $n$ 为偶数，则构造第一行为 $1, 2, n, 3, n-1, 4, n-2, \dots$，之后的每一行都在上一行对应列元素上加一并对 $n$ 取模，即可表示为如下矩阵。</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+    1 & 2 & n & 3 & n-1 & 4 & n-2 & \cdots\\
+    2 & 3 & n+1 & 4 & n & 5 & n-1 & \cdots\\
+    \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots\\
+    i & i+1 & i+n-1 & i+2 & i+n-2 & i+3 & i+n-3 & \cdots\\
+    \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots\\
+    n & 1 & n-1 & 2 & n-2 & 3 & n-3 & \cdots\\
+\end{bmatrix} \mathrm{mod}\ n</script><p>若 $n$ 为奇数，则先按偶数法则构造一个拉丁方，然后将上述模式左右对调。</p>
+<h3 id="正交拉丁方"><a href="#正交拉丁方" class="headerlink" title="正交拉丁方"></a>正交拉丁方</h3><p>设有两个阶数相同且为 $n$ 的拉丁方阵$A_1=(a^{(1)}_{i,j})_{n\times n}, A_2=(a^{(2)}_{i,j})_{n\times n}$，其中将所有放置位置相同的元素组合成一个元组，组合成一个新的矩阵 $((a^{(1)}_{i,j}, a^{(2)}_{i,j}))_{n\times n}$。当这个新的矩阵 $((a^{(1)}_{i,j}, a^{(2)}_{i,j}))_{n\times n}$ 中每一个元素互不相同时，拉丁方阵 $A_1$ 和 $A_2$ 是互相正交的。此时，$A_1$ 和 $A_2$ 即为一对正交拉丁方。 而在阶数固定的情况下，所有两两正交的拉丁方所成的集合称为正交拉丁方族。如下面的两个 3 阶拉丁方。</p>
+<script type="math/tex; mode=display">
+\begin{matrix}
+A = \begin{bmatrix}
+    1 & 2 & 3\\
+    2 & 3 & 1\\
+    3 & 1 & 2\\
+\end{bmatrix} &
+B = \begin{bmatrix}
+    1 & 2 & 3\\
+    3 & 1 & 2\\
+    2 & 3 & 1\\
+\end{bmatrix}
+\end{matrix}</script><h3 id="素数阶拉丁方"><a href="#素数阶拉丁方" class="headerlink" title="素数阶拉丁方"></a>素数阶拉丁方</h3><p>若 $n$ 阶拉丁方存在 $r$ 个两两正交的拉丁方，那么 $r\leq n-1$。素数阶拉丁方（以 $3, 5, 7, \dots$ 为阶）是完全的，即 $n$ 阶正交拉丁方族中有 $n-1$ 个拉丁方。</p>
+<h2 id="构造正交表"><a href="#构造正交表" class="headerlink" title="构造正交表"></a>构造正交表</h2><p>因为素数阶拉丁方都可构造完全的正交拉丁方族，则可继续构造正交表。若把素数 $n$ 作为水平数，则以 $n$ 阶拉丁方构造的正交拉丁方有 $n-1$ 个。以 $n-1$ 作为因素数构造正交表。</p>
+<p>以 3 阶拉丁方为例，3 阶正交拉丁方族包含 2 个正交拉丁方，并将对应位置元素合并成二元有序数对。</p>
+<script type="math/tex; mode=display">
+\begin{matrix}
+\begin{bmatrix}
+    1 & 2 & 3\\
+    2 & 3 & 1\\
+    3 & 1 & 2\\
+\end{bmatrix} &
+\begin{bmatrix}
+    1 & 2 & 3\\
+    3 & 1 & 2\\
+    2 & 3 & 1\\
+\end{bmatrix} & = &
+\begin{bmatrix}
+    11 & 22 & 33\\
+    23 & 31 & 12\\
+    32 & 13 & 21\\
+\end{bmatrix} &
+\end{matrix}</script><p>以第一个元素作为因素 A，第二个元素作为因素 B，然后与因素 C、D 均匀搭配，构造 4 因素 3 水平正交表。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>C, A, B, D</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>11</td>
+<td>22</td>
+<td>33</td>
+</tr>
+<tr>
+<td>2</td>
+<td>23</td>
+<td>31</td>
+<td>12</td>
+</tr>
+<tr>
+<td>3</td>
+<td>32</td>
+<td>13</td>
+<td>21</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>展开后为</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>试验号</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2</td>
+<td>3</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr>
+<td>7</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>8</td>
+<td>3</td>
+<td>1</td>
+<td>3</td>
+<td>2</td>
+</tr>
+<tr>
+<td>9</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>若只与一个因素 C 搭配，则可构造 3 因素 3 水平正交表。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>C, A, B</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>11</td>
+<td>22</td>
+<td>33</td>
+</tr>
+<tr>
+<td>2</td>
+<td>23</td>
+<td>31</td>
+<td>12</td>
+</tr>
+<tr>
+<td>3</td>
+<td>32</td>
+<td>13</td>
+<td>21</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>展开后为</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>试验号</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2</td>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr>
+<td>6</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>7</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+</tr>
+<tr>
+<td>8</td>
+<td>3</td>
+<td>1</td>
+<td>3</td>
+</tr>
+<tr>
+<td>9</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>由此可见，以素数 $n$ 为水平数设计正交试验，可满足 $[n-1, n+1]$ 个因素的设计，并且总共需要 $n^2$ 次试验。即对于 3 因素 3 水平与 4 因素 3 水平正交试验具有相同的试验组数，同为 9 组。可类似地构造出 $L_9(3^3)$，$L_9(3^4)$，$L_{25}(5^5)$，$L_{25}(5^6)$，$L_{49}(7^7)$，$L_{49}(7^8)$ 等。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://baike.baidu.com/item/%E6%8B%89%E4%B8%81%E6%96%B9%E9%98%B5/4413910?fromtitle=%E6%8B%89%E4%B8%81%E6%96%B9&amp;fromid=7176085" target="_blank" rel="noopener">百度百科-拉丁方</a></li>
+<li><a href="https://bkso.baidu.com/item/%E6%AD%A3%E4%BA%A4%E6%8B%89%E4%B8%81%E6%96%B9" target="_blank" rel="noopener">百度百科-正交拉丁方</a></li>
+<li><a href="https://baike.baidu.com/item/%E6%8B%89%E4%B8%81%E6%96%B9%E8%AE%BE%E8%AE%A1" target="_blank" rel="noopener">百度百科-拉丁方设计</a></li>
+<li><a href="https://wenku.baidu.com/view/7b9965bcbdeb19e8b8f67c1cfad6195f312be8db.html?re=view" target="_blank" rel="noopener">正交表与正交设计</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2018/11/09/Linux下常用软件和配置记录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -319,7 +773,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2018/11/09/Linux下常用软件和配置记录/" itemprop="url">
-                  Linux下常用软件和配置记录
+                  Linux下常用軟件和配置記錄
                 </a>
               
             
@@ -407,17 +861,54 @@
       
         
           
-            <p>随着使用 Linux 系统的年头越来越长，积累的相关技巧也越来越多。最近一次重装系统突然发现很多配置都已经忘的差不多了，想要配置系统还需要去网上到处搜刮资料实在是麻烦，因此打算用一篇博客记录关于 Linux 系统的配置及常用软件的介绍。</p>
-<h2 id="Archlinux-配置"><a href="#Archlinux-配置" class="headerlink" title="Archlinux 配置"></a>Archlinux 配置</h2><h3 id="让-Qt5-程序使用原生-GTK-主题"><a href="#让-Qt5-程序使用原生-GTK-主题" class="headerlink" title="让 Qt5 程序使用原生 GTK+ 主题"></a>让 Qt5 程序使用原生 GTK+ 主题</h3><p>Qt5 程序在 GTK3 环境下主题不统一真的很难受，尤其是 GTK3 用了黑色主题而 Qt5 还是刺眼的白色主题的时候。不像在 KDE 设置中设置 GTK3 主题那么方便，设置 Qt5 主题可需要好好折腾一番。而且这个解决方案也是我使用了近一年后才找到的答案。</p>
-<p>首先你需要安装 qt5ct 来提供 Qt5 程序主题的设置入口。此时直接在应用列表中打开 qt5ct 会提示未设置环境变量，编辑 <code>.xprofile</code> 文件，并在其中加入如下内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ <span class="string">"<span class="variable">$XDG_CURRENT_DESKTOP</span>"</span> = <span class="string">"KDE"</span> ] || [ <span class="string">"<span class="variable">$XDG_CURRENT_DESKTOP</span>"</span> = <span class="string">"GNOME"</span> ] || <span class="built_in">export</span> QT_QPA_PLATFORMTHEME=<span class="string">"qt5ct"</span></span><br></pre></td></tr></table></figure></p>
-<p>注销后重新登录，此时打开 qt5ct 应该就不报错了。但此时你会发现主题列表中只有 Qt5 自带的几个样式，而没有 Gtk3 主题。你需要安装 qt5-styleplugins 来使 Qt5 支持 GTK2 主题。你没有看错，我也不知道为啥 Qt5 只支持 GTK2 的主题。但是我们要如何设置 GTK2 主题呢，好吧，又需要安装一个叫 gtk-theme-switch2 的工具。在 gtk-theme-switch2 中设置好满意的 GTK2 主题后，再在 qt5ct 中设置 Qt5 主题为 GTK2 即可。</p>
+            <p>隨着使用 Linux 系統的年頭越來越長，積累的相關技巧也越來越多。最近一次重裝系統突然發現很多配置都已經忘的差不多了，想要配置系統還需要去網上到處搜刮資料實在是麻煩，因此打算用一篇博客記錄關於 Linux 系統的配置及常用軟件的介紹。</p>
+<h2 id="Archlinux-配置"><a href="#Archlinux-配置" class="headerlink" title="Archlinux 配置"></a>Archlinux 配置</h2><h3 id="讓-Qt5-程序使用原生-GTK-主題"><a href="#讓-Qt5-程序使用原生-GTK-主題" class="headerlink" title="讓 Qt5 程序使用原生 GTK+ 主題"></a>讓 Qt5 程序使用原生 GTK+ 主題</h3><p>Qt5 程序在 GTK3 環境下主題不統一真的很難受，尤其是 GTK3 用了黑色主題而 Qt5 還是刺眼的白色主題的時候。不像在 KDE 設置中設置 GTK3 主題那麼方便，設置 Qt5 主題可需要好好折騰一番。而且這個解決方案也是我使用了近一年後才找到的答案。</p>
+<p>首先你需要安裝 qt5ct 來提供 Qt5 程序主題的設置入口。此時直接在應用列表中打開 qt5ct 會提示未設置環境變量，編輯 <code>.xprofile</code> 文件，並在其中加入如下內容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ <span class="string">"<span class="variable">$XDG_CURRENT_DESKTOP</span>"</span> = <span class="string">"KDE"</span> ] || [ <span class="string">"<span class="variable">$XDG_CURRENT_DESKTOP</span>"</span> = <span class="string">"GNOME"</span> ] || <span class="built_in">export</span> QT_QPA_PLATFORMTHEME=<span class="string">"qt5ct"</span></span><br></pre></td></tr></table></figure></p>
+<p>註銷後重新登錄，此時打開 qt5ct 應該就不報錯了。但此時你會發現主題列表中只有 Qt5 自帶的幾個樣式，而沒有 Gtk3 主題。你需要安裝 qt5-styleplugins 來使 Qt5 支持 GTK2 主題。你沒有看錯，我也不知道爲啥 Qt5 只支持 GTK2 的主題。但是我們要如何設置 GTK2 主題呢，好吧，又需要安裝一個叫 gtk-theme-switch2 的工具。在 gtk-theme-switch2 中設置好滿意的 GTK2 主題後，再在 qt5ct 中設置 Qt5 主題爲 GTK2 即可。</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
+<h2 id="常用軟件"><a href="#常用軟件" class="headerlink" title="常用軟件"></a>常用軟件</h2><h1 id="用了幾年-Linux-後發現其實-Linux-平臺的軟件並不少（當然-Adobe-全家桶和-MS-Office-除外，要做設計或者辦公還是老老實實-Windows-吧-speak-no-evil-），只是與-Windows-和-Mac-平臺常用的軟件不同而已。Linux-的真正強大之處是命令行軟件，幾條簡單的命令組合就可以完成複雜的功能。"><a href="#用了幾年-Linux-後發現其實-Linux-平臺的軟件並不少（當然-Adobe-全家桶和-MS-Office-除外，要做設計或者辦公還是老老實實-Windows-吧-speak-no-evil-），只是與-Windows-和-Mac-平臺常用的軟件不同而已。Linux-的真正強大之處是命令行軟件，幾條簡單的命令組合就可以完成複雜的功能。" class="headerlink" title="用了幾年 Linux 後發現其實 Linux 平臺的軟件並不少（當然 Adobe 全家桶和 MS Office 除外，要做設計或者辦公還是老老實實 Windows 吧:speak_no_evil:），只是與 Windows 和 Mac 平臺常用的軟件不同而已。Linux 的真正強大之處是命令行軟件，幾條簡單的命令組合就可以完成複雜的功能。"></a>用了幾年 Linux 後發現其實 Linux 平臺的軟件並不少（當然 Adobe 全家桶和 MS Office 除外，要做設計或者辦公還是老老實實 Windows 吧:speak_no_evil:），只是與 Windows 和 Mac 平臺常用的軟件不同而已。Linux 的真正強大之處是命令行軟件，幾條簡單的命令組合就可以完成複雜的功能。</h1><h3 id="小鹤双拼"><a href="#小鹤双拼" class="headerlink" title="小鹤双拼"></a>小鹤双拼</h3><p>每次重装系统都需要重新配置输入法，更蛋疼的是在 Rime 中添加鹤形码表时，总出现部署错误。虽然最后折腾半天总是莫名其妙地整好了，但是不得不感叹配置 Rime 真是玄学（虽然很不想承认是自己对 Rime 的配置文件一窍不通:laughing:）。特此记录一下给 Rime 添加鹤形的过程，虽然以后按相同的步骤也不一定能配置成功。</p>
+<p>第一步，安装 fcitx 框架（ibus 框架就不考虑了，fcitx 用习惯了）和 Rime 的 fcitx 实现。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Archlinux</span></span><br><span class="line">sudo pacman -S fcitx fcitx-rime fcitx-configtool</span><br><span class="line"><span class="comment"># openSUSE</span></span><br><span class="line">sudo zypper <span class="keyword">in</span> fcitx fcitx-rime fcitx-config-gtk</span><br></pre></td></tr></table></figure></p>
+<p>第二步，在 fcitx 设置中加入 rime 输入法，记得关闭“只显示当前语言输入法选项”。切换到 Rime 输入法，此时应该会自动运行一次 deploy。</p>
+<p>第三步，将<a href="https://git.coding.net/cycoe/config.git" target="_blank" rel="noopener">我的配置</a>中的 <code>.config/fcitx</code> 目录复制到对应的路径，其中已经包含了 flypy 使用的码表（之前小鹤双拼官网发布的挂接码表文件，但因为没有通用的配置方法目前已经下架），并将运行下面的命令将配置文件复制到 Rime 系统级路径中（尝试过复制到 <code>.config/fcitx/rime/build/default.custom.yaml</code>，没有效果）。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 备份原配置</span></span><br><span class="line">sudo mv /usr/share/rime-data/default.yaml /usr/share/rime-data/default.yaml.bak</span><br><span class="line"><span class="comment"># 复制新配置</span></span><br><span class="line">sudo cp default.yaml /usr/share/rime-data/default.yaml</span><br></pre></td></tr></table></figure></p>
+<p>第四步，在 fcitx 上右键，选择 deploy，此时会提示部署错误，但是惊喜地发现输入法已经可以使用。</p>
 <h2 id="常用软件"><a href="#常用软件" class="headerlink" title="常用软件"></a>常用软件</h2><p>用了几年 Linux 后发现其实 Linux 平台的软件并不少（当然 Adobe 全家桶和 MS Office 除外，要做设计或者办公还是老老实实 Windows 吧:speak_no_evil:），只是与 Windows 和 Mac 平台常用的软件不同而已。Linux 的真正强大之处是命令行软件，几条简单的命令组合就可以完成复杂的功能。</p>
-<h3 id="Dia"><a href="#Dia" class="headerlink" title="Dia"></a>Dia</h3><p>一个非常小的流程图绘制软件，但是功能够用。</p>
-<h3 id="ncdu"><a href="#ncdu" class="headerlink" title="ncdu"></a>ncdu</h3><p>ncdu (NCurses Disk Usage) 是一个基于 NCurses 系统的磁盘用量分析命令行软件，相似功能的还有基于 GTK+ 的 Baobab（从版本号来看应该是属于 Gnome 桌面套装）。其实对我来说真的很少使用此类软件，毕竟我很少删除磁盘文件，但是最近 /Home 分区接近爆满让我很难受，还是需要从磁盘的角落翻出以后再也用不上的大文件以删除之。</p>
-<h3 id="xreader"><a href="#xreader" class="headerlink" title="xreader"></a>xreader</h3><p>pdf 文档阅读器，X-Apps 计划中的一员（这个计划好像只有个阅读器？:laughing:）。体积小巧，优点是可以使用 <code>hjkl</code> 等 vim 键位进行控制。缺点是没有高级功能，单纯作为一个阅读器还是不错的。</p>
-<h3 id="pcmanfm"><a href="#pcmanfm" class="headerlink" title="pcmanfm"></a>pcmanfm</h3><p>LXDE 桌面环境默认文件管理器，实话说比 Gnome 的鹦鹉螺好用太多，功能上与 Dolphin 相近。Archlinux 上有单独提供 pcmanfm-gtk3 的安装包，其他发型版上应该默认使用的就是 GTK3 了。</p>
-<h3 id="lxappearance"><a href="#lxappearance" class="headerlink" title="lxappearance"></a>lxappearance</h3><p>GTK+ 界面主题设置工具，又是 LXDE 的一员。LXDE 自带的几款软件质量都挺高，界面风格统一并且功能强大。</p>
-<h3 id="gpickview"><a href="#gpickview" class="headerlink" title="gpickview"></a>gpickview</h3><p>LXDE 默认的图片查看器，体积小巧，没有太多花哨功能。</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>cc82a6261f6c74531b0a2de240eae2d2fe3ed050</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<h3 id="Dia"><a href="#Dia" class="headerlink" title="Dia"></a>Dia</h3><p>一個非常小的流程圖繪製軟件，但是功能夠用。</p>
+<h3 id="ncdu"><a href="#ncdu" class="headerlink" title="ncdu"></a>ncdu</h3><p>ncdu (NCurses Disk Usage) 是一個基於 NCurses 系統的磁盤用量分析命令行軟件，相似功能的還有基於 GTK+ 的 Baobab（從版本號來看應該是屬於 Gnome 桌面套裝）。其實對我來說真的很少使用此類軟件，畢竟我很少刪除磁盤文件，但是最近 /Home 分區接近爆滿讓我很難受，還是需要從磁盤的角落翻出以後再也用不上的大文件以刪除之。</p>
+<h3 id="xreader"><a href="#xreader" class="headerlink" title="xreader"></a>xreader</h3><p>pdf 文檔閱讀器，X-Apps 計劃中的一員（這個計劃好像只有個閱讀器？:laughing:）。體積小巧，優點是可以使用 <code>hjkl</code> 等 vim 鍵位進行控制。缺點是沒有高級功能，單純作爲一個閱讀器還是不錯的。</p>
+<h3 id="pcmanfm"><a href="#pcmanfm" class="headerlink" title="pcmanfm"></a>pcmanfm</h3><p>LXDE 桌面環境默認文件管理器，實話說比 Gnome 的鸚鵡螺好用太多，功能上與 Dolphin 相近。Archlinux 上有單獨提供 pcmanfm-gtk3 的安裝包，其他髮型版上應該默認使用的就是 GTK3 了。</p>
+<h3 id="lxappearance"><a href="#lxappearance" class="headerlink" title="lxappearance"></a>lxappearance</h3><p>GTK+ 界面主題設置工具，又是 LXDE 的一員。LXDE 自帶的幾款軟件質量都挺高，界面風格統一併且功能強大。</p>
+<h3 id="gpickview"><a href="#gpickview" class="headerlink" title="gpickview"></a>gpickview</h3><p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
+<h1 id="LXDE-默認的圖片查看器，體積小巧，沒有太多花哨功能。"><a href="#LXDE-默認的圖片查看器，體積小巧，沒有太多花哨功能。" class="headerlink" title="LXDE 默認的圖片查看器，體積小巧，沒有太多花哨功能。"></a>LXDE 默認的圖片查看器，體積小巧，沒有太多花哨功能。</h1><p>LXDE 默认的图片查看器，体积小巧，没有太多花哨功能。</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>cc82a6261f6c74531b0a2de240eae2d2fe3ed050</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
 
           
         
@@ -491,7 +982,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2018/10/23/一种通过最小二乘法求转变点的方法/" itemprop="url">
-                  一种通过最小二乘法求转变点的方法
+                  一種通過最小二乘法求轉變點的方法
                 </a>
               
             
@@ -561,29 +1052,29 @@
       
         
           
-            <h2 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h2><p>假设存在 k 个样本点 \(X_1, X_2, \ldots, X_k\)，定义向量<br>\(X_i = (x_{i1}, x_{i2}, \ldots, x_{in})^T\)，为方便计算在 \(X_i\) 前插入常量 1。<br>则需要求 \(W = (w_0, w_1, w_2, \ldots, w_n)\) 使 \(\hat{Y} = XW\)。</p>
-<p>定义均方误差 \(E = \dfrac{1}{n}\sum(y_i-\hat{y}_i)^2 = \dfrac{1}{n}||Y-\hat{Y}||_2^2\)，则可转变为寻找 W 使得 E 最小，即寻找 \(W = \mathrm{argmin}\dfrac{1}{n}||Y-XW||_2^2\)。</p>
-<p>对于</p>
-<script type="math/tex; mode=display">E(W) = \dfrac{1}{n}</script><p>则可推导</p>
+            <h2 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h2><p>假設存在 k 個樣本點 \(X_1, X_2, \ldots, X_k\)，定義向量<br>\(X_i = (x_{i1}, x_{i2}, \ldots, x_{in})^T\)，爲方便計算在 \(X_i\) 前插入常量 1。<br>則需要求 \(W = (w_0, w_1, w_2, \ldots, w_n)\) 使 \(\hat{Y} = XW\)。</p>
+<p>定義均方誤差 \(E = \dfrac{1}{n}\sum(y_i-\hat{y}_i)^2 = \dfrac{1}{n}||Y-\hat{Y}||_2^2\)，則可轉變爲尋找 W 使得 E 最小，即尋找 \(W = \mathrm{argmin}\dfrac{1}{n}||Y-XW||_2^2\)。</p>
+<p>對於</p>
+<script type="math/tex; mode=display">E(W) = \dfrac{1}{n}</script><p>則可推導</p>
 <script type="math/tex; mode=display">
     \begin{align}
     E(W+\Delta W) - E(W) &= \dfrac{1}{n}||Y-X(W+\Delta W)||_2^2-\dfrac{1}{n}||Y-XW||_2^2\\
     &= \dfrac1n||Y-XW||_2^2-\dfrac2n(Y-XW)(X\Delta W)+\dfrac1n||X\Delta W||_2^2-\dfrac1n||Y-XW||_2^2\\
     &= \dfrac2n(XW-Y)X\Delta W+\mathcal{O}(||\Delta X||)\\
     \end{align}</script><p>令 </p>
-<script type="math/tex; mode=display">L(W) = \dfrac2n(XW-Y)X\Delta W</script><p>为 \(E(W)\) 在 \(W\) 处的导数，同时</p>
+<script type="math/tex; mode=display">L(W) = \dfrac2n(XW-Y)X\Delta W</script><p>爲 \(E(W)\) 在 \(W\) 處的導數，同時</p>
 <script type="math/tex; mode=display">
     \begin{align}
     L(\Delta W) &= <\nabla E(W), \Delta W>\\
     &= <\dfrac2nX^T(XW-Y), \Delta X>\\
     &= \dfrac2n(XW-Y)X\Delta W\\
-    \end{align}</script><p>则</p>
+    \end{align}</script><p>則</p>
 <script type="math/tex; mode=display">
     \begin{align}
     \nabla E(W) = \dfrac2nX^T(XW-Y) &= 0\\
     X^TXW &= X^TY\\
     W &= (X^TX)^{-1}X^TY
-    \end{align}</script><p>最终得</p>
+    \end{align}</script><p>最終得</p>
 <script type="math/tex; mode=display">E=\dfrac1n||Y-\hat{Y}||_2^2=\dfrac1n||X(X^TX)^{-1}X^TY-Y||_2^2</script>
           
         
@@ -657,7 +1148,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2018/09/06/Nocturnal使用说明/" itemprop="url">
-                  Nocturnal使用说明
+                  Nocturnal使用說明
                 </a>
               
             
@@ -745,26 +1236,26 @@
       
         
           
-            <h1 id="Nocturnal-by-Cycoe"><a href="#Nocturnal-by-Cycoe" class="headerlink" title="Nocturnal by Cycoe"></a>Nocturnal by Cycoe</h1><p><a href="https://git.coding.net/cycoe/Nocturnal.git" title="Nocturnal GitHub" target="_blank" rel="noopener">GitHub 地址</a><br>如果在使用过程中发现 bug，可到<a href="https://git.coding.net/cycoe/Nocturnal.git" title="Nocturnal GitHub" target="_blank" rel="noopener">此处</a>进行反馈，或者直接提交修复 PR，感谢支持！</p>
-<h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a><strong>声明</strong></h2><p>Nocturnal 是我课余时间练习 python 代码编写的程序，针对使用引起的一切后果本人概不负责。</p>
-<h2 id="关于捐赠"><a href="#关于捐赠" class="headerlink" title="关于捐赠"></a>关于捐赠</h2><p>Nocturnal 不并强制要求捐赠，但为了防止软件被滥用而出现的一系列问题，因此需要提供解密密钥才能使用，具体操作如下：</p>
+            <h1 id="Nocturnal-by-Cycoe"><a href="#Nocturnal-by-Cycoe" class="headerlink" title="Nocturnal by Cycoe"></a>Nocturnal by Cycoe</h1><p><a href="https://git.coding.net/cycoe/Nocturnal.git" title="Nocturnal GitHub" target="_blank" rel="noopener">GitHub 地址</a><br>如果在使用過程中發現 bug，可到<a href="https://git.coding.net/cycoe/Nocturnal.git" title="Nocturnal GitHub" target="_blank" rel="noopener">此處</a>進行反饋，或者直接提交修復 PR，感謝支持！</p>
+<h2 id="聲明"><a href="#聲明" class="headerlink" title="聲明"></a><strong>聲明</strong></h2><p>Nocturnal 是我課餘時間練習 python 代碼編寫的程序，針對使用引起的一切後果本人概不負責。</p>
+<h2 id="關於捐贈"><a href="#關於捐贈" class="headerlink" title="關於捐贈"></a>關於捐贈</h2><p>Nocturnal 不併強制要求捐贈，但爲了防止軟件被濫用而出現的一系列問題，因此需要提供解密密鑰才能使用，具體操作如下：</p>
 <ol>
-<li>打开软件，此时会自动弹出一个命令提示符窗口和一个二维码</li>
-<li>微信扫描二维码添加我为好友</li>
-<li><p>你能在命令提示符窗口上看到类似这样一段话</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">你的 id 为 2160。请将 id 发给开发者获取解锁密钥</span><br><span class="line">请输入解密密钥:</span><br></pre></td></tr></table></figure>
+<li>打開軟件，此時會自動彈出一個命令提示符窗口和一個二維碼</li>
+<li>微信掃描二維碼添加我爲好友</li>
+<li><p>你能在命令提示符窗口上看到類似這樣一段話</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">你的 id 爲 2160。請將 id 發給開發者獲取解鎖密鑰</span><br><span class="line">請輸入解密密鑰:</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>将其中的 id 发给我，我会生成解密密钥</p>
+<li><p>將其中的 id 發給我，我會生成解密密鑰</p>
 </li>
-<li>输入密钥后即可使用</li>
-<li>（可选）如果你觉得这个软件给你带来了便利，你可以给开发者包个红包，建议 5 元</li>
+<li>輸入密鑰後即可使用</li>
+<li>（可選）如果你覺得這個軟件給你帶來了便利，你可以給開發者包個紅包，建議 5 元</li>
 </ol>
-<h2 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h2><h3 id="命令帮助"><a href="#命令帮助" class="headerlink" title="命令帮助"></a>命令帮助</h3><div class="table-container">
+<h2 id="使用說明"><a href="#使用說明" class="headerlink" title="使用說明"></a>使用說明</h2><h3 id="命令幫助"><a href="#命令幫助" class="headerlink" title="命令幫助"></a>命令幫助</h3><div class="table-container">
 <table>
 <thead>
 <tr>
-<th>命令全称</th>
-<th>缩写</th>
+<th>命令全稱</th>
+<th>縮寫</th>
 <th>描述</th>
 </tr>
 </thead>
@@ -772,47 +1263,47 @@
 <tr>
 <td>help</td>
 <td>h</td>
-<td>打印帮助信息</td>
+<td>打印幫助信息</td>
 </tr>
 <tr>
 <td>emailLogin</td>
 <td>el</td>
-<td>绑定通知邮箱</td>
+<td>綁定通知郵箱</td>
 </tr>
 <tr>
 <td>grade</td>
 <td>g</td>
-<td>成绩抓取模式</td>
+<td>成績抓取模式</td>
 </tr>
 <tr>
 <td>report</td>
 <td>r</td>
-<td>选报告模式</td>
+<td>選報告模式</td>
 </tr>
 <tr>
 <td>class</td>
 <td>c</td>
-<td>选课模式</td>
+<td>選課模式</td>
 </tr>
 <tr>
 <td>add</td>
 <td>a</td>
-<td>添加待选课程名称</td>
+<td>添加待選課程名稱</td>
 </tr>
 <tr>
 <td>delete</td>
 <td>de</td>
-<td>删除待选课程名称</td>
+<td>刪除待選課程名稱</td>
 </tr>
 <tr>
 <td>list</td>
 <td>l</td>
-<td>列出待选课程名称</td>
+<td>列出待選課程名稱</td>
 </tr>
 <tr>
 <td>donate</td>
 <td>d</td>
-<td>捐赠</td>
+<td>捐贈</td>
 </tr>
 <tr>
 <td>quit</td>
@@ -822,53 +1313,53 @@
 </tbody>
 </table>
 </div>
-<p>以上表格第一列为命令的全称，第二列为命令的缩写，输入全称与缩写拥有同样的效果。</p>
-<h3 id="软件符号说明"><a href="#软件符号说明" class="headerlink" title="软件符号说明"></a>软件符号说明</h3><p>Nocturnal 使用字符界面（TUI）进行交互，双击 <code>Nocturnal.exe</code> 打开软件后可看到一个黑底白字的字符界面，这不是因为软件运行出错，而是 Nocturnal 本来就是这样的。现在你应该能在界面上看到一些表格，最上面的表格为 Nocturnal 的基本信息，中间的表格为使用帮助。在最下方你可以看到类似这样的提示符 <code>[0] &gt;&gt;&gt;</code>，该提示符表明此时你可以输入命令运行相关功能，<code>[0]</code> 中的数字表示后台正在运行的任务数量。</p>
-<h3 id="成绩抓取模式"><a href="#成绩抓取模式" class="headerlink" title="成绩抓取模式"></a>成绩抓取模式</h3><p>在 <code>[0] &gt;&gt;&gt;</code> 后输入 <code>grade</code> 或 <code>g</code> 回车即可运行成绩抓取功能。第一次使用时会自动提示你输入用户名和密码，也就是你的教务网学号和密码。运行成功后不会有提示，但 Nocturnal 就会在后台自动抓取成绩，并在出新成绩时自动通知。</p>
-<h3 id="选报告模式"><a href="#选报告模式" class="headerlink" title="选报告模式"></a>选报告模式</h3><p>在 <code>[0] &gt;&gt;&gt;</code> 后输入 <code>report</code> 或 <code>r</code> 回车即可运行选报告模式，运行成功后 Nocturnal 会在后台自动抓取报告列表，并在有新报告放出时自动选报告，并通过邮件通知你。</p>
-<h3 id="选课模式"><a href="#选课模式" class="headerlink" title="选课模式"></a>选课模式</h3><p>选课模式与成绩抓取模式和选报告模式不同，选课模式需要在前台运行。选课模式通过匹配关键字实现，针对每门课程可以添加多个关键字。比如你想要选 ‘高分子研究方法’ 这门课，则可以在一级关键字后输入 ‘高分子研究方法’ 并回车。但一般课程会有多个时间开课，如果想要指定特定时间或特定老师的课程，则可在二级关键字后输入 ‘周一’ 或 ‘某某某老师’ 即可。Nocturnal 会首先检查一级关键字，如果一级关键字对应多个候选，那么会继续以二级关键字进行过滤，优先选择符合二级关键字的候选。但如果二级关键字过滤后没有可选课程，那么会返回一级关键字的候选列表，并随机选取一个候选作为最终选择。<strong>总而言之，Nocturnal 中的关键字列表并不是选课的唯一列表，而是一个优先列表，Nocturnal 会按关键字列表所给的优先顺序依照选取所有可选课程。</strong></p>
-<p><strong>注意：选课模式还未经过测试，选课完成后务必登录教务网检查已选课程。</strong></p>
-<p>具体流程如下：</p>
+<p>以上表格第一列爲命令的全稱，第二列爲命令的縮寫，輸入全稱與縮寫擁有同樣的效果。</p>
+<h3 id="軟件符號說明"><a href="#軟件符號說明" class="headerlink" title="軟件符號說明"></a>軟件符號說明</h3><p>Nocturnal 使用字符界面（TUI）進行交互，雙擊 <code>Nocturnal.exe</code> 打開軟件後可看到一個黑底白字的字符界面，這不是因爲軟件運行出錯，而是 Nocturnal 本來就是這樣的。現在你應該能在界面上看到一些表格，最上面的表格爲 Nocturnal 的基本信息，中間的表格爲使用幫助。在最下方你可以看到類似這樣的提示符 <code>[0] &gt;&gt;&gt;</code>，該提示符表明此時你可以輸入命令運行相關功能，<code>[0]</code> 中的數字表示後臺正在運行的任務數量。</p>
+<h3 id="成績抓取模式"><a href="#成績抓取模式" class="headerlink" title="成績抓取模式"></a>成績抓取模式</h3><p>在 <code>[0] &gt;&gt;&gt;</code> 後輸入 <code>grade</code> 或 <code>g</code> 回車即可運行成績抓取功能。第一次使用時會自動提示你輸入用戶名和密碼，也就是你的教務網學號和密碼。運行成功後不會有提示，但 Nocturnal 就會在後臺自動抓取成績，並在出新成績時自動通知。</p>
+<h3 id="選報告模式"><a href="#選報告模式" class="headerlink" title="選報告模式"></a>選報告模式</h3><p>在 <code>[0] &gt;&gt;&gt;</code> 後輸入 <code>report</code> 或 <code>r</code> 回車即可運行選報告模式，運行成功後 Nocturnal 會在後臺自動抓取報告列表，並在有新報告放出時自動選報告，並通過郵件通知你。</p>
+<h3 id="選課模式"><a href="#選課模式" class="headerlink" title="選課模式"></a>選課模式</h3><p>選課模式與成績抓取模式和選報告模式不同，選課模式需要在前臺運行。選課模式通過匹配關鍵字實現，針對每門課程可以添加多個關鍵字。比如你想要選 ‘高分子研究方法’ 這門課，則可以在一級關鍵字後輸入 ‘高分子研究方法’ 並回車。但一般課程會有多個時間開課，如果想要指定特定時間或特定老師的課程，則可在二級關鍵字後輸入 ‘週一’ 或 ‘某某某老師’ 即可。Nocturnal 會首先檢查一級關鍵字，如果一級關鍵字對應多個候選，那麼會繼續以二級關鍵字進行過濾，優先選擇符合二級關鍵字的候選。但如果二級關鍵字過濾後沒有可選課程，那麼會返回一級關鍵字的候選列表，並隨機選取一個候選作爲最終選擇。<strong>總而言之，Nocturnal 中的關鍵字列表並不是選課的唯一列表，而是一個優先列表，Nocturnal 會按關鍵字列表所給的優先順序依照選取所有可選課程。</strong></p>
+<p><strong>注意：選課模式還未經過測試，選課完成後務必登錄教務網檢查已選課程。</strong></p>
+<p>具體流程如下：</p>
 <ol>
-<li>输入 <code>a</code> 回车添加需要选的课程名称，输入 <code>a</code> 后提示如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[0] &gt;&gt;&gt; a</span><br><span class="line">please input 1th key</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<li>輸入 <code>a</code> 回車添加需要選的課程名稱，輸入 <code>a</code> 後提示如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[0] &gt;&gt;&gt; a</span><br><span class="line">please input 1th key</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p><code>&gt;</code> 表示此时你可输入一级关键字，一般我们会将课程名称作为一级关键字，如此时你可输入 ‘高分子研究方法’ 回车添加一个关键字，完成后程序会提示你输入二级关键字如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[0] &gt;&gt;&gt; a</span><br><span class="line">please input 1th key</span><br><span class="line">&gt; 高分子研究方法</span><br><span class="line">please input 2th key</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
-<p>此时你可直接输入回车来结束关键字的输入（在输入任一关键字时，你都可通过直接回车来结束输入），或者输入 ‘周六’ 回车作为想要上课的时间。</p>
-<p>重复以上步骤直至你输入了所有想要选的课程。</p>
+<p><code>&gt;</code> 表示此時你可輸入一級關鍵字，一般我們會將課程名稱作爲一級關鍵字，如此時你可輸入 ‘高分子研究方法’ 回車添加一個關鍵字，完成後程序會提示你輸入二級關鍵字如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[0] &gt;&gt;&gt; a</span><br><span class="line">please input 1th key</span><br><span class="line">&gt; 高分子研究方法</span><br><span class="line">please input 2th key</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
+<p>此時你可直接輸入回車來結束關鍵字的輸入（在輸入任一關鍵字時，你都可通過直接回車來結束輸入），或者輸入 ‘週六’ 回車作爲想要上課的時間。</p>
+<p>重複以上步驟直至你輸入了所有想要選的課程。</p>
 <ol>
-<li>输入 <code>l</code> 查看已经输入的课程列表</li>
-<li>输入 <code>d</code> 删除不想选的课程</li>
+<li>輸入 <code>l</code> 查看已經輸入的課程列表</li>
+<li>輸入 <code>d</code> 刪除不想選的課程</li>
 </ol>
-<h3 id="邮件通知"><a href="#邮件通知" class="headerlink" title="邮件通知"></a>邮件通知</h3><p>Nocturnal 目前只有通过邮箱一种方式对你进行通知，你可通过输入 <code>el</code> 来绑定邮箱，Nocturnal 会提示你一步一步进行操作。&lt;接收邮箱&gt;为你要接收通知的邮箱，建议使用 qq 邮箱，这样使用微信绑定 qq 邮箱后就可以的即时地收到邮件通知消息。&lt;发送邮箱&gt;可以使用任意邮箱，但发送邮箱需要输入密码。<smtp 主机地址=""> 为发送邮箱的主机地址，qq 邮箱对应的是 ‘smtp.qq.com’，163 邮箱对应 ‘smtp.163.com’，其他邮箱请自行百度。&lt;端口&gt; 默认值为 ‘25’（<strong>注意：使用端口 25 意味着不使用 SSL 加密，希望邮件加密的同学请自行百度</strong>）。每步输入过程中，提示符后括号中为原始值，如果你不希望更改原始值，直接回车即可。</smtp></p>
-<h2 id="更新日志"><a href="#更新日志" class="headerlink" title="更新日志"></a>更新日志</h2><h3 id="Date-2017-1-3"><a href="#Date-2017-1-3" class="headerlink" title="Date: 2017-1-3"></a>Date: 2017-1-3</h3><p><strong>Version: V4.0</strong></p>
+<h3 id="郵件通知"><a href="#郵件通知" class="headerlink" title="郵件通知"></a>郵件通知</h3><p>Nocturnal 目前只有通過郵箱一種方式對你進行通知，你可通過輸入 <code>el</code> 來綁定郵箱，Nocturnal 會提示你一步一步進行操作。&lt;接收郵箱&gt;爲你要接收通知的郵箱，建議使用 qq 郵箱，這樣使用微信綁定 qq 郵箱後就可以的即時地收到郵件通知消息。&lt;發送郵箱&gt;可以使用任意郵箱，但發送郵箱需要輸入密碼。<smtp 主機地址=""> 爲發送郵箱的主機地址，qq 郵箱對應的是 ‘smtp.qq.com’，163 郵箱對應 ‘smtp.163.com’，其他郵箱請自行百度。&lt;端口&gt; 默認值爲 ‘25’（<strong>注意：使用端口 25 意味着不使用 SSL 加密，希望郵件加密的同學請自行百度</strong>）。每步輸入過程中，提示符後括號中爲原始值，如果你不希望更改原始值，直接回車即可。</smtp></p>
+<h2 id="更新日誌"><a href="#更新日誌" class="headerlink" title="更新日誌"></a>更新日誌</h2><h3 id="Date-2017-1-3"><a href="#Date-2017-1-3" class="headerlink" title="Date: 2017-1-3"></a>Date: 2017-1-3</h3><p><strong>Version: V4.0</strong></p>
 <h3 id="Date-2017-12-15"><a href="#Date-2017-12-15" class="headerlink" title="Date: 2017-12-15"></a>Date: 2017-12-15</h3><p><strong>Version: V3.1</strong></p>
 <p>[bug fix]</p>
 <ul>
-<li>修复掉线后不能重新登录的问题</li>
-<li>修复达到最大重试次数后不会自动停止的问题</li>
+<li>修復掉線後不能重新登錄的問題</li>
+<li>修復達到最大重試次數後不會自動停止的問題</li>
 </ul>
 <p>[optimization]</p>
 <ul>
-<li>重新登录时清理内存</li>
-<li>简化代码结构</li>
-<li>新增等待时的动画效果</li>
-<li>完善自定义邮箱登录</li>
+<li>重新登錄時清理內存</li>
+<li>簡化代碼結構</li>
+<li>新增等待時的動畫效果</li>
+<li>完善自定義郵箱登錄</li>
 </ul>
 <h3 id="Date-2017-12-14"><a href="#Date-2017-12-14" class="headerlink" title="Date: 2017-12-14"></a>Date: 2017-12-14</h3><p><strong>Version: V3.0</strong></p>
 <p>[bug fix]</p>
 <ul>
-<li>修复选报告时的崩溃问题</li>
+<li>修復選報告時的崩潰問題</li>
 </ul>
 <p>[optimization]</p>
 <ul>
-<li>重磅更新！新增验证码自动识别，花了大力气才写出来，现在无需手动输入验证码登录</li>
-<li>更新了选报告的入口，优化了休眠逻辑</li>
-<li>命令行提示已汉化</li>
-<li>优化邮件提醒，现在只会发送最新选到的报告列表</li>
-<li>新增报告黑名单，选到的报告自动加入黑名单列表中，防止手动退了后又重复选上</li>
-<li>新增捐赠入口，希望大家多多支持！</li>
-<li>打包成安装文件，不用再手动解压</li>
+<li>重磅更新！新增驗證碼自動識別，花了大力氣才寫出來，現在無需手動輸入驗證碼登錄</li>
+<li>更新了選報告的入口，優化了休眠邏輯</li>
+<li>命令行提示已漢化</li>
+<li>優化郵件提醒，現在只會發送最新選到的報告列表</li>
+<li>新增報告黑名單，選到的報告自動加入黑名單列表中，防止手動退了後又重複選上</li>
+<li>新增捐贈入口，希望大家多多支持！</li>
+<li>打包成安裝文件，不用再手動解壓</li>
 </ul>
 
           
@@ -943,7 +1434,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2018/08/12/Vim-一款让我相见恨晚的编辑器/" itemprop="url">
-                  Vim- 一款让我相见恨晚的编辑器
+                  Vim- 一款讓我相見恨晚的編輯器
                 </a>
               
             
@@ -1013,61 +1504,61 @@
       
         
           
-            <h2 id="Vim-简介"><a href="#Vim-简介" class="headerlink" title="Vim 简介"></a>Vim 简介</h2><blockquote>
+            <h2 id="Vim-簡介"><a href="#Vim-簡介" class="headerlink" title="Vim 簡介"></a>Vim 簡介</h2><blockquote>
 <p><a href="https://github.com/vim/vim" title="Vim" target="_blank" rel="noopener">Vim</a> is a greatly improved version of the good old UNIX editor Vi. Many new features have been added: multi-level undo, syntax highlighting, command line history, on-line help, spell checking, filename completion, block operations, script language, etc. There is also a Graphical User Interface (GUI) available.</p>
 </blockquote>
-<p>以上关于 Vim 的描述来自 <a href="https://github.com/vim/vim" title="Vim" target="_blank" rel="noopener">Vim</a> 的官方 GitHub 仓库。Vim 是一款古老且强大的编辑器，从其诞生之日起到现在已经有二十多年的历史（比我的年龄都要大 orz）。很多人听说它的大名一般是因为它与 <a href="https://github.com/emacs-mirror/emacs" title="Emacs" target="_blank" rel="noopener">Emacs</a> 并称编辑器之神与神之编辑器。为什么会有这样的名号？除了它们的功能极其强大之外，还因为它们极其难以上手。以下图片为网友戏称的常用编辑器的学习曲线。</p>
-<img src="/2018/08/12/Vim-一款让我相见恨晚的编辑器/learning_curve.jpg" title="常用编辑器的学习曲线">
-<p>即便如此，Vim 和 <a href="https://github.com/emacs-mirror/emacs" title="Emacs" target="_blank" rel="noopener">Emacs</a> 仍流行到了现在，以至于后来经常能在各处看到的 Vimer（Vim 党）和 Emacser（Emacs 党）的编辑器之争，虽然有的时候可能只是类似于“php 是世界上最好的语言”之类的梗，但足以看出 Vim 确实非常强大，并且用上了就再也回不去了。</p>
-<h2 id="安装-Vim"><a href="#安装-Vim" class="headerlink" title="安装 Vim"></a>安装 Vim</h2><p>Vim 在所有的 Linux 发行版上都易于获得，只需要使用对应的包管理器进行安装即可，Windows 上也有编译好的二进制包，但实际在安装过程中仍会面临几个选择。</p>
-<p>以 Archlinux 为例，Archlinux 的官方仓库中包含的 Vim 在编译过程中并没有编译进 python、lua 等支持，导致很多插件无法使用，因此为了能使用上 Vim 的完全体，可以选择 Gvim。Gvim 是基于 Vim 的一个带有图形界面的版本，并在编译过程中包含进了所有可用组件。如果选择 Vim 分支，强烈建议使用 Gvim，并且使用 8.0 之后的版本。下载链接在<a href="https://github.com/vim/vim-win32-installer/releases" title="Vim Download" target="_blank" rel="noopener">此处</a>。</p>
-<p>另一个可供选择的版本是 Neovim，Neovim 是 Vim 的一个 fork 版本，比 Vim 具有更多的特性（Neovim 先首先支持的异步架构和内置 terminal，随后 Vim 也提供了支持），目前开发活跃，推荐进行尝试。下载链接在<a href="https://github.com/neovim/neovim/releases/" title="Neovim Download" target="_blank" rel="noopener">此处</a>。</p>
-<p>以上的所有版本在下文中都将统一称为 ‘Vim’（虽然事实上 Vim 与 Neovim 并不是同一个项目，但在配置和使用方法上是类似的）。无论安装哪个版本，安装完成后从应用启动菜单或命令行应该就能成功启动。恭喜你！此时已经完成了安装 Vim 的第一步，现在你看到的是一个黑底白字的字符界面。不过别着急，接下来我们会一步一步将 Vim 配置成称手的编辑器。</p>
-<h2 id="退出-Vim-使用-Vim-的第一大难题？"><a href="#退出-Vim-使用-Vim-的第一大难题？" class="headerlink" title="退出 Vim - 使用 Vim 的第一大难题？"></a>退出 Vim - 使用 Vim 的第一大难题？</h2><p>虽然客观上讲，退出 Vim 相较于 Vim 其他功能要容易的多，但是确实是第一次使用 Vim 会遇到的一个问题。相对于其他的编辑器，Vim 没有直观的退出方式，以至于在 Stack Overflow 上有个专门的问题（<a href="https://stackoverflow.com/questions/11828270/how-to-exit-the-vim-editor" title="How to exit vim" target="_blank" rel="noopener">见此处</a>）解答如何退出 Vim。甚至有了如下的梗：<br><img src="/2018/08/12/Vim-一款让我相见恨晚的编辑器/exit_vim.jpg" title="如何退出Vim"></p>
-<p>看来确实有必要对 Vim 的退出方式做个总结，之列出平常最常用的几种退出方式</p>
+<p>以上關於 Vim 的描述來自 <a href="https://github.com/vim/vim" title="Vim" target="_blank" rel="noopener">Vim</a> 的官方 GitHub 倉庫。Vim 是一款古老且強大的編輯器，從其誕生之日起到現在已經有二十多年的歷史（比我的年齡都要大 orz）。很多人聽說它的大名一般是因爲它與 <a href="https://github.com/emacs-mirror/emacs" title="Emacs" target="_blank" rel="noopener">Emacs</a> 並稱編輯器之神與神之編輯器。爲什麼會有這樣的名號？除了它們的功能極其強大之外，還因爲它們極其難以上手。以下圖片爲網友戲稱的常用編輯器的學習曲線。</p>
+<img src="/2018/08/12/Vim-一款让我相见恨晚的编辑器/learning_curve.jpg" title="常用編輯器的學習曲線">
+<p>即便如此，Vim 和 <a href="https://github.com/emacs-mirror/emacs" title="Emacs" target="_blank" rel="noopener">Emacs</a> 仍流行到了現在，以至於後來經常能在各處看到的 Vimer（Vim 黨）和 Emacser（Emacs 黨）的編輯器之爭，雖然有的時候可能只是類似於“php 是世界上最好的語言”之類的梗，但足以看出 Vim 確實非常強大，並且用上了就再也回不去了。</p>
+<h2 id="安裝-Vim"><a href="#安裝-Vim" class="headerlink" title="安裝 Vim"></a>安裝 Vim</h2><p>Vim 在所有的 Linux 發行版上都易於獲得，只需要使用對應的包管理器進行安裝即可，Windows 上也有編譯好的二進制包，但實際在安裝過程中仍會面臨幾個選擇。</p>
+<p>以 Archlinux 爲例，Archlinux 的官方倉庫中包含的 Vim 在編譯過程中並沒有編譯進 python、lua 等支持，導致很多插件無法使用，因此爲了能使用上 Vim 的完全體，可以選擇 Gvim。Gvim 是基於 Vim 的一個帶有圖形界面的版本，並在編譯過程中包含進了所有可用組件。如果選擇 Vim 分支，強烈建議使用 Gvim，並且使用 8.0 之後的版本。下載鏈接在<a href="https://github.com/vim/vim-win32-installer/releases" title="Vim Download" target="_blank" rel="noopener">此處</a>。</p>
+<p>另一個可供選擇的版本是 Neovim，Neovim 是 Vim 的一個 fork 版本，比 Vim 具有更多的特性（Neovim 先首先支持的異步架構和內置 terminal，隨後 Vim 也提供了支持），目前開發活躍，推薦進行嘗試。下載鏈接在<a href="https://github.com/neovim/neovim/releases/" title="Neovim Download" target="_blank" rel="noopener">此處</a>。</p>
+<p>以上的所有版本在下文中都將統一稱爲 ‘Vim’（雖然事實上 Vim 與 Neovim 並不是同一個項目，但在配置和使用方法上是類似的）。無論安裝哪個版本，安裝完成後從應用啓動菜單或命令行應該就能成功啓動。恭喜你！此時已經完成了安裝 Vim 的第一步，現在你看到的是一個黑底白字的字符界面。不過彆着急，接下來我們會一步一步將 Vim 配置成稱手的編輯器。</p>
+<h2 id="退出-Vim-使用-Vim-的第一大難題？"><a href="#退出-Vim-使用-Vim-的第一大難題？" class="headerlink" title="退出 Vim - 使用 Vim 的第一大難題？"></a>退出 Vim - 使用 Vim 的第一大難題？</h2><p>雖然客觀上講，退出 Vim 相較於 Vim 其他功能要容易的多，但是確實是第一次使用 Vim 會遇到的一個問題。相對於其他的編輯器，Vim 沒有直觀的退出方式，以至於在 Stack Overflow 上有個專門的問題（<a href="https://stackoverflow.com/questions/11828270/how-to-exit-the-vim-editor" title="How to exit vim" target="_blank" rel="noopener">見此處</a>）解答如何退出 Vim。甚至有了如下的梗：<br><img src="/2018/08/12/Vim-一款让我相见恨晚的编辑器/exit_vim.jpg" title="如何退出Vim"></p>
+<p>看來確實有必要對 Vim 的退出方式做個總結，之列出平常最常用的幾種退出方式</p>
 <ul>
 <li><code>:q</code> 正常退出</li>
-<li><code>:q!</code> 强制退出不保存</li>
-<li><code>:wq</code> 保存并退出</li>
-<li><code>:x</code> 保存并退出，与 <code>:wq</code> 不同之处在于如果文件未做修改则不更新时间戳</li>
-<li>强制关机</li>
+<li><code>:q!</code> 強制退出不保存</li>
+<li><code>:wq</code> 保存並退出</li>
+<li><code>:x</code> 保存並退出，與 <code>:wq</code> 不同之處在於如果文件未做修改則不更新時間戳</li>
+<li>強制關機</li>
 </ul>
-<h2 id="使用-Vim-前先看帮助文档"><a href="#使用-Vim-前先看帮助文档" class="headerlink" title="使用 Vim 前先看帮助文档"></a>使用 Vim 前先看帮助文档</h2><p>安装好 Vim 后，你可能想要马上尝试输入。但我强烈建议先阅读软件自带的帮助文档，一款优秀的软件都会带有一个详细的用户手册以及一个简要的使用说明，这有助于降低你在接触新软件时的痛苦感。你可以在 Vim 中随时通过输入 <code>:help&lt;CR&gt;</code>（<cr> 代表回车）来呼出帮助文档。</cr></p>
-<h2 id="配置-Vim-从-vimrc-开始"><a href="#配置-Vim-从-vimrc-开始" class="headerlink" title="配置 Vim - 从 .vimrc 开始"></a>配置 Vim - 从 .vimrc 开始</h2><p>由于 Vim 的流行，GitHub 上有各种各样现成的 ‘vimrc’（Vim 的配置文件）可供使用。对于不想自己折腾配置的用户来说，从 GitHub 上下载安装其他用户已经编辑好的 ‘vimrc’ 是最好的选择。甚至还有像 <a href="https://github.com/SpaceVim/SpaceVim" title="SpaceVim" target="_blank" rel="noopener">SpaceVim</a> 这样的模块化 Vim 配置可以一键安装使用，能大大减少配置所需的时间。</p>
-<p>另一些用户可能想要继续对 Vim 进行自定义配置，那么就需要对 ‘vimrc’ 进行修改。在 Linux 系统中，Gvim 与 Vim 的配置文件默认存放在 ‘$HOME/.vimrc’（Neovim 存放在 ‘$HOME/.config/nvim/init.vim’），Windows 下存放在 ‘$VIM/vimrc’。</p>
-<p>你可以选择自己新建一个文件从头开始。不过还是建议拷贝官方自带的配置示例，一方面可以省去一部分对常规配置的修改时间，另一方面，官方示例中对各配置语句对应有详细的注释。或者也可以选择从 GitHub 上寻找一个适合你的 ‘vimrc’，或者参考<a href="https://coding.net/u/cycoe/p/config/git/blob/master/init.vim" title="Cycoe 的 vimrc" target="_blank" rel="noopener">我的配置</a>。</p>
-<h3 id="常规配置"><a href="#常规配置" class="headerlink" title="常规配置"></a>常规配置</h3><p>在使用 Vim 之前，我们需要对其进行一些常规配置，来使它看起来更像一般的编辑器（以下步骤默认了你已经学会 Vim 的基本操作，包括移动光标、输入、模式切换等）。</p>
-<p>首先，通过输入 <code>:e $HOME/.vimrc&lt;CR&gt;</code> 打开配置文件（’$HOME/.vimrc’ 替换为你平台对应的配置文件路径）。这时，如果此前你已经拷贝了 Vim 的示例配置文件，或者是从网上下载安装了其他人的配置，那么你打开的文件里应该就有那些内容，如果此前还未做过配置，那么打开的就是一个空文件。</p>
-<p>接下来可以选择下面的配置中你需要的部分拷贝进你的 ‘vimrc’</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">" about vim setup</span></span><br><span class="line"><span class="keyword">set</span> nocompatible               <span class="comment">" disable compatible for vi</span></span><br><span class="line"><span class="keyword">set</span> <span class="keyword">shell</span>=/bin/bash            <span class="comment">" setup default shell</span></span><br><span class="line"><span class="keyword">set</span> shortmess=at               <span class="comment">" 启动时隐去援助提示</span></span><br><span class="line"><span class="keyword">set</span> mouse=<span class="keyword">a</span>                    <span class="comment">" active mouse control</span></span><br><span class="line"><span class="keyword">set</span> clipboard+=unnamed         <span class="comment">" support system clipboard</span></span><br><span class="line"><span class="keyword">let</span> mapleader=<span class="string">';'</span>              <span class="comment">" remap &lt;leader&gt;</span></span><br><span class="line"><span class="comment">" display setup</span></span><br><span class="line"><span class="keyword">set</span> relativenumber             <span class="comment">" display relative row number</span></span><br><span class="line"><span class="keyword">set</span> ruler                      <span class="comment">" 显示标尺，就是在右下角显示光标位置</span></span><br><span class="line"><span class="keyword">set</span> spell spelllang=en_us,cjk  <span class="comment">" Spell checking for English, escape Chinese</span></span><br><span class="line"><span class="keyword">set</span> langmenu=zh_CN.UTF-<span class="number">8</span></span><br><span class="line"><span class="keyword">set</span> helplang=<span class="keyword">cn</span>                <span class="comment">" 设置帮助文档为中文，需要 'yianwillis/vimcdoc'</span></span><br><span class="line"><span class="keyword">syntax</span> enable                  <span class="comment">" syntax highlight enable</span></span><br><span class="line"><span class="keyword">syntax</span> <span class="keyword">on</span>                      <span class="comment">" syntax highlight on</span></span><br><span class="line"><span class="keyword">set</span> background=dark            <span class="comment">" setup background color</span></span><br><span class="line"><span class="keyword">colorscheme</span> gruvbox            <span class="comment">" setup color scheme</span></span><br><span class="line"><span class="keyword">set</span> wildmenu                   <span class="comment">" select the candidates in interactive way</span></span><br><span class="line"><span class="keyword">set</span> backspace=<span class="built_in">indent</span>,eol,start <span class="comment">" more powerful backspacing</span></span><br><span class="line"><span class="keyword">set</span> cursorcolumn               <span class="comment">" 浅色高亮当前列</span></span><br><span class="line"><span class="keyword">set</span> cursorline                 <span class="comment">" 浅色高亮当前行</span></span><br><span class="line"><span class="keyword">set</span> novisualbell               <span class="comment">" 关闭视觉响铃</span></span><br><span class="line"><span class="keyword">set</span> laststatus=<span class="number">2</span>               <span class="comment">" 启动显示状态行</span></span><br><span class="line"><span class="keyword">set</span> showcmd                    <span class="comment">" show the command executed by shortcuts</span></span><br><span class="line"><span class="keyword">set</span> noshowmode                 <span class="comment">" don't show the mode status, avoid override argvs hint</span></span><br><span class="line"><span class="keyword">set</span> hlsearch                   <span class="comment">" highlight for searched results</span></span><br><span class="line"><span class="keyword">set</span> incsearch                  <span class="comment">" highlight for searching results</span></span><br><span class="line"><span class="keyword">set</span> showmatch                  <span class="comment">" show the match of brackets and Quotation mark</span></span><br><span class="line"><span class="keyword">set</span> ignorecase                 <span class="comment">" ignore case when searching and command completion</span></span><br><span class="line"><span class="keyword">set</span> gdefault                   <span class="comment">" default substitute in the whole line</span></span><br></pre></td></tr></table></figure>
-<p>其中，最重要的一条设置就是 <code>set nocompatible</code>，它的作用是关闭对 Vi 的兼容性。Vi 是一款更加古老的编辑器，可视作是 Vim 的前身。如果保留对 Vi 的兼容性也就意味着你放弃了很多 Vim 独有的特性。<code>set shell=/bin/bash</code> 显式地声明了 Vim 在运行脚本时调用的解释器，如果是 Windows 用户则需要去掉这行。</p>
-<p>此时保存配置文件并通过 <code>:so \$HOME/.vimrc&lt;CR&gt;</code> 重载配置后应该就能看到改变了。但此时你可能会注意到几条错误信息，不要紧张，这是因为我们在配置中引用了一些插件功能，但事实上我们现在还未安装插件，安装插件后你会看到错误就消失了。</p>
-<h3 id="安装插件管理器-管理插件的插件"><a href="#安装插件管理器-管理插件的插件" class="headerlink" title="安装插件管理器 - 管理插件的插件"></a>安装插件管理器 - 管理插件的插件</h3><p>Vim 有非常多的插件管理器可以使用，除去功能上的细微差异，我们可以将所有插件管理器分为异步型和同步型。可以简单地理解为异步型可以同时下载安装多个插件，而同步型一次只能处理一个。在 Vim 7.4 版本出来之前，插件管理器都是同步型的，包括大名鼎鼎的 Vundle。</p>
-<p>在我刚开始使用 Vim 的时候，Vim 和 Neovim 都已经支持异步架构，但由于当时查的是中文资料，很多都是非常老的文章。基本上所有文章都推荐使用 Vundle 作为插件管理器，事实上在你用过 vim-plug 之类的异步插件管理器后，你会无法再忍受 Vundle 的速度。这告诉我们技术型的文章还是要去 Google…</p>
-<p>不会有人再去使用 Vim 7.4 之前的版本了，所以这里我推荐使用 <a href="https://github.com/junegunn/vim-plug" title="vim-plug" target="_blank" rel="noopener">vim-plug</a> 作为插件管理器。vim-plug 的优点是异步下载安装、插件更新方便、支持插件按需加载，并且只包含一个文件。它的 <a href="https://github.com/junegunn/vim-plug" title="vim-plug" target="_blank" rel="noopener">GitHub 仓库</a>上有详细的安装教程。</p>
-<h3 id="安装插件-本体不够再打-mod"><a href="#安装插件-本体不够再打-mod" class="headerlink" title="安装插件 - 本体不够再打 mod"></a>安装插件 - 本体不够再打 mod</h3><p>虽然 Vim 并不是扩展性最好的编辑器，但它仍支持成千上万个插件。寻找插件最好的途径是 <a href="https://github.com" title="GitHub" target="_blank" rel="noopener">GitHub</a> 和 <a href="https://www.vim.org/scripts/" title="Vim Scripts" target="_blank" rel="noopener">Vim Scripts</a>。以下是我使用的插件列表：</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">g:python3_host_prog</span> = <span class="string">"/usr/bin/python3"</span></span><br><span class="line"><span class="keyword">call</span> plug#begin(<span class="string">'~/.vim/plugged'</span>)</span><br><span class="line">Plug <span class="string">'tomasr/molokai'</span>                                             <span class="comment">" molokai color scheme</span></span><br><span class="line">Plug <span class="string">'morhetz/gruvbox'</span>                                            <span class="comment">" gruvbox colorscheme theme</span></span><br><span class="line">Plug <span class="string">'mhinz/vim-startify'</span>                                         <span class="comment">" an awesome startup screen</span></span><br><span class="line">Plug <span class="string">'vim-scripts/fcitx.vim'</span>                                      <span class="comment">" auto switch fcitx status</span></span><br><span class="line">Plug <span class="string">'manu-mannattil/vim-sdcv'</span>                                    <span class="comment">" a simple dictionary for vim</span></span><br><span class="line">Plug <span class="string">'vim-airline/vim-airline'</span>                                    <span class="comment">" add status line</span></span><br><span class="line">Plug <span class="string">'scrooloose/nerdtree'</span>, &#123; <span class="string">'on'</span>: <span class="string">'NERDTreeToggle'</span> &#125;            <span class="comment">" directory tree</span></span><br><span class="line">Plug <span class="string">'majutsushi/tagbar'</span>, &#123; <span class="string">'on'</span>: <span class="string">'TagbarToggle'</span> &#125;                <span class="comment">" Class structure viewer, need ctags installed</span></span><br><span class="line">Plug <span class="string">'mbbill/undotree'</span>, &#123; <span class="string">'on'</span>: <span class="string">'UndotreeToggle'</span> &#125;                <span class="comment">" undo tree manager</span></span><br><span class="line">Plug <span class="string">'tpope/vim-fugitive'</span>                                         <span class="comment">" git support</span></span><br><span class="line">Plug <span class="string">'junegunn/gv.vim'</span>                                            <span class="comment">" view git commits in Vim</span></span><br><span class="line">Plug <span class="string">'junegunn/fzf'</span>, &#123; <span class="string">'dir'</span>: <span class="string">'~/.fzf'</span>, <span class="string">'do'</span>: <span class="string">'./install --all'</span> &#125; <span class="comment">" fuzzy file searcher</span></span><br><span class="line">Plug <span class="string">'junegunn/fzf.vim'</span>                                           <span class="comment">" provide many other search functions</span></span><br><span class="line">Plug <span class="string">'tpope/vim-commentary'</span>                                       <span class="comment">" a better comment tool</span></span><br><span class="line">Plug <span class="string">'vim-scripts/EasyMotion'</span>                                     <span class="comment">" enhance default motions</span></span><br><span class="line">Plug <span class="string">'Yggdroot/indentLine'</span>                                        <span class="comment">" indent line indicator</span></span><br><span class="line">Plug <span class="string">'jiangmiao/auto-pairs'</span>                                       <span class="comment">" auto add pairs</span></span><br><span class="line">Plug <span class="string">'junegunn/rainbow_parentheses.vim'</span>                           <span class="comment">" a much simpler-using fork of above</span></span><br><span class="line">Plug <span class="string">'junegunn/limelight.vim'</span>                                     <span class="comment">" dim others</span></span><br><span class="line">Plug <span class="string">'junegunn/goyo.vim'</span>                                          <span class="comment">" provide a dim writing environment</span></span><br><span class="line">Plug <span class="string">'w0rp/ale'</span>                                                   <span class="comment">" syntax error check</span></span><br><span class="line">Plug <span class="string">'Valloric/YouCompleteMe'</span>,                                    <span class="comment">" auto complete</span></span><br><span class="line">            \&#123; <span class="string">'do'</span>: <span class="string">'./install.py --clang-completer'</span> &#125;</span><br><span class="line">Plug <span class="string">'SirVer/ultisnips'</span>                                           <span class="comment">" auto complete string</span></span><br><span class="line">Plug <span class="string">'honza/vim-snippets'</span>                                         <span class="comment">" complete rules for ultisnips</span></span><br><span class="line">Plug <span class="string">'junegunn/vim-easy-align'</span>                                    <span class="comment">" align tool</span></span><br><span class="line">Plug <span class="string">'godlygeek/tabular'</span>                                          <span class="comment">" advanced align tool</span></span><br><span class="line">Plug <span class="string">'gabrielelana/vim-markdown'</span>, &#123; <span class="string">'for'</span>: <span class="string">'markdown'</span> &#125;           <span class="comment">" markdown plugin</span></span><br><span class="line">Plug <span class="string">'joker1007/vim-markdown-quote-syntax'</span>, &#123; <span class="string">'for'</span>: <span class="string">'markdown'</span> &#125; <span class="comment">" syntax highlight for quoted code</span></span><br><span class="line">Plug <span class="string">'iamcco/mathjax-support-for-mkdp'</span>, &#123; <span class="string">'for'</span>: <span class="string">'markdown'</span> &#125;     <span class="comment">" mathjax support for markdown preview</span></span><br><span class="line">Plug <span class="string">'iamcco/markdown-preview.vim'</span>, &#123; <span class="string">'for'</span>: <span class="string">'markdown'</span> &#125;         <span class="comment">" markdown preview support</span></span><br><span class="line">Plug <span class="string">'vim-scripts/indentpython.vim'</span>, &#123; <span class="string">'for'</span>: <span class="string">'python'</span> &#125;          <span class="comment">" auto indent for python</span></span><br><span class="line">Plug <span class="string">'nvie/vim-flake8'</span>, &#123; <span class="string">'for'</span>: <span class="string">'python'</span> &#125;                       <span class="comment">" flake8 style code check, need install flake8</span></span><br><span class="line"><span class="comment">" 这两个插件被 neoformat 替代了</span></span><br><span class="line"><span class="string">" Plug 'tell-k/vim-autopep8', &#123; 'for': 'python' &#125;                 "</span> <span class="keyword">a</span> <span class="keyword">python</span> code format tool wrapper <span class="keyword">for</span> autopep8</span><br><span class="line"><span class="string">" Plug 'fisadev/vim-isort', &#123; 'for': 'python' &#125;                   "</span> imports sorter <span class="keyword">for</span> <span class="keyword">python</span></span><br><span class="line">Plug <span class="string">'vim-latex/vim-latex'</span>, &#123; <span class="string">'for'</span>: <span class="string">'tex'</span> &#125;                      <span class="comment">" latex edit environment</span></span><br><span class="line">Plug <span class="string">'skywind3000/asyncrun.vim'</span>                                   <span class="comment">" AsyncRun plugin</span></span><br><span class="line">Plug <span class="string">'hotoo/pangu.vim'</span>                                            <span class="comment">" Chinese text format</span></span><br><span class="line">Plug <span class="string">'vimwiki/vimwiki'</span>                                            <span class="comment">" write wiki in vim</span></span><br><span class="line">Plug <span class="string">'yianwillis/vimcdoc'</span>                                         <span class="comment">" a Chinese help handbook for Vim</span></span><br><span class="line">Plug <span class="string">'sbdchd/neoformat'</span>                                           <span class="comment">" a collection of format tools</span></span><br><span class="line">Plug <span class="string">'ludovicchabant/vim-gutentags'</span>                               <span class="comment">" generate tags for project</span></span><br><span class="line">Plug <span class="string">'mhinz/vim-signify'</span>                                          <span class="comment">" show file modifying status for git</span></span><br><span class="line">Plug <span class="string">'Shougo/echodoc.vim'</span>                                         <span class="comment">" show argvs hint on the command line</span></span><br><span class="line"><span class="string">"======================"</span></span><br><span class="line"><span class="string">"  text object 全家桶  "</span></span><br><span class="line"><span class="string">"======================"</span></span><br><span class="line">Plug <span class="string">'kana/vim-textobj-user'</span>                                            <span class="comment">" 用户自定义 text object</span></span><br><span class="line">Plug <span class="string">'kana/vim-textobj-indent'</span>                                          <span class="comment">" 缩进对象，关键字 &lt;i&gt;</span></span><br><span class="line">Plug <span class="string">'kana/vim-textobj-syntax'</span>                                          <span class="comment">" 语法对象</span></span><br><span class="line">Plug <span class="string">'kana/vim-textobj-function'</span>, &#123; <span class="string">'for'</span>:[<span class="string">'c'</span>, <span class="string">'cpp'</span>, <span class="string">'vim'</span>, <span class="string">'java'</span>] &#125; <span class="comment">" 函数对象，关键字 &lt;f&gt;</span></span><br><span class="line">Plug <span class="string">'sgur/vim-textobj-parameter'</span>                                       <span class="comment">" 参数对象，关键字 &lt;,&gt;</span></span><br><span class="line">Plug <span class="string">'coderifous/textobj-word-column.vim'</span>                               <span class="comment">" 列对象，关键字 &lt;c&gt;</span></span><br><span class="line">Plug <span class="string">'bps/vim-textobj-python'</span>                                           <span class="comment">" python 对象合集，&lt;c&gt; 类，&lt;f&gt; 函数</span></span><br><span class="line">Plug <span class="string">'tpope/vim-surround'</span>                                               <span class="comment">" deal with surround for text object</span></span><br><span class="line"><span class="keyword">call</span> plug#end()</span><br><span class="line"><span class="keyword">filetype</span> plugin <span class="built_in">indent</span> <span class="keyword">on</span></span><br></pre></td></tr></table></figure>
-<p>由于 vim-plug 的强大，我们只需要将上述配置粘贴进 vimrc 中，重载配置文件后运行 <code>:PlugInstall&lt;CR&gt;</code> 就会自动安装所有插件，甚至 vim-plug 会帮我们做好安装后的处理。</p>
-<h3 id="必装插件配置-大大提高生产力"><a href="#必装插件配置-大大提高生产力" class="headerlink" title="必装插件配置 - 大大提高生产力"></a>必装插件配置 - 大大提高生产力</h3><p>通过 vim-plug 安装的插件大部分都是即装即用的，但也包括小部分需要在安装完成后进行一定的配置才能舒适地使用。</p>
-<h4 id="YouCompleteMe-最强补全神器"><a href="#YouCompleteMe-最强补全神器" class="headerlink" title="YouCompleteMe - 最强补全神器"></a>YouCompleteMe - 最强补全神器</h4><p><a href="https://github.com/Valloric/YouCompleteMe" title="YouCompleteMe" target="_blank" rel="noopener">YouCompleteMe</a> 是谷歌程序员 Valloric 开发的一款智能补全插件。在 YouCompleteMe 出来之前，大部分补全插件都是基于 tag 分析，也就是从当前文件以及其他 buffer 中的文件文本中匹配类似字符串进行补全，说白了就是靠猜。而 YouCompleteMe 是真正支持程序语义分析的补全，能够理解程序语言进行补全，准确率大大提高，并且体验也提升了很多。</p>
-<p>盗用 YouCompleteMe 官方仓库上的一张效果图</p>
-<p><img src="https://camo.githubusercontent.com/1f3f922431d5363224b20e99467ff28b04e810e2/687474703a2f2f692e696d6775722e636f6d2f304f50346f6f642e676966" alt="YouCompleteMe 效果图" title="YouCompleteMe 效果图（来自 YouCompleteMe 官方仓库）"></p>
-<p>虽然 YouCompleteMe 效果看起来很炫酷，但它也被称为“最难安装的插件”。它的底层是用 C++ 写成的，为了能作为 Vim 的插件，外层又用 Python 做了封装，因此它也是最复杂的插件。<code>Plug &#39;Valloric/YouCompleteMe&#39;, { &#39;do&#39;: &#39;./install.py --clang-completer&#39; }</code> 命令要求 vim-plug 将 YouCompleteMe 插件下载下来后自动编译，但如果你的终端上缺少编译的依赖会导致编译失败，此时我们需要手动进行编译。</p>
-<p>在 Linux 下进行安装会相对比较容易，在编译之前你需要但不限于以下工具：</p>
+<h2 id="使用-Vim-前先看幫助文檔"><a href="#使用-Vim-前先看幫助文檔" class="headerlink" title="使用 Vim 前先看幫助文檔"></a>使用 Vim 前先看幫助文檔</h2><p>安裝好 Vim 後，你可能想要馬上嘗試輸入。但我強烈建議先閱讀軟件自帶的幫助文檔，一款優秀的軟件都會帶有一個詳細的用戶手冊以及一個簡要的使用說明，這有助於降低你在接觸新軟件時的痛苦感。你可以在 Vim 中隨時通過輸入 <code>:help&lt;CR&gt;</code>（<cr> 代表回車）來呼出幫助文檔。</cr></p>
+<h2 id="配置-Vim-從-vimrc-開始"><a href="#配置-Vim-從-vimrc-開始" class="headerlink" title="配置 Vim - 從 .vimrc 開始"></a>配置 Vim - 從 .vimrc 開始</h2><p>由於 Vim 的流行，GitHub 上有各種各樣現成的 ‘vimrc’（Vim 的配置文件）可供使用。對於不想自己折騰配置的用戶來說，從 GitHub 上下載安裝其他用戶已經編輯好的 ‘vimrc’ 是最好的選擇。甚至還有像 <a href="https://github.com/SpaceVim/SpaceVim" title="SpaceVim" target="_blank" rel="noopener">SpaceVim</a> 這樣的模塊化 Vim 配置可以一鍵安裝使用，能大大減少配置所需的時間。</p>
+<p>另一些用戶可能想要繼續對 Vim 進行自定義配置，那麼就需要對 ‘vimrc’ 進行修改。在 Linux 系統中，Gvim 與 Vim 的配置文件默認存放在 ‘$HOME/.vimrc’（Neovim 存放在 ‘$HOME/.config/nvim/init.vim’），Windows 下存放在 ‘$VIM/vimrc’。</p>
+<p>你可以選擇自己新建一個文件從頭開始。不過還是建議拷貝官方自帶的配置示例，一方面可以省去一部分對常規配置的修改時間，另一方面，官方示例中對各配置語句對應有詳細的註釋。或者也可以選擇從 GitHub 上尋找一個適合你的 ‘vimrc’，或者參考<a href="https://coding.net/u/cycoe/p/config/git/blob/master/init.vim" title="Cycoe 的 vimrc" target="_blank" rel="noopener">我的配置</a>。</p>
+<h3 id="常規配置"><a href="#常規配置" class="headerlink" title="常規配置"></a>常規配置</h3><p>在使用 Vim 之前，我們需要對其進行一些常規配置，來使它看起來更像一般的編輯器（以下步驟默認了你已經學會 Vim 的基本操作，包括移動光標、輸入、模式切換等）。</p>
+<p>首先，通過輸入 <code>:e $HOME/.vimrc&lt;CR&gt;</code> 打開配置文件（’$HOME/.vimrc’ 替換爲你平臺對應的配置文件路徑）。這時，如果此前你已經拷貝了 Vim 的示例配置文件，或者是從網上下載安裝了其他人的配置，那麼你打開的文件裏應該就有那些內容，如果此前還未做過配置，那麼打開的就是一個空文件。</p>
+<p>接下來可以選擇下面的配置中你需要的部分拷貝進你的 ‘vimrc’</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">" about vim setup</span></span><br><span class="line"><span class="keyword">set</span> nocompatible               <span class="comment">" disable compatible for vi</span></span><br><span class="line"><span class="keyword">set</span> <span class="keyword">shell</span>=/bin/bash            <span class="comment">" setup default shell</span></span><br><span class="line"><span class="keyword">set</span> shortmess=at               <span class="comment">" 啓動時隱去援助提示</span></span><br><span class="line"><span class="keyword">set</span> mouse=<span class="keyword">a</span>                    <span class="comment">" active mouse control</span></span><br><span class="line"><span class="keyword">set</span> clipboard+=unnamed         <span class="comment">" support system clipboard</span></span><br><span class="line"><span class="keyword">let</span> mapleader=<span class="string">';'</span>              <span class="comment">" remap &lt;leader&gt;</span></span><br><span class="line"><span class="comment">" display setup</span></span><br><span class="line"><span class="keyword">set</span> relativenumber             <span class="comment">" display relative row number</span></span><br><span class="line"><span class="keyword">set</span> ruler                      <span class="comment">" 顯示標尺，就是在右下角顯示光標位置</span></span><br><span class="line"><span class="keyword">set</span> spell spelllang=en_us,cjk  <span class="comment">" Spell checking for English, escape Chinese</span></span><br><span class="line"><span class="keyword">set</span> langmenu=zh_CN.UTF-<span class="number">8</span></span><br><span class="line"><span class="keyword">set</span> helplang=<span class="keyword">cn</span>                <span class="comment">" 設置幫助文檔爲中文，需要 'yianwillis/vimcdoc'</span></span><br><span class="line"><span class="keyword">syntax</span> enable                  <span class="comment">" syntax highlight enable</span></span><br><span class="line"><span class="keyword">syntax</span> <span class="keyword">on</span>                      <span class="comment">" syntax highlight on</span></span><br><span class="line"><span class="keyword">set</span> background=dark            <span class="comment">" setup background color</span></span><br><span class="line"><span class="keyword">colorscheme</span> gruvbox            <span class="comment">" setup color scheme</span></span><br><span class="line"><span class="keyword">set</span> wildmenu                   <span class="comment">" select the candidates in interactive way</span></span><br><span class="line"><span class="keyword">set</span> backspace=<span class="built_in">indent</span>,eol,start <span class="comment">" more powerful backspacing</span></span><br><span class="line"><span class="keyword">set</span> cursorcolumn               <span class="comment">" 淺色高亮當前列</span></span><br><span class="line"><span class="keyword">set</span> cursorline                 <span class="comment">" 淺色高亮當前行</span></span><br><span class="line"><span class="keyword">set</span> novisualbell               <span class="comment">" 關閉視覺響鈴</span></span><br><span class="line"><span class="keyword">set</span> laststatus=<span class="number">2</span>               <span class="comment">" 啓動顯示狀態行</span></span><br><span class="line"><span class="keyword">set</span> showcmd                    <span class="comment">" show the command executed by shortcuts</span></span><br><span class="line"><span class="keyword">set</span> noshowmode                 <span class="comment">" don't show the mode status, avoid override argvs hint</span></span><br><span class="line"><span class="keyword">set</span> hlsearch                   <span class="comment">" highlight for searched results</span></span><br><span class="line"><span class="keyword">set</span> incsearch                  <span class="comment">" highlight for searching results</span></span><br><span class="line"><span class="keyword">set</span> showmatch                  <span class="comment">" show the match of brackets and Quotation mark</span></span><br><span class="line"><span class="keyword">set</span> ignorecase                 <span class="comment">" ignore case when searching and command completion</span></span><br><span class="line"><span class="keyword">set</span> gdefault                   <span class="comment">" default substitute in the whole line</span></span><br></pre></td></tr></table></figure>
+<p>其中，最重要的一條設置就是 <code>set nocompatible</code>，它的作用是關閉對 Vi 的兼容性。Vi 是一款更加古老的編輯器，可視作是 Vim 的前身。如果保留對 Vi 的兼容性也就意味着你放棄了很多 Vim 獨有的特性。<code>set shell=/bin/bash</code> 顯式地聲明瞭 Vim 在運行腳本時調用的解釋器，如果是 Windows 用戶則需要去掉這行。</p>
+<p>此時保存配置文件並通過 <code>:so \$HOME/.vimrc&lt;CR&gt;</code> 重載配置後應該就能看到改變了。但此時你可能會注意到幾條錯誤信息，不要緊張，這是因爲我們在配置中引用了一些插件功能，但事實上我們現在還未安裝插件，安裝插件後你會看到錯誤就消失了。</p>
+<h3 id="安裝插件管理器-管理插件的插件"><a href="#安裝插件管理器-管理插件的插件" class="headerlink" title="安裝插件管理器 - 管理插件的插件"></a>安裝插件管理器 - 管理插件的插件</h3><p>Vim 有非常多的插件管理器可以使用，除去功能上的細微差異，我們可以將所有插件管理器分爲異步型和同步型。可以簡單地理解爲異步型可以同時下載安裝多個插件，而同步型一次只能處理一個。在 Vim 7.4 版本出來之前，插件管理器都是同步型的，包括大名鼎鼎的 Vundle。</p>
+<p>在我剛開始使用 Vim 的時候，Vim 和 Neovim 都已經支持異步架構，但由於當時查的是中文資料，很多都是非常老的文章。基本上所有文章都推薦使用 Vundle 作爲插件管理器，事實上在你用過 vim-plug 之類的異步插件管理器後，你會無法再忍受 Vundle 的速度。這告訴我們技術型的文章還是要去 Google…</p>
+<p>不會有人再去使用 Vim 7.4 之前的版本了，所以這裏我推薦使用 <a href="https://github.com/junegunn/vim-plug" title="vim-plug" target="_blank" rel="noopener">vim-plug</a> 作爲插件管理器。vim-plug 的優點是異步下載安裝、插件更新方便、支持插件按需加載，並且只包含一個文件。它的 <a href="https://github.com/junegunn/vim-plug" title="vim-plug" target="_blank" rel="noopener">GitHub 倉庫</a>上有詳細的安裝教程。</p>
+<h3 id="安裝插件-本體不夠再打-mod"><a href="#安裝插件-本體不夠再打-mod" class="headerlink" title="安裝插件 - 本體不夠再打 mod"></a>安裝插件 - 本體不夠再打 mod</h3><p>雖然 Vim 並不是擴展性最好的編輯器，但它仍支持成千上萬個插件。尋找插件最好的途徑是 <a href="https://github.com" title="GitHub" target="_blank" rel="noopener">GitHub</a> 和 <a href="https://www.vim.org/scripts/" title="Vim Scripts" target="_blank" rel="noopener">Vim Scripts</a>。以下是我使用的插件列表：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">g:python3_host_prog</span> = <span class="string">"/usr/bin/python3"</span></span><br><span class="line"><span class="keyword">call</span> plug#begin(<span class="string">'~/.vim/plugged'</span>)</span><br><span class="line">Plug <span class="string">'tomasr/molokai'</span>                                             <span class="comment">" molokai color scheme</span></span><br><span class="line">Plug <span class="string">'morhetz/gruvbox'</span>                                            <span class="comment">" gruvbox colorscheme theme</span></span><br><span class="line">Plug <span class="string">'mhinz/vim-startify'</span>                                         <span class="comment">" an awesome startup screen</span></span><br><span class="line">Plug <span class="string">'vim-scripts/fcitx.vim'</span>                                      <span class="comment">" auto switch fcitx status</span></span><br><span class="line">Plug <span class="string">'manu-mannattil/vim-sdcv'</span>                                    <span class="comment">" a simple dictionary for vim</span></span><br><span class="line">Plug <span class="string">'vim-airline/vim-airline'</span>                                    <span class="comment">" add status line</span></span><br><span class="line">Plug <span class="string">'scrooloose/nerdtree'</span>, &#123; <span class="string">'on'</span>: <span class="string">'NERDTreeToggle'</span> &#125;            <span class="comment">" directory tree</span></span><br><span class="line">Plug <span class="string">'majutsushi/tagbar'</span>, &#123; <span class="string">'on'</span>: <span class="string">'TagbarToggle'</span> &#125;                <span class="comment">" Class structure viewer, need ctags installed</span></span><br><span class="line">Plug <span class="string">'mbbill/undotree'</span>, &#123; <span class="string">'on'</span>: <span class="string">'UndotreeToggle'</span> &#125;                <span class="comment">" undo tree manager</span></span><br><span class="line">Plug <span class="string">'tpope/vim-fugitive'</span>                                         <span class="comment">" git support</span></span><br><span class="line">Plug <span class="string">'junegunn/gv.vim'</span>                                            <span class="comment">" view git commits in Vim</span></span><br><span class="line">Plug <span class="string">'junegunn/fzf'</span>, &#123; <span class="string">'dir'</span>: <span class="string">'~/.fzf'</span>, <span class="string">'do'</span>: <span class="string">'./install --all'</span> &#125; <span class="comment">" fuzzy file searcher</span></span><br><span class="line">Plug <span class="string">'junegunn/fzf.vim'</span>                                           <span class="comment">" provide many other search functions</span></span><br><span class="line">Plug <span class="string">'tpope/vim-commentary'</span>                                       <span class="comment">" a better comment tool</span></span><br><span class="line">Plug <span class="string">'vim-scripts/EasyMotion'</span>                                     <span class="comment">" enhance default motions</span></span><br><span class="line">Plug <span class="string">'Yggdroot/indentLine'</span>                                        <span class="comment">" indent line indicator</span></span><br><span class="line">Plug <span class="string">'jiangmiao/auto-pairs'</span>                                       <span class="comment">" auto add pairs</span></span><br><span class="line">Plug <span class="string">'junegunn/rainbow_parentheses.vim'</span>                           <span class="comment">" a much simpler-using fork of above</span></span><br><span class="line">Plug <span class="string">'junegunn/limelight.vim'</span>                                     <span class="comment">" dim others</span></span><br><span class="line">Plug <span class="string">'junegunn/goyo.vim'</span>                                          <span class="comment">" provide a dim writing environment</span></span><br><span class="line">Plug <span class="string">'w0rp/ale'</span>                                                   <span class="comment">" syntax error check</span></span><br><span class="line">Plug <span class="string">'Valloric/YouCompleteMe'</span>,                                    <span class="comment">" auto complete</span></span><br><span class="line">            \&#123; <span class="string">'do'</span>: <span class="string">'./install.py --clang-completer'</span> &#125;</span><br><span class="line">Plug <span class="string">'SirVer/ultisnips'</span>                                           <span class="comment">" auto complete string</span></span><br><span class="line">Plug <span class="string">'honza/vim-snippets'</span>                                         <span class="comment">" complete rules for ultisnips</span></span><br><span class="line">Plug <span class="string">'junegunn/vim-easy-align'</span>                                    <span class="comment">" align tool</span></span><br><span class="line">Plug <span class="string">'godlygeek/tabular'</span>                                          <span class="comment">" advanced align tool</span></span><br><span class="line">Plug <span class="string">'gabrielelana/vim-markdown'</span>, &#123; <span class="string">'for'</span>: <span class="string">'markdown'</span> &#125;           <span class="comment">" markdown plugin</span></span><br><span class="line">Plug <span class="string">'joker1007/vim-markdown-quote-syntax'</span>, &#123; <span class="string">'for'</span>: <span class="string">'markdown'</span> &#125; <span class="comment">" syntax highlight for quoted code</span></span><br><span class="line">Plug <span class="string">'iamcco/mathjax-support-for-mkdp'</span>, &#123; <span class="string">'for'</span>: <span class="string">'markdown'</span> &#125;     <span class="comment">" mathjax support for markdown preview</span></span><br><span class="line">Plug <span class="string">'iamcco/markdown-preview.vim'</span>, &#123; <span class="string">'for'</span>: <span class="string">'markdown'</span> &#125;         <span class="comment">" markdown preview support</span></span><br><span class="line">Plug <span class="string">'vim-scripts/indentpython.vim'</span>, &#123; <span class="string">'for'</span>: <span class="string">'python'</span> &#125;          <span class="comment">" auto indent for python</span></span><br><span class="line">Plug <span class="string">'nvie/vim-flake8'</span>, &#123; <span class="string">'for'</span>: <span class="string">'python'</span> &#125;                       <span class="comment">" flake8 style code check, need install flake8</span></span><br><span class="line"><span class="comment">" 這兩個插件被 neoformat 替代了</span></span><br><span class="line"><span class="string">" Plug 'tell-k/vim-autopep8', &#123; 'for': 'python' &#125;                 "</span> <span class="keyword">a</span> <span class="keyword">python</span> code format tool wrapper <span class="keyword">for</span> autopep8</span><br><span class="line"><span class="string">" Plug 'fisadev/vim-isort', &#123; 'for': 'python' &#125;                   "</span> imports sorter <span class="keyword">for</span> <span class="keyword">python</span></span><br><span class="line">Plug <span class="string">'vim-latex/vim-latex'</span>, &#123; <span class="string">'for'</span>: <span class="string">'tex'</span> &#125;                      <span class="comment">" latex edit environment</span></span><br><span class="line">Plug <span class="string">'skywind3000/asyncrun.vim'</span>                                   <span class="comment">" AsyncRun plugin</span></span><br><span class="line">Plug <span class="string">'hotoo/pangu.vim'</span>                                            <span class="comment">" Chinese text format</span></span><br><span class="line">Plug <span class="string">'vimwiki/vimwiki'</span>                                            <span class="comment">" write wiki in vim</span></span><br><span class="line">Plug <span class="string">'yianwillis/vimcdoc'</span>                                         <span class="comment">" a Chinese help handbook for Vim</span></span><br><span class="line">Plug <span class="string">'sbdchd/neoformat'</span>                                           <span class="comment">" a collection of format tools</span></span><br><span class="line">Plug <span class="string">'ludovicchabant/vim-gutentags'</span>                               <span class="comment">" generate tags for project</span></span><br><span class="line">Plug <span class="string">'mhinz/vim-signify'</span>                                          <span class="comment">" show file modifying status for git</span></span><br><span class="line">Plug <span class="string">'Shougo/echodoc.vim'</span>                                         <span class="comment">" show argvs hint on the command line</span></span><br><span class="line"><span class="string">"======================"</span></span><br><span class="line"><span class="string">"  text object 全家桶  "</span></span><br><span class="line"><span class="string">"======================"</span></span><br><span class="line">Plug <span class="string">'kana/vim-textobj-user'</span>                                            <span class="comment">" 用戶自定義 text object</span></span><br><span class="line">Plug <span class="string">'kana/vim-textobj-indent'</span>                                          <span class="comment">" 縮進對象，關鍵字 &lt;i&gt;</span></span><br><span class="line">Plug <span class="string">'kana/vim-textobj-syntax'</span>                                          <span class="comment">" 語法對象</span></span><br><span class="line">Plug <span class="string">'kana/vim-textobj-function'</span>, &#123; <span class="string">'for'</span>:[<span class="string">'c'</span>, <span class="string">'cpp'</span>, <span class="string">'vim'</span>, <span class="string">'java'</span>] &#125; <span class="comment">" 函數對象，關鍵字 &lt;f&gt;</span></span><br><span class="line">Plug <span class="string">'sgur/vim-textobj-parameter'</span>                                       <span class="comment">" 參數對象，關鍵字 &lt;,&gt;</span></span><br><span class="line">Plug <span class="string">'coderifous/textobj-word-column.vim'</span>                               <span class="comment">" 列對象，關鍵字 &lt;c&gt;</span></span><br><span class="line">Plug <span class="string">'bps/vim-textobj-python'</span>                                           <span class="comment">" python 對象合集，&lt;c&gt; 類，&lt;f&gt; 函數</span></span><br><span class="line">Plug <span class="string">'tpope/vim-surround'</span>                                               <span class="comment">" deal with surround for text object</span></span><br><span class="line"><span class="keyword">call</span> plug#end()</span><br><span class="line"><span class="keyword">filetype</span> plugin <span class="built_in">indent</span> <span class="keyword">on</span></span><br></pre></td></tr></table></figure>
+<p>由於 vim-plug 的強大，我們只需要將上述配置粘貼進 vimrc 中，重載配置文件後運行 <code>:PlugInstall&lt;CR&gt;</code> 就會自動安裝所有插件，甚至 vim-plug 會幫我們做好安裝後的處理。</p>
+<h3 id="必裝插件配置-大大提高生產力"><a href="#必裝插件配置-大大提高生產力" class="headerlink" title="必裝插件配置 - 大大提高生產力"></a>必裝插件配置 - 大大提高生產力</h3><p>通過 vim-plug 安裝的插件大部分都是即裝即用的，但也包括小部分需要在安裝完成後進行一定的配置才能舒適地使用。</p>
+<h4 id="YouCompleteMe-最強補全神器"><a href="#YouCompleteMe-最強補全神器" class="headerlink" title="YouCompleteMe - 最強補全神器"></a>YouCompleteMe - 最強補全神器</h4><p><a href="https://github.com/Valloric/YouCompleteMe" title="YouCompleteMe" target="_blank" rel="noopener">YouCompleteMe</a> 是谷歌程序員 Valloric 開發的一款智能補全插件。在 YouCompleteMe 出來之前，大部分補全插件都是基於 tag 分析，也就是從當前文件以及其他 buffer 中的文件文本中匹配類似字符串進行補全，說白了就是靠猜。而 YouCompleteMe 是真正支持程序語義分析的補全，能夠理解程序語言進行補全，準確率大大提高，並且體驗也提升了很多。</p>
+<p>盜用 YouCompleteMe 官方倉庫上的一張效果圖</p>
+<p><img src="https://camo.githubusercontent.com/1f3f922431d5363224b20e99467ff28b04e810e2/687474703a2f2f692e696d6775722e636f6d2f304f50346f6f642e676966" alt="YouCompleteMe 效果圖" title="YouCompleteMe 效果圖（來自 YouCompleteMe 官方倉庫）"></p>
+<p>雖然 YouCompleteMe 效果看起來很炫酷，但它也被稱爲“最難安裝的插件”。它的底層是用 C++ 寫成的，爲了能作爲 Vim 的插件，外層又用 Python 做了封裝，因此它也是最複雜的插件。<code>Plug &#39;Valloric/YouCompleteMe&#39;, { &#39;do&#39;: &#39;./install.py --clang-completer&#39; }</code> 命令要求 vim-plug 將 YouCompleteMe 插件下載下來後自動編譯，但如果你的終端上缺少編譯的依賴會導致編譯失敗，此時我們需要手動進行編譯。</p>
+<p>在 Linux 下進行安裝會相對比較容易，在編譯之前你需要但不限於以下工具：</p>
 <ul>
 <li>cmake</li>
 <li>automake</li>
 <li>python3-dev（python2 或 python3）</li>
 </ul>
-<p>之后运行 <code>cd ~/.vim/plugged/YouCompleteMe/</code> 进入 YouCompleteMe 的安装目录，运行 <code>./install.py --clang-completer</code> 进行安装，如果不需要 C 语言补全支持的话无需 <code>--clang-completer</code> 选项。安装程序会自动下载 libclang 依赖，等待安装完成即可。Windows 的安装过程大部分相似，可参考 YouCompleteMe 的官方仓库文档。</p>
-<p>再次使用 Vim 打开一个 Python 或 cpp 文件应该就能自动补全了。但接下来你会发现 YouCompleteMe 弹出的补全菜单里只会包括前面你输入过的关键字，并没有进行语义识别，那不是和自带的 omni 补全没区别！还浪费我这么长时间安装！其实之前我也是这么想的，直到有一天我看到<a href="https://zhuanlan.zhihu.com/p/33046090" title="YouCompleteMe 中容易忽略的配置" target="_blank" rel="noopener">这篇文章</a>，我才发现原来我一直用的是半残的 YouCompleteMe，根本没发挥出它真正的实力。通过如下配置就能使 YouCompleteMe 的补全策略更贴近于常见的 IDE。</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> completeopt=longest,<span class="keyword">menu</span>                                <span class="comment">" YCM 的提示方式，previews 会显示具体预览窗口，menu 不提示</span></span><br><span class="line"><span class="comment">" let g:ycm_add_preview_to_completeopt = 0</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_collect_identifiers_from_tags_files</span>=<span class="number">1</span>             <span class="comment">" 使用 ctags 生成的 tags 文件</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_min_num_of_chars_for_completion</span>=<span class="number">2</span>                 <span class="comment">" 从第 2 个键入字符就开始罗列匹配项</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_seed_identifiers_with_syntax</span>=<span class="number">1</span>                    <span class="comment">" 语法关键字补全</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_cache_omnifunc</span>=<span class="number">1</span>                                  <span class="comment">" 禁止缓存匹配项,每次都重新生成匹配项</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_complete_in_comments</span> = <span class="number">1</span>                          <span class="comment">" 在注释输入中也能补全</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_complete_in_strings</span> = <span class="number">1</span>                           <span class="comment">" 在字符串输入中也能补全</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_collect_identifiers_from_comments_and_strings</span> = <span class="number">1</span> <span class="comment">" 注释和字符串中的文字也会被收入补全</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_python_binary_path</span> = <span class="string">'/usr/bin/python'</span>            <span class="comment">" set default python binary</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_global_ycm_extra_conf</span> = <span class="string">'~/.ycm_extra_conf.py'</span>    <span class="comment">" set global ycm extra config path</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_confirm_extra_conf</span> = <span class="number">0</span>                            <span class="comment">" confirm for config file</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_use_ultisnips_completer</span>=<span class="number">1</span>                         <span class="comment">" 查询 ultisnips 提供的代码模板补全</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_key_invoke_completion</span> = <span class="string">'&lt;c-z&gt;'</span>                   <span class="comment">" 手动触发补全的按键</span></span><br><span class="line"><span class="comment">" 使 YCM 能在输入两个字母的时候自动基于语义补全</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_semantic_triggers</span> =  &#123;</span><br><span class="line">			\ <span class="string">'c,cpp,python,java,go,erlang,perl'</span>: [<span class="string">'re!\w&#123;2&#125;'</span>],</span><br><span class="line">			\ <span class="string">'cs,lua,javascript'</span>: [<span class="string">'re!\w&#123;2&#125;'</span>],</span><br><span class="line">			\ &#125;</span><br><span class="line"><span class="keyword">nnoremap</span> <span class="symbol">&lt;leader&gt;</span>d :YcmCompleter GoToDefinitionElseDeclaration<span class="symbol">&lt;CR&gt;</span> <span class="comment">" goto definition</span></span><br><span class="line"><span class="keyword">autocmd</span> InsertLeave * <span class="keyword">if</span> <span class="built_in">pumvisible</span>() == <span class="number">0</span>|<span class="keyword">pclose</span>|<span class="keyword">endif</span>            <span class="comment">" 离开插入模式后自动关闭预览窗口</span></span><br><span class="line"><span class="keyword">autocmd</span> VimEnter * EchoDocEnable</span><br></pre></td></tr></table></figure>
-<h4 id="ALE-第二好的异步语法检查工具"><a href="#ALE-第二好的异步语法检查工具" class="headerlink" title="ALE - 第二好的异步语法检查工具"></a>ALE - 第二好的异步语法检查工具</h4><p><a href="https://github.com/w0rp/ale" title="ALE 官方仓库" target="_blank" rel="noopener">ALE</a> 是一款非常强大的异步语法检查工具。在 Vim 支持异步之前，最好的语法检查工具是 <a href="https://github.com/vim-syntastic/syntastic" title="Syntastic 官方仓库" target="_blank" rel="noopener">Syntastic</a>，但由于它非异步的工作方式，导致语法检查会阻塞主线程，使用体验比较差。在新版 Vim 中，都会推荐 ALE 或其他支持异步的语法检查工具。事实上 ALE 并不仅仅是一款语法检查工具，它是包括了语法检查、代码风格格式化、自动补全功能的工具集。</p>
-<p>ALE 安装完成后，随意打开一个代码文件。如果语法存在错误，那么在窗口的最左侧会显示一列符号，包括 ‘&gt;&gt;’ 或 ‘—‘。将光标移至有标记的行，在最下方的 statusline 中会显示错误的具体信息。</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">" let g:ale_set_loclist = 0           "</span> show the lint <span class="keyword">as</span> <span class="keyword">a</span> dot <span class="keyword">on</span> <span class="keyword">left</span> of <span class="keyword">a</span> <span class="built_in">line</span></span><br><span class="line"><span class="string">" let g:ale_set_quickfix = 1          "</span> show the lint in quickfix <span class="keyword">list</span></span><br><span class="line"><span class="string">" let g:ale_open_list = 1             "</span> show quickfix window <span class="keyword">to</span> show error message</span><br><span class="line"><span class="string">" let g:ale_keep_list_window_open = 1 "</span> keep quickfix window show whether errors exist</span><br><span class="line"><span class="string">" let g:ale_sign_column_always = 1    "</span> 保持左侧边栏始终可见</span><br><span class="line"><span class="keyword">nmap</span> <span class="symbol">&lt;silent&gt;</span> <span class="symbol">&lt;C-k&gt;</span> <span class="symbol">&lt;Plug&gt;</span>(ale_previous_wrap)</span><br><span class="line"><span class="keyword">nmap</span> <span class="symbol">&lt;silent&gt;</span> <span class="symbol">&lt;C-j&gt;</span> <span class="symbol">&lt;Plug&gt;</span>(ale_next_wrap)</span><br><span class="line"><span class="comment">" Check Python files with flake8 and pylint.</span></span><br><span class="line"><span class="comment">" let b:ale_linters = ['flake8', 'pylint']</span></span><br><span class="line"><span class="comment">" set fixers for different file types</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">b:ale_fixers</span> = &#123;</span><br><span class="line">            \ <span class="string">'python'</span>: [<span class="string">'isort'</span>, <span class="string">'autopep8'</span>],</span><br><span class="line">            \ <span class="string">'cpp'</span>: [<span class="string">'clang-format'</span>],</span><br><span class="line">            \ <span class="string">'markdown'</span>: [<span class="string">'prettier'</span>]&#125;</span><br><span class="line"><span class="comment">" let g:ale_linters_explicit = 1</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ale_completion_delay</span> = <span class="number">500</span>                     <span class="comment">" 补全的延迟</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ale_echo_delay</span> = <span class="number">20</span>                            <span class="comment">" 回显的延迟</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ale_lint_delay</span> = <span class="number">500</span>                           <span class="comment">" 停止输入后更新 lint 标记的延迟</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ale_echo_msg_format</span> = <span class="string">'[%linter%] &lt;%code&gt; %%s'</span> <span class="comment">" 自定义 lint 输出格式</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ale_lint_on_text_changed</span> = <span class="string">'normal'</span>            <span class="comment">" 当文字在 NORMAL 模式下发生更改的时候更新 lint，防止 YCM 频繁刷新</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ale_lint_on_insert_leave</span> = <span class="number">1</span>                   <span class="comment">" 离开 INSERT 模式时更新 lint</span></span><br></pre></td></tr></table></figure>
-<p>将错误信息表示在左侧只是一种方式，你也可以通过反注释前 4 行，利用 Vim 自带的 quickfix 窗口显示错误信息。虽然通过这种方式你能够更清晰的了解各个错误的具体信息，但需要占用一部分宝贵的屏幕空间。</p>
-<p>11 至 14 行设置了 ALE 的默认格式化工具，ALE 本身并不对代码进行格式化，而是针对不同文件类型调用合适的格式化工具进行处理（ALE 支持的格式化工具列表可参照<a href="https://github.com/w0rp/ale" title="ALE 官方仓库" target="_blank" rel="noopener">官方仓库</a>）。其中 <code>isort</code>、<code>autopep8</code>、<code>prettier</code> 都是 Python 编写的命令行工具，<code>clang-format</code> 是 <code>clang</code> 编译器带的 C++ 格式化工具。</p>
-<p>20、21 行是针对 YCM 做的额外配置，据悉可以解决 YCM 补全菜单频繁刷新的问题。</p>
+<p>之後運行 <code>cd ~/.vim/plugged/YouCompleteMe/</code> 進入 YouCompleteMe 的安裝目錄，運行 <code>./install.py --clang-completer</code> 進行安裝，如果不需要 C 語言補全支持的話無需 <code>--clang-completer</code> 選項。安裝程序會自動下載 libclang 依賴，等待安裝完成即可。Windows 的安裝過程大部分相似，可參考 YouCompleteMe 的官方倉庫文檔。</p>
+<p>再次使用 Vim 打開一個 Python 或 cpp 文件應該就能自動補全了。但接下來你會發現 YouCompleteMe 彈出的補全菜單裏只會包括前面你輸入過的關鍵字，並沒有進行語義識別，那不是和自帶的 omni 補全沒區別！還浪費我這麼長時間安裝！其實之前我也是這麼想的，直到有一天我看到<a href="https://zhuanlan.zhihu.com/p/33046090" title="YouCompleteMe 中容易忽略的配置" target="_blank" rel="noopener">這篇文章</a>，我才發現原來我一直用的是半殘的 YouCompleteMe，根本沒發揮出它真正的實力。通過如下配置就能使 YouCompleteMe 的補全策略更貼近於常見的 IDE。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> completeopt=longest,<span class="keyword">menu</span>                                <span class="comment">" YCM 的提示方式，previews 會顯示具體預覽窗口，menu 不提示</span></span><br><span class="line"><span class="comment">" let g:ycm_add_preview_to_completeopt = 0</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_collect_identifiers_from_tags_files</span>=<span class="number">1</span>             <span class="comment">" 使用 ctags 生成的 tags 文件</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_min_num_of_chars_for_completion</span>=<span class="number">2</span>                 <span class="comment">" 從第 2 個鍵入字符就開始羅列匹配項</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_seed_identifiers_with_syntax</span>=<span class="number">1</span>                    <span class="comment">" 語法關鍵字補全</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_cache_omnifunc</span>=<span class="number">1</span>                                  <span class="comment">" 禁止緩存匹配項,每次都重新生成匹配項</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_complete_in_comments</span> = <span class="number">1</span>                          <span class="comment">" 在註釋輸入中也能補全</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_complete_in_strings</span> = <span class="number">1</span>                           <span class="comment">" 在字符串輸入中也能補全</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_collect_identifiers_from_comments_and_strings</span> = <span class="number">1</span> <span class="comment">" 註釋和字符串中的文字也會被收入補全</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_python_binary_path</span> = <span class="string">'/usr/bin/python'</span>            <span class="comment">" set default python binary</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_global_ycm_extra_conf</span> = <span class="string">'~/.ycm_extra_conf.py'</span>    <span class="comment">" set global ycm extra config path</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_confirm_extra_conf</span> = <span class="number">0</span>                            <span class="comment">" confirm for config file</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_use_ultisnips_completer</span>=<span class="number">1</span>                         <span class="comment">" 查詢 ultisnips 提供的代碼模板補全</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_key_invoke_completion</span> = <span class="string">'&lt;c-z&gt;'</span>                   <span class="comment">" 手動觸發補全的按鍵</span></span><br><span class="line"><span class="comment">" 使 YCM 能在輸入兩個字母的時候自動基於語義補全</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ycm_semantic_triggers</span> =  &#123;</span><br><span class="line">			\ <span class="string">'c,cpp,python,java,go,erlang,perl'</span>: [<span class="string">'re!\w&#123;2&#125;'</span>],</span><br><span class="line">			\ <span class="string">'cs,lua,javascript'</span>: [<span class="string">'re!\w&#123;2&#125;'</span>],</span><br><span class="line">			\ &#125;</span><br><span class="line"><span class="keyword">nnoremap</span> <span class="symbol">&lt;leader&gt;</span>d :YcmCompleter GoToDefinitionElseDeclaration<span class="symbol">&lt;CR&gt;</span> <span class="comment">" goto definition</span></span><br><span class="line"><span class="keyword">autocmd</span> InsertLeave * <span class="keyword">if</span> <span class="built_in">pumvisible</span>() == <span class="number">0</span>|<span class="keyword">pclose</span>|<span class="keyword">endif</span>            <span class="comment">" 離開插入模式後自動關閉預覽窗口</span></span><br><span class="line"><span class="keyword">autocmd</span> VimEnter * EchoDocEnable</span><br></pre></td></tr></table></figure>
+<h4 id="ALE-第二好的異步語法檢查工具"><a href="#ALE-第二好的異步語法檢查工具" class="headerlink" title="ALE - 第二好的異步語法檢查工具"></a>ALE - 第二好的異步語法檢查工具</h4><p><a href="https://github.com/w0rp/ale" title="ALE 官方倉庫" target="_blank" rel="noopener">ALE</a> 是一款非常強大的異步語法檢查工具。在 Vim 支持異步之前，最好的語法檢查工具是 <a href="https://github.com/vim-syntastic/syntastic" title="Syntastic 官方倉庫" target="_blank" rel="noopener">Syntastic</a>，但由於它非異步的工作方式，導致語法檢查會阻塞主線程，使用體驗比較差。在新版 Vim 中，都會推薦 ALE 或其他支持異步的語法檢查工具。事實上 ALE 並不僅僅是一款語法檢查工具，它是包括了語法檢查、代碼風格格式化、自動補全功能的工具集。</p>
+<p>ALE 安裝完成後，隨意打開一個代碼文件。如果語法存在錯誤，那麼在窗口的最左側會顯示一列符號，包括 ‘&gt;&gt;’ 或 ‘—‘。將光標移至有標記的行，在最下方的 statusline 中會顯示錯誤的具體信息。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">" let g:ale_set_loclist = 0           "</span> show the lint <span class="keyword">as</span> <span class="keyword">a</span> dot <span class="keyword">on</span> <span class="keyword">left</span> of <span class="keyword">a</span> <span class="built_in">line</span></span><br><span class="line"><span class="string">" let g:ale_set_quickfix = 1          "</span> show the lint in quickfix <span class="keyword">list</span></span><br><span class="line"><span class="string">" let g:ale_open_list = 1             "</span> show quickfix window <span class="keyword">to</span> show error message</span><br><span class="line"><span class="string">" let g:ale_keep_list_window_open = 1 "</span> keep quickfix window show whether errors exist</span><br><span class="line"><span class="string">" let g:ale_sign_column_always = 1    "</span> 保持左側邊欄始終可見</span><br><span class="line"><span class="keyword">nmap</span> <span class="symbol">&lt;silent&gt;</span> <span class="symbol">&lt;C-k&gt;</span> <span class="symbol">&lt;Plug&gt;</span>(ale_previous_wrap)</span><br><span class="line"><span class="keyword">nmap</span> <span class="symbol">&lt;silent&gt;</span> <span class="symbol">&lt;C-j&gt;</span> <span class="symbol">&lt;Plug&gt;</span>(ale_next_wrap)</span><br><span class="line"><span class="comment">" Check Python files with flake8 and pylint.</span></span><br><span class="line"><span class="comment">" let b:ale_linters = ['flake8', 'pylint']</span></span><br><span class="line"><span class="comment">" set fixers for different file types</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">b:ale_fixers</span> = &#123;</span><br><span class="line">            \ <span class="string">'python'</span>: [<span class="string">'isort'</span>, <span class="string">'autopep8'</span>],</span><br><span class="line">            \ <span class="string">'cpp'</span>: [<span class="string">'clang-format'</span>],</span><br><span class="line">            \ <span class="string">'markdown'</span>: [<span class="string">'prettier'</span>]&#125;</span><br><span class="line"><span class="comment">" let g:ale_linters_explicit = 1</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ale_completion_delay</span> = <span class="number">500</span>                     <span class="comment">" 補全的延遲</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ale_echo_delay</span> = <span class="number">20</span>                            <span class="comment">" 回顯的延遲</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ale_lint_delay</span> = <span class="number">500</span>                           <span class="comment">" 停止輸入後更新 lint 標記的延遲</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ale_echo_msg_format</span> = <span class="string">'[%linter%] &lt;%code&gt; %%s'</span> <span class="comment">" 自定義 lint 輸出格式</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ale_lint_on_text_changed</span> = <span class="string">'normal'</span>            <span class="comment">" 當文字在 NORMAL 模式下發生更改的時候更新 lint，防止 YCM 頻繁刷新</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:ale_lint_on_insert_leave</span> = <span class="number">1</span>                   <span class="comment">" 離開 INSERT 模式時更新 lint</span></span><br></pre></td></tr></table></figure>
+<p>將錯誤信息表示在左側只是一種方式，你也可以通過反註釋前 4 行，利用 Vim 自帶的 quickfix 窗口顯示錯誤信息。雖然通過這種方式你能夠更清晰的瞭解各個錯誤的具體信息，但需要佔用一部分寶貴的屏幕空間。</p>
+<p>11 至 14 行設置了 ALE 的默認格式化工具，ALE 本身並不對代碼進行格式化，而是針對不同文件類型調用合適的格式化工具進行處理（ALE 支持的格式化工具列表可參照<a href="https://github.com/w0rp/ale" title="ALE 官方倉庫" target="_blank" rel="noopener">官方倉庫</a>）。其中 <code>isort</code>、<code>autopep8</code>、<code>prettier</code> 都是 Python 編寫的命令行工具，<code>clang-format</code> 是 <code>clang</code> 編譯器帶的 C++ 格式化工具。</p>
+<p>20、21 行是針對 YCM 做的額外配置，據悉可以解決 YCM 補全菜單頻繁刷新的問題。</p>
 <!--links-->
 
           
@@ -1212,7 +1703,7 @@
       
         
           
-            <p>Pandoc 是一个强大的文档格式转换软件，可以对 html、markdown、ppt、doc、pdf 等多种格式进行相互转换，但在将 markdown 文件转换为 pdf 文件的过程中，发现会出现中文编码的问题，因此需要使用如下命令指定渲染的引擎 <code>pandoc -f markdown_github my.md -o my.pdf --pdf-engine=xelatex -V mainfont=&quot;Your Font&quot;</code></p>
+            <p>Pandoc 是一個強大的文檔格式轉換軟件，可以對 html、markdown、ppt、doc、pdf 等多種格式進行相互轉換，但在將 markdown 文件轉換爲 pdf 文件的過程中，發現會出現中文編碼的問題，因此需要使用如下命令指定渲染的引擎 <code>pandoc -f markdown_github my.md -o my.pdf --pdf-engine=xelatex -V mainfont=&quot;Your Font&quot;</code></p>
 
           
         
@@ -1397,38 +1888,38 @@
 </ul>
 </li>
 </ul>
-<h2 id="開始寫博客"><a href="#開始寫博客" class="headerlink" title="開始寫博客"></a>開始寫博客</h2><p>可以选择 typora 或者其他的 Markdown 编辑器进行编辑，此处我选择了 vim 进行文件编辑。要想要 vim 支持 Markdown 的语法高亮需要以下几个插件</p>
+<h2 id="開始寫博客"><a href="#開始寫博客" class="headerlink" title="開始寫博客"></a>開始寫博客</h2><p>可以選擇 typora 或者其他的 Markdown 編輯器進行編輯，此處我選擇了 vim 進行文件編輯。要想要 vim 支持 Markdown 的語法高亮需要以下幾個插件</p>
 <ul>
 <li>Plugin ‘godlygeek/tabular’</li>
 <li>Plugin ‘gabrielelana/vim-markdown’</li>
 </ul>
-<h2 id="部署博客"><a href="#部署博客" class="headerlink" title="部署博客"></a>部署博客</h2><p>hexo 可以用 <code>$ hexo d -g</code> 命令方便的对博客系统进行部署，但首先需要在博客配置文件 <code>_config.yml</code>  的 Deployment 节中做配置<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span> <span class="comment"># 此处是部署的方式</span></span><br><span class="line"><span class="attr">  repo:</span>     <span class="comment"># 此处是所有需要部署的仓库，仓库的设置与 Jekyll 类似</span></span><br><span class="line"><span class="attr">      coding:</span> <span class="string">git@git.coding.net:cycoe/cycoe.git</span></span><br></pre></td></tr></table></figure></p>
-<p>然后在 <a href="https://coding.net" title="Coding" target="_blank" rel="noopener">Coding</a> 上新建一个名为 cycoe 的空仓库（由于  <a href="https://coding.net" title="Coding" target="_blank" rel="noopener">Coding</a> 本身的限制，该仓库应与用户名同名），在本机的博客根目录运行 <code>hexo d -g</code> 即可将博客部署至 <a href="https://coding.net" title="Coding" target="_blank" rel="noopener">Coding</a>。然后打开仓库设置，将此仓库设置为 Coding Pages 即可。</p>
-<h2 id="2018-06-05-更新"><a href="#2018-06-05-更新" class="headerlink" title="2018-06-05 更新"></a>2018-06-05 更新</h2><p>最近 <a href="https://coding.net" title="Coding" target="_blank" rel="noopener">Coding</a> 不知是怎么了，我的博客总是打不开。凑巧最近刚租了个包月的服务器，于是决定将整个博客迁移到自己的服务器上。</p>
-<p><a href="https://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 和 Jekyll 博客系统的部署原理不太一样，<code>$ hexo g</code> 是 <code>$ hexo generate</code> 的缩写，其原理是在本地使用 Hexo 引擎将 <code>_posts</code> 目录的 Markdown 文件生成网页结构，结果保存在 <code>public</code> 目录下，可直接由 Apache 或 Nginx 驱动。</p>
-<img src="/2018/04/14/Spawn-your-blog-site-with-hexo/html_dir.png" title="网页目录结构">
-<p>而 <code>$ hexo deploy</code> 正是将 public 目录下的网页部署到 Git 仓库中。因此如果能将仓库克隆到服务器上进行部署，那么问题就能解决。</p>
-<h3 id="在服务器上建立-Git-仓库"><a href="#在服务器上建立-Git-仓库" class="headerlink" title="在服务器上建立 Git 仓库"></a>在服务器上建立 Git 仓库</h3><h4 id="初始化-Git-仓库"><a href="#初始化-Git-仓库" class="headerlink" title="初始化 Git 仓库"></a>初始化 Git 仓库</h4><p><code>$ sudo git init --bare sample.git</code></p>
-<p>Git 就会创建一个裸仓库，即会在当前路径下创建一个名为 <code>sample.git</code> 的仓库。裸仓库没有工作区，因为服务器上的 Git 仓库纯粹是为了共享，所以不让用户直接登录到服务器上去改工作区，并且服务器上的 Git 仓库通常都以 <code>.git</code> 结尾。然后，把 owner 改为服务器的用户名，不然没有权限将修改写入该仓库。</p>
+<h2 id="部署博客"><a href="#部署博客" class="headerlink" title="部署博客"></a>部署博客</h2><p>hexo 可以用 <code>$ hexo d -g</code> 命令方便的對博客系統進行部署，但首先需要在博客配置文件 <code>_config.yml</code>  的 Deployment 節中做配置<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span> <span class="comment"># 此處是部署的方式</span></span><br><span class="line"><span class="attr">  repo:</span>     <span class="comment"># 此處是所有需要部署的倉庫，倉庫的設置與 Jekyll 類似</span></span><br><span class="line"><span class="attr">      coding:</span> <span class="string">git@git.coding.net:cycoe/cycoe.git</span></span><br></pre></td></tr></table></figure></p>
+<p>然後在 <a href="https://coding.net" title="Coding" target="_blank" rel="noopener">Coding</a> 上新建一個名爲 cycoe 的空倉庫（由於  <a href="https://coding.net" title="Coding" target="_blank" rel="noopener">Coding</a> 本身的限制，該倉庫應與用戶名同名），在本機的博客根目錄運行 <code>hexo d -g</code> 即可將博客部署至 <a href="https://coding.net" title="Coding" target="_blank" rel="noopener">Coding</a>。然後打開倉庫設置，將此倉庫設置爲 Coding Pages 即可。</p>
+<h2 id="2018-06-05-更新"><a href="#2018-06-05-更新" class="headerlink" title="2018-06-05 更新"></a>2018-06-05 更新</h2><p>最近 <a href="https://coding.net" title="Coding" target="_blank" rel="noopener">Coding</a> 不知是怎麼了，我的博客總是打不開。湊巧最近剛租了個包月的服務器，於是決定將整個博客遷移到自己的服務器上。</p>
+<p><a href="https://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 和 Jekyll 博客系統的部署原理不太一樣，<code>$ hexo g</code> 是 <code>$ hexo generate</code> 的縮寫，其原理是在本地使用 Hexo 引擎將 <code>_posts</code> 目錄的 Markdown 文件生成網頁結構，結果保存在 <code>public</code> 目錄下，可直接由 Apache 或 Nginx 驅動。</p>
+<img src="/2018/04/14/Spawn-your-blog-site-with-hexo/html_dir.png" title="網頁目錄結構">
+<p>而 <code>$ hexo deploy</code> 正是將 public 目錄下的網頁部署到 Git 倉庫中。因此如果能將倉庫克隆到服務器上進行部署，那麼問題就能解決。</p>
+<h3 id="在服務器上建立-Git-倉庫"><a href="#在服務器上建立-Git-倉庫" class="headerlink" title="在服務器上建立 Git 倉庫"></a>在服務器上建立 Git 倉庫</h3><h4 id="初始化-Git-倉庫"><a href="#初始化-Git-倉庫" class="headerlink" title="初始化 Git 倉庫"></a>初始化 Git 倉庫</h4><p><code>$ sudo git init --bare sample.git</code></p>
+<p>Git 就會創建一個裸倉庫，即會在當前路徑下創建一個名爲 <code>sample.git</code> 的倉庫。裸倉庫沒有工作區，因爲服務器上的 Git 倉庫純粹是爲了共享，所以不讓用戶直接登錄到服務器上去改工作區，並且服務器上的 Git 倉庫通常都以 <code>.git</code> 結尾。然後，把 owner 改爲服務器的用戶名，不然沒有權限將修改寫入該倉庫。</p>
 <p><code>$ sudo chown -R ubuntu:ubuntu sample.git</code></p>
-<h4 id="将仓库加到-Hexo-的配置文件"><a href="#将仓库加到-Hexo-的配置文件" class="headerlink" title="将仓库加到 Hexo 的配置文件"></a>将仓库加到 Hexo 的配置文件</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repo:</span></span><br><span class="line">    <span class="comment">#coding: git@git.coding.net:cycoe/cycoe.git</span></span><br><span class="line"><span class="attr">    my_server:</span> <span class="string">ubuntu@139.199.95.151:/home/ubuntu/git/blog.git</span></span><br></pre></td></tr></table></figure>
-<p>此处 @ 前的用户名一定要与服务器仓库的权限对应，: 后面是仓库的绝对路径。</p>
-<h4 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h4><p>此时运行 <code>$ hexo d- g</code> 即可将博客网页目录部署到仓库，但此时查看仓库会发现目录下并不是网页的结构，因为这个仓库是裸仓库，下面并没有工作区，所以看到的并不是我们 Push 上来的内容。</p>
-<h4 id="Git-Hook-事件"><a href="#Git-Hook-事件" class="headerlink" title="Git Hook 事件"></a>Git Hook 事件</h4><p>事实上，如果我们此时将该仓库克隆到另一个目录下就可以看到工作区了。首先 <code>cd</code> 到需要保存网页的路径下 <code>$ cd /home/ubuntu/www/</code>，然后运行 <code>$ git clone /home/ubuntu/git/blog.git</code> 将仓库克隆至当前路径。</p>
-<p>但是如果每次都要登上服务器手动克隆就违背我们自动化部署的初衷了。因此此处需要用到 Git 自带的 Hook 功能，简单来将讲就是在仓库发生变化前/后所要执行的操作。</p>
-<p>Hook 的事件放在裸仓库目录的 hooks 文件夹下，这里我们新建一个名为 <code>post-receive</code> 的事件，该事件是在仓库更新合并完成后自动运行，文件中加入如下内容</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">cd</span> /home/ubuntu/www/blog  <span class="comment"># cd 到网页的展示仓库</span></span><br><span class="line"><span class="built_in">unset</span> GIT_DIR  <span class="comment"># 非常重要！如果不解绑 GIT_DIR 环境变量无法切换路径</span></span><br><span class="line">git config --list</span><br><span class="line">git pull origin master</span><br></pre></td></tr></table></figure>
-<p>运行 <code>$ chmod +x post-receive</code> 赋予执行权限</p>
-<p>此时再在本机运行 <code>$ hexo d -g</code> 发现网页目录也自动更新了</p>
-<h2 id="2018-08-18-更新"><a href="#2018-08-18-更新" class="headerlink" title="2018-08-18 更新"></a>2018-08-18 更新</h2><p>今天写了一篇博客，运行 <code>$ hexo d -g</code> 想要更新博客，结果发现网页并没有变化。登上服务器一看 <code>/home/ubuntu/git/blog.git</code> 仓库已经更新了，怀疑是更新后没有成功运行 <code>post-receive</code>。但是自从上次设置好 <code>post-receive</code> 后就没有改过，按理说应该能够运行。运行 <code>$ ls -l</code> 命令后发现，<code>/home/ubuntu/git/blog.git</code> 目录的归属者是 <code>ubuntu</code>，而 <code>/home/ubuntu/www/blog</code> 目录的归属者是 <code>nginx</code>，应该是上次我在设置 nginx 的时候不小心把 <code>/home/ubuntu/www</code> 目录递归修改成归属 <code>nginx</code> 了。而 <code>post-receive</code> 所做的工作实际上是在我把更新 push 到 <code>/home/ubuntu/git/blog.git</code> 仓库后，<code>cd</code> 到了 <code>/home/ubuntu/www/blog</code> 目录并拉取更新。因此我是以 <code>ubuntu</code> 用户的身份做的 push，又是以 <code>ubuntu</code> 用户的身份运行的 <code>post-receive</code>，因此在 <code>/home/ubuntu/www/blog</code> 目录中是没有权限拉取更新的。</p>
-<p>既然已经发现了问题出在用户权限上。那就可以通过运行 <code>$ sudo chown -R ubuntu:users /home/ubuntu/www</code> 将整个目录都改为 <code>ubuntu</code> 所属，也就不关 <code>nginx</code> 用户什么事了，这样确实非常方便的解决了这个问题。另外 <code>post-receive</code> 在更改用户归属后执行权限丢失了，记得运行 <code>$ chmod +x post-receive</code> 重新赋予执行权限。事实上当初建立 <code>nginx</code> 用户也是因为安装了 nginx 服务，想要弄得更规范些。但因为懒一直没给 <code>nginx</code> 建立自己的 Home 目录，按理说把跟 nginx 相关的目录都扔到 <code>nginx</code> 用户对应的 Home 下是最好的。</p>
-<h2 id="2018-10-24-更新"><a href="#2018-10-24-更新" class="headerlink" title="2018-10-24 更新"></a>2018-10-24 更新</h2><p>最近写的新博客中需要开启 LaTeX 公式支持，但 hexo 本身对数学公式的支持有些问题，Hexo 默认使用 “hexo-renderer-marked” 引擎渲染网页，该引擎会把一些特殊的 markdown 符号转换为相应的 html 标签，比如在 markdown 语法中，下划线 ‘_’ 代表斜体，会被渲染引擎处理为 <em> 标签。</em></p>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>更换 Hexo 的 markdown 渲染引擎，使用 ‘hexo-renderer-kramed’ 引擎替代 ‘hexo-renderer-marked’ 引擎，前者在后者的基础上修复了一些 bug。执行以下命令卸载原引擎并安装新引擎。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-renderer-marked --save</span><br><span class="line">npm install hexo-renderer-kramed --save</span><br></pre></td></tr></table></figure></p>
-<p>此时行间公式应该就可以正常渲染了，但行内公式还是有问题。接下来在博客根目录中，找到 <code>node_modules\kramed\lib\rules\inline.js</code>，修改 11 行的 escape 变量的值。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  escape: /^\\([\\`*&#123;&#125;\[\]()#$+\-.!_&gt;])/,</span></span><br><span class="line"><span class="built_in">escape</span>: <span class="regexp">/^\\([`*\[\]()#$+\-.!_&gt;])/</span>,</span><br></pre></td></tr></table></figure></p>
-<p>这一步是在原基础上取消了对 ‘\, {, }’ 的转义(escape)。同时把第 20 行的 em 变量也要做相应的修改。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  em: /^\b_((?:__|[\s\S])+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,</span></span><br><span class="line">em: <span class="regexp">/^\*((?:\*\*|[\s\S])+?)\*(?!\*)/</span>,</span><br></pre></td></tr></table></figure></p>
-<p>然后运行 <code>hexo clean</code> 清除构建，再 generate 即可解决问题。</p>
-<h3 id="在主题中开启-mathjax-开关"><a href="#在主题中开启-mathjax-开关" class="headerlink" title="在主题中开启 mathjax 开关"></a>在主题中开启 mathjax 开关</h3><p>打开 <code>themes/next/_config.yml</code>，将 math 的 enable 设为 true，将 per_page 设为 true，表示针对每页单独决定是否开启 mathjax 支持。<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">math:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Default(true) will load mathjax/katex script on demand</span></span><br><span class="line">  <span class="comment"># That is it only render those page who has 'mathjax: true' in Front Matter.</span></span><br><span class="line">  <span class="comment"># If you set it to false, it will load mathjax/katex srcipt EVERY PAGE.</span></span><br><span class="line"><span class="attr">  per_page:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>因为 per_page 设为 true，因此需要在文章的 Front-matter 里打开 mathjax 开关。<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Spawn your blog site with hexo</span><br><span class="line">date: 2018-04-14 13:50:18</span><br><span class="line">categories: linux</span><br><span class="line">tag: hexo</span><br><span class="line">mathjax: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure></p>
+<h4 id="將倉庫加到-Hexo-的配置文件"><a href="#將倉庫加到-Hexo-的配置文件" class="headerlink" title="將倉庫加到 Hexo 的配置文件"></a>將倉庫加到 Hexo 的配置文件</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repo:</span></span><br><span class="line">    <span class="comment">#coding: git@git.coding.net:cycoe/cycoe.git</span></span><br><span class="line"><span class="attr">    my_server:</span> <span class="string">ubuntu@139.199.95.151:/home/ubuntu/git/blog.git</span></span><br></pre></td></tr></table></figure>
+<p>此處 @ 前的用戶名一定要與服務器倉庫的權限對應，: 後面是倉庫的絕對路徑。</p>
+<h4 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h4><p>此時運行 <code>$ hexo d- g</code> 即可將博客網頁目錄部署到倉庫，但此時查看倉庫會發現目錄下並不是網頁的結構，因爲這個倉庫是裸倉庫，下面並沒有工作區，所以看到的並不是我們 Push 上來的內容。</p>
+<h4 id="Git-Hook-事件"><a href="#Git-Hook-事件" class="headerlink" title="Git Hook 事件"></a>Git Hook 事件</h4><p>事實上，如果我們此時將該倉庫克隆到另一個目錄下就可以看到工作區了。首先 <code>cd</code> 到需要保存網頁的路徑下 <code>$ cd /home/ubuntu/www/</code>，然後運行 <code>$ git clone /home/ubuntu/git/blog.git</code> 將倉庫克隆至當前路徑。</p>
+<p>但是如果每次都要登上服務器手動克隆就違揹我們自動化部署的初衷了。因此此處需要用到 Git 自帶的 Hook 功能，簡單來將講就是在倉庫發生變化前/後所要執行的操作。</p>
+<p>Hook 的事件放在裸倉庫目錄的 hooks 文件夾下，這裏我們新建一個名爲 <code>post-receive</code> 的事件，該事件是在倉庫更新合併完成後自動運行，文件中加入如下內容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">cd</span> /home/ubuntu/www/blog  <span class="comment"># cd 到網頁的展示倉庫</span></span><br><span class="line"><span class="built_in">unset</span> GIT_DIR  <span class="comment"># 非常重要！如果不解綁 GIT_DIR 環境變量無法切換路徑</span></span><br><span class="line">git config --list</span><br><span class="line">git pull origin master</span><br></pre></td></tr></table></figure>
+<p>運行 <code>$ chmod +x post-receive</code> 賦予執行權限</p>
+<p>此時再在本機運行 <code>$ hexo d -g</code> 發現網頁目錄也自動更新了</p>
+<h2 id="2018-08-18-更新"><a href="#2018-08-18-更新" class="headerlink" title="2018-08-18 更新"></a>2018-08-18 更新</h2><p>今天寫了一篇博客，運行 <code>$ hexo d -g</code> 想要更新博客，結果發現網頁並沒有變化。登上服務器一看 <code>/home/ubuntu/git/blog.git</code> 倉庫已經更新了，懷疑是更新後沒有成功運行 <code>post-receive</code>。但是自從上次設置好 <code>post-receive</code> 後就沒有改過，按理說應該能夠運行。運行 <code>$ ls -l</code> 命令後發現，<code>/home/ubuntu/git/blog.git</code> 目錄的歸屬者是 <code>ubuntu</code>，而 <code>/home/ubuntu/www/blog</code> 目錄的歸屬者是 <code>nginx</code>，應該是上次我在設置 nginx 的時候不小心把 <code>/home/ubuntu/www</code> 目錄遞歸修改成歸屬 <code>nginx</code> 了。而 <code>post-receive</code> 所做的工作實際上是在我把更新 push 到 <code>/home/ubuntu/git/blog.git</code> 倉庫後，<code>cd</code> 到了 <code>/home/ubuntu/www/blog</code> 目錄並拉取更新。因此我是以 <code>ubuntu</code> 用戶的身份做的 push，又是以 <code>ubuntu</code> 用戶的身份運行的 <code>post-receive</code>，因此在 <code>/home/ubuntu/www/blog</code> 目錄中是沒有權限拉取更新的。</p>
+<p>既然已經發現了問題出在用戶權限上。那就可以通過運行 <code>$ sudo chown -R ubuntu:users /home/ubuntu/www</code> 將整個目錄都改爲 <code>ubuntu</code> 所屬，也就不關 <code>nginx</code> 用戶什麼事了，這樣確實非常方便的解決了這個問題。另外 <code>post-receive</code> 在更改用戶歸屬後執行權限丟失了，記得運行 <code>$ chmod +x post-receive</code> 重新賦予執行權限。事實上當初建立 <code>nginx</code> 用戶也是因爲安裝了 nginx 服務，想要弄得更規範些。但因爲懶一直沒給 <code>nginx</code> 建立自己的 Home 目錄，按理說把跟 nginx 相關的目錄都扔到 <code>nginx</code> 用戶對應的 Home 下是最好的。</p>
+<h2 id="2018-10-24-更新"><a href="#2018-10-24-更新" class="headerlink" title="2018-10-24 更新"></a>2018-10-24 更新</h2><p>最近寫的新博客中需要開啓 LaTeX 公式支持，但 hexo 本身對數學公式的支持有些問題，Hexo 默認使用 “hexo-renderer-marked” 引擎渲染網頁，該引擎會把一些特殊的 markdown 符號轉換爲相應的 html 標籤，比如在 markdown 語法中，下劃線 ‘_’ 代表斜體，會被渲染引擎處理爲 <em> 標籤。</em></p>
+<h3 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h3><p>更換 Hexo 的 markdown 渲染引擎，使用 ‘hexo-renderer-kramed’ 引擎替代 ‘hexo-renderer-marked’ 引擎，前者在後者的基礎上修復了一些 bug。執行以下命令卸載原引擎並安裝新引擎。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-renderer-marked --save</span><br><span class="line">npm install hexo-renderer-kramed --save</span><br></pre></td></tr></table></figure></p>
+<p>此時行間公式應該就可以正常渲染了，但行內公式還是有問題。接下來在博客根目錄中，找到 <code>node_modules\kramed\lib\rules\inline.js</code>，修改 11 行的 escape 變量的值。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  escape: /^\\([\\`*&#123;&#125;\[\]()#$+\-.!_&gt;])/,</span></span><br><span class="line"><span class="built_in">escape</span>: <span class="regexp">/^\\([`*\[\]()#$+\-.!_&gt;])/</span>,</span><br></pre></td></tr></table></figure></p>
+<p>這一步是在原基礎上取消了對 ‘\, {, }’ 的轉義(escape)。同時把第 20 行的 em 變量也要做相應的修改。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  em: /^\b_((?:__|[\s\S])+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,</span></span><br><span class="line">em: <span class="regexp">/^\*((?:\*\*|[\s\S])+?)\*(?!\*)/</span>,</span><br></pre></td></tr></table></figure></p>
+<p>然後運行 <code>hexo clean</code> 清除構建，再 generate 即可解決問題。</p>
+<h3 id="在主題中開啓-mathjax-開關"><a href="#在主題中開啓-mathjax-開關" class="headerlink" title="在主題中開啓 mathjax 開關"></a>在主題中開啓 mathjax 開關</h3><p>打開 <code>themes/next/_config.yml</code>，將 math 的 enable 設爲 true，將 per_page 設爲 true，表示針對每頁單獨決定是否開啓 mathjax 支持。<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">math:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Default(true) will load mathjax/katex script on demand</span></span><br><span class="line">  <span class="comment"># That is it only render those page who has 'mathjax: true' in Front Matter.</span></span><br><span class="line">  <span class="comment"># If you set it to false, it will load mathjax/katex srcipt EVERY PAGE.</span></span><br><span class="line"><span class="attr">  per_page:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<p>因爲 per_page 設爲 true，因此需要在文章的 Front-matter 裏打開 mathjax 開關。<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Spawn your blog site with hexo</span><br><span class="line">date: 2018-04-14 13:50:18</span><br><span class="line">categories: linux</span><br><span class="line">tag: hexo</span><br><span class="line">mathjax: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -1594,36 +2085,36 @@
 <p> A planche is a skill in <a href="https://en.wikipedia.org/wiki/Gymnastics" target="_blank" rel="noopener">gymnastics</a> in which the <a href="https://en.wikipedia.org/wiki/Human_body" target="_blank" rel="noopener">body</a> is held parallel to the ground, giving the illusion of floating. It is a move that requires significant <a href="https://en.wikipedia.org/wiki/Physical_strength" target="_blank" rel="noopener">strength</a> and <a href="https://en.wikipedia.org/wiki/Balance" target="_blank" rel="noopener">balance</a>.</p>
 <img src="/2018/04/13/Planche-training-calendar/Planche.jpg" title="Planche">
 </blockquote>
-<p>刚进大学的时候 ，无意间在 B 站看到一个关于俄挺的视频，能够完成俄挺成了我的一个梦想。本科的时候陆陆续续地练过一段时间，练练俯卧撑和团身，团身也就是刚刚高团 2-3 秒的程度。后来因为实在没什么进展也就渐渐放弃了。前几天回家的路上吹了点小风就感冒了，意识到自己的小身板太弱，再加上最近想要增重，决定重新开始练习俄挺。</p>
-<h3 id="2018-04-05"><a href="#2018-04-05" class="headerlink" title="2018-04-05"></a>2018-04-05</h3><p>从今天开始练习，因为也好久没有做俯卧撑了，目前的水平实在太烂。</p>
+<p>剛進大學的時候 ，無意間在 B 站看到一個關於俄挺的視頻，能夠完成俄挺成了我的一個夢想。本科的時候陸陸續續地練過一段時間，練練俯臥撐和團身，團身也就是剛剛高團 2-3 秒的程度。後來因爲實在沒什麼進展也就漸漸放棄了。前幾天回家的路上吹了點小風就感冒了，意識到自己的小身板太弱，再加上最近想要增重，決定重新開始練習俄挺。</p>
+<h3 id="2018-04-05"><a href="#2018-04-05" class="headerlink" title="2018-04-05"></a>2018-04-05</h3><p>從今天開始練習，因爲也好久沒有做俯臥撐了，目前的水平實在太爛。</p>
 <ul>
-<li>标准俯卧撑 10 个</li>
-<li>冲肩维持 5 秒</li>
+<li>標準俯臥撐 10 個</li>
+<li>衝肩維持 5 秒</li>
 </ul>
-<h3 id="2018-04-13"><a href="#2018-04-13" class="headerlink" title="2018-04-13"></a>2018-04-13</h3><p>练了一个星期的冲肩，每天都在坚持。</p>
+<h3 id="2018-04-13"><a href="#2018-04-13" class="headerlink" title="2018-04-13"></a>2018-04-13</h3><p>練了一個星期的衝肩，每天都在堅持。</p>
 <img src="/2018/04/13/Planche-training-calendar/plank_lean.jpg">
 <ul>
-<li>冲肩维持 10 秒</li>
-<li>窄距俯卧撑 10 个</li>
+<li>衝肩維持 10 秒</li>
+<li>窄距俯臥撐 10 個</li>
 </ul>
-<h3 id="2018-06-10"><a href="#2018-06-10" class="headerlink" title="2018-06-10"></a>2018-06-10</h3><p>最近右手小臂疼的厉害，应该是跟前几天每天用鼠标做视频有关，看来要好好休息几天了，最近下调训练强度，少用鼠标。。不过值得激动的是，目前已经可以比较轻松地做团身了，高阶团身应该也能 10 来秒了，接下来准备练团身举腿。</p>
+<h3 id="2018-06-10"><a href="#2018-06-10" class="headerlink" title="2018-06-10"></a>2018-06-10</h3><p>最近右手小臂疼的厲害，應該是跟前幾天每天用鼠標做視頻有關，看來要好好休息幾天了，最近下調訓練強度，少用鼠標。。不過值得激動的是，目前已經可以比較輕鬆地做團身了，高階團身應該也能 10 來秒了，接下來準備練團身舉腿。</p>
 <img src="/2018/04/13/Planche-training-calendar/tucked.jpg" title="tucked">
 <ul>
-<li>冲肩维持 30 秒</li>
-<li>窄距俯卧撑 25 个</li>
-<li>冲肩俯卧撑 15 个</li>
-<li>团身维持 10 秒</li>
-<li>引体向上 7 个</li>
+<li>衝肩維持 30 秒</li>
+<li>窄距俯臥撐 25 個</li>
+<li>衝肩俯臥撐 15 個</li>
+<li>團身維持 10 秒</li>
+<li>引體向上 7 個</li>
 </ul>
-<h3 id="2018-07-25"><a href="#2018-07-25" class="headerlink" title="2018-07-25"></a>2018-07-25</h3><p>最近一个月因为手腕一直还是有点疼，尤其搬重物的时候，也就没怎么敢继续练团身，转而练习引体和前水平。打算先通过前水平锻炼背部力量，通过双力臂锻炼手腕力量，等基础打好后再练习俄挺。引体的话其实应该一组能做个 10 个左右，但是后面几组做的时候因为可能是翻腕了的原因，导致手腕还是会疼，发现在云梯上练习就没事了，可能是手的朝向的问题。</p>
-<p>双力臂其实还是没有太大进展，前水平的话一条腿伸直是能保持了，接下来就是要延长持续的时间，然后慢慢向双腿进步。在宿舍也可以每天都练前水平。</p>
-<p>另外利用操场上的杠铃可以做很多其他的训练，比如正手抬、反手拉、单手拉、卧推。利用器材可以取得更好的训练效果。</p>
-<p><strong>最后有个非常重要的想法：</strong>在家的这几天发现，想要找个健身器材齐全的公园实在不是很容易，因此希望能做个 App，街健爱好者可以在上面共享健身器材所在的位置，另外可以认识附近的街健爱好者。</p>
+<h3 id="2018-07-25"><a href="#2018-07-25" class="headerlink" title="2018-07-25"></a>2018-07-25</h3><p>最近一個月因爲手腕一直還是有點疼，尤其搬重物的時候，也就沒怎麼敢繼續練團身，轉而練習引體和前水平。打算先通過前水平鍛鍊背部力量，通過雙力臂鍛鍊手腕力量，等基礎打好後再練習俄挺。引體的話其實應該一組能做個 10 個左右，但是後面幾組做的時候因爲可能是翻腕了的原因，導致手腕還是會疼，發現在雲梯上練習就沒事了，可能是手的朝向的問題。</p>
+<p>雙力臂其實還是沒有太大進展，前水平的話一條腿伸直是能保持了，接下來就是要延長持續的時間，然後慢慢向雙腿進步。在宿舍也可以每天都練前水平。</p>
+<p>另外利用操場上的槓鈴可以做很多其他的訓練，比如正手擡、反手拉、單手拉、臥推。利用器材可以取得更好的訓練效果。</p>
+<p><strong>最後有個非常重要的想法：</strong>在家的這幾天發現，想要找個健身器材齊全的公園實在不是很容易，因此希望能做個 App，街健愛好者可以在上面共享健身器材所在的位置，另外可以認識附近的街健愛好者。</p>
 <ul>
-<li>冲肩俯卧撑 20 个</li>
-<li>前水平团身 10 秒</li>
-<li>单杠硬拉 4 个</li>
-<li>引体 10 个</li>
+<li>衝肩俯臥撐 20 個</li>
+<li>前水平團身 10 秒</li>
+<li>單槓硬拉 4 個</li>
+<li>引體 10 個</li>
 </ul>
 
           
@@ -1698,7 +2189,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2017/12/07/教务网现惊天大bug/" itemprop="url">
-                  教务网现惊天大 bug？！谈谈弱密码如何暴露你的信息
+                  教務網現驚天大 bug？！談談弱密碼如何暴露你的信息
                 </a>
               
             
@@ -1799,7 +2290,7 @@
 
       
         
-          爬虫小记
+          爬蟲小記
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/12/07/教务网现惊天大bug/">
@@ -1878,7 +2369,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2017/11/03/如何提高抢到报告的概率/" itemprop="url">
-                  如何提高抢到报告的概率？
+                  如何提高搶到報告的概率？
                 </a>
               
             
@@ -1972,183 +2463,10 @@
 
       
         
-          爬虫小记
+          爬蟲小記
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/11/03/如何提高抢到报告的概率/">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2017/10/28/利用python实现自动抢报告/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Cycoe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cycoe's Home Page">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/28/利用python实现自动抢报告/" itemprop="url">
-                  利用 python 实现自动抢报告
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-                
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-28T00:00:00+08:00">2017-10-28</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/spider/" itemprop="url" rel="index"><span itemprop="name">spider</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/28/利用python实现自动抢报告/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/28/利用python实现自动抢报告/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          爬虫小记
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/28/利用python实现自动抢报告/">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2236,7 +2554,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2246,7 +2564,7 @@
                 
                 
                 <div class="site-state-item site-state-categories">
-                  
+                  <a href="/categories/index.html">
                     
                     
                       
@@ -2269,9 +2587,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">分类</span>
-                  
+                  </a>
                 </div>
               
 
@@ -2294,7 +2614,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -2343,7 +2667,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -2520,9 +2844,9 @@
   
     
       
-    
-      
         
+      
+    
       
     
       
