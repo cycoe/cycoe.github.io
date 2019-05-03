@@ -107,7 +107,7 @@
 <meta property="og:site_name" content="Cycoe&#39;s Home Page">
 <meta property="og:description" content="隨着使用 Linux 系統的年頭越來越長，積累的相關技巧也越來越多。最近一次重裝系統突然發現很多配置都已經忘的差不多了，想要配置系統還需要去網上到處搜刮資料實在是麻煩，因此打算用一篇博客記錄關於 Linux 系統的配置及常用軟件的介紹。 Archlinux 配置讓 Qt5 程序使用原生 GTK+ 主題Qt5 程序在 GTK3 環境下主題不統一真的很難受，尤其是 GTK3 用了黑色主題而 Qt5 還">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-02-28T01:04:14.966Z">
+<meta property="og:updated_time" content="2019-05-03T14:01:44.436Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux下常用軟件和配置記錄">
 <meta name="twitter:description" content="隨着使用 Linux 系統的年頭越來越長，積累的相關技巧也越來越多。最近一次重裝系統突然發現很多配置都已經忘的差不多了，想要配置系統還需要去網上到處搜刮資料實在是麻煩，因此打算用一篇博客記錄關於 Linux 系統的配置及常用軟件的介紹。 Archlinux 配置讓 Qt5 程序使用原生 GTK+ 主題Qt5 程序在 GTK3 環境下主題不統一真的很難受，尤其是 GTK3 用了黑色主題而 Qt5 還">
@@ -405,50 +405,19 @@
 <h2 id="Archlinux-配置"><a href="#Archlinux-配置" class="headerlink" title="Archlinux 配置"></a>Archlinux 配置</h2><h3 id="讓-Qt5-程序使用原生-GTK-主題"><a href="#讓-Qt5-程序使用原生-GTK-主題" class="headerlink" title="讓 Qt5 程序使用原生 GTK+ 主題"></a>讓 Qt5 程序使用原生 GTK+ 主題</h3><p>Qt5 程序在 GTK3 環境下主題不統一真的很難受，尤其是 GTK3 用了黑色主題而 Qt5 還是刺眼的白色主題的時候。不像在 KDE 設置中設置 GTK3 主題那麼方便，設置 Qt5 主題可需要好好折騰一番。而且這個解決方案也是我使用了近一年後才找到的答案。</p>
 <p>首先你需要安裝 qt5ct 來提供 Qt5 程序主題的設置入口。此時直接在應用列表中打開 qt5ct 會提示未設置環境變量，編輯 <code>.xprofile</code> 文件，並在其中加入如下內容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ <span class="string">"<span class="variable">$XDG_CURRENT_DESKTOP</span>"</span> = <span class="string">"KDE"</span> ] || [ <span class="string">"<span class="variable">$XDG_CURRENT_DESKTOP</span>"</span> = <span class="string">"GNOME"</span> ] || <span class="built_in">export</span> QT_QPA_PLATFORMTHEME=<span class="string">"qt5ct"</span></span><br></pre></td></tr></table></figure></p>
 <p>註銷後重新登錄，此時打開 qt5ct 應該就不報錯了。但此時你會發現主題列表中只有 Qt5 自帶的幾個樣式，而沒有 Gtk3 主題。你需要安裝 qt5-styleplugins 來使 Qt5 支持 GTK2 主題。你沒有看錯，我也不知道爲啥 Qt5 只支持 GTK2 的主題。但是我們要如何設置 GTK2 主題呢，好吧，又需要安裝一個叫 gtk-theme-switch2 的工具。在 gtk-theme-switch2 中設置好滿意的 GTK2 主題後，再在 qt5ct 中設置 Qt5 主題爲 GTK2 即可。</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
-<h2 id="常用軟件"><a href="#常用軟件" class="headerlink" title="常用軟件"></a>常用軟件</h2><h1 id="用了幾年-Linux-後發現其實-Linux-平臺的軟件並不少（當然-Adobe-全家桶和-MS-Office-除外，要做設計或者辦公還是老老實實-Windows-吧-speak-no-evil-），只是與-Windows-和-Mac-平臺常用的軟件不同而已。Linux-的真正強大之處是命令行軟件，幾條簡單的命令組合就可以完成複雜的功能。"><a href="#用了幾年-Linux-後發現其實-Linux-平臺的軟件並不少（當然-Adobe-全家桶和-MS-Office-除外，要做設計或者辦公還是老老實實-Windows-吧-speak-no-evil-），只是與-Windows-和-Mac-平臺常用的軟件不同而已。Linux-的真正強大之處是命令行軟件，幾條簡單的命令組合就可以完成複雜的功能。" class="headerlink" title="用了幾年 Linux 後發現其實 Linux 平臺的軟件並不少（當然 Adobe 全家桶和 MS Office 除外，要做設計或者辦公還是老老實實 Windows 吧:speak_no_evil:），只是與 Windows 和 Mac 平臺常用的軟件不同而已。Linux 的真正強大之處是命令行軟件，幾條簡單的命令組合就可以完成複雜的功能。"></a>用了幾年 Linux 後發現其實 Linux 平臺的軟件並不少（當然 Adobe 全家桶和 MS Office 除外，要做設計或者辦公還是老老實實 Windows 吧:speak_no_evil:），只是與 Windows 和 Mac 平臺常用的軟件不同而已。Linux 的真正強大之處是命令行軟件，幾條簡單的命令組合就可以完成複雜的功能。</h1><h3 id="小鹤双拼"><a href="#小鹤双拼" class="headerlink" title="小鹤双拼"></a>小鹤双拼</h3><p>每次重装系统都需要重新配置输入法，更蛋疼的是在 Rime 中添加鹤形码表时，总出现部署错误。虽然最后折腾半天总是莫名其妙地整好了，但是不得不感叹配置 Rime 真是玄学（虽然很不想承认是自己对 Rime 的配置文件一窍不通:laughing:）。特此记录一下给 Rime 添加鹤形的过程，虽然以后按相同的步骤也不一定能配置成功。</p>
+<h2 id="常用軟件"><a href="#常用軟件" class="headerlink" title="常用軟件"></a>常用軟件</h2><p>用了幾年 Linux 後發現其實 Linux 平臺的軟件並不少（當然 Adobe 全家桶和 MS Office 除外，要做設計或者辦公還是老老實實 Windows 吧:speak_no_evil:），只是與 Windows 和 Mac 平臺常用的軟件不同而已。Linux 的真正強大之處是命令行軟件，幾條簡單的命令組合就可以完成複雜的功能。</p>
+<h3 id="小鹤双拼"><a href="#小鹤双拼" class="headerlink" title="小鹤双拼"></a>小鹤双拼</h3><p>每次重装系统都需要重新配置输入法，更蛋疼的是在 Rime 中添加鹤形码表时，总出现部署错误。虽然最后折腾半天总是莫名其妙地整好了，但是不得不感叹配置 Rime 真是玄学（虽然很不想承认是自己对 Rime 的配置文件一窍不通:laughing:）。特此记录一下给 Rime 添加鹤形的过程，虽然以后按相同的步骤也不一定能配置成功。</p>
 <p>第一步，安装 fcitx 框架（ibus 框架就不考虑了，fcitx 用习惯了）和 Rime 的 fcitx 实现。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Archlinux</span></span><br><span class="line">sudo pacman -S fcitx fcitx-rime fcitx-configtool</span><br><span class="line"><span class="comment"># openSUSE</span></span><br><span class="line">sudo zypper <span class="keyword">in</span> fcitx fcitx-rime fcitx-config-gtk</span><br></pre></td></tr></table></figure></p>
 <p>第二步，在 fcitx 设置中加入 rime 输入法，记得关闭“只显示当前语言输入法选项”。切换到 Rime 输入法，此时应该会自动运行一次 deploy。</p>
 <p>第三步，将<a href="https://git.coding.net/cycoe/config.git" target="_blank" rel="noopener">我的配置</a>中的 <code>.config/fcitx</code> 目录复制到对应的路径，其中已经包含了 flypy 使用的码表（之前小鹤双拼官网发布的挂接码表文件，但因为没有通用的配置方法目前已经下架），并将运行下面的命令将配置文件复制到 Rime 系统级路径中（尝试过复制到 <code>.config/fcitx/rime/build/default.custom.yaml</code>，没有效果）。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 备份原配置</span></span><br><span class="line">sudo mv /usr/share/rime-data/default.yaml /usr/share/rime-data/default.yaml.bak</span><br><span class="line"><span class="comment"># 复制新配置</span></span><br><span class="line">sudo cp default.yaml /usr/share/rime-data/default.yaml</span><br></pre></td></tr></table></figure></p>
 <p>第四步，在 fcitx 上右键，选择 deploy，此时会提示部署错误，但是惊喜地发现输入法已经可以使用。</p>
 <h2 id="常用软件"><a href="#常用软件" class="headerlink" title="常用软件"></a>常用软件</h2><p>用了几年 Linux 后发现其实 Linux 平台的软件并不少（当然 Adobe 全家桶和 MS Office 除外，要做设计或者办公还是老老实实 Windows 吧:speak_no_evil:），只是与 Windows 和 Mac 平台常用的软件不同而已。Linux 的真正强大之处是命令行软件，几条简单的命令组合就可以完成复杂的功能。</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>cc82a6261f6c74531b0a2de240eae2d2fe3ed050</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
 <h3 id="Dia"><a href="#Dia" class="headerlink" title="Dia"></a>Dia</h3><p>一個非常小的流程圖繪製軟件，但是功能夠用。</p>
 <h3 id="ncdu"><a href="#ncdu" class="headerlink" title="ncdu"></a>ncdu</h3><p>ncdu (NCurses Disk Usage) 是一個基於 NCurses 系統的磁盤用量分析命令行軟件，相似功能的還有基於 GTK+ 的 Baobab（從版本號來看應該是屬於 Gnome 桌面套裝）。其實對我來說真的很少使用此類軟件，畢竟我很少刪除磁盤文件，但是最近 /Home 分區接近爆滿讓我很難受，還是需要從磁盤的角落翻出以後再也用不上的大文件以刪除之。</p>
 <h3 id="xreader"><a href="#xreader" class="headerlink" title="xreader"></a>xreader</h3><p>pdf 文檔閱讀器，X-Apps 計劃中的一員（這個計劃好像只有個閱讀器？:laughing:）。體積小巧，優點是可以使用 <code>hjkl</code> 等 vim 鍵位進行控制。缺點是沒有高級功能，單純作爲一個閱讀器還是不錯的。</p>
 <h3 id="pcmanfm"><a href="#pcmanfm" class="headerlink" title="pcmanfm"></a>pcmanfm</h3><p>LXDE 桌面環境默認文件管理器，實話說比 Gnome 的鸚鵡螺好用太多，功能上與 Dolphin 相近。Archlinux 上有單獨提供 pcmanfm-gtk3 的安裝包，其他髮型版上應該默認使用的就是 GTK3 了。</p>
 <h3 id="lxappearance"><a href="#lxappearance" class="headerlink" title="lxappearance"></a>lxappearance</h3><p>GTK+ 界面主題設置工具，又是 LXDE 的一員。LXDE 自帶的幾款軟件質量都挺高，界面風格統一併且功能強大。</p>
-<h3 id="gpickview"><a href="#gpickview" class="headerlink" title="gpickview"></a>gpickview</h3><p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
-<h1 id="LXDE-默認的圖片查看器，體積小巧，沒有太多花哨功能。"><a href="#LXDE-默認的圖片查看器，體積小巧，沒有太多花哨功能。" class="headerlink" title="LXDE 默認的圖片查看器，體積小巧，沒有太多花哨功能。"></a>LXDE 默認的圖片查看器，體積小巧，沒有太多花哨功能。</h1><p>LXDE 默认的图片查看器，体积小巧，没有太多花哨功能。</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>cc82a6261f6c74531b0a2de240eae2d2fe3ed050</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+<h3 id="gpickview"><a href="#gpickview" class="headerlink" title="gpickview"></a>gpickview</h3><p>LXDE 默認的圖片查看器，體積小巧，沒有太多花哨功能。</p>
 
       
     </div>
@@ -578,7 +547,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -613,7 +582,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -642,7 +613,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -687,7 +658,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Archlinux-配置"><span class="nav-number">1.</span> <span class="nav-text">Archlinux 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#讓-Qt5-程序使用原生-GTK-主題"><span class="nav-number">1.1.</span> <span class="nav-text">讓 Qt5 程序使用原生 GTK+ 主題</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用軟件"><span class="nav-number">2.</span> <span class="nav-text">常用軟件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用了幾年-Linux-後發現其實-Linux-平臺的軟件並不少（當然-Adobe-全家桶和-MS-Office-除外，要做設計或者辦公還是老老實實-Windows-吧-speak-no-evil-），只是與-Windows-和-Mac-平臺常用的軟件不同而已。Linux-的真正強大之處是命令行軟件，幾條簡單的命令組合就可以完成複雜的功能。"><span class="nav-number"></span> <span class="nav-text">用了幾年 Linux 後發現其實 Linux 平臺的軟件並不少（當然 Adobe 全家桶和 MS Office 除外，要做設計或者辦公還是老老實實 Windows 吧:speak_no_evil:），只是與 Windows 和 Mac 平臺常用的軟件不同而已。Linux 的真正強大之處是命令行軟件，幾條簡單的命令組合就可以完成複雜的功能。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#小鹤双拼"><span class="nav-number">0.1.</span> <span class="nav-text">小鹤双拼</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用软件"><span class="nav-number">1.</span> <span class="nav-text">常用软件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dia"><span class="nav-number">1.1.</span> <span class="nav-text">Dia</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ncdu"><span class="nav-number">1.2.</span> <span class="nav-text">ncdu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xreader"><span class="nav-number">1.3.</span> <span class="nav-text">xreader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pcmanfm"><span class="nav-number">1.4.</span> <span class="nav-text">pcmanfm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lxappearance"><span class="nav-number">1.5.</span> <span class="nav-text">lxappearance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gpickview"><span class="nav-number">1.6.</span> <span class="nav-text">gpickview</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LXDE-默認的圖片查看器，體積小巧，沒有太多花哨功能。"><span class="nav-number"></span> <span class="nav-text">LXDE 默認的圖片查看器，體積小巧，沒有太多花哨功能。</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Archlinux-配置"><span class="nav-number">1.</span> <span class="nav-text">Archlinux 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#讓-Qt5-程序使用原生-GTK-主題"><span class="nav-number">1.1.</span> <span class="nav-text">讓 Qt5 程序使用原生 GTK+ 主題</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用軟件"><span class="nav-number">2.</span> <span class="nav-text">常用軟件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#小鹤双拼"><span class="nav-number">2.1.</span> <span class="nav-text">小鹤双拼</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用软件"><span class="nav-number">3.</span> <span class="nav-text">常用软件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dia"><span class="nav-number">3.1.</span> <span class="nav-text">Dia</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ncdu"><span class="nav-number">3.2.</span> <span class="nav-text">ncdu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xreader"><span class="nav-number">3.3.</span> <span class="nav-text">xreader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pcmanfm"><span class="nav-number">3.4.</span> <span class="nav-text">pcmanfm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lxappearance"><span class="nav-number">3.5.</span> <span class="nav-text">lxappearance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gpickview"><span class="nav-number">3.6.</span> <span class="nav-text">gpickview</span></a></li></ol></li></ol></div>
             
 
           </div>

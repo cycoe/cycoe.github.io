@@ -299,6 +299,612 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2019/04/30/反向SSH实现内网穿透/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cycoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cycoe's Home Page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/30/反向SSH实现内网穿透/" itemprop="url">
+                  反向SSH实现内网穿透
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-30T23:42:57+08:00">2019-04-30</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/30/反向SSH实现内网穿透/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/04/30/反向SSH实现内网穿透/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近实验室又配置了一台新的计算平台，噪声堪比飞机起飞，再加上本校区不允许实验过夜，只能将其安置在学校外面。但从学校到计算平台车程 40Km，每次都过去做计算显然不现实，如果能从学校直接远程连接是最好的。</p>
+<p>通过相关资料的查询及对专业人士的请教，找到如下几种解决方法:</p>
+<ol>
+<li>联系网络运营商将动态 IP 转为静态的公网 IP，这样就可以直接从学校的内网连接到计算平台，是最完美的解决方案。但是查询资费后发现，价钱不那么完美，一个月 6000 块大洋怎么负担得起啊！</li>
+<li>主机 A 使用 TeamViewer 连接至计算平台局域网下的另一台主机 B，再控制 B 使用 SSH 连接至计算平台。这种方法包含几个明显的弊端：<ol>
+<li>操作麻烦，需要经过两层的文件传输及控制；</li>
+<li>虽然 TeamViewer 有个人的免费使用许可，但最近审查日益严格，经常使用几分钟就被强制下线；</li>
+<li>TeamViewer 基于 GUI 远程控制，对网络要求很高；</li>
+<li>最重要的一点，一个好的解决方案应该形成一个“黑箱”，而不应该把内部细节暴露给用户；</li>
+</ol>
+</li>
+<li>从计算平台使用反向 SSH 连接到云服务器，从而建立起从云服务器到计算平台的隧道连接。这种方法传输的速度上限在于云服务器的带宽，最大的优点在于实现了一个“鸭子类型”，使用 SSH 连接计算平台与连接局域网内的主机无异。</li>
+</ol>
+<h2 id="SSH-协议与应用"><a href="#SSH-协议与应用" class="headerlink" title="SSH 协议与应用"></a>SSH 协议与应用</h2><blockquote>
+<p>SSH 为 Secure Shell 的缩写，由 IETF 的网络小组（Network Working Group）所制定；SSH 为建立在应用层基础上的安全协议。SSH 是目前较可靠，专为远程登录会话和其他网络服务提供安全性的协议。利用 SSH 协议可以有效防止远程管理过程中的信息泄露问题。SSH 最初是 UNIX 系统上的一个程序，后来又迅速扩展到其他操作平台。SSH 在正确使用时可弥补网络中的漏洞。SSH 客户端适用于多种平台。几乎所有 UNIX 平台—包括 HP-UX、Linux、AIX、Solaris、Digital UNIX、Irix，以及其他平台，都可运行 SSH。</p>
+</blockquote>
+<p>以上对 SSH 的解释来自<a href="https://baike.baidu.com/item/ssh/10407?fr=aladdin" target="_blank" rel="noopener">百度百科</a>，别问我为什么不用 Wikipedia。从中我们看到，SSH 是建立在应用层基础上的一种安全协议，可以用来进行远程控制，或在计算机之间传送文件，比传统的 telnet 或 ftp 协议要更安全。Linux 下最常使用的就是 OpenSSH。OpenSSH 是 SSH 协议的免费开源实现，提供了服务端后台程序（SSH Daemon）和客户端工具(SSH Client)。主机可以通过 SSH 客户端连接运行了 SSH 服务端的主机。</p>
+<h2 id="网络拓扑分析"><a href="#网络拓扑分析" class="headerlink" title="网络拓扑分析"></a>网络拓扑分析</h2><p>互联网是一张巨大的网，其中所有的主机都由有线或无线的方式相连，但并不代表任意两台主机都能互相可见。网络是有方向的，与其说是网我觉得更像一棵树。网络在向下进行传输时，会经过 NAT（Network Address Translation 网络地址转换），因此外网的主机无法直接访问内网的主机。</p>
+<p>在我们本次遇到的问题中，网络连接可表示为如下的拓扑结构。<br><img src="/2019/04/30/反向SSH实现内网穿透/topology.png" title="网络拓扑结构"></p>
+<p>各个主机的 IP 地址如下表所示</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>主机名</th>
+<th>IP</th>
+<th>用户名</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>计算平台 A</td>
+<td>10.0.0.100</td>
+<td>cal</td>
+<td>目标主机，处于内网</td>
+</tr>
+<tr>
+<td>控制端 B</td>
+<td>192.168.1.100</td>
+<td>client</td>
+<td>控制主机，处于内网</td>
+</tr>
+<tr>
+<td>云服务器 O</td>
+<td>123.123.123.123</td>
+<td>server</td>
+<td>公网服务器，起桥梁作用</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>其中 A、B 能够访问 O，但 O 不能访问 A、B，并且 A、B 之间不能直接互相访问。我们最后要实现的目标就是使用 B 访问 A。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>通俗地说：就是在主机 A 上做到 O 的反向代理；然后在 O 上做正向的代理实现本地端口的转发。</p>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>A、B、O 上都要安装 SSH Client，A、O 上需要安装 SSH Daemon。</p>
+<p>需要用到的 ssh 参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">反向代理</span><br><span class="line">ssh -fCNR</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">正向代理</span><br><span class="line">ssh -fCNL</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-f 后台执行 ssh 指令</span><br><span class="line">-C 允许压缩数据</span><br><span class="line">-N 不执行远程指令</span><br><span class="line">-R 将远程主机（服务器）的某个端口转发到本地端指定主机的指定端口</span><br><span class="line">-L 将本地机（客户机）的某个端口转发到远端指定主机的指定端口</span><br><span class="line">-p 指定远程主机的端口</span><br></pre></td></tr></table></figure>
+<h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3><p>首先在 A 主机上操作，建立 A 到 O 的反向代理，具体命令为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -fCNR [O 主机 IP 或省略]:[O 主机端口]:[A 主机 IP ]:[A 主机端口] [O 主机的用户名@O 主机 IP]</span><br></pre></td></tr></table></figure></p>
+<p>在这里我使用了 O 主机的 3333 端口，以及 A 主机的 22 端口，按照以上命令即为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -fCNR 3333:localhost:22 server@123.123.123.123</span><br></pre></td></tr></table></figure></p>
+<p>此时我们就将 O 的 3333 端口映射到了 A 的 22 端口，也就是说访问 O 的 3333 端口与访问 A 的 22 端口效果相同。</p>
+<p>使用 <code>ps aux | grep 3333</code> 命令来查看反向代理是否运行成功。</p>
+<h3 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h3><p>接下来在 O 主机上操作。完成上一步的反向代理后，在主机 O 上运行如下命令应该就可以登陆 A 主机。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -p 3333 cal@localhost</span><br></pre></td></tr></table></figure></p>
+<p>该命令的含义为，使用 cal 用户登陆本机的 3333 端口。上面已经说过，访问 O 的 3333 端口与访问 A 的 22 端口效果相同，那么我们就成功从  O 主机登陆了 A 主机。</p>
+<p>但此时我们仍只能从 O 主机本机上登陆 A 主机，无法从其他主机登陆，因此需要再对 3333 端口进行一次端口转发，使其他主机可以访问。具体命令为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -fCNL [O 主机 IP 或省略]:[转发端口]:[O 主机 IP]:[被转发端口] [登陆 O 主机的用户名@O 主机的 IP]</span><br></pre></td></tr></table></figure></p>
+<p>此处我们想要将 3333 端口转发到 2222 端口，因此转发端口为 2222，被转发端口为 3333。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -fCNL *:2222:localhost:3333 localhost</span><br></pre></td></tr></table></figure></p>
+<p>此处 <code>*</code> 表示允许任意其他主机访问，本机的用户名可省略。使用 <code>ps aux | grep 2222</code> 命令来查看正向代理是否运行成功。此处 2222 端口为本地转发端口，负责与外网进行通信，并将数据转发到 3333 端口，实现了可以从其他主机访问的功能。</p>
+<h3 id="展现奇迹的时候到了"><a href="#展现奇迹的时候到了" class="headerlink" title="展现奇迹的时候到了"></a>展现奇迹的时候到了</h3><p>到次为至，我们已经配置好了 AO 主机，那么我们可以从任意可联网的设备登录到计算平台中去啦。指令为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -p 2222 cal@123.123.123.123</span><br></pre></td></tr></table></figure></p>
+<p>我们实现了从任意地方连入内网计算平台的连接！</p>
+<h3 id="这种反向代理是不稳定的"><a href="#这种反向代理是不稳定的" class="headerlink" title="这种反向代理是不稳定的"></a>这种反向代理是不稳定的</h3><p>不幸的是这种 ssh 连接会因为超时和网络堵塞等原因而关闭，那么从的外网连通内网的通道就无法维持了，为此我们需要维持稳定 ssh 反向代理隧道的方法。</p>
+<h4 id="配置-ssh-key-实现免密登陆"><a href="#配置-ssh-key-实现免密登陆" class="headerlink" title="配置 ssh key 实现免密登陆"></a>配置 ssh key 实现免密登陆</h4><p>在使用 ssh 进行连接时，每次都需要输入密码，一方面不安全，另一方面也为我们接下来使用的自动化工具带来了阻碍。</p>
+<p>首先登陆 A 主机，并运行如下命令生成公钥私钥对。中间的配置过程一路回车即可。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"youremail@example.com"</span></span><br></pre></td></tr></table></figure></p>
+<p>此时就在 A 主机的 <code>~/.ssh/</code> 目录下生成了公钥与私钥对，接下来我们需要将公钥传到 O 主机上作为我们登陆的一个比对凭证<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id server@123.123.123.123</span><br></pre></td></tr></table></figure></p>
+<p>此时，我们再使用 <code>ssh server@123.123.123.123</code> 登陆路 O 主机就不再需要密码了。</p>
+<h4 id="用-autossh-建立稳定隧道"><a href="#用-autossh-建立稳定隧道" class="headerlink" title="用 autossh 建立稳定隧道"></a>用 autossh 建立稳定隧道</h4><p>从 A 主机到 O 主机的反向代理连接是不稳定的，也就是说，我们需要一个工具来时刻监听着这个连接。一但断开，再次自动重新建立连接即可。幸运的是，已经有人写出了这个工具，那就是 autossh！感谢开源！</p>
+<p>CentOS 的官方仓库中并没有这个软件包，我们需要从源码编译安装<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install wget gcc make</span><br><span class="line">wget http://www.harding.motd.ca/autossh/autossh-1.4e.tgz</span><br><span class="line">tar -xf autossh-1.4e.tgz</span><br><span class="line"><span class="built_in">cd</span> autossh-1.4e</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure></p>
+<p>至此我们已经安装好了 autossh，利用下面的命令来启动守护进程。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">autossh -M 7200 -fCNR 3333:localhost:22 server@123.123.123.123</span><br></pre></td></tr></table></figure></p>
+<p>autossh 命令的参数与 ssh 一致，不同的是我们需要指出的 <code>-M`` </code>参数，这个参数指定一个端口，这个端口是外网的 O 主机用来接收内网 A 主机的信息，如果隧道不正常而返回给 A 主机让它实现重新连接。</p>
+<h4 id="配置自动启动"><a href="#配置自动启动" class="headerlink" title="配置自动启动"></a>配置自动启动</h4><p>我们需要将 autossh 命令配置在开机自动启动脚本中，免去了每次开机都需要重新运行脚本的麻烦。</p>
+<p>我们需要在 A 主机的 <code>/etc/rc.d/rc.local</code> 文件中添加如下内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/su -c <span class="string">'/usr/local/bin/autossh -M 7200 -fCNR 3333:localhost:22 server@123.123.123.123'</span> - cal</span><br></pre></td></tr></table></figure></p>
+<p>此命令表示，以 cal 用户运行 autossh 命令，这样我们就能够使用 cal 用户反向连接到 A 主机。</p>
+<p>为了保险起见，我们需要为自启动脚本添加执行权限<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod +x /etc/rc.d/rc.local</span><br></pre></td></tr></table></figure></p>
+<p>至此我们就建立好了稳定的连接隧道。</p>
+<h3 id="进一步优化"><a href="#进一步优化" class="headerlink" title="进一步优化"></a>进一步优化</h3><h4 id="保持活连接"><a href="#保持活连接" class="headerlink" title="保持活连接"></a>保持活连接</h4><p>在测试中发现，如果一个连接长时间空置，那么就会冻结。反向代理连接也是一样，此时便只能通过重启 A 主机使连接重置。为保持一个活连接（Keep alive），需要服务端或客户端定时发送心跳包来确保连接活跃，此处我们选择配置服务端的心跳。</p>
+<p>在 A 和 O 的 <code>/etc/ssh/sshd_config</code> 文件中添加如下内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># server 每隔 60 秒发送一次请求给 client，然后 client 响应，从而保持连接</span></span><br><span class="line">ClientAliveInterval 60</span><br><span class="line"><span class="comment"># server 发出请求后，客户端没有响应得次数达到 3，就自动断开连接，正常情况下，client 不会不响应</span></span><br><span class="line">ClientAliveCountMax 3</span><br></pre></td></tr></table></figure></p>
+<h4 id="Windows-SSH-Client-连接提示错误"><a href="#Windows-SSH-Client-连接提示错误" class="headerlink" title="Windows SSH Client 连接提示错误"></a>Windows SSH Client 连接提示错误</h4><p>使用 Windows 的 SSH Client 连接 Linux 运行的 SSH 服务端时，会提示“ssh algorithm negotiation failed”错误，导致此问题的原因是 ssh 升级后，为了安全，默认不再采用原来一些加密算法，我们手工添加进去即可。</p>
+<p>在 O 主机的 <code>/etc/ssh/sshd_config</code> 文件中添加如下内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># add crypt format for window ssh client</span></span><br><span class="line">Ciphers aes128-cbc,aes192-cbc,aes256-cbc,aes128-ctr,aes192-ctr,aes256-ctr,3des-cbc,arcfour128,arcfour256,arcfour,blowfish-cbc,cast128-cbc</span><br><span class="line">MACs hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-sha1-96,hmac-md5-96</span><br><span class="line">KexAlgorithms diffie-hellman-group1-sha1,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group-exchange-sha256,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group1-sha1,curve25519-sha256@libssh.org</span><br></pre></td></tr></table></figure></p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p> <a href="https://www.cnblogs.com/zjutlitao/p/6223486.html" target="_blank" rel="noopener">Windows SSH Client 报 Algorithm negotiation failed 的解决方法之一</a><br> <a href="https://blog.csdn.net/jiangbenchu/article/details/84438959" target="_blank" rel="noopener">使用SSH反向隧道进行内网穿透</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2019/04/30/路由器配置教程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cycoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cycoe's Home Page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/30/路由器配置教程/" itemprop="url">
+                  路由器配置教程
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-30T21:19:49+08:00">2019-04-30</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/30/路由器配置教程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/04/30/路由器配置教程/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="初次使用"><a href="#初次使用" class="headerlink" title="初次使用"></a>初次使用</h2><p>拿到新的路由器之后，首先检查外包装是否有破损、路由器是否有划痕、插头是否有使用痕迹、插上电源后指示灯是否正常亮起，以此初步判断路由器是否是全新的，在某东平台上买电子产品要尤其注意。。。</p>
+<p>好吧扯远了。。。路由器其实可以算作是一台独立的微型计算机，运行着定制的操作系统（针对路由器我们叫固件）。但路由器又与我们平常见到的电脑不同，因为它没有标准输入输出设备，也就是键盘鼠标和显示器。那我们要怎么对路由器进行控制呢，其实有很多种方式，但无论的使用哪种方式，我们都需要首先连接上路由器。</p>
+<ol>
+<li>为路由器插上电</li>
+<li>连接路由器的方式有两种——有线和无线连接。任选其一即可。<ol>
+<li>有线连接：使用网线一头连接路由器的 LAN（Local Area Network）口，一头连接电脑的网线口</li>
+<li>无线连接：打开 Wi-Fi 并连接路由器，一般初始名字为 “TP-LINK_XXX”</li>
+</ol>
+</li>
+<li>在浏览器中输入 <code>192.168.1.1</code> 打开路由器管理界面（也可能是其他 IP 地址，一般在路由器底部的标签上可以看到）</li>
+<li>这个时候，根据配置向导对路由器进行配置即可。需要注意的是对于校园网，在 WAN 口连接方式中，选择“动态IP”选项。其他的 SSID 名（也就是平常说的 Wi-Fi 名）及密码等根据需要进行配置即可</li>
+</ol>
+<h2 id="高级配置"><a href="#高级配置" class="headerlink" title="高级配置"></a>高级配置</h2><p>在路由器管理页面中，我们可以看到非常多的配置选项。虽然平常在家庭使用中我们只会用到其中的几个选项，但对于实验室这样一个需要对几十台设备进行管理的场景，里面的一些选项就会非常有用了。</p>
+<h3 id="静态-IP-地址绑定"><a href="#静态-IP-地址绑定" class="headerlink" title="静态 IP 地址绑定"></a>静态 IP 地址绑定</h3><p>这是我最常用到的一个功能，通俗的讲就是将一个设备的 IP 的地址固定下来。一个设备在通过路由器连入互联网时，路由器会通过 DHCP（Dynamic Host Configuration Protocol 动态主机设置协议）服务为每个设备随机分配 IP 地址，并且每过一段时间就会改变。那么我们想在局域网中找到另一台设备就需要通过 IP 地址，而静态 IP 地址绑定就是要告诉路由器，我想为一台特定设备分配一个固定的 IP 地址，那么我以后就可以通过这个固定的 IP 地址来找到这台设备。</p>
+<p>现在的路由器几乎都有这个功能，一般是在基本设置-LAN 设置-静态地址分配中进行设置。其中“MAC 地址”是设备的硬件地址，是一串唯一的 12 位的十六进制数，在设备出厂时就确定好了。可通过我写的小程序获得。“IP 地址”是你希望该设备使用的 IP 地址。</p>
+<h3 id="路由器桥接"><a href="#路由器桥接" class="headerlink" title="路由器桥接"></a>路由器桥接</h3>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2019/02/28/从自然数开始/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cycoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cycoe's Home Page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/28/从自然数开始/" itemprop="url">
+                  从自然数开始
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-28T10:05:58+08:00">2019-02-28</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Math/" itemprop="url" rel="index"><span itemprop="name">Math</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/28/从自然数开始/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/28/从自然数开始/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="素数（Prime）"><a href="#素数（Prime）" class="headerlink" title="素数（Prime）"></a>素数（Prime）</h2><p>对于一个自然数 $n\in\mathbb{N}$，若其只能被 $1$ 和它本身整除（即只有两个因子），则被称为素数；若其有多于两个因子，则被称为合数。素数是不能够进行质因式分解的最小单元，因此合数具有唯一的质因式分解（质因子不可再分）。</p>
+<h3 id="1-的特殊性"><a href="#1-的特殊性" class="headerlink" title="1 的特殊性"></a>1 的特殊性</h3><p>1 能够被 $1$ 及其自身整除，但为了体系的自洽，不认为 $1$ 是素数。有如下两个原因：</p>
+<ol>
+<li>若 $1$ 是素数，则任意自然数的质因式分解将不是唯一的。$6=2\times 3=1\times 2\times 3$。</li>
+<li>任意素数 $p$ 可被分解为 $p=1\times p$，若 $1$ 为素数，则 $p$ 为合数，与 $p$ 为素数相矛盾。</li>
+</ol>
+<h2 id="寻找素数"><a href="#寻找素数" class="headerlink" title="寻找素数"></a>寻找素数</h2><p>针对素数，我们希望研究：</p>
+<ul>
+<li>对于任意 $n\in \mathbb{N}$，判断其是否为素数；</li>
+<li>对于任意 $n\in \mathbb{N}$，找到所有小于 $n$ 的素数，或等价于求小于 $n$ 的素数的个数；</li>
+<li>对于任意 $n\in \mathbb{N}$，求其质因式分解。</li>
+</ul>
+<h2 id="质因式分解"><a href="#质因式分解" class="headerlink" title="质因式分解"></a>质因式分解</h2><p>前几天，看杂志时发现一个有趣的问题，“对任意一个自然数 $n$，如何求其所有因子的和”。这个问题本身并不困难，但从中可以继续思考质数的相关规律。</p>
+<p>既然是要求因子的和，那么我们首先需要用数学语言将因子表示出来。在此之前，我们需要先将这个自然数表示出来。</p>
+<p>设 $n$ 有 $m+1$ 个质因子 $p_0 &lt; p_1 &lt; \cdots &lt; p_m$，则存在如下唯一的质因式分解</p>
+<script type="math/tex; mode=display">
+    n = p_0^{a_0} \times p_1^{a_1} \times \cdots \times p_m^{a_m}</script><p>则 $n$ 的因子 $f$ 满足</p>
+<script type="math/tex; mode=display">
+    f = p_0^{b_0} \times p_1^{b_1} \times \cdots \times p_m^{b_m}</script><p>其中</p>
+<script type="math/tex; mode=display">
+    \left\{\begin{array}{c}
+        0 \leq b_0 \leq a_0\\
+        0 \leq b_1 \leq a_1\\
+        \vdots\\
+        0 \leq b_m \leq a_m
+    \end{array}\right.,\ 
+    且\ b_0, b_1, \cdots, b_m \in \mathbb{N}</script><p>记所有质因子之和为 $S(n)$，即为所有满足上式的 $f$ 之和</p>
+<script type="math/tex; mode=display">
+    \begin{split}
+        S(n) &= (p_0^0+p_0^1+\cdots+p_0^{a^0})\times (p_1^0+p_1^1+\cdots+p_1^{a^1})\times \cdots \times (p_m^0+p_m^1+\cdots+p_m^{a^m})\\
+        &= \dfrac{p_0^{a_0+1}-1}{p_0-1}\times \dfrac{p_1^{a_1+1}-1}{p_1-1}\times \cdots \times\dfrac{p_m^{a_m+1}-1}{p_m-1}\\
+        &= \prod\limits_{i=0}^m \dfrac{p_i^{a_i+1}-1}{p_i-1}
+    \end{split}</script><p>至此，我们已经得到已知自然数 $n$ 所有因子和 $S(n)$ 的表达式。接下来验证一下，$24$ 的所有因子有 $1, 2, 3, 4, 6, 8, 12, 24$，求和得 $S_1(24)=60$。$24$ 的质因式分解为 $24=2^3\times3^1$，则 $S_2(24)=(2^0+2^1+2^2+2^3)\times(3^0+3^1)=60$。答案正确！</p>
+<hr>
+<p>但通过观察发现，表达式的值并不直接与 $n$ 相关，而是与 $n$ 的所有质因子相关。我们知道，因式分解是一个 NPC 问题，我们无法在多项式时间内对 $n$ 进行因式分解。那么，我们有没有办法对 $S(n)$ 进行粗略的估计呢？即有没有办法用 $n$ 来表示 $S(n)$ 的上下界？或者更具体的，$S(n)$ 与 $n$ 是否存在某种倍数关系？</p>
+<p>对 $S(n)$ 的表达式进行缩放我们得到</p>
+<script type="math/tex; mode=display">
+    \begin{split}
+        S(n) &= \dfrac{p_0^{a_0+1}-1}{p_0-1}\times \dfrac{p_1^{a_1+1}-1}{p_1-1}\times \cdots \times\dfrac{p_m^{a_m+1}-1}{p_m-1}\\
+        &< \dfrac{p_0^{a_0+1}}{p_0-1}\times \dfrac{p_1^{a_1+1}}{p_1-1}\times \cdots \times\dfrac{p_m^{a_m+1}}{p_m-1}\\
+        &= \dfrac{p_0}{p_0-1}\times \dfrac{p_1}{p_1-1}\times \cdots \times\dfrac{p_m}{p_m-1}\times n
+    \end{split}</script><p>得到</p>
+<script type="math/tex; mode=display">
+    \dfrac{S(n)}{n} < \dfrac{p_0}{p_0-1}\times \dfrac{p_1}{p_1-1}\times \cdots \times\dfrac{p_m}{p_m-1} = \Pi_p(m)</script><p>接下来，我们希望知道两件事</p>
+<ol>
+<li>对于任意大的 $m$，$\Pi_p(m)$ 是否存在上界，若 $\Pi_p(m)$ 的上界存在，则 $\dfrac{S(n)}{n}$ 的上界存在。</li>
+<li>若$\Pi_p(m)$ 的上界不存在，那么对于确定的 $n$，我们能否得到 $\dfrac{S(n)}{n}$ 的上界。</li>
+</ol>
+<hr>
+<p>首先来解决第一个问题。使用计算机进行计算发现，前 $2^k$ 个质数的 $\Pi_p(2^k)$ 与 $k$ 呈近似线性关系</p>
+<script type="math/tex; mode=display">
+    \Pi_p(2^k) = ak + b</script><p>另外 $2^k$ 以内的质数的分式乘积 $\Pi_p(\eta)$ 也与 $k$ 呈近似线性关系。</p>
+<p>设 $\Pi(n)$ 为前 $n$ 个自然数的类似分式积表达式</p>
+<script type="math/tex; mode=display">
+    \Pi(n) = \dfrac21 \times \dfrac32 \times \cdots \times \dfrac{n}{n-1} = n</script><p>则前 $n$ 个质数的 $\Pi(n)$ 与 $n$ 呈线性关系。</p>
+<p>一个为质数， 一个为自然数，其中必然蕴含着质数分布的某种真理。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2018/11/13/正交试验设计/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -865,50 +1471,19 @@ B = \begin{bmatrix}
 <h2 id="Archlinux-配置"><a href="#Archlinux-配置" class="headerlink" title="Archlinux 配置"></a>Archlinux 配置</h2><h3 id="讓-Qt5-程序使用原生-GTK-主題"><a href="#讓-Qt5-程序使用原生-GTK-主題" class="headerlink" title="讓 Qt5 程序使用原生 GTK+ 主題"></a>讓 Qt5 程序使用原生 GTK+ 主題</h3><p>Qt5 程序在 GTK3 環境下主題不統一真的很難受，尤其是 GTK3 用了黑色主題而 Qt5 還是刺眼的白色主題的時候。不像在 KDE 設置中設置 GTK3 主題那麼方便，設置 Qt5 主題可需要好好折騰一番。而且這個解決方案也是我使用了近一年後才找到的答案。</p>
 <p>首先你需要安裝 qt5ct 來提供 Qt5 程序主題的設置入口。此時直接在應用列表中打開 qt5ct 會提示未設置環境變量，編輯 <code>.xprofile</code> 文件，並在其中加入如下內容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ <span class="string">"<span class="variable">$XDG_CURRENT_DESKTOP</span>"</span> = <span class="string">"KDE"</span> ] || [ <span class="string">"<span class="variable">$XDG_CURRENT_DESKTOP</span>"</span> = <span class="string">"GNOME"</span> ] || <span class="built_in">export</span> QT_QPA_PLATFORMTHEME=<span class="string">"qt5ct"</span></span><br></pre></td></tr></table></figure></p>
 <p>註銷後重新登錄，此時打開 qt5ct 應該就不報錯了。但此時你會發現主題列表中只有 Qt5 自帶的幾個樣式，而沒有 Gtk3 主題。你需要安裝 qt5-styleplugins 來使 Qt5 支持 GTK2 主題。你沒有看錯，我也不知道爲啥 Qt5 只支持 GTK2 的主題。但是我們要如何設置 GTK2 主題呢，好吧，又需要安裝一個叫 gtk-theme-switch2 的工具。在 gtk-theme-switch2 中設置好滿意的 GTK2 主題後，再在 qt5ct 中設置 Qt5 主題爲 GTK2 即可。</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
-<h2 id="常用軟件"><a href="#常用軟件" class="headerlink" title="常用軟件"></a>常用軟件</h2><h1 id="用了幾年-Linux-後發現其實-Linux-平臺的軟件並不少（當然-Adobe-全家桶和-MS-Office-除外，要做設計或者辦公還是老老實實-Windows-吧-speak-no-evil-），只是與-Windows-和-Mac-平臺常用的軟件不同而已。Linux-的真正強大之處是命令行軟件，幾條簡單的命令組合就可以完成複雜的功能。"><a href="#用了幾年-Linux-後發現其實-Linux-平臺的軟件並不少（當然-Adobe-全家桶和-MS-Office-除外，要做設計或者辦公還是老老實實-Windows-吧-speak-no-evil-），只是與-Windows-和-Mac-平臺常用的軟件不同而已。Linux-的真正強大之處是命令行軟件，幾條簡單的命令組合就可以完成複雜的功能。" class="headerlink" title="用了幾年 Linux 後發現其實 Linux 平臺的軟件並不少（當然 Adobe 全家桶和 MS Office 除外，要做設計或者辦公還是老老實實 Windows 吧:speak_no_evil:），只是與 Windows 和 Mac 平臺常用的軟件不同而已。Linux 的真正強大之處是命令行軟件，幾條簡單的命令組合就可以完成複雜的功能。"></a>用了幾年 Linux 後發現其實 Linux 平臺的軟件並不少（當然 Adobe 全家桶和 MS Office 除外，要做設計或者辦公還是老老實實 Windows 吧:speak_no_evil:），只是與 Windows 和 Mac 平臺常用的軟件不同而已。Linux 的真正強大之處是命令行軟件，幾條簡單的命令組合就可以完成複雜的功能。</h1><h3 id="小鹤双拼"><a href="#小鹤双拼" class="headerlink" title="小鹤双拼"></a>小鹤双拼</h3><p>每次重装系统都需要重新配置输入法，更蛋疼的是在 Rime 中添加鹤形码表时，总出现部署错误。虽然最后折腾半天总是莫名其妙地整好了，但是不得不感叹配置 Rime 真是玄学（虽然很不想承认是自己对 Rime 的配置文件一窍不通:laughing:）。特此记录一下给 Rime 添加鹤形的过程，虽然以后按相同的步骤也不一定能配置成功。</p>
+<h2 id="常用軟件"><a href="#常用軟件" class="headerlink" title="常用軟件"></a>常用軟件</h2><p>用了幾年 Linux 後發現其實 Linux 平臺的軟件並不少（當然 Adobe 全家桶和 MS Office 除外，要做設計或者辦公還是老老實實 Windows 吧:speak_no_evil:），只是與 Windows 和 Mac 平臺常用的軟件不同而已。Linux 的真正強大之處是命令行軟件，幾條簡單的命令組合就可以完成複雜的功能。</p>
+<h3 id="小鹤双拼"><a href="#小鹤双拼" class="headerlink" title="小鹤双拼"></a>小鹤双拼</h3><p>每次重装系统都需要重新配置输入法，更蛋疼的是在 Rime 中添加鹤形码表时，总出现部署错误。虽然最后折腾半天总是莫名其妙地整好了，但是不得不感叹配置 Rime 真是玄学（虽然很不想承认是自己对 Rime 的配置文件一窍不通:laughing:）。特此记录一下给 Rime 添加鹤形的过程，虽然以后按相同的步骤也不一定能配置成功。</p>
 <p>第一步，安装 fcitx 框架（ibus 框架就不考虑了，fcitx 用习惯了）和 Rime 的 fcitx 实现。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Archlinux</span></span><br><span class="line">sudo pacman -S fcitx fcitx-rime fcitx-configtool</span><br><span class="line"><span class="comment"># openSUSE</span></span><br><span class="line">sudo zypper <span class="keyword">in</span> fcitx fcitx-rime fcitx-config-gtk</span><br></pre></td></tr></table></figure></p>
 <p>第二步，在 fcitx 设置中加入 rime 输入法，记得关闭“只显示当前语言输入法选项”。切换到 Rime 输入法，此时应该会自动运行一次 deploy。</p>
 <p>第三步，将<a href="https://git.coding.net/cycoe/config.git" target="_blank" rel="noopener">我的配置</a>中的 <code>.config/fcitx</code> 目录复制到对应的路径，其中已经包含了 flypy 使用的码表（之前小鹤双拼官网发布的挂接码表文件，但因为没有通用的配置方法目前已经下架），并将运行下面的命令将配置文件复制到 Rime 系统级路径中（尝试过复制到 <code>.config/fcitx/rime/build/default.custom.yaml</code>，没有效果）。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 备份原配置</span></span><br><span class="line">sudo mv /usr/share/rime-data/default.yaml /usr/share/rime-data/default.yaml.bak</span><br><span class="line"><span class="comment"># 复制新配置</span></span><br><span class="line">sudo cp default.yaml /usr/share/rime-data/default.yaml</span><br></pre></td></tr></table></figure></p>
 <p>第四步，在 fcitx 上右键，选择 deploy，此时会提示部署错误，但是惊喜地发现输入法已经可以使用。</p>
 <h2 id="常用软件"><a href="#常用软件" class="headerlink" title="常用软件"></a>常用软件</h2><p>用了几年 Linux 后发现其实 Linux 平台的软件并不少（当然 Adobe 全家桶和 MS Office 除外，要做设计或者办公还是老老实实 Windows 吧:speak_no_evil:），只是与 Windows 和 Mac 平台常用的软件不同而已。Linux 的真正强大之处是命令行软件，几条简单的命令组合就可以完成复杂的功能。</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>cc82a6261f6c74531b0a2de240eae2d2fe3ed050</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
 <h3 id="Dia"><a href="#Dia" class="headerlink" title="Dia"></a>Dia</h3><p>一個非常小的流程圖繪製軟件，但是功能夠用。</p>
 <h3 id="ncdu"><a href="#ncdu" class="headerlink" title="ncdu"></a>ncdu</h3><p>ncdu (NCurses Disk Usage) 是一個基於 NCurses 系統的磁盤用量分析命令行軟件，相似功能的還有基於 GTK+ 的 Baobab（從版本號來看應該是屬於 Gnome 桌面套裝）。其實對我來說真的很少使用此類軟件，畢竟我很少刪除磁盤文件，但是最近 /Home 分區接近爆滿讓我很難受，還是需要從磁盤的角落翻出以後再也用不上的大文件以刪除之。</p>
 <h3 id="xreader"><a href="#xreader" class="headerlink" title="xreader"></a>xreader</h3><p>pdf 文檔閱讀器，X-Apps 計劃中的一員（這個計劃好像只有個閱讀器？:laughing:）。體積小巧，優點是可以使用 <code>hjkl</code> 等 vim 鍵位進行控制。缺點是沒有高級功能，單純作爲一個閱讀器還是不錯的。</p>
 <h3 id="pcmanfm"><a href="#pcmanfm" class="headerlink" title="pcmanfm"></a>pcmanfm</h3><p>LXDE 桌面環境默認文件管理器，實話說比 Gnome 的鸚鵡螺好用太多，功能上與 Dolphin 相近。Archlinux 上有單獨提供 pcmanfm-gtk3 的安裝包，其他髮型版上應該默認使用的就是 GTK3 了。</p>
 <h3 id="lxappearance"><a href="#lxappearance" class="headerlink" title="lxappearance"></a>lxappearance</h3><p>GTK+ 界面主題設置工具，又是 LXDE 的一員。LXDE 自帶的幾款軟件質量都挺高，界面風格統一併且功能強大。</p>
-<h3 id="gpickview"><a href="#gpickview" class="headerlink" title="gpickview"></a>gpickview</h3><p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
-<h1 id="LXDE-默認的圖片查看器，體積小巧，沒有太多花哨功能。"><a href="#LXDE-默認的圖片查看器，體積小巧，沒有太多花哨功能。" class="headerlink" title="LXDE 默認的圖片查看器，體積小巧，沒有太多花哨功能。"></a>LXDE 默認的圖片查看器，體積小巧，沒有太多花哨功能。</h1><p>LXDE 默认的图片查看器，体积小巧，没有太多花哨功能。</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>cc82a6261f6c74531b0a2de240eae2d2fe3ed050</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+<h3 id="gpickview"><a href="#gpickview" class="headerlink" title="gpickview"></a>gpickview</h3><p>LXDE 默認的圖片查看器，體積小巧，沒有太多花哨功能。</p>
 
           
         
@@ -1958,555 +2533,6 @@ B = \begin{bmatrix}
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2018/04/13/Planche-training-calendar/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Cycoe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cycoe's Home Page">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/13/Planche-training-calendar/" itemprop="url">
-                  Planche training calendar
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-                
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-13T00:00:00+08:00">2018-04-13</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/personal/" itemprop="url" rel="index"><span itemprop="name">personal</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/13/Planche-training-calendar/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/13/Planche-training-calendar/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p> A planche is a skill in <a href="https://en.wikipedia.org/wiki/Gymnastics" target="_blank" rel="noopener">gymnastics</a> in which the <a href="https://en.wikipedia.org/wiki/Human_body" target="_blank" rel="noopener">body</a> is held parallel to the ground, giving the illusion of floating. It is a move that requires significant <a href="https://en.wikipedia.org/wiki/Physical_strength" target="_blank" rel="noopener">strength</a> and <a href="https://en.wikipedia.org/wiki/Balance" target="_blank" rel="noopener">balance</a>.</p>
-<img src="/2018/04/13/Planche-training-calendar/Planche.jpg" title="Planche">
-</blockquote>
-<p>剛進大學的時候 ，無意間在 B 站看到一個關於俄挺的視頻，能夠完成俄挺成了我的一個夢想。本科的時候陸陸續續地練過一段時間，練練俯臥撐和團身，團身也就是剛剛高團 2-3 秒的程度。後來因爲實在沒什麼進展也就漸漸放棄了。前幾天回家的路上吹了點小風就感冒了，意識到自己的小身板太弱，再加上最近想要增重，決定重新開始練習俄挺。</p>
-<h3 id="2018-04-05"><a href="#2018-04-05" class="headerlink" title="2018-04-05"></a>2018-04-05</h3><p>從今天開始練習，因爲也好久沒有做俯臥撐了，目前的水平實在太爛。</p>
-<ul>
-<li>標準俯臥撐 10 個</li>
-<li>衝肩維持 5 秒</li>
-</ul>
-<h3 id="2018-04-13"><a href="#2018-04-13" class="headerlink" title="2018-04-13"></a>2018-04-13</h3><p>練了一個星期的衝肩，每天都在堅持。</p>
-<img src="/2018/04/13/Planche-training-calendar/plank_lean.jpg">
-<ul>
-<li>衝肩維持 10 秒</li>
-<li>窄距俯臥撐 10 個</li>
-</ul>
-<h3 id="2018-06-10"><a href="#2018-06-10" class="headerlink" title="2018-06-10"></a>2018-06-10</h3><p>最近右手小臂疼的厲害，應該是跟前幾天每天用鼠標做視頻有關，看來要好好休息幾天了，最近下調訓練強度，少用鼠標。。不過值得激動的是，目前已經可以比較輕鬆地做團身了，高階團身應該也能 10 來秒了，接下來準備練團身舉腿。</p>
-<img src="/2018/04/13/Planche-training-calendar/tucked.jpg" title="tucked">
-<ul>
-<li>衝肩維持 30 秒</li>
-<li>窄距俯臥撐 25 個</li>
-<li>衝肩俯臥撐 15 個</li>
-<li>團身維持 10 秒</li>
-<li>引體向上 7 個</li>
-</ul>
-<h3 id="2018-07-25"><a href="#2018-07-25" class="headerlink" title="2018-07-25"></a>2018-07-25</h3><p>最近一個月因爲手腕一直還是有點疼，尤其搬重物的時候，也就沒怎麼敢繼續練團身，轉而練習引體和前水平。打算先通過前水平鍛鍊背部力量，通過雙力臂鍛鍊手腕力量，等基礎打好後再練習俄挺。引體的話其實應該一組能做個 10 個左右，但是後面幾組做的時候因爲可能是翻腕了的原因，導致手腕還是會疼，發現在雲梯上練習就沒事了，可能是手的朝向的問題。</p>
-<p>雙力臂其實還是沒有太大進展，前水平的話一條腿伸直是能保持了，接下來就是要延長持續的時間，然後慢慢向雙腿進步。在宿舍也可以每天都練前水平。</p>
-<p>另外利用操場上的槓鈴可以做很多其他的訓練，比如正手擡、反手拉、單手拉、臥推。利用器材可以取得更好的訓練效果。</p>
-<p><strong>最後有個非常重要的想法：</strong>在家的這幾天發現，想要找個健身器材齊全的公園實在不是很容易，因此希望能做個 App，街健愛好者可以在上面共享健身器材所在的位置，另外可以認識附近的街健愛好者。</p>
-<ul>
-<li>衝肩俯臥撐 20 個</li>
-<li>前水平團身 10 秒</li>
-<li>單槓硬拉 4 個</li>
-<li>引體 10 個</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2017/12/07/教务网现惊天大bug/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Cycoe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cycoe's Home Page">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/07/教务网现惊天大bug/" itemprop="url">
-                  教務網現驚天大 bug？！談談弱密碼如何暴露你的信息
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-                
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-07T00:00:00+08:00">2017-12-07</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/spider/" itemprop="url" rel="index"><span itemprop="name">spider</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/spider/sploit/" itemprop="url" rel="index"><span itemprop="name">sploit</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/12/07/教务网现惊天大bug/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/12/07/教务网现惊天大bug/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          爬蟲小記
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/12/07/教务网现惊天大bug/">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2017/11/03/如何提高抢到报告的概率/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Cycoe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cycoe's Home Page">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/03/如何提高抢到报告的概率/" itemprop="url">
-                  如何提高搶到報告的概率？
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-                
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-03T00:00:00+08:00">2017-11-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/spider/" itemprop="url" rel="index"><span itemprop="name">spider</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/11/03/如何提高抢到报告的概率/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/11/03/如何提高抢到报告的概率/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          爬蟲小記
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/03/如何提高抢到报告的概率/">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2554,7 +2580,7 @@ B = \begin{bmatrix}
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2589,7 +2615,9 @@ B = \begin{bmatrix}
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2618,7 +2646,7 @@ B = \begin{bmatrix}
                     
                       
                     
-                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -2844,11 +2872,11 @@ B = \begin{bmatrix}
   
     
       
+    
+      
+    
+      
         
-      
-    
-      
-    
       
     
       

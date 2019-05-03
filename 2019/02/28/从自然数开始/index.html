@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="素数（Prime）对于一个自然数 $n\in\mathbb{N}$，若其只能被 $1$ 和它本身整除（即只有两个因子），则被称为素数；若其有多于两个因子，则被称为合数。素数是不能够进行质因式分解的最小单元，因此合数具有唯一的质因式分解（质因子不可再分）。 1 的特殊性1 能够被 $1$ 及其自身整除，但为了体系的自洽，不认为 $1$ 是素数。有如下两个原因：  若 $1$ 是素数，则任意自然数的质">
+<meta name="keywords" content="Math, Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从自然数开始">
+<meta property="og:url" content="http://cycoe.cc/2019/02/28/从自然数开始/index.html">
+<meta property="og:site_name" content="Cycoe&#39;s Home Page">
+<meta property="og:description" content="素数（Prime）对于一个自然数 $n\in\mathbb{N}$，若其只能被 $1$ 和它本身整除（即只有两个因子），则被称为素数；若其有多于两个因子，则被称为合数。素数是不能够进行质因式分解的最小单元，因此合数具有唯一的质因式分解（质因子不可再分）。 1 的特殊性1 能够被 $1$ 及其自身整除，但为了体系的自洽，不认为 $1$ 是素数。有如下两个原因：  若 $1$ 是素数，则任意自然数的质">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-04T08:51:24.240Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从自然数开始">
+<meta name="twitter:description" content="素数（Prime）对于一个自然数 $n\in\mathbb{N}$，若其只能被 $1$ 和它本身整除（即只有两个因子），则被称为素数；若其有多于两个因子，则被称为合数。素数是不能够进行质因式分解的最小单元，因此合数具有唯一的质因式分解（质因子不可再分）。 1 的特殊性1 能够被 $1$ 及其自身整除，但为了体系的自洽，不认为 $1$ 是素数。有如下两个原因：  若 $1$ 是素数，则任意自然数的质">
+
+
+
+
+
+
+  <link rel="canonical" href="http://cycoe.cc/2019/02/28/从自然数开始/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>从自然数开始 | Cycoe's Home Page</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cycoe's Home Page</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Simple is better than complex. Complex is better than complicated.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2019/02/28/从自然数开始/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cycoe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cycoe's Home Page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">从自然数开始
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-28T10:05:58+08:00">2019-02-28</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Math/" itemprop="url" rel="index"><span itemprop="name">Math</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/28/从自然数开始/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/28/从自然数开始/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="素数（Prime）"><a href="#素数（Prime）" class="headerlink" title="素数（Prime）"></a>素数（Prime）</h2><p>对于一个自然数 $n\in\mathbb{N}$，若其只能被 $1$ 和它本身整除（即只有两个因子），则被称为素数；若其有多于两个因子，则被称为合数。素数是不能够进行质因式分解的最小单元，因此合数具有唯一的质因式分解（质因子不可再分）。</p>
+<h3 id="1-的特殊性"><a href="#1-的特殊性" class="headerlink" title="1 的特殊性"></a>1 的特殊性</h3><p>1 能够被 $1$ 及其自身整除，但为了体系的自洽，不认为 $1$ 是素数。有如下两个原因：</p>
+<ol>
+<li>若 $1$ 是素数，则任意自然数的质因式分解将不是唯一的。$6=2\times 3=1\times 2\times 3$。</li>
+<li>任意素数 $p$ 可被分解为 $p=1\times p$，若 $1$ 为素数，则 $p$ 为合数，与 $p$ 为素数相矛盾。</li>
+</ol>
+<h2 id="寻找素数"><a href="#寻找素数" class="headerlink" title="寻找素数"></a>寻找素数</h2><p>针对素数，我们希望研究：</p>
+<ul>
+<li>对于任意 $n\in \mathbb{N}$，判断其是否为素数；</li>
+<li>对于任意 $n\in \mathbb{N}$，找到所有小于 $n$ 的素数，或等价于求小于 $n$ 的素数的个数；</li>
+<li>对于任意 $n\in \mathbb{N}$，求其质因式分解。</li>
+</ul>
+<h2 id="质因式分解"><a href="#质因式分解" class="headerlink" title="质因式分解"></a>质因式分解</h2><p>前几天，看杂志时发现一个有趣的问题，“对任意一个自然数 $n$，如何求其所有因子的和”。这个问题本身并不困难，但从中可以继续思考质数的相关规律。</p>
+<p>既然是要求因子的和，那么我们首先需要用数学语言将因子表示出来。在此之前，我们需要先将这个自然数表示出来。</p>
+<p>设 $n$ 有 $m+1$ 个质因子 $p_0 &lt; p_1 &lt; \cdots &lt; p_m$，则存在如下唯一的质因式分解</p>
+<script type="math/tex; mode=display">
+    n = p_0^{a_0} \times p_1^{a_1} \times \cdots \times p_m^{a_m}</script><p>则 $n$ 的因子 $f$ 满足</p>
+<script type="math/tex; mode=display">
+    f = p_0^{b_0} \times p_1^{b_1} \times \cdots \times p_m^{b_m}</script><p>其中</p>
+<script type="math/tex; mode=display">
+    \left\{\begin{array}{c}
+        0 \leq b_0 \leq a_0\\
+        0 \leq b_1 \leq a_1\\
+        \vdots\\
+        0 \leq b_m \leq a_m
+    \end{array}\right.,\ 
+    且\ b_0, b_1, \cdots, b_m \in \mathbb{N}</script><p>记所有质因子之和为 $S(n)$，即为所有满足上式的 $f$ 之和</p>
+<script type="math/tex; mode=display">
+    \begin{split}
+        S(n) &= (p_0^0+p_0^1+\cdots+p_0^{a^0})\times (p_1^0+p_1^1+\cdots+p_1^{a^1})\times \cdots \times (p_m^0+p_m^1+\cdots+p_m^{a^m})\\
+        &= \dfrac{p_0^{a_0+1}-1}{p_0-1}\times \dfrac{p_1^{a_1+1}-1}{p_1-1}\times \cdots \times\dfrac{p_m^{a_m+1}-1}{p_m-1}\\
+        &= \prod\limits_{i=0}^m \dfrac{p_i^{a_i+1}-1}{p_i-1}
+    \end{split}</script><p>至此，我们已经得到已知自然数 $n$ 所有因子和 $S(n)$ 的表达式。接下来验证一下，$24$ 的所有因子有 $1, 2, 3, 4, 6, 8, 12, 24$，求和得 $S_1(24)=60$。$24$ 的质因式分解为 $24=2^3\times3^1$，则 $S_2(24)=(2^0+2^1+2^2+2^3)\times(3^0+3^1)=60$。答案正确！</p>
+<hr>
+<p>但通过观察发现，表达式的值并不直接与 $n$ 相关，而是与 $n$ 的所有质因子相关。我们知道，因式分解是一个 NPC 问题，我们无法在多项式时间内对 $n$ 进行因式分解。那么，我们有没有办法对 $S(n)$ 进行粗略的估计呢？即有没有办法用 $n$ 来表示 $S(n)$ 的上下界？或者更具体的，$S(n)$ 与 $n$ 是否存在某种倍数关系？</p>
+<p>对 $S(n)$ 的表达式进行缩放我们得到</p>
+<script type="math/tex; mode=display">
+    \begin{split}
+        S(n) &= \dfrac{p_0^{a_0+1}-1}{p_0-1}\times \dfrac{p_1^{a_1+1}-1}{p_1-1}\times \cdots \times\dfrac{p_m^{a_m+1}-1}{p_m-1}\\
+        &< \dfrac{p_0^{a_0+1}}{p_0-1}\times \dfrac{p_1^{a_1+1}}{p_1-1}\times \cdots \times\dfrac{p_m^{a_m+1}}{p_m-1}\\
+        &= \dfrac{p_0}{p_0-1}\times \dfrac{p_1}{p_1-1}\times \cdots \times\dfrac{p_m}{p_m-1}\times n
+    \end{split}</script><p>得到</p>
+<script type="math/tex; mode=display">
+    \dfrac{S(n)}{n} < \dfrac{p_0}{p_0-1}\times \dfrac{p_1}{p_1-1}\times \cdots \times\dfrac{p_m}{p_m-1} = \Pi_p(m)</script><p>接下来，我们希望知道两件事</p>
+<ol>
+<li>对于任意大的 $m$，$\Pi_p(m)$ 是否存在上界，若 $\Pi_p(m)$ 的上界存在，则 $\dfrac{S(n)}{n}$ 的上界存在。</li>
+<li>若$\Pi_p(m)$ 的上界不存在，那么对于确定的 $n$，我们能否得到 $\dfrac{S(n)}{n}$ 的上界。</li>
+</ol>
+<hr>
+<p>首先来解决第一个问题。使用计算机进行计算发现，前 $2^k$ 个质数的 $\Pi_p(2^k)$ 与 $k$ 呈近似线性关系</p>
+<script type="math/tex; mode=display">
+    \Pi_p(2^k) = ak + b</script><p>另外 $2^k$ 以内的质数的分式乘积 $\Pi_p(\eta)$ 也与 $k$ 呈近似线性关系。</p>
+<p>设 $\Pi(n)$ 为前 $n$ 个自然数的类似分式积表达式</p>
+<script type="math/tex; mode=display">
+    \Pi(n) = \dfrac21 \times \dfrac32 \times \cdots \times \dfrac{n}{n-1} = n</script><p>则前 $n$ 个质数的 $\Pi(n)$ 与 $n$ 呈线性关系。</p>
+<p>一个为质数， 一个为自然数，其中必然蕴含着质数分布的某种真理。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Math-Algorithm/" rel="tag"># Math, Algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/13/正交试验设计/" rel="next" title="正交試驗設計">
+                <i class="fa fa-chevron-left"></i> 正交試驗設計
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/30/路由器配置教程/" rel="prev" title="路由器配置教程">
+                路由器配置教程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Cycoe</p>
+              <p class="site-description motion-element" itemprop="description">Cycoe's Personal Blog</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/cycoe" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#素数（Prime）"><span class="nav-number">1.</span> <span class="nav-text">素数（Prime）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-的特殊性"><span class="nav-number">1.1.</span> <span class="nav-text">1 的特殊性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寻找素数"><span class="nav-number">2.</span> <span class="nav-text">寻找素数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#质因式分解"><span class="nav-number">3.</span> <span class="nav-text">质因式分解</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cycoe</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a> v6.1.0</div>
+
+
+
+  <div class="footer-custom">Hosted by <a target="_blank" rel="external nofollow" href="https://pages.coding.me"><b>Coding Pages</b></a></div>
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'http://cycoe.cc/2019/02/28/从自然数开始/';
+        this.page.identifier = '2019/02/28/从自然数开始/';
+        this.page.title = '从自然数开始';
+      };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script>
+  
+
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
