@@ -376,8 +376,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/03/15/postgraduate/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/15/postgraduate/" itemprop="commentCount"></span>
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/03/15/postgraduate/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -540,8 +539,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/03/12/KNN/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/12/KNN/" itemprop="commentCount"></span>
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/03/12/KNN/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -706,8 +704,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/03/11/first-post/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/11/first-post/" itemprop="commentCount"></span>
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/03/11/first-post/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -873,8 +870,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/03/11/如何同步GitHub上游更新/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/11/如何同步GitHub上游更新/" itemprop="commentCount"></span>
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/03/11/如何同步GitHub上游更新/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1048,8 +1044,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/03/09/CPVC热稳定剂/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/09/CPVC热稳定剂/" itemprop="commentCount"></span>
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/03/09/CPVC热稳定剂/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1239,8 +1234,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/03/09/用GitHub-Pages和jekyll搭建个人主页/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/09/用GitHub-Pages和jekyll搭建个人主页/" itemprop="commentCount"></span>
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/03/09/用GitHub-Pages和jekyll搭建个人主页/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1620,14 +1614,6 @@ lazy_load_duoshuo: true
 
   
 
-  
-    <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
-  
-
-  
-
-
-
 
 
 	
@@ -1650,6 +1636,30 @@ lazy_load_duoshuo: true
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'JMPgCt4i5QXYiepmd7ADdLfm-gzGzoHsz',
+        appKey: 'z6zWp6MXVNc4WnbBOCkVw3Ir',
+        placeholder: '此处评论',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 
