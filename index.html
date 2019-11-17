@@ -238,6 +238,115 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2019/11/17/fcitx-输入法配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cycoe">
+      <meta itemprop="description" content="Cycoe's Personal Blog">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cycoe's Home Page">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            
+            <a href="/2019/11/17/fcitx-输入法配置/" class="post-title-link" itemprop="url">fcitx 输入法配置</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-17 11:54:30 / 修改时间：12:49:04" itemprop="dateCreated datePublished" datetime="2019-11-17T11:54:30+08:00">2019-11-17</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/11/17/fcitx-输入法配置/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/17/fcitx-输入法配置/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>fcitx 是 Linux 下最常用的输入法框架之一，另一个是 ibus。这两个框架的关 系，就好像 KDE 与 Gnome 的关系一般。因为在早些年，ibus 是作为 Gnome 的 依赖项被默认安装的，而 fcitx 被认为与 KDE 共同工作的更好。</p>
+<p>fcitx 的安装非常简单，但是想让她在非桌面环境下正常运行，还是需要一番配置的。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装 fcitx 只需要安装以下几个包即可<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S fcitx fcitx-rime fcitx-gtk3 fcitx-qt5 fcitx-configtool</span><br><span class="line"></span><br><span class="line"><span class="comment"># fcitx: fcitx 可执行主程序</span></span><br><span class="line"><span class="comment"># fcitx-rime: fcitx 中的 rime 输入法实现，可根据喜好换为其他输入法</span></span><br><span class="line"><span class="comment"># fcitx-gtk3: 使 fcitx 能够在 gtk3 程序中使用</span></span><br><span class="line"><span class="comment"># fcitx-qt5: 使 fcitx 能够在 qt5 程序中使用</span></span><br><span class="line"><span class="comment"># fcitx-configtool: fcitx 配置工具界面</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p>在 <code>.xprofile</code> 文件中加入以下行，使得在 X 启动时，可以自动设置 fcitx 相关的环境变量。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># export for fcitx</span></span><br><span class="line"><span class="built_in">export</span> XMODIFIERS=<span class="string">"@im=fcitx"</span></span><br><span class="line"><span class="built_in">export</span> XIM=fcitx</span><br><span class="line"><span class="built_in">export</span> XIM_PROGRAM=fcitx</span><br><span class="line"><span class="built_in">export</span> GTK_IM_MODULE=fcitx</span><br><span class="line"><span class="built_in">export</span> QT_IM_MODULE=fcitx</span><br></pre></td></tr></table></figure></p>
+<p>如果 fcitx 在 gtk 或者 qt 其中一个图形库的程序中无法使用时，很有可能是相对应的环境变量没有设置，或者没有安装对应图形库的 fcitx 支持。</p>
+<h2 id="fcitx-无法在-Emacs-中使用"><a href="#fcitx-无法在-Emacs-中使用" class="headerlink" title="fcitx 无法在 Emacs 中使用"></a>fcitx 无法在 Emacs 中使用</h2><p>前段时间开始使用 Emacs，但发现 fcitx 在 gtk 和 qt 程序下都没有问题，唯独在 Emacs 下无法使用。在网上搜索了很久找不到答案，最后看到一个看起来不那么靠谱的答案，抱着试一试的心态，没想到竟真的解决了。解决办法就是安装 <code>terminus-font</code>，真的不可思议是什么原理。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S terminus-font</span><br></pre></td></tr></table></figure></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2019/11/09/窗口管理器在高分屏中的设置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1830,155 +1939,11 @@ B = \begin{bmatrix}
   
 
     
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2018/11/09/Linux下常用软件和配置记录/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Cycoe">
-      <meta itemprop="description" content="Cycoe's Personal Blog">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cycoe's Home Page">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            
-            <a href="/2018/11/09/Linux下常用软件和配置记录/" class="post-title-link" itemprop="url">Linux下常用軟件和配置記錄</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2018-11-09 22:22:31" itemprop="dateCreated datePublished" datetime="2018-11-09T22:22:31+08:00">2018-11-09</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-02 23:48:07" itemprop="dateModified" datetime="2019-09-02T23:48:07+08:00">2019-09-02</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2018/11/09/Linux下常用软件和配置记录/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2018/11/09/Linux下常用软件和配置记录/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>隨着使用 Linux 系統的年頭越來越長，積累的相關技巧也越來越多。最近一次重裝系統突然發現很多配置都已經忘的差不多了，想要配置系統還需要去網上到處搜刮資料實在是麻煩，因此打算用一篇博客記錄關於 Linux 系統的配置及常用軟件的介紹。</p>
-<h2 id="Archlinux-配置"><a href="#Archlinux-配置" class="headerlink" title="Archlinux 配置"></a>Archlinux 配置</h2><h3 id="讓-Qt5-程序使用原生-GTK-主題"><a href="#讓-Qt5-程序使用原生-GTK-主題" class="headerlink" title="讓 Qt5 程序使用原生 GTK+ 主題"></a>讓 Qt5 程序使用原生 GTK+ 主題</h3><p>Qt5 程序在 GTK3 環境下主題不統一真的很難受，尤其是 GTK3 用了黑色主題而 Qt5 還是刺眼的白色主題的時候。不像在 KDE 設置中設置 GTK3 主題那麼方便，設置 Qt5 主題可需要好好折騰一番。而且這個解決方案也是我使用了近一年後才找到的答案。</p>
-<p>首先你需要安裝 qt5ct 來提供 Qt5 程序主題的設置入口。此時直接在應用列表中打開 qt5ct 會提示未設置環境變量，編輯 <code>.xprofile</code> 文件，並在其中加入如下內容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ <span class="string">"<span class="variable">$XDG_CURRENT_DESKTOP</span>"</span> = <span class="string">"KDE"</span> ] || [ <span class="string">"<span class="variable">$XDG_CURRENT_DESKTOP</span>"</span> = <span class="string">"GNOME"</span> ] || <span class="built_in">export</span> QT_QPA_PLATFORMTHEME=<span class="string">"qt5ct"</span></span><br></pre></td></tr></table></figure></p>
-<p>註銷後重新登錄，此時打開 qt5ct 應該就不報錯了。但此時你會發現主題列表中只有 Qt5 自帶的幾個樣式<del>，而沒有 Gtk3 主題。你需要安裝 qt5-styleplugins 來使 Qt5 支持 GTK2 主題。你沒有看錯，我也不知道爲啥 Qt5 只支持 GTK2 的主題。但是我們要如何設置 GTK2 主題呢，好吧，又需要安裝一個叫 gtk-theme-switch2 的工具。在 gtk-theme-switch2 中設置好滿意的 GTK2 主題後，再在 qt5ct 中設置 Qt5 主題爲 GTK2 即可</del>。</p>
-<h4 id="2019-08-11-更新"><a href="#2019-08-11-更新" class="headerlink" title="2019-08-11 更新"></a>2019-08-11 更新</h4><p>事实上現在有个更加好用的 qt 主题引擎叫 Kvantum，样式更加現代并且支持透明。<code>sudo pacman -S kvantum-qt5</code> 安装完成后，在 qt5ct 中将 kvantum 设置为默认主题引擎，并在 kvantum 中設置主题即可。</p>
-<h3 id="variety-无法设置壁紙"><a href="#variety-无法设置壁紙" class="headerlink" title="variety 无法设置壁紙"></a>variety 无法设置壁紙</h3><p>目前我遇到过两种情况可能导致 variety 无法设置壁紙。</p>
-<ol>
-<li>未安装 feh，虽然 variety 的依赖项中并没有 feh，但是缺少 feh 确实无法设置壁紙。</li>
-<li>如果没有安装 display manager，variety 无法获取当前桌面的环境变量，在 <code>.xinitrc</code> 中添加<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># variables set identifying which DE / WM you're using,</span></span><br><span class="line"><span class="comment"># so variety can know what to do. </span></span><br><span class="line"><span class="built_in">export</span> XDG_CURRENT_DESKTOP=i3-gaps</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="dunst-无法显示通知"><a href="#dunst-无法显示通知" class="headerlink" title="dunst 无法显示通知"></a>dunst 无法显示通知</h3><p>同样是由于没有 display manager 导致的，在 <code>.xinitrc</code> 中添加<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># When using dunst without a Display Manager,</span></span><br><span class="line"><span class="comment"># the DISPLAY environment variable might not be correctly set.</span></span><br><span class="line">systemctl --user import-environment DISPLAY</span><br></pre></td></tr></table></figure></p>
-<h2 id="常用軟件"><a href="#常用軟件" class="headerlink" title="常用軟件"></a>常用軟件</h2><p>用了幾年 Linux 後發現其實 Linux 平臺的軟件並不少（當然 Adobe 全家桶和 MS Office 除外，要做設計或者辦公還是老老實實 Windows 吧:speak_no_evil:），只是與 Windows 和 Mac 平臺常用的軟件不同而已。Linux 的真正強大之處是命令行軟件，幾條簡單的命令組合就可以完成複雜的功能。</p>
-<h3 id="小鹤双拼"><a href="#小鹤双拼" class="headerlink" title="小鹤双拼"></a>小鹤双拼</h3><p>每次重装系统都需要重新配置输入法，更蛋疼的是在 Rime 中添加鹤形码表时，总出现部署错误。虽然最后折腾半天总是莫名其妙地整好了，但是不得不感叹配置 Rime 真是玄学（虽然很不想承认是自己对 Rime 的配置文件一窍不通:laughing:）。特此记录一下给 Rime 添加鹤形的过程，虽然以后按相同的步骤也不一定能配置成功。</p>
-<p>第一步，安装 fcitx 框架（ibus 框架就不考虑了，fcitx 用习惯了）和 Rime 的 fcitx 实现。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Archlinux</span></span><br><span class="line">sudo pacman -S fcitx fcitx-rime fcitx-configtool</span><br><span class="line"><span class="comment"># openSUSE</span></span><br><span class="line">sudo zypper <span class="keyword">in</span> fcitx fcitx-rime fcitx-config-gtk</span><br></pre></td></tr></table></figure></p>
-<p>第二步，在 fcitx 设置中加入 rime 输入法，记得关闭“只显示当前语言输入法选项”。切换到 Rime 输入法，此时应该会自动运行一次 deploy。</p>
-<p>第三步，将<a href="https://git.coding.net/cycoe/config.git" target="_blank" rel="noopener">我的配置</a>中的 <code>.config/fcitx</code> 目录复制到对应的路径，其中已经包含了 flypy 使用的码表（之前小鹤双拼官网发布的挂接码表文件，但因为没有通用的配置方法目前已经下架），并将运行下面的命令将配置文件复制到 Rime 系统级路径中（尝试过复制到 <code>.config/fcitx/rime/build/default.custom.yaml</code>，没有效果）。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 备份原配置</span></span><br><span class="line">sudo mv /usr/share/rime-data/default.yaml /usr/share/rime-data/default.yaml.bak</span><br><span class="line"><span class="comment"># 复制新配置</span></span><br><span class="line">sudo cp default.yaml /usr/share/rime-data/default.yaml</span><br></pre></td></tr></table></figure></p>
-<p>第四步，在 fcitx 上右键，选择 deploy，此时会提示部署错误，但是惊喜地发现输入法已经可以使用。</p>
-<h2 id="常用软件"><a href="#常用软件" class="headerlink" title="常用软件"></a>常用软件</h2><p>用了几年 Linux 后发现其实 Linux 平台的软件并不少（当然 Adobe 全家桶和 MS Office 除外，要做设计或者办公还是老老实实 Windows 吧:speak_no_evil:），只是与 Windows 和 Mac 平台常用的软件不同而已。Linux 的真正强大之处是命令行软件，几条简单的命令组合就可以完成复杂的功能。</p>
-<h3 id="Dia"><a href="#Dia" class="headerlink" title="Dia"></a>Dia</h3><p>一個非常小的流程圖繪製軟件，但是功能夠用。</p>
-<h3 id="ncdu"><a href="#ncdu" class="headerlink" title="ncdu"></a>ncdu</h3><p>ncdu (NCurses Disk Usage) 是一個基於 NCurses 系統的磁盤用量分析命令行軟件，相似功能的還有基於 GTK+ 的 Baobab（從版本號來看應該是屬於 Gnome 桌面套裝）。其實對我來說真的很少使用此類軟件，畢竟我很少刪除磁盤文件，但是最近 /Home 分區接近爆滿讓我很難受，還是需要從磁盤的角落翻出以後再也用不上的大文件以刪除之。</p>
-<h3 id="xreader"><a href="#xreader" class="headerlink" title="xreader"></a>xreader</h3><p>pdf 文檔閱讀器，X-Apps 計劃中的一員（這個計劃好像只有個閱讀器？:laughing:）。體積小巧，優點是可以使用 <code>hjkl</code> 等 vim 鍵位進行控制。缺點是沒有高級功能，單純作爲一個閱讀器還是不錯的。</p>
-<h3 id="pcmanfm"><a href="#pcmanfm" class="headerlink" title="pcmanfm"></a>pcmanfm</h3><p>LXDE 桌面環境默認文件管理器，實話說比 Gnome 的鸚鵡螺好用太多，功能上與 Dolphin 相近。Archlinux 上有單獨提供 pcmanfm-gtk3 的安裝包，其他髮型版上應該默認使用的就是 GTK3 了。</p>
-<h3 id="lxappearance"><a href="#lxappearance" class="headerlink" title="lxappearance"></a>lxappearance</h3><p>GTK+ 界面主題設置工具，又是 LXDE 的一員。LXDE 自帶的幾款軟件質量都挺高，界面風格統一併且功能強大。</p>
-<h3 id="gpickview"><a href="#gpickview" class="headerlink" title="gpickview"></a>gpickview</h3><p>LXDE 默認的圖片查看器，體積小巧，沒有太多花哨功能。</p>
-<h3 id="sxiv"><a href="#sxiv" class="headerlink" title="sxiv"></a>sxiv</h3><p>Simple X11 Image Viewer</p>
-<h3 id="zathura"><a href="#zathura" class="headerlink" title="zathura"></a>zathura</h3><p>Suckless pdf 阅读器</p>
-<h3 id="ranger"><a href="#ranger" class="headerlink" title="ranger"></a>ranger</h3><p>python 写成的基于命令行的文件管理器，有与 Vim 类似的键位绑定，全键盘操作效率爆表。拥有 ranger 就不太需要 pcmanfm 了。</p>
-<h4 id="初次使用"><a href="#初次使用" class="headerlink" title="初次使用"></a>初次使用</h4><p>通过运行 <code>ranger --copy-config=all</code> 拷贝所有配置文件到用户家目录。包含以下文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">commands_full.py <span class="comment"># ranger 所有命令</span></span><br><span class="line">commands.py <span class="comment"># 自定义命令</span></span><br><span class="line">rc.conf <span class="comment"># ranger 配置文件</span></span><br><span class="line">rifle.conf <span class="comment"># 文件打开方式配置</span></span><br><span class="line">scope.sh <span class="comment"># 预览配置</span></span><br></pre></td></tr></table></figure></p>
-<h4 id="文件预览"><a href="#文件预览" class="headerlink" title="文件预览"></a>文件预览</h4><p>在 <code>rc.conf</code> 中檢查所有 ‘preview’ 的选项<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"># Use non-default path for file preview script?</span><br><span class="line"># ranger ships with scope.sh, a script that calls external programs (see</span><br><span class="line"># README.md for dependencies) to preview images, archives, etc.</span><br><span class="line">set preview_script ~/.config/ranger/scope.sh</span><br><span class="line"></span><br><span class="line"># Use the external preview script or display simple plain text or image previews?</span><br><span class="line">set use_preview_script true</span><br><span class="line">...</span><br><span class="line"># 设置图片的 method，虽然 w3m bug 很多，但也是唯一一个选择了</span><br><span class="line">set preview_images_method w3m</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
-<p>预览其他类型的文件需要安装对应的依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Optional Deps   : atool: for previews of archives</span><br><span class="line">                  elinks: for previews of html pages</span><br><span class="line">                  ffmpegthumbnailer: for video previews</span><br><span class="line">                  highlight: for syntax highlighting of code</span><br><span class="line">                  libcaca: for ASCII-art image previews</span><br><span class="line">                  lynx: for previews of html pages</span><br><span class="line">                  mediainfo: for viewing information about media files</span><br><span class="line">                  odt2txt: for OpenDocument texts</span><br><span class="line">                  perl-image-exiftool: for viewing information about media files</span><br><span class="line">                  poppler: for pdf previews</span><br><span class="line">                  python-chardet: in case of encoding detection problems</span><br><span class="line">                  sudo: to use the &quot;run as root&quot;-feature</span><br><span class="line">                  transmission-cli: for viewing bittorrent information</span><br><span class="line">                  w3m: for previews of images and html pages</span><br></pre></td></tr></table></figure></p>
-<p>但不建议开启压缩包的预览，会大幅影响速度，修改 <code>scope.sh</code> 文件，注释掉压缩包的预览<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Archive</span><br><span class="line">a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|\</span><br><span class="line">rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)</span><br><span class="line">    # atool --list -- &quot;$&#123;FILE_PATH&#125;&quot; &amp;&amp; exit 5</span><br><span class="line">    # bsdtar --list --file &quot;$&#123;FILE_PATH&#125;&quot; &amp;&amp; exit 5</span><br><span class="line">    exit 1;;</span><br></pre></td></tr></table></figure></p>
-<h4 id="批量重命名"><a href="#批量重命名" class="headerlink" title="批量重命名"></a>批量重命名</h4><p>ranger 有个非常 sexy 的功能，那就是批量重命名。选中多个文件后，输入 <code>:bulkrename</code>，ranger 会帮你自动打开一个 Vim 编辑器。在 Vim 中你可以利用 Vim 的强大功能对文件名做任何处理，修改完成后保存退出即可。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># This file will be executed when you close the editor.</span></span><br><span class="line"><span class="comment"># Please double-check everything, clear the file to abort.</span></span><br><span class="line">mv -vi -- <span class="built_in">test</span> today_test</span><br><span class="line">mv -vi -- test.md today_test.md</span><br><span class="line">mv -vi -- test.pdf today_test.pdf</span><br></pre></td></tr></table></figure></p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-    
   </div>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2023,7 +1988,7 @@ B = \begin{bmatrix}
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -2049,7 +2014,7 @@ B = \begin{bmatrix}
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -2172,9 +2137,9 @@ B = \begin{bmatrix}
       
     
       
-        
-      
     
+      
+        
       
     
       

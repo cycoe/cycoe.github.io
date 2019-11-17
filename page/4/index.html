@@ -59,28 +59,28 @@
 <meta name="keywords" content="Python, Linux, 化学">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Cycoe&#39;s Home Page">
-<meta property="og:url" content="http://cycoe.cc/tags/DWM/index.html">
+<meta property="og:url" content="http://cycoe.cc/page/4/index.html">
 <meta property="og:site_name" content="Cycoe&#39;s Home Page">
 <meta property="og:description" content="Cycoe&apos;s Personal Blog">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cycoe&#39;s Home Page">
 <meta name="twitter:description" content="Cycoe&apos;s Personal Blog">
-  <link rel="canonical" href="http://cycoe.cc/tags/DWM/">
+  <link rel="canonical" href="http://cycoe.cc/page/4/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: false,
+    isHome: true,
     isPost: false,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>标签: DWM | Cycoe's Home Page</title>
+  <title>Cycoe's Home Page</title>
   
 
 
@@ -216,24 +216,6 @@
 
     
 
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-  
-
 </nav>
 </div>
     </header>
@@ -251,60 +233,147 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+        
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">DWM
-          <small>标签</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2017/03/09/用GitHub-Pages和jekyll搭建个人主页/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cycoe">
+      <meta itemprop="description" content="Cycoe's Personal Blog">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cycoe's Home Page">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            
+            <a href="/2017/03/09/用GitHub-Pages和jekyll搭建个人主页/" class="post-title-link" itemprop="url">用GitHub-Pages和jekyll搭建個人主頁</a>
+          
         </h1>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2017-03-09 00:00:00" itemprop="dateCreated datePublished" datetime="2017-03-09T00:00:00+08:00">2017-03-09</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-02-28 09:03:02" itemprop="dateModified" datetime="2019-02-28T09:03:02+08:00">2019-02-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GitHub/" itemprop="url" rel="index">
+                    <span itemprop="name">GitHub</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2017/03/09/用GitHub-Pages和jekyll搭建个人主页/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2017/03/09/用GitHub-Pages和jekyll搭建个人主页/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+          <p>閒來無事，打算搭建個人主頁。查閱了各種資料，發現目前最省錢省力的方法就是在 GitHub Pages 上利用 jekyll 靜態網頁生成器搭建。<br>對於 Web 開發小白來說，自己寫網頁代碼不太現實。 好在GitHub 上有許多其他大神製作好的 jekyll 模板，直接 fork 過來修改一下就可以使用，其餘的精力都可以用在文章內容本身上。</p>
+<hr>
+<h2 id="搭建步驟"><a href="#搭建步驟" class="headerlink" title="搭建步驟"></a>搭建步驟</h2><ol>
+<li>在 GitHub 上找到自己喜歡的 jekyll 模板， fork 到自己的倉庫下，然後點擊 Setting 修改倉庫名稱爲 <code>username.github.io</code></li>
+<li>將 fork 後的項目 clone 至本地</li>
+<li>打開 <code>_config.yml</code> 文件修改其中的信息，包括網站名稱、用戶信息等</li>
+<li>將 html 或 MarkDown 格式的文章和博客添加到 <code>_posts</code> 文件夾</li>
+<li><p>使用以下命令即可提交更新並推送更新至遠端倉庫</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -am <span class="string">"post update"</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>完成以上步驟後，你就應該可以通過 <code>username.github.io</code> 訪問你的主頁了 :clap: ！</p>
+</li>
+</ol>
+<h2 id="注意事項"><a href="#注意事項" class="headerlink" title="注意事項"></a>注意事項</h2><pre><code>comments_provider: duoshuo
+duoshuo_username: cycoe
+disqus_username: cycoe
+lazy_load_duoshuo: true
+</code></pre><p><strong>此處的usrname一定要填自己申請的賬號名</strong></p>
+<h2 id="進階配置"><a href="#進階配置" class="headerlink" title="進階配置"></a>進階配置</h2><ol>
+<li>申請域名</li>
+</ol>
+<hr>
+<p>本博客使用的主題爲 <em>mzlogin</em> 的 <a href="https://github.com/mzlogin/mzlogin.github.io" target="_blank" rel="noopener">碼志</a> 主題</p>
 
-  
-  
+        
+      
+    </div>
 
-  
     
-    <div class="collection-year">
-      <h1 class="collection-header">2019</h1>
-    </div>
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-11-09T22:18:55+08:00"
-              content="2019-11-09">
-          11-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/11/09/窗口管理器在高分屏中的设置/" itemprop="url">
-            <span itemprop="name">窗口管理器在高分屏中的设置</span>
-          </a>
-        
-      </h2>
-
-    </header>
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
   </article>
+  
+  
+  
 
-
-
-    </div>
+    
   </div>
-  
-  
-  
 
   
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+  </nav>
 
 
 
@@ -480,6 +549,10 @@
 
   
 
+  
+    
+      
+    
   
 
   
