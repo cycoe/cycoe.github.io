@@ -377,11 +377,19 @@
                 
               
 
-              <time title="创建时间：2019-11-09 22:18:55 / 修改时间：22:53:52" itemprop="dateCreated datePublished" datetime="2019-11-09T22:18:55+08:00">2019-11-09</time>
+              <time title="创建时间：2019-11-09 22:18:55" itemprop="dateCreated datePublished" datetime="2019-11-09T22:18:55+08:00">2019-11-09</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-26 13:31:12" itemprop="dateModified" datetime="2019-11-26T13:31:12+08:00">2019-11-26</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -429,14 +437,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>前几天换了新机器，也算是让贫穷的我第一次体验到了高分屏。13.3 寸的 2K<br>屏，用默认的缩放比例，字比蚂蚁大不了多少。为了保护视力，我决定将调整屏<br>幕缩放提到最高优先级，摸索一阵后，得到了比较完美的配置方案。</p>
-<p>在 Linux 中（此处特指 X.org 显示服务器，Wayland 不了解），传统的 X<br>Clients 的缩放由 xrandr 控制，GTK 的 QT 程序的缩放由它们自己的环境变量<br>控制。因此想要完美调整所有界面的缩放比例需要一番摸索。当然，Gnome、KDE<br>之类的桌面环境除外，桌面环境设置中一般都自带缩放设置。</p>
-<h2 id="降低分辨率"><a href="#降低分辨率" class="headerlink" title="降低分辨率"></a>降低分辨率</h2><p>直接通过 xrandr 降低显示器的分辨率是最简单粗暴的办法，但这样高分屏就相<br>当于废了，不推荐。</p>
-<h2 id="调整-Scale"><a href="#调整-Scale" class="headerlink" title="调整 Scale"></a>调整 Scale</h2><p>通过 xrandr 调整显示界面的 Scale，这种方法相当于用放大镜将屏幕上的内容<br>放大，会使内容严重模糊，同样不推荐。</p>
-<h2 id="通过-xrandr-设置-DPI"><a href="#通过-xrandr-设置-DPI" class="headerlink" title="通过 xrandr 设置 DPI"></a>通过 xrandr 设置 DPI</h2><p>通过设置 DPI，其实就是告诉程序我的屏幕的细腻程度如何。如设置 DPI 为<br>144，就是告诉程序我的屏幕一英寸长度上有 144 个像素点。但此处也有技巧，<br>第一种方法是直接使用 xrandr 设置 DPI，在 <code>.xinitrc</code> 或 <code>.xprofile</code> 中<br>加入 <code>xrandr --dpi 144</code>，使得每次登录 X Server 时都会自动设置 DPI。但<br>此方法对 GTK 程序无效，需要继续在文件中加入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GDK_SCALE=2</span><br><span class="line"><span class="built_in">export</span> GDK_DPI_SCALE=0.5</span><br></pre></td></tr></table></figure></p>
-<p>使得 GTK 程序支持缩放，但你应该也注意到了此处的两个问题。一是此处仍然<br>使用的是缩放而非 DPI，会导致 GTK 程序界面模糊；二是 <code>GDK_SCALE</code> 只支持<br>整数倍缩放。</p>
-<h2 id="通过-xft-设置-DPI"><a href="#通过-xft-设置-DPI" class="headerlink" title="通过 xft 设置 DPI"></a>通过 xft 设置 DPI</h2><p>这是我目前找到的完美的方法，还未遇到什么问题。在 <code>.Xresources</code> 文件中<br>加入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Xft.dpi: 144</span><br><span class="line">Xft.autohint: 0</span><br><span class="line">Xft.lcdfilter:  lcddefault</span><br><span class="line">Xft.hintstyle:  hintfull</span><br><span class="line">Xft.hinting: 1</span><br><span class="line">Xft.antialias: 1</span><br><span class="line">Xft.rgba: rgb</span><br></pre></td></tr></table></figure></p>
-<p>并在 <code>.xinitrc</code> 或 <code>.xprofile</code> 中加入 <code>xrdb -merge &quot;.Xresources&quot;</code> 使得<br>每次登录时都会使 <code>.Xresources</code> 生效。<code>xrdb</code> 命令需要首先安装<br><code>xorg-xrdb</code> 包。至此，终于拥有了一个比较舒适的 DPI。</p>
+          <p>前几天换了新机器，也算是让贫穷的我第一次体验到了高分屏。13.3 寸的 2K 屏，用默认的缩放比例，字比蚂蚁大不了多少。为了保护视力，我决定将调整屏幕缩放提到最高优先级，摸索一阵后，得到了比较完美的配置方案。</p>
+<p>在 Linux 中（此处特指 X.org 显示服务器，Wayland 不了解），传统的 X Clients 的缩放由 xrandr 控制，GTK 的 QT 程序的缩放由它们自己的环境变量控制。因此想要完美调整所有界面的缩放比例需要一番摸索。当然，Gnome、KDE 之类的桌面环境除外，桌面环境设置中一般都自带缩放设置。</p>
+<h2 id="降低分辨率"><a href="#降低分辨率" class="headerlink" title="降低分辨率"></a>降低分辨率</h2><p>直接通过 xrandr 降低显示器的分辨率是最简单粗暴的办法，但这样高分屏就相当于废了，不推荐。</p>
+<h2 id="调整-Scale"><a href="#调整-Scale" class="headerlink" title="调整 Scale"></a>调整 Scale</h2><p>通过 xrandr 调整显示界面的 Scale，这种方法相当于用放大镜将屏幕上的内容放大，会使内容严重模糊，同样不推荐。</p>
+<h2 id="通过-xrandr-设置-DPI"><a href="#通过-xrandr-设置-DPI" class="headerlink" title="通过 xrandr 设置 DPI"></a>通过 xrandr 设置 DPI</h2><p>通过设置 DPI，其实就是告诉程序我的屏幕的细腻程度如何。如设置 DPI 为 144，就是告诉程序我的屏幕一英寸长度上有 144 个像素点。但此处也有技巧，第一种方法是直接使用 xrandr 设置 DPI，在 <code>.xinitrc</code> 或 <code>.xprofile</code> 中加入 <code>xrandr --dpi 144</code>，使得每次登录 X Server 时都会自动设置 DPI。但此方法对 GTK 程序无效，需要继续在文件中加入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GDK_SCALE=2</span><br><span class="line"><span class="built_in">export</span> GDK_DPI_SCALE=0.5</span><br></pre></td></tr></table></figure></p>
+<p>使得 GTK 程序支持缩放，但你应该也注意到了此处的两个问题。一是此处仍然使用的是缩放而非 DPI，会导致 GTK 程序界面模糊；二是 <code>GDK_SCALE</code> 只支持整数倍缩放。</p>
+<h2 id="通过-xft-设置-DPI"><a href="#通过-xft-设置-DPI" class="headerlink" title="通过 xft 设置 DPI"></a>通过 xft 设置 DPI</h2><p>这是我目前找到的完美的方法，还未遇到什么问题。在 <code>.Xresources</code> 文件中加入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Xft.dpi: 144</span><br><span class="line">Xft.autohint: 0</span><br><span class="line">Xft.lcdfilter:  lcddefault</span><br><span class="line">Xft.hintstyle:  hintfull</span><br><span class="line">Xft.hinting: 1</span><br><span class="line">Xft.antialias: 1</span><br><span class="line">Xft.rgba: rgb</span><br></pre></td></tr></table></figure></p>
+<p>并在 <code>.xinitrc</code> 或 <code>.xprofile</code> 中加入 <code>xrdb -merge &quot;.Xresources&quot;</code> 使得每次登录时都会使 <code>.Xresources</code> 生效。<code>xrdb</code> 命令需要首先安装 <code>xorg-xrdb</code> 包。至此，终于拥有了一个比较舒适的 DPI。</p>
 
         
       
@@ -488,11 +496,19 @@
                 
               
 
-              <time title="创建时间：2019-11-09 01:50:02 / 修改时间：02:15:28" itemprop="dateCreated datePublished" datetime="2019-11-09T01:50:02+08:00">2019-11-09</time>
+              <time title="创建时间：2019-11-09 01:50:02" itemprop="dateCreated datePublished" datetime="2019-11-09T01:50:02+08:00">2019-11-09</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-26 13:29:43" itemprop="dateModified" datetime="2019-11-26T13:29:43+08:00">2019-11-26</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -540,15 +556,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>最近买了一个新机器小新 Pro13，买来的第一天当然是先装上 Archlinux。装上<br>之后发现无法通过键盘上的亮度调节按钮调节屏幕亮度，机器是 AMD 处理器加<br>AMD 核显。刚开始以为是 AMD 版本特有的问题，但在网上查了相关的问题后，<br>发现许多 Intel 核显的机器也有类似问题。</p>
-<p>首先排除按键问题，通过 <code>xev</code> 命令可以监测到亮度调节按钮被按下，说明按<br>键本身没有问题。通过向 <code>/etc/default/grub</code> 中加入<br><code>GRUB_CMDLINE_LINUX_DEFAULT=&quot;loglevel=3 acpi_osi=! acpi=&quot;Linux&quot; quiet
-splash&quot;</code> 没有效果，并且反而使得亮度调节按钮失效了。</p>
-<p>安装 <code>xorg-xbacklight</code> 包，但 <code>xbacklight</code> 命令提示 <code>No outputs have
-backlight property</code>。是因为 <code>xorg-xbacklight</code> 包中提供的 <code>xbacklight</code><br>命令默认只对 Intel 核显有效，在 AMD 核显上会提示 <code>No outputs have
-backlight property</code> 错误。因此需要通过 ACPI 通道对亮度进行控制。</p>
+          <p>最近买了一个新机器小新 Pro13，买来的第一天当然是先装上 Archlinux。装上 之后发现无法通过键盘上的亮度调节按钮调节屏幕亮度，机器是 AMD 处理器加 AMD 核显。刚开始以为是 AMD 版本特有的问题，但在网上查了相关的问题后， 发现许多 Intel 核显的机器也有类似问题。</p>
+<p>首先排除按键问题，通过 <code>xev</code> 命令可以监测到亮度调节按钮被按下，说明按键本身没有问题。通过向 <code>/etc/default/grub</code> 中加入 <code>GRUB_CMDLINE_LINUX_DEFAULT=&quot;loglevel=3 acpi_osi=! acpi=&quot;Linux&quot; quiet splash&quot;</code> 没有效果，并且反而使得亮度调节按钮失效了。</p>
+<p>安装 <code>xorg-xbacklight</code> 包，但 <code>xbacklight</code> 命令提示 <code>No outputs have backlight property</code>。是因为 <code>xorg-xbacklight</code> 包中提供的 <code>xbacklight</code> 命令默认只对 Intel 核显有效，在 AMD 核显上会提示 <code>No outputs have backlight property</code> 错误。因此需要通过 ACPI 通道对亮度进行控制。</p>
 <p><strong>解决方法如下：</strong><br>安装 ACPI 的亮度控制，替换原 <code>xbacklight</code> 命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S acpilight</span><br></pre></td></tr></table></figure></p>
 <p>将当前用户加入 video 组，实现免 root 控制亮度<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gpasswd video -a cycoe</span><br></pre></td></tr></table></figure></p>
-<p>重启之后就可以通过下面命令控制亮度了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Get backlight brightness</span></span><br><span class="line">xbacklight -get</span><br><span class="line"><span class="comment"># Set brightness</span></span><br><span class="line">xbacklight -<span class="built_in">set</span> 70</span><br><span class="line"><span class="comment"># Increase brightness</span></span><br><span class="line">xbacklight -inc 10</span><br><span class="line"><span class="comment"># Decrease brightness</span></span><br><span class="line">xbacklight -dec 10</span><br></pre></td></tr></table></figure></p>
+<p>acpilight 兼容 xbacklight 重启之后就可以通过下面命令控制亮度了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Get backlight brightness</span></span><br><span class="line">xbacklight -get</span><br><span class="line"><span class="comment"># Set brightness</span></span><br><span class="line">xbacklight -<span class="built_in">set</span> 70</span><br><span class="line"><span class="comment"># Increase brightness</span></span><br><span class="line">xbacklight -inc 10</span><br><span class="line"><span class="comment"># Decrease brightness</span></span><br><span class="line">xbacklight -dec 10</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用-light-替代-acpilight"><a href="#使用-light-替代-acpilight" class="headerlink" title="使用 light 替代 acpilight"></a>使用 light 替代 acpilight</h2><p>acpilight 是用 Python 写的脚本工具，由于我对于系统工具的洁癖，还是考虑找个 C 语言的替代品，也就找到了 light 这个工具，并且其可以自动检测到亮度调节接口。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Install light</span></span><br><span class="line">sudo pacman -S light</span><br><span class="line"><span class="comment"># Increase brightness</span></span><br><span class="line">light -A 10</span><br><span class="line"><span class="comment"># Decrease brightness</span></span><br><span class="line">light -U 10</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用-clight-利用摄像头自动调节亮度"><a href="#使用-clight-利用摄像头自动调节亮度" class="headerlink" title="使用 clight 利用摄像头自动调节亮度"></a>使用 clight 利用摄像头自动调节亮度</h2><blockquote>
+<p>Clight is a C user daemon utility that aims to fully manage your display. It will automagically change screen backlight level to match ambient brightness, as computed by capturing frames from webcam. Moreover, it can manage your screen temperature, just like redshift does. Finally, it can dim your screen after a timeout.</p>
+</blockquote>
+<p>简而言之，clight 能够自动控制屏幕亮度、gamma 值、自动变暗、自动熄屏等。通过 AUR 安装。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S clight</span><br></pre></td></tr></table></figure></p>
+<p>官方 Wiki 建议安装完成后启用 clightd 服务，虽然并不知道有什么用。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Remember to enable Clightd systemd unit!</span></span><br><span class="line">sudo systemctl <span class="built_in">enable</span> clightd.service</span><br></pre></td></tr></table></figure></p>
+<p>拷贝配置文件。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/default/clight.conf ~/.config/</span><br></pre></td></tr></table></figure></p>
+<p>配置文件中的 <code>gamma_temp</code> 取消注释会提示参数个数不对，设置一个或者三个参数也没有用，因此直接禁用 gamma 值调节。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Gamma temperature during day and night</span></span><br><span class="line"><span class="comment"># gamma_temp = [ 6500, 6500 ];</span></span><br><span class="line">...</span><br><span class="line"><span class="comment">## Uncomment to disable gamma support</span></span><br><span class="line">no_gamma = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure></p>
+<p>将 <code>clight</code> 加入到自启动脚本中。</p>
 
         
       
