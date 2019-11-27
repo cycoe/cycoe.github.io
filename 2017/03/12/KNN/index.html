@@ -9,7 +9,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.7.1">
+<meta name="generator" content="Hexo 4.0.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
@@ -59,16 +59,14 @@
 <meta name="keywords" content="Python, Machine Learing, KNN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[python機器學習-1]K近鄰算法實現驗證碼識別">
-<meta property="og:url" content="http://cycoe.cc/2017/03/12/KNN/index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;2017&#x2F;03&#x2F;12&#x2F;KNN&#x2F;index.html">
 <meta property="og:site_name" content="Cycoe&#39;s Home Page">
 <meta property="og:description" content="機器學習小記">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://p1.bpimg.com/587851/b8e80b83eb2b7e31.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;p1.bpimg.com&#x2F;587851&#x2F;b8e80b83eb2b7e31.jpg">
 <meta property="og:updated_time" content="2019-02-28T01:03:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[python機器學習-1]K近鄰算法實現驗證碼識別">
-<meta name="twitter:description" content="機器學習小記">
-<meta name="twitter:image" content="http://p1.bpimg.com/587851/b8e80b83eb2b7e31.jpg">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;p1.bpimg.com&#x2F;587851&#x2F;b8e80b83eb2b7e31.jpg">
   <link rel="canonical" href="http://cycoe.cc/2017/03/12/KNN/">
 
 
@@ -375,7 +373,7 @@
 <li>最終的分類方法其實是投票表決的方法</li>
 </ul>
 <h2 id="代碼"><a href="#代碼" class="headerlink" title="代碼"></a>代碼</h2><p>爲了提高代碼的運行效率及編碼效率，import 了 <code>Numpy</code> 庫，具體的函數看 <a href="https://docs.scipy.org/doc/" target="_blank" rel="noopener">官方文檔</a> ，或者 <a href="http://cycoe.win/wiki/Numpy/" target="_blank" rel="noopener">Numpy 教程</a> 。</p>
-<h3 id="分類函數"><a href="#分類函數" class="headerlink" title="分類函數"></a>分類函數</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">classify0</span><span class="params">(inX, dataSet, labels, k)</span>:</span> <span class="comment">#輸入(待測樣本向量，訓練樣本矩陣，標籤向量，k)</span></span><br><span class="line">    dataSetSize = dataSet.shape[<span class="number">0</span>] <span class="comment">#shape函數用來讀取矩陣的維的長度，返回值爲(4L,2L)</span></span><br><span class="line">    diffMat = tile(inX, (dataSetSize, <span class="number">1</span>)) - dataSet <span class="comment">#tile函數用來重複 A=[1,2] tile(A,(2,3)) -&gt; [[1,2,1,2，1,2], [1,2,1,2,1,2]]</span></span><br><span class="line">    sqDiffMat = diffMat**<span class="number">2</span></span><br><span class="line">    sqDistances = sqDiffMat.sum(axis=<span class="number">1</span>)</span><br><span class="line">    distances = sqDistances**<span class="number">0.5</span></span><br><span class="line"></span><br><span class="line">    sortedDistIndicies = distances.argsort()</span><br><span class="line">    classCount = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span><br><span class="line">        votedLabel = labels[sortedDistIndicies[i]]</span><br><span class="line">        classCount[votedLabel] = classCount.get(votedLabel, <span class="number">0</span>) + <span class="number">1</span> <span class="comment">#dict.get(key, default_value)函數用來取鍵對應的值，若鍵不存在則值爲defalut_vlaue</span></span><br><span class="line">    sortedClassCount = sorted(classCount.items(), key=operator.itemgetter(<span class="number">1</span>), reverse=<span class="keyword">True</span>) <span class="comment">#operator.itemgetter(1)表示根據多級列表的第二個元素進行排序</span></span><br><span class="line">    <span class="keyword">return</span> sortedClassCount[<span class="number">0</span>][<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="分類函數"><a href="#分類函數" class="headerlink" title="分類函數"></a>分類函數</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">classify0</span><span class="params">(inX, dataSet, labels, k)</span>:</span> <span class="comment">#輸入(待測樣本向量，訓練樣本矩陣，標籤向量，k)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    dataSetSize = dataSet.shape[<span class="number">0</span>] <span class="comment">#shape函數用來讀取矩陣的維的長度，返回值爲(4L,2L)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    diffMat = tile(inX, (dataSetSize, <span class="number">1</span>)) - dataSet <span class="comment">#tile函數用來重複 A=[1,2] tile(A,(2,3)) -&gt; [[1,2,1,2，1,2], [1,2,1,2,1,2]]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    sqDiffMat = diffMat**<span class="number">2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    sqDistances = sqDiffMat.sum(axis=<span class="number">1</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    distances = sqDistances**<span class="number">0.5</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    sortedDistIndicies = distances.argsort()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    classCount = &#123;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        votedLabel = labels[sortedDistIndicies[i]]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        classCount[votedLabel] = classCount.get(votedLabel, <span class="number">0</span>) + <span class="number">1</span> <span class="comment">#dict.get(key, default_value)函數用來取鍵對應的值，若鍵不存在則值爲defalut_vlaue</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    sortedClassCount = sorted(classCount.items(), key=operator.itemgetter(<span class="number">1</span>), reverse=<span class="literal">True</span>) <span class="comment">#operator.itemgetter(1)表示根據多級列表的第二個元素進行排序</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> sortedClassCount[<span class="number">0</span>][<span class="number">0</span>]</span></pre></td></tr></table></figure>
 <hr>
 
     </div>
@@ -541,7 +539,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Cycoe</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.7.1
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
   </div>
   <span class="post-meta-divider">|</span>
   <div class="theme-info">

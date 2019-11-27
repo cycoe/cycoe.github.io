@@ -9,7 +9,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.7.1">
+<meta name="generator" content="Hexo 4.0.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
@@ -55,19 +55,17 @@
   };
 </script>
 
-  <meta name="description" content="在 GitHub 上進行項目的團隊協作，一般都是 fork 組織倉庫到自己的賬號下，提交補丁後再提交 Pull Request。上游倉庫一直保持更新。由於最近在做 LCTT 項目，經常需要同步上游其他人的翻譯，下面就以 LCTT 項目爲例，記錄一下 GitHub 上 fork 倉庫同步上游更新的操作。   使用 git remote -v 查看當前的遠程倉庫別名，輸出如下：  1234LCTT">
+  <meta name="description" content="在 GitHub 上進行項目的團隊協作，一般都是 fork 組織倉庫到自己的賬號下，提交補丁後再提交 Pull Request。上游倉庫一直保持更新。由於最近在做 LCTT 項目，經常需要同步上游其他人的翻譯，下面就以 LCTT 項目爲例，記錄一下 GitHub 上 fork 倉庫同步上游更新的操作。   使用 git remote -v 查看當前的遠程倉庫別名，輸出如下：  1LCTT    h">
 <meta name="keywords" content="Python, Linux, 化学">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何同步GitHub上游更新">
-<meta property="og:url" content="http://cycoe.cc/2017/03/11/如何同步GitHub上游更新/index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;2017&#x2F;03&#x2F;11&#x2F;%E5%A6%82%E4%BD%95%E5%90%8C%E6%AD%A5GitHub%E4%B8%8A%E6%B8%B8%E6%9B%B4%E6%96%B0&#x2F;index.html">
 <meta property="og:site_name" content="Cycoe&#39;s Home Page">
-<meta property="og:description" content="在 GitHub 上進行項目的團隊協作，一般都是 fork 組織倉庫到自己的賬號下，提交補丁後再提交 Pull Request。上游倉庫一直保持更新。由於最近在做 LCTT 項目，經常需要同步上游其他人的翻譯，下面就以 LCTT 項目爲例，記錄一下 GitHub 上 fork 倉庫同步上游更新的操作。   使用 git remote -v 查看當前的遠程倉庫別名，輸出如下：  1234LCTT">
+<meta property="og:description" content="在 GitHub 上進行項目的團隊協作，一般都是 fork 組織倉庫到自己的賬號下，提交補丁後再提交 Pull Request。上游倉庫一直保持更新。由於最近在做 LCTT 項目，經常需要同步上游其他人的翻譯，下面就以 LCTT 項目爲例，記錄一下 GitHub 上 fork 倉庫同步上游更新的操作。   使用 git remote -v 查看當前的遠程倉庫別名，輸出如下：  1LCTT    h">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-02-28T01:03:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何同步GitHub上游更新">
-<meta name="twitter:description" content="在 GitHub 上進行項目的團隊協作，一般都是 fork 組織倉庫到自己的賬號下，提交補丁後再提交 Pull Request。上游倉庫一直保持更新。由於最近在做 LCTT 項目，經常需要同步上游其他人的翻譯，下面就以 LCTT 項目爲例，記錄一下 GitHub 上 fork 倉庫同步上游更新的操作。   使用 git remote -v 查看當前的遠程倉庫別名，輸出如下：  1234LCTT">
-  <link rel="canonical" href="http://cycoe.cc/2017/03/11/如何同步GitHub上游更新/">
+  <link rel="canonical" href="http://cycoe.cc/2017/03/11/%E5%A6%82%E4%BD%95%E5%90%8C%E6%AD%A5GitHub%E4%B8%8A%E6%B8%B8%E6%9B%B4%E6%96%B0/">
 
 
 <script id="page-configurations">
@@ -239,7 +237,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2017/03/11/如何同步GitHub上游更新/">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2017/03/11/%E5%A6%82%E4%BD%95%E5%90%8C%E6%AD%A5GitHub%E4%B8%8A%E6%B8%B8%E6%9B%B4%E6%96%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Cycoe">
@@ -314,8 +312,8 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2017/03/11/如何同步GitHub上游更新/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2017/03/11/如何同步GitHub上游更新/" itemprop="commentCount"></span>
+    <a title="valine" href="/2017/03/11/%E5%A6%82%E4%BD%95%E5%90%8C%E6%AD%A5GitHub%E4%B8%8A%E6%B8%B8%E6%9B%B4%E6%96%B0/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2017/03/11/%E5%A6%82%E4%BD%95%E5%90%8C%E6%AD%A5GitHub%E4%B8%8A%E6%B8%B8%E6%9B%B4%E6%96%B0/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -334,11 +332,11 @@
 <hr>
 <ol>
 <li><p>使用 <code>git remote -v</code> 查看當前的遠程倉庫別名，輸出如下：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LCTT    https://github.com/LCTT/TranslateProject.git (fetch)</span><br><span class="line">LCTT    https://github.com/LCTT/TranslateProject.git (push)</span><br><span class="line">origin  git@github.com:cycoe/TranslateProject.git (fetch)</span><br><span class="line">origin  git@github.com:cycoe/TranslateProject.git (push)</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">LCTT    https:&#x2F;&#x2F;github.com&#x2F;LCTT&#x2F;TranslateProject.git (fetch)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">LCTT    https:&#x2F;&#x2F;github.com&#x2F;LCTT&#x2F;TranslateProject.git (push)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">origin  git@github.com:cycoe&#x2F;TranslateProject.git (fetch)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">origin  git@github.com:cycoe&#x2F;TranslateProject.git (push)</span></pre></td></tr></table></figure>
 <p> 其中 <code>origin</code> 是自己賬號下的對應遠端倉庫地址別名， <code>LCTT</code> 是設定好的上游倉庫地址的別名。此處 LCTT 項目已經幫我們設置好了就不需要另外設置。<br> 如果沒有設置上游倉庫地址，可通過 <code>git remote add 上游倉庫別名 上游倉庫地址</code> 命令來設置上游倉庫的別名。</p>
 </li>
 <li><p>同步上游倉庫更新到本地，併合並更新到本地倉庫 master 分支</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git fetch LCTT          <span class="comment">#從上游倉庫抓取更新</span></span><br><span class="line">git checkout master     <span class="comment">#切換到 master 分支</span></span><br><span class="line">git merge LCTT/master   <span class="comment">#合併上游更新到 master 分支</span></span><br></pre></td></tr></table></figure>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">git fetch LCTT          <span class="comment">#從上游倉庫抓取更新</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">git checkout master     <span class="comment">#切換到 master 分支</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">git merge LCTT/master   <span class="comment">#合併上游更新到 master 分支</span></span></pre></td></tr></table></figure>
 </li>
 <li><p><code>git push</code> 命令推送本地倉庫到 fork 倉庫</p>
 </li>
@@ -360,7 +358,7 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2017/03/09/CPVC热稳定剂/" rel="next" title="CPVC熱穩定劑">
+                <a href="/2017/03/09/CPVC%E7%83%AD%E7%A8%B3%E5%AE%9A%E5%89%82/" rel="next" title="CPVC熱穩定劑">
                   <i class="fa fa-chevron-left"></i> CPVC熱穩定劑
                 </a>
               
@@ -506,7 +504,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Cycoe</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.7.1
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
   </div>
   <span class="post-meta-divider">|</span>
   <div class="theme-info">

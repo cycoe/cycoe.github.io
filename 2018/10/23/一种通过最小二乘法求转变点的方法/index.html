@@ -9,7 +9,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.7.1">
+<meta name="generator" content="Hexo 4.0.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
@@ -55,19 +55,17 @@
   };
 </script>
 
-  <meta name="description" content="最小二乘法假設存在 k 個樣本點 \(X_1, X_2, \ldots, X_k\)，定義向量\(X_i = (x_{i1}, x_{i2}, \ldots, x_{in})^T\)，爲方便計算在 \(X_i\) 前插入常量 1。則需要求 \(W = (w_0, w_1, w_2, \ldots, w_n)\) 使 \(\hat{Y} = XW\)。 定義均方誤差 \(E = \dfrac{1}{">
+  <meta name="description" content="最小二乘法假設存在 k 個樣本點 \(X_1, X_2, \ldots, X_k\)，定義向量\(X_i &#x3D; (x_{i1}, x_{i2}, \ldots, x_{in})^T\)，爲方便計算在 \(X_i\) 前插入常量 1。則需要求 \(W &#x3D; (w_0, w_1, w_2, \ldots, w_n)\) 使 \(\hat{Y} &#x3D; XW\)。 定義均方誤差 \(E &#x3D; \dfrac{1}{">
 <meta name="keywords" content="算法,線性代數,粒子羣優化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一種通過最小二乘法求轉變點的方法">
-<meta property="og:url" content="http://cycoe.cc/2018/10/23/一种通过最小二乘法求转变点的方法/index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;2018&#x2F;10&#x2F;23&#x2F;%E4%B8%80%E7%A7%8D%E9%80%9A%E8%BF%87%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%BD%AC%E5%8F%98%E7%82%B9%E7%9A%84%E6%96%B9%E6%B3%95&#x2F;index.html">
 <meta property="og:site_name" content="Cycoe&#39;s Home Page">
-<meta property="og:description" content="最小二乘法假設存在 k 個樣本點 \(X_1, X_2, \ldots, X_k\)，定義向量\(X_i = (x_{i1}, x_{i2}, \ldots, x_{in})^T\)，爲方便計算在 \(X_i\) 前插入常量 1。則需要求 \(W = (w_0, w_1, w_2, \ldots, w_n)\) 使 \(\hat{Y} = XW\)。 定義均方誤差 \(E = \dfrac{1}{">
+<meta property="og:description" content="最小二乘法假設存在 k 個樣本點 \(X_1, X_2, \ldots, X_k\)，定義向量\(X_i &#x3D; (x_{i1}, x_{i2}, \ldots, x_{in})^T\)，爲方便計算在 \(X_i\) 前插入常量 1。則需要求 \(W &#x3D; (w_0, w_1, w_2, \ldots, w_n)\) 使 \(\hat{Y} &#x3D; XW\)。 定義均方誤差 \(E &#x3D; \dfrac{1}{">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-09T05:58:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一種通過最小二乘法求轉變點的方法">
-<meta name="twitter:description" content="最小二乘法假設存在 k 個樣本點 \(X_1, X_2, \ldots, X_k\)，定義向量\(X_i = (x_{i1}, x_{i2}, \ldots, x_{in})^T\)，爲方便計算在 \(X_i\) 前插入常量 1。則需要求 \(W = (w_0, w_1, w_2, \ldots, w_n)\) 使 \(\hat{Y} = XW\)。 定義均方誤差 \(E = \dfrac{1}{">
-  <link rel="canonical" href="http://cycoe.cc/2018/10/23/一种通过最小二乘法求转变点的方法/">
+  <link rel="canonical" href="http://cycoe.cc/2018/10/23/%E4%B8%80%E7%A7%8D%E9%80%9A%E8%BF%87%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%BD%AC%E5%8F%98%E7%82%B9%E7%9A%84%E6%96%B9%E6%B3%95/">
 
 
 <script id="page-configurations">
@@ -239,7 +237,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2018/10/23/一种通过最小二乘法求转变点的方法/">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2018/10/23/%E4%B8%80%E7%A7%8D%E9%80%9A%E8%BF%87%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%BD%AC%E5%8F%98%E7%82%B9%E7%9A%84%E6%96%B9%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Cycoe">
@@ -297,8 +295,8 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2018/10/23/一种通过最小二乘法求转变点的方法/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2018/10/23/一种通过最小二乘法求转变点的方法/" itemprop="commentCount"></span>
+    <a title="valine" href="/2018/10/23/%E4%B8%80%E7%A7%8D%E9%80%9A%E8%BF%87%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%BD%AC%E5%8F%98%E7%82%B9%E7%9A%84%E6%96%B9%E6%B3%95/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2018/10/23/%E4%B8%80%E7%A7%8D%E9%80%9A%E8%BF%87%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%BD%AC%E5%8F%98%E7%82%B9%E7%9A%84%E6%96%B9%E6%B3%95/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -351,11 +349,11 @@
           
           <div class="post-tags">
             
-              <a href="/tags/算法/" rel="tag"># 算法</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
             
-              <a href="/tags/線性代數/" rel="tag"># 線性代數</a>
+              <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" rel="tag"># 線性代數</a>
             
-              <a href="/tags/粒子羣優化/" rel="tag"># 粒子羣優化</a>
+              <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" rel="tag"># 粒子羣優化</a>
             
           </div>
         
@@ -365,7 +363,7 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2018/09/06/Nocturnal使用说明/" rel="next" title="Nocturnal使用說明">
+                <a href="/2018/09/06/Nocturnal%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" rel="next" title="Nocturnal使用說明">
                   <i class="fa fa-chevron-left"></i> Nocturnal使用說明
                 </a>
               
@@ -375,7 +373,7 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2018/11/09/Linux下常用软件和配置记录/" rel="prev" title="Linux下常用軟件和配置記錄">
+                <a href="/2018/11/09/Linux%E4%B8%8B%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%92%8C%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/" rel="prev" title="Linux下常用軟件和配置記錄">
                   Linux下常用軟件和配置記錄 <i class="fa fa-chevron-right"></i>
                 </a>
               
@@ -513,7 +511,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Cycoe</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.7.1
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
   </div>
   <span class="post-meta-divider">|</span>
   <div class="theme-info">

@@ -9,7 +9,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.7.1">
+<meta name="generator" content="Hexo 4.0.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
@@ -59,15 +59,13 @@
 <meta name="keywords" content="Linux, Blog, Jekyll">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基於Jekyll引擎的博客服務器搭建">
-<meta property="og:url" content="http://cycoe.cc/2017/04/01/基于Jekyll引擎的博客服务器搭建/index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;2017&#x2F;04&#x2F;01&#x2F;%E5%9F%BA%E4%BA%8EJekyll%E5%BC%95%E6%93%8E%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA&#x2F;index.html">
 <meta property="og:site_name" content="Cycoe&#39;s Home Page">
 <meta property="og:description" content="在樹莓派上搭建自己的博客服務器">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-02-28T01:03:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基於Jekyll引擎的博客服務器搭建">
-<meta name="twitter:description" content="在樹莓派上搭建自己的博客服務器">
-  <link rel="canonical" href="http://cycoe.cc/2017/04/01/基于Jekyll引擎的博客服务器搭建/">
+  <link rel="canonical" href="http://cycoe.cc/2017/04/01/%E5%9F%BA%E4%BA%8EJekyll%E5%BC%95%E6%93%8E%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/">
 
 
 <script id="page-configurations">
@@ -239,7 +237,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2017/04/01/基于Jekyll引擎的博客服务器搭建/">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2017/04/01/%E5%9F%BA%E4%BA%8EJekyll%E5%BC%95%E6%93%8E%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Cycoe">
@@ -314,8 +312,8 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2017/04/01/基于Jekyll引擎的博客服务器搭建/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2017/04/01/基于Jekyll引擎的博客服务器搭建/" itemprop="commentCount"></span>
+    <a title="valine" href="/2017/04/01/%E5%9F%BA%E4%BA%8EJekyll%E5%BC%95%E6%93%8E%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2017/04/01/%E5%9F%BA%E4%BA%8EJekyll%E5%BC%95%E6%93%8E%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -336,32 +334,21 @@
 <p>Transform your plain text into static websites and blogs.</p>
 </blockquote>
 <h2 id="爲什麼要搭建自己的博客服務器"><a href="#爲什麼要搭建自己的博客服務器" class="headerlink" title="爲什麼要搭建自己的博客服務器"></a>爲什麼要搭建自己的博客服務器</h2><p>之前我們已經利用 GitHub Pages 和 Jekyll 搭建了靜態博客並且託管在了 <code>github.io</code> 上，<br>並且擁有了不錯的頁面效果以及可用性。那我們爲什麼還要搭建自己的博客服務器呢？<br>因爲 GitHub 的服務器在美國，訪問體驗並不順暢；並且在我們 Push 了項目之後，往往要等待一定時間頁面內容纔會刷新。<br>爲了更好的體驗效果，我們將基於<a href="www.raspberrypi.org/">樹莓派</a>搭建自己的博客服務器。<br>樹莓派爲 3B+，系統爲 <code>Archlinuxarm-rpi-2</code></p>
-<h2 id="環境搭建"><a href="#環境搭建" class="headerlink" title="環境搭建"></a>環境搭建</h2><h3 id="安裝-Ruby"><a href="#安裝-Ruby" class="headerlink" title="安裝 Ruby"></a>安裝 <a href="https://ruby-china.org/" target="_blank" rel="noopener">Ruby</a></h3><p>依次運行下面的命令安裝最新的 Ruby 運行環境：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S ruby</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ruby --version</span></span><br><span class="line">ruby 2.4.0p0 (2016-12-24 revision 57164) [armv7l-linux-eabihf]</span><br><span class="line"><span class="meta">$</span><span class="bash"> gem --version</span></span><br><span class="line">2.6.8</span><br></pre></td></tr></table></figure></p>
-<p>出現上面的提示說明 Ruby 安裝成功，gem 可以看做是 Ruby 插件的安裝器，一般安裝 Ruby 後自帶。</p>
-<p><strong><font color="#ff0000" size="4">注意：</font></strong><br>Archlinux 用普通用戶安裝 Ruby 後會遇到運行 Gem 插件提示找不到命令的情況，原因是 Ruby 未自動設置環境變量。解決方法：</p>
+<h2 id="環境搭建"><a href="#環境搭建" class="headerlink" title="環境搭建"></a>環境搭建</h2><h3 id="安裝-Ruby"><a href="#安裝-Ruby" class="headerlink" title="安裝 Ruby"></a>安裝 <a href="https://ruby-china.org/" target="_blank" rel="noopener">Ruby</a></h3><p>依次運行下面的命令安裝最新的 Ruby 運行環境：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S ruby</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ruby --version</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">ruby 2.4.0p0 (2016-12-24 revision 57164) [armv7l-linux-eabihf]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gem --version</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">2.6.8</span></pre></td></tr></table></figure><br>出現上面的提示說明 Ruby 安裝成功，gem 可以看做是 Ruby 插件的安裝器，一般安裝 Ruby 後自帶。</p>
+<p><strong><font color=#ff0000 size=4>注意：</font></strong><br>Archlinux 用普通用戶安裝 Ruby 後會遇到運行 Gem 插件提示找不到命令的情況，原因是 Ruby 未自動設置環境變量。解決方法：</p>
 <ul>
-<li><p>bash<br>打開 ~/.bashrc 文件，加入以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=$PATH:~/.gem/ruby/2.4.0/bin/</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>fish<br>打開 ~/.config/fish/config.fish 文件（沒有則新建），加入以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set -x PATH &#123;$PATH&#125; ~/.gem/ruby/2.4.0/bin</span><br></pre></td></tr></table></figure>
+<li>bash<br>打開 ~/.bashrc 文件，加入以下命令：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">export PATH=$PATH:~/.gem/ruby/2.4.0/bin/</span></pre></td></tr></table></figure></li>
+<li>fish<br>打開 ~/.config/fish/config.fish 文件（沒有則新建），加入以下命令：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">set -x PATH &#123;$PATH&#125; ~/.gem/ruby/2.4.0/bin</span></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="安裝-Jekyll"><a href="#安裝-Jekyll" class="headerlink" title="安裝 Jekyll"></a>安裝 <a href="http://jekyllrb.com/" target="_blank" rel="noopener">Jekyll</a></h3><blockquote>
 <p>Jekyll is a simple, blog-aware, static site generator for personal, project, or organization sites.<br>Written in Ruby by Tom Preston-Werner, GitHub’s co-founder, it is distributed under an open source license.</p>
 </blockquote>
 <ol>
-<li><p>安裝 Jekyll 之前需要先安裝 <code>bundle</code> 管理器</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem install bundle</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>編輯 <code>Gemfile</code>，在文件中輸入以下內容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem &apos;github-pages&apos;, group: :jekyll_plugins</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>利用 <code>bundle</code> 安裝 Jekyll 渲染需要的所有包</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bundle install</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>到此需要的依賴安裝完畢，若 fork 的其他人的 Jekyll 模板，則直接進入模板目錄下執行 <code>bundle install</code>。</p>
-</li>
+<li>安裝 Jekyll 之前需要先安裝 <code>bundle</code> 管理器<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">gem install bundle</span></pre></td></tr></table></figure></li>
+<li>編輯 <code>Gemfile</code>，在文件中輸入以下內容<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">gem &#39;github-pages&#39;, group: :jekyll_plugins</span></pre></td></tr></table></figure></li>
+<li>利用 <code>bundle</code> 安裝 Jekyll 渲染需要的所有包<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">bundle install</span></pre></td></tr></table></figure></li>
+<li>到此需要的依賴安裝完畢，若 fork 的其他人的 Jekyll 模板，則直接進入模板目錄下執行 <code>bundle install</code>。</li>
 </ol>
 <h3 id="運行-Jekll"><a href="#運行-Jekll" class="headerlink" title="運行 Jekll"></a>運行 Jekll</h3><ul>
 <li>若要在 <code>_site</code> 目錄下生成網站目錄，則運行 <code>bundle exec jekyll build</code></li>
@@ -394,7 +381,7 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2017/04/11/静态编译安装Qt/" rel="prev" title="靜態編譯安裝 Qt">
+                <a href="/2017/04/11/%E9%9D%99%E6%80%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85Qt/" rel="prev" title="靜態編譯安裝 Qt">
                   靜態編譯安裝 Qt <i class="fa fa-chevron-right"></i>
                 </a>
               
@@ -532,7 +519,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Cycoe</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.7.1
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
   </div>
   <span class="post-meta-divider">|</span>
   <div class="theme-info">

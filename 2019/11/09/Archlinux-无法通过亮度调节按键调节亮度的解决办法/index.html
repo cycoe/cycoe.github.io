@@ -9,7 +9,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.7.1">
+<meta name="generator" content="Hexo 4.0.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
@@ -55,19 +55,17 @@
   };
 </script>
 
-  <meta name="description" content="最近买了一个新机器小新 Pro13，买来的第一天当然是先装上 Archlinux。装上 之后发现无法通过键盘上的亮度调节按钮调节屏幕亮度，机器是 AMD 处理器加 AMD 核显。刚开始以为是 AMD 版本特有的问题，但在网上查了相关的问题后， 发现许多 Intel 核显的机器也有类似问题。 首先排除按键问题，通过 xev 命令可以监测到亮度调节按钮被按下，说明按键本身没有问题。通过向 /etc/d">
+  <meta name="description" content="最近买了一个新机器小新 Pro13，买来的第一天当然是先装上 Archlinux。装上 之后发现无法通过键盘上的亮度调节按钮调节屏幕亮度，机器是 AMD 处理器加 AMD 核显。刚开始以为是 AMD 版本特有的问题，但在网上查了相关的问题后， 发现许多 Intel 核显的机器也有类似问题。 首先排除按键问题，通过 xev 命令可以监测到亮度调节按钮被按下，说明按键本身没有问题。通过向 &#x2F;etc&#x2F;d">
 <meta name="keywords" content="Archlinux,AMD,Brightness">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Archlinux 无法通过亮度调节按键调节亮度的解决办法">
-<meta property="og:url" content="http://cycoe.cc/2019/11/09/Archlinux-无法通过亮度调节按键调节亮度的解决办法/index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;2019&#x2F;11&#x2F;09&#x2F;Archlinux-%E6%97%A0%E6%B3%95%E9%80%9A%E8%BF%87%E4%BA%AE%E5%BA%A6%E8%B0%83%E8%8A%82%E6%8C%89%E9%94%AE%E8%B0%83%E8%8A%82%E4%BA%AE%E5%BA%A6%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95&#x2F;index.html">
 <meta property="og:site_name" content="Cycoe&#39;s Home Page">
-<meta property="og:description" content="最近买了一个新机器小新 Pro13，买来的第一天当然是先装上 Archlinux。装上 之后发现无法通过键盘上的亮度调节按钮调节屏幕亮度，机器是 AMD 处理器加 AMD 核显。刚开始以为是 AMD 版本特有的问题，但在网上查了相关的问题后， 发现许多 Intel 核显的机器也有类似问题。 首先排除按键问题，通过 xev 命令可以监测到亮度调节按钮被按下，说明按键本身没有问题。通过向 /etc/d">
+<meta property="og:description" content="最近买了一个新机器小新 Pro13，买来的第一天当然是先装上 Archlinux。装上 之后发现无法通过键盘上的亮度调节按钮调节屏幕亮度，机器是 AMD 处理器加 AMD 核显。刚开始以为是 AMD 版本特有的问题，但在网上查了相关的问题后， 发现许多 Intel 核显的机器也有类似问题。 首先排除按键问题，通过 xev 命令可以监测到亮度调节按钮被按下，说明按键本身没有问题。通过向 &#x2F;etc&#x2F;d">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-11-26T05:29:43.344Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Archlinux 无法通过亮度调节按键调节亮度的解决办法">
-<meta name="twitter:description" content="最近买了一个新机器小新 Pro13，买来的第一天当然是先装上 Archlinux。装上 之后发现无法通过键盘上的亮度调节按钮调节屏幕亮度，机器是 AMD 处理器加 AMD 核显。刚开始以为是 AMD 版本特有的问题，但在网上查了相关的问题后， 发现许多 Intel 核显的机器也有类似问题。 首先排除按键问题，通过 xev 命令可以监测到亮度调节按钮被按下，说明按键本身没有问题。通过向 /etc/d">
-  <link rel="canonical" href="http://cycoe.cc/2019/11/09/Archlinux-无法通过亮度调节按键调节亮度的解决办法/">
+  <link rel="canonical" href="http://cycoe.cc/2019/11/09/Archlinux-%E6%97%A0%E6%B3%95%E9%80%9A%E8%BF%87%E4%BA%AE%E5%BA%A6%E8%B0%83%E8%8A%82%E6%8C%89%E9%94%AE%E8%B0%83%E8%8A%82%E4%BA%AE%E5%BA%A6%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">
 
 
 <script id="page-configurations">
@@ -239,7 +237,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2019/11/09/Archlinux-无法通过亮度调节按键调节亮度的解决办法/">
+    <link itemprop="mainEntityOfPage" href="http://cycoe.cc/2019/11/09/Archlinux-%E6%97%A0%E6%B3%95%E9%80%9A%E8%BF%87%E4%BA%AE%E5%BA%A6%E8%B0%83%E8%8A%82%E6%8C%89%E9%94%AE%E8%B0%83%E8%8A%82%E4%BA%AE%E5%BA%A6%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Cycoe">
@@ -314,8 +312,8 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/11/09/Archlinux-无法通过亮度调节按键调节亮度的解决办法/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/09/Archlinux-无法通过亮度调节按键调节亮度的解决办法/" itemprop="commentCount"></span>
+    <a title="valine" href="/2019/11/09/Archlinux-%E6%97%A0%E6%B3%95%E9%80%9A%E8%BF%87%E4%BA%AE%E5%BA%A6%E8%B0%83%E8%8A%82%E6%8C%89%E9%94%AE%E8%B0%83%E8%8A%82%E4%BA%AE%E5%BA%A6%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/09/Archlinux-%E6%97%A0%E6%B3%95%E9%80%9A%E8%BF%87%E4%BA%AE%E5%BA%A6%E8%B0%83%E8%8A%82%E6%8C%89%E9%94%AE%E8%B0%83%E8%8A%82%E4%BA%AE%E5%BA%A6%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -333,17 +331,16 @@
         <p>最近买了一个新机器小新 Pro13，买来的第一天当然是先装上 Archlinux。装上 之后发现无法通过键盘上的亮度调节按钮调节屏幕亮度，机器是 AMD 处理器加 AMD 核显。刚开始以为是 AMD 版本特有的问题，但在网上查了相关的问题后， 发现许多 Intel 核显的机器也有类似问题。</p>
 <p>首先排除按键问题，通过 <code>xev</code> 命令可以监测到亮度调节按钮被按下，说明按键本身没有问题。通过向 <code>/etc/default/grub</code> 中加入 <code>GRUB_CMDLINE_LINUX_DEFAULT=&quot;loglevel=3 acpi_osi=! acpi=&quot;Linux&quot; quiet splash&quot;</code> 没有效果，并且反而使得亮度调节按钮失效了。</p>
 <p>安装 <code>xorg-xbacklight</code> 包，但 <code>xbacklight</code> 命令提示 <code>No outputs have backlight property</code>。是因为 <code>xorg-xbacklight</code> 包中提供的 <code>xbacklight</code> 命令默认只对 Intel 核显有效，在 AMD 核显上会提示 <code>No outputs have backlight property</code> 错误。因此需要通过 ACPI 通道对亮度进行控制。</p>
-<p><strong>解决方法如下：</strong><br>安装 ACPI 的亮度控制，替换原 <code>xbacklight</code> 命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S acpilight</span><br></pre></td></tr></table></figure></p>
-<p>将当前用户加入 video 组，实现免 root 控制亮度<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gpasswd video -a cycoe</span><br></pre></td></tr></table></figure></p>
-<p>acpilight 兼容 xbacklight 重启之后就可以通过下面命令控制亮度了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Get backlight brightness</span></span><br><span class="line">xbacklight -get</span><br><span class="line"><span class="comment"># Set brightness</span></span><br><span class="line">xbacklight -<span class="built_in">set</span> 70</span><br><span class="line"><span class="comment"># Increase brightness</span></span><br><span class="line">xbacklight -inc 10</span><br><span class="line"><span class="comment"># Decrease brightness</span></span><br><span class="line">xbacklight -dec 10</span><br></pre></td></tr></table></figure></p>
-<h2 id="使用-light-替代-acpilight"><a href="#使用-light-替代-acpilight" class="headerlink" title="使用 light 替代 acpilight"></a>使用 light 替代 acpilight</h2><p>acpilight 是用 Python 写的脚本工具，由于我对于系统工具的洁癖，还是考虑找个 C 语言的替代品，也就找到了 light 这个工具，并且其可以自动检测到亮度调节接口。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Install light</span></span><br><span class="line">sudo pacman -S light</span><br><span class="line"><span class="comment"># Increase brightness</span></span><br><span class="line">light -A 10</span><br><span class="line"><span class="comment"># Decrease brightness</span></span><br><span class="line">light -U 10</span><br></pre></td></tr></table></figure></p>
+<p><strong>解决方法如下：</strong><br>安装 ACPI 的亮度控制，替换原 <code>xbacklight</code> 命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo pacman -S acpilight</span></pre></td></tr></table></figure><br>将当前用户加入 video 组，实现免 root 控制亮度<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo gpasswd video -a cycoe</span></pre></td></tr></table></figure></p>
+<p>acpilight 兼容 xbacklight 重启之后就可以通过下面命令控制亮度了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Get backlight brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">xbacklight -get</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">xbacklight -<span class="built_in">set</span> 70</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Increase brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">xbacklight -inc 10</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Decrease brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">xbacklight -dec 10</span></pre></td></tr></table></figure></p>
+<h2 id="使用-light-替代-acpilight"><a href="#使用-light-替代-acpilight" class="headerlink" title="使用 light 替代 acpilight"></a>使用 light 替代 acpilight</h2><p>acpilight 是用 Python 写的脚本工具，由于我对于系统工具的洁癖，还是考虑找个 C 语言的替代品，也就找到了 light 这个工具，并且其可以自动检测到亮度调节接口。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Install light</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sudo pacman -S light</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Increase brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">light -A 10</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Decrease brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">light -U 10</span></pre></td></tr></table></figure></p>
 <h2 id="使用-clight-利用摄像头自动调节亮度"><a href="#使用-clight-利用摄像头自动调节亮度" class="headerlink" title="使用 clight 利用摄像头自动调节亮度"></a>使用 clight 利用摄像头自动调节亮度</h2><blockquote>
 <p>Clight is a C user daemon utility that aims to fully manage your display. It will automagically change screen backlight level to match ambient brightness, as computed by capturing frames from webcam. Moreover, it can manage your screen temperature, just like redshift does. Finally, it can dim your screen after a timeout.</p>
 </blockquote>
-<p>简而言之，clight 能够自动控制屏幕亮度、gamma 值、自动变暗、自动熄屏等。通过 AUR 安装。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S clight</span><br></pre></td></tr></table></figure></p>
-<p>官方 Wiki 建议安装完成后启用 clightd 服务，虽然并不知道有什么用。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Remember to enable Clightd systemd unit!</span></span><br><span class="line">sudo systemctl <span class="built_in">enable</span> clightd.service</span><br></pre></td></tr></table></figure></p>
-<p>拷贝配置文件。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/default/clight.conf ~/.config/</span><br></pre></td></tr></table></figure></p>
-<p>配置文件中的 <code>gamma_temp</code> 取消注释会提示参数个数不对，设置一个或者三个参数也没有用，因此直接禁用 gamma 值调节。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Gamma temperature during day and night</span></span><br><span class="line"><span class="comment"># gamma_temp = [ 6500, 6500 ];</span></span><br><span class="line">...</span><br><span class="line"><span class="comment">## Uncomment to disable gamma support</span></span><br><span class="line">no_gamma = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure></p>
+<p>简而言之，clight 能够自动控制屏幕亮度、gamma 值、自动变暗、自动熄屏等。通过 AUR 安装。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">yay -S clight</span></pre></td></tr></table></figure></p>
+<p>官方 Wiki 建议安装完成后启用 clightd 服务，虽然并不知道有什么用。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Remember to enable Clightd systemd unit!</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> clightd.service</span></pre></td></tr></table></figure></p>
+<p>拷贝配置文件。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">cp /etc/default/clight.conf ~/.config/</span></pre></td></tr></table></figure></p>
+<p>配置文件中的 <code>gamma_temp</code> 取消注释会提示参数个数不对，设置一个或者三个参数也没有用，因此直接禁用 gamma 值调节。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">## Gamma temperature during day and night</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># gamma_temp = [ 6500, 6500 ];</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">## Uncomment to disable gamma support</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">no_gamma = <span class="literal">true</span>;</span></pre></td></tr></table></figure></p>
 <p>将 <code>clight</code> 加入到自启动脚本中。</p>
 
     </div>
@@ -374,7 +371,7 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/08/13/使用-PIL-与-numpy-进行图像处理/" rel="next" title="使用 PIL 与 numpy 进行图像处理">
+                <a href="/2019/08/13/%E4%BD%BF%E7%94%A8-PIL-%E4%B8%8E-numpy-%E8%BF%9B%E8%A1%8C%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="next" title="使用 PIL 与 numpy 进行图像处理">
                   <i class="fa fa-chevron-left"></i> 使用 PIL 与 numpy 进行图像处理
                 </a>
               
@@ -384,7 +381,7 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/11/09/窗口管理器在高分屏中的设置/" rel="prev" title="窗口管理器在高分屏中的设置">
+                <a href="/2019/11/09/%E7%AA%97%E5%8F%A3%E7%AE%A1%E7%90%86%E5%99%A8%E5%9C%A8%E9%AB%98%E5%88%86%E5%B1%8F%E4%B8%AD%E7%9A%84%E8%AE%BE%E7%BD%AE/" rel="prev" title="窗口管理器在高分屏中的设置">
                   窗口管理器在高分屏中的设置 <i class="fa fa-chevron-right"></i>
                 </a>
               
@@ -522,7 +519,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Cycoe</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.7.1
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
   </div>
   <span class="post-meta-divider">|</span>
   <div class="theme-info">
