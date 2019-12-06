@@ -172,9 +172,9 @@
 <p>在 Linux 中（此处特指 X.org 显示服务器，Wayland 不了解），传统的 X Clients 的缩放由 xrandr 控制，GTK 的 QT 程序的缩放由它们自己的环境变量控制。因此想要完美调整所有界面的缩放比例需要一番摸索。当然，Gnome、KDE 之类的桌面环境除外，桌面环境设置中一般都自带缩放设置。</p>
 <h2 id="降低分辨率"><a href="#降低分辨率" class="headerlink" title="降低分辨率"></a>降低分辨率</h2><p>直接通过 xrandr 降低显示器的分辨率是最简单粗暴的办法，但这样高分屏就相当于废了，不推荐。</p>
 <h2 id="调整-Scale"><a href="#调整-Scale" class="headerlink" title="调整 Scale"></a>调整 Scale</h2><p>通过 xrandr 调整显示界面的 Scale，这种方法相当于用放大镜将屏幕上的内容放大，会使内容严重模糊，同样不推荐。</p>
-<h2 id="通过-xrandr-设置-DPI"><a href="#通过-xrandr-设置-DPI" class="headerlink" title="通过 xrandr 设置 DPI"></a>通过 xrandr 设置 DPI</h2><p>通过设置 DPI，其实就是告诉程序我的屏幕的细腻程度如何。如设置 DPI 为 144，就是告诉程序我的屏幕一英寸长度上有 144 个像素点。但此处也有技巧，第一种方法是直接使用 xrandr 设置 DPI，在 <code>.xinitrc</code> 或 <code>.xprofile</code> 中加入 <code>xrandr --dpi 144</code>，使得每次登录 X Server 时都会自动设置 DPI。但此方法对 GTK 程序无效，需要继续在文件中加入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GDK_SCALE=2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GDK_DPI_SCALE=0.5</span></pre></td></tr></table></figure></p>
+<h2 id="通过-xrandr-设置-DPI"><a href="#通过-xrandr-设置-DPI" class="headerlink" title="通过 xrandr 设置 DPI"></a>通过 xrandr 设置 DPI</h2><p>通过设置 DPI，其实就是告诉程序我的屏幕的细腻程度如何。如设置 DPI 为 144，就是告诉程序我的屏幕一英寸长度上有 144 个像素点。但此处也有技巧，第一种方法是直接使用 xrandr 设置 DPI，在 <code>.xinitrc</code> 或 <code>.xprofile</code> 中加入 <code>xrandr --dpi 144</code>，使得每次登录 X Server 时都会自动设置 DPI。但此方法对 GTK 程序无效，需要继续在文件中加入<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">export</span> GDK_SCALE=2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">export</span> GDK_DPI_SCALE=0.5</span></pre></td></tr></table></figure></p>
 <p>使得 GTK 程序支持缩放，但你应该也注意到了此处的两个问题。一是此处仍然使用的是缩放而非 DPI，会导致 GTK 程序界面模糊；二是 <code>GDK_SCALE</code> 只支持整数倍缩放。</p>
-<h2 id="通过-xft-设置-DPI"><a href="#通过-xft-设置-DPI" class="headerlink" title="通过 xft 设置 DPI"></a>通过 xft 设置 DPI</h2><p>这是我目前找到的完美的方法，还未遇到什么问题。在 <code>.Xresources</code> 文件中加入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Xft.dpi: 144</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Xft.autohint: 0</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">Xft.lcdfilter:  lcddefault</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">Xft.hintstyle:  hintfull</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">Xft.hinting: 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">Xft.antialias: 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">Xft.rgba: rgb</span></pre></td></tr></table></figure></p>
+<h2 id="通过-xft-设置-DPI"><a href="#通过-xft-设置-DPI" class="headerlink" title="通过 xft 设置 DPI"></a>通过 xft 设置 DPI</h2><p>这是我目前找到的完美的方法，还未遇到什么问题。在 <code>.Xresources</code> 文件中加入<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Xft.dpi: 144</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Xft.autohint: 0</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">Xft.lcdfilter:  lcddefault</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">Xft.hintstyle:  hintfull</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">Xft.hinting: 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">Xft.antialias: 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">Xft.rgba: rgb</span></pre></td></tr></table></figure></p>
 <p>并在 <code>.xinitrc</code> 或 <code>.xprofile</code> 中加入 <code>xrdb -merge &quot;.Xresources&quot;</code> 使得每次登录时都会使 <code>.Xresources</code> 生效。<code>xrdb</code> 命令需要首先安装 <code>xorg-xrdb</code> 包。至此，终于拥有了一个比较舒适的 DPI。</p>
 
         </div>
@@ -224,16 +224,16 @@
             <p>最近买了一个新机器小新 Pro13，买来的第一天当然是先装上 Archlinux。装上 之后发现无法通过键盘上的亮度调节按钮调节屏幕亮度，机器是 AMD 处理器加 AMD 核显。刚开始以为是 AMD 版本特有的问题，但在网上查了相关的问题后， 发现许多 Intel 核显的机器也有类似问题。</p>
 <p>首先排除按键问题，通过 <code>xev</code> 命令可以监测到亮度调节按钮被按下，说明按键本身没有问题。通过向 <code>/etc/default/grub</code> 中加入 <code>GRUB_CMDLINE_LINUX_DEFAULT=&quot;loglevel=3 acpi_osi=! acpi=&quot;Linux&quot; quiet splash&quot;</code> 没有效果，并且反而使得亮度调节按钮失效了。</p>
 <p>安装 <code>xorg-xbacklight</code> 包，但 <code>xbacklight</code> 命令提示 <code>No outputs have backlight property</code>。是因为 <code>xorg-xbacklight</code> 包中提供的 <code>xbacklight</code> 命令默认只对 Intel 核显有效，在 AMD 核显上会提示 <code>No outputs have backlight property</code> 错误。因此需要通过 ACPI 通道对亮度进行控制。</p>
-<p><strong>解决方法如下：</strong><br>安装 ACPI 的亮度控制，替换原 <code>xbacklight</code> 命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo pacman -S acpilight</span></pre></td></tr></table></figure><br>将当前用户加入 video 组，实现免 root 控制亮度<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo gpasswd video -a cycoe</span></pre></td></tr></table></figure></p>
-<p>acpilight 兼容 xbacklight 重启之后就可以通过下面命令控制亮度了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Get backlight brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">xbacklight -get</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">xbacklight -<span class="built_in">set</span> 70</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Increase brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">xbacklight -inc 10</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Decrease brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">xbacklight -dec 10</span></pre></td></tr></table></figure></p>
-<h2 id="使用-light-替代-acpilight"><a href="#使用-light-替代-acpilight" class="headerlink" title="使用 light 替代 acpilight"></a>使用 light 替代 acpilight</h2><p>acpilight 是用 Python 写的脚本工具，由于我对于系统工具的洁癖，还是考虑找个 C 语言的替代品，也就找到了 light 这个工具，并且其可以自动检测到亮度调节接口。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Install light</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sudo pacman -S light</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Increase brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">light -A 10</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Decrease brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">light -U 10</span></pre></td></tr></table></figure></p>
+<p><strong>解决方法如下：</strong><br>安装 ACPI 的亮度控制，替换原 <code>xbacklight</code> 命令<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo pacman -S acpilight</span></pre></td></tr></table></figure><br>将当前用户加入 video 组，实现免 root 控制亮度<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo gpasswd video -a cycoe</span></pre></td></tr></table></figure></p>
+<p>acpilight 兼容 xbacklight 重启之后就可以通过下面命令控制亮度了<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Get backlight brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">xbacklight -get</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Set brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">xbacklight -<span class="hljs-built_in">set</span> 70</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Increase brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">xbacklight -inc 10</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Decrease brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">xbacklight -dec 10</span></pre></td></tr></table></figure></p>
+<h2 id="使用-light-替代-acpilight"><a href="#使用-light-替代-acpilight" class="headerlink" title="使用 light 替代 acpilight"></a>使用 light 替代 acpilight</h2><p>acpilight 是用 Python 写的脚本工具，由于我对于系统工具的洁癖，还是考虑找个 C 语言的替代品，也就找到了 light 这个工具，并且其可以自动检测到亮度调节接口。<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Install light</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sudo pacman -S light</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Increase brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">light -A 10</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Decrease brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">light -U 10</span></pre></td></tr></table></figure></p>
 <h2 id="使用-clight-利用摄像头自动调节亮度"><a href="#使用-clight-利用摄像头自动调节亮度" class="headerlink" title="使用 clight 利用摄像头自动调节亮度"></a>使用 clight 利用摄像头自动调节亮度</h2><blockquote>
 <p>Clight is a C user daemon utility that aims to fully manage your display. It will automagically change screen backlight level to match ambient brightness, as computed by capturing frames from webcam. Moreover, it can manage your screen temperature, just like redshift does. Finally, it can dim your screen after a timeout.</p>
 </blockquote>
-<p>简而言之，clight 能够自动控制屏幕亮度、gamma 值、自动变暗、自动熄屏等。通过 AUR 安装。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">yay -S clight</span></pre></td></tr></table></figure></p>
-<p>官方 Wiki 建议安装完成后启用 clightd 服务，虽然并不知道有什么用。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Remember to enable Clightd systemd unit!</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> clightd.service</span></pre></td></tr></table></figure></p>
-<p>拷贝配置文件。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">cp /etc/default/clight.conf ~/.config/</span></pre></td></tr></table></figure></p>
-<p>配置文件中的 <code>gamma_temp</code> 取消注释会提示参数个数不对，设置一个或者三个参数也没有用，因此直接禁用 gamma 值调节。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">## Gamma temperature during day and night</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># gamma_temp = [ 6500, 6500 ];</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">## Uncomment to disable gamma support</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">no_gamma = <span class="literal">true</span>;</span></pre></td></tr></table></figure></p>
+<p>简而言之，clight 能够自动控制屏幕亮度、gamma 值、自动变暗、自动熄屏等。通过 AUR 安装。<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">yay -S clight</span></pre></td></tr></table></figure></p>
+<p>官方 Wiki 建议安装完成后启用 clightd 服务，虽然并不知道有什么用。<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Remember to enable Clightd systemd unit!</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="hljs-built_in">enable</span> clightd.service</span></pre></td></tr></table></figure></p>
+<p>拷贝配置文件。<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">cp /etc/default/clight.conf ~/.config/</span></pre></td></tr></table></figure></p>
+<p>配置文件中的 <code>gamma_temp</code> 取消注释会提示参数个数不对，设置一个或者三个参数也没有用，因此直接禁用 gamma 值调节。<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">## Gamma temperature during day and night</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># gamma_temp = [ 6500, 6500 ];</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">## Uncomment to disable gamma support</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">no_gamma = <span class="hljs-literal">true</span>;</span></pre></td></tr></table></figure></p>
 <p>将 <code>clight</code> 加入到自启动脚本中。</p>
 
         </div>
@@ -318,8 +318,8 @@
 </li>
 </ul>
 <h2 id="Utilities"><a href="#Utilities" class="headerlink" title="Utilities"></a>Utilities</h2><h3 id="DFHack-Linux-V0-44-09-r1-gcc-5-4-0"><a href="#DFHack-Linux-V0-44-09-r1-gcc-5-4-0" class="headerlink" title="DFHack Linux V0.44.09-r1 (gcc 5.4.0)"></a><a href="http://www.bay12forums.com/smf/index.php?topic=139553.0" target="_blank" rel="noopener">DFHack Linux V0.44.09-r1 (gcc 5.4.0)</a></h3><p>DfHack is an attempt to unite the various ways hack tools access DF memory and allow for easier development of new tools (and of course, make the game more enjoyable for players).</p>
-<p>In archlinux, we can get DfHack by install it with yay:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">yay -S dfhack-twbt-bin</span></pre></td></tr></table></figure><br>As we can see, we installed a DfHack version integrated with TWBT. That means we don’t need to install TWBT again. What’s more, package ‘dfhack-twbt-bin’ depends on the package ‘dwarffortress’ in community repository. </p>
-<p>But as default, the ‘PKGBIULD’ file of ‘dfhack-twbt-bin’ will download the dfhack binary compiled with gcc-4.8, which provide an out-of-date version of remotefortressreader plugin. To avoid this, you can command the PKGBIULD to download dfhack compiled with gcc-7. To get this magic as below, edit PKGBIULD with editor:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># https://github.com/DFHack/dfhack/releases/download/$_pkgver/dfhack-$_pkgver-Linux-64-gcc-4.8.tar.bz2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">https://github.com/DFHack/dfhack/releases/download/<span class="variable">$_pkgver</span>/dfhack-<span class="variable">$_pkgver</span>-Linux-64-gcc-7.tar.bz2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">md5sums=(<span class="string">'e630ae2fc93c6c7b55552336da2b6c07'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">         <span class="string">'3853c6f890d3541f710f2c4833a9e696'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">         <span class="string">'6730da5fec400ece9102552e77996fcb'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">         <span class="string">'052a58e7f5f1af8be3ddefe9677b8fc6'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">         <span class="comment"># 'e200a6225dcf285e2eac19c1d1e118ea'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">         <span class="string">'bdbe256099ec9ffd90f391f0d069742f'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">         <span class="string">'8eac5ae59dad0397090c4f50d50ef841'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr></table></figure></p>
+<p>In archlinux, we can get DfHack by install it with yay:<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">yay -S dfhack-twbt-bin</span></pre></td></tr></table></figure><br>As we can see, we installed a DfHack version integrated with TWBT. That means we don’t need to install TWBT again. What’s more, package ‘dfhack-twbt-bin’ depends on the package ‘dwarffortress’ in community repository. </p>
+<p>But as default, the ‘PKGBIULD’ file of ‘dfhack-twbt-bin’ will download the dfhack binary compiled with gcc-4.8, which provide an out-of-date version of remotefortressreader plugin. To avoid this, you can command the PKGBIULD to download dfhack compiled with gcc-7. To get this magic as below, edit PKGBIULD with editor:<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># https://github.com/DFHack/dfhack/releases/download/$_pkgver/dfhack-$_pkgver-Linux-64-gcc-4.8.tar.bz2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">https://github.com/DFHack/dfhack/releases/download/<span class="hljs-variable">$_pkgver</span>/dfhack-<span class="hljs-variable">$_pkgver</span>-Linux-64-gcc-7.tar.bz2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">md5sums=(<span class="hljs-string">'e630ae2fc93c6c7b55552336da2b6c07'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'3853c6f890d3541f710f2c4833a9e696'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'6730da5fec400ece9102552e77996fcb'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'052a58e7f5f1af8be3ddefe9677b8fc6'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-comment"># 'e200a6225dcf285e2eac19c1d1e118ea'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'bdbe256099ec9ffd90f391f0d069742f'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'8eac5ae59dad0397090c4f50d50ef841'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr></table></figure></p>
 <p>Then run <code>makepkg</code> to download lacking files.</p>
 <h3 id="TWBT-6-41"><a href="#TWBT-6-41" class="headerlink" title="TWBT 6.41"></a><a href="http://www.bay12forums.com/smf/index.php?topic=138754.0" target="_blank" rel="noopener">TWBT 6.41</a></h3><p>This plugin improves various aspects the game interface.</p>
 <p>Originally I wrote a small plugin because I was tired seeing coffins instead of zeroes and all that stuff. It has greately evolved since then. Some functions may not work or have issues in Adventurer Mode. See readme for all details.</p>
@@ -403,7 +403,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            31
+                            32
                         </p>
                     </a>
                 </div>
@@ -415,7 +415,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            14
+                            15
                         </p>
                     </a>
                 </div>
@@ -427,7 +427,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            22
+                            25
                         </p>
                     </a>
                 </div>
@@ -602,6 +602,14 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
+        <a class="level is-marginless" href="/categories/matplotlib/">
+            <span class="level-start">
+                <span class="level-item">matplotlib</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/personal/">
             <span class="level-start">
                 <span class="level-item">personal</span>
@@ -644,7 +652,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Archlinux/" style="font-size: 20px;">Archlinux</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/statistics/" style="font-size: 10px;">statistics</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
+        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Archlinux/" style="font-size: 20px;">Archlinux</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/matplotlib/" style="font-size: 10px;">matplotlib</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 10px;">plot</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/statistics/" style="font-size: 10px;">statistics</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
     </div>
 </div>
     
@@ -656,6 +664,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/12/05/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-matplotlib%E5%88%9D%E4%BD%93%E9%AA%8C/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第一弹-matplotlib初体验">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-05T14:55:57.000Z">2019-12-05</time></div>
+                    <a href="/2019/12/05/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-matplotlib%E5%88%9D%E4%BD%93%E9%AA%8C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第一弹-matplotlib初体验</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/matplotlib/">matplotlib</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -733,25 +760,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/08/09/Construct-Dwarf-Fortress-Lazy-Newbee-Package-in-ArchLinux/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Construct Dwarf Fortress Lazy Newbee Package in ArchLinux">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-09T05:36:01.000Z">2019-08-09</time></div>
-                    <a href="/2019/08/09/Construct-Dwarf-Fortress-Lazy-Newbee-Package-in-ArchLinux/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Construct Dwarf Fortress Lazy Newbee Package in ArchLinux</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Games/">Games</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -762,6 +770,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/11/">
@@ -1041,6 +1060,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/Vim/">
                         <span class="tag">Vim</span>
                         <span class="tag is-grey">1</span>
@@ -1062,6 +1088,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/matplotlib/">
+                        <span class="tag">matplotlib</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/numpy/">
                         <span class="tag">numpy</span>
                         <span class="tag is-grey">1</span>
@@ -1071,6 +1104,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/planche/">
                         <span class="tag">planche</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/plot/">
+                        <span class="tag">plot</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1141,6 +1181,25 @@
         
         <article class="media">
             
+            <a href="/2019/12/05/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-matplotlib%E5%88%9D%E4%BD%93%E9%AA%8C/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第一弹-matplotlib初体验">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-05T14:55:57.000Z">2019-12-05</time></div>
+                    <a href="/2019/12/05/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-matplotlib%E5%88%9D%E4%BD%93%E9%AA%8C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第一弹-matplotlib初体验</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/matplotlib/">matplotlib</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/11/17/fcitx-%E8%BE%93%E5%85%A5%E6%B3%95%E9%85%8D%E7%BD%AE/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="fcitx 输入法配置">
@@ -1215,25 +1274,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/08/09/Construct-Dwarf-Fortress-Lazy-Newbee-Package-in-ArchLinux/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Construct Dwarf Fortress Lazy Newbee Package in ArchLinux">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-09T05:36:01.000Z">2019-08-09</time></div>
-                    <a href="/2019/08/09/Construct-Dwarf-Fortress-Lazy-Newbee-Package-in-ArchLinux/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Construct Dwarf Fortress Lazy Newbee Package in ArchLinux</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Games/">Games</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1244,6 +1284,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/11/">
@@ -1523,6 +1574,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/Vim/">
                         <span class="tag">Vim</span>
                         <span class="tag is-grey">1</span>
@@ -1544,6 +1602,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/matplotlib/">
+                        <span class="tag">matplotlib</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/numpy/">
                         <span class="tag">numpy</span>
                         <span class="tag is-grey">1</span>
@@ -1553,6 +1618,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/planche/">
                         <span class="tag">planche</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/plot/">
+                        <span class="tag">plot</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

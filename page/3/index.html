@@ -135,6 +135,91 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-10-27T16:00:00.000Z">2017-10-28</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/python/">python</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/python/spider/">spider</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    11 分钟 读完 (大约 1619 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/10/28/%E5%88%A9%E7%94%A8python%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E6%8A%A2%E6%8A%A5%E5%91%8A/">利用 python 實現自動搶報告</a>
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>上了研究生才知道北化的研究生每年需要聽 15 個報告，而且最重要的是這些報告都是算分數的，而且更重要的是你的分數是和最後的獎學金評定掛鉤的。這也就決定了大家爲了那麼點報告分數擠教務網都擠破了頭（北化的服務器大家都懂），雖然場面不如開學搶課那麼火爆，卻需要長時間掛着教務網瘋狂刷新，爲了交換個講座也需要大半夜起來，生怕被別人截胡。爲了解放生產力，同時熟悉爬蟲技術、神經網絡技術、裝飾器等進階內容，寫了這個爬蟲來練練手。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/ui.png" alt="ui"></p>
+<h2 id="聲明"><a href="#聲明" class="headerlink" title="聲明"></a><strong>聲明</strong></h2><p><strong>該爬蟲是本人(cycoe)練習 python 編程技巧和神經網絡所編寫，使用造成的任何責任與本人無關</strong></p>
+<p><a href="https://github.com/cycoe/class_robber" target="_blank" rel="noopener">項目地址</a></p>
+<h2 id="問題分解"><a href="#問題分解" class="headerlink" title="問題分解"></a>問題分解</h2><p>想要順利的拿到搶講座的 session，需要如下的步驟：</p>
+<ol>
+<li>處理登陸問題，包括處理驗證碼、頁面表單和 cookies</li>
+<li>獲取報告列表</li>
+<li>獲取搶報告的地址</li>
+<li>提交表單數據</li>
+</ol>
+<h2 id="框架設計"><a href="#框架設計" class="headerlink" title="框架設計"></a>框架設計</h2><p>好的框架應具有良好的可維護性和擴展性，目前正朝着這個方向努力</p>
+<ol>
+<li>採用交互式的命令行設計，分離 login, robSpeech 等方法</li>
+<li>將 login, robSpeech, robClass 等方法封裝成 Robber 對象</li>
+<li>將底層的 requests 封裝成 Spider 對象</li>
+</ol>
+<h2 id="逐步解決"><a href="#逐步解決" class="headerlink" title="逐步解決"></a>逐步解決</h2><ol>
+<li><p>通過 firefox 或 chrome 的 debug 模式可以查看在訪問網頁時的 request 和 response。仿照瀏覽器在訪問教務網時提交的 headers 構造如下字典</p>
+ <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Spider</span><span class="hljs-params">(object)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">    @staticmethod</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">formatHeaders</span><span class="hljs-params">(referer=None, contentLength=None, originHost=None)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-string">"""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">        封裝請求的 headers</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string"></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">        :param referer: 跳轉標記，告訴 web 服務器自己是從哪個頁面跳轉過來的</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">        :param contentLength: 作用未知</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">        :param originHost: 原始主機地址</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">        :returns: headers 字典</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">        """</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        headers = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-string">'Accept'</span>: <span class="hljs-string">'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-string">'Accept-Encoding'</span>: <span class="hljs-string">'gzip, deflate'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-string">'Accept-Language'</span>: <span class="hljs-string">'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-string">'Cache-Control'</span>: <span class="hljs-string">'max-age=0'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-string">'Connection'</span>: <span class="hljs-string">'keep-alive'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/x-www-form-urlencoded'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-string">'DNT'</span>: <span class="hljs-string">'1'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-string">'Host'</span>: <span class="hljs-string">'graduate.buct.edu.cn:8080'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-string">'Upgrade-Insecure-Requests'</span>: <span class="hljs-string">'1'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-string">'User-Agent'</span>: <span class="hljs-string">'Mozilla/5.0 (X11;Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-string">'Referer'</span>: referer,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-string">'Content-Length'</span>: contentLength,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-string">'Origin'</span>: originHost,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr></table></figure>
+</li>
+<li><p>封裝 request 請求需要的 prepareBody 對象，<code>response = session.send(prepareBody)</code>，response 就是我們拿到的服務器的響應對象，可通過 <code>response.text</code> 得到網頁內容，<code>response.status_code</code> 得到狀態碼，<code>response.url</code> 得到響應的地址。</p>
+ <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">prepare</span><span class="hljs-params">(self,</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-params">            referer=None,</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-params">            originHost=None,</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-params">            method=<span class="hljs-string">'GET'</span>,</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-params">            url=None,</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-params">            data=None,</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-params">            params=None)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-string">"""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">    生成用於請求的 prepare</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string"></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">    :param referer: 跳轉標記，告訴 web 服務器自己是從哪個頁面跳轉過來的</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">    :param originHost: 原始主機地址</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">    :param method: 請求方法 in ['GET', 'POST']</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">    :param url: 請求的 url 地址</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">    :param data: 封裝的 post 數據</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">    :param params: post 參數</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">    :return: prepare 對象</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">    """</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    headers = self.formatHeaders(referer=referer, originHost=originHost)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    req = Request(method, url, headers=headers, data=data, params=params)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">return</span> self.session.prepare_request(req)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">prepareBody = prepare(referer=<span class="hljs-literal">None</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">                       originHost=<span class="hljs-literal">None</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">                       method=<span class="hljs-string">'GET'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">                       url=UrlBean.jwglLoginUrl,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">                       data=<span class="hljs-literal">None</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">                       params=<span class="hljs-literal">None</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">response = session.send(prepareBody)</span></pre></td></tr></table></figure>
+</li>
+<li><p>請求登錄網址，提交表單數據。根據 response 返回的響應體內容判斷是否登陸成功</p>
+ <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getVIEWSTATE</span><span class="hljs-params">(self)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-string">"""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">    正則獲取頁面的 __VIEWSTATE</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string"></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">    :returns: 頁面的 __VIEWSTATE</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">    """</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    VIEWSTATE = re.findall(<span class="hljs-string">'&lt;.*name="__VIEWSTATE".*value="(.*)?".*/&gt;'</span>, self.response.text)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">if</span> len(VIEWSTATE) &gt; <span class="hljs-number">0</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-keyword">return</span> VIEWSTATE</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">else</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getEVENTVALIDATION</span><span class="hljs-params">(self)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-string">"""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">    正則獲取頁面的 __EVENTVALIDATION</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string"></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">    :returns: 頁面的 __EVENTVALIDATION</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">    """</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    EVENTVALIDATION = re.findall(<span class="hljs-string">'&lt;.*name="__EVENTVALIDATION".*value="(.*)?".*/&gt;'</span>, self.response.text)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">if</span> len(EVENTVALIDATION) &gt; <span class="hljs-number">0</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-keyword">return</span> EVENTVALIDATION</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">else</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">login</span><span class="hljs-params">(self)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-string">"""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">    登錄教務網</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">    """</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-comment"># 在登錄前請求一次登錄頁面，獲取網頁的隱藏表單數據</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    prepareBody = self.prepare(referer=<span class="hljs-literal">None</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">                               originHost=<span class="hljs-literal">None</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">                               method=<span class="hljs-string">'GET'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">                               url=UrlBean.jwglLoginUrl,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">                               data=<span class="hljs-literal">None</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">                               params=<span class="hljs-literal">None</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-comment"># 登陸主循環</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">        self.response = self.session.send(prepareBody)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">        self.VIEWSTATE = self.getVIEWSTATE()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">        self.EVENTVALIDATION = self.getEVENTVALIDATION()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-keyword">if</span> self.VIEWSTATE <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span> <span class="hljs-keyword">and</span> self.EVENTVALIDATION <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-keyword">break</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">        Logger.log(<span class="hljs-string">"Retrying fetching login page viewState..."</span>, level=Logger.warning)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">    reInput = <span class="hljs-literal">True</span>      <span class="hljs-comment"># 是否需要重新輸入用戶名和密碼</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-comment"># 輸入用戶名和密碼</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-keyword">if</span> reInput:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-keyword">if</span> Config.checkUserFile():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">                Config.readUserInfo()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-keyword">else</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">                Config.userName = input(<span class="hljs-string">"&gt; UserName: "</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">                Config.password = input(<span class="hljs-string">"&gt; Password: "</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">            reInput = <span class="hljs-literal">False</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">        prepareBody = self.prepare(referer=UrlBean.jwglLoginUrl,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line">                                   originHost=<span class="hljs-literal">None</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line">                                   method=<span class="hljs-string">'GET'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">61</span></pre></td><td class="code"><pre><span class="line">                                   url=UrlBean.verifyCodeUrl,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">62</span></pre></td><td class="code"><pre><span class="line">                                   data=<span class="hljs-literal">None</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">63</span></pre></td><td class="code"><pre><span class="line">                                   params=<span class="hljs-literal">None</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">64</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">65</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">66</span></pre></td><td class="code"><pre><span class="line">            codeImg = self.session.send(prepareBody)  <span class="hljs-comment"># 獲取驗證碼圖片</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">67</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-keyword">if</span> codeImg.status_code == <span class="hljs-number">200</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">68</span></pre></td><td class="code"><pre><span class="line">                <span class="hljs-keyword">break</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">69</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-keyword">else</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">70</span></pre></td><td class="code"><pre><span class="line">                Logger.log(<span class="hljs-string">"retrying fetching vertify code..."</span>, level=Logger.warning)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">71</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">72</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-keyword">with</span> open(<span class="hljs-string">'check.gif'</span>, <span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> fr:  <span class="hljs-comment"># 保存驗證碼圖片</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">73</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-keyword">for</span> chunk <span class="hljs-keyword">in</span> codeImg:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">74</span></pre></td><td class="code"><pre><span class="line">                fr.write(chunk)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">75</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">76</span></pre></td><td class="code"><pre><span class="line">        print_vertify_code()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">77</span></pre></td><td class="code"><pre><span class="line">        verCode = input(<span class="hljs-string">"input verify code:"</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">78</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-comment"># verCode = self.classifier.recognizer("check.gif")  # 識別驗證碼</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">79</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">80</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-comment"># 構造登陸表單</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">81</span></pre></td><td class="code"><pre><span class="line">        postData = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">82</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-string">'__VIEWSTATE'</span>: self.VIEWSTATE,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">83</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-string">'__EVENTVALIDATION'</span>: self.EVENTVALIDATION,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">84</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-string">'_ctl0:txtusername'</span>: Config.userName,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">85</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-string">'_ctl0:txtpassword'</span>: Config.password,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">86</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-string">'_ctl0:txtyzm'</span>: verCode,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">87</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-string">'_ctl0:ImageButton1.x'</span>: <span class="hljs-string">'43'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">88</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-string">'_ctl0:ImageButton1.y'</span>: <span class="hljs-string">'21'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">89</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">90</span></pre></td><td class="code"><pre><span class="line">        prepareBody = self.prepare(referer=UrlBean.jwglLoginUrl,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">91</span></pre></td><td class="code"><pre><span class="line">                                   originHost=UrlBean.jwglOriginUrl,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">92</span></pre></td><td class="code"><pre><span class="line">                                   method=<span class="hljs-string">'POST'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">93</span></pre></td><td class="code"><pre><span class="line">                                   url=UrlBean.jwglLoginUrl,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">94</span></pre></td><td class="code"><pre><span class="line">                                   data=postData,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">95</span></pre></td><td class="code"><pre><span class="line">                                   params=<span class="hljs-literal">None</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">96</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">97</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-comment"># 獲取登陸 response</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">98</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">99</span></pre></td><td class="code"><pre><span class="line">            self.response = self.session.send(prepareBody)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">100</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-keyword">if</span> self.response.status_code == <span class="hljs-number">200</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">101</span></pre></td><td class="code"><pre><span class="line">                <span class="hljs-keyword">break</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">102</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">103</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-comment"># 根據返回的 html 判斷是否登錄成功</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">104</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-keyword">if</span> re.search(<span class="hljs-string">'用戶名不存在'</span>, self.response.text):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">105</span></pre></td><td class="code"><pre><span class="line">            Logger.log(<span class="hljs-string">'No such a user!'</span>, [<span class="hljs-string">'Cleaning password file'</span>], level=Logger.error)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">106</span></pre></td><td class="code"><pre><span class="line">            print(OutputFormater.table([[<span class="hljs-string">'No such a user!'</span>], [<span class="hljs-string">'Cleaning password file'</span>]], padding=<span class="hljs-number">2</span>))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">107</span></pre></td><td class="code"><pre><span class="line">            Config.cleanUserInfo()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">108</span></pre></td><td class="code"><pre><span class="line">            reInput = <span class="hljs-literal">True</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">109</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">110</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-keyword">elif</span> re.search(<span class="hljs-string">'密碼錯誤'</span>, self.response.text):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">111</span></pre></td><td class="code"><pre><span class="line">            Logger.log(<span class="hljs-string">'Wrong password!'</span>, [<span class="hljs-string">'Cleaning password file'</span>], level=Logger.error)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">112</span></pre></td><td class="code"><pre><span class="line">            print(OutputFormater.table([[<span class="hljs-string">'Wrong password!'</span>], [<span class="hljs-string">'Cleaning password file'</span>]], padding=<span class="hljs-number">2</span>))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">113</span></pre></td><td class="code"><pre><span class="line">            Config.cleanUserInfo()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">114</span></pre></td><td class="code"><pre><span class="line">            reInput = <span class="hljs-literal">True</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">115</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">116</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-keyword">elif</span> re.search(<span class="hljs-string">'請輸入驗證碼'</span>, self.response.text):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">117</span></pre></td><td class="code"><pre><span class="line">            Logger.log(<span class="hljs-string">'Please input vertify code!'</span>, [<span class="hljs-string">'Retrying...'</span>], level=Logger.error)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">118</span></pre></td><td class="code"><pre><span class="line">            print(OutputFormater.table([[<span class="hljs-string">'Please input vertify code!'</span>], [<span class="hljs-string">'Retrying...'</span>]], padding=<span class="hljs-number">2</span>))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">119</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">120</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-keyword">elif</span> re.search(<span class="hljs-string">'驗證碼錯誤'</span>, self.response.text):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">121</span></pre></td><td class="code"><pre><span class="line">            Logger.log(<span class="hljs-string">'Wrong vertify code!'</span>, [<span class="hljs-string">'Retrying...'</span>], level=Logger.error)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">122</span></pre></td><td class="code"><pre><span class="line">            print(OutputFormater.table([[<span class="hljs-string">'Wrong vertify code!'</span>], [<span class="hljs-string">'Retrying...'</span>]], padding=<span class="hljs-number">2</span>))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">123</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">124</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-keyword">else</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">125</span></pre></td><td class="code"><pre><span class="line">            Logger.log(<span class="hljs-string">'Login successfully!'</span>, [<span class="hljs-string">'UserName: '</span> + Config.userName, <span class="hljs-string">'Password: '</span> + Config.password], level=Logger.warning)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">126</span></pre></td><td class="code"><pre><span class="line">            print(OutputFormater.table([[<span class="hljs-string">'Login successfully!'</span>]], padding=<span class="hljs-number">2</span>))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">127</span></pre></td><td class="code"><pre><span class="line">            Config.dumpUserInfo()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">128</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-keyword">break</span></span></pre></td></tr></table></figure>
+</li>
+<li><p>拿到已登陸的 session 後，搶課和搶報告都是非常方便的，只要按照瀏覽器提交的數據構造 headers 和表單數據後就可以獲得正常的 response</p>
+</li>
+</ol>
+<h2 id="暗坑總結"><a href="#暗坑總結" class="headerlink" title="暗坑總結"></a>暗坑總結</h2><ol>
+<li>剛開始抓到的網頁內容中文都是亂碼，後來 google 解決，發現是 python 的編碼和 asp 框架的編碼問題造成的，python 中的編碼問題真的是讓人頭大</li>
+<li>由於網站的防爬蟲設計，會在 html 源碼中插入很多隱藏的表單數據，如此處的 <code>__VIEWSTATE</code> 和 <code>__EVENTVALIDATION</code>，這兩個是非常重要的參數。否則無法成功登陸</li>
+<li>兩次訪問之間要有一定的時間間隔，如此處用了一個隨機函數的閉包來獲得隨機時間的間隔</li>
+<li>使用裝飾器解決了在訪問搶課網頁前判斷登錄的問題</li>
+<li>接下來將循環封裝成函數，加入最大循環次數和超時</li>
+<li>完善邊界檢查和異常處理</li>
+</ol>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-07-08T16:00:00.000Z">2017-07-09</time>
                 
                 <div class="level-item">
@@ -166,8 +251,8 @@
 <li>利用 cfdisk 或 fdisk 工具進行分區</li>
 <li>使用 <code>mkfs.ext4 /dev/sdxY</code> 進行分區的格式化，btrfs 分區運行 <code>mkfs.btrfs -f /dev/sdxY</code></li>
 </ol>
-<h3 id="掛載"><a href="#掛載" class="headerlink" title="掛載"></a>掛載</h3><p>按順序執行如下命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">mount /dev/sdxY /mnt	# 掛載根分區</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">mkdir /mnt/home</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">mkdir /mnt/boot</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">mkdir /mnt/boot/grub</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">mkdir /mnt/boot/efi</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">mount /dev/sdxY /mnt/home</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">mount /dev/sdxY /mnt/boot/efi</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">mount /dev/sdxY /mnt/boot/grub</span></pre></td></tr></table></figure></p>
-<p>若根分區爲 btrfs 格式，則需要先使用如下命令掛載根分區<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">mount /dev/sdxY /mnt		#掛載根分區</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">cd /mnt</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">btrfs subvolume create @	#創建名爲 @ 的子卷</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">cd ~</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">umount /mnt</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">mount /dev/sdxY /mnt -o subvol=@,compress=lzo</span></pre></td></tr></table></figure></p>
+<h3 id="掛載"><a href="#掛載" class="headerlink" title="掛載"></a>掛載</h3><p>按順序執行如下命令<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">mount /dev/sdxY /mnt	# 掛載根分區</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">mkdir /mnt/home</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">mkdir /mnt/boot</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">mkdir /mnt/boot/grub</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">mkdir /mnt/boot/efi</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">mount /dev/sdxY /mnt/home</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">mount /dev/sdxY /mnt/boot/efi</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">mount /dev/sdxY /mnt/boot/grub</span></pre></td></tr></table></figure></p>
+<p>若根分區爲 btrfs 格式，則需要先使用如下命令掛載根分區<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">mount /dev/sdxY /mnt		#掛載根分區</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">cd /mnt</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">btrfs subvolume create @	#創建名爲 @ 的子卷</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">cd ~</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">umount /mnt</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">mount /dev/sdxY /mnt -o subvol=@,compress=lzo</span></pre></td></tr></table></figure></p>
 <p>分區掛載完畢後可運行 <code>lsblk</code> 查看掛載信息</p>
 <h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h3><p>運行自動化安裝工具 <code>pacstrap -i /mnt base</code></p>
 <ul>
@@ -180,7 +265,7 @@
 <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ul>
 <li>使用 archlinux 自帶的 <code>arch-chroot /mnt</code> 接管新系統</li>
 <li><code>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code>    # 設置時區</li>
-<li>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># nano /etc/locale.gen</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">en_US.UTF-8 UTF-8</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">zh_CN.UTF-8 UTF-8</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">zh_TW.UTF-8 UTF-8</span></pre></td></tr></table></figure>
+<li>  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># nano /etc/locale.gen</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">en_US.UTF-8 UTF-8</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">zh_CN.UTF-8 UTF-8</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">zh_TW.UTF-8 UTF-8</span></pre></td></tr></table></figure>
 </li>
 </ul>
 
@@ -236,7 +321,7 @@
 <h2 id="編譯"><a href="#編譯" class="headerlink" title="編譯"></a>編譯</h2><ol>
 <li><a href="http://download.qt.io/official_releases/qt/" target="_blank" rel="noopener">下載</a>最新的 Qt everywhere 壓縮包</li>
 <li>解壓壓縮包，<code>cd</code> 進壓縮包目錄</li>
-<li>運行以下命令對 <code>makefile</code> 進行配置 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">./configure -confirm-license -opensource -static -fontconfig -release -no-qml-debug -qt-xcb -nomake tests -nomake examples -skip qtwebkit -prefix /usr/include/Qt-5.8.0-static</span></pre></td></tr></table></figure>
+<li>運行以下命令對 <code>makefile</code> 進行配置 <figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">./configure -confirm-license -opensource -static -fontconfig -release -no-qml-debug -qt-xcb -nomake tests -nomake examples -skip qtwebkit -prefix /usr/include/Qt-5.8.0-static</span></pre></td></tr></table></figure>
 <ul>
 <li><code>-static</code> -&gt; 選擇靜態編譯模式</li>
 <li><code>-fontconfig</code> -&gt; 此項一定要加，否則會導致找不到字體</li>
@@ -299,20 +384,20 @@
 <p>Transform your plain text into static websites and blogs.</p>
 </blockquote>
 <h2 id="爲什麼要搭建自己的博客服務器"><a href="#爲什麼要搭建自己的博客服務器" class="headerlink" title="爲什麼要搭建自己的博客服務器"></a>爲什麼要搭建自己的博客服務器</h2><p>之前我們已經利用 GitHub Pages 和 Jekyll 搭建了靜態博客並且託管在了 <code>github.io</code> 上，<br>並且擁有了不錯的頁面效果以及可用性。那我們爲什麼還要搭建自己的博客服務器呢？<br>因爲 GitHub 的服務器在美國，訪問體驗並不順暢；並且在我們 Push 了項目之後，往往要等待一定時間頁面內容纔會刷新。<br>爲了更好的體驗效果，我們將基於<a href="www.raspberrypi.org/">樹莓派</a>搭建自己的博客服務器。<br>樹莓派爲 3B+，系統爲 <code>Archlinuxarm-rpi-2</code></p>
-<h2 id="環境搭建"><a href="#環境搭建" class="headerlink" title="環境搭建"></a>環境搭建</h2><h3 id="安裝-Ruby"><a href="#安裝-Ruby" class="headerlink" title="安裝 Ruby"></a>安裝 <a href="https://ruby-china.org/" target="_blank" rel="noopener">Ruby</a></h3><p>依次運行下面的命令安裝最新的 Ruby 運行環境：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo pacman -S ruby</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ruby --version</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">ruby 2.4.0p0 (2016-12-24 revision 57164) [armv7l-linux-eabihf]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gem --version</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">2.6.8</span></pre></td></tr></table></figure><br>出現上面的提示說明 Ruby 安裝成功，gem 可以看做是 Ruby 插件的安裝器，一般安裝 Ruby 後自帶。</p>
-<p><strong><font color=#ff0000 size=4>注意：</font></strong><br>Archlinux 用普通用戶安裝 Ruby 後會遇到運行 Gem 插件提示找不到命令的情況，原因是 Ruby 未自動設置環境變量。解決方法：</p>
+<h2 id="環境搭建"><a href="#環境搭建" class="headerlink" title="環境搭建"></a>環境搭建</h2><h3 id="安裝-Ruby"><a href="#安裝-Ruby" class="headerlink" title="安裝 Ruby"></a>安裝 <a href="https://ruby-china.org/" target="_blank" rel="noopener">Ruby</a></h3><p>依次運行下面的命令安裝最新的 Ruby 運行環境：<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> sudo pacman -S ruby</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> ruby --version</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">ruby 2.4.0p0 (2016-12-24 revision 57164) [armv7l-linux-eabihf]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> gem --version</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">2.6.8</span></pre></td></tr></table></figure><br>出現上面的提示說明 Ruby 安裝成功，gem 可以看做是 Ruby 插件的安裝器，一般安裝 Ruby 後自帶。</p>
+<p><strong><font color="#ff0000" size="4">注意：</font></strong><br>Archlinux 用普通用戶安裝 Ruby 後會遇到運行 Gem 插件提示找不到命令的情況，原因是 Ruby 未自動設置環境變量。解決方法：</p>
 <ul>
-<li>bash<br>打開 ~/.bashrc 文件，加入以下命令：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">export PATH=$PATH:~/.gem/ruby/2.4.0/bin/</span></pre></td></tr></table></figure></li>
-<li>fish<br>打開 ~/.config/fish/config.fish 文件（沒有則新建），加入以下命令：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">set -x PATH &#123;$PATH&#125; ~/.gem/ruby/2.4.0/bin</span></pre></td></tr></table></figure>
+<li>bash<br>打開 ~/.bashrc 文件，加入以下命令：<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">export PATH=$PATH:~/.gem/ruby/2.4.0/bin/</span></pre></td></tr></table></figure></li>
+<li>fish<br>打開 ~/.config/fish/config.fish 文件（沒有則新建），加入以下命令：<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">set -x PATH &#123;$PATH&#125; ~/.gem/ruby/2.4.0/bin</span></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="安裝-Jekyll"><a href="#安裝-Jekyll" class="headerlink" title="安裝 Jekyll"></a>安裝 <a href="http://jekyllrb.com/" target="_blank" rel="noopener">Jekyll</a></h3><blockquote>
 <p>Jekyll is a simple, blog-aware, static site generator for personal, project, or organization sites.<br>Written in Ruby by Tom Preston-Werner, GitHub’s co-founder, it is distributed under an open source license.</p>
 </blockquote>
 <ol>
-<li>安裝 Jekyll 之前需要先安裝 <code>bundle</code> 管理器<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">gem install bundle</span></pre></td></tr></table></figure></li>
-<li>編輯 <code>Gemfile</code>，在文件中輸入以下內容<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">gem &#39;github-pages&#39;, group: :jekyll_plugins</span></pre></td></tr></table></figure></li>
-<li>利用 <code>bundle</code> 安裝 Jekyll 渲染需要的所有包<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">bundle install</span></pre></td></tr></table></figure></li>
+<li>安裝 Jekyll 之前需要先安裝 <code>bundle</code> 管理器<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">gem install bundle</span></pre></td></tr></table></figure></li>
+<li>編輯 <code>Gemfile</code>，在文件中輸入以下內容<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">gem &#39;github-pages&#39;, group: :jekyll_plugins</span></pre></td></tr></table></figure></li>
+<li>利用 <code>bundle</code> 安裝 Jekyll 渲染需要的所有包<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">bundle install</span></pre></td></tr></table></figure></li>
 <li>到此需要的依賴安裝完畢，若 fork 的其他人的 Jekyll 模板，則直接進入模板目錄下執行 <code>bundle install</code>。</li>
 </ol>
 <h3 id="運行-Jekll"><a href="#運行-Jekll" class="headerlink" title="運行 Jekll"></a>運行 Jekll</h3><ul>
@@ -413,9 +498,9 @@ That’s all. Thank you for giving me this opportunity!</font>
         </h1>
         <div class="content">
             <p><img src="http://i1.piimg.com/587851/ed4b8db8cb32978d.jpg" alt="image1"></p>
-<h2 id="優化掛載參數"><a href="#優化掛載參數" class="headerlink" title="優化掛載參數"></a>優化掛載參數</h2><p>在 Linux 中掛載 SSD 上的 btrfs，可以採用各種參數進行優化：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">#&lt;file system&gt;&lt;mount point&gt;&lt;type&gt;&lt;options&gt;&lt;dump&gt;&lt;pass&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">UUID&#x3D;&lt;略&gt;&#x2F; btrfs defaults,ssd,discard,noatime,compress&#x3D;lzo,subvol&#x3D;@</span></pre></td></tr></table></figure></p>
+<h2 id="優化掛載參數"><a href="#優化掛載參數" class="headerlink" title="優化掛載參數"></a>優化掛載參數</h2><p>在 Linux 中掛載 SSD 上的 btrfs，可以採用各種參數進行優化：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">#&lt;file system&gt;&lt;mount point&gt;&lt;type&gt;&lt;options&gt;&lt;dump&gt;&lt;pass&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">UUID&#x3D;&lt;略&gt;&#x2F; btrfs defaults,ssd,discard,noatime,compress&#x3D;lzo,subvol&#x3D;@</span></pre></td></tr></table></figure></p>
 <h3 id="ssd"><a href="#ssd" class="headerlink" title="ssd"></a>ssd</h3><p>btrfs 文件系統有對 SSD 進行優化，在掛載參數中加入 ssd 即可。該參數不會自動啓用 TRIM/discard。</p>
-<h3 id="discard"><a href="#discard" class="headerlink" title="discard"></a>discard</h3><p>可以通過以下命令確認 SSD 是否支持 TRIM：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo hdparm -I /dev/sdX | grep TRIM</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">*Data Set Management TRIM supported (limit 8 blocks)</span></pre></td></tr></table></figure><br>若 SSD 支持 TRIM 命令，可以在 <code>/etc/fstab</code> 中啓用 discard 參數。建議將 discard 掛載參數作爲首選。據 debian wiki 所述，包括三星、鎂光、英睿達在內的一些 SSD <a href="https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/drivers/ata/libata-core.c#n4227" target="_blank" rel="noopener">在 discard/TRIM 上有問題</a>，不能合適地處理 TRIM 命令。<br>該參數不是必需的，也可以自定義週期性運行 fstrim 命令來取代該參數，使用該命令前要確認 SSD 支持 TRIM，否則可能造成數據丟失。當 SSD 有足夠的空餘空間或（未分配的）可用空間時不需要該參數。</p>
+<h3 id="discard"><a href="#discard" class="headerlink" title="discard"></a>discard</h3><p>可以通過以下命令確認 SSD 是否支持 TRIM：<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo hdparm -I /dev/sdX | grep TRIM</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">*Data Set Management TRIM supported (limit 8 blocks)</span></pre></td></tr></table></figure><br>若 SSD 支持 TRIM 命令，可以在 <code>/etc/fstab</code> 中啓用 discard 參數。建議將 discard 掛載參數作爲首選。據 debian wiki 所述，包括三星、鎂光、英睿達在內的一些 SSD <a href="https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/drivers/ata/libata-core.c#n4227" target="_blank" rel="noopener">在 discard/TRIM 上有問題</a>，不能合適地處理 TRIM 命令。<br>該參數不是必需的，也可以自定義週期性運行 fstrim 命令來取代該參數，使用該命令前要確認 SSD 支持 TRIM，否則可能造成數據丟失。當 SSD 有足夠的空餘空間或（未分配的）可用空間時不需要該參數。</p>
 <h3 id="noatime"><a href="#noatime" class="headerlink" title="noatime"></a>noatime</h3><p>掛載參數可以加入 noatime，通過禁止更新訪問記錄來減少不必要的寫操作以提高性能。該選項對 HDD 同樣有性能提升。btrfs 的默認配置爲 relatime。</p>
 <h3 id="compress"><a href="#compress" class="headerlink" title="compress"></a>compress</h3><p>打開壓縮功能在通常情況下有利於提高傳輸性能（並非絕對），也可以節省存儲空間。加入以下掛載參數：</p>
 <ul>
@@ -425,7 +510,7 @@ That’s all. Thank you for giving me this opportunity!</font>
 <p>lzo 速度更快，zlib 壓縮率更高。注意確認 SSD 主控是否是非壓縮主控，若爲壓縮主控不建議加入該參數。</p>
 <h3 id="寫緩存"><a href="#寫緩存" class="headerlink" title="寫緩存"></a>寫緩存</h3><p>若 SSD 帶有緩存，啓用 Write Cache 可以提高性能：Disks -&gt; Drive Setting -&gt; Enable Write Cache，但在突然斷電的情況下可能造成數據丟失。</p>
 <hr>
-<h2 id="I-O-調度"><a href="#I-O-調度" class="headerlink" title="I/O 調度"></a>I/O 調度</h2><p>SSD 結構不同於傳統硬盤，尋址時間短，I/O 調度算法可選擇 noop 以降低延遲。以下命令可查看與修改調度器：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">cat/sys/block/sdX/queue/scheduler # sdX 指你的設備</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sudotee/sys/block/sdX/queue/scheduler &lt;&lt;&lt; noop</span></pre></td></tr></table></figure><br>注意以上方法並不持久，重啓後會重置。如果 SSD 是系統唯一的存儲設備，可考慮通過 elevator=noop 內核參數設置 I/O 調度器。也可使用 udev 規則來修改調度器，對多存儲設備同樣有效：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo touch /etc/udev/rules.d/60-ssd-scheduler.rules #創建該文件</span></pre></td></tr></table></figure><br>文件內容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"># set deadline scheduler for non-rotating disks</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">ACTION&#x3D;&#x3D;&quot;add|change&quot;, KERNEL&#x3D;&#x3D;&quot;sd[a-z]&quot;, ATTR&#123;queue&#x2F;rotational&#125;&#x3D;&#x3D;&quot;0&quot;, ATTR&#123;queue&#x2F;scheduler&#125;&#x3D;&quot;noop&quot;</span></pre></td></tr></table></figure></p>
+<h2 id="I-O-調度"><a href="#I-O-調度" class="headerlink" title="I/O 調度"></a>I/O 調度</h2><p>SSD 結構不同於傳統硬盤，尋址時間短，I/O 調度算法可選擇 noop 以降低延遲。以下命令可查看與修改調度器：<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">cat/sys/block/sdX/queue/scheduler # sdX 指你的設備</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sudotee/sys/block/sdX/queue/scheduler &lt;&lt;&lt; noop</span></pre></td></tr></table></figure><br>注意以上方法並不持久，重啓後會重置。如果 SSD 是系統唯一的存儲設備，可考慮通過 elevator=noop 內核參數設置 I/O 調度器。也可使用 udev 規則來修改調度器，對多存儲設備同樣有效：<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo touch /etc/udev/rules.d/60-ssd-scheduler.rules #創建該文件</span></pre></td></tr></table></figure><br>文件內容如下：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"># set deadline scheduler for non-rotating disks</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">ACTION&#x3D;&#x3D;&quot;add|change&quot;, KERNEL&#x3D;&#x3D;&quot;sd[a-z]&quot;, ATTR&#123;queue&#x2F;rotational&#125;&#x3D;&#x3D;&quot;0&quot;, ATTR&#123;queue&#x2F;scheduler&#125;&#x3D;&quot;noop&quot;</span></pre></td></tr></table></figure></p>
 <hr>
 
         </div>
@@ -561,7 +646,7 @@ That’s all. Thank you for giving me this opportunity!</font>
 <li>最終的分類方法其實是投票表決的方法</li>
 </ul>
 <h2 id="代碼"><a href="#代碼" class="headerlink" title="代碼"></a>代碼</h2><p>爲了提高代碼的運行效率及編碼效率，import 了 <code>Numpy</code> 庫，具體的函數看 <a href="https://docs.scipy.org/doc/" target="_blank" rel="noopener">官方文檔</a> ，或者 <a href="http://cycoe.win/wiki/Numpy/" target="_blank" rel="noopener">Numpy 教程</a> 。</p>
-<h3 id="分類函數"><a href="#分類函數" class="headerlink" title="分類函數"></a>分類函數</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">classify0</span><span class="params">(inX, dataSet, labels, k)</span>:</span> <span class="comment">#輸入(待測樣本向量，訓練樣本矩陣，標籤向量，k)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    dataSetSize = dataSet.shape[<span class="number">0</span>] <span class="comment">#shape函數用來讀取矩陣的維的長度，返回值爲(4L,2L)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    diffMat = tile(inX, (dataSetSize, <span class="number">1</span>)) - dataSet <span class="comment">#tile函數用來重複 A=[1,2] tile(A,(2,3)) -&gt; [[1,2,1,2，1,2], [1,2,1,2,1,2]]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    sqDiffMat = diffMat**<span class="number">2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    sqDistances = sqDiffMat.sum(axis=<span class="number">1</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    distances = sqDistances**<span class="number">0.5</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    sortedDistIndicies = distances.argsort()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    classCount = &#123;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        votedLabel = labels[sortedDistIndicies[i]]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        classCount[votedLabel] = classCount.get(votedLabel, <span class="number">0</span>) + <span class="number">1</span> <span class="comment">#dict.get(key, default_value)函數用來取鍵對應的值，若鍵不存在則值爲defalut_vlaue</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    sortedClassCount = sorted(classCount.items(), key=operator.itemgetter(<span class="number">1</span>), reverse=<span class="literal">True</span>) <span class="comment">#operator.itemgetter(1)表示根據多級列表的第二個元素進行排序</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> sortedClassCount[<span class="number">0</span>][<span class="number">0</span>]</span></pre></td></tr></table></figure>
+<h3 id="分類函數"><a href="#分類函數" class="headerlink" title="分類函數"></a>分類函數</h3><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">classify0</span><span class="hljs-params">(inX, dataSet, labels, k)</span>:</span> <span class="hljs-comment">#輸入(待測樣本向量，訓練樣本矩陣，標籤向量，k)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    dataSetSize = dataSet.shape[<span class="hljs-number">0</span>] <span class="hljs-comment">#shape函數用來讀取矩陣的維的長度，返回值爲(4L,2L)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    diffMat = tile(inX, (dataSetSize, <span class="hljs-number">1</span>)) - dataSet <span class="hljs-comment">#tile函數用來重複 A=[1,2] tile(A,(2,3)) -&gt; [[1,2,1,2，1,2], [1,2,1,2,1,2]]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    sqDiffMat = diffMat**<span class="hljs-number">2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    sqDistances = sqDiffMat.sum(axis=<span class="hljs-number">1</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    distances = sqDistances**<span class="hljs-number">0.5</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    sortedDistIndicies = distances.argsort()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    classCount = &#123;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(k):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        votedLabel = labels[sortedDistIndicies[i]]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        classCount[votedLabel] = classCount.get(votedLabel, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span> <span class="hljs-comment">#dict.get(key, default_value)函數用來取鍵對應的值，若鍵不存在則值爲defalut_vlaue</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    sortedClassCount = sorted(classCount.items(), key=operator.itemgetter(<span class="hljs-number">1</span>), reverse=<span class="hljs-literal">True</span>) <span class="hljs-comment">#operator.itemgetter(1)表示根據多級列表的第二個元素進行排序</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">return</span> sortedClassCount[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]</span></pre></td></tr></table></figure>
 <hr>
 
         </div>
@@ -663,89 +748,14 @@ That’s all. Thank you for giving me this opportunity!</font>
 <hr>
 <ol>
 <li><p>使用 <code>git remote -v</code> 查看當前的遠程倉庫別名，輸出如下：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">LCTT    https:&#x2F;&#x2F;github.com&#x2F;LCTT&#x2F;TranslateProject.git (fetch)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">LCTT    https:&#x2F;&#x2F;github.com&#x2F;LCTT&#x2F;TranslateProject.git (push)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">origin  git@github.com:cycoe&#x2F;TranslateProject.git (fetch)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">origin  git@github.com:cycoe&#x2F;TranslateProject.git (push)</span></pre></td></tr></table></figure>
+ <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">LCTT    https:&#x2F;&#x2F;github.com&#x2F;LCTT&#x2F;TranslateProject.git (fetch)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">LCTT    https:&#x2F;&#x2F;github.com&#x2F;LCTT&#x2F;TranslateProject.git (push)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">origin  git@github.com:cycoe&#x2F;TranslateProject.git (fetch)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">origin  git@github.com:cycoe&#x2F;TranslateProject.git (push)</span></pre></td></tr></table></figure>
 <p> 其中 <code>origin</code> 是自己賬號下的對應遠端倉庫地址別名， <code>LCTT</code> 是設定好的上游倉庫地址的別名。此處 LCTT 項目已經幫我們設置好了就不需要另外設置。<br> 如果沒有設置上游倉庫地址，可通過 <code>git remote add 上游倉庫別名 上游倉庫地址</code> 命令來設置上游倉庫的別名。</p>
 </li>
 <li><p>同步上游倉庫更新到本地，併合並更新到本地倉庫 master 分支</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">git fetch LCTT          <span class="comment">#從上游倉庫抓取更新</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">git checkout master     <span class="comment">#切換到 master 分支</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">git merge LCTT/master   <span class="comment">#合併上游更新到 master 分支</span></span></pre></td></tr></table></figure>
+ <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">git fetch LCTT          <span class="hljs-comment">#從上游倉庫抓取更新</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">git checkout master     <span class="hljs-comment">#切換到 master 分支</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">git merge LCTT/master   <span class="hljs-comment">#合併上游更新到 master 分支</span></span></pre></td></tr></table></figure>
 </li>
 <li><p><code>git push</code> 命令推送本地倉庫到 fork 倉庫</p>
 </li>
-</ol>
-<hr>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-03-08T16:00:00.000Z">2017-03-09</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/chemistry/">chemistry</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    13 分钟 读完 (大约 1920 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/03/09/CPVC%E7%83%AD%E7%A8%B3%E5%AE%9A%E5%89%82/">CPVC熱穩定劑</a>
-            
-        </h1>
-        <div class="content">
-            <blockquote>
-<p>熱穩定劑是一類能防止或減少聚合物在加工使用過程中受熱而發生降解或交聯,延長複合材料使用壽命的添加劑。常用的穩定劑按照主要成分分類可分爲鹽基類、脂肪酸皁類、有機錫化合物、複合型熱穩定劑及純有機化合物類。</p>
-</blockquote>
-<hr>
-<h3 id="分類"><a href="#分類" class="headerlink" title="分類"></a>分類</h3><ol>
-<li>鹽基類熱穩定劑:鹽基類穩定劑是指結合有“鹽基”的無機和有機酸鉛鹽,這類穩定劑具有優良的耐熱性、耐候性和電絕緣性,成本低,透明性差,有一定毒性,用量一般在0.5%~5.0%。</li>
-<li>脂肪酸類熱穩定劑:該類熱穩定劑是指由脂肪酸根與金屬離子組成的化合物,也稱金屬皁類熱穩定劑,其性能與酸根及金屬離子的種類有關,一般用量爲0.1%~3.0%。</li>
-<li>有機錫類熱穩定劑:該類熱穩定劑可與聚氯乙烯分子中的不穩定氯原子形成配位體,而且在配位體中有機錫的羧酸酯基與不穩定的氯原子置換。這類熱穩定劑的特點是穩定性高、透明性好、耐熱性優異,不足之處是價格較貴。</li>
-<li>複合型熱穩定劑:該類熱穩定劑是以鹽基類或金屬皁類爲基礎的液體或固體複合物以及有機錫爲基礎的複合物,其中金屬鹽類有鈣—鎂—鋅、鋇—鈣—鋅、鋇—鋅和鋇—鎘等;常用的有機酸如有機脂肪酸、環烷酸、油酸、苯甲酸和水楊酸等。</li>
-<li>有機化合物熱穩定劑:該類熱穩定劑除少數可單獨使用的主穩定劑(主要是含氮的有機化合物)外,還包括高沸點的多元醇及亞磷酸酯,亞磷酸酯常與金屬穩定劑並用,能提高複合材料的耐候性、透明性,改善製品的表面色澤。</li>
-</ol>
-<hr>
-<h3 id="PVC熱穩定劑的作用機理"><a href="#PVC熱穩定劑的作用機理" class="headerlink" title="PVC熱穩定劑的作用機理"></a>PVC熱穩定劑的作用機理</h3><ol>
-<li>吸收中和HCL,抑制其自動催化作用。這類穩定劑包括鉛鹽類、有機酸金屬皁類、有機錫化合物、環氧化合物、酚鹽及金屬硫醇鹽等。它們可與HCL反應,抑制PVC脫HCL的反應。</li>
-<li>置換PVC分子中不穩定的烯丙基氯原子抑制脫PVC。如有機錫穩定劑與PVC分子的不穩定氯原子發生配位結合,在配位體中,有機錫與不穩定氯原子置換。</li>
-<li>與多烯結構發生加成反應,破壞大共軛體系的形成,減少着色。不飽和酸的鹽或酯含有雙鍵,與PVC分子**軛雙鍵發生雙烯加成反應,從而破壞其共軛結構,抑制變色。</li>
-<li>捕捉自由基,阻止氧化反應。如加入酚類熱穩定劑能阻滯脫HCL,是由於酚給出的H原子自由基能與降解的PVC大分子自由基偶合,形成不能與O2反應的物質,而具有熱穩定作用。這種熱穩定劑可具有一種或兼具幾種作用。</li>
-</ol>
-<p>理想的PVC熱穩定劑應是一種多功能物質,或者是一些材料的混合物,它們能夠實現以下功能:一是置換活潑、不穩定的取代基;二是吸收並中和PVC加工過程中放出的HCL,消除HCL的自動催化降解作用;三是中和或鈍化對降解起催化作用的金屬離子及其他有害雜質;四是通過多種形式的化學反應可阻斷不飽和鍵的繼續增長,抑制降解着色;五是最好對紫外光有防護屏蔽作用。通常熱穩定劑根據各自的特殊效能配合使用,單獨使用的情況極少,而且大部分品種是粉末狀,一些是毒性很大的化學物質。爲了使用方便,防止粉塵中毒,減小毒性物質或代之以無毒性物質,近年國內外研製出許多種複合穩定劑,例如,世界著名的德國熊牌複合穩定劑系列,美國、德國、日本、荷蘭等國的有機錫或複合有機錫穩定劑,都在中國佔有相當的市場。因此,全力推廣應用我國研製的具有高效、低成本、無粉塵污染及無毒或低毒性的新型複合穩定劑,是我國塑料工業發展的迫切需要。</p>
-<hr>
-<h3 id="PVC加工需用熱穩定劑原理分析"><a href="#PVC加工需用熱穩定劑原理分析" class="headerlink" title="PVC加工需用熱穩定劑原理分析"></a>PVC加工需用熱穩定劑原理分析</h3><p>理想的PVC結構是首—尾結構-CH2-CHCl-CH2-CHCl-,是相當穩定的。但是至今合成PVC的方法還不能像合成順丁橡膠那樣,在齊格爾催化劑的作用下使順丁二烯進行定向有規聚合。<br>氯乙烯的聚合是自由基的無規聚合,它除了有穩定的首—尾結構,還有首—首結構-CH2-CHCl-CHCl-CH-,尾—尾結構-CHCl-CH2-CH2-CHCl-;有偶合歧化生成乙烯基結CH2=CH-CHCl-CH2-結構和烯丙基氯-CH2-CH=CH-CHCl-CH2等。<br>在PVC合成中生成烯丙基氯、叔碳氯和雙鍵等是其分子鏈結構中不穩定因素,不穩定順序爲:PVC分子鏈內部的烯丙基氯&gt;叔碳氯&gt;端基烯丙基氯&gt;仲氯。PVC加工時易於降解正是因爲PVC分子鏈的結構中存在着不穩定因素,如不進行穩定化改性,其分解溫度爲130℃左右,但要將PVC樹脂加工成有用的製品,成型溫度要在190℃以上。因此,必須添加熱穩定劑對其結構進行穩定化改進。</p>
-<hr>
-<h3 id="各類熱穩定劑受熱變色評析"><a href="#各類熱穩定劑受熱變色評析" class="headerlink" title="各類熱穩定劑受熱變色評析"></a>各類熱穩定劑受熱變色評析</h3><p>理想的熱穩定劑應同時具有吸收HCL、消除活性部位、向共軛多烯鏈加成、破壞碳正離子鹽、防止自動氧化等功能,而又不產生對PVC降解有催化作用的產物。實際的熱穩定劑因具有不同的功能而表現出不同的熱穩定特性,大致可分爲初期型、長期型、中間型和全能型四類。</p>
-<ol>
-<li>鎘、鋅皁屬典型的初期型熱穩定劑,能快速吸收HCL,並在Cd、Zn的催化下有效地以羧酸根取代PVC鏈上的不穩定氯原子,從而有效抑制初期降解和着色,但因其消耗快而轉化產物CdC12、ZnC12,又是PVC脫HCL的高效催化劑,因而會引發PVC惡性降解使物料突然變黑,因此長期熱穩定性差。</li>
-<li>鋇、鈣皁屬典型的長期型熱穩定劑,只有吸收HCL的功能,因此不能有效抑制PVC着色,但因轉化產物BaC12、CaC12不具催化活性,不會引起PVC突然變黑,長期熱穩定性較好。</li>
-<li>脂肪酸有機錫屬中間型,既能吸收HCL,又能有效地以羧酸根取代PVC鏈上的不穩定氯原子,並且轉化產物不具催化活性。</li>
-<li>硫醇有機錫則具有全能型特徵,能同時以各種機制穩定PVC,轉化產物也不具催化活性,因此兼具優異的初期和長期熱穩定效果。</li>
 </ol>
 <hr>
 
@@ -831,7 +841,7 @@ That’s all. Thank you for giving me this opportunity!</font>
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            31
+                            32
                         </p>
                     </a>
                 </div>
@@ -843,7 +853,7 @@ That’s all. Thank you for giving me this opportunity!</font>
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            14
+                            15
                         </p>
                     </a>
                 </div>
@@ -855,7 +865,7 @@ That’s all. Thank you for giving me this opportunity!</font>
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            22
+                            25
                         </p>
                     </a>
                 </div>
@@ -1030,6 +1040,14 @@ That’s all. Thank you for giving me this opportunity!</font>
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
+        <a class="level is-marginless" href="/categories/matplotlib/">
+            <span class="level-start">
+                <span class="level-item">matplotlib</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/personal/">
             <span class="level-start">
                 <span class="level-item">personal</span>
@@ -1072,7 +1090,7 @@ That’s all. Thank you for giving me this opportunity!</font>
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Archlinux/" style="font-size: 20px;">Archlinux</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/statistics/" style="font-size: 10px;">statistics</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
+        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Archlinux/" style="font-size: 20px;">Archlinux</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/matplotlib/" style="font-size: 10px;">matplotlib</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 10px;">plot</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/statistics/" style="font-size: 10px;">statistics</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
     </div>
 </div>
     
@@ -1084,6 +1102,25 @@ That’s all. Thank you for giving me this opportunity!</font>
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/12/05/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-matplotlib%E5%88%9D%E4%BD%93%E9%AA%8C/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第一弹-matplotlib初体验">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-05T14:55:57.000Z">2019-12-05</time></div>
+                    <a href="/2019/12/05/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-matplotlib%E5%88%9D%E4%BD%93%E9%AA%8C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第一弹-matplotlib初体验</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/matplotlib/">matplotlib</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1161,25 +1198,6 @@ That’s all. Thank you for giving me this opportunity!</font>
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/08/09/Construct-Dwarf-Fortress-Lazy-Newbee-Package-in-ArchLinux/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Construct Dwarf Fortress Lazy Newbee Package in ArchLinux">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-09T05:36:01.000Z">2019-08-09</time></div>
-                    <a href="/2019/08/09/Construct-Dwarf-Fortress-Lazy-Newbee-Package-in-ArchLinux/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Construct Dwarf Fortress Lazy Newbee Package in ArchLinux</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Games/">Games</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -1190,6 +1208,17 @@ That’s all. Thank you for giving me this opportunity!</font>
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/11/">
@@ -1469,6 +1498,13 @@ That’s all. Thank you for giving me this opportunity!</font>
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/Vim/">
                         <span class="tag">Vim</span>
                         <span class="tag is-grey">1</span>
@@ -1490,6 +1526,13 @@ That’s all. Thank you for giving me this opportunity!</font>
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/matplotlib/">
+                        <span class="tag">matplotlib</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/numpy/">
                         <span class="tag">numpy</span>
                         <span class="tag is-grey">1</span>
@@ -1499,6 +1542,13 @@ That’s all. Thank you for giving me this opportunity!</font>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/planche/">
                         <span class="tag">planche</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/plot/">
+                        <span class="tag">plot</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1569,6 +1619,25 @@ That’s all. Thank you for giving me this opportunity!</font>
         
         <article class="media">
             
+            <a href="/2019/12/05/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-matplotlib%E5%88%9D%E4%BD%93%E9%AA%8C/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第一弹-matplotlib初体验">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-05T14:55:57.000Z">2019-12-05</time></div>
+                    <a href="/2019/12/05/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-matplotlib%E5%88%9D%E4%BD%93%E9%AA%8C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第一弹-matplotlib初体验</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/matplotlib/">matplotlib</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/11/17/fcitx-%E8%BE%93%E5%85%A5%E6%B3%95%E9%85%8D%E7%BD%AE/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="fcitx 输入法配置">
@@ -1643,25 +1712,6 @@ That’s all. Thank you for giving me this opportunity!</font>
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/08/09/Construct-Dwarf-Fortress-Lazy-Newbee-Package-in-ArchLinux/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Construct Dwarf Fortress Lazy Newbee Package in ArchLinux">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-09T05:36:01.000Z">2019-08-09</time></div>
-                    <a href="/2019/08/09/Construct-Dwarf-Fortress-Lazy-Newbee-Package-in-ArchLinux/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Construct Dwarf Fortress Lazy Newbee Package in ArchLinux</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Games/">Games</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1672,6 +1722,17 @@ That’s all. Thank you for giving me this opportunity!</font>
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/11/">
@@ -1951,6 +2012,13 @@ That’s all. Thank you for giving me this opportunity!</font>
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/Vim/">
                         <span class="tag">Vim</span>
                         <span class="tag is-grey">1</span>
@@ -1972,6 +2040,13 @@ That’s all. Thank you for giving me this opportunity!</font>
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/matplotlib/">
+                        <span class="tag">matplotlib</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/numpy/">
                         <span class="tag">numpy</span>
                         <span class="tag is-grey">1</span>
@@ -1981,6 +2056,13 @@ That’s all. Thank you for giving me this opportunity!</font>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/planche/">
                         <span class="tag">planche</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/plot/">
+                        <span class="tag">plot</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

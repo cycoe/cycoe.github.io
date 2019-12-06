@@ -164,9 +164,9 @@
         </h1>
         <div class="content">
             <p><img src="http://i1.piimg.com/587851/ed4b8db8cb32978d.jpg" alt="image1"></p>
-<h2 id="優化掛載參數"><a href="#優化掛載參數" class="headerlink" title="優化掛載參數"></a>優化掛載參數</h2><p>在 Linux 中掛載 SSD 上的 btrfs，可以採用各種參數進行優化：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">#&lt;file system&gt;&lt;mount point&gt;&lt;type&gt;&lt;options&gt;&lt;dump&gt;&lt;pass&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">UUID&#x3D;&lt;略&gt;&#x2F; btrfs defaults,ssd,discard,noatime,compress&#x3D;lzo,subvol&#x3D;@</span></pre></td></tr></table></figure></p>
+<h2 id="優化掛載參數"><a href="#優化掛載參數" class="headerlink" title="優化掛載參數"></a>優化掛載參數</h2><p>在 Linux 中掛載 SSD 上的 btrfs，可以採用各種參數進行優化：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">#&lt;file system&gt;&lt;mount point&gt;&lt;type&gt;&lt;options&gt;&lt;dump&gt;&lt;pass&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">UUID&#x3D;&lt;略&gt;&#x2F; btrfs defaults,ssd,discard,noatime,compress&#x3D;lzo,subvol&#x3D;@</span></pre></td></tr></table></figure></p>
 <h3 id="ssd"><a href="#ssd" class="headerlink" title="ssd"></a>ssd</h3><p>btrfs 文件系統有對 SSD 進行優化，在掛載參數中加入 ssd 即可。該參數不會自動啓用 TRIM/discard。</p>
-<h3 id="discard"><a href="#discard" class="headerlink" title="discard"></a>discard</h3><p>可以通過以下命令確認 SSD 是否支持 TRIM：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo hdparm -I /dev/sdX | grep TRIM</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">*Data Set Management TRIM supported (limit 8 blocks)</span></pre></td></tr></table></figure><br>若 SSD 支持 TRIM 命令，可以在 <code>/etc/fstab</code> 中啓用 discard 參數。建議將 discard 掛載參數作爲首選。據 debian wiki 所述，包括三星、鎂光、英睿達在內的一些 SSD <a href="https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/drivers/ata/libata-core.c#n4227" target="_blank" rel="noopener">在 discard/TRIM 上有問題</a>，不能合適地處理 TRIM 命令。<br>該參數不是必需的，也可以自定義週期性運行 fstrim 命令來取代該參數，使用該命令前要確認 SSD 支持 TRIM，否則可能造成數據丟失。當 SSD 有足夠的空餘空間或（未分配的）可用空間時不需要該參數。</p>
+<h3 id="discard"><a href="#discard" class="headerlink" title="discard"></a>discard</h3><p>可以通過以下命令確認 SSD 是否支持 TRIM：<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo hdparm -I /dev/sdX | grep TRIM</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">*Data Set Management TRIM supported (limit 8 blocks)</span></pre></td></tr></table></figure><br>若 SSD 支持 TRIM 命令，可以在 <code>/etc/fstab</code> 中啓用 discard 參數。建議將 discard 掛載參數作爲首選。據 debian wiki 所述，包括三星、鎂光、英睿達在內的一些 SSD <a href="https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/drivers/ata/libata-core.c#n4227" target="_blank" rel="noopener">在 discard/TRIM 上有問題</a>，不能合適地處理 TRIM 命令。<br>該參數不是必需的，也可以自定義週期性運行 fstrim 命令來取代該參數，使用該命令前要確認 SSD 支持 TRIM，否則可能造成數據丟失。當 SSD 有足夠的空餘空間或（未分配的）可用空間時不需要該參數。</p>
 <h3 id="noatime"><a href="#noatime" class="headerlink" title="noatime"></a>noatime</h3><p>掛載參數可以加入 noatime，通過禁止更新訪問記錄來減少不必要的寫操作以提高性能。該選項對 HDD 同樣有性能提升。btrfs 的默認配置爲 relatime。</p>
 <h3 id="compress"><a href="#compress" class="headerlink" title="compress"></a>compress</h3><p>打開壓縮功能在通常情況下有利於提高傳輸性能（並非絕對），也可以節省存儲空間。加入以下掛載參數：</p>
 <ul>
@@ -176,7 +176,7 @@
 <p>lzo 速度更快，zlib 壓縮率更高。注意確認 SSD 主控是否是非壓縮主控，若爲壓縮主控不建議加入該參數。</p>
 <h3 id="寫緩存"><a href="#寫緩存" class="headerlink" title="寫緩存"></a>寫緩存</h3><p>若 SSD 帶有緩存，啓用 Write Cache 可以提高性能：Disks -&gt; Drive Setting -&gt; Enable Write Cache，但在突然斷電的情況下可能造成數據丟失。</p>
 <hr>
-<h2 id="I-O-調度"><a href="#I-O-調度" class="headerlink" title="I/O 調度"></a>I/O 調度</h2><p>SSD 結構不同於傳統硬盤，尋址時間短，I/O 調度算法可選擇 noop 以降低延遲。以下命令可查看與修改調度器：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">cat/sys/block/sdX/queue/scheduler # sdX 指你的設備</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sudotee/sys/block/sdX/queue/scheduler &lt;&lt;&lt; noop</span></pre></td></tr></table></figure><br>注意以上方法並不持久，重啓後會重置。如果 SSD 是系統唯一的存儲設備，可考慮通過 elevator=noop 內核參數設置 I/O 調度器。也可使用 udev 規則來修改調度器，對多存儲設備同樣有效：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo touch /etc/udev/rules.d/60-ssd-scheduler.rules #創建該文件</span></pre></td></tr></table></figure><br>文件內容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"># set deadline scheduler for non-rotating disks</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">ACTION&#x3D;&#x3D;&quot;add|change&quot;, KERNEL&#x3D;&#x3D;&quot;sd[a-z]&quot;, ATTR&#123;queue&#x2F;rotational&#125;&#x3D;&#x3D;&quot;0&quot;, ATTR&#123;queue&#x2F;scheduler&#125;&#x3D;&quot;noop&quot;</span></pre></td></tr></table></figure></p>
+<h2 id="I-O-調度"><a href="#I-O-調度" class="headerlink" title="I/O 調度"></a>I/O 調度</h2><p>SSD 結構不同於傳統硬盤，尋址時間短，I/O 調度算法可選擇 noop 以降低延遲。以下命令可查看與修改調度器：<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">cat/sys/block/sdX/queue/scheduler # sdX 指你的設備</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sudotee/sys/block/sdX/queue/scheduler &lt;&lt;&lt; noop</span></pre></td></tr></table></figure><br>注意以上方法並不持久，重啓後會重置。如果 SSD 是系統唯一的存儲設備，可考慮通過 elevator=noop 內核參數設置 I/O 調度器。也可使用 udev 規則來修改調度器，對多存儲設備同樣有效：<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo touch /etc/udev/rules.d/60-ssd-scheduler.rules #創建該文件</span></pre></td></tr></table></figure><br>文件內容如下：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"># set deadline scheduler for non-rotating disks</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">ACTION&#x3D;&#x3D;&quot;add|change&quot;, KERNEL&#x3D;&#x3D;&quot;sd[a-z]&quot;, ATTR&#123;queue&#x2F;rotational&#125;&#x3D;&#x3D;&quot;0&quot;, ATTR&#123;queue&#x2F;scheduler&#125;&#x3D;&quot;noop&quot;</span></pre></td></tr></table></figure></p>
 <hr>
 
         </div>
@@ -320,7 +320,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            31
+                            32
                         </p>
                     </a>
                 </div>
@@ -332,7 +332,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            14
+                            15
                         </p>
                     </a>
                 </div>
@@ -344,7 +344,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            22
+                            25
                         </p>
                     </a>
                 </div>
@@ -519,6 +519,14 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
+        <a class="level is-marginless" href="/categories/matplotlib/">
+            <span class="level-start">
+                <span class="level-item">matplotlib</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/personal/">
             <span class="level-start">
                 <span class="level-item">personal</span>
@@ -561,7 +569,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Archlinux/" style="font-size: 20px;">Archlinux</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/statistics/" style="font-size: 10px;">statistics</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
+        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Archlinux/" style="font-size: 20px;">Archlinux</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/matplotlib/" style="font-size: 10px;">matplotlib</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 10px;">plot</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/statistics/" style="font-size: 10px;">statistics</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
     </div>
 </div>
     
@@ -573,6 +581,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/12/05/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-matplotlib%E5%88%9D%E4%BD%93%E9%AA%8C/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第一弹-matplotlib初体验">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-05T14:55:57.000Z">2019-12-05</time></div>
+                    <a href="/2019/12/05/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-matplotlib%E5%88%9D%E4%BD%93%E9%AA%8C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第一弹-matplotlib初体验</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/matplotlib/">matplotlib</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -650,25 +677,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/08/09/Construct-Dwarf-Fortress-Lazy-Newbee-Package-in-ArchLinux/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Construct Dwarf Fortress Lazy Newbee Package in ArchLinux">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-09T05:36:01.000Z">2019-08-09</time></div>
-                    <a href="/2019/08/09/Construct-Dwarf-Fortress-Lazy-Newbee-Package-in-ArchLinux/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Construct Dwarf Fortress Lazy Newbee Package in ArchLinux</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Games/">Games</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -679,6 +687,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/11/">
@@ -958,6 +977,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/Vim/">
                         <span class="tag">Vim</span>
                         <span class="tag is-grey">1</span>
@@ -979,6 +1005,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/matplotlib/">
+                        <span class="tag">matplotlib</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/numpy/">
                         <span class="tag">numpy</span>
                         <span class="tag is-grey">1</span>
@@ -988,6 +1021,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/planche/">
                         <span class="tag">planche</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/plot/">
+                        <span class="tag">plot</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1058,6 +1098,25 @@
         
         <article class="media">
             
+            <a href="/2019/12/05/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-matplotlib%E5%88%9D%E4%BD%93%E9%AA%8C/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第一弹-matplotlib初体验">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-05T14:55:57.000Z">2019-12-05</time></div>
+                    <a href="/2019/12/05/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-matplotlib%E5%88%9D%E4%BD%93%E9%AA%8C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第一弹-matplotlib初体验</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/matplotlib/">matplotlib</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/11/17/fcitx-%E8%BE%93%E5%85%A5%E6%B3%95%E9%85%8D%E7%BD%AE/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="fcitx 输入法配置">
@@ -1132,25 +1191,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/08/09/Construct-Dwarf-Fortress-Lazy-Newbee-Package-in-ArchLinux/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Construct Dwarf Fortress Lazy Newbee Package in ArchLinux">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-09T05:36:01.000Z">2019-08-09</time></div>
-                    <a href="/2019/08/09/Construct-Dwarf-Fortress-Lazy-Newbee-Package-in-ArchLinux/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Construct Dwarf Fortress Lazy Newbee Package in ArchLinux</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Games/">Games</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1161,6 +1201,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/11/">
@@ -1440,6 +1491,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/Vim/">
                         <span class="tag">Vim</span>
                         <span class="tag is-grey">1</span>
@@ -1461,6 +1519,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/matplotlib/">
+                        <span class="tag">matplotlib</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/numpy/">
                         <span class="tag">numpy</span>
                         <span class="tag is-grey">1</span>
@@ -1470,6 +1535,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/planche/">
                         <span class="tag">planche</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/plot/">
+                        <span class="tag">plot</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
