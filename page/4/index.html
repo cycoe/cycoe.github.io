@@ -135,6 +135,66 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-03-10T16:00:00.000Z">2017-03-11</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/GitHub/">GitHub</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 348 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/03/11/%E5%A6%82%E4%BD%95%E5%90%8C%E6%AD%A5GitHub%E4%B8%8A%E6%B8%B8%E6%9B%B4%E6%96%B0/">如何同步GitHub上游更新</a>
+            
+        </h1>
+        <div class="content">
+            <p>在 GitHub 上進行項目的團隊協作，一般都是 fork 組織倉庫到自己的賬號下，提交補丁後再提交 Pull Request。上游倉庫一直保持更新。<br>由於最近在做 <a href="https://github.com/LCTT/TranslateProject.git" target="_blank" rel="noopener">LCTT</a> 項目，經常需要同步上游其他人的翻譯，下面就以 <a href="https://github.com/LCTT/TranslateProject.git" target="_blank" rel="noopener">LCTT</a> 項目爲例，記錄一下 GitHub 上 fork 倉庫同步上游更新的操作。</p>
+<hr>
+<ol>
+<li><p>使用 <code>git remote -v</code> 查看當前的遠程倉庫別名，輸出如下：</p>
+ <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">LCTT    https:&#x2F;&#x2F;github.com&#x2F;LCTT&#x2F;TranslateProject.git (fetch)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">LCTT    https:&#x2F;&#x2F;github.com&#x2F;LCTT&#x2F;TranslateProject.git (push)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">origin  git@github.com:cycoe&#x2F;TranslateProject.git (fetch)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">origin  git@github.com:cycoe&#x2F;TranslateProject.git (push)</span></pre></td></tr></table></figure>
+
+<p> 其中 <code>origin</code> 是自己賬號下的對應遠端倉庫地址別名， <code>LCTT</code> 是設定好的上游倉庫地址的別名。此處 LCTT 項目已經幫我們設置好了就不需要另外設置。<br> 如果沒有設置上游倉庫地址，可通過 <code>git remote add 上游倉庫別名 上游倉庫地址</code> 命令來設置上游倉庫的別名。</p>
+</li>
+<li><p>同步上游倉庫更新到本地，併合並更新到本地倉庫 master 分支</p>
+ <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">git fetch LCTT          <span class="hljs-comment">#從上游倉庫抓取更新</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">git checkout master     <span class="hljs-comment">#切換到 master 分支</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">git merge LCTT/master   <span class="hljs-comment">#合併上游更新到 master 分支</span></span></pre></td></tr></table></figure>
+</li>
+<li><p><code>git push</code> 命令推送本地倉庫到 fork 倉庫</p>
+</li>
+</ol>
+<hr>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-03-08T16:00:00.000Z">2017-03-09</time>
                 
                 <div class="level-item">
@@ -236,10 +296,14 @@
             <p>閒來無事，打算搭建個人主頁。查閱了各種資料，發現目前最省錢省力的方法就是在 GitHub Pages 上利用 jekyll 靜態網頁生成器搭建。<br>對於 Web 開發小白來說，自己寫網頁代碼不太現實。 好在GitHub 上有許多其他大神製作好的 jekyll 模板，直接 fork 過來修改一下就可以使用，其餘的精力都可以用在文章內容本身上。</p>
 <hr>
 <h2 id="搭建步驟"><a href="#搭建步驟" class="headerlink" title="搭建步驟"></a>搭建步驟</h2><ol>
-<li>在 GitHub 上找到自己喜歡的 jekyll 模板， fork 到自己的倉庫下，然後點擊 Setting 修改倉庫名稱爲 <code>username.github.io</code></li>
-<li>將 fork 後的項目 clone 至本地</li>
-<li>打開 <code>_config.yml</code> 文件修改其中的信息，包括網站名稱、用戶信息等</li>
-<li>將 html 或 MarkDown 格式的文章和博客添加到 <code>_posts</code> 文件夾</li>
+<li><p>在 GitHub 上找到自己喜歡的 jekyll 模板， fork 到自己的倉庫下，然後點擊 Setting 修改倉庫名稱爲 <code>username.github.io</code></p>
+</li>
+<li><p>將 fork 後的項目 clone 至本地</p>
+</li>
+<li><p>打開 <code>_config.yml</code> 文件修改其中的信息，包括網站名稱、用戶信息等</p>
+</li>
+<li><p>將 html 或 MarkDown 格式的文章和博客添加到 <code>_posts</code> 文件夾</p>
+</li>
 <li><p>使用以下命令即可提交更新並推送更新至遠端倉庫</p>
  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">git add .</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">git commit -am <span class="hljs-string">"post update"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">git push</span></pre></td></tr></table></figure>
 </li>
@@ -249,8 +313,7 @@
 <h2 id="注意事項"><a href="#注意事項" class="headerlink" title="注意事項"></a>注意事項</h2><pre><code>comments_provider: duoshuo
 duoshuo_username: cycoe
 disqus_username: cycoe
-lazy_load_duoshuo: true
-</code></pre><p><strong>此處的usrname一定要填自己申請的賬號名</strong></p>
+lazy_load_duoshuo: true</code></pre><p><strong>此處的usrname一定要填自己申請的賬號名</strong></p>
 <h2 id="進階配置"><a href="#進階配置" class="headerlink" title="進階配置"></a>進階配置</h2><ol>
 <li>申請域名</li>
 </ol>
@@ -339,7 +402,7 @@ lazy_load_duoshuo: true
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            32
+                            33
                         </p>
                     </a>
                 </div>
@@ -543,7 +606,7 @@ lazy_load_duoshuo: true
                 <span class="level-item">matplotlib</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/personal/">
@@ -588,7 +651,7 @@ lazy_load_duoshuo: true
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Archlinux/" style="font-size: 20px;">Archlinux</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/matplotlib/" style="font-size: 10px;">matplotlib</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 10px;">plot</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/statistics/" style="font-size: 10px;">statistics</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
+        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Archlinux/" style="font-size: 20px;">Archlinux</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/matplotlib/" style="font-size: 15px;">matplotlib</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 15px;">plot</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/statistics/" style="font-size: 10px;">statistics</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
     </div>
 </div>
     
@@ -600,6 +663,25 @@ lazy_load_duoshuo: true
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第二弹-调整坐标轴">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T06:57:59.000Z">2019-12-06</time></div>
+                    <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第二弹-调整坐标轴</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/matplotlib/">matplotlib</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -677,25 +759,6 @@ lazy_load_duoshuo: true
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/08/13/%E4%BD%BF%E7%94%A8-PIL-%E4%B8%8E-numpy-%E8%BF%9B%E8%A1%8C%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 PIL 与 numpy 进行图像处理">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-13T14:35:51.000Z">2019-08-13</time></div>
-                    <a href="/2019/08/13/%E4%BD%BF%E7%94%A8-PIL-%E4%B8%8E-numpy-%E8%BF%9B%E8%A1%8C%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 PIL 与 numpy 进行图像处理</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -713,7 +776,7 @@ lazy_load_duoshuo: true
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -998,7 +1061,7 @@ lazy_load_duoshuo: true
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Python/">
                         <span class="tag">Python</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1026,7 +1089,7 @@ lazy_load_duoshuo: true
                 <div class="control">
                     <a class="tags has-addons" href="/tags/matplotlib/">
                         <span class="tag">matplotlib</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1047,7 +1110,7 @@ lazy_load_duoshuo: true
                 <div class="control">
                     <a class="tags has-addons" href="/tags/plot/">
                         <span class="tag">plot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1117,6 +1180,25 @@ lazy_load_duoshuo: true
         
         <article class="media">
             
+            <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第二弹-调整坐标轴">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T06:57:59.000Z">2019-12-06</time></div>
+                    <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第二弹-调整坐标轴</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/matplotlib/">matplotlib</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/12/05/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-matplotlib%E5%88%9D%E4%BD%93%E9%AA%8C/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第一弹-matplotlib初体验">
@@ -1191,25 +1273,6 @@ lazy_load_duoshuo: true
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/08/13/%E4%BD%BF%E7%94%A8-PIL-%E4%B8%8E-numpy-%E8%BF%9B%E8%A1%8C%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 PIL 与 numpy 进行图像处理">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-13T14:35:51.000Z">2019-08-13</time></div>
-                    <a href="/2019/08/13/%E4%BD%BF%E7%94%A8-PIL-%E4%B8%8E-numpy-%E8%BF%9B%E8%A1%8C%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 PIL 与 numpy 进行图像处理</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1227,7 +1290,7 @@ lazy_load_duoshuo: true
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1512,7 +1575,7 @@ lazy_load_duoshuo: true
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Python/">
                         <span class="tag">Python</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1540,7 +1603,7 @@ lazy_load_duoshuo: true
                 <div class="control">
                     <a class="tags has-addons" href="/tags/matplotlib/">
                         <span class="tag">matplotlib</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1561,7 +1624,7 @@ lazy_load_duoshuo: true
                 <div class="control">
                     <a class="tags has-addons" href="/tags/plot/">
                         <span class="tag">plot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 

@@ -161,28 +161,8 @@
         <div class="content">
             <h2 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h2><p>假設存在 k 個樣本點 \(X_1, X_2, \ldots, X_k\)，定義向量<br>\(X_i = (x_{i1}, x_{i2}, \ldots, x_{in})^T\)，爲方便計算在 \(X_i\) 前插入常量 1。<br>則需要求 \(W = (w_0, w_1, w_2, \ldots, w_n)\) 使 \(\hat{Y} = XW\)。</p>
 <p>定義均方誤差 \(E = \dfrac{1}{n}\sum(y_i-\hat{y}_i)^2 = \dfrac{1}{n}||Y-\hat{Y}||_2^2\)，則可轉變爲尋找 W 使得 E 最小，即尋找 \(W = \mathrm{argmin}\dfrac{1}{n}||Y-XW||_2^2\)。</p>
-<p>對於</p>
-<script type="math/tex; mode=display">E(W) = \dfrac{1}{n}</script><p>則可推導</p>
-<script type="math/tex; mode=display">
-    \begin{align}
-    E(W+\Delta W) - E(W) &= \dfrac{1}{n}||Y-X(W+\Delta W)||_2^2-\dfrac{1}{n}||Y-XW||_2^2\\
-    &= \dfrac1n||Y-XW||_2^2-\dfrac2n(Y-XW)(X\Delta W)+\dfrac1n||X\Delta W||_2^2-\dfrac1n||Y-XW||_2^2\\
-    &= \dfrac2n(XW-Y)X\Delta W+\mathcal{O}(||\Delta X||)\\
-    \end{align}</script><p>令 </p>
-<script type="math/tex; mode=display">L(W) = \dfrac2n(XW-Y)X\Delta W</script><p>爲 \(E(W)\) 在 \(W\) 處的導數，同時</p>
-<script type="math/tex; mode=display">
-    \begin{align}
-    L(\Delta W) &= <\nabla E(W), \Delta W>\\
-    &= <\dfrac2nX^T(XW-Y), \Delta X>\\
-    &= \dfrac2n(XW-Y)X\Delta W\\
-    \end{align}</script><p>則</p>
-<script type="math/tex; mode=display">
-    \begin{align}
-    \nabla E(W) = \dfrac2nX^T(XW-Y) &= 0\\
-    X^TXW &= X^TY\\
-    W &= (X^TX)^{-1}X^TY
-    \end{align}</script><p>最終得</p>
-<script type="math/tex; mode=display">E=\dfrac1n||Y-\hat{Y}||_2^2=\dfrac1n||X(X^TX)^{-1}X^TY-Y||_2^2</script>
+<p>對於<br>$$E(W) = \dfrac{1}{n}$$<br>則可推導<br>$$<br>    \begin{align}<br>    E(W+\Delta W) - E(W) &amp;= \dfrac{1}{n}||Y-X(W+\Delta W)||_2^2-\dfrac{1}{n}||Y-XW||_2^2\<br>    &amp;= \dfrac1n||Y-XW||_2^2-\dfrac2n(Y-XW)(X\Delta W)+\dfrac1n||X\Delta W||_2^2-\dfrac1n||Y-XW||_2^2\<br>    &amp;= \dfrac2n(XW-Y)X\Delta W+\mathcal{O}(||\Delta X||)\<br>    \end{align}<br>$$<br>令<br>$$L(W) = \dfrac2n(XW-Y)X\Delta W$$<br>爲 \(E(W)\) 在 \(W\) 處的導數，同時<br>$$<br>    \begin{align}<br>    L(\Delta W) &amp;= &lt;\nabla E(W), \Delta W&gt;\<br>    &amp;= &lt;\dfrac2nX^T(XW-Y), \Delta X&gt;\<br>    &amp;= \dfrac2n(XW-Y)X\Delta W\<br>    \end{align}<br>$$<br>則<br>$$<br>    \begin{align}<br>    \nabla E(W) = \dfrac2nX^T(XW-Y) &amp;= 0\<br>    X^TXW &amp;= X^TY\<br>    W &amp;= (X^TX)^{-1}X^TY<br>    \end{align}<br>$$<br>最終得<br>$$E=\dfrac1n||Y-\hat{Y}||_2^2=\dfrac1n||X(X^TX)^{-1}X^TY-Y||_2^2$$</p>
+
         </div>
         
         <div class="level is-size-7 is-uppercase">
@@ -333,7 +313,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            32
+                            33
                         </p>
                     </a>
                 </div>
@@ -537,7 +517,7 @@
                 <span class="level-item">matplotlib</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/personal/">
@@ -582,7 +562,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Archlinux/" style="font-size: 20px;">Archlinux</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/matplotlib/" style="font-size: 10px;">matplotlib</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 10px;">plot</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/statistics/" style="font-size: 10px;">statistics</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
+        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Archlinux/" style="font-size: 20px;">Archlinux</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/matplotlib/" style="font-size: 15px;">matplotlib</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 15px;">plot</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/statistics/" style="font-size: 10px;">statistics</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
     </div>
 </div>
     
@@ -594,6 +574,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第二弹-调整坐标轴">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T06:57:59.000Z">2019-12-06</time></div>
+                    <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第二弹-调整坐标轴</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/matplotlib/">matplotlib</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -671,25 +670,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/08/13/%E4%BD%BF%E7%94%A8-PIL-%E4%B8%8E-numpy-%E8%BF%9B%E8%A1%8C%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 PIL 与 numpy 进行图像处理">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-13T14:35:51.000Z">2019-08-13</time></div>
-                    <a href="/2019/08/13/%E4%BD%BF%E7%94%A8-PIL-%E4%B8%8E-numpy-%E8%BF%9B%E8%A1%8C%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 PIL 与 numpy 进行图像处理</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -707,7 +687,7 @@
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -992,7 +972,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Python/">
                         <span class="tag">Python</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1020,7 +1000,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/matplotlib/">
                         <span class="tag">matplotlib</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1041,7 +1021,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/plot/">
                         <span class="tag">plot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1111,6 +1091,25 @@
         
         <article class="media">
             
+            <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第二弹-调整坐标轴">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T06:57:59.000Z">2019-12-06</time></div>
+                    <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第二弹-调整坐标轴</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/matplotlib/">matplotlib</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/12/05/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-matplotlib%E5%88%9D%E4%BD%93%E9%AA%8C/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第一弹-matplotlib初体验">
@@ -1185,25 +1184,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/08/13/%E4%BD%BF%E7%94%A8-PIL-%E4%B8%8E-numpy-%E8%BF%9B%E8%A1%8C%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 PIL 与 numpy 进行图像处理">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-13T14:35:51.000Z">2019-08-13</time></div>
-                    <a href="/2019/08/13/%E4%BD%BF%E7%94%A8-PIL-%E4%B8%8E-numpy-%E8%BF%9B%E8%A1%8C%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 PIL 与 numpy 进行图像处理</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1221,7 +1201,7 @@
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1506,7 +1486,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Python/">
                         <span class="tag">Python</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1534,7 +1514,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/matplotlib/">
                         <span class="tag">matplotlib</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1555,7 +1535,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/plot/">
                         <span class="tag">plot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 

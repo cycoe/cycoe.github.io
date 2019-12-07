@@ -135,6 +135,60 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-06T06:57:59.000Z">2019-12-06</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/matplotlib/">matplotlib</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 1023 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/">使用matplotlib进行科学绘图第二弹-调整坐标轴</a>
+            
+        </h1>
+        <div class="content">
+            <p><img src="https://matplotlib.org/_static/logo2_compressed.svg" alt="matplotlib"></p>
+<p>坐标轴主要包含了轴标签（axis labels）、刻度（ticks）和刻度标签(tick labels)。</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-12-05T14:55:57.000Z">2019-12-05</time>
                 
                 <div class="level-item">
@@ -273,9 +327,13 @@
 <p>在 Linux 中（此处特指 X.org 显示服务器，Wayland 不了解），传统的 X Clients 的缩放由 xrandr 控制，GTK 的 QT 程序的缩放由它们自己的环境变量控制。因此想要完美调整所有界面的缩放比例需要一番摸索。当然，Gnome、KDE 之类的桌面环境除外，桌面环境设置中一般都自带缩放设置。</p>
 <h2 id="降低分辨率"><a href="#降低分辨率" class="headerlink" title="降低分辨率"></a>降低分辨率</h2><p>直接通过 xrandr 降低显示器的分辨率是最简单粗暴的办法，但这样高分屏就相当于废了，不推荐。</p>
 <h2 id="调整-Scale"><a href="#调整-Scale" class="headerlink" title="调整 Scale"></a>调整 Scale</h2><p>通过 xrandr 调整显示界面的 Scale，这种方法相当于用放大镜将屏幕上的内容放大，会使内容严重模糊，同样不推荐。</p>
-<h2 id="通过-xrandr-设置-DPI"><a href="#通过-xrandr-设置-DPI" class="headerlink" title="通过 xrandr 设置 DPI"></a>通过 xrandr 设置 DPI</h2><p>通过设置 DPI，其实就是告诉程序我的屏幕的细腻程度如何。如设置 DPI 为 144，就是告诉程序我的屏幕一英寸长度上有 144 个像素点。但此处也有技巧，第一种方法是直接使用 xrandr 设置 DPI，在 <code>.xinitrc</code> 或 <code>.xprofile</code> 中加入 <code>xrandr --dpi 144</code>，使得每次登录 X Server 时都会自动设置 DPI。但此方法对 GTK 程序无效，需要继续在文件中加入<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">export</span> GDK_SCALE=2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">export</span> GDK_DPI_SCALE=0.5</span></pre></td></tr></table></figure></p>
+<h2 id="通过-xrandr-设置-DPI"><a href="#通过-xrandr-设置-DPI" class="headerlink" title="通过 xrandr 设置 DPI"></a>通过 xrandr 设置 DPI</h2><p>通过设置 DPI，其实就是告诉程序我的屏幕的细腻程度如何。如设置 DPI 为 144，就是告诉程序我的屏幕一英寸长度上有 144 个像素点。但此处也有技巧，第一种方法是直接使用 xrandr 设置 DPI，在 <code>.xinitrc</code> 或 <code>.xprofile</code> 中加入 <code>xrandr --dpi 144</code>，使得每次登录 X Server 时都会自动设置 DPI。但此方法对 GTK 程序无效，需要继续在文件中加入</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">export</span> GDK_SCALE=2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">export</span> GDK_DPI_SCALE=0.5</span></pre></td></tr></table></figure>
+
 <p>使得 GTK 程序支持缩放，但你应该也注意到了此处的两个问题。一是此处仍然使用的是缩放而非 DPI，会导致 GTK 程序界面模糊；二是 <code>GDK_SCALE</code> 只支持整数倍缩放。</p>
-<h2 id="通过-xft-设置-DPI"><a href="#通过-xft-设置-DPI" class="headerlink" title="通过 xft 设置 DPI"></a>通过 xft 设置 DPI</h2><p>这是我目前找到的完美的方法，还未遇到什么问题。在 <code>.Xresources</code> 文件中加入<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Xft.dpi: 144</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Xft.autohint: 0</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">Xft.lcdfilter:  lcddefault</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">Xft.hintstyle:  hintfull</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">Xft.hinting: 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">Xft.antialias: 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">Xft.rgba: rgb</span></pre></td></tr></table></figure></p>
+<h2 id="通过-xft-设置-DPI"><a href="#通过-xft-设置-DPI" class="headerlink" title="通过 xft 设置 DPI"></a>通过 xft 设置 DPI</h2><p>这是我目前找到的完美的方法，还未遇到什么问题。在 <code>.Xresources</code> 文件中加入</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Xft.dpi: 144</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Xft.autohint: 0</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">Xft.lcdfilter:  lcddefault</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">Xft.hintstyle:  hintfull</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">Xft.hinting: 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">Xft.antialias: 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">Xft.rgba: rgb</span></pre></td></tr></table></figure>
+
 <p>并在 <code>.xinitrc</code> 或 <code>.xprofile</code> 中加入 <code>xrdb -merge &quot;.Xresources&quot;</code> 使得每次登录时都会使 <code>.Xresources</code> 生效。<code>xrdb</code> 命令需要首先安装 <code>xorg-xrdb</code> 包。至此，终于拥有了一个比较舒适的 DPI。</p>
 
         </div>
@@ -325,16 +383,32 @@
             <p>最近买了一个新机器小新 Pro13，买来的第一天当然是先装上 Archlinux。装上 之后发现无法通过键盘上的亮度调节按钮调节屏幕亮度，机器是 AMD 处理器加 AMD 核显。刚开始以为是 AMD 版本特有的问题，但在网上查了相关的问题后， 发现许多 Intel 核显的机器也有类似问题。</p>
 <p>首先排除按键问题，通过 <code>xev</code> 命令可以监测到亮度调节按钮被按下，说明按键本身没有问题。通过向 <code>/etc/default/grub</code> 中加入 <code>GRUB_CMDLINE_LINUX_DEFAULT=&quot;loglevel=3 acpi_osi=! acpi=&quot;Linux&quot; quiet splash&quot;</code> 没有效果，并且反而使得亮度调节按钮失效了。</p>
 <p>安装 <code>xorg-xbacklight</code> 包，但 <code>xbacklight</code> 命令提示 <code>No outputs have backlight property</code>。是因为 <code>xorg-xbacklight</code> 包中提供的 <code>xbacklight</code> 命令默认只对 Intel 核显有效，在 AMD 核显上会提示 <code>No outputs have backlight property</code> 错误。因此需要通过 ACPI 通道对亮度进行控制。</p>
-<p><strong>解决方法如下：</strong><br>安装 ACPI 的亮度控制，替换原 <code>xbacklight</code> 命令<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo pacman -S acpilight</span></pre></td></tr></table></figure><br>将当前用户加入 video 组，实现免 root 控制亮度<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo gpasswd video -a cycoe</span></pre></td></tr></table></figure></p>
-<p>acpilight 兼容 xbacklight 重启之后就可以通过下面命令控制亮度了<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Get backlight brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">xbacklight -get</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Set brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">xbacklight -<span class="hljs-built_in">set</span> 70</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Increase brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">xbacklight -inc 10</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Decrease brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">xbacklight -dec 10</span></pre></td></tr></table></figure></p>
-<h2 id="使用-light-替代-acpilight"><a href="#使用-light-替代-acpilight" class="headerlink" title="使用 light 替代 acpilight"></a>使用 light 替代 acpilight</h2><p>acpilight 是用 Python 写的脚本工具，由于我对于系统工具的洁癖，还是考虑找个 C 语言的替代品，也就找到了 light 这个工具，并且其可以自动检测到亮度调节接口。<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Install light</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sudo pacman -S light</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Increase brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">light -A 10</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Decrease brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">light -U 10</span></pre></td></tr></table></figure></p>
+<p><strong>解决方法如下：</strong><br>安装 ACPI 的亮度控制，替换原 <code>xbacklight</code> 命令</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo pacman -S acpilight</span></pre></td></tr></table></figure>
+<p>将当前用户加入 video 组，实现免 root 控制亮度</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo gpasswd video -a cycoe</span></pre></td></tr></table></figure>
+
+<p>acpilight 兼容 xbacklight 重启之后就可以通过下面命令控制亮度了</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Get backlight brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">xbacklight -get</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Set brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">xbacklight -<span class="hljs-built_in">set</span> 70</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Increase brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">xbacklight -inc 10</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Decrease brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">xbacklight -dec 10</span></pre></td></tr></table></figure>
+
+<h2 id="使用-light-替代-acpilight"><a href="#使用-light-替代-acpilight" class="headerlink" title="使用 light 替代 acpilight"></a>使用 light 替代 acpilight</h2><p>acpilight 是用 Python 写的脚本工具，由于我对于系统工具的洁癖，还是考虑找个 C 语言的替代品，也就找到了 light 这个工具，并且其可以自动检测到亮度调节接口。</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Install light</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sudo pacman -S light</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Increase brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">light -A 10</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Decrease brightness</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">light -U 10</span></pre></td></tr></table></figure>
+
 <h2 id="使用-clight-利用摄像头自动调节亮度"><a href="#使用-clight-利用摄像头自动调节亮度" class="headerlink" title="使用 clight 利用摄像头自动调节亮度"></a>使用 clight 利用摄像头自动调节亮度</h2><blockquote>
 <p>Clight is a C user daemon utility that aims to fully manage your display. It will automagically change screen backlight level to match ambient brightness, as computed by capturing frames from webcam. Moreover, it can manage your screen temperature, just like redshift does. Finally, it can dim your screen after a timeout.</p>
 </blockquote>
-<p>简而言之，clight 能够自动控制屏幕亮度、gamma 值、自动变暗、自动熄屏等。通过 AUR 安装。<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">yay -S clight</span></pre></td></tr></table></figure></p>
-<p>官方 Wiki 建议安装完成后启用 clightd 服务，虽然并不知道有什么用。<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Remember to enable Clightd systemd unit!</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="hljs-built_in">enable</span> clightd.service</span></pre></td></tr></table></figure></p>
-<p>拷贝配置文件。<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">cp /etc/default/clight.conf ~/.config/</span></pre></td></tr></table></figure></p>
-<p>配置文件中的 <code>gamma_temp</code> 取消注释会提示参数个数不对，设置一个或者三个参数也没有用，因此直接禁用 gamma 值调节。<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">## Gamma temperature during day and night</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># gamma_temp = [ 6500, 6500 ];</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">## Uncomment to disable gamma support</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">no_gamma = <span class="hljs-literal">true</span>;</span></pre></td></tr></table></figure></p>
+<p>简而言之，clight 能够自动控制屏幕亮度、gamma 值、自动变暗、自动熄屏等。通过 AUR 安装。</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">yay -S clight</span></pre></td></tr></table></figure>
+
+<p>官方 Wiki 建议安装完成后启用 clightd 服务，虽然并不知道有什么用。</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Remember to enable Clightd systemd unit!</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="hljs-built_in">enable</span> clightd.service</span></pre></td></tr></table></figure>
+
+<p>拷贝配置文件。</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">cp /etc/default/clight.conf ~/.config/</span></pre></td></tr></table></figure>
+
+<p>配置文件中的 <code>gamma_temp</code> 取消注释会提示参数个数不对，设置一个或者三个参数也没有用，因此直接禁用 gamma 值调节。</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">## Gamma temperature during day and night</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># gamma_temp = [ 6500, 6500 ];</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">## Uncomment to disable gamma support</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">no_gamma = <span class="hljs-literal">true</span>;</span></pre></td></tr></table></figure>
+
 <p>将 <code>clight</code> 加入到自启动脚本中。</p>
 
         </div>
@@ -460,8 +534,12 @@
 </li>
 </ul>
 <h2 id="Utilities"><a href="#Utilities" class="headerlink" title="Utilities"></a>Utilities</h2><h3 id="DFHack-Linux-V0-44-09-r1-gcc-5-4-0"><a href="#DFHack-Linux-V0-44-09-r1-gcc-5-4-0" class="headerlink" title="DFHack Linux V0.44.09-r1 (gcc 5.4.0)"></a><a href="http://www.bay12forums.com/smf/index.php?topic=139553.0" target="_blank" rel="noopener">DFHack Linux V0.44.09-r1 (gcc 5.4.0)</a></h3><p>DfHack is an attempt to unite the various ways hack tools access DF memory and allow for easier development of new tools (and of course, make the game more enjoyable for players).</p>
-<p>In archlinux, we can get DfHack by install it with yay:<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">yay -S dfhack-twbt-bin</span></pre></td></tr></table></figure><br>As we can see, we installed a DfHack version integrated with TWBT. That means we don’t need to install TWBT again. What’s more, package ‘dfhack-twbt-bin’ depends on the package ‘dwarffortress’ in community repository. </p>
-<p>But as default, the ‘PKGBIULD’ file of ‘dfhack-twbt-bin’ will download the dfhack binary compiled with gcc-4.8, which provide an out-of-date version of remotefortressreader plugin. To avoid this, you can command the PKGBIULD to download dfhack compiled with gcc-7. To get this magic as below, edit PKGBIULD with editor:<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># https://github.com/DFHack/dfhack/releases/download/$_pkgver/dfhack-$_pkgver-Linux-64-gcc-4.8.tar.bz2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">https://github.com/DFHack/dfhack/releases/download/<span class="hljs-variable">$_pkgver</span>/dfhack-<span class="hljs-variable">$_pkgver</span>-Linux-64-gcc-7.tar.bz2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">md5sums=(<span class="hljs-string">'e630ae2fc93c6c7b55552336da2b6c07'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'3853c6f890d3541f710f2c4833a9e696'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'6730da5fec400ece9102552e77996fcb'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'052a58e7f5f1af8be3ddefe9677b8fc6'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-comment"># 'e200a6225dcf285e2eac19c1d1e118ea'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'bdbe256099ec9ffd90f391f0d069742f'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'8eac5ae59dad0397090c4f50d50ef841'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr></table></figure></p>
+<p>In archlinux, we can get DfHack by install it with yay:</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">yay -S dfhack-twbt-bin</span></pre></td></tr></table></figure>
+<p>As we can see, we installed a DfHack version integrated with TWBT. That means we don’t need to install TWBT again. What’s more, package ‘dfhack-twbt-bin’ depends on the package ‘dwarffortress’ in community repository. </p>
+<p>But as default, the ‘PKGBIULD’ file of ‘dfhack-twbt-bin’ will download the dfhack binary compiled with gcc-4.8, which provide an out-of-date version of remotefortressreader plugin. To avoid this, you can command the PKGBIULD to download dfhack compiled with gcc-7. To get this magic as below, edit PKGBIULD with editor:</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># https://github.com/DFHack/dfhack/releases/download/$_pkgver/dfhack-$_pkgver-Linux-64-gcc-4.8.tar.bz2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">https://github.com/DFHack/dfhack/releases/download/<span class="hljs-variable">$_pkgver</span>/dfhack-<span class="hljs-variable">$_pkgver</span>-Linux-64-gcc-7.tar.bz2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">md5sums=(<span class="hljs-string">'e630ae2fc93c6c7b55552336da2b6c07'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'3853c6f890d3541f710f2c4833a9e696'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'6730da5fec400ece9102552e77996fcb'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'052a58e7f5f1af8be3ddefe9677b8fc6'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-comment"># 'e200a6225dcf285e2eac19c1d1e118ea'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'bdbe256099ec9ffd90f391f0d069742f'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'8eac5ae59dad0397090c4f50d50ef841'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr></table></figure>
+
 <p>Then run <code>makepkg</code> to download lacking files.</p>
 <h3 id="TWBT-6-41"><a href="#TWBT-6-41" class="headerlink" title="TWBT 6.41"></a><a href="http://www.bay12forums.com/smf/index.php?topic=138754.0" target="_blank" rel="noopener">TWBT 6.41</a></h3><p>This plugin improves various aspects the game interface.</p>
 <p>Originally I wrote a small plugin because I was tired seeing coffins instead of zeroes and all that stuff. It has greately evolved since then. Some functions may not work or have issues in Adventurer Mode. See readme for all details.</p>
@@ -528,7 +606,6 @@
         <div class="content">
             <p>最近发现粤语的语气词使用的非常多，这一点与温州话比较相似，因此特地总结了如下一些常用的粤语语气词的发音与用法。</p>
 <h2 id="的、地、得"><a href="#的、地、得" class="headerlink" title="的、地、得"></a>的、地、得</h2><p>在普通话中，的、地、得都发音为 de，而在粤语中三个“的” 的发音都不相同。</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -538,8 +615,7 @@
 <th>用法</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>嘅</td>
 <td>ge3</td>
 <td>类似于普通话的“的”</td>
@@ -563,11 +639,8 @@
 <td>类似于“得”，可表示程度</td>
 <td>食得（到）一干二净</td>
 </tr>
-</tbody>
-</table>
-</div>
-<h2 id="语气词"><a href="#语气词" class="headerlink" title="语气词"></a>语气词</h2><div class="table-container">
-<table>
+</tbody></table>
+<h2 id="语气词"><a href="#语气词" class="headerlink" title="语气词"></a>语气词</h2><table>
 <thead>
 <tr>
 <th>字</th>
@@ -576,8 +649,7 @@
 <th>用法</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>哋</td>
 <td>dei2</td>
 <td>用於人稱代詞後，相當於“們”</td>
@@ -703,9 +775,7 @@
 <td>了</td>
 <td>走得喇</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 
         </div>
         
@@ -765,9 +835,10 @@
 </blockquote>
 <p>以上对 SSH 的解释来自<a href="https://baike.baidu.com/item/ssh/10407?fr=aladdin" target="_blank" rel="noopener">百度百科</a>，别问我为什么不用 Wikipedia。从中我们看到，SSH 是建立在应用层基础上的一种安全协议，可以用来进行远程控制，或在计算机之间传送文件，比传统的 telnet 或 ftp 协议要更安全。Linux 下最常使用的就是 OpenSSH。OpenSSH 是 SSH 协议的免费开源实现，提供了服务端后台程序（SSH Daemon）和客户端工具(SSH Client)。主机可以通过 SSH 客户端连接运行了 SSH 服务端的主机。</p>
 <h2 id="网络拓扑分析"><a href="#网络拓扑分析" class="headerlink" title="网络拓扑分析"></a>网络拓扑分析</h2><p>互联网是一张巨大的网，其中所有的主机都由有线或无线的方式相连，但并不代表任意两台主机都能互相可见。网络是有方向的，与其说是网我觉得更像一棵树。网络在向下进行传输时，会经过 NAT（Network Address Translation 网络地址转换），因此外网的主机无法直接访问内网的主机。</p>
-<p>在我们本次遇到的问题中，网络连接可表示为如下的拓扑结构。<br><img src="/2019/04/30/%E5%8F%8D%E5%90%91SSH%E5%AE%9E%E7%8E%B0%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/topology.png" class title="网络拓扑结构"></p>
+<p>在我们本次遇到的问题中，网络连接可表示为如下的拓扑结构。</p>
+<img src="/2019/04/30/%E5%8F%8D%E5%90%91SSH%E5%AE%9E%E7%8E%B0%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/topology.png" class title="网络拓扑结构">
+
 <p>各个主机的 IP 地址如下表所示</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -777,8 +848,7 @@
 <th>备注</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>计算平台 A</td>
 <td>10.0.0.100</td>
 <td>cal</td>
@@ -796,33 +866,63 @@
 <td>server</td>
 <td>公网服务器，起桥梁作用</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <p>其中 A、B 能够访问 O，但 O 不能访问 A、B，并且 A、B 之间不能直接互相访问。我们最后要实现的目标就是使用 B 访问 A。</p>
 <h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>通俗地说：就是在主机 A 上做到 O 的反向代理；然后在 O 上做正向的代理实现本地端口的转发。</p>
 <h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>A、B、O 上都要安装 SSH Client，A、O 上需要安装 SSH Daemon。</p>
-<p>需要用到的 ssh 参数<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">反向代理</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">ssh -fCNR</span></pre></td></tr></table></figure><br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">正向代理</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">ssh -fCNL</span></pre></td></tr></table></figure><br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">-f 后台执行 ssh 指令</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">-C 允许压缩数据</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">-N 不执行远程指令</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">-R 将远程主机（服务器）的某个端口转发到本地端指定主机的指定端口</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">-L 将本地机（客户机）的某个端口转发到远端指定主机的指定端口</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">-p 指定远程主机的端口</span></pre></td></tr></table></figure></p>
-<h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3><p>首先在 A 主机上操作，建立 A 到 O 的反向代理，具体命令为<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh -fCNR [O 主机 IP 或省略]:[O 主机端口]:[A 主机 IP ]:[A 主机端口] [O 主机的用户名@O 主机 IP]</span></pre></td></tr></table></figure><br>在这里我使用了 O 主机的 3333 端口，以及 A 主机的 22 端口，按照以上命令即为<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh -fCNR 3333:localhost:22 server@123.123.123.123</span></pre></td></tr></table></figure><br>此时我们就将 O 的 3333 端口映射到了 A 的 22 端口，也就是说访问 O 的 3333 端口与访问 A 的 22 端口效果相同。</p>
+<p>需要用到的 ssh 参数</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">反向代理</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">ssh -fCNR</span></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">正向代理</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">ssh -fCNL</span></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">-f 后台执行 ssh 指令</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">-C 允许压缩数据</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">-N 不执行远程指令</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">-R 将远程主机（服务器）的某个端口转发到本地端指定主机的指定端口</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">-L 将本地机（客户机）的某个端口转发到远端指定主机的指定端口</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">-p 指定远程主机的端口</span></pre></td></tr></table></figure>
+
+<h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3><p>首先在 A 主机上操作，建立 A 到 O 的反向代理，具体命令为</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh -fCNR [O 主机 IP 或省略]:[O 主机端口]:[A 主机 IP ]:[A 主机端口] [O 主机的用户名@O 主机 IP]</span></pre></td></tr></table></figure>
+<p>在这里我使用了 O 主机的 3333 端口，以及 A 主机的 22 端口，按照以上命令即为</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh -fCNR 3333:localhost:22 server@123.123.123.123</span></pre></td></tr></table></figure>
+<p>此时我们就将 O 的 3333 端口映射到了 A 的 22 端口，也就是说访问 O 的 3333 端口与访问 A 的 22 端口效果相同。</p>
 <p>使用 <code>ps aux | grep 3333</code> 命令来查看反向代理是否运行成功。</p>
-<h3 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h3><p>接下来在 O 主机上操作。完成上一步的反向代理后，在主机 O 上运行如下命令应该就可以登陆 A 主机。<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh -p 3333 cal@localhost</span></pre></td></tr></table></figure></p>
+<h3 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h3><p>接下来在 O 主机上操作。完成上一步的反向代理后，在主机 O 上运行如下命令应该就可以登陆 A 主机。</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh -p 3333 cal@localhost</span></pre></td></tr></table></figure>
+
 <p>该命令的含义为，使用 cal 用户登陆本机的 3333 端口。上面已经说过，访问 O 的 3333 端口与访问 A 的 22 端口效果相同，那么我们就成功从  O 主机登陆了 A 主机。</p>
-<p>但此时我们仍只能从 O 主机本机上登陆 A 主机，无法从其他主机登陆，因此需要再对 3333 端口进行一次端口转发，使其他主机可以访问。具体命令为<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh -fCNL [O 主机 IP 或省略]:[转发端口]:[O 主机 IP]:[被转发端口] [登陆 O 主机的用户名@O 主机的 IP]</span></pre></td></tr></table></figure><br>此处我们想要将 3333 端口转发到 2222 端口，因此转发端口为 2222，被转发端口为 3333。<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh -fCNL *:2222:localhost:3333 localhost</span></pre></td></tr></table></figure><br>此处 <code>*</code> 表示允许任意其他主机访问，本机的用户名可省略。使用 <code>ps aux | grep 2222</code> 命令来查看正向代理是否运行成功。此处 2222 端口为本地转发端口，负责与外网进行通信，并将数据转发到 3333 端口，实现了可以从其他主机访问的功能。</p>
-<h3 id="展现奇迹的时候到了"><a href="#展现奇迹的时候到了" class="headerlink" title="展现奇迹的时候到了"></a>展现奇迹的时候到了</h3><p>到次为至，我们已经配置好了 AO 主机，那么我们可以从任意可联网的设备登录到计算平台中去啦。指令为<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh -p 2222 cal@123.123.123.123</span></pre></td></tr></table></figure><br>我们实现了从任意地方连入内网计算平台的连接！</p>
+<p>但此时我们仍只能从 O 主机本机上登陆 A 主机，无法从其他主机登陆，因此需要再对 3333 端口进行一次端口转发，使其他主机可以访问。具体命令为</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh -fCNL [O 主机 IP 或省略]:[转发端口]:[O 主机 IP]:[被转发端口] [登陆 O 主机的用户名@O 主机的 IP]</span></pre></td></tr></table></figure>
+<p>此处我们想要将 3333 端口转发到 2222 端口，因此转发端口为 2222，被转发端口为 3333。</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh -fCNL *:2222:localhost:3333 localhost</span></pre></td></tr></table></figure>
+<p>此处 <code>*</code> 表示允许任意其他主机访问，本机的用户名可省略。使用 <code>ps aux | grep 2222</code> 命令来查看正向代理是否运行成功。此处 2222 端口为本地转发端口，负责与外网进行通信，并将数据转发到 3333 端口，实现了可以从其他主机访问的功能。</p>
+<h3 id="展现奇迹的时候到了"><a href="#展现奇迹的时候到了" class="headerlink" title="展现奇迹的时候到了"></a>展现奇迹的时候到了</h3><p>到次为至，我们已经配置好了 AO 主机，那么我们可以从任意可联网的设备登录到计算平台中去啦。指令为</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh -p 2222 cal@123.123.123.123</span></pre></td></tr></table></figure>
+<p>我们实现了从任意地方连入内网计算平台的连接！</p>
 <h3 id="这种反向代理是不稳定的"><a href="#这种反向代理是不稳定的" class="headerlink" title="这种反向代理是不稳定的"></a>这种反向代理是不稳定的</h3><p>不幸的是这种 ssh 连接会因为超时和网络堵塞等原因而关闭，那么从的外网连通内网的通道就无法维持了，为此我们需要维持稳定 ssh 反向代理隧道的方法。</p>
 <h4 id="配置-ssh-key-实现免密登陆"><a href="#配置-ssh-key-实现免密登陆" class="headerlink" title="配置 ssh key 实现免密登陆"></a>配置 ssh key 实现免密登陆</h4><p>在使用 ssh 进行连接时，每次都需要输入密码，一方面不安全，另一方面也为我们接下来使用的自动化工具带来了阻碍。</p>
-<p>首先登陆 A 主机，并运行如下命令生成公钥私钥对。中间的配置过程一路回车即可。<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="hljs-string">"youremail@example.com"</span></span></pre></td></tr></table></figure></p>
-<p>此时就在 A 主机的 <code>~/.ssh/</code> 目录下生成了公钥与私钥对，接下来我们需要将公钥传到 O 主机上作为我们登陆的一个比对凭证<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh-copy-id server@123.123.123.123</span></pre></td></tr></table></figure><br>此时，我们再使用 <code>ssh server@123.123.123.123</code> 登陆路 O 主机就不再需要密码了。</p>
+<p>首先登陆 A 主机，并运行如下命令生成公钥私钥对。中间的配置过程一路回车即可。</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="hljs-string">"youremail@example.com"</span></span></pre></td></tr></table></figure>
+
+<p>此时就在 A 主机的 <code>~/.ssh/</code> 目录下生成了公钥与私钥对，接下来我们需要将公钥传到 O 主机上作为我们登陆的一个比对凭证</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh-copy-id server@123.123.123.123</span></pre></td></tr></table></figure>
+<p>此时，我们再使用 <code>ssh server@123.123.123.123</code> 登陆路 O 主机就不再需要密码了。</p>
 <h4 id="用-autossh-建立稳定隧道"><a href="#用-autossh-建立稳定隧道" class="headerlink" title="用 autossh 建立稳定隧道"></a>用 autossh 建立稳定隧道</h4><p>从 A 主机到 O 主机的反向代理连接是不稳定的，也就是说，我们需要一个工具来时刻监听着这个连接。一但断开，再次自动重新建立连接即可。幸运的是，已经有人写出了这个工具，那就是 autossh！感谢开源！</p>
-<p>CentOS 的官方仓库中并没有这个软件包，我们需要从源码编译安装<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo yum install wget gcc make</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">wget http://www.harding.motd.ca/autossh/autossh-1.4e.tgz</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">tar -xf autossh-1.4e.tgz</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">cd</span> autossh-1.4e</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">./configure</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">make</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">sudo make install</span></pre></td></tr></table></figure><br>至此我们已经安装好了 autossh，利用下面的命令来启动守护进程。<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">autossh -M 7200 -fCNR 3333:localhost:22 server@123.123.123.123</span></pre></td></tr></table></figure><br>autossh 命令的参数与 ssh 一致，不同的是我们需要指出的 <code>-M`` </code>参数，这个参数指定一个端口，这个端口是外网的 O 主机用来接收内网 A 主机的信息，如果隧道不正常而返回给 A 主机让它实现重新连接。</p>
+<p>CentOS 的官方仓库中并没有这个软件包，我们需要从源码编译安装</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo yum install wget gcc make</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">wget http://www.harding.motd.ca/autossh/autossh-1.4e.tgz</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">tar -xf autossh-1.4e.tgz</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">cd</span> autossh-1.4e</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">./configure</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">make</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">sudo make install</span></pre></td></tr></table></figure>
+<p>至此我们已经安装好了 autossh，利用下面的命令来启动守护进程。</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">autossh -M 7200 -fCNR 3333:localhost:22 server@123.123.123.123</span></pre></td></tr></table></figure>
+<p>autossh 命令的参数与 ssh 一致，不同的是我们需要指出的 <code>-M``</code>参数，这个参数指定一个端口，这个端口是外网的 O 主机用来接收内网 A 主机的信息，如果隧道不正常而返回给 A 主机让它实现重新连接。</p>
 <h4 id="配置自动启动"><a href="#配置自动启动" class="headerlink" title="配置自动启动"></a>配置自动启动</h4><p>我们需要将 autossh 命令配置在开机自动启动脚本中，免去了每次开机都需要重新运行脚本的麻烦。</p>
-<p>我们需要在 A 主机的 <code>/etc/rc.d/rc.local</code> 文件中添加如下内容<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">/bin/su -c <span class="hljs-string">'/usr/local/bin/autossh -M 7200 -fCNR 3333:localhost:22 server@123.123.123.123'</span> - cal</span></pre></td></tr></table></figure><br>此命令表示，以 cal 用户运行 autossh 命令，这样我们就能够使用 cal 用户反向连接到 A 主机。</p>
-<p>为了保险起见，我们需要为自启动脚本添加执行权限<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo chmod +x /etc/rc.d/rc.local</span></pre></td></tr></table></figure></p>
+<p>我们需要在 A 主机的 <code>/etc/rc.d/rc.local</code> 文件中添加如下内容</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">/bin/su -c <span class="hljs-string">'/usr/local/bin/autossh -M 7200 -fCNR 3333:localhost:22 server@123.123.123.123'</span> - cal</span></pre></td></tr></table></figure>
+<p>此命令表示，以 cal 用户运行 autossh 命令，这样我们就能够使用 cal 用户反向连接到 A 主机。</p>
+<p>为了保险起见，我们需要为自启动脚本添加执行权限</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo chmod +x /etc/rc.d/rc.local</span></pre></td></tr></table></figure>
+
 <p>至此我们就建立好了稳定的连接隧道。</p>
 <h3 id="进一步优化"><a href="#进一步优化" class="headerlink" title="进一步优化"></a>进一步优化</h3><h4 id="保持活连接"><a href="#保持活连接" class="headerlink" title="保持活连接"></a>保持活连接</h4><p>在测试中发现，如果一个连接长时间空置，那么就会冻结。反向代理连接也是一样，此时便只能通过重启 A 主机使连接重置。为保持一个活连接（Keep alive），需要服务端或客户端定时发送心跳包来确保连接活跃，此处我们选择配置服务端的心跳。</p>
-<p>在 A 和 O 的 <code>/etc/ssh/sshd_config</code> 文件中添加如下内容<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># server 每隔 60 秒发送一次请求给 client，然后 client 响应，从而保持连接</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">ClientAliveInterval 60</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># server 发出请求后，客户端没有响应得次数达到 3，就自动断开连接，正常情况下，client 不会不响应</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">ClientAliveCountMax 3</span></pre></td></tr></table></figure></p>
+<p>在 A 和 O 的 <code>/etc/ssh/sshd_config</code> 文件中添加如下内容</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># server 每隔 60 秒发送一次请求给 client，然后 client 响应，从而保持连接</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">ClientAliveInterval 60</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># server 发出请求后，客户端没有响应得次数达到 3，就自动断开连接，正常情况下，client 不会不响应</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">ClientAliveCountMax 3</span></pre></td></tr></table></figure>
+
 <h4 id="Windows-SSH-Client-连接提示错误"><a href="#Windows-SSH-Client-连接提示错误" class="headerlink" title="Windows SSH Client 连接提示错误"></a>Windows SSH Client 连接提示错误</h4><p>使用 Windows 的 SSH Client 连接 Linux 运行的 SSH 服务端时，会提示“ssh algorithm negotiation failed”错误，导致此问题的原因是 ssh 升级后，为了安全，默认不再采用原来一些加密算法，我们手工添加进去即可。</p>
-<p>在 O 主机的 <code>/etc/ssh/sshd_config</code> 文件中添加如下内容<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># add crypt format for window ssh client</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Ciphers aes128-cbc,aes192-cbc,aes256-cbc,aes128-ctr,aes192-ctr,aes256-ctr,3des-cbc,arcfour128,arcfour256,arcfour,blowfish-cbc,cast128-cbc</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">MACs hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-sha1-96,hmac-md5-96</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">KexAlgorithms diffie-hellman-group1-sha1,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group-exchange-sha256,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group1-sha1,curve25519-sha256@libssh.org</span></pre></td></tr></table></figure></p>
+<p>在 O 主机的 <code>/etc/ssh/sshd_config</code> 文件中添加如下内容</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># add crypt format for window ssh client</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Ciphers aes128-cbc,aes192-cbc,aes256-cbc,aes128-ctr,aes192-ctr,aes256-ctr,3des-cbc,arcfour128,arcfour256,arcfour,blowfish-cbc,cast128-cbc</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">MACs hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-sha1-96,hmac-md5-96</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">KexAlgorithms diffie-hellman-group1-sha1,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group-exchange-sha256,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group1-sha1,curve25519-sha256@libssh.org</span></pre></td></tr></table></figure>
+
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p> <a href="https://www.cnblogs.com/zjutlitao/p/6223486.html" target="_blank" rel="noopener">Windows SSH Client 报 Algorithm negotiation failed 的解决方法之一</a><br> <a href="https://blog.csdn.net/jiangbenchu/article/details/84438959" target="_blank" rel="noopener">使用SSH反向隧道进行内网穿透</a></p>
 
         </div>
@@ -881,107 +981,6 @@
 <h3 id="静态-IP-地址绑定"><a href="#静态-IP-地址绑定" class="headerlink" title="静态 IP 地址绑定"></a>静态 IP 地址绑定</h3><p>这是我最常用到的一个功能，通俗的讲就是将一个设备的 IP 的地址固定下来。一个设备在通过路由器连入互联网时，路由器会通过 DHCP（Dynamic Host Configuration Protocol 动态主机设置协议）服务为每个设备随机分配 IP 地址，并且每过一段时间就会改变。那么我们想在局域网中找到另一台设备就需要通过 IP 地址，而静态 IP 地址绑定就是要告诉路由器，我想为一台特定设备分配一个固定的 IP 地址，那么我以后就可以通过这个固定的 IP 地址来找到这台设备。</p>
 <p>现在的路由器几乎都有这个功能，一般是在基本设置-LAN 设置-静态地址分配中进行设置。其中“MAC 地址”是设备的硬件地址，是一串唯一的 12 位的十六进制数，在设备出厂时就确定好了。可通过我写的小程序获得。“IP 地址”是你希望该设备使用的 IP 地址。</p>
 <h3 id="路由器桥接"><a href="#路由器桥接" class="headerlink" title="路由器桥接"></a>路由器桥接</h3>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-02-28T02:05:58.000Z">2019-02-28</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Math/">Math</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    8 分钟 读完 (大约 1129 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/02/28/%E4%BB%8E%E8%87%AA%E7%84%B6%E6%95%B0%E5%BC%80%E5%A7%8B/">从自然数开始</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="素数（Prime）"><a href="#素数（Prime）" class="headerlink" title="素数（Prime）"></a>素数（Prime）</h2><p>对于一个自然数 $n\in\mathbb{N}$，若其只能被 $1$ 和它本身整除（即只有两个因子），则被称为素数；若其有多于两个因子，则被称为合数。素数是不能够进行质因式分解的最小单元，因此合数具有唯一的质因式分解（质因子不可再分）。</p>
-<h3 id="1-的特殊性"><a href="#1-的特殊性" class="headerlink" title="1 的特殊性"></a>1 的特殊性</h3><p>1 能够被 $1$ 及其自身整除，但为了体系的自洽，不认为 $1$ 是素数。有如下两个原因：</p>
-<ol>
-<li>若 $1$ 是素数，则任意自然数的质因式分解将不是唯一的。$6=2\times 3=1\times 2\times 3$。</li>
-<li>任意素数 $p$ 可被分解为 $p=1\times p$，若 $1$ 为素数，则 $p$ 为合数，与 $p$ 为素数相矛盾。</li>
-</ol>
-<h2 id="寻找素数"><a href="#寻找素数" class="headerlink" title="寻找素数"></a>寻找素数</h2><p>针对素数，我们希望研究：</p>
-<ul>
-<li>对于任意 $n\in \mathbb{N}$，判断其是否为素数；</li>
-<li>对于任意 $n\in \mathbb{N}$，找到所有小于 $n$ 的素数，或等价于求小于 $n$ 的素数的个数；</li>
-<li>对于任意 $n\in \mathbb{N}$，求其质因式分解。</li>
-</ul>
-<h2 id="质因式分解"><a href="#质因式分解" class="headerlink" title="质因式分解"></a>质因式分解</h2><p>前几天，看杂志时发现一个有趣的问题，“对任意一个自然数 $n$，如何求其所有因子的和”。这个问题本身并不困难，但从中可以继续思考质数的相关规律。</p>
-<p>既然是要求因子的和，那么我们首先需要用数学语言将因子表示出来。在此之前，我们需要先将这个自然数表示出来。</p>
-<p>设 $n$ 有 $m+1$ 个质因子 $p_0 &lt; p_1 &lt; \cdots &lt; p_m$，则存在如下唯一的质因式分解</p>
-<script type="math/tex; mode=display">
-    n = p_0^{a_0} \times p_1^{a_1} \times \cdots \times p_m^{a_m}</script><p>则 $n$ 的因子 $f$ 满足</p>
-<script type="math/tex; mode=display">
-    f = p_0^{b_0} \times p_1^{b_1} \times \cdots \times p_m^{b_m}</script><p>其中</p>
-<script type="math/tex; mode=display">
-    \left\{\begin{array}{c}
-        0 \leq b_0 \leq a_0\\
-        0 \leq b_1 \leq a_1\\
-        \vdots\\
-        0 \leq b_m \leq a_m
-    \end{array}\right.,\ 
-    且\ b_0, b_1, \cdots, b_m \in \mathbb{N}</script><p>记所有质因子之和为 $S(n)$，即为所有满足上式的 $f$ 之和</p>
-<script type="math/tex; mode=display">
-    \begin{split}
-        S(n) &= (p_0^0+p_0^1+\cdots+p_0^{a^0})\times (p_1^0+p_1^1+\cdots+p_1^{a^1})\times \cdots \times (p_m^0+p_m^1+\cdots+p_m^{a^m})\\
-        &= \dfrac{p_0^{a_0+1}-1}{p_0-1}\times \dfrac{p_1^{a_1+1}-1}{p_1-1}\times \cdots \times\dfrac{p_m^{a_m+1}-1}{p_m-1}\\
-        &= \prod\limits_{i=0}^m \dfrac{p_i^{a_i+1}-1}{p_i-1}
-    \end{split}</script><p>至此，我们已经得到已知自然数 $n$ 所有因子和 $S(n)$ 的表达式。接下来验证一下，$24$ 的所有因子有 $1, 2, 3, 4, 6, 8, 12, 24$，求和得 $S_1(24)=60$。$24$ 的质因式分解为 $24=2^3\times3^1$，则 $S_2(24)=(2^0+2^1+2^2+2^3)\times(3^0+3^1)=60$。答案正确！</p>
-<hr>
-<p>但通过观察发现，表达式的值并不直接与 $n$ 相关，而是与 $n$ 的所有质因子相关。我们知道，因式分解是一个 NPC 问题，我们无法在多项式时间内对 $n$ 进行因式分解。那么，我们有没有办法对 $S(n)$ 进行粗略的估计呢？即有没有办法用 $n$ 来表示 $S(n)$ 的上下界？或者更具体的，$S(n)$ 与 $n$ 是否存在某种倍数关系？</p>
-<p>对 $S(n)$ 的表达式进行缩放我们得到</p>
-<script type="math/tex; mode=display">
-    \begin{split}
-        S(n) &= \dfrac{p_0^{a_0+1}-1}{p_0-1}\times \dfrac{p_1^{a_1+1}-1}{p_1-1}\times \cdots \times\dfrac{p_m^{a_m+1}-1}{p_m-1}\\
-        &< \dfrac{p_0^{a_0+1}}{p_0-1}\times \dfrac{p_1^{a_1+1}}{p_1-1}\times \cdots \times\dfrac{p_m^{a_m+1}}{p_m-1}\\
-        &= \dfrac{p_0}{p_0-1}\times \dfrac{p_1}{p_1-1}\times \cdots \times\dfrac{p_m}{p_m-1}\times n
-    \end{split}</script><p>得到</p>
-<script type="math/tex; mode=display">
-    \dfrac{S(n)}{n} < \dfrac{p_0}{p_0-1}\times \dfrac{p_1}{p_1-1}\times \cdots \times\dfrac{p_m}{p_m-1} = \Pi_p(m)</script><p>接下来，我们希望知道两件事</p>
-<ol>
-<li>对于任意大的 $m$，$\Pi_p(m)$ 是否存在上界，若 $\Pi_p(m)$ 的上界存在，则 $\dfrac{S(n)}{n}$ 的上界存在。</li>
-<li>若$\Pi_p(m)$ 的上界不存在，那么对于确定的 $n$，我们能否得到 $\dfrac{S(n)}{n}$ 的上界。</li>
-</ol>
-<hr>
-<p>首先来解决第一个问题。使用计算机进行计算发现，前 $2^k$ 个质数的 $\Pi_p(2^k)$ 与 $k$ 呈近似线性关系</p>
-<script type="math/tex; mode=display">
-    \Pi_p(2^k) = ak + b</script><p>另外 $2^k$ 以内的质数的分式乘积 $\Pi_p(\eta)$ 也与 $k$ 呈近似线性关系。</p>
-<p>设 $\Pi(n)$ 为前 $n$ 个自然数的类似分式积表达式</p>
-<script type="math/tex; mode=display">
-    \Pi(n) = \dfrac21 \times \dfrac32 \times \cdots \times \dfrac{n}{n-1} = n</script><p>则前 $n$ 个质数的 $\Pi(n)$ 与 $n$ 呈线性关系。</p>
-<p>一个为质数， 一个为自然数，其中必然蕴含着质数分布的某种真理。</p>
-
         </div>
         
         
@@ -1064,7 +1063,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            32
+                            33
                         </p>
                     </a>
                 </div>
@@ -1268,7 +1267,7 @@
                 <span class="level-item">matplotlib</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/personal/">
@@ -1313,7 +1312,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Archlinux/" style="font-size: 20px;">Archlinux</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/matplotlib/" style="font-size: 10px;">matplotlib</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 10px;">plot</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/statistics/" style="font-size: 10px;">statistics</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
+        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Archlinux/" style="font-size: 20px;">Archlinux</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/matplotlib/" style="font-size: 15px;">matplotlib</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 15px;">plot</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/statistics/" style="font-size: 10px;">statistics</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
     </div>
 </div>
     
@@ -1325,6 +1324,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第二弹-调整坐标轴">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T06:57:59.000Z">2019-12-06</time></div>
+                    <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第二弹-调整坐标轴</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/matplotlib/">matplotlib</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1402,25 +1420,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/08/13/%E4%BD%BF%E7%94%A8-PIL-%E4%B8%8E-numpy-%E8%BF%9B%E8%A1%8C%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 PIL 与 numpy 进行图像处理">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-13T14:35:51.000Z">2019-08-13</time></div>
-                    <a href="/2019/08/13/%E4%BD%BF%E7%94%A8-PIL-%E4%B8%8E-numpy-%E8%BF%9B%E8%A1%8C%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 PIL 与 numpy 进行图像处理</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -1438,7 +1437,7 @@
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1723,7 +1722,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Python/">
                         <span class="tag">Python</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1751,7 +1750,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/matplotlib/">
                         <span class="tag">matplotlib</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1772,7 +1771,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/plot/">
                         <span class="tag">plot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1842,6 +1841,25 @@
         
         <article class="media">
             
+            <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第二弹-调整坐标轴">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T06:57:59.000Z">2019-12-06</time></div>
+                    <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第二弹-调整坐标轴</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/matplotlib/">matplotlib</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/12/05/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-matplotlib%E5%88%9D%E4%BD%93%E9%AA%8C/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第一弹-matplotlib初体验">
@@ -1916,25 +1934,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/08/13/%E4%BD%BF%E7%94%A8-PIL-%E4%B8%8E-numpy-%E8%BF%9B%E8%A1%8C%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 PIL 与 numpy 进行图像处理">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-13T14:35:51.000Z">2019-08-13</time></div>
-                    <a href="/2019/08/13/%E4%BD%BF%E7%94%A8-PIL-%E4%B8%8E-numpy-%E8%BF%9B%E8%A1%8C%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 PIL 与 numpy 进行图像处理</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1952,7 +1951,7 @@
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2237,7 +2236,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Python/">
                         <span class="tag">Python</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2265,7 +2264,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/matplotlib/">
                         <span class="tag">matplotlib</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2286,7 +2285,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/plot/">
                         <span class="tag">plot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
