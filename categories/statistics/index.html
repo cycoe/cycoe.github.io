@@ -156,7 +156,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    10 分钟 读完 (大约 1428 个字)
+                    10 分钟 读完 (大约 1429 个字)
                 </span>
                 
                 
@@ -172,242 +172,16 @@
             <blockquote>
 <p>正交試驗設計是利用正交表來安排與分析多因素試驗的一種設計方法。它是由試驗因素的全部水平組合中，挑選部分有代表性的水平組合進行試驗的，通過對這部分試驗結果的分析瞭解全面試驗的情況，找出最優的水平組合。可以通過代表性很強的少數次試驗，摸清各個因素對試驗指標的影響情況，確定出因素的主次順序，找出較好的生產條件或最佳參數組合。</p>
 </blockquote>
-<h2 id="正交表的性質"><a href="#正交表的性質" class="headerlink" title="正交表的性質"></a>正交表的性質</h2><h3 id="正交性"><a href="#正交性" class="headerlink" title="正交性"></a>正交性</h3><ol>
-<li>均勻分散性：任一列中，不同數字出現的次數相等；</li>
-<li>整齊可比性：任兩列中，同一橫行所組成的數字對出現的次數相等；</li>
-<li>可置換性：<ol>
-<li>正交表各列的地位是平等的，表中各列之間可以相互置換，稱爲列間置換；</li>
-<li>正交表各行之間也可相互置換，稱列間置換；</li>
-<li>正交表中同一列的水平數字也可以相互置換，稱水平置換。</li>
-</ol>
-</li>
-</ol>
-<h3 id="分散均勻性"><a href="#分散均勻性" class="headerlink" title="分散均勻性"></a>分散均勻性</h3><ol>
-<li>任一列的各水平都出現，使得部分試驗中包含所有因素的所有水平；</li>
-<li>任意兩列間的所有組合全部出現，使任意兩因素間都是全面試驗。</li>
-</ol>
-<h3 id="綜合可比性"><a href="#綜合可比性" class="headerlink" title="綜合可比性"></a>綜合可比性</h3><ol>
-<li>任一列各水平出現的次數都相等；</li>
-<li>任兩列間所有可能的組合出現的次數都相等，因此使任一因素各水平的試驗條件相同。</li>
-</ol>
-<h2 id="拉丁方陣"><a href="#拉丁方陣" class="headerlink" title="拉丁方陣"></a>拉丁方陣</h2><p>拉丁方陣（Latin square）是一種 $n\times n$ 的方陣，在這種 $n\times n$ 的方陣裏，恰有 $n$ 種不同的元素，每一種不同的元素在同一行或同一列裏只出現一次。如下面的三階拉丁方。<br>$$<br>\begin{bmatrix}<br>    1 &amp; 2 &amp; 3\<br>    2 &amp; 3 &amp; 1\<br>    3 &amp; 1 &amp; 2\<br>\end{bmatrix}<br>$$</p>
-<h3 id="標準型"><a href="#標準型" class="headerlink" title="標準型"></a>標準型</h3><p>當一個拉丁方陣的第一行與第一列的元素按順序排列時，此爲這個拉丁方陣的標準型，英語稱爲 “reduced Latin square, normalized Latin square, or Latin square in standard form”。</p>
-<h3 id="構造拉丁方"><a href="#構造拉丁方" class="headerlink" title="構造拉丁方"></a>構造拉丁方</h3><p>同階的拉丁方有多個，構造其中的一個有一種通用的方法。</p>
-<p>若 $n$ 爲偶數，則構造第一行爲 $1, 2, n, 3, n-1, 4, n-2, \dots$，之後的每一行都在上一行對應列元素上加一併對 $n$ 取模，即可表示爲如下矩陣。<br>$$<br>\begin{bmatrix}<br>    1 &amp; 2 &amp; n &amp; 3 &amp; n-1 &amp; 4 &amp; n-2 &amp; \cdots\<br>    2 &amp; 3 &amp; n+1 &amp; 4 &amp; n &amp; 5 &amp; n-1 &amp; \cdots\<br>    \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots\<br>    i &amp; i+1 &amp; i+n-1 &amp; i+2 &amp; i+n-2 &amp; i+3 &amp; i+n-3 &amp; \cdots\<br>    \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots\<br>    n &amp; 1 &amp; n-1 &amp; 2 &amp; n-2 &amp; 3 &amp; n-3 &amp; \cdots\<br>\end{bmatrix} \mathrm{mod}\ n<br>$$</p>
-<p>若 $n$ 爲奇數，則先按偶數法則構造一個拉丁方，然後將上述模式左右對調。</p>
-<h3 id="正交拉丁方"><a href="#正交拉丁方" class="headerlink" title="正交拉丁方"></a>正交拉丁方</h3><p>設有兩個階數相同且爲 $n$ 的拉丁方陣$A_1=(a^{(1)}<em>{i,j})</em>{n\times n}, A_2=(a^{(2)}<em>{i,j})</em>{n\times n}$，其中將所有放置位置相同的元素組合成一個元組，組合成一個新的矩陣 $((a^{(1)}<em>{i,j}, a^{(2)}</em>{i,j}))<em>{n\times n}$。當這個新的矩陣 $((a^{(1)}</em>{i,j}, a^{(2)}<em>{i,j}))</em>{n\times n}$ 中每一個元素互不相同時，拉丁方陣 $A_1$ 和 $A_2$ 是互相正交的。此時，$A_1$ 和 $A_2$ 即爲一對正交拉丁方。 而在階數固定的情況下，所有兩兩正交的拉丁方所成的集合稱爲正交拉丁方族。如下面的兩個 3 階拉丁方。<br>$$<br>\begin{matrix}<br>A = \begin{bmatrix}<br>    1 &amp; 2 &amp; 3\<br>    2 &amp; 3 &amp; 1\<br>    3 &amp; 1 &amp; 2\<br>\end{bmatrix} &amp;<br>B = \begin{bmatrix}<br>    1 &amp; 2 &amp; 3\<br>    3 &amp; 1 &amp; 2\<br>    2 &amp; 3 &amp; 1\<br>\end{bmatrix}<br>\end{matrix}<br>$$</p>
-<h3 id="素數階拉丁方"><a href="#素數階拉丁方" class="headerlink" title="素數階拉丁方"></a>素數階拉丁方</h3><p>若 $n$ 階拉丁方存在 $r$ 個兩兩正交的拉丁方，那麼 $r\leq n-1$。素數階拉丁方（以 $3, 5, 7, \dots$ 爲階）是完全的，即 $n$ 階正交拉丁方族中有 $n-1$ 個拉丁方。</p>
-<h2 id="構造正交表"><a href="#構造正交表" class="headerlink" title="構造正交表"></a>構造正交表</h2><p>因爲素數階拉丁方都可構造完全的正交拉丁方族，則可繼續構造正交表。若把素數 $n$ 作爲水平數，則以 $n$ 階拉丁方構造的正交拉丁方有 $n-1$ 個。以 $n-1$ 作爲因素數構造正交表。</p>
-<p>以 3 階拉丁方爲例，3 階正交拉丁方族包含 2 個正交拉丁方，並將對應位置元素合併成二元有序數對。</p>
-<p>$$<br>\begin{matrix}<br>\begin{bmatrix}<br>    1 &amp; 2 &amp; 3\<br>    2 &amp; 3 &amp; 1\<br>    3 &amp; 1 &amp; 2\<br>\end{bmatrix} &amp;<br>\begin{bmatrix}<br>    1 &amp; 2 &amp; 3\<br>    3 &amp; 1 &amp; 2\<br>    2 &amp; 3 &amp; 1\<br>\end{bmatrix} &amp; = &amp;<br>\begin{bmatrix}<br>    11 &amp; 22 &amp; 33\<br>    23 &amp; 31 &amp; 12\<br>    32 &amp; 13 &amp; 21\<br>\end{bmatrix} &amp;<br>\end{matrix}<br>$$</p>
-<p>以第一個元素作爲因素 A，第二個元素作爲因素 B，然後與因素 C、D 均勻搭配，構造 4 因素 3 水平正交表。</p>
-<table>
-<thead>
-<tr>
-<th>C, A, B, D</th>
-<th>1</th>
-<th>2</th>
-<th>3</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>11</td>
-<td>22</td>
-<td>33</td>
-</tr>
-<tr>
-<td>2</td>
-<td>23</td>
-<td>31</td>
-<td>12</td>
-</tr>
-<tr>
-<td>3</td>
-<td>32</td>
-<td>13</td>
-<td>21</td>
-</tr>
-</tbody></table>
-<p>展開後爲</p>
-<table>
-<thead>
-<tr>
-<th>試驗號</th>
-<th>A</th>
-<th>B</th>
-<th>C</th>
-<th>D</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>2</td>
-<td>1</td>
-<td>2</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr>
-<td>3</td>
-<td>1</td>
-<td>3</td>
-<td>3</td>
-<td>3</td>
-</tr>
-<tr>
-<td>4</td>
-<td>2</td>
-<td>2</td>
-<td>3</td>
-<td>1</td>
-</tr>
-<tr>
-<td>5</td>
-<td>2</td>
-<td>3</td>
-<td>1</td>
-<td>2</td>
-</tr>
-<tr>
-<td>6</td>
-<td>2</td>
-<td>1</td>
-<td>2</td>
-<td>3</td>
-</tr>
-<tr>
-<td>7</td>
-<td>3</td>
-<td>3</td>
-<td>2</td>
-<td>1</td>
-</tr>
-<tr>
-<td>8</td>
-<td>3</td>
-<td>1</td>
-<td>3</td>
-<td>2</td>
-</tr>
-<tr>
-<td>9</td>
-<td>3</td>
-<td>2</td>
-<td>1</td>
-<td>3</td>
-</tr>
-</tbody></table>
-<p>若只與一個因素 C 搭配，則可構造 3 因素 3 水平正交表。</p>
-<table>
-<thead>
-<tr>
-<th>C, A, B</th>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>11</td>
-<td>22</td>
-<td>33</td>
-</tr>
-<tr>
-<td>2</td>
-<td>23</td>
-<td>31</td>
-<td>12</td>
-</tr>
-<tr>
-<td>3</td>
-<td>32</td>
-<td>13</td>
-<td>21</td>
-</tr>
-</tbody></table>
-<p>展開後爲</p>
-<table>
-<thead>
-<tr>
-<th>試驗號</th>
-<th>A</th>
-<th>B</th>
-<th>C</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>2</td>
-<td>1</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr>
-<td>3</td>
-<td>1</td>
-<td>3</td>
-<td>3</td>
-</tr>
-<tr>
-<td>4</td>
-<td>2</td>
-<td>2</td>
-<td>3</td>
-</tr>
-<tr>
-<td>5</td>
-<td>2</td>
-<td>3</td>
-<td>1</td>
-</tr>
-<tr>
-<td>6</td>
-<td>2</td>
-<td>1</td>
-<td>2</td>
-</tr>
-<tr>
-<td>7</td>
-<td>3</td>
-<td>3</td>
-<td>2</td>
-</tr>
-<tr>
-<td>8</td>
-<td>3</td>
-<td>1</td>
-<td>3</td>
-</tr>
-<tr>
-<td>9</td>
-<td>3</td>
-<td>2</td>
-<td>1</td>
-</tr>
-</tbody></table>
-<p>由此可見，以素數 $n$ 爲水平數設計正交試驗，可滿足 $[n-1, n+1]$ 個因素的設計，並且總共需要 $n^2$ 次試驗。即對於 3 因素 3 水平與 4 因素 3 水平正交試驗具有相同的試驗組數，同爲 9 組。可類似地構造出 $L_9(3^3)$，$L_9(3^4)$，$L_{25}(5^5)$，$L_{25}(5^6)$，$L_{49}(7^7)$，$L_{49}(7^8)$ 等。</p>
-<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
-<li><a href="https://baike.baidu.com/item/%E6%8B%89%E4%B8%81%E6%96%B9%E9%98%B5/4413910?fromtitle=%E6%8B%89%E4%B8%81%E6%96%B9&fromid=7176085" target="_blank" rel="noopener">百度百科-拉丁方</a></li>
-<li><a href="https://bkso.baidu.com/item/%E6%AD%A3%E4%BA%A4%E6%8B%89%E4%B8%81%E6%96%B9" target="_blank" rel="noopener">百度百科-正交拉丁方</a></li>
-<li><a href="https://baike.baidu.com/item/%E6%8B%89%E4%B8%81%E6%96%B9%E8%AE%BE%E8%AE%A1" target="_blank" rel="noopener">百度百科-拉丁方設計</a></li>
-<li><a href="https://wenku.baidu.com/view/7b9965bcbdeb19e8b8f67c1cfad6195f312be8db.html?re=view" target="_blank" rel="noopener">正交表與正交設計</a></li>
-</ul>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/11/13/%E6%AD%A3%E4%BA%A4%E8%AF%95%E9%AA%8C%E8%AE%BE%E8%AE%A1/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -465,7 +239,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            33
+                            30
                         </p>
                     </a>
                 </div>
@@ -477,7 +251,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            15
+                            14
                         </p>
                     </a>
                 </div>
@@ -643,14 +417,6 @@
         <a class="level is-marginless" href="/categories/blog/">
             <span class="level-start">
                 <span class="level-item">blog</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/chemistry/">
-            <span class="level-start">
-                <span class="level-item">chemistry</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -1026,7 +792,7 @@
                     <span class="level-item">三月 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1540,7 +1306,7 @@
                     <span class="level-item">三月 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>

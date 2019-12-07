@@ -10,16 +10,16 @@
 <title>Archlinux 无法通过亮度调节按键调节亮度的解决办法 - Cycoe&#39;s Home Page</title>
 
 
-    <meta name="description" content="最近买了一个新机器小新 Pro13，买来的第一天当然是先装上 Archlinux。装上 之后发现无法通过键盘上的亮度调节按钮调节屏幕亮度，机器是 AMD 处理器加 AMD 核显。刚开始以为是 AMD 版本特有的问题，但在网上查了相关的问题后， 发现许多 Intel 核显的机器也有类似问题。 首先排除按键问题，通过 xev 命令可以监测到亮度调节按钮被按下，说明按键本身没有问题。通过向 &#x2F;etc&#x2F;d">
+    <meta name="description" content="最近买了一个新机器小新 Pro13，买来的第一天当然是先装上 Archlinux。装上 之后发现无法通过键盘上的亮度调节按钮调节屏幕亮度，机器是 AMD 处理器加 AMD 核显。刚开始以为是 AMD 版本特有的问题，但在网上查了相关的问题后， 发现许多 Intel 核显的机器也有类似问题。">
 <meta name="keywords" content="Archlinux,AMD,Brightness">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Archlinux 无法通过亮度调节按键调节亮度的解决办法">
 <meta property="og:url" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;2019&#x2F;11&#x2F;09&#x2F;Archlinux-%E6%97%A0%E6%B3%95%E9%80%9A%E8%BF%87%E4%BA%AE%E5%BA%A6%E8%B0%83%E8%8A%82%E6%8C%89%E9%94%AE%E8%B0%83%E8%8A%82%E4%BA%AE%E5%BA%A6%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95&#x2F;index.html">
 <meta property="og:site_name" content="Cycoe&#39;s Home Page">
-<meta property="og:description" content="最近买了一个新机器小新 Pro13，买来的第一天当然是先装上 Archlinux。装上 之后发现无法通过键盘上的亮度调节按钮调节屏幕亮度，机器是 AMD 处理器加 AMD 核显。刚开始以为是 AMD 版本特有的问题，但在网上查了相关的问题后， 发现许多 Intel 核显的机器也有类似问题。 首先排除按键问题，通过 xev 命令可以监测到亮度调节按钮被按下，说明按键本身没有问题。通过向 &#x2F;etc&#x2F;d">
+<meta property="og:description" content="最近买了一个新机器小新 Pro13，买来的第一天当然是先装上 Archlinux。装上 之后发现无法通过键盘上的亮度调节按钮调节屏幕亮度，机器是 AMD 处理器加 AMD 核显。刚开始以为是 AMD 版本特有的问题，但在网上查了相关的问题后， 发现许多 Intel 核显的机器也有类似问题。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-11-26T05:29:43.344Z">
+<meta property="og:updated_time" content="2019-12-07T15:00:02.436Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
 
@@ -145,7 +145,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 681 个字)
+                    5 分钟 读完 (大约 682 个字)
                 </span>
                 
                 
@@ -164,6 +164,8 @@
         </h1>
         <div class="content">
             <p>最近买了一个新机器小新 Pro13，买来的第一天当然是先装上 Archlinux。装上 之后发现无法通过键盘上的亮度调节按钮调节屏幕亮度，机器是 AMD 处理器加 AMD 核显。刚开始以为是 AMD 版本特有的问题，但在网上查了相关的问题后， 发现许多 Intel 核显的机器也有类似问题。</p>
+<a id="more"></a>
+
 <p>首先排除按键问题，通过 <code>xev</code> 命令可以监测到亮度调节按钮被按下，说明按键本身没有问题。通过向 <code>/etc/default/grub</code> 中加入 <code>GRUB_CMDLINE_LINUX_DEFAULT=&quot;loglevel=3 acpi_osi=! acpi=&quot;Linux&quot; quiet splash&quot;</code> 没有效果，并且反而使得亮度调节按钮失效了。</p>
 <p>安装 <code>xorg-xbacklight</code> 包，但 <code>xbacklight</code> 命令提示 <code>No outputs have backlight property</code>。是因为 <code>xorg-xbacklight</code> 包中提供的 <code>xbacklight</code> 命令默认只对 Intel 核显有效，在 AMD 核显上会提示 <code>No outputs have backlight property</code> 错误。因此需要通过 ACPI 通道对亮度进行控制。</p>
 <p><strong>解决方法如下：</strong><br>安装 ACPI 的亮度控制，替换原 <code>xbacklight</code> 命令</p>
@@ -344,7 +346,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            33
+                            30
                         </p>
                     </a>
                 </div>
@@ -356,7 +358,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            15
+                            14
                         </p>
                     </a>
                 </div>
@@ -522,14 +524,6 @@
         <a class="level is-marginless" href="/categories/blog/">
             <span class="level-start">
                 <span class="level-item">blog</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/chemistry/">
-            <span class="level-start">
-                <span class="level-item">chemistry</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -905,7 +899,7 @@
                     <span class="level-item">三月 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1419,7 +1413,7 @@
                     <span class="level-item">三月 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>

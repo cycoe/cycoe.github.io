@@ -145,7 +145,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    8 分钟 读完 (大约 1129 个字)
+                    8 分钟 读完 (大约 1130 个字)
                 </span>
                 
                 
@@ -159,40 +159,16 @@
         </h1>
         <div class="content">
             <h2 id="素数（Prime）"><a href="#素数（Prime）" class="headerlink" title="素数（Prime）"></a>素数（Prime）</h2><p>对于一个自然数 $n\in\mathbb{N}$，若其只能被 $1$ 和它本身整除（即只有两个因子），则被称为素数；若其有多于两个因子，则被称为合数。素数是不能够进行质因式分解的最小单元，因此合数具有唯一的质因式分解（质因子不可再分）。</p>
-<h3 id="1-的特殊性"><a href="#1-的特殊性" class="headerlink" title="1 的特殊性"></a>1 的特殊性</h3><p>1 能够被 $1$ 及其自身整除，但为了体系的自洽，不认为 $1$ 是素数。有如下两个原因：</p>
-<ol>
-<li>若 $1$ 是素数，则任意自然数的质因式分解将不是唯一的。$6=2\times 3=1\times 2\times 3$。</li>
-<li>任意素数 $p$ 可被分解为 $p=1\times p$，若 $1$ 为素数，则 $p$ 为合数，与 $p$ 为素数相矛盾。</li>
-</ol>
-<h2 id="寻找素数"><a href="#寻找素数" class="headerlink" title="寻找素数"></a>寻找素数</h2><p>针对素数，我们希望研究：</p>
-<ul>
-<li>对于任意 $n\in \mathbb{N}$，判断其是否为素数；</li>
-<li>对于任意 $n\in \mathbb{N}$，找到所有小于 $n$ 的素数，或等价于求小于 $n$ 的素数的个数；</li>
-<li>对于任意 $n\in \mathbb{N}$，求其质因式分解。</li>
-</ul>
-<h2 id="质因式分解"><a href="#质因式分解" class="headerlink" title="质因式分解"></a>质因式分解</h2><p>前几天，看杂志时发现一个有趣的问题，“对任意一个自然数 $n$，如何求其所有因子的和”。这个问题本身并不困难，但从中可以继续思考质数的相关规律。</p>
-<p>既然是要求因子的和，那么我们首先需要用数学语言将因子表示出来。在此之前，我们需要先将这个自然数表示出来。</p>
-<p>设 $n$ 有 $m+1$ 个质因子 $p_0 &lt; p_1 &lt; \cdots &lt; p_m$，则存在如下唯一的质因式分解<br>$$<br>    n = p_0^{a_0} \times p_1^{a_1} \times \cdots \times p_m^{a_m}<br>$$</p>
-<p>则 $n$ 的因子 $f$ 满足<br>$$<br>    f = p_0^{b_0} \times p_1^{b_1} \times \cdots \times p_m^{b_m}<br>$$<br>其中<br>$$<br>    \left{\begin{array}{c}<br>        0 \leq b_0 \leq a_0\<br>        0 \leq b_1 \leq a_1\<br>        \vdots\<br>        0 \leq b_m \leq a_m<br>    \end{array}\right.,\<br>    且\ b_0, b_1, \cdots, b_m \in \mathbb{N}<br>$$</p>
-<p>记所有质因子之和为 $S(n)$，即为所有满足上式的 $f$ 之和<br>$$<br>    \begin{split}<br>        S(n) &amp;= (p_0^0+p_0^1+\cdots+p_0^{a^0})\times (p_1^0+p_1^1+\cdots+p_1^{a^1})\times \cdots \times (p_m^0+p_m^1+\cdots+p_m^{a^m})\<br>        &amp;= \dfrac{p_0^{a_0+1}-1}{p_0-1}\times \dfrac{p_1^{a_1+1}-1}{p_1-1}\times \cdots \times\dfrac{p_m^{a_m+1}-1}{p_m-1}\<br>        &amp;= \prod\limits_{i=0}^m \dfrac{p_i^{a_i+1}-1}{p_i-1}<br>    \end{split}<br>$$</p>
-<p>至此，我们已经得到已知自然数 $n$ 所有因子和 $S(n)$ 的表达式。接下来验证一下，$24$ 的所有因子有 $1, 2, 3, 4, 6, 8, 12, 24$，求和得 $S_1(24)=60$。$24$ 的质因式分解为 $24=2^3\times3^1$，则 $S_2(24)=(2^0+2^1+2^2+2^3)\times(3^0+3^1)=60$。答案正确！</p>
-<hr>
-<p>但通过观察发现，表达式的值并不直接与 $n$ 相关，而是与 $n$ 的所有质因子相关。我们知道，因式分解是一个 NPC 问题，我们无法在多项式时间内对 $n$ 进行因式分解。那么，我们有没有办法对 $S(n)$ 进行粗略的估计呢？即有没有办法用 $n$ 来表示 $S(n)$ 的上下界？或者更具体的，$S(n)$ 与 $n$ 是否存在某种倍数关系？</p>
-<p>对 $S(n)$ 的表达式进行缩放我们得到<br>$$<br>    \begin{split}<br>        S(n) &amp;= \dfrac{p_0^{a_0+1}-1}{p_0-1}\times \dfrac{p_1^{a_1+1}-1}{p_1-1}\times \cdots \times\dfrac{p_m^{a_m+1}-1}{p_m-1}\<br>        &amp;&lt; \dfrac{p_0^{a_0+1}}{p_0-1}\times \dfrac{p_1^{a_1+1}}{p_1-1}\times \cdots \times\dfrac{p_m^{a_m+1}}{p_m-1}\<br>        &amp;= \dfrac{p_0}{p_0-1}\times \dfrac{p_1}{p_1-1}\times \cdots \times\dfrac{p_m}{p_m-1}\times n<br>    \end{split}<br>$$</p>
-<p>得到<br>$$<br>    \dfrac{S(n)}{n} &lt; \dfrac{p_0}{p_0-1}\times \dfrac{p_1}{p_1-1}\times \cdots \times\dfrac{p_m}{p_m-1} = \Pi_p(m)<br>$$</p>
-<p>接下来，我们希望知道两件事</p>
-<ol>
-<li>对于任意大的 $m$，$\Pi_p(m)$ 是否存在上界，若 $\Pi_p(m)$ 的上界存在，则 $\dfrac{S(n)}{n}$ 的上界存在。</li>
-<li>若$\Pi_p(m)$ 的上界不存在，那么对于确定的 $n$，我们能否得到 $\dfrac{S(n)}{n}$ 的上界。</li>
-</ol>
-<hr>
-<p>首先来解决第一个问题。使用计算机进行计算发现，前 $2^k$ 个质数的 $\Pi_p(2^k)$ 与 $k$ 呈近似线性关系<br>$$<br>    \Pi_p(2^k) = ak + b<br>$$</p>
-<p>另外 $2^k$ 以内的质数的分式乘积 $\Pi_p(\eta)$ 也与 $k$ 呈近似线性关系。</p>
-<p>设 $\Pi(n)$ 为前 $n$ 个自然数的类似分式积表达式<br>$$<br>    \Pi(n) = \dfrac21 \times \dfrac32 \times \cdots \times \dfrac{n}{n-1} = n<br>$$<br>则前 $n$ 个质数的 $\Pi(n)$ 与 $n$ 呈线性关系。</p>
-<p>一个为质数， 一个为自然数，其中必然蕴含着质数分布的某种真理。</p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/02/28/%E4%BB%8E%E8%87%AA%E7%84%B6%E6%95%B0%E5%BC%80%E5%A7%8B/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -222,7 +198,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    10 分钟 读完 (大约 1428 个字)
+                    10 分钟 读完 (大约 1429 个字)
                 </span>
                 
                 
@@ -238,242 +214,16 @@
             <blockquote>
 <p>正交試驗設計是利用正交表來安排與分析多因素試驗的一種設計方法。它是由試驗因素的全部水平組合中，挑選部分有代表性的水平組合進行試驗的，通過對這部分試驗結果的分析瞭解全面試驗的情況，找出最優的水平組合。可以通過代表性很強的少數次試驗，摸清各個因素對試驗指標的影響情況，確定出因素的主次順序，找出較好的生產條件或最佳參數組合。</p>
 </blockquote>
-<h2 id="正交表的性質"><a href="#正交表的性質" class="headerlink" title="正交表的性質"></a>正交表的性質</h2><h3 id="正交性"><a href="#正交性" class="headerlink" title="正交性"></a>正交性</h3><ol>
-<li>均勻分散性：任一列中，不同數字出現的次數相等；</li>
-<li>整齊可比性：任兩列中，同一橫行所組成的數字對出現的次數相等；</li>
-<li>可置換性：<ol>
-<li>正交表各列的地位是平等的，表中各列之間可以相互置換，稱爲列間置換；</li>
-<li>正交表各行之間也可相互置換，稱列間置換；</li>
-<li>正交表中同一列的水平數字也可以相互置換，稱水平置換。</li>
-</ol>
-</li>
-</ol>
-<h3 id="分散均勻性"><a href="#分散均勻性" class="headerlink" title="分散均勻性"></a>分散均勻性</h3><ol>
-<li>任一列的各水平都出現，使得部分試驗中包含所有因素的所有水平；</li>
-<li>任意兩列間的所有組合全部出現，使任意兩因素間都是全面試驗。</li>
-</ol>
-<h3 id="綜合可比性"><a href="#綜合可比性" class="headerlink" title="綜合可比性"></a>綜合可比性</h3><ol>
-<li>任一列各水平出現的次數都相等；</li>
-<li>任兩列間所有可能的組合出現的次數都相等，因此使任一因素各水平的試驗條件相同。</li>
-</ol>
-<h2 id="拉丁方陣"><a href="#拉丁方陣" class="headerlink" title="拉丁方陣"></a>拉丁方陣</h2><p>拉丁方陣（Latin square）是一種 $n\times n$ 的方陣，在這種 $n\times n$ 的方陣裏，恰有 $n$ 種不同的元素，每一種不同的元素在同一行或同一列裏只出現一次。如下面的三階拉丁方。<br>$$<br>\begin{bmatrix}<br>    1 &amp; 2 &amp; 3\<br>    2 &amp; 3 &amp; 1\<br>    3 &amp; 1 &amp; 2\<br>\end{bmatrix}<br>$$</p>
-<h3 id="標準型"><a href="#標準型" class="headerlink" title="標準型"></a>標準型</h3><p>當一個拉丁方陣的第一行與第一列的元素按順序排列時，此爲這個拉丁方陣的標準型，英語稱爲 “reduced Latin square, normalized Latin square, or Latin square in standard form”。</p>
-<h3 id="構造拉丁方"><a href="#構造拉丁方" class="headerlink" title="構造拉丁方"></a>構造拉丁方</h3><p>同階的拉丁方有多個，構造其中的一個有一種通用的方法。</p>
-<p>若 $n$ 爲偶數，則構造第一行爲 $1, 2, n, 3, n-1, 4, n-2, \dots$，之後的每一行都在上一行對應列元素上加一併對 $n$ 取模，即可表示爲如下矩陣。<br>$$<br>\begin{bmatrix}<br>    1 &amp; 2 &amp; n &amp; 3 &amp; n-1 &amp; 4 &amp; n-2 &amp; \cdots\<br>    2 &amp; 3 &amp; n+1 &amp; 4 &amp; n &amp; 5 &amp; n-1 &amp; \cdots\<br>    \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots\<br>    i &amp; i+1 &amp; i+n-1 &amp; i+2 &amp; i+n-2 &amp; i+3 &amp; i+n-3 &amp; \cdots\<br>    \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots\<br>    n &amp; 1 &amp; n-1 &amp; 2 &amp; n-2 &amp; 3 &amp; n-3 &amp; \cdots\<br>\end{bmatrix} \mathrm{mod}\ n<br>$$</p>
-<p>若 $n$ 爲奇數，則先按偶數法則構造一個拉丁方，然後將上述模式左右對調。</p>
-<h3 id="正交拉丁方"><a href="#正交拉丁方" class="headerlink" title="正交拉丁方"></a>正交拉丁方</h3><p>設有兩個階數相同且爲 $n$ 的拉丁方陣$A_1=(a^{(1)}<em>{i,j})</em>{n\times n}, A_2=(a^{(2)}<em>{i,j})</em>{n\times n}$，其中將所有放置位置相同的元素組合成一個元組，組合成一個新的矩陣 $((a^{(1)}<em>{i,j}, a^{(2)}</em>{i,j}))<em>{n\times n}$。當這個新的矩陣 $((a^{(1)}</em>{i,j}, a^{(2)}<em>{i,j}))</em>{n\times n}$ 中每一個元素互不相同時，拉丁方陣 $A_1$ 和 $A_2$ 是互相正交的。此時，$A_1$ 和 $A_2$ 即爲一對正交拉丁方。 而在階數固定的情況下，所有兩兩正交的拉丁方所成的集合稱爲正交拉丁方族。如下面的兩個 3 階拉丁方。<br>$$<br>\begin{matrix}<br>A = \begin{bmatrix}<br>    1 &amp; 2 &amp; 3\<br>    2 &amp; 3 &amp; 1\<br>    3 &amp; 1 &amp; 2\<br>\end{bmatrix} &amp;<br>B = \begin{bmatrix}<br>    1 &amp; 2 &amp; 3\<br>    3 &amp; 1 &amp; 2\<br>    2 &amp; 3 &amp; 1\<br>\end{bmatrix}<br>\end{matrix}<br>$$</p>
-<h3 id="素數階拉丁方"><a href="#素數階拉丁方" class="headerlink" title="素數階拉丁方"></a>素數階拉丁方</h3><p>若 $n$ 階拉丁方存在 $r$ 個兩兩正交的拉丁方，那麼 $r\leq n-1$。素數階拉丁方（以 $3, 5, 7, \dots$ 爲階）是完全的，即 $n$ 階正交拉丁方族中有 $n-1$ 個拉丁方。</p>
-<h2 id="構造正交表"><a href="#構造正交表" class="headerlink" title="構造正交表"></a>構造正交表</h2><p>因爲素數階拉丁方都可構造完全的正交拉丁方族，則可繼續構造正交表。若把素數 $n$ 作爲水平數，則以 $n$ 階拉丁方構造的正交拉丁方有 $n-1$ 個。以 $n-1$ 作爲因素數構造正交表。</p>
-<p>以 3 階拉丁方爲例，3 階正交拉丁方族包含 2 個正交拉丁方，並將對應位置元素合併成二元有序數對。</p>
-<p>$$<br>\begin{matrix}<br>\begin{bmatrix}<br>    1 &amp; 2 &amp; 3\<br>    2 &amp; 3 &amp; 1\<br>    3 &amp; 1 &amp; 2\<br>\end{bmatrix} &amp;<br>\begin{bmatrix}<br>    1 &amp; 2 &amp; 3\<br>    3 &amp; 1 &amp; 2\<br>    2 &amp; 3 &amp; 1\<br>\end{bmatrix} &amp; = &amp;<br>\begin{bmatrix}<br>    11 &amp; 22 &amp; 33\<br>    23 &amp; 31 &amp; 12\<br>    32 &amp; 13 &amp; 21\<br>\end{bmatrix} &amp;<br>\end{matrix}<br>$$</p>
-<p>以第一個元素作爲因素 A，第二個元素作爲因素 B，然後與因素 C、D 均勻搭配，構造 4 因素 3 水平正交表。</p>
-<table>
-<thead>
-<tr>
-<th>C, A, B, D</th>
-<th>1</th>
-<th>2</th>
-<th>3</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>11</td>
-<td>22</td>
-<td>33</td>
-</tr>
-<tr>
-<td>2</td>
-<td>23</td>
-<td>31</td>
-<td>12</td>
-</tr>
-<tr>
-<td>3</td>
-<td>32</td>
-<td>13</td>
-<td>21</td>
-</tr>
-</tbody></table>
-<p>展開後爲</p>
-<table>
-<thead>
-<tr>
-<th>試驗號</th>
-<th>A</th>
-<th>B</th>
-<th>C</th>
-<th>D</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>2</td>
-<td>1</td>
-<td>2</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr>
-<td>3</td>
-<td>1</td>
-<td>3</td>
-<td>3</td>
-<td>3</td>
-</tr>
-<tr>
-<td>4</td>
-<td>2</td>
-<td>2</td>
-<td>3</td>
-<td>1</td>
-</tr>
-<tr>
-<td>5</td>
-<td>2</td>
-<td>3</td>
-<td>1</td>
-<td>2</td>
-</tr>
-<tr>
-<td>6</td>
-<td>2</td>
-<td>1</td>
-<td>2</td>
-<td>3</td>
-</tr>
-<tr>
-<td>7</td>
-<td>3</td>
-<td>3</td>
-<td>2</td>
-<td>1</td>
-</tr>
-<tr>
-<td>8</td>
-<td>3</td>
-<td>1</td>
-<td>3</td>
-<td>2</td>
-</tr>
-<tr>
-<td>9</td>
-<td>3</td>
-<td>2</td>
-<td>1</td>
-<td>3</td>
-</tr>
-</tbody></table>
-<p>若只與一個因素 C 搭配，則可構造 3 因素 3 水平正交表。</p>
-<table>
-<thead>
-<tr>
-<th>C, A, B</th>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>11</td>
-<td>22</td>
-<td>33</td>
-</tr>
-<tr>
-<td>2</td>
-<td>23</td>
-<td>31</td>
-<td>12</td>
-</tr>
-<tr>
-<td>3</td>
-<td>32</td>
-<td>13</td>
-<td>21</td>
-</tr>
-</tbody></table>
-<p>展開後爲</p>
-<table>
-<thead>
-<tr>
-<th>試驗號</th>
-<th>A</th>
-<th>B</th>
-<th>C</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>2</td>
-<td>1</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr>
-<td>3</td>
-<td>1</td>
-<td>3</td>
-<td>3</td>
-</tr>
-<tr>
-<td>4</td>
-<td>2</td>
-<td>2</td>
-<td>3</td>
-</tr>
-<tr>
-<td>5</td>
-<td>2</td>
-<td>3</td>
-<td>1</td>
-</tr>
-<tr>
-<td>6</td>
-<td>2</td>
-<td>1</td>
-<td>2</td>
-</tr>
-<tr>
-<td>7</td>
-<td>3</td>
-<td>3</td>
-<td>2</td>
-</tr>
-<tr>
-<td>8</td>
-<td>3</td>
-<td>1</td>
-<td>3</td>
-</tr>
-<tr>
-<td>9</td>
-<td>3</td>
-<td>2</td>
-<td>1</td>
-</tr>
-</tbody></table>
-<p>由此可見，以素數 $n$ 爲水平數設計正交試驗，可滿足 $[n-1, n+1]$ 個因素的設計，並且總共需要 $n^2$ 次試驗。即對於 3 因素 3 水平與 4 因素 3 水平正交試驗具有相同的試驗組數，同爲 9 組。可類似地構造出 $L_9(3^3)$，$L_9(3^4)$，$L_{25}(5^5)$，$L_{25}(5^6)$，$L_{49}(7^7)$，$L_{49}(7^8)$ 等。</p>
-<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
-<li><a href="https://baike.baidu.com/item/%E6%8B%89%E4%B8%81%E6%96%B9%E9%98%B5/4413910?fromtitle=%E6%8B%89%E4%B8%81%E6%96%B9&fromid=7176085" target="_blank" rel="noopener">百度百科-拉丁方</a></li>
-<li><a href="https://bkso.baidu.com/item/%E6%AD%A3%E4%BA%A4%E6%8B%89%E4%B8%81%E6%96%B9" target="_blank" rel="noopener">百度百科-正交拉丁方</a></li>
-<li><a href="https://baike.baidu.com/item/%E6%8B%89%E4%B8%81%E6%96%B9%E8%AE%BE%E8%AE%A1" target="_blank" rel="noopener">百度百科-拉丁方設計</a></li>
-<li><a href="https://wenku.baidu.com/view/7b9965bcbdeb19e8b8f67c1cfad6195f312be8db.html?re=view" target="_blank" rel="noopener">正交表與正交設計</a></li>
-</ul>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/11/13/%E6%AD%A3%E4%BA%A4%E8%AF%95%E9%AA%8C%E8%AE%BE%E8%AE%A1/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -503,7 +253,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    18 分钟 读完 (大约 2707 个字)
+                    18 分钟 读完 (大约 2708 个字)
                 </span>
                 
                 
@@ -517,65 +267,16 @@
         </h1>
         <div class="content">
             <p>隨着使用 Linux 系統的年頭越來越長，積累的相關技巧也越來越多。最近一次重裝系統突然發現很多配置都已經忘的差不多了，想要配置系統還需要去網上到處搜刮資料實在是麻煩，因此打算用一篇博客記錄關於 Linux 系統的配置及常用軟件的介紹。</p>
-<h2 id="硬件相关配置"><a href="#硬件相关配置" class="headerlink" title="硬件相关配置"></a>硬件相关配置</h2><p>一般来说，在 Windows 上驱动是随硬件的发布同步释出的，而 Linux 上需要硬件先发布，开源驱动才能跟上。Linux 内核能较好地适配所有不太新的硬件，太新的硬件就自求多福了。目前遇到最有可能出问题的硬件有无线网卡、触摸板、显卡等。因此，这些驱动需要单独配置。</p>
-<h3 id="APU-核显"><a href="#APU-核显" class="headerlink" title="APU 核显"></a>APU 核显</h3><p>就目前形式来看，牙膏厂的 CPU + iGPU 是问题概率最小的组合，虽然 10 代以前 Intel 核显的性能鸡肋得不行，但胜在稳定。APU 次之，本来我以为 APU 是与 Intel 同等稳定的存在，但 <code>xf86-video-amdgpu</code> 驱动竟然遇到了问题… Intel CPU + NVIDIA GPU 的组合在早些年是绝对不推荐的，但是最近 bumblebee 和 prime 等项目趋于成熟，NVIDIA 显卡的使用体验好了不少，但还是比不上 Intel 和 AMD 的核显。我的 CPU 和 显卡型号如下：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">CPU:       Topology: Quad Core model: AMD Ryzen 5 3550H with Radeon Vega Mobile Gfx</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">           bits: 64 type: MT MCP arch: Zen+ rev: 1 L2 cache: 2048 KiB</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">           flags: avx avx2 lm nx pae sse sse2 sse3 sse4_1 sse4_2 sse4a ssse3 svm</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">           bogomips: 33550</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">           Speed: 2203 MHz min&#x2F;max: 1400&#x2F;2100 MHz boost: enabled Core speeds (MHz):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">           1: 2011 2: 1879 3: 1198 4: 1199 5: 1202 6: 1206 7: 1199 8: 1199</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">Graphics:  Device-1: AMD Picasso vendor: Lenovo driver: amdgpu v: kernel bus ID: 03:00.0</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">           chip ID: 1002:15d8</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">           Display: x11 server: X.Org 1.20.5 driver: amdgpu resolution: 2560x1600~60Hz</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">           OpenGL: renderer: AMD RAVEN (DRM 3.33.0 5.3.12-arch1-1 LLVM 9.0.0)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">           v: 4.5 Mesa 19.2.4 direct render: Yes</span></pre></td></tr></table></figure>
-
-<p>此处只有一点需要注意，不要安装官方源的 <code>xf86-video-amdgpu</code>，会导致机器异常耗电并且无法挂起大量发热。安装 AUR 上的 Git 版本可暂时解决问题。</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">yay -S xf86-video-amdgpu-git</span></pre></td></tr></table></figure>
-
-<p>在 <code>/etc/X11/xorg.conf.d/20-amdgpu.conf</code> 配置中加入如下 section 启用 TearFree</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Section &quot;Device&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    Identifier &quot;AMD&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    Driver &quot;amdgpu&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    Option &quot;TearFree&quot; &quot;true&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">EndSection</span></pre></td></tr></table></figure>
-
-<h3 id="亮度配置"><a href="#亮度配置" class="headerlink" title="亮度配置"></a>亮度配置</h3><p>Intel 核显与 AMD 核显调节亮度的方法不太相同，具体步骤参考我的另一篇博客 <a href="/2019/11/09/Archlinux-%E6%97%A0%E6%B3%95%E9%80%9A%E8%BF%87%E4%BA%AE%E5%BA%A6%E8%B0%83%E8%8A%82%E6%8C%89%E9%94%AE%E8%B0%83%E8%8A%82%E4%BA%AE%E5%BA%A6%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" title="Archlinux 无法通过亮度调节按键调节亮度的解决办法">Archlinux 无法通过亮度调节按键调节亮度的解决办法</a></p>
-<h2 id="Archlinux-配置"><a href="#Archlinux-配置" class="headerlink" title="Archlinux 配置"></a>Archlinux 配置</h2><h3 id="讓-Qt5-程序使用原生-GTK-主題"><a href="#讓-Qt5-程序使用原生-GTK-主題" class="headerlink" title="讓 Qt5 程序使用原生 GTK+ 主題"></a>讓 Qt5 程序使用原生 GTK+ 主題</h3><p>Qt5 程序在 GTK3 環境下主題不統一真的很難受，尤其是 GTK3 用了黑色主題而 Qt5 還是刺眼的白色主題的時候。不像在 KDE 設置中設置 GTK3 主題那麼方便，設置 Qt5 主題可需要好好折騰一番。而且這個解決方案也是我使用了近一年後才找到的答案。</p>
-<p>首先你需要安裝 qt5ct 來提供 Qt5 程序主題的設置入口。此時直接在應用列表中打開 qt5ct 會提示未設置環境變量，編輯 <code>.xprofile</code> 文件，並在其中加入如下內容</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">[ <span class="hljs-string">"<span class="hljs-variable">$XDG_CURRENT_DESKTOP</span>"</span> = <span class="hljs-string">"KDE"</span> ] || [ <span class="hljs-string">"<span class="hljs-variable">$XDG_CURRENT_DESKTOP</span>"</span> = <span class="hljs-string">"GNOME"</span> ] || <span class="hljs-built_in">export</span> QT_QPA_PLATFORMTHEME=<span class="hljs-string">"qt5ct"</span></span></pre></td></tr></table></figure>
-<p>註銷後重新登錄，此時打開 qt5ct 應該就不報錯了。但此時你會發現主題列表中只有 Qt5 自帶的幾個樣式<del>，而沒有 Gtk3 主題。你需要安裝 qt5-styleplugins 來使 Qt5 支持 GTK2 主題。你沒有看錯，我也不知道爲啥 Qt5 只支持 GTK2 的主題。但是我們要如何設置 GTK2 主題呢，好吧，又需要安裝一個叫 gtk-theme-switch2 的工具。在 gtk-theme-switch2 中設置好滿意的 GTK2 主題後，再在 qt5ct 中設置 Qt5 主題爲 GTK2 即可</del>。</p>
-<h4 id="2019-08-11-更新"><a href="#2019-08-11-更新" class="headerlink" title="2019-08-11 更新"></a>2019-08-11 更新</h4><p>事实上現在有个更加好用的 qt 主题引擎叫 Kvantum，样式更加現代并且支持透明。<code>sudo pacman -S kvantum-qt5</code> 安装完成后，在 qt5ct 中将 kvantum 设置为默认主题引擎，并在 kvantum 中設置主题即可。</p>
-<h3 id="variety-无法设置壁紙"><a href="#variety-无法设置壁紙" class="headerlink" title="variety 无法设置壁紙"></a>variety 无法设置壁紙</h3><p>目前我遇到过两种情况可能导致 variety 无法设置壁紙。</p>
-<ol>
-<li>未安装 feh，虽然 variety 的依赖项中并没有 feh，但是缺少 feh 确实无法设置壁紙。</li>
-<li>如果没有安装 display manager，variety 无法获取当前桌面的环境变量，在 <code>.xinitrc</code> 中添加<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># variables set identifying which DE / WM you're using,</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># so variety can know what to do. </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">export</span> XDG_CURRENT_DESKTOP=i3-gaps</span></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h3 id="dunst-无法显示通知"><a href="#dunst-无法显示通知" class="headerlink" title="dunst 无法显示通知"></a>dunst 无法显示通知</h3><p>同样是由于没有 display manager 导致的，在 <code>.xinitrc</code> 中添加</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># When using dunst without a Display Manager,</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># the DISPLAY environment variable might not be correctly set.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">systemctl --user import-environment DISPLAY</span></pre></td></tr></table></figure>
-
-<h3 id="小鹤双拼"><a href="#小鹤双拼" class="headerlink" title="小鹤双拼"></a>小鹤双拼</h3><p>每次重装系统都需要重新配置输入法，更蛋疼的是在 Rime 中添加鹤形码表时，总出现部署错误。虽然最后折腾半天总是莫名其妙地整好了，但是不得不感叹配置 Rime 真是玄学（虽然很不想承认是自己对 Rime 的配置文件一窍不通:laughing:）。特此记录一下给 Rime 添加鹤形的过程，虽然以后按相同的步骤也不一定能配置成功。</p>
-<p>第一步，安装 fcitx 框架（ibus 框架就不考虑了，fcitx 用习惯了）和 Rime 的 fcitx 实现。</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Archlinux</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sudo pacman -S fcitx fcitx-rime fcitx-configtool</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># openSUSE</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">sudo zypper <span class="hljs-keyword">in</span> fcitx fcitx-rime fcitx-config-gtk</span></pre></td></tr></table></figure>
-<p>第二步，在 fcitx 设置中加入 rime 输入法，记得关闭“只显示当前语言输入法选项”。切换到 Rime 输入法，此时应该会自动运行一次 deploy。</p>
-<p>第三步，将<a href="https://git.coding.net/cycoe/config.git" target="_blank" rel="noopener">我的配置</a>中的 <code>.config/fcitx</code> 目录复制到对应的路径，其中已经包含了 flypy 使用的码表（之前小鹤双拼官网发布的挂接码表文件，但因为没有通用的配置方法目前已经下架），并将运行下面的命令将配置文件复制到 Rime 系统级路径中（尝试过复制到 <code>.config/fcitx/rime/build/default.custom.yaml</code>，没有效果）。</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 备份原配置</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sudo mv /usr/share/rime-data/default.yaml /usr/share/rime-data/default.yaml.bak</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 复制新配置</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">sudo cp default.yaml /usr/share/rime-data/default.yaml</span></pre></td></tr></table></figure>
-
-<p>第四步，在 fcitx 上右键，选择 deploy，此时会提示部署错误，但是惊喜地发现输入法已经可以使用。</p>
-<h2 id="常用软件"><a href="#常用软件" class="headerlink" title="常用软件"></a>常用软件</h2><p>用了几年 Linux 后发现其实 Linux 平台的软件并不少（当然 Adobe 全家桶和 MS Office 除外，要做设计或者办公还是老老实实 Windows 吧:speak_no_evil:），只是与 Windows 和 Mac 平台常用的软件不同而已。Linux 的真正强大之处是命令行软件，几条简单的命令组合就可以完成复杂的功能。</p>
-<h3 id="Dia"><a href="#Dia" class="headerlink" title="Dia"></a>Dia</h3><p>一個非常小的流程圖繪製軟件，但是功能夠用。</p>
-<h3 id="ncdu"><a href="#ncdu" class="headerlink" title="ncdu"></a>ncdu</h3><p>ncdu (NCurses Disk Usage) 是一個基於 NCurses 系統的磁盤用量分析命令行軟件，相似功能的還有基於 GTK+ 的 Baobab（從版本號來看應該是屬於 Gnome 桌面套裝）。其實對我來說真的很少使用此類軟件，畢竟我很少刪除磁盤文件，但是最近 /Home 分區接近爆滿讓我很難受，還是需要從磁盤的角落翻出以後再也用不上的大文件以刪除之。</p>
-<h3 id="xreader"><a href="#xreader" class="headerlink" title="xreader"></a>xreader</h3><p>pdf 文檔閱讀器，X-Apps 計劃中的一員（這個計劃好像只有個閱讀器？:laughing:）。體積小巧，優點是可以使用 <code>hjkl</code> 等 vim 鍵位進行控制。缺點是沒有高級功能，單純作爲一個閱讀器還是不錯的。</p>
-<h3 id="pcmanfm"><a href="#pcmanfm" class="headerlink" title="pcmanfm"></a>pcmanfm</h3><p>LXDE 桌面環境默認文件管理器，實話說比 Gnome 的鸚鵡螺好用太多，功能上與 Dolphin 相近。Archlinux 上有單獨提供 pcmanfm-gtk3 的安裝包，其他髮型版上應該默認使用的就是 GTK3 了。</p>
-<h3 id="lxappearance"><a href="#lxappearance" class="headerlink" title="lxappearance"></a>lxappearance</h3><p>GTK+ 界面主題設置工具，又是 LXDE 的一員。LXDE 自帶的幾款軟件質量都挺高，界面風格統一併且功能強大。</p>
-<h3 id="gpickview"><a href="#gpickview" class="headerlink" title="gpickview"></a>gpickview</h3><p>LXDE 默認的圖片查看器，體積小巧，沒有太多花哨功能。</p>
-<h3 id="sxiv"><a href="#sxiv" class="headerlink" title="sxiv"></a>sxiv</h3><p>Simple X11 Image Viewer</p>
-<h3 id="zathura"><a href="#zathura" class="headerlink" title="zathura"></a>zathura</h3><p>Suckless pdf 阅读器</p>
-<h3 id="ranger"><a href="#ranger" class="headerlink" title="ranger"></a>ranger</h3><p>python 写成的基于命令行的文件管理器，有与 Vim 类似的键位绑定，全键盘操作效率爆表。拥有 ranger 就不太需要 pcmanfm 了。</p>
-<h4 id="初次使用"><a href="#初次使用" class="headerlink" title="初次使用"></a>初次使用</h4><p>通过运行 <code>ranger --copy-config=all</code> 拷贝所有配置文件到用户家目录。包含以下文件</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">commands_full.py <span class="hljs-comment"># ranger 所有命令</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">commands.py <span class="hljs-comment"># 自定义命令</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">rc.conf <span class="hljs-comment"># ranger 配置文件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">rifle.conf <span class="hljs-comment"># 文件打开方式配置</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">scope.sh <span class="hljs-comment"># 预览配置</span></span></pre></td></tr></table></figure>
-<h4 id="文件预览"><a href="#文件预览" class="headerlink" title="文件预览"></a>文件预览</h4><p>在 <code>rc.conf</code> 中檢查所有 ‘preview’ 的选项</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"># Use non-default path for file preview script?</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"># ranger ships with scope.sh, a script that calls external programs (see</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"># README.md for dependencies) to preview images, archives, etc.</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">set preview_script ~&#x2F;.config&#x2F;ranger&#x2F;scope.sh</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"># Use the external preview script or display simple plain text or image previews?</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">set use_preview_script true</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"># 设置图片的 method，虽然 w3m bug 很多，但也是唯一一个选择了</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">set preview_images_method w3m</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr></table></figure>
-
-<p>预览其他类型的文件需要安装对应的依赖</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Optional Deps   : atool: for previews of archives</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">                  elinks: for previews of html pages</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">                  ffmpegthumbnailer: for video previews</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">                  highlight: for syntax highlighting of code</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">                  libcaca: for ASCII-art image previews</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">                  lynx: for previews of html pages</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">                  mediainfo: for viewing information about media files</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">                  odt2txt: for OpenDocument texts</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                  perl-image-exiftool: for viewing information about media files</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                  poppler: for pdf previews</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                  python-chardet: in case of encoding detection problems</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                  sudo: to use the &quot;run as root&quot;-feature</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                  transmission-cli: for viewing bittorrent information</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                  w3m: for previews of images and html pages</span></pre></td></tr></table></figure>
-<p>但不建议开启压缩包的预览，会大幅影响速度，修改 <code>scope.sh</code> 文件，注释掉压缩包的预览</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"># Archive</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|\</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    # atool --list -- &quot;$&#123;FILE_PATH&#125;&quot; &amp;&amp; exit 5</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    # bsdtar --list --file &quot;$&#123;FILE_PATH&#125;&quot; &amp;&amp; exit 5</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    exit 1;;</span></pre></td></tr></table></figure>
-<h4 id="批量重命名"><a href="#批量重命名" class="headerlink" title="批量重命名"></a>批量重命名</h4><p>ranger 有个非常 sexy 的功能，那就是批量重命名。选中多个文件后，输入 <code>:bulkrename</code>，ranger 会帮你自动打开一个 Vim 编辑器。在 Vim 中你可以利用 Vim 的强大功能对文件名做任何处理，修改完成后保存退出即可。</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># This file will be executed when you close the editor.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Please double-check everything, clear the file to abort.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">mv -vi -- <span class="hljs-built_in">test</span> today_test</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">mv -vi -- test.md today_test.md</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">mv -vi -- test.pdf today_test.pdf</span></pre></td></tr></table></figure>
-
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/11/09/Linux%E4%B8%8B%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%92%8C%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -601,7 +302,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 260 个字)
+                    2 分钟 读完 (大约 261 个字)
                 </span>
                 
                 
@@ -615,11 +316,16 @@
         </h1>
         <div class="content">
             <h2 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h2><p>假設存在 k 個樣本點 \(X_1, X_2, \ldots, X_k\)，定義向量<br>\(X_i = (x_{i1}, x_{i2}, \ldots, x_{in})^T\)，爲方便計算在 \(X_i\) 前插入常量 1。<br>則需要求 \(W = (w_0, w_1, w_2, \ldots, w_n)\) 使 \(\hat{Y} = XW\)。</p>
-<p>定義均方誤差 \(E = \dfrac{1}{n}\sum(y_i-\hat{y}_i)^2 = \dfrac{1}{n}||Y-\hat{Y}||_2^2\)，則可轉變爲尋找 W 使得 E 最小，即尋找 \(W = \mathrm{argmin}\dfrac{1}{n}||Y-XW||_2^2\)。</p>
-<p>對於<br>$$E(W) = \dfrac{1}{n}$$<br>則可推導<br>$$<br>    \begin{align}<br>    E(W+\Delta W) - E(W) &amp;= \dfrac{1}{n}||Y-X(W+\Delta W)||_2^2-\dfrac{1}{n}||Y-XW||_2^2\<br>    &amp;= \dfrac1n||Y-XW||_2^2-\dfrac2n(Y-XW)(X\Delta W)+\dfrac1n||X\Delta W||_2^2-\dfrac1n||Y-XW||_2^2\<br>    &amp;= \dfrac2n(XW-Y)X\Delta W+\mathcal{O}(||\Delta X||)\<br>    \end{align}<br>$$<br>令<br>$$L(W) = \dfrac2n(XW-Y)X\Delta W$$<br>爲 \(E(W)\) 在 \(W\) 處的導數，同時<br>$$<br>    \begin{align}<br>    L(\Delta W) &amp;= &lt;\nabla E(W), \Delta W&gt;\<br>    &amp;= &lt;\dfrac2nX^T(XW-Y), \Delta X&gt;\<br>    &amp;= \dfrac2n(XW-Y)X\Delta W\<br>    \end{align}<br>$$<br>則<br>$$<br>    \begin{align}<br>    \nabla E(W) = \dfrac2nX^T(XW-Y) &amp;= 0\<br>    X^TXW &amp;= X^TY\<br>    W &amp;= (X^TX)^{-1}X^TY<br>    \end{align}<br>$$<br>最終得<br>$$E=\dfrac1n||Y-\hat{Y}||_2^2=\dfrac1n||X(X^TX)^{-1}X^TY-Y||_2^2$$</p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/10/23/%E4%B8%80%E7%A7%8D%E9%80%9A%E8%BF%87%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%BD%AC%E5%8F%98%E7%82%B9%E7%9A%84%E6%96%B9%E6%B3%95/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -649,7 +355,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    12 分钟 读完 (大约 1849 个字)
+                    12 分钟 读完 (大约 1850 个字)
                 </span>
                 
                 
@@ -664,124 +370,16 @@
         <div class="content">
             <h1 id="Nocturnal-by-Cycoe"><a href="#Nocturnal-by-Cycoe" class="headerlink" title="Nocturnal by Cycoe"></a>Nocturnal by Cycoe</h1><p><a href="https://git.coding.net/cycoe/Nocturnal.git" target="_blank" rel="noopener" title="Nocturnal GitHub">GitHub 地址</a><br>如果在使用過程中發現 bug，可到<a href="https://git.coding.net/cycoe/Nocturnal.git" target="_blank" rel="noopener" title="Nocturnal GitHub">此處</a>進行反饋，或者直接提交修復 PR，感謝支持！</p>
 <h2 id="聲明"><a href="#聲明" class="headerlink" title="聲明"></a><strong>聲明</strong></h2><p>Nocturnal 是我課餘時間練習 python 代碼編寫的程序，針對使用引起的一切後果本人概不負責。</p>
-<h2 id="關於捐贈"><a href="#關於捐贈" class="headerlink" title="關於捐贈"></a>關於捐贈</h2><p>Nocturnal 不併強制要求捐贈，但爲了防止軟件被濫用而出現的一系列問題，因此需要提供解密密鑰才能使用，具體操作如下：</p>
-<ol>
-<li>打開軟件，此時會自動彈出一個命令提示符窗口和一個二維碼</li>
-<li>微信掃描二維碼添加我爲好友</li>
-<li>你能在命令提示符窗口上看到類似這樣一段話<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">你的 id 爲 2160。請將 id 發給開發者獲取解鎖密鑰</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">請輸入解密密鑰:</span></pre></td></tr></table></figure></li>
-<li>將其中的 id 發給我，我會生成解密密鑰</li>
-<li>輸入密鑰後即可使用</li>
-<li>（可選）如果你覺得這個軟件給你帶來了便利，你可以給開發者包個紅包，建議 5 元</li>
-</ol>
-<h2 id="使用說明"><a href="#使用說明" class="headerlink" title="使用說明"></a>使用說明</h2><h3 id="命令幫助"><a href="#命令幫助" class="headerlink" title="命令幫助"></a>命令幫助</h3><table>
-<thead>
-<tr>
-<th>命令全稱</th>
-<th>縮寫</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>help</td>
-<td>h</td>
-<td>打印幫助信息</td>
-</tr>
-<tr>
-<td>emailLogin</td>
-<td>el</td>
-<td>綁定通知郵箱</td>
-</tr>
-<tr>
-<td>grade</td>
-<td>g</td>
-<td>成績抓取模式</td>
-</tr>
-<tr>
-<td>report</td>
-<td>r</td>
-<td>選報告模式</td>
-</tr>
-<tr>
-<td>class</td>
-<td>c</td>
-<td>選課模式</td>
-</tr>
-<tr>
-<td>add</td>
-<td>a</td>
-<td>添加待選課程名稱</td>
-</tr>
-<tr>
-<td>delete</td>
-<td>de</td>
-<td>刪除待選課程名稱</td>
-</tr>
-<tr>
-<td>list</td>
-<td>l</td>
-<td>列出待選課程名稱</td>
-</tr>
-<tr>
-<td>donate</td>
-<td>d</td>
-<td>捐贈</td>
-</tr>
-<tr>
-<td>quit</td>
-<td>q</td>
-<td>退出</td>
-</tr>
-</tbody></table>
-<p>以上表格第一列爲命令的全稱，第二列爲命令的縮寫，輸入全稱與縮寫擁有同樣的效果。</p>
-<h3 id="軟件符號說明"><a href="#軟件符號說明" class="headerlink" title="軟件符號說明"></a>軟件符號說明</h3><p>Nocturnal 使用字符界面（TUI）進行交互，雙擊 <code>Nocturnal.exe</code> 打開軟件後可看到一個黑底白字的字符界面，這不是因爲軟件運行出錯，而是 Nocturnal 本來就是這樣的。現在你應該能在界面上看到一些表格，最上面的表格爲 Nocturnal 的基本信息，中間的表格爲使用幫助。在最下方你可以看到類似這樣的提示符 <code>[0] &gt;&gt;&gt;</code>，該提示符表明此時你可以輸入命令運行相關功能，<code>[0]</code> 中的數字表示後臺正在運行的任務數量。</p>
-<h3 id="成績抓取模式"><a href="#成績抓取模式" class="headerlink" title="成績抓取模式"></a>成績抓取模式</h3><p>在 <code>[0] &gt;&gt;&gt;</code> 後輸入 <code>grade</code> 或 <code>g</code> 回車即可運行成績抓取功能。第一次使用時會自動提示你輸入用戶名和密碼，也就是你的教務網學號和密碼。運行成功後不會有提示，但 Nocturnal 就會在後臺自動抓取成績，並在出新成績時自動通知。</p>
-<h3 id="選報告模式"><a href="#選報告模式" class="headerlink" title="選報告模式"></a>選報告模式</h3><p>在 <code>[0] &gt;&gt;&gt;</code> 後輸入 <code>report</code> 或 <code>r</code> 回車即可運行選報告模式，運行成功後 Nocturnal 會在後臺自動抓取報告列表，並在有新報告放出時自動選報告，並通過郵件通知你。</p>
-<h3 id="選課模式"><a href="#選課模式" class="headerlink" title="選課模式"></a>選課模式</h3><p>選課模式與成績抓取模式和選報告模式不同，選課模式需要在前臺運行。選課模式通過匹配關鍵字實現，針對每門課程可以添加多個關鍵字。比如你想要選 ‘高分子研究方法’ 這門課，則可以在一級關鍵字後輸入 ‘高分子研究方法’ 並回車。但一般課程會有多個時間開課，如果想要指定特定時間或特定老師的課程，則可在二級關鍵字後輸入 ‘週一’ 或 ‘某某某老師’ 即可。Nocturnal 會首先檢查一級關鍵字，如果一級關鍵字對應多個候選，那麼會繼續以二級關鍵字進行過濾，優先選擇符合二級關鍵字的候選。但如果二級關鍵字過濾後沒有可選課程，那麼會返回一級關鍵字的候選列表，並隨機選取一個候選作爲最終選擇。<strong>總而言之，Nocturnal 中的關鍵字列表並不是選課的唯一列表，而是一個優先列表，Nocturnal 會按關鍵字列表所給的優先順序依照選取所有可選課程。</strong></p>
-<p><strong>注意：選課模式還未經過測試，選課完成後務必登錄教務網檢查已選課程。</strong></p>
-<p>具體流程如下：</p>
-<ol>
-<li>輸入 <code>a</code> 回車添加需要選的課程名稱，輸入 <code>a</code> 後提示如下：<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">[0] &gt;&gt;&gt; a</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">please input 1th key</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&gt;</span></pre></td></tr></table></figure>
-<code>&gt;</code> 表示此時你可輸入一級關鍵字，一般我們會將課程名稱作爲一級關鍵字，如此時你可輸入 ‘高分子研究方法’ 回車添加一個關鍵字，完成後程序會提示你輸入二級關鍵字如下：<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">[0] &gt;&gt;&gt; a</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">please input 1th key</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&gt; 高分子研究方法</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">please input 2th key</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&gt;</span></pre></td></tr></table></figure>
-此時你可直接輸入回車來結束關鍵字的輸入（在輸入任一關鍵字時，你都可通過直接回車來結束輸入），或者輸入 ‘週六’ 回車作爲想要上課的時間。</li>
-</ol>
-<p>重複以上步驟直至你輸入了所有想要選的課程。</p>
-<ol start="2">
-<li>輸入 <code>l</code> 查看已經輸入的課程列表</li>
-<li>輸入 <code>d</code> 刪除不想選的課程</li>
-</ol>
-<h3 id="郵件通知"><a href="#郵件通知" class="headerlink" title="郵件通知"></a>郵件通知</h3><p>Nocturnal 目前只有通過郵箱一種方式對你進行通知，你可通過輸入 <code>el</code> 來綁定郵箱，Nocturnal 會提示你一步一步進行操作。&lt;接收郵箱&gt;爲你要接收通知的郵箱，建議使用 qq 郵箱，這樣使用微信綁定 qq 郵箱後就可以的即時地收到郵件通知消息。&lt;發送郵箱&gt;可以使用任意郵箱，但發送郵箱需要輸入密碼。&lt;smtp 主機地址&gt; 爲發送郵箱的主機地址，qq 郵箱對應的是 ‘smtp.qq.com’，163 郵箱對應 ‘smtp.163.com’，其他郵箱請自行百度。&lt;端口&gt; 默認值爲 ‘25’（<strong>注意：使用端口 25 意味着不使用 SSL 加密，希望郵件加密的同學請自行百度</strong>）。每步輸入過程中，提示符後括號中爲原始值，如果你不希望更改原始值，直接回車即可。</p>
-<h2 id="更新日誌"><a href="#更新日誌" class="headerlink" title="更新日誌"></a>更新日誌</h2><h3 id="Date-2017-1-3"><a href="#Date-2017-1-3" class="headerlink" title="Date: 2017-1-3"></a>Date: 2017-1-3</h3><p><strong>Version: V4.0</strong></p>
-<h3 id="Date-2017-12-15"><a href="#Date-2017-12-15" class="headerlink" title="Date: 2017-12-15"></a>Date: 2017-12-15</h3><p><strong>Version: V3.1</strong></p>
-<p>[bug fix]</p>
-<ul>
-<li>修復掉線後不能重新登錄的問題</li>
-<li>修復達到最大重試次數後不會自動停止的問題</li>
-</ul>
-<p>[optimization]</p>
-<ul>
-<li>重新登錄時清理內存</li>
-<li>簡化代碼結構</li>
-<li>新增等待時的動畫效果</li>
-<li>完善自定義郵箱登錄</li>
-</ul>
-<h3 id="Date-2017-12-14"><a href="#Date-2017-12-14" class="headerlink" title="Date: 2017-12-14"></a>Date: 2017-12-14</h3><p><strong>Version: V3.0</strong></p>
-<p>[bug fix]</p>
-<ul>
-<li>修復選報告時的崩潰問題</li>
-</ul>
-<p>[optimization]</p>
-<ul>
-<li>重磅更新！新增驗證碼自動識別，花了大力氣才寫出來，現在無需手動輸入驗證碼登錄</li>
-<li>更新了選報告的入口，優化了休眠邏輯</li>
-<li>命令行提示已漢化</li>
-<li>優化郵件提醒，現在只會發送最新選到的報告列表</li>
-<li>新增報告黑名單，選到的報告自動加入黑名單列表中，防止手動退了後又重複選上</li>
-<li>新增捐贈入口，希望大家多多支持！</li>
-<li>打包成安裝文件，不用再手動解壓</li>
-</ul>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/09/06/Nocturnal%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -807,7 +405,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    33 分钟 读完 (大约 4882 个字)
+                    33 分钟 读完 (大约 4883 个字)
                 </span>
                 
                 
@@ -825,68 +423,16 @@
 </blockquote>
 <p>以上關於 Vim 的描述來自 <a href="https://github.com/vim/vim" target="_blank" rel="noopener" title="Vim">Vim</a> 的官方 GitHub 倉庫。Vim 是一款古老且強大的編輯器，從其誕生之日起到現在已經有二十多年的歷史（比我的年齡都要大 orz）。很多人聽說它的大名一般是因爲它與 <a href="https://github.com/emacs-mirror/emacs" target="_blank" rel="noopener" title="Emacs">Emacs</a> 並稱編輯器之神與神之編輯器。爲什麼會有這樣的名號？除了它們的功能極其強大之外，還因爲它們極其難以上手。以下圖片爲網友戲稱的常用編輯器的學習曲線。</p>
 <img src="/2018/08/12/Vim-%E4%B8%80%E6%AC%BE%E8%AE%A9%E6%88%91%E7%9B%B8%E8%A7%81%E6%81%A8%E6%99%9A%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8/learning_curve.jpg" class title="常用編輯器的學習曲線">
-
-<p>即便如此，Vim 和 <a href="https://github.com/emacs-mirror/emacs" target="_blank" rel="noopener" title="Emacs">Emacs</a> 仍流行到了現在，以至於後來經常能在各處看到的 Vimer（Vim 黨）和 Emacser（Emacs 黨）的編輯器之爭，雖然有的時候可能只是類似於“php 是世界上最好的語言”之類的梗，但足以看出 Vim 確實非常強大，並且用上了就再也回不去了。</p>
-<h2 id="安裝-Vim"><a href="#安裝-Vim" class="headerlink" title="安裝 Vim"></a>安裝 Vim</h2><p>Vim 在所有的 Linux 發行版上都易於獲得，只需要使用對應的包管理器進行安裝即可，Windows 上也有編譯好的二進制包，但實際在安裝過程中仍會面臨幾個選擇。</p>
-<p>以 Archlinux 爲例，Archlinux 的官方倉庫中包含的 Vim 在編譯過程中並沒有編譯進 python、lua 等支持，導致很多插件無法使用，因此爲了能使用上 Vim 的完全體，可以選擇 Gvim。Gvim 是基於 Vim 的一個帶有圖形界面的版本，並在編譯過程中包含進了所有可用組件。如果選擇 Vim 分支，強烈建議使用 Gvim，並且使用 8.0 之後的版本。下載鏈接在<a href="https://github.com/vim/vim-win32-installer/releases" target="_blank" rel="noopener" title="Vim Download">此處</a>。</p>
-<p>另一個可供選擇的版本是 Neovim，Neovim 是 Vim 的一個 fork 版本，比 Vim 具有更多的特性（Neovim 先首先支持的異步架構和內置 terminal，隨後 Vim 也提供了支持），目前開發活躍，推薦進行嘗試。下載鏈接在<a href="https://github.com/neovim/neovim/releases/" target="_blank" rel="noopener" title="Neovim Download">此處</a>。</p>
-<p>以上的所有版本在下文中都將統一稱爲 ‘Vim’（雖然事實上 Vim 與 Neovim 並不是同一個項目，但在配置和使用方法上是類似的）。無論安裝哪個版本，安裝完成後從應用啓動菜單或命令行應該就能成功啓動。恭喜你！此時已經完成了安裝 Vim 的第一步，現在你看到的是一個黑底白字的字符界面。不過彆着急，接下來我們會一步一步將 Vim 配置成稱手的編輯器。</p>
-<h2 id="退出-Vim-使用-Vim-的第一大難題？"><a href="#退出-Vim-使用-Vim-的第一大難題？" class="headerlink" title="退出 Vim - 使用 Vim 的第一大難題？"></a>退出 Vim - 使用 Vim 的第一大難題？</h2><p>雖然客觀上講，退出 Vim 相較於 Vim 其他功能要容易的多，但是確實是第一次使用 Vim 會遇到的一個問題。相對於其他的編輯器，Vim 沒有直觀的退出方式，以至於在 Stack Overflow 上有個專門的問題（<a href="https://stackoverflow.com/questions/11828270/how-to-exit-the-vim-editor" target="_blank" rel="noopener" title="How to exit vim">見此處</a>）解答如何退出 Vim。甚至有了如下的梗：</p>
-<img src="/2018/08/12/Vim-%E4%B8%80%E6%AC%BE%E8%AE%A9%E6%88%91%E7%9B%B8%E8%A7%81%E6%81%A8%E6%99%9A%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8/exit_vim.jpg" class title="如何退出Vim">
-
-<p>看來確實有必要對 Vim 的退出方式做個總結，之列出平常最常用的幾種退出方式</p>
-<ul>
-<li><code>:q</code> 正常退出</li>
-<li><code>:q!</code> 強制退出不保存</li>
-<li><code>:wq</code> 保存並退出</li>
-<li><code>:x</code> 保存並退出，與 <code>:wq</code> 不同之處在於如果文件未做修改則不更新時間戳</li>
-<li>強制關機</li>
-</ul>
-<h2 id="使用-Vim-前先看幫助文檔"><a href="#使用-Vim-前先看幫助文檔" class="headerlink" title="使用 Vim 前先看幫助文檔"></a>使用 Vim 前先看幫助文檔</h2><p>安裝好 Vim 後，你可能想要馬上嘗試輸入。但我強烈建議先閱讀軟件自帶的幫助文檔，一款優秀的軟件都會帶有一個詳細的用戶手冊以及一個簡要的使用說明，這有助於降低你在接觸新軟件時的痛苦感。你可以在 Vim 中隨時通過輸入 <code>:help&lt;CR&gt;</code>（<cr> 代表回車）來呼出幫助文檔。</cr></p>
-<h2 id="配置-Vim-從-vimrc-開始"><a href="#配置-Vim-從-vimrc-開始" class="headerlink" title="配置 Vim - 從 .vimrc 開始"></a>配置 Vim - 從 .vimrc 開始</h2><p>由於 Vim 的流行，GitHub 上有各種各樣現成的 ‘vimrc’（Vim 的配置文件）可供使用。對於不想自己折騰配置的用戶來說，從 GitHub 上下載安裝其他用戶已經編輯好的 ‘vimrc’ 是最好的選擇。甚至還有像 <a href="https://github.com/SpaceVim/SpaceVim" target="_blank" rel="noopener" title="SpaceVim">SpaceVim</a> 這樣的模塊化 Vim 配置可以一鍵安裝使用，能大大減少配置所需的時間。</p>
-<p>另一些用戶可能想要繼續對 Vim 進行自定義配置，那麼就需要對 ‘vimrc’ 進行修改。在 Linux 系統中，Gvim 與 Vim 的配置文件默認存放在 ‘$HOME/.vimrc’（Neovim 存放在 ‘$HOME/.config/nvim/init.vim’），Windows 下存放在 ‘$VIM/vimrc’。</p>
-<p>你可以選擇自己新建一個文件從頭開始。不過還是建議拷貝官方自帶的配置示例，一方面可以省去一部分對常規配置的修改時間，另一方面，官方示例中對各配置語句對應有詳細的註釋。或者也可以選擇從 GitHub 上尋找一個適合你的 ‘vimrc’，或者參考<a href="https://coding.net/u/cycoe/p/config/git/blob/master/init.vim" target="_blank" rel="noopener" title="Cycoe 的 vimrc">我的配置</a>。</p>
-<h3 id="常規配置"><a href="#常規配置" class="headerlink" title="常規配置"></a>常規配置</h3><p>在使用 Vim 之前，我們需要對其進行一些常規配置，來使它看起來更像一般的編輯器（以下步驟默認了你已經學會 Vim 的基本操作，包括移動光標、輸入、模式切換等）。</p>
-<p>首先，通過輸入 <code>:e $HOME/.vimrc&lt;CR&gt;</code> 打開配置文件（’$HOME/.vimrc’ 替換爲你平臺對應的配置文件路徑）。這時，如果此前你已經拷貝了 Vim 的示例配置文件，或者是從網上下載安裝了其他人的配置，那麼你打開的文件裏應該就有那些內容，如果此前還未做過配置，那麼打開的就是一個空文件。</p>
-<p>接下來可以選擇下面的配置中你需要的部分拷貝進你的 ‘vimrc’</p>
-<figure class="highlight vim hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">" about vim setup</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> nocompatible               <span class="hljs-comment">" disable compatible for vi</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> <span class="hljs-keyword">shell</span>=/bin/bash            <span class="hljs-comment">" setup default shell</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> shortmess=at               <span class="hljs-comment">" 啓動時隱去援助提示</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> mouse=<span class="hljs-keyword">a</span>                    <span class="hljs-comment">" active mouse control</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> clipboard+=unnamed         <span class="hljs-comment">" support system clipboard</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> mapleader=<span class="hljs-string">';'</span>              <span class="hljs-comment">" remap &lt;leader&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">" display setup</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> relativenumber             <span class="hljs-comment">" display relative row number</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> ruler                      <span class="hljs-comment">" 顯示標尺，就是在右下角顯示光標位置</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> spell spelllang=en_us,cjk  <span class="hljs-comment">" Spell checking for English, escape Chinese</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> langmenu=zh_CN.UTF-<span class="hljs-number">8</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> helplang=<span class="hljs-keyword">cn</span>                <span class="hljs-comment">" 設置幫助文檔爲中文，需要 'yianwillis/vimcdoc'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">syntax</span> enable                  <span class="hljs-comment">" syntax highlight enable</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">syntax</span> <span class="hljs-keyword">on</span>                      <span class="hljs-comment">" syntax highlight on</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> background=dark            <span class="hljs-comment">" setup background color</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">colorscheme</span> gruvbox            <span class="hljs-comment">" setup color scheme</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> wildmenu                   <span class="hljs-comment">" select the candidates in interactive way</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> backspace=<span class="hljs-built_in">indent</span>,eol,start <span class="hljs-comment">" more powerful backspacing</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> cursorcolumn               <span class="hljs-comment">" 淺色高亮當前列</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> cursorline                 <span class="hljs-comment">" 淺色高亮當前行</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> novisualbell               <span class="hljs-comment">" 關閉視覺響鈴</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> laststatus=<span class="hljs-number">2</span>               <span class="hljs-comment">" 啓動顯示狀態行</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> showcmd                    <span class="hljs-comment">" show the command executed by shortcuts</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> noshowmode                 <span class="hljs-comment">" don't show the mode status, avoid override argvs hint</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> hlsearch                   <span class="hljs-comment">" highlight for searched results</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> incsearch                  <span class="hljs-comment">" highlight for searching results</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> showmatch                  <span class="hljs-comment">" show the match of brackets and Quotation mark</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> ignorecase                 <span class="hljs-comment">" ignore case when searching and command completion</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> gdefault                   <span class="hljs-comment">" default substitute in the whole line</span></span></pre></td></tr></table></figure>
-
-<p>其中，最重要的一條設置就是 <code>set nocompatible</code>，它的作用是關閉對 Vi 的兼容性。Vi 是一款更加古老的編輯器，可視作是 Vim 的前身。如果保留對 Vi 的兼容性也就意味着你放棄了很多 Vim 獨有的特性。<code>set shell=/bin/bash</code> 顯式地聲明瞭 Vim 在運行腳本時調用的解釋器，如果是 Windows 用戶則需要去掉這行。</p>
-<p>此時保存配置文件並通過 <code>:so \$HOME/.vimrc&lt;CR&gt;</code> 重載配置後應該就能看到改變了。但此時你可能會注意到幾條錯誤信息，不要緊張，這是因爲我們在配置中引用了一些插件功能，但事實上我們現在還未安裝插件，安裝插件後你會看到錯誤就消失了。</p>
-<h3 id="安裝插件管理器-管理插件的插件"><a href="#安裝插件管理器-管理插件的插件" class="headerlink" title="安裝插件管理器 - 管理插件的插件"></a>安裝插件管理器 - 管理插件的插件</h3><p>Vim 有非常多的插件管理器可以使用，除去功能上的細微差異，我們可以將所有插件管理器分爲異步型和同步型。可以簡單地理解爲異步型可以同時下載安裝多個插件，而同步型一次只能處理一個。在 Vim 7.4 版本出來之前，插件管理器都是同步型的，包括大名鼎鼎的 Vundle。</p>
-<p>在我剛開始使用 Vim 的時候，Vim 和 Neovim 都已經支持異步架構，但由於當時查的是中文資料，很多都是非常老的文章。基本上所有文章都推薦使用 Vundle 作爲插件管理器，事實上在你用過 vim-plug 之類的異步插件管理器後，你會無法再忍受 Vundle 的速度。這告訴我們技術型的文章還是要去 Google…</p>
-<p>不會有人再去使用 Vim 7.4 之前的版本了，所以這裏我推薦使用 <a href="https://github.com/junegunn/vim-plug" target="_blank" rel="noopener" title="vim-plug">vim-plug</a> 作爲插件管理器。vim-plug 的優點是異步下載安裝、插件更新方便、支持插件按需加載，並且只包含一個文件。它的 <a href="https://github.com/junegunn/vim-plug" target="_blank" rel="noopener" title="vim-plug">GitHub 倉庫</a>上有詳細的安裝教程。</p>
-<h3 id="安裝插件-本體不夠再打-mod"><a href="#安裝插件-本體不夠再打-mod" class="headerlink" title="安裝插件 - 本體不夠再打 mod"></a>安裝插件 - 本體不夠再打 mod</h3><p>雖然 Vim 並不是擴展性最好的編輯器，但它仍支持成千上萬個插件。尋找插件最好的途徑是 <a href="https://github.com" target="_blank" rel="noopener" title="GitHub">GitHub</a> 和 <a href="https://www.vim.org/scripts/" target="_blank" rel="noopener" title="Vim Scripts">Vim Scripts</a>。以下是我使用的插件列表：</p>
-<figure class="highlight vim hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> <span class="hljs-variable">g:python3_host_prog</span> = <span class="hljs-string">"/usr/bin/python3"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">call</span> plug#begin(<span class="hljs-string">'~/.vim/plugged'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'tomasr/molokai'</span>                                             <span class="hljs-comment">" molokai color scheme</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'morhetz/gruvbox'</span>                                            <span class="hljs-comment">" gruvbox colorscheme theme</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'mhinz/vim-startify'</span>                                         <span class="hljs-comment">" an awesome startup screen</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'vim-scripts/fcitx.vim'</span>                                      <span class="hljs-comment">" auto switch fcitx status</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'manu-mannattil/vim-sdcv'</span>                                    <span class="hljs-comment">" a simple dictionary for vim</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'vim-airline/vim-airline'</span>                                    <span class="hljs-comment">" add status line</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'scrooloose/nerdtree'</span>, &#123; <span class="hljs-string">'on'</span>: <span class="hljs-string">'NERDTreeToggle'</span> &#125;            <span class="hljs-comment">" directory tree</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'majutsushi/tagbar'</span>, &#123; <span class="hljs-string">'on'</span>: <span class="hljs-string">'TagbarToggle'</span> &#125;                <span class="hljs-comment">" Class structure viewer, need ctags installed</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'mbbill/undotree'</span>, &#123; <span class="hljs-string">'on'</span>: <span class="hljs-string">'UndotreeToggle'</span> &#125;                <span class="hljs-comment">" undo tree manager</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'tpope/vim-fugitive'</span>                                         <span class="hljs-comment">" git support</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'junegunn/gv.vim'</span>                                            <span class="hljs-comment">" view git commits in Vim</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'junegunn/fzf'</span>, &#123; <span class="hljs-string">'dir'</span>: <span class="hljs-string">'~/.fzf'</span>, <span class="hljs-string">'do'</span>: <span class="hljs-string">'./install --all'</span> &#125; <span class="hljs-comment">" fuzzy file searcher</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'junegunn/fzf.vim'</span>                                           <span class="hljs-comment">" provide many other search functions</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'tpope/vim-commentary'</span>                                       <span class="hljs-comment">" a better comment tool</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'vim-scripts/EasyMotion'</span>                                     <span class="hljs-comment">" enhance default motions</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'Yggdroot/indentLine'</span>                                        <span class="hljs-comment">" indent line indicator</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'jiangmiao/auto-pairs'</span>                                       <span class="hljs-comment">" auto add pairs</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'junegunn/rainbow_parentheses.vim'</span>                           <span class="hljs-comment">" a much simpler-using fork of above</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'junegunn/limelight.vim'</span>                                     <span class="hljs-comment">" dim others</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'junegunn/goyo.vim'</span>                                          <span class="hljs-comment">" provide a dim writing environment</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'w0rp/ale'</span>                                                   <span class="hljs-comment">" syntax error check</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'Valloric/YouCompleteMe'</span>,                                    <span class="hljs-comment">" auto complete</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">            \&#123; <span class="hljs-string">'do'</span>: <span class="hljs-string">'./install.py --clang-completer'</span> &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'SirVer/ultisnips'</span>                                           <span class="hljs-comment">" auto complete string</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'honza/vim-snippets'</span>                                         <span class="hljs-comment">" complete rules for ultisnips</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'junegunn/vim-easy-align'</span>                                    <span class="hljs-comment">" align tool</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'godlygeek/tabular'</span>                                          <span class="hljs-comment">" advanced align tool</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'gabrielelana/vim-markdown'</span>, &#123; <span class="hljs-string">'for'</span>: <span class="hljs-string">'markdown'</span> &#125;           <span class="hljs-comment">" markdown plugin</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'joker1007/vim-markdown-quote-syntax'</span>, &#123; <span class="hljs-string">'for'</span>: <span class="hljs-string">'markdown'</span> &#125; <span class="hljs-comment">" syntax highlight for quoted code</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'iamcco/mathjax-support-for-mkdp'</span>, &#123; <span class="hljs-string">'for'</span>: <span class="hljs-string">'markdown'</span> &#125;     <span class="hljs-comment">" mathjax support for markdown preview</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'iamcco/markdown-preview.vim'</span>, &#123; <span class="hljs-string">'for'</span>: <span class="hljs-string">'markdown'</span> &#125;         <span class="hljs-comment">" markdown preview support</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'vim-scripts/indentpython.vim'</span>, &#123; <span class="hljs-string">'for'</span>: <span class="hljs-string">'python'</span> &#125;          <span class="hljs-comment">" auto indent for python</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'nvie/vim-flake8'</span>, &#123; <span class="hljs-string">'for'</span>: <span class="hljs-string">'python'</span> &#125;                       <span class="hljs-comment">" flake8 style code check, need install flake8</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">" 這兩個插件被 neoformat 替代了</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">" Plug 'tell-k/vim-autopep8', &#123; 'for': 'python' &#125;                 "</span> <span class="hljs-keyword">a</span> <span class="hljs-keyword">python</span> code format tool wrapper <span class="hljs-keyword">for</span> autopep8</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">" Plug 'fisadev/vim-isort', &#123; 'for': 'python' &#125;                   "</span> imports sorter <span class="hljs-keyword">for</span> <span class="hljs-keyword">python</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'vim-latex/vim-latex'</span>, &#123; <span class="hljs-string">'for'</span>: <span class="hljs-string">'tex'</span> &#125;                      <span class="hljs-comment">" latex edit environment</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'skywind3000/asyncrun.vim'</span>                                   <span class="hljs-comment">" AsyncRun plugin</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'hotoo/pangu.vim'</span>                                            <span class="hljs-comment">" Chinese text format</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'vimwiki/vimwiki'</span>                                            <span class="hljs-comment">" write wiki in vim</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'yianwillis/vimcdoc'</span>                                         <span class="hljs-comment">" a Chinese help handbook for Vim</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'sbdchd/neoformat'</span>                                           <span class="hljs-comment">" a collection of format tools</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'ludovicchabant/vim-gutentags'</span>                               <span class="hljs-comment">" generate tags for project</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'mhinz/vim-signify'</span>                                          <span class="hljs-comment">" show file modifying status for git</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'Shougo/echodoc.vim'</span>                                         <span class="hljs-comment">" show argvs hint on the command line</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">"======================"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">"  text object 全家桶  "</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">"======================"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'kana/vim-textobj-user'</span>                                            <span class="hljs-comment">" 用戶自定義 text object</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'kana/vim-textobj-indent'</span>                                          <span class="hljs-comment">" 縮進對象，關鍵字 &lt;i&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'kana/vim-textobj-syntax'</span>                                          <span class="hljs-comment">" 語法對象</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'kana/vim-textobj-function'</span>, &#123; <span class="hljs-string">'for'</span>:[<span class="hljs-string">'c'</span>, <span class="hljs-string">'cpp'</span>, <span class="hljs-string">'vim'</span>, <span class="hljs-string">'java'</span>] &#125; <span class="hljs-comment">" 函數對象，關鍵字 &lt;f&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'sgur/vim-textobj-parameter'</span>                                       <span class="hljs-comment">" 參數對象，關鍵字 &lt;,&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'coderifous/textobj-word-column.vim'</span>                               <span class="hljs-comment">" 列對象，關鍵字 &lt;c&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'bps/vim-textobj-python'</span>                                           <span class="hljs-comment">" python 對象合集，&lt;c&gt; 類，&lt;f&gt; 函數</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">Plug <span class="hljs-string">'tpope/vim-surround'</span>                                               <span class="hljs-comment">" deal with surround for text object</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">call</span> plug#end()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">filetype</span> plugin <span class="hljs-built_in">indent</span> <span class="hljs-keyword">on</span></span></pre></td></tr></table></figure>
-
-<p>由於 vim-plug 的強大，我們只需要將上述配置粘貼進 vimrc 中，重載配置文件後運行 <code>:PlugInstall&lt;CR&gt;</code> 就會自動安裝所有插件，甚至 vim-plug 會幫我們做好安裝後的處理。</p>
-<h3 id="必裝插件配置-大大提高生產力"><a href="#必裝插件配置-大大提高生產力" class="headerlink" title="必裝插件配置 - 大大提高生產力"></a>必裝插件配置 - 大大提高生產力</h3><p>通過 vim-plug 安裝的插件大部分都是即裝即用的，但也包括小部分需要在安裝完成後進行一定的配置才能舒適地使用。</p>
-<h4 id="YouCompleteMe-最強補全神器"><a href="#YouCompleteMe-最強補全神器" class="headerlink" title="YouCompleteMe - 最強補全神器"></a>YouCompleteMe - 最強補全神器</h4><p><a href="https://github.com/Valloric/YouCompleteMe" target="_blank" rel="noopener" title="YouCompleteMe">YouCompleteMe</a> 是谷歌程序員 Valloric 開發的一款智能補全插件。在 YouCompleteMe 出來之前，大部分補全插件都是基於 tag 分析，也就是從當前文件以及其他 buffer 中的文件文本中匹配類似字符串進行補全，說白了就是靠猜。而 YouCompleteMe 是真正支持程序語義分析的補全，能夠理解程序語言進行補全，準確率大大提高，並且體驗也提升了很多。</p>
-<p>盜用 YouCompleteMe 官方倉庫上的一張效果圖</p>
-<p><img src="https://camo.githubusercontent.com/1f3f922431d5363224b20e99467ff28b04e810e2/687474703a2f2f692e696d6775722e636f6d2f304f50346f6f642e676966" alt="YouCompleteMe 效果圖" title="YouCompleteMe 效果圖（來自 YouCompleteMe 官方倉庫）"></p>
-<p>雖然 YouCompleteMe 效果看起來很炫酷，但它也被稱爲“最難安裝的插件”。它的底層是用 C++ 寫成的，爲了能作爲 Vim 的插件，外層又用 Python 做了封裝，因此它也是最複雜的插件。<code>Plug &#39;Valloric/YouCompleteMe&#39;, { &#39;do&#39;: &#39;./install.py --clang-completer&#39; }</code> 命令要求 vim-plug 將 YouCompleteMe 插件下載下來後自動編譯，但如果你的終端上缺少編譯的依賴會導致編譯失敗，此時我們需要手動進行編譯。</p>
-<p>在 Linux 下進行安裝會相對比較容易，在編譯之前你需要但不限於以下工具：</p>
-<ul>
-<li>cmake</li>
-<li>automake</li>
-<li>python3-dev（python2 或 python3）</li>
-</ul>
-<p>之後運行 <code>cd ~/.vim/plugged/YouCompleteMe/</code> 進入 YouCompleteMe 的安裝目錄，運行 <code>./install.py --clang-completer</code> 進行安裝，如果不需要 C 語言補全支持的話無需 <code>--clang-completer</code> 選項。安裝程序會自動下載 libclang 依賴，等待安裝完成即可。Windows 的安裝過程大部分相似，可參考 YouCompleteMe 的官方倉庫文檔。</p>
-<p>再次使用 Vim 打開一個 Python 或 cpp 文件應該就能自動補全了。但接下來你會發現 YouCompleteMe 彈出的補全菜單裏只會包括前面你輸入過的關鍵字，並沒有進行語義識別，那不是和自帶的 omni 補全沒區別！還浪費我這麼長時間安裝！其實之前我也是這麼想的，直到有一天我看到<a href="https://zhuanlan.zhihu.com/p/33046090" target="_blank" rel="noopener" title="YouCompleteMe 中容易忽略的配置">這篇文章</a>，我才發現原來我一直用的是半殘的 YouCompleteMe，根本沒發揮出它真正的實力。通過如下配置就能使 YouCompleteMe 的補全策略更貼近於常見的 IDE。</p>
-<figure class="highlight vim hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">set</span> completeopt=longest,<span class="hljs-keyword">menu</span>                                <span class="hljs-comment">" YCM 的提示方式，previews 會顯示具體預覽窗口，menu 不提示</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">" let g:ycm_add_preview_to_completeopt = 0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> <span class="hljs-variable">g:ycm_collect_identifiers_from_tags_files</span>=<span class="hljs-number">1</span>             <span class="hljs-comment">" 使用 ctags 生成的 tags 文件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> <span class="hljs-variable">g:ycm_min_num_of_chars_for_completion</span>=<span class="hljs-number">2</span>                 <span class="hljs-comment">" 從第 2 個鍵入字符就開始羅列匹配項</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> <span class="hljs-variable">g:ycm_seed_identifiers_with_syntax</span>=<span class="hljs-number">1</span>                    <span class="hljs-comment">" 語法關鍵字補全</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> <span class="hljs-variable">g:ycm_cache_omnifunc</span>=<span class="hljs-number">1</span>                                  <span class="hljs-comment">" 禁止緩存匹配項,每次都重新生成匹配項</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> <span class="hljs-variable">g:ycm_complete_in_comments</span> = <span class="hljs-number">1</span>                          <span class="hljs-comment">" 在註釋輸入中也能補全</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> <span class="hljs-variable">g:ycm_complete_in_strings</span> = <span class="hljs-number">1</span>                           <span class="hljs-comment">" 在字符串輸入中也能補全</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> <span class="hljs-variable">g:ycm_collect_identifiers_from_comments_and_strings</span> = <span class="hljs-number">1</span> <span class="hljs-comment">" 註釋和字符串中的文字也會被收入補全</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> <span class="hljs-variable">g:ycm_python_binary_path</span> = <span class="hljs-string">'/usr/bin/python'</span>            <span class="hljs-comment">" set default python binary</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> <span class="hljs-variable">g:ycm_global_ycm_extra_conf</span> = <span class="hljs-string">'~/.ycm_extra_conf.py'</span>    <span class="hljs-comment">" set global ycm extra config path</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> <span class="hljs-variable">g:ycm_confirm_extra_conf</span> = <span class="hljs-number">0</span>                            <span class="hljs-comment">" confirm for config file</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> <span class="hljs-variable">g:ycm_use_ultisnips_completer</span>=<span class="hljs-number">1</span>                         <span class="hljs-comment">" 查詢 ultisnips 提供的代碼模板補全</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> <span class="hljs-variable">g:ycm_key_invoke_completion</span> = <span class="hljs-string">'&lt;c-z&gt;'</span>                   <span class="hljs-comment">" 手動觸發補全的按鍵</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">" 使 YCM 能在輸入兩個字母的時候自動基於語義補全</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> <span class="hljs-variable">g:ycm_semantic_triggers</span> =  &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">			\ <span class="hljs-string">'c,cpp,python,java,go,erlang,perl'</span>: [<span class="hljs-string">'re!\w&#123;2&#125;'</span>],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">			\ <span class="hljs-string">'cs,lua,javascript'</span>: [<span class="hljs-string">'re!\w&#123;2&#125;'</span>],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">			\ &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">nnoremap</span> <span class="hljs-symbol">&lt;leader&gt;</span>d :YcmCompleter GoToDefinitionElseDeclaration<span class="hljs-symbol">&lt;CR&gt;</span> <span class="hljs-comment">" goto definition</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">autocmd</span> InsertLeave * <span class="hljs-keyword">if</span> <span class="hljs-built_in">pumvisible</span>() == <span class="hljs-number">0</span>|<span class="hljs-keyword">pclose</span>|<span class="hljs-keyword">endif</span>            <span class="hljs-comment">" 離開插入模式後自動關閉預覽窗口</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">autocmd</span> VimEnter * EchoDocEnable</span></pre></td></tr></table></figure>
-
-<h4 id="ALE-第二好的異步語法檢查工具"><a href="#ALE-第二好的異步語法檢查工具" class="headerlink" title="ALE - 第二好的異步語法檢查工具"></a>ALE - 第二好的異步語法檢查工具</h4><p><a href="https://github.com/w0rp/ale" target="_blank" rel="noopener" title="ALE 官方倉庫">ALE</a> 是一款非常強大的異步語法檢查工具。在 Vim 支持異步之前，最好的語法檢查工具是 <a href="https://github.com/vim-syntastic/syntastic" target="_blank" rel="noopener" title="Syntastic 官方倉庫">Syntastic</a>，但由於它非異步的工作方式，導致語法檢查會阻塞主線程，使用體驗比較差。在新版 Vim 中，都會推薦 ALE 或其他支持異步的語法檢查工具。事實上 ALE 並不僅僅是一款語法檢查工具，它是包括了語法檢查、代碼風格格式化、自動補全功能的工具集。</p>
-<p>ALE 安裝完成後，隨意打開一個代碼文件。如果語法存在錯誤，那麼在窗口的最左側會顯示一列符號，包括 ‘&gt;&gt;’ 或 ‘–’。將光標移至有標記的行，在最下方的 statusline 中會顯示錯誤的具體信息。</p>
-<figure class="highlight vim hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">" let g:ale_set_loclist = 0           "</span> show the lint <span class="hljs-keyword">as</span> <span class="hljs-keyword">a</span> dot <span class="hljs-keyword">on</span> <span class="hljs-keyword">left</span> of <span class="hljs-keyword">a</span> <span class="hljs-built_in">line</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">" let g:ale_set_quickfix = 1          "</span> show the lint in quickfix <span class="hljs-keyword">list</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">" let g:ale_open_list = 1             "</span> show quickfix window <span class="hljs-keyword">to</span> show error message</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">" let g:ale_keep_list_window_open = 1 "</span> keep quickfix window show whether errors exist</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">" let g:ale_sign_column_always = 1    "</span> 保持左側邊欄始終可見</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">nmap</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;C-k&gt;</span> <span class="hljs-symbol">&lt;Plug&gt;</span>(ale_previous_wrap)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">nmap</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;C-j&gt;</span> <span class="hljs-symbol">&lt;Plug&gt;</span>(ale_next_wrap)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">" Check Python files with flake8 and pylint.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">" let b:ale_linters = ['flake8', 'pylint']</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">" set fixers for different file types</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> <span class="hljs-variable">b:ale_fixers</span> = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            \ <span class="hljs-string">'python'</span>: [<span class="hljs-string">'isort'</span>, <span class="hljs-string">'autopep8'</span>],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            \ <span class="hljs-string">'cpp'</span>: [<span class="hljs-string">'clang-format'</span>],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            \ <span class="hljs-string">'markdown'</span>: [<span class="hljs-string">'prettier'</span>]&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">" let g:ale_linters_explicit = 1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> <span class="hljs-variable">g:ale_completion_delay</span> = <span class="hljs-number">500</span>                     <span class="hljs-comment">" 補全的延遲</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> <span class="hljs-variable">g:ale_echo_delay</span> = <span class="hljs-number">20</span>                            <span class="hljs-comment">" 回顯的延遲</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> <span class="hljs-variable">g:ale_lint_delay</span> = <span class="hljs-number">500</span>                           <span class="hljs-comment">" 停止輸入後更新 lint 標記的延遲</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> <span class="hljs-variable">g:ale_echo_msg_format</span> = <span class="hljs-string">'[%linter%] &lt;%code&gt; %%s'</span> <span class="hljs-comment">" 自定義 lint 輸出格式</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> <span class="hljs-variable">g:ale_lint_on_text_changed</span> = <span class="hljs-string">'normal'</span>            <span class="hljs-comment">" 當文字在 NORMAL 模式下發生更改的時候更新 lint，防止 YCM 頻繁刷新</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> <span class="hljs-variable">g:ale_lint_on_insert_leave</span> = <span class="hljs-number">1</span>                   <span class="hljs-comment">" 離開 INSERT 模式時更新 lint</span></span></pre></td></tr></table></figure>
-
-<p>將錯誤信息表示在左側只是一種方式，你也可以通過反註釋前 4 行，利用 Vim 自帶的 quickfix 窗口顯示錯誤信息。雖然通過這種方式你能夠更清晰的瞭解各個錯誤的具體信息，但需要佔用一部分寶貴的屏幕空間。</p>
-<p>11 至 14 行設置了 ALE 的默認格式化工具，ALE 本身並不對代碼進行格式化，而是針對不同文件類型調用合適的格式化工具進行處理（ALE 支持的格式化工具列表可參照<a href="https://github.com/w0rp/ale" target="_blank" rel="noopener" title="ALE 官方倉庫">官方倉庫</a>）。其中 <code>isort</code>、<code>autopep8</code>、<code>prettier</code> 都是 Python 編寫的命令行工具，<code>clang-format</code> 是 <code>clang</code> 編譯器帶的 C++ 格式化工具。</p>
-<p>20、21 行是針對 YCM 做的額外配置，據悉可以解決 YCM 補全菜單頻繁刷新的問題。</p>
-<!--links-->
-
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/08/12/Vim-%E4%B8%80%E6%AC%BE%E8%AE%A9%E6%88%91%E7%9B%B8%E8%A7%81%E6%81%A8%E6%99%9A%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -958,7 +504,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    16 分钟 读完 (大约 2430 个字)
+                    16 分钟 读完 (大约 2431 个字)
                 </span>
                 
                 
@@ -972,75 +518,16 @@
         </h1>
         <div class="content">
             <p>最近，由於 GitHub 在國內的訪問越來越不穩定，我決定將博客遷移至 <a href="https://coding.net" target="_blank" rel="noopener" title="Coding">Coding</a>（一個國內的代碼託管平臺）。Coding 與 GitHub 類似的可以直接展示靜態的個人主頁，整個配置流程與 GitHub 類似。但是之前使用的是 Jekyll 博客生成器進行構建，Jekyll 的優點是可以直接將代碼 Push 上去，GitHub 可以直接根據 Jekyll 格式的目錄進行部署，無需本地的部署環境，但是由於 Ruby 的性能問題，整個部署過程需要至少幾分鐘，因此尋求其他的生成器解決辦法。後來瞭解到 <a href="https://hexo.io/" target="_blank" rel="noopener" title="Hexo">Hexo</a>，一個由 NodeJS 驅動的博客生成器，於是決定趁遷移嘗試一下。</p>
-<h2 id="環境安裝"><a href="#環境安裝" class="headerlink" title="環境安裝"></a>環境安裝</h2><h3 id="安裝-NodeJS"><a href="#安裝-NodeJS" class="headerlink" title="安裝 NodeJS"></a>安裝 NodeJS</h3><p>Hexo 既然是由 NodeJS 驅動的，那必然 NodeJS 環境是必不可少，另外爲了更方便地管理第三方庫，還需要安裝 npm 管理器。對於我使用的 ArchLinux 爲例，只需要運行以下命令即可完成安裝。</p>
-<p> <code>$ sudo pacman -S nodejs npm</code></p>
-<h3 id="安裝-hexo"><a href="#安裝-hexo" class="headerlink" title="安裝 hexo"></a>安裝 hexo</h3><ul>
-<li>先創建一個文件夾用於存放博客的資源文件，然後 <code>cd</code> 到該目錄下</li>
-<li>安裝 hexo：<code>sudo npm install hexo -g</code></li>
-<li>安裝完成後通過 <code>hexo -v</code> 查看版本</li>
-<li>通過 <code>hexo init</code> 將本目錄初始化爲博客的根目錄，可以看到目錄下自動生成了一些文件</li>
-</ul>
-<img src="/2018/04/14/Spawn-your-blog-site-with-hexo/hexo_dir.png" class title="hexo 目錄">
-
-<ul>
-<li>各文件解釋如下：<ul>
-<li>node_modules：依賴包</li>
-<li>public：存放構建生成的頁面</li>
-<li>scaffolds：命令生成文章等的模板</li>
-<li>source：用命令創建的各種文章</li>
-<li>themes：主題目錄</li>
-<li>_config.yml：整個博客的配置</li>
-<li>db.json：source 解析得到的信息</li>
-<li>package.json：項目所需模塊的配置信息</li>
-</ul>
-</li>
-</ul>
-<h2 id="開始寫博客"><a href="#開始寫博客" class="headerlink" title="開始寫博客"></a>開始寫博客</h2><p>可以選擇 typora 或者其他的 Markdown 編輯器進行編輯，此處我選擇了 vim 進行文件編輯。要想要 vim 支持 Markdown 的語法高亮需要以下幾個插件</p>
-<ul>
-<li>Plugin ‘godlygeek/tabular’</li>
-<li>Plugin ‘gabrielelana/vim-markdown’</li>
-</ul>
-<h2 id="部署博客"><a href="#部署博客" class="headerlink" title="部署博客"></a>部署博客</h2><p>hexo 可以用 <code>$ hexo d -g</code> 命令方便的對博客系統進行部署，但首先需要在博客配置文件 <code>_config.yml</code>  的 Deployment 節中做配置</p>
-<figure class="highlight yaml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">deploy:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-attr">type:</span> <span class="hljs-string">git</span> <span class="hljs-comment"># 此處是部署的方式</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-attr">repo:</span>     <span class="hljs-comment"># 此處是所有需要部署的倉庫，倉庫的設置與 Jekyll 類似</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">      <span class="hljs-attr">coding:</span> <span class="hljs-string">git@git.coding.net:cycoe/cycoe.git</span></span></pre></td></tr></table></figure>
-
-<p>然後在 <a href="https://coding.net" target="_blank" rel="noopener" title="Coding">Coding</a> 上新建一個名爲 cycoe 的空倉庫（由於  <a href="https://coding.net" target="_blank" rel="noopener" title="Coding">Coding</a> 本身的限制，該倉庫應與用戶名同名），在本機的博客根目錄運行 <code>hexo d -g</code> 即可將博客部署至 <a href="https://coding.net" target="_blank" rel="noopener" title="Coding">Coding</a>。然後打開倉庫設置，將此倉庫設置爲 Coding Pages 即可。</p>
-<h2 id="2018-06-05-更新"><a href="#2018-06-05-更新" class="headerlink" title="2018-06-05 更新"></a>2018-06-05 更新</h2><p>最近 <a href="https://coding.net" target="_blank" rel="noopener" title="Coding">Coding</a> 不知是怎麼了，我的博客總是打不開。湊巧最近剛租了個包月的服務器，於是決定將整個博客遷移到自己的服務器上。</p>
-<p><a href="https://hexo.io/" target="_blank" rel="noopener" title="Hexo">Hexo</a> 和 Jekyll 博客系統的部署原理不太一樣，<code>$ hexo g</code> 是 <code>$ hexo generate</code> 的縮寫，其原理是在本地使用 Hexo 引擎將 <code>_posts</code> 目錄的 Markdown 文件生成網頁結構，結果保存在 <code>public</code> 目錄下，可直接由 Apache 或 Nginx 驅動。</p>
-<img src="/2018/04/14/Spawn-your-blog-site-with-hexo/html_dir.png" class title="網頁目錄結構">
-
-<p>而 <code>$ hexo deploy</code> 正是將 public 目錄下的網頁部署到 Git 倉庫中。因此如果能將倉庫克隆到服務器上進行部署，那麼問題就能解決。</p>
-<h3 id="在服務器上建立-Git-倉庫"><a href="#在服務器上建立-Git-倉庫" class="headerlink" title="在服務器上建立 Git 倉庫"></a>在服務器上建立 Git 倉庫</h3><h4 id="初始化-Git-倉庫"><a href="#初始化-Git-倉庫" class="headerlink" title="初始化 Git 倉庫"></a>初始化 Git 倉庫</h4><p><code>$ sudo git init --bare sample.git</code></p>
-<p>Git 就會創建一個裸倉庫，即會在當前路徑下創建一個名爲 <code>sample.git</code> 的倉庫。裸倉庫沒有工作區，因爲服務器上的 Git 倉庫純粹是爲了共享，所以不讓用戶直接登錄到服務器上去改工作區，並且服務器上的 Git 倉庫通常都以 <code>.git</code> 結尾。然後，把 owner 改爲服務器的用戶名，不然沒有權限將修改寫入該倉庫。</p>
-<p><code>$ sudo chown -R ubuntu:ubuntu sample.git</code></p>
-<h4 id="將倉庫加到-Hexo-的配置文件"><a href="#將倉庫加到-Hexo-的配置文件" class="headerlink" title="將倉庫加到 Hexo 的配置文件"></a>將倉庫加到 Hexo 的配置文件</h4><figure class="highlight yaml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">deploy:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-attr">type:</span> <span class="hljs-string">git</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-attr">repo:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-comment">#coding: git@git.coding.net:cycoe/cycoe.git</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-attr">my_server:</span> <span class="hljs-string">ubuntu@139.199.95.151:/home/ubuntu/git/blog.git</span></span></pre></td></tr></table></figure>
-
-<p>此處 @ 前的用戶名一定要與服務器倉庫的權限對應，: 後面是倉庫的絕對路徑。</p>
-<h4 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h4><p>此時運行 <code>$ hexo d- g</code> 即可將博客網頁目錄部署到倉庫，但此時查看倉庫會發現目錄下並不是網頁的結構，因爲這個倉庫是裸倉庫，下面並沒有工作區，所以看到的並不是我們 Push 上來的內容。</p>
-<h4 id="Git-Hook-事件"><a href="#Git-Hook-事件" class="headerlink" title="Git Hook 事件"></a>Git Hook 事件</h4><p>事實上，如果我們此時將該倉庫克隆到另一個目錄下就可以看到工作區了。首先 <code>cd</code> 到需要保存網頁的路徑下 <code>$ cd /home/ubuntu/www/</code>，然後運行 <code>$ git clone /home/ubuntu/git/blog.git</code> 將倉庫克隆至當前路徑。</p>
-<p>但是如果每次都要登上服務器手動克隆就違揹我們自動化部署的初衷了。因此此處需要用到 Git 自帶的 Hook 功能，簡單來將講就是在倉庫發生變化前/後所要執行的操作。</p>
-<p>Hook 的事件放在裸倉庫目錄的 hooks 文件夾下，這裏我們新建一個名爲 <code>post-receive</code> 的事件，該事件是在倉庫更新合併完成後自動運行，文件中加入如下內容</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#!/bin/bash</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">cd</span> /home/ubuntu/www/blog  <span class="hljs-comment"># cd 到網頁的展示倉庫</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">unset</span> GIT_DIR  <span class="hljs-comment"># 非常重要！如果不解綁 GIT_DIR 環境變量無法切換路徑</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">git config --list</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">git pull origin master</span></pre></td></tr></table></figure>
-
-<p>運行 <code>$ chmod +x post-receive</code> 賦予執行權限</p>
-<p>此時再在本機運行 <code>$ hexo d -g</code> 發現網頁目錄也自動更新了</p>
-<h2 id="2018-08-18-更新"><a href="#2018-08-18-更新" class="headerlink" title="2018-08-18 更新"></a>2018-08-18 更新</h2><p>今天寫了一篇博客，運行 <code>$ hexo d -g</code> 想要更新博客，結果發現網頁並沒有變化。登上服務器一看 <code>/home/ubuntu/git/blog.git</code> 倉庫已經更新了，懷疑是更新後沒有成功運行 <code>post-receive</code>。但是自從上次設置好 <code>post-receive</code> 後就沒有改過，按理說應該能夠運行。運行 <code>$ ls -l</code> 命令後發現，<code>/home/ubuntu/git/blog.git</code> 目錄的歸屬者是 <code>ubuntu</code>，而 <code>/home/ubuntu/www/blog</code> 目錄的歸屬者是 <code>nginx</code>，應該是上次我在設置 nginx 的時候不小心把 <code>/home/ubuntu/www</code> 目錄遞歸修改成歸屬 <code>nginx</code> 了。而 <code>post-receive</code> 所做的工作實際上是在我把更新 push 到 <code>/home/ubuntu/git/blog.git</code> 倉庫後，<code>cd</code> 到了 <code>/home/ubuntu/www/blog</code> 目錄並拉取更新。因此我是以 <code>ubuntu</code> 用戶的身份做的 push，又是以 <code>ubuntu</code> 用戶的身份運行的 <code>post-receive</code>，因此在 <code>/home/ubuntu/www/blog</code> 目錄中是沒有權限拉取更新的。</p>
-<p>既然已經發現了問題出在用戶權限上。那就可以通過運行 <code>$ sudo chown -R ubuntu:users /home/ubuntu/www</code> 將整個目錄都改爲 <code>ubuntu</code> 所屬，也就不關 <code>nginx</code> 用戶什麼事了，這樣確實非常方便的解決了這個問題。另外 <code>post-receive</code> 在更改用戶歸屬後執行權限丟失了，記得運行 <code>$ chmod +x post-receive</code> 重新賦予執行權限。事實上當初建立 <code>nginx</code> 用戶也是因爲安裝了 nginx 服務，想要弄得更規範些。但因爲懶一直沒給 <code>nginx</code> 建立自己的 Home 目錄，按理說把跟 nginx 相關的目錄都扔到 <code>nginx</code> 用戶對應的 Home 下是最好的。</p>
-<h2 id="2018-10-24-更新"><a href="#2018-10-24-更新" class="headerlink" title="2018-10-24 更新"></a>2018-10-24 更新</h2><p>最近寫的新博客中需要開啓 LaTeX 公式支持，但 hexo 本身對數學公式的支持有些問題，Hexo 默認使用 “hexo-renderer-marked” 引擎渲染網頁，該引擎會把一些特殊的 markdown 符號轉換爲相應的 html 標籤，比如在 markdown 語法中，下劃線 ‘_’ 代表斜體，會被渲染引擎處理爲 <em> 標籤。</em></p>
-<h3 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h3><p>更換 Hexo 的 markdown 渲染引擎，使用 ‘hexo-renderer-kramed’ 引擎替代 ‘hexo-renderer-marked’ 引擎，前者在後者的基礎上修復了一些 bug。執行以下命令卸載原引擎並安裝新引擎。</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-renderer-marked --save</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">npm install hexo-renderer-kramed --save</span></pre></td></tr></table></figure>
-<p>此時行間公式應該就可以正常渲染了，但行內公式還是有問題。接下來在博客根目錄中，找到 <code>node_modules\kramed\lib\rules\inline.js</code>，修改 11 行的 escape 變量的值。</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//  escape: /^\\([\\`*&#123;&#125;\[\]()#$+\-.!_&gt;])/,</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">escape</span>: <span class="hljs-regexp">/^\\([`*\[\]()#$+\-.!_&gt;])/</span>,</span></pre></td></tr></table></figure>
-<p>這一步是在原基礎上取消了對 ‘, {, }’ 的轉義(escape)。同時把第 20 行的 em 變量也要做相應的修改。</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//  em: /^\b_((?:__|[\s\S])+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">em: <span class="hljs-regexp">/^\*((?:\*\*|[\s\S])+?)\*(?!\*)/</span>,</span></pre></td></tr></table></figure>
-<p>然後運行 <code>hexo clean</code> 清除構建，再 generate 即可解決問題。</p>
-<h3 id="在主題中開啓-mathjax-開關"><a href="#在主題中開啓-mathjax-開關" class="headerlink" title="在主題中開啓 mathjax 開關"></a>在主題中開啓 mathjax 開關</h3><p>打開 <code>themes/next/_config.yml</code>，將 math 的 enable 設爲 true，將 per_page 設爲 true，表示針對每頁單獨決定是否開啓 mathjax 支持。</p>
-<figure class="highlight yaml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">math:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-comment"># Default(true) will load mathjax/katex script on demand</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-comment"># That is it only render those page who has 'mathjax: true' in Front Matter.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-comment"># If you set it to false, it will load mathjax/katex srcipt EVERY PAGE.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-attr">per_page:</span> <span class="hljs-literal">true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-comment"># hexo-renderer-pandoc (or hexo-renderer-kramed) required for full MathJax support.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="hljs-attr">mathjax:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-comment"># See: https://mhchem.github.io/MathJax-mhchem/</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-attr">mhchem:</span> <span class="hljs-literal">false</span></span></pre></td></tr></table></figure>
-<p>因爲 per_page 設爲 true，因此需要在文章的 Front-matter 裏打開 mathjax 開關。</p>
-<figure class="highlight markdown hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">---</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">title: Spawn your blog site with hexo</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">date: 2018-04-14 13:50:18</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">categories: linux</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">tag: hexo</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">mathjax: true</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">---</span></pre></td></tr></table></figure>
-
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/04/14/Spawn-your-blog-site-with-hexo/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -1070,7 +557,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 814 个字)
+                    5 分钟 读完 (大约 815 个字)
                 </span>
                 
                 
@@ -1088,41 +575,16 @@
 <img src="/2018/04/13/Planche-training-calendar/Planche.jpg" class title="Planche">
 </blockquote>
 <p>剛進大學的時候 ，無意間在 B 站看到一個關於俄挺的視頻，能夠完成俄挺成了我的一個夢想。本科的時候陸陸續續地練過一段時間，練練俯臥撐和團身，團身也就是剛剛高團 2-3 秒的程度。後來因爲實在沒什麼進展也就漸漸放棄了。前幾天回家的路上吹了點小風就感冒了，意識到自己的小身板太弱，再加上最近想要增重，決定重新開始練習俄挺。</p>
-<h3 id="2018-04-05"><a href="#2018-04-05" class="headerlink" title="2018-04-05"></a>2018-04-05</h3><p>從今天開始練習，因爲也好久沒有做俯臥撐了，目前的水平實在太爛。</p>
-<ul>
-<li>標準俯臥撐 10 個</li>
-<li>衝肩維持 5 秒</li>
-</ul>
-<h3 id="2018-04-13"><a href="#2018-04-13" class="headerlink" title="2018-04-13"></a>2018-04-13</h3><p>練了一個星期的衝肩，每天都在堅持。</p>
-<img src="/2018/04/13/Planche-training-calendar/plank_lean.jpg" class>
-
-<ul>
-<li>衝肩維持 10 秒</li>
-<li>窄距俯臥撐 10 個</li>
-</ul>
-<h3 id="2018-06-10"><a href="#2018-06-10" class="headerlink" title="2018-06-10"></a>2018-06-10</h3><p>最近右手小臂疼的厲害，應該是跟前幾天每天用鼠標做視頻有關，看來要好好休息幾天了，最近下調訓練強度，少用鼠標。。不過值得激動的是，目前已經可以比較輕鬆地做團身了，高階團身應該也能 10 來秒了，接下來準備練團身舉腿。</p>
-<img src="/2018/04/13/Planche-training-calendar/tucked.jpg" class title="tucked">
-
-<ul>
-<li>衝肩維持 30 秒</li>
-<li>窄距俯臥撐 25 個</li>
-<li>衝肩俯臥撐 15 個</li>
-<li>團身維持 10 秒</li>
-<li>引體向上 7 個</li>
-</ul>
-<h3 id="2018-07-25"><a href="#2018-07-25" class="headerlink" title="2018-07-25"></a>2018-07-25</h3><p>最近一個月因爲手腕一直還是有點疼，尤其搬重物的時候，也就沒怎麼敢繼續練團身，轉而練習引體和前水平。打算先通過前水平鍛鍊背部力量，通過雙力臂鍛鍊手腕力量，等基礎打好後再練習俄挺。引體的話其實應該一組能做個 10 個左右，但是後面幾組做的時候因爲可能是翻腕了的原因，導致手腕還是會疼，發現在雲梯上練習就沒事了，可能是手的朝向的問題。</p>
-<p>雙力臂其實還是沒有太大進展，前水平的話一條腿伸直是能保持了，接下來就是要延長持續的時間，然後慢慢向雙腿進步。在宿舍也可以每天都練前水平。</p>
-<p>另外利用操場上的槓鈴可以做很多其他的訓練，比如正手擡、反手拉、單手拉、臥推。利用器材可以取得更好的訓練效果。</p>
-<p><strong>最後有個非常重要的想法：</strong>在家的這幾天發現，想要找個健身器材齊全的公園實在不是很容易，因此希望能做個 App，街健愛好者可以在上面共享健身器材所在的位置，另外可以認識附近的街健愛好者。</p>
-<ul>
-<li>衝肩俯臥撐 20 個</li>
-<li>前水平團身 10 秒</li>
-<li>單槓硬拉 4 個</li>
-<li>引體 10 個</li>
-</ul>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/04/13/Planche-training-calendar/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -1152,7 +614,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    10 分钟 读完 (大约 1563 个字)
+                    10 分钟 读完 (大约 1564 个字)
                 </span>
                 
                 
@@ -1166,36 +628,16 @@
         </h1>
         <div class="content">
             <h2 id="漏洞發現"><a href="#漏洞發現" class="headerlink" title="漏洞發現"></a>漏洞發現</h2><p>最近在爲之前寫的爬蟲做批註的時候發現了一段有趣的代碼，代碼如下</p>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">MisUtils.initAttempt()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">while</span> MisUtils.descAttempt():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    self.response = self.session.send(prepareBody)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">if</span> self.response.status_code == <span class="hljs-number">200</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-keyword">break</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> MisUtils.descAttempt():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    Logger.log(<span class="hljs-string">'Up to max attempts!'</span>, [<span class="hljs-string">'Maybe remote server unreachable'</span>], level=Logger.error)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> re.search(<span class="hljs-string">'用戶名不存在'</span>, self.response.text):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    print(Logger.log(<span class="hljs-string">'No such a user!'</span>, [<span class="hljs-string">'Cleaning password file'</span>], level=Logger.error))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    reInput = <span class="hljs-literal">True</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">elif</span> re.search(<span class="hljs-string">'密碼錯誤'</span>, self.response.text):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    print(Logger.log(<span class="hljs-string">'Wrong password!'</span>, [<span class="hljs-string">'Cleaning password file'</span>], level=Logger.error))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    reInput = <span class="hljs-literal">True</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">elif</span> re.search(<span class="hljs-string">'請輸入驗證碼'</span>, self.response.text):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    print(Logger.log(<span class="hljs-string">'Please input vertify code!'</span>, [<span class="hljs-string">'Retrying...'</span>], level=Logger.error))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">elif</span> re.search(<span class="hljs-string">'驗證碼錯誤'</span>, self.response.text):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    print(Logger.log(<span class="hljs-string">'Wrong vertify code!'</span>, [<span class="hljs-string">'Retrying...'</span>], level=Logger.error))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">else</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    print(Logger.log(<span class="hljs-string">'Login successfully!'</span>, [<span class="hljs-string">'UserName: '</span> + MisUtils.confDict[<span class="hljs-string">'userName'</span>]], level=Logger.error))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    MisUtils.dumpConfFile()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">break</span></span></pre></td></tr></table></figure>
-<p>當時寫的時候沒注意，現在回過頭來看看，驚奇地發現教務網對於用戶名和密碼的驗證順序是如下的優先級：</p>
-<ol>
-<li>首先驗證用戶名是否存在</li>
-<li>再驗證密碼是否正確</li>
-<li>然後驗證碼是否爲空</li>
-<li>最後纔是驗證碼是否正確</li>
-</ol>
-<p>這。。。我只想說，誰寫的驗證邏輯。。。我要這驗證碼有何用？！！！</p>
-<h2 id="漏洞驗證"><a href="#漏洞驗證" class="headerlink" title="漏洞驗證"></a>漏洞驗證</h2><p>接下來去教務網上驗證一下整個驗證邏輯是否如所想的那樣</p>
-<ol>
-<li>首先在用戶名輸入框中隨意輸入一串數字，並保持密碼和驗證碼都爲空，嘗試登錄發現彈出“用戶名不存在”的 JS 腳本<br><img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login1.png" alt="login1"></li>
-<li>再輸入我正確的學號，仍保持密碼和驗證碼都爲空，嘗試登錄彈出“密碼錯誤”的 JS 腳本<br><img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login2.png" alt="login2"></li>
-<li>輸入正確的學號和密碼，並保持驗證碼爲空，嘗試登錄彈出“請輸入驗證碼”的 JS 腳本<br><img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login3.png" alt="login3"></li>
-<li>輸入正確的學號和密碼，但是輸入錯誤的驗證碼，嘗試登錄彈出“驗證碼錯誤”的 JS 腳本<br><img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login4.png" alt="login4"></li>
-</ol>
-<p>通過以上流程，可以總結得以下兩條有價值的信息：</p>
-<ol>
-<li>當你輸入的用戶名不存在時，不管密碼和驗證碼輸的啥，總是會提示“用戶名不存在”；當你輸入的用戶名存在，並且密碼爲空時，會提示“密碼錯誤”。</li>
-<li>當你輸入的用戶名存在，但是密碼錯誤時，不管驗證碼輸的啥，總會提示“密碼錯誤”；當輸入的密碼正確並且驗證碼爲空時，會提示“請輸入驗證碼”。</li>
-</ol>
-<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>通過上面的兩條信息可以至少做到兩件事情</p>
-<h3 id="枚舉用戶名"><a href="#枚舉用戶名" class="headerlink" title="枚舉用戶名"></a>枚舉用戶名</h3><p>目前所有在讀研究生的入學時間大部分爲 2013-2017 年，學號的前四位爲入學年份，中間三位與所在的專業有關，最後三位爲流水號。對所有形如 2013XXXXXX 的學號進行嘗試登錄，根據信息 1，能夠枚舉出所有 13 年入學的學生學號。</p>
-<h3 id="暴破"><a href="#暴破" class="headerlink" title="暴破"></a>暴破</h3><p>利用上一步得到的用戶名列表，再配合字典就可以進行在線的密碼暴破，這種破解方法一般來說是非常低效的，嚴重依賴於網絡狀況和服務器的機能。嘗試發現在單線程的情況下，每秒只能對服務器進行 1k 次左右的訪問。也就是說如果使用 16 位的數字加字母作爲密碼，最多需要 2.5 百萬億年的時間才能成功破解。看起來是非常安全吧。<br>然而實際情況又是什麼樣呢？教務網的初始密碼爲身份證號中的生日，一般來說我們在第一次登錄時都會改密碼，但還總會有人抱着僥倖的心理用初始密碼，這就爲暴破帶來了捷徑。<br>以生日作爲密碼具有非常明顯的結構，如 2017 年入學學生的生日大多在 1994-1996 之間，利用下面簡單的字典生成器可得到 1994-1996 年所有的日期列表：</p>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">big_month_ = [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">10</span>, <span class="hljs-number">12</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">small_month_ = [<span class="hljs-number">4</span>, <span class="hljs-number">6</span>, <span class="hljs-number">9</span>, <span class="hljs-number">11</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">gen_</span><span class="hljs-params">(begin, end)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    password_ = []</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">for</span> year <span class="hljs-keyword">in</span> range(begin, end + <span class="hljs-number">1</span>):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-keyword">for</span> month <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">13</span>):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-keyword">if</span> month <span class="hljs-keyword">in</span> big_month_:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                month_len = <span class="hljs-number">31</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-keyword">elif</span> month <span class="hljs-keyword">in</span> small_month_:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                month_len = <span class="hljs-number">30</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-keyword">elif</span> month == <span class="hljs-number">2</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                <span class="hljs-keyword">if</span> year % <span class="hljs-number">4</span> != <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> (year % <span class="hljs-number">100</span> == <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> year % <span class="hljs-number">400</span> != <span class="hljs-number">0</span>):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                    month_len = <span class="hljs-number">28</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                <span class="hljs-keyword">else</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                    month_len = <span class="hljs-number">29</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-keyword">else</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                month_len = <span class="hljs-number">31</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-keyword">for</span> day <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, month_len + <span class="hljs-number">1</span>):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">                password_.append(str(year) + str(month).zfill(<span class="hljs-number">2</span>) + str(day).zfill(<span class="hljs-number">2</span>))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">with</span> open(<span class="hljs-string">'password.dict'</span>, <span class="hljs-string">'w'</span>) <span class="hljs-keyword">as</span> fr:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-keyword">for</span> password <span class="hljs-keyword">in</span> password_:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">            fr.write(password)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">            fr.write(<span class="hljs-string">'\n'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    gen_(<span class="hljs-number">1994</span>, <span class="hljs-number">1996</span>)</span></pre></td></tr></table></figure>
-<p>利用得到的用戶名列表和密碼字典就可以對所有未修改的用戶密碼進行暴破。</p>
-<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>最後結果怎麼樣？使用 100 個線程，並設置單個線程的訪問頻率爲 1 次/秒進行暴破，10 分鐘破解出了接近 40 個用戶密碼！並且平均每四個人裏就有一個人沒有修改密碼！<br>可能很多人會覺得教務網密碼不涉及錢財也就不那麼在意。但其實教務網上有詳細的個人資料，包括你的姓名、照片和家庭住址。另外還有你的課表，你某時某刻會在哪個教室出現都會被人知道啊！<br>所以，弱密碼的危害顯而易見，很多的信息泄漏也都是由弱密碼引起的。給自己換個複雜點的密碼吧，畢竟密碼這種東西一寸長一寸強。現在也快到年底了，騙子也要賺錢備年貨了，希望大家能夠保護好自己的信息，不要給騙子可乘之機。<br>最後討伐一下這個軟件提供商，一個商業化的系統裏面竟然有如此明顯的邏輯漏洞，只希望快點被修復吧。<br><img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/source_code.png" alt="source_code"></p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2017/12/07/%E6%95%99%E5%8A%A1%E7%BD%91%E7%8E%B0%E6%83%8A%E5%A4%A9%E5%A4%A7bug/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -1225,8 +667,6 @@
             <li><a class="pagination-link is-current" href="/page/2/">2</a></li>
             
             <li><a class="pagination-link has-text-black-ter" href="/page/3/">3</a></li>
-            
-            <li><a class="pagination-link has-text-black-ter" href="/page/4/">4</a></li>
             
         </ul>
     </nav>
@@ -1276,7 +716,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            33
+                            30
                         </p>
                     </a>
                 </div>
@@ -1288,7 +728,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            15
+                            14
                         </p>
                     </a>
                 </div>
@@ -1454,14 +894,6 @@
         <a class="level is-marginless" href="/categories/blog/">
             <span class="level-start">
                 <span class="level-item">blog</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/chemistry/">
-            <span class="level-start">
-                <span class="level-item">chemistry</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -1837,7 +1269,7 @@
                     <span class="level-item">三月 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -2351,7 +1783,7 @@
                     <span class="level-item">三月 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>

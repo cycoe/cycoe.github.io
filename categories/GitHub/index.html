@@ -156,7 +156,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 348 个字)
+                    2 分钟 读完 (大约 349 个字)
                 </span>
                 
                 
@@ -170,23 +170,16 @@
         </h1>
         <div class="content">
             <p>在 GitHub 上進行項目的團隊協作，一般都是 fork 組織倉庫到自己的賬號下，提交補丁後再提交 Pull Request。上游倉庫一直保持更新。<br>由於最近在做 <a href="https://github.com/LCTT/TranslateProject.git" target="_blank" rel="noopener">LCTT</a> 項目，經常需要同步上游其他人的翻譯，下面就以 <a href="https://github.com/LCTT/TranslateProject.git" target="_blank" rel="noopener">LCTT</a> 項目爲例，記錄一下 GitHub 上 fork 倉庫同步上游更新的操作。</p>
-<hr>
-<ol>
-<li><p>使用 <code>git remote -v</code> 查看當前的遠程倉庫別名，輸出如下：</p>
- <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">LCTT    https:&#x2F;&#x2F;github.com&#x2F;LCTT&#x2F;TranslateProject.git (fetch)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">LCTT    https:&#x2F;&#x2F;github.com&#x2F;LCTT&#x2F;TranslateProject.git (push)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">origin  git@github.com:cycoe&#x2F;TranslateProject.git (fetch)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">origin  git@github.com:cycoe&#x2F;TranslateProject.git (push)</span></pre></td></tr></table></figure>
-
-<p> 其中 <code>origin</code> 是自己賬號下的對應遠端倉庫地址別名， <code>LCTT</code> 是設定好的上游倉庫地址的別名。此處 LCTT 項目已經幫我們設置好了就不需要另外設置。<br> 如果沒有設置上游倉庫地址，可通過 <code>git remote add 上游倉庫別名 上游倉庫地址</code> 命令來設置上游倉庫的別名。</p>
-</li>
-<li><p>同步上游倉庫更新到本地，併合並更新到本地倉庫 master 分支</p>
- <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">git fetch LCTT          <span class="hljs-comment">#從上游倉庫抓取更新</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">git checkout master     <span class="hljs-comment">#切換到 master 分支</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">git merge LCTT/master   <span class="hljs-comment">#合併上游更新到 master 分支</span></span></pre></td></tr></table></figure>
-</li>
-<li><p><code>git push</code> 命令推送本地倉庫到 fork 倉庫</p>
-</li>
-</ol>
-<hr>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2017/03/11/%E5%A6%82%E4%BD%95%E5%90%8C%E6%AD%A5GitHub%E4%B8%8A%E6%B8%B8%E6%9B%B4%E6%96%B0/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -216,7 +209,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 347 个字)
+                    2 分钟 读完 (大约 348 个字)
                 </span>
                 
                 
@@ -230,34 +223,16 @@
         </h1>
         <div class="content">
             <p>閒來無事，打算搭建個人主頁。查閱了各種資料，發現目前最省錢省力的方法就是在 GitHub Pages 上利用 jekyll 靜態網頁生成器搭建。<br>對於 Web 開發小白來說，自己寫網頁代碼不太現實。 好在GitHub 上有許多其他大神製作好的 jekyll 模板，直接 fork 過來修改一下就可以使用，其餘的精力都可以用在文章內容本身上。</p>
-<hr>
-<h2 id="搭建步驟"><a href="#搭建步驟" class="headerlink" title="搭建步驟"></a>搭建步驟</h2><ol>
-<li><p>在 GitHub 上找到自己喜歡的 jekyll 模板， fork 到自己的倉庫下，然後點擊 Setting 修改倉庫名稱爲 <code>username.github.io</code></p>
-</li>
-<li><p>將 fork 後的項目 clone 至本地</p>
-</li>
-<li><p>打開 <code>_config.yml</code> 文件修改其中的信息，包括網站名稱、用戶信息等</p>
-</li>
-<li><p>將 html 或 MarkDown 格式的文章和博客添加到 <code>_posts</code> 文件夾</p>
-</li>
-<li><p>使用以下命令即可提交更新並推送更新至遠端倉庫</p>
- <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">git add .</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">git commit -am <span class="hljs-string">"post update"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">git push</span></pre></td></tr></table></figure>
-</li>
-<li><p>完成以上步驟後，你就應該可以通過 <code>username.github.io</code> 訪問你的主頁了 :clap: ！</p>
-</li>
-</ol>
-<h2 id="注意事項"><a href="#注意事項" class="headerlink" title="注意事項"></a>注意事項</h2><pre><code>comments_provider: duoshuo
-duoshuo_username: cycoe
-disqus_username: cycoe
-lazy_load_duoshuo: true</code></pre><p><strong>此處的usrname一定要填自己申請的賬號名</strong></p>
-<h2 id="進階配置"><a href="#進階配置" class="headerlink" title="進階配置"></a>進階配置</h2><ol>
-<li>申請域名</li>
-</ol>
-<hr>
-<p>本博客使用的主題爲 <em>mzlogin</em> 的 <a href="https://github.com/mzlogin/mzlogin.github.io" target="_blank" rel="noopener">碼志</a> 主題</p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2017/03/09/%E7%94%A8GitHub-Pages%E5%92%8Cjekyll%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -315,7 +290,7 @@ lazy_load_duoshuo: true</code></pre><p><strong>此處的usrname一定要填自�
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            33
+                            30
                         </p>
                     </a>
                 </div>
@@ -327,7 +302,7 @@ lazy_load_duoshuo: true</code></pre><p><strong>此處的usrname一定要填自�
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            15
+                            14
                         </p>
                     </a>
                 </div>
@@ -493,14 +468,6 @@ lazy_load_duoshuo: true</code></pre><p><strong>此處的usrname一定要填自�
         <a class="level is-marginless" href="/categories/blog/">
             <span class="level-start">
                 <span class="level-item">blog</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/chemistry/">
-            <span class="level-start">
-                <span class="level-item">chemistry</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -876,7 +843,7 @@ lazy_load_duoshuo: true</code></pre><p><strong>此處的usrname一定要填自�
                     <span class="level-item">三月 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1390,7 +1357,7 @@ lazy_load_duoshuo: true</code></pre><p><strong>此處的usrname一定要填自�
                     <span class="level-item">三月 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>

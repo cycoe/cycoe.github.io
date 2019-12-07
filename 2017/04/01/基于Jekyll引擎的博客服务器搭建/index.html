@@ -19,7 +19,7 @@
 <meta property="og:description" content="在樹莓派上搭建自己的博客服務器">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-02-28T01:03:03.000Z">
+<meta property="og:updated_time" content="2019-12-07T15:05:55.234Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
 
@@ -145,7 +145,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 581 个字)
+                    4 分钟 读完 (大约 582 个字)
                 </span>
                 
                 
@@ -166,6 +166,8 @@
             <blockquote>
 <p>Transform your plain text into static websites and blogs.</p>
 </blockquote>
+<a id="more"></a>
+
 <h2 id="爲什麼要搭建自己的博客服務器"><a href="#爲什麼要搭建自己的博客服務器" class="headerlink" title="爲什麼要搭建自己的博客服務器"></a>爲什麼要搭建自己的博客服務器</h2><p>之前我們已經利用 GitHub Pages 和 Jekyll 搭建了靜態博客並且託管在了 <code>github.io</code> 上，<br>並且擁有了不錯的頁面效果以及可用性。那我們爲什麼還要搭建自己的博客服務器呢？<br>因爲 GitHub 的服務器在美國，訪問體驗並不順暢；並且在我們 Push 了項目之後，往往要等待一定時間頁面內容纔會刷新。<br>爲了更好的體驗效果，我們將基於<a href="www.raspberrypi.org/">樹莓派</a>搭建自己的博客服務器。<br>樹莓派爲 3B+，系統爲 <code>Archlinuxarm-rpi-2</code></p>
 <h2 id="環境搭建"><a href="#環境搭建" class="headerlink" title="環境搭建"></a>環境搭建</h2><h3 id="安裝-Ruby"><a href="#安裝-Ruby" class="headerlink" title="安裝 Ruby"></a>安裝 <a href="https://ruby-china.org/" target="_blank" rel="noopener">Ruby</a></h3><p>依次運行下面的命令安裝最新的 Ruby 運行環境：</p>
 <figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> sudo pacman -S ruby</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> ruby --version</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">ruby 2.4.0p0 (2016-12-24 revision 57164) [armv7l-linux-eabihf]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> gem --version</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">2.6.8</span></pre></td></tr></table></figure>
@@ -258,8 +260,8 @@
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2017/03/25/English_Interview/">
-                <span class="level-item">研究生複試英語面試稿子</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2017/03/25/%E5%9C%A8SSD%E4%B8%8A%E4%BD%BF%E7%94%A8Btrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%9B%B8%E5%85%B3%E4%BC%98%E5%8C%96/">
+                <span class="level-item">在SSD上使用Btrfs文件系統的相關優化</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -334,7 +336,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            33
+                            30
                         </p>
                     </a>
                 </div>
@@ -346,7 +348,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            15
+                            14
                         </p>
                     </a>
                 </div>
@@ -512,14 +514,6 @@
         <a class="level is-marginless" href="/categories/blog/">
             <span class="level-start">
                 <span class="level-item">blog</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/chemistry/">
-            <span class="level-start">
-                <span class="level-item">chemistry</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -895,7 +889,7 @@
                     <span class="level-item">三月 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1409,7 +1403,7 @@
                     <span class="level-item">三月 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>

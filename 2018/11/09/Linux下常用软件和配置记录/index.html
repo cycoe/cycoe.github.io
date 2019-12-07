@@ -10,16 +10,16 @@
 <title>Linux下常用軟件和配置記錄 - Cycoe&#39;s Home Page</title>
 
 
-    <meta name="description" content="隨着使用 Linux 系統的年頭越來越長，積累的相關技巧也越來越多。最近一次重裝系統突然發現很多配置都已經忘的差不多了，想要配置系統還需要去網上到處搜刮資料實在是麻煩，因此打算用一篇博客記錄關於 Linux 系統的配置及常用軟件的介紹。 硬件相关配置一般来说，在 Windows 上驱动是随硬件的发布同步释出的，而 Linux 上需要硬件先发布，开源驱动才能跟上。Linux 内核能较好地适配所有不太">
+    <meta name="description" content="隨着使用 Linux 系統的年頭越來越長，積累的相關技巧也越來越多。最近一次重裝系統突然發現很多配置都已經忘的差不多了，想要配置系統還需要去網上到處搜刮資料實在是麻煩，因此打算用一篇博客記錄關於 Linux 系統的配置及常用軟件的介紹。">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux下常用軟件和配置記錄">
 <meta property="og:url" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;2018&#x2F;11&#x2F;09&#x2F;Linux%E4%B8%8B%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%92%8C%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95&#x2F;index.html">
 <meta property="og:site_name" content="Cycoe&#39;s Home Page">
-<meta property="og:description" content="隨着使用 Linux 系統的年頭越來越長，積累的相關技巧也越來越多。最近一次重裝系統突然發現很多配置都已經忘的差不多了，想要配置系統還需要去網上到處搜刮資料實在是麻煩，因此打算用一篇博客記錄關於 Linux 系統的配置及常用軟件的介紹。 硬件相关配置一般来说，在 Windows 上驱动是随硬件的发布同步释出的，而 Linux 上需要硬件先发布，开源驱动才能跟上。Linux 内核能较好地适配所有不太">
+<meta property="og:description" content="隨着使用 Linux 系統的年頭越來越長，積累的相關技巧也越來越多。最近一次重裝系統突然發現很多配置都已經忘的差不多了，想要配置系統還需要去網上到處搜刮資料實在是麻煩，因此打算用一篇博客記錄關於 Linux 系統的配置及常用軟件的介紹。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-11-26T09:39:00.191Z">
+<meta property="og:updated_time" content="2019-12-07T15:03:30.365Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
 
@@ -145,7 +145,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    18 分钟 读完 (大约 2707 个字)
+                    18 分钟 读完 (大约 2708 个字)
                 </span>
                 
                 
@@ -164,6 +164,8 @@
         </h1>
         <div class="content">
             <p>隨着使用 Linux 系統的年頭越來越長，積累的相關技巧也越來越多。最近一次重裝系統突然發現很多配置都已經忘的差不多了，想要配置系統還需要去網上到處搜刮資料實在是麻煩，因此打算用一篇博客記錄關於 Linux 系統的配置及常用軟件的介紹。</p>
+<a id="more"></a>
+
 <h2 id="硬件相关配置"><a href="#硬件相关配置" class="headerlink" title="硬件相关配置"></a>硬件相关配置</h2><p>一般来说，在 Windows 上驱动是随硬件的发布同步释出的，而 Linux 上需要硬件先发布，开源驱动才能跟上。Linux 内核能较好地适配所有不太新的硬件，太新的硬件就自求多福了。目前遇到最有可能出问题的硬件有无线网卡、触摸板、显卡等。因此，这些驱动需要单独配置。</p>
 <h3 id="APU-核显"><a href="#APU-核显" class="headerlink" title="APU 核显"></a>APU 核显</h3><p>就目前形式来看，牙膏厂的 CPU + iGPU 是问题概率最小的组合，虽然 10 代以前 Intel 核显的性能鸡肋得不行，但胜在稳定。APU 次之，本来我以为 APU 是与 Intel 同等稳定的存在，但 <code>xf86-video-amdgpu</code> 驱动竟然遇到了问题… Intel CPU + NVIDIA GPU 的组合在早些年是绝对不推荐的，但是最近 bumblebee 和 prime 等项目趋于成熟，NVIDIA 显卡的使用体验好了不少，但还是比不上 Intel 和 AMD 的核显。我的 CPU 和 显卡型号如下：</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">CPU:       Topology: Quad Core model: AMD Ryzen 5 3550H with Radeon Vega Mobile Gfx</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">           bits: 64 type: MT MCP arch: Zen+ rev: 1 L2 cache: 2048 KiB</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">           flags: avx avx2 lm nx pae sse sse2 sse3 sse4_1 sse4_2 sse4a ssse3 svm</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">           bogomips: 33550</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">           Speed: 2203 MHz min&#x2F;max: 1400&#x2F;2100 MHz boost: enabled Core speeds (MHz):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">           1: 2011 2: 1879 3: 1198 4: 1199 5: 1202 6: 1206 7: 1199 8: 1199</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">Graphics:  Device-1: AMD Picasso vendor: Lenovo driver: amdgpu v: kernel bus ID: 03:00.0</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">           chip ID: 1002:15d8</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">           Display: x11 server: X.Org 1.20.5 driver: amdgpu resolution: 2560x1600~60Hz</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">           OpenGL: renderer: AMD RAVEN (DRM 3.33.0 5.3.12-arch1-1 LLVM 9.0.0)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">           v: 4.5 Mesa 19.2.4 direct render: Yes</span></pre></td></tr></table></figure>
@@ -371,7 +373,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            33
+                            30
                         </p>
                     </a>
                 </div>
@@ -383,7 +385,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            15
+                            14
                         </p>
                     </a>
                 </div>
@@ -549,14 +551,6 @@
         <a class="level is-marginless" href="/categories/blog/">
             <span class="level-start">
                 <span class="level-item">blog</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/chemistry/">
-            <span class="level-start">
-                <span class="level-item">chemistry</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -932,7 +926,7 @@
                     <span class="level-item">三月 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1446,7 +1440,7 @@
                     <span class="level-item">三月 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>

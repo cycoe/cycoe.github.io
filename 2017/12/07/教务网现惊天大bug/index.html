@@ -19,7 +19,7 @@
 <meta property="og:description" content="爬蟲小記">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-02-28T01:03:03.000Z">
+<meta property="og:updated_time" content="2019-12-07T15:06:45.394Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
 
@@ -145,7 +145,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    10 分钟 读完 (大约 1563 个字)
+                    10 分钟 读完 (大约 1564 个字)
                 </span>
                 
                 
@@ -164,6 +164,8 @@
         </h1>
         <div class="content">
             <h2 id="漏洞發現"><a href="#漏洞發現" class="headerlink" title="漏洞發現"></a>漏洞發現</h2><p>最近在爲之前寫的爬蟲做批註的時候發現了一段有趣的代碼，代碼如下</p>
+<a id="more"></a>
+
 <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">MisUtils.initAttempt()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">while</span> MisUtils.descAttempt():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    self.response = self.session.send(prepareBody)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">if</span> self.response.status_code == <span class="hljs-number">200</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-keyword">break</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> MisUtils.descAttempt():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    Logger.log(<span class="hljs-string">'Up to max attempts!'</span>, [<span class="hljs-string">'Maybe remote server unreachable'</span>], level=Logger.error)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> re.search(<span class="hljs-string">'用戶名不存在'</span>, self.response.text):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    print(Logger.log(<span class="hljs-string">'No such a user!'</span>, [<span class="hljs-string">'Cleaning password file'</span>], level=Logger.error))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    reInput = <span class="hljs-literal">True</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">elif</span> re.search(<span class="hljs-string">'密碼錯誤'</span>, self.response.text):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    print(Logger.log(<span class="hljs-string">'Wrong password!'</span>, [<span class="hljs-string">'Cleaning password file'</span>], level=Logger.error))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    reInput = <span class="hljs-literal">True</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">elif</span> re.search(<span class="hljs-string">'請輸入驗證碼'</span>, self.response.text):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    print(Logger.log(<span class="hljs-string">'Please input vertify code!'</span>, [<span class="hljs-string">'Retrying...'</span>], level=Logger.error))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">elif</span> re.search(<span class="hljs-string">'驗證碼錯誤'</span>, self.response.text):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    print(Logger.log(<span class="hljs-string">'Wrong vertify code!'</span>, [<span class="hljs-string">'Retrying...'</span>], level=Logger.error))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">else</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    print(Logger.log(<span class="hljs-string">'Login successfully!'</span>, [<span class="hljs-string">'UserName: '</span> + MisUtils.confDict[<span class="hljs-string">'userName'</span>]], level=Logger.error))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    MisUtils.dumpConfFile()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">break</span></span></pre></td></tr></table></figure>
 <p>當時寫的時候沒注意，現在回過頭來看看，驚奇地發現教務網對於用戶名和密碼的驗證順序是如下的優先級：</p>
 <ol>
@@ -333,7 +335,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            33
+                            30
                         </p>
                     </a>
                 </div>
@@ -345,7 +347,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            15
+                            14
                         </p>
                     </a>
                 </div>
@@ -511,14 +513,6 @@
         <a class="level is-marginless" href="/categories/blog/">
             <span class="level-start">
                 <span class="level-item">blog</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/chemistry/">
-            <span class="level-start">
-                <span class="level-item">chemistry</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -894,7 +888,7 @@
                     <span class="level-item">三月 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1408,7 +1402,7 @@
                     <span class="level-item">三月 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
