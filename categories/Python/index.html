@@ -7,19 +7,18 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>教務網現驚天大 bug？！談談弱密碼如何暴露你的信息 - Cycoe&#39;s Home Page</title>
+<title>分类: Python - Cycoe&#39;s Home Page</title>
 
 
-    <meta name="description" content="爬蟲小記">
-<meta name="keywords" content="Python,Spider,Sploit">
-<meta property="og:type" content="article">
-<meta property="og:title" content="教務網現驚天大 bug？！談談弱密碼如何暴露你的信息">
-<meta property="og:url" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;2017&#x2F;12&#x2F;07&#x2F;%E6%95%99%E5%8A%A1%E7%BD%91%E7%8E%B0%E6%83%8A%E5%A4%A9%E5%A4%A7bug&#x2F;index.html">
+    <meta name="description" content="Cycoe&amp;apos;s Personal Blog">
+<meta name="keywords" content="Python, Linux, 化学">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cycoe&#39;s Home Page">
+<meta property="og:url" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;categories&#x2F;Python&#x2F;index.html">
 <meta property="og:site_name" content="Cycoe&#39;s Home Page">
-<meta property="og:description" content="爬蟲小記">
+<meta property="og:description" content="Cycoe&amp;apos;s Personal Blog">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-12-07T15:34:07.285Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
 
@@ -79,7 +78,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="教務網現驚天大 bug？！談談弱密碼如何暴露你的信息" height="28">
+                <img src="/images/logo.svg" alt="Cycoe&#39;s Home Page" height="28">
             
             </a>
         </div>
@@ -128,7 +127,19 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    <div class="card-content">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/categories">分类</a></li>
+            
+            <li class="is-active"><a href="#" aria-current="page">Python</a></li>
+        </ul>
+        </nav>
+    </div>
+</div>
+
+    
 <div class="card">
     
     <div class="card-content article ">
@@ -149,156 +160,38 @@
                 </span>
                 
                 
-                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
-                    <i class="far fa-eye"></i>
-                    <span id="busuanzi_value_page_pv">0</span>次访问
-                </span>
-                
             </div>
         </div>
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                教務網現驚天大 bug？！談談弱密碼如何暴露你的信息
+                <a class="has-link-black-ter" href="/2017/12/07/%E6%95%99%E5%8A%A1%E7%BD%91%E7%8E%B0%E6%83%8A%E5%A4%A9%E5%A4%A7bug/">教務網現驚天大 bug？！談談弱密碼如何暴露你的信息</a>
             
         </h1>
         <div class="content">
             <h2 id="漏洞發現"><a href="#漏洞發現" class="headerlink" title="漏洞發現"></a>漏洞發現</h2><p>最近在爲之前寫的爬蟲做批註的時候發現了一段有趣的代碼，代碼如下</p>
-<a id="more"></a>
-
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">MisUtils.initAttempt()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">while</span> MisUtils.descAttempt():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    self.response = self.session.send(prepareBody)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">if</span> self.response.status_code == <span class="hljs-number">200</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-keyword">break</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> MisUtils.descAttempt():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    Logger.log(<span class="hljs-string">'Up to max attempts!'</span>, [<span class="hljs-string">'Maybe remote server unreachable'</span>], level=Logger.error)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> re.search(<span class="hljs-string">'用戶名不存在'</span>, self.response.text):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    print(Logger.log(<span class="hljs-string">'No such a user!'</span>, [<span class="hljs-string">'Cleaning password file'</span>], level=Logger.error))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    reInput = <span class="hljs-literal">True</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">elif</span> re.search(<span class="hljs-string">'密碼錯誤'</span>, self.response.text):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    print(Logger.log(<span class="hljs-string">'Wrong password!'</span>, [<span class="hljs-string">'Cleaning password file'</span>], level=Logger.error))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    reInput = <span class="hljs-literal">True</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">elif</span> re.search(<span class="hljs-string">'請輸入驗證碼'</span>, self.response.text):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    print(Logger.log(<span class="hljs-string">'Please input vertify code!'</span>, [<span class="hljs-string">'Retrying...'</span>], level=Logger.error))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">elif</span> re.search(<span class="hljs-string">'驗證碼錯誤'</span>, self.response.text):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    print(Logger.log(<span class="hljs-string">'Wrong vertify code!'</span>, [<span class="hljs-string">'Retrying...'</span>], level=Logger.error))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">else</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    print(Logger.log(<span class="hljs-string">'Login successfully!'</span>, [<span class="hljs-string">'UserName: '</span> + MisUtils.confDict[<span class="hljs-string">'userName'</span>]], level=Logger.error))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    MisUtils.dumpConfFile()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">break</span></span></pre></td></tr></table></figure>
-<p>當時寫的時候沒注意，現在回過頭來看看，驚奇地發現教務網對於用戶名和密碼的驗證順序是如下的優先級：</p>
-<ol>
-<li>首先驗證用戶名是否存在</li>
-<li>再驗證密碼是否正確</li>
-<li>然後驗證碼是否爲空</li>
-<li>最後纔是驗證碼是否正確</li>
-</ol>
-<p>這。。。我只想說，誰寫的驗證邏輯。。。我要這驗證碼有何用？！！！</p>
-<h2 id="漏洞驗證"><a href="#漏洞驗證" class="headerlink" title="漏洞驗證"></a>漏洞驗證</h2><p>接下來去教務網上驗證一下整個驗證邏輯是否如所想的那樣</p>
-<ol>
-<li>首先在用戶名輸入框中隨意輸入一串數字，並保持密碼和驗證碼都爲空，嘗試登錄發現彈出“用戶名不存在”的 JS 腳本<br><img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login1.png" alt="login1"></li>
-<li>再輸入我正確的學號，仍保持密碼和驗證碼都爲空，嘗試登錄彈出“密碼錯誤”的 JS 腳本<br><img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login2.png" alt="login2"></li>
-<li>輸入正確的學號和密碼，並保持驗證碼爲空，嘗試登錄彈出“請輸入驗證碼”的 JS 腳本<br><img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login3.png" alt="login3"></li>
-<li>輸入正確的學號和密碼，但是輸入錯誤的驗證碼，嘗試登錄彈出“驗證碼錯誤”的 JS 腳本<br><img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login4.png" alt="login4"></li>
-</ol>
-<p>通過以上流程，可以總結得以下兩條有價值的信息：</p>
-<ol>
-<li>當你輸入的用戶名不存在時，不管密碼和驗證碼輸的啥，總是會提示“用戶名不存在”；當你輸入的用戶名存在，並且密碼爲空時，會提示“密碼錯誤”。</li>
-<li>當你輸入的用戶名存在，但是密碼錯誤時，不管驗證碼輸的啥，總會提示“密碼錯誤”；當輸入的密碼正確並且驗證碼爲空時，會提示“請輸入驗證碼”。</li>
-</ol>
-<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>通過上面的兩條信息可以至少做到兩件事情</p>
-<h3 id="枚舉用戶名"><a href="#枚舉用戶名" class="headerlink" title="枚舉用戶名"></a>枚舉用戶名</h3><p>目前所有在讀研究生的入學時間大部分爲 2013-2017 年，學號的前四位爲入學年份，中間三位與所在的專業有關，最後三位爲流水號。對所有形如 2013XXXXXX 的學號進行嘗試登錄，根據信息 1，能夠枚舉出所有 13 年入學的學生學號。</p>
-<h3 id="暴破"><a href="#暴破" class="headerlink" title="暴破"></a>暴破</h3><p>利用上一步得到的用戶名列表，再配合字典就可以進行在線的密碼暴破，這種破解方法一般來說是非常低效的，嚴重依賴於網絡狀況和服務器的機能。嘗試發現在單線程的情況下，每秒只能對服務器進行 1k 次左右的訪問。也就是說如果使用 16 位的數字加字母作爲密碼，最多需要 2.5 百萬億年的時間才能成功破解。看起來是非常安全吧。<br>然而實際情況又是什麼樣呢？教務網的初始密碼爲身份證號中的生日，一般來說我們在第一次登錄時都會改密碼，但還總會有人抱着僥倖的心理用初始密碼，這就爲暴破帶來了捷徑。<br>以生日作爲密碼具有非常明顯的結構，如 2017 年入學學生的生日大多在 1994-1996 之間，利用下面簡單的字典生成器可得到 1994-1996 年所有的日期列表：</p>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">big_month_ = [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">10</span>, <span class="hljs-number">12</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">small_month_ = [<span class="hljs-number">4</span>, <span class="hljs-number">6</span>, <span class="hljs-number">9</span>, <span class="hljs-number">11</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">gen_</span><span class="hljs-params">(begin, end)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    password_ = []</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">for</span> year <span class="hljs-keyword">in</span> range(begin, end + <span class="hljs-number">1</span>):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-keyword">for</span> month <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">13</span>):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-keyword">if</span> month <span class="hljs-keyword">in</span> big_month_:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                month_len = <span class="hljs-number">31</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-keyword">elif</span> month <span class="hljs-keyword">in</span> small_month_:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                month_len = <span class="hljs-number">30</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-keyword">elif</span> month == <span class="hljs-number">2</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                <span class="hljs-keyword">if</span> year % <span class="hljs-number">4</span> != <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> (year % <span class="hljs-number">100</span> == <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> year % <span class="hljs-number">400</span> != <span class="hljs-number">0</span>):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                    month_len = <span class="hljs-number">28</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                <span class="hljs-keyword">else</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                    month_len = <span class="hljs-number">29</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-keyword">else</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                month_len = <span class="hljs-number">31</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-keyword">for</span> day <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, month_len + <span class="hljs-number">1</span>):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">                password_.append(str(year) + str(month).zfill(<span class="hljs-number">2</span>) + str(day).zfill(<span class="hljs-number">2</span>))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">with</span> open(<span class="hljs-string">'password.dict'</span>, <span class="hljs-string">'w'</span>) <span class="hljs-keyword">as</span> fr:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-keyword">for</span> password <span class="hljs-keyword">in</span> password_:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">            fr.write(password)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">            fr.write(<span class="hljs-string">'\n'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    gen_(<span class="hljs-number">1994</span>, <span class="hljs-number">1996</span>)</span></pre></td></tr></table></figure>
-<p>利用得到的用戶名列表和密碼字典就可以對所有未修改的用戶密碼進行暴破。</p>
-<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>最後結果怎麼樣？使用 100 個線程，並設置單個線程的訪問頻率爲 1 次/秒進行暴破，10 分鐘破解出了接近 40 個用戶密碼！並且平均每四個人裏就有一個人沒有修改密碼！<br>可能很多人會覺得教務網密碼不涉及錢財也就不那麼在意。但其實教務網上有詳細的個人資料，包括你的姓名、照片和家庭住址。另外還有你的課表，你某時某刻會在哪個教室出現都會被人知道啊！<br>所以，弱密碼的危害顯而易見，很多的信息泄漏也都是由弱密碼引起的。給自己換個複雜點的密碼吧，畢竟密碼這種東西一寸長一寸強。現在也快到年底了，騙子也要賺錢備年貨了，希望大家能夠保護好自己的信息，不要給騙子可乘之機。<br>最後討伐一下這個軟件提供商，一個商業化的系統裏面竟然有如此明顯的邏輯漏洞，只希望快點被修復吧。<br><img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/source_code.png" alt="source_code"></p>
-
         </div>
         
-        <div class="level is-size-7 is-uppercase">
+        
+        <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/Python/" rel="tag">Python</a>, <a class="has-link-grey -link" href="/tags/Spider/" rel="tag">Spider</a>, <a class="has-link-grey -link" href="/tags/Sploit/" rel="tag">Sploit</a>
+                <a class="button is-size-7 is-light" href="/2017/12/07/%E6%95%99%E5%8A%A1%E7%BD%91%E7%8E%B0%E6%83%8A%E5%A4%A9%E5%A4%A7bug/#more">阅读更多</a>
                 </div>
             </div>
         </div>
         
         
-        
-        <!-- AddToAny BEGIN -->
-<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
-<a class="a2a_dd" href="https://www.addtoany.com/share" target="_blank" rel="noopener"></a>
-<a class="a2a_button_facebook"></a>
-<a class="a2a_button_twitter"></a>
-<a class="a2a_button_telegram"></a>
-<a class="a2a_button_whatsapp"></a>
-<a class="a2a_button_reddit"></a>
-</div>
-<script async src="https://static.addtoany.com/menu/page.js"></script>
-<!-- AddToAny END -->
-
-        
     </div>
 </div>
 
 
 
-<div class="card">
-    <div class="card-content">
-        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
-        <div class="buttons is-centered">
-            
-                
-<a class="button is-info donate">
-    <span class="icon is-small">
-        <i class="fab fa-alipay"></i>
-    </span>
-    <span>支付宝</span>
-    <div class="qrcode"><img src="HTTPS://QR.ALIPAY.COM/FKX01669SBV7NA4ALTVPE8" alt="支付宝"></div>
-</a>
-
-                
-                
-<a class="button is-success donate">
-    <span class="icon is-small">
-        <i class="fab fa-weixin"></i>
-    </span>
-    <span>微信</span>
-    <div class="qrcode"><img src="wxp://f2f0PYx27X0CWU1yiBhSKeHHgYzfA27iOicM" alt="微信"></div>
-</a>
-
-                
-        </div>
-    </div>
-</div>
 
 
 
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
-        
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/04/13/Planche-training-calendar/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Planche training calendar</span>
-            </a>
-        </div>
-        
-        
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2017/11/03/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E6%8A%A2%E5%88%B0%E6%8A%A5%E5%91%8A%E7%9A%84%E6%A6%82%E7%8E%87/">
-                <span class="level-item">如何提高搶到報告的概率？</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
-        </div>
-        
-    </div>
-</div>
 
 
-
-<div class="card">
-    <div class="card-content">
-        <h3 class="title is-5 has-text-weight-normal">评论</h3>
-        
-<div id="valine-thread" class="content"></div>
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
-<script>
-    new Valine({
-        el: '#valine-thread' ,
-        notify: false,
-        verify: false,
-        app_id: 'JMPgCt4i5QXYiepmd7ADdLfm-gzGzoHsz',
-        app_key: 'z6zWp6MXVNc4WnbBOCkVw3Ir',
-        placeholder: '友情提醒：你甚至不需要填写昵称、邮箱、网址就能匿名评论！（邮箱可接收回复提醒）'
-    });
-</script>
-
-    </div>
-</div>
 </div>
                 
 
@@ -1665,7 +1558,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="教務網現驚天大 bug？！談談弱密碼如何暴露你的信息" height="28">
+                    <img src="/images/logo.svg" alt="Cycoe&#39;s Home Page" height="28">
                 
                 </a>
                 <p class="is-size-7">
