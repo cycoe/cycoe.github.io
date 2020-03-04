@@ -165,16 +165,11 @@
         <div class="content">
             <p>閒來無事，打算搭建個人主頁。查閱了各種資料，發現目前最省錢省力的方法就是在 GitHub Pages 上利用 jekyll 靜態網頁生成器搭建。<br>對於 Web 開發小白來說，自己寫網頁代碼不太現實。 好在GitHub 上有許多其他大神製作好的 jekyll 模板，直接 fork 過來修改一下就可以使用，其餘的精力都可以用在文章內容本身上。</p>
 <a id="more"></a>
-
 <h2 id="搭建步驟"><a href="#搭建步驟" class="headerlink" title="搭建步驟"></a>搭建步驟</h2><ol>
-<li><p>在 GitHub 上找到自己喜歡的 jekyll 模板， fork 到自己的倉庫下，然後點擊 Setting 修改倉庫名稱爲 <code>username.github.io</code></p>
-</li>
-<li><p>將 fork 後的項目 clone 至本地</p>
-</li>
-<li><p>打開 <code>_config.yml</code> 文件修改其中的信息，包括網站名稱、用戶信息等</p>
-</li>
-<li><p>將 html 或 MarkDown 格式的文章和博客添加到 <code>_posts</code> 文件夾</p>
-</li>
+<li>在 GitHub 上找到自己喜歡的 jekyll 模板， fork 到自己的倉庫下，然後點擊 Setting 修改倉庫名稱爲 <code>username.github.io</code></li>
+<li>將 fork 後的項目 clone 至本地</li>
+<li>打開 <code>_config.yml</code> 文件修改其中的信息，包括網站名稱、用戶信息等</li>
+<li>將 html 或 MarkDown 格式的文章和博客添加到 <code>_posts</code> 文件夾</li>
 <li><p>使用以下命令即可提交更新並推送更新至遠端倉庫</p>
  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">git add .</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">git commit -am <span class="hljs-string">"post update"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">git push</span></pre></td></tr></table></figure>
 </li>
@@ -184,7 +179,8 @@
 <h2 id="注意事項"><a href="#注意事項" class="headerlink" title="注意事項"></a>注意事項</h2><pre><code>comments_provider: duoshuo
 duoshuo_username: cycoe
 disqus_username: cycoe
-lazy_load_duoshuo: true</code></pre><p><strong>此處的usrname一定要填自己申請的賬號名</strong></p>
+lazy_load_duoshuo: true
+</code></pre><p><strong>此處的usrname一定要填自己申請的賬號名</strong></p>
 <h2 id="進階配置"><a href="#進階配置" class="headerlink" title="進階配置"></a>進階配置</h2><ol>
 <li>申請域名</li>
 </ol>
@@ -336,7 +332,7 @@ lazy_load_duoshuo: true</code></pre><p><strong>此處的usrname一定要填自�
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            18
+                            17
                         </p>
                     </a>
                 </div>
@@ -459,22 +455,6 @@ lazy_load_duoshuo: true</code></pre><p><strong>此處的usrname一定要填自�
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/Emacs/">
-            <span class="level-start">
-                <span class="level-item">Emacs</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/Emacs/Linux/">
-            <span class="level-start">
-                <span class="level-item">Linux</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li></ul></li><li>
         <a class="level is-marginless" href="/categories/Games/">
             <span class="level-start">
                 <span class="level-item">Games</span>
@@ -496,9 +476,17 @@ lazy_load_duoshuo: true</code></pre><p><strong>此處的usrname一定要填自�
                 <span class="level-item">Linux</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">7</span>
+                <span class="level-item tag">8</span>
             </span>
-        </a></li><li>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Linux/Emacs/">
+            <span class="level-start">
+                <span class="level-item">Emacs</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
         <a class="level is-marginless" href="/categories/Machine-Learning/">
             <span class="level-start">
                 <span class="level-item">Machine Learning</span>
@@ -623,7 +611,7 @@ lazy_load_duoshuo: true</code></pre><p><strong>此處的usrname一定要填自�
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-28T15:03:00.000Z">2020-02-28</time></div>
                     <a href="/2020/02/28/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-mu4e-%E7%AE%A1%E7%90%86%E9%82%AE%E4%BB%B6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 mu4e 管理邮件</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Emacs/">Emacs</a> / <a class="has-link-grey -link" href="/categories/Emacs/Linux/">Linux</a>
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
                     </p>
                 </div>
             </div>
@@ -1183,7 +1171,7 @@ lazy_load_duoshuo: true</code></pre><p><strong>此處的usrname一定要填自�
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-28T15:03:00.000Z">2020-02-28</time></div>
                     <a href="/2020/02/28/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-mu4e-%E7%AE%A1%E7%90%86%E9%82%AE%E4%BB%B6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 mu4e 管理邮件</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Emacs/">Emacs</a> / <a class="has-link-grey -link" href="/categories/Emacs/Linux/">Linux</a>
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
                     </p>
                 </div>
             </div>
@@ -1899,5 +1887,21 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/search.css">
 <link rel="stylesheet" href="/css/insight.css">
     
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 </body>
 </html>

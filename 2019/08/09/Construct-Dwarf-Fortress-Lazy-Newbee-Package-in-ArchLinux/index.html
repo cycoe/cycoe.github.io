@@ -165,7 +165,6 @@
         <div class="content">
             <h2 id="Included-With-This-Package"><a href="#Included-With-This-Package" class="headerlink" title="Included With This Package:"></a>Included With This Package:</h2><p>DwarfFortress-LNP 也就是我们常说的懒人包，由游戏本体、工具包和图形包组成。在 archlinux 上，我们无法通过 aur 简单地安装懒人包，因此我们需要分别安装懒人包中的各个部分来达到同样的效果。</p>
 <a id="more"></a>
-
 <p>懒人包主要包括如下部分：</p>
 <ul>
 <li><a href="http://www.bay12forums.com/smf/index.php?topic=140808.0" target="_blank" rel="noopener">Pidgeot’s PyLNP 0.13 Lazy Newb Pack Python interface</a><ul>
@@ -204,12 +203,8 @@
 </li>
 </ul>
 <h2 id="Utilities"><a href="#Utilities" class="headerlink" title="Utilities"></a>Utilities</h2><h3 id="DFHack-Linux-V0-44-09-r1-gcc-5-4-0"><a href="#DFHack-Linux-V0-44-09-r1-gcc-5-4-0" class="headerlink" title="DFHack Linux V0.44.09-r1 (gcc 5.4.0)"></a><a href="http://www.bay12forums.com/smf/index.php?topic=139553.0" target="_blank" rel="noopener">DFHack Linux V0.44.09-r1 (gcc 5.4.0)</a></h3><p>DfHack is an attempt to unite the various ways hack tools access DF memory and allow for easier development of new tools (and of course, make the game more enjoyable for players).</p>
-<p>In archlinux, we can get DfHack by install it with yay:</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">yay -S dfhack-twbt-bin</span></pre></td></tr></table></figure>
-<p>As we can see, we installed a DfHack version integrated with TWBT. That means we don’t need to install TWBT again. What’s more, package ‘dfhack-twbt-bin’ depends on the package ‘dwarffortress’ in community repository. </p>
-<p>But as default, the ‘PKGBIULD’ file of ‘dfhack-twbt-bin’ will download the dfhack binary compiled with gcc-4.8, which provide an out-of-date version of remotefortressreader plugin. To avoid this, you can command the PKGBIULD to download dfhack compiled with gcc-7. To get this magic as below, edit PKGBIULD with editor:</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># https://github.com/DFHack/dfhack/releases/download/$_pkgver/dfhack-$_pkgver-Linux-64-gcc-4.8.tar.bz2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">https://github.com/DFHack/dfhack/releases/download/<span class="hljs-variable">$_pkgver</span>/dfhack-<span class="hljs-variable">$_pkgver</span>-Linux-64-gcc-7.tar.bz2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">md5sums=(<span class="hljs-string">'e630ae2fc93c6c7b55552336da2b6c07'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'3853c6f890d3541f710f2c4833a9e696'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'6730da5fec400ece9102552e77996fcb'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'052a58e7f5f1af8be3ddefe9677b8fc6'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-comment"># 'e200a6225dcf285e2eac19c1d1e118ea'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'bdbe256099ec9ffd90f391f0d069742f'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'8eac5ae59dad0397090c4f50d50ef841'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr></table></figure>
-
+<p>In archlinux, we can get DfHack by install it with yay:<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">yay -S dfhack-twbt-bin</span></pre></td></tr></table></figure><br>As we can see, we installed a DfHack version integrated with TWBT. That means we don’t need to install TWBT again. What’s more, package ‘dfhack-twbt-bin’ depends on the package ‘dwarffortress’ in community repository. </p>
+<p>But as default, the ‘PKGBIULD’ file of ‘dfhack-twbt-bin’ will download the dfhack binary compiled with gcc-4.8, which provide an out-of-date version of remotefortressreader plugin. To avoid this, you can command the PKGBIULD to download dfhack compiled with gcc-7. To get this magic as below, edit PKGBIULD with editor:<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># https://github.com/DFHack/dfhack/releases/download/$_pkgver/dfhack-$_pkgver-Linux-64-gcc-4.8.tar.bz2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">https://github.com/DFHack/dfhack/releases/download/<span class="hljs-variable">$_pkgver</span>/dfhack-<span class="hljs-variable">$_pkgver</span>-Linux-64-gcc-7.tar.bz2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">md5sums=(<span class="hljs-string">'e630ae2fc93c6c7b55552336da2b6c07'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'3853c6f890d3541f710f2c4833a9e696'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'6730da5fec400ece9102552e77996fcb'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'052a58e7f5f1af8be3ddefe9677b8fc6'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-comment"># 'e200a6225dcf285e2eac19c1d1e118ea'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'bdbe256099ec9ffd90f391f0d069742f'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'8eac5ae59dad0397090c4f50d50ef841'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr></table></figure></p>
 <p>Then run <code>makepkg</code> to download lacking files.</p>
 <h3 id="TWBT-6-41"><a href="#TWBT-6-41" class="headerlink" title="TWBT 6.41"></a><a href="http://www.bay12forums.com/smf/index.php?topic=138754.0" target="_blank" rel="noopener">TWBT 6.41</a></h3><p>This plugin improves various aspects the game interface.</p>
 <p>Originally I wrote a small plugin because I was tired seeing coffins instead of zeroes and all that stuff. It has greately evolved since then. Some functions may not work or have issues in Adventurer Mode. See readme for all details.</p>
@@ -396,7 +391,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            18
+                            17
                         </p>
                     </a>
                 </div>
@@ -519,22 +514,6 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/Emacs/">
-            <span class="level-start">
-                <span class="level-item">Emacs</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/Emacs/Linux/">
-            <span class="level-start">
-                <span class="level-item">Linux</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li></ul></li><li>
         <a class="level is-marginless" href="/categories/Games/">
             <span class="level-start">
                 <span class="level-item">Games</span>
@@ -556,9 +535,17 @@
                 <span class="level-item">Linux</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">7</span>
+                <span class="level-item tag">8</span>
             </span>
-        </a></li><li>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Linux/Emacs/">
+            <span class="level-start">
+                <span class="level-item">Emacs</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
         <a class="level is-marginless" href="/categories/Machine-Learning/">
             <span class="level-start">
                 <span class="level-item">Machine Learning</span>
@@ -683,7 +670,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-28T15:03:00.000Z">2020-02-28</time></div>
                     <a href="/2020/02/28/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-mu4e-%E7%AE%A1%E7%90%86%E9%82%AE%E4%BB%B6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 mu4e 管理邮件</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Emacs/">Emacs</a> / <a class="has-link-grey -link" href="/categories/Emacs/Linux/">Linux</a>
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
                     </p>
                 </div>
             </div>
@@ -1243,7 +1230,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-28T15:03:00.000Z">2020-02-28</time></div>
                     <a href="/2020/02/28/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-mu4e-%E7%AE%A1%E7%90%86%E9%82%AE%E4%BB%B6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 mu4e 管理邮件</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Emacs/">Emacs</a> / <a class="has-link-grey -link" href="/categories/Emacs/Linux/">Linux</a>
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
                     </p>
                 </div>
             </div>
@@ -1959,5 +1946,21 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/search.css">
 <link rel="stylesheet" href="/css/insight.css">
     
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 </body>
 </html>
