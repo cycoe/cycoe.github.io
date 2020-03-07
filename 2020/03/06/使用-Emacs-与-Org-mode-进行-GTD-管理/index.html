@@ -1,0 +1,2085 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.0.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>使用 Emacs 与 Org mode 进行 GTD 管理 - Cycoe&#39;s Home Page</title>
+
+
+    <meta name="description" content="&amp;#x5728;&amp;#x63A5;&amp;#x89E6; Emacs &amp;#x4EE5;&amp;#x524D;&amp;#xFF0C;&amp;#x6211;&amp;#x7684;&amp;#x65F6;&amp;#x95F4;&amp;#x7BA1;&amp;#x7406;&amp;#x65B9;&amp;#x5F0F;&amp;#x4E3B;&amp;#x8981;&amp;#x662F;&amp;#x5229;&amp;#x7528;&amp;#x6E05;&amp;#x5355;&amp;#x8F6F;&amp;#x4EF6;&amp;#x5EFA">
+<meta name="keywords" content="Linux,Emacs,Org,GTD,Agenda">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Emacs 与 Org mode 进行 GTD 管理">
+<meta property="og:url" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;2020&#x2F;03&#x2F;06&#x2F;%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Org-mode-%E8%BF%9B%E8%A1%8C-GTD-%E7%AE%A1%E7%90%86&#x2F;index.html">
+<meta property="og:site_name" content="Cycoe&#39;s Home Page">
+<meta property="og:description" content="&amp;#x5728;&amp;#x63A5;&amp;#x89E6; Emacs &amp;#x4EE5;&amp;#x524D;&amp;#xFF0C;&amp;#x6211;&amp;#x7684;&amp;#x65F6;&amp;#x95F4;&amp;#x7BA1;&amp;#x7406;&amp;#x65B9;&amp;#x5F0F;&amp;#x4E3B;&amp;#x8981;&amp;#x662F;&amp;#x5229;&amp;#x7528;&amp;#x6E05;&amp;#x5355;&amp;#x8F6F;&amp;#x4EF6;&amp;#x5EFA">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
+<meta property="og:updated_time" content="2020-03-07T08:14:00.656Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="使用 Emacs 与 Org mode 进行 GTD 管理" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/cycoe">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;" target="_blank" rel="noopener">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-06T11:51:00.000Z">2020-03-06</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    9 分钟 读完 (大约 1309 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                使用 Emacs 与 Org mode 进行 GTD 管理
+            
+        </h1>
+        <div class="content">
+            <div id="content">
+<p>
+&#x5728;&#x63A5;&#x89E6; Emacs &#x4EE5;&#x524D;&#xFF0C;&#x6211;&#x7684;&#x65F6;&#x95F4;&#x7BA1;&#x7406;&#x65B9;&#x5F0F;&#x4E3B;&#x8981;&#x662F;&#x5229;&#x7528;&#x6E05;&#x5355;&#x8F6F;&#x4EF6;&#x5EFA;&#x7ACB;&#x5F85;&#x529E;&#x4E8B;&#x9879;&#xFF0C;&#x8F85;&#x4EE5;&#x7EB8;&#x7B14;&#x968F;&#x624B;
+&#x8BB0;&#x5F55;&#x5F53;&#x524D;&#x7684;&#x4E34;&#x65F6;&#x4EFB;&#x52A1;&#x3002;&#x4F46;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x6700;&#x5927;&#x7684;&#x5F0A;&#x7AEF;&#x662F;&#x4E0D;&#x80FD;&#x5206;&#x9879;&#x76EE;&#x8FDB;&#x884C;&#x8BB0;&#x5F55;&#xFF0C;&#x6240;&#x6709;&#x4E8B;&#x9879;&#x90FD;&#x5806;&#x5728;&#x4E00;&#x8D77;&#x3002;
+&#x53E6;&#x5916;&#xFF0C;&#x5B8C;&#x6210;&#x7684;&#x4E8B;&#x9879;&#x4E5F;&#x4E0D;&#x65B9;&#x4FBF;&#x5F52;&#x6863;&#x6574;&#x7406;&#x3002;&#x65E9;&#x5C31;&#x542C;&#x8BF4;&#x4E86; Emacs &#x4EE5;&#x53CA; Org-mode &#x7684;&#x5F3A;&#x5927;&#xFF0C;&#x4E5F;&#x89CA;&#x89CE;
+&#x7F51;&#x4E0A;&#x5927;&#x795E;&#x7528; Org-mode &#x505A;&#x65E5;&#x7A0B;&#x7BA1;&#x7406;&#x5F88;&#x4E45;&#x4E86;&#xFF0C;&#x56E0;&#x6B64;&#x5728;&#x6B64;&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;&#x81EA;&#x5DF1;&#x7684; GTD &#x5DE5;&#x4F5C;&#x6D41;&#x3002;
+</p>
+
+<a id="more"></a>
+
+<div id="outline-container-org7711eb7" class="outline-2">
+<h2 id="org7711eb7">&#x57FA;&#x672C;&#x60F3;&#x6CD5;</h2>
+<div class="outline-text-2" id="text-org7711eb7">
+<ol class="org-ol">
+<li>&#x4ECE;&#x7A7A;&#x95F4;&#x5C3A;&#x5EA6;&#x4E0A;&#xFF0C;&#x4E0D;&#x540C;&#x9879;&#x76EE;&#x96B6;&#x5C5E;&#x4E8E;&#x4E0D;&#x540C;&#x7684; Org &#x6587;&#x4EF6;&#xFF0C;&#x800C;&#x4E0D;&#x540C;&#x7684; Org &#x6587;&#x4EF6;&#x52A0;&#x5165;&#x5230;&#x4E0D;&#x540C;&#x7684;
+agenda &#x4E2D;&#xFF0C;&#x5B9E;&#x73B0;&#x57FA;&#x4E8E;&#x9879;&#x76EE;&#x7684;&#x7BA1;&#x7406;&#x65B9;&#x5F0F;&#x3002;</li>
+<li>&#x4ECE;&#x4EFB;&#x52A1;&#x7C7B;&#x578B;&#x4E0A;&#xFF0C;&#x4EFB;&#x52A1;&#x5206;&#x4E3A;&#x4E00;&#x6B21;&#x6027;&#x4EFB;&#x52A1;&#x4EE5;&#x53CA;&#x5468;&#x671F;&#x6027;&#x4EFB;&#x52A1;&#xFF08;Habit&#xFF09;&#x3002;</li>
+<li>&#x4ECE;&#x65F6;&#x95F4;&#x5C3A;&#x5EA6;&#x4E0A;&#xFF0C;&#x4EFB;&#x52A1;&#x53EF;&#x4EE5;&#x6309;&#x7167;&#x9700;&#x8981;&#x6295;&#x5165;&#x7684;&#x65F6;&#x95F4;&#xFF08;Effort estimate&#xFF09;&#xFF0C;&#x53EF;&#x4EE5;&#x5206;&#x4E3A;&#x5E74;&#x4EFB;&#x52A1;&#x3001;
+&#x6708;&#x4EFB;&#x52A1;&#x3001;&#x5468;&#x4EFB;&#x52A1;&#x3001;&#x65E5;&#x4EFB;&#x52A1;&#x3001;&#x5C0F;&#x65F6;&#x4EFB;&#x52A1;&#x7B49;&#x3002;&#x5982;&#x679C;&#x4EFB;&#x52A1;&#x7684; Effort &#x592A;&#x5927;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x5C31;&#x65E0;&#x6CD5;&#x5F88;&#x597D;
+&#x5730;&#x628A;&#x63E1;&#x4EFB;&#x52A1;&#x7684;&#x8FDB;&#x5EA6;&#x4EE5;&#x53CA;&#x6295;&#x5165;&#xFF0C;&#x6B64;&#x65F6;&#x6211;&#x4EEC;&#x4E5F;&#x5C31;&#x9700;&#x8981;&#x5C06;&#x5176;&#x62C6;&#x5206;&#x4E3A;&#x66F4;&#x5C0F;&#x7684;&#x4EFB;&#x52A1;&#x3002;</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org98a7d9d" class="outline-2">
+<h2 id="org98a7d9d">&#x6574;&#x4F53;&#x6D41;&#x7A0B;</h2>
+<div class="outline-text-2" id="text-org98a7d9d">
+<p>
+&#x53C2;&#x7167; <i>&#x76AE;&#x6CE2;&#x8FEA;</i> &#x7684;&#x535A;&#x5BA2; <a href="https://www.cnblogs.com/quantumman/p/10808174.html" target="_blank" rel="noopener">&#x4EE5; Emacs Org mode &#x4E3A;&#x6838;&#x5FC3;&#x7684;&#x4EFB;&#x52A1;&#x7BA1;&#x7406;&#x65B9;&#x6848;</a>&#xFF0C;&#x8BBE;&#x8BA1;&#x9002;&#x5408;&#x81EA;&#x5DF1;&#x7684;&#x5DE5;&#x4F5C;&#x6D41;&#x3002;
+</p>
+
+<p>
+&#x5982;&#x4EE5;&#x4E0B;&#x6D41;&#x7A0B;&#x56FE;&#x6240;&#x793A;&#xFF0C;&#x53EF;&#x5C06;&#x4EFB;&#x52A1;&#x5206;&#x4E3A;&#x56DB;&#x4E2A;&#x9636;&#x6BB5;&#x3002;
+</p>
+<ol class="org-ol">
+<li>&#x9996;&#x5148;&#x4E00;&#x65E6;&#x51FA;&#x73B0;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#xFF0C;&#x5C31;&#x5C06;&#x5176;&#x52A0;&#x5165;&#x5230; <i>&#x6536;&#x96C6;&#x7BB1;</i> &#x4E2D;&#x3002;&#x8FD9;&#x4E9B;&#x4EFB;&#x52A1;&#x4EE3;&#x8868;&#x51FA;&#x73B0;&#x7684;&#x7075;&#x611F;&#x6216;&#x8005;&#x60F3;&#x6CD5;&#xFF0C;
+&#x4F46;&#x6682;&#x65F6;&#x8FD8;&#x672A;&#x60F3;&#x597D;&#x5728;&#x4F55;&#x65F6;&#x5B8C;&#x6210;&#x3002;</li>
+<li>&#x5F53;&#x6536;&#x96C6;&#x7BB1;&#x4E2D;&#x7684;&#x4EFB;&#x52A1;&#x60F3;&#x8981;&#x88AB;&#x5B8C;&#x6210;&#x65F6;&#xFF0C;&#x5C31;&#x4E3A;&#x5176;&#x52A0;&#x4E0A; schedule (<code>C-c C-s</code>) &#x548C; deadline (<code>C-c
+   C-d</code>) &#x65F6;&#x95F4;&#x6233;&#xFF0C;&#x8FDB;&#x5165; <i>&#x8DDF;&#x8E2A;&#x4EFB;&#x52A1;&#x5217;&#x8868;</i> &#x3002;&#x8FD9;&#x4E9B;&#x4EFB;&#x52A1;&#x4EE3;&#x8868;&#x5DF2;&#x7ECF;&#x505A;&#x597D;&#x8BA1;&#x5212;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x540C;&#x65F6;&#x4E5F;&#x53EF;&#x4E3A;&#x4EFB;&#x52A1;
+&#x8BBE;&#x5B9A;&#x9884;&#x8BA1;&#x6295;&#x5165;&#x65F6;&#x95F4; (<code>C-c C-x e</code>)&#x3002;</li>
+<li>&#x5F53;&#x6709;&#x8DDF;&#x8E2A;&#x5217;&#x8868;&#x4E2D;&#x7684;&#x4EFB;&#x52A1;&#x5230;&#x8FBE;&#x8BA1;&#x5212;&#x7684;&#x6267;&#x884C;&#x65F6;&#x95F4;&#x65F6;&#xFF0C;&#x6267;&#x884C; clock in (<code>C-c C-x C-i</code>)&#xFF0C;&#x540C;&#x65F6;&#x4EFB;
+&#x52A1;&#x8FDB;&#x5165; <i>&#x5F53;&#x524D;&#x4EFB;&#x52A1;</i> &#x72B6;&#x6001;&#x3002;</li>
+<li>&#x5F53;&#x4EFB;&#x52A1;&#x5B8C;&#x6210;&#x65F6;&#xFF0C;&#x6267;&#x884C; clock out (<code>C-c C-x C-o</code>)&#xFF0C;&#x4EFB;&#x52A1;&#x8FDB;&#x5165; <i>&#x5DF2;&#x5B8C;&#x6210;&#x4EFB;&#x52A1;</i> &#x72B6;&#x6001;&#x3002;</li>
+</ol>
+
+
+<div class="figure">
+<p><img src="workflow.png">
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcdbfdeb" class="outline-2">
+<h2 id="orgcdbfdeb">&#x4EFB;&#x52A1;&#x62C6;&#x5206;</h2>
+<div class="outline-text-2" id="text-orgcdbfdeb">
+<p>
+&#x5BF9;&#x4E8E;&#x8017;&#x65F6;&#x8F83;&#x957F;&#x7684;&#x975E;&#x5468;&#x671F;&#x4EFB;&#x52A1;&#xFF0C;&#x9700;&#x8981;&#x62C6;&#x5206;&#x6210;&#x66F4;&#x5C0F;&#x7684;&#x4EFB;&#x52A1;&#x6765;&#x8FDB;&#x884C;&#x5904;&#x7406;&#x3002;&#x5927;&#x578B;&#x7684;&#x4EFB;&#x52A1;&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x5355;&#x72EC;
+&#x7684;&#x9879;&#x76EE;&#x653E;&#x5728;&#x5355;&#x72EC;&#x7684; Org &#x6587;&#x4EF6;&#x4E2D;&#xFF0C;&#x5E76;&#x4F7F;&#x7528;&#x5982;&#x4E0B;&#x7684;&#x4EE3;&#x7801;&#x4E3A;&#x8BE5;&#x9879;&#x76EE;&#x8BBE;&#x5B9A;&#x4E00;&#x4E2A;&#x5355;&#x72EC;&#x7684; agenda&#x3002;
+</p>
+<div class="org-src-container">
+<figure class="highlight lisp hljs"><table><tr><td class="code"><pre><span class="line"><span class="hljs-list">(<span class="hljs-keyword">setq</span> org-agenda-custom-commands</span><br><span class="hljs-line">      <span class="hljs-quoted">&apos;((<span class="hljs-string">&quot;n&quot;</span> <span class="hljs-string">&quot;Agenda and all TODOs&quot;</span></span><br><span class="hljs-line">	 ((agenda <span class="hljs-string">&quot;&quot;</span> <span class="hljs-literal">nil</span>)</span><br><span class="hljs-line">	  (alltodo <span class="hljs-string">&quot;&quot;</span> <span class="hljs-literal">nil</span>))</span><br><span class="hljs-line">	 <span class="hljs-literal">nil</span>)</span><br><span class="hljs-line">	(<span class="hljs-string">&quot;pc&quot;</span> <span class="hljs-string">&quot;Learn Org&quot;</span> agenda <span class="hljs-string">&quot;&quot;</span></span><br><span class="hljs-line">	 ((org-agenda-files</span><br><span class="hljs-line">	   &apos;(<span class="hljs-string">&quot;~/Orgs/learn-org.org&quot;</span>))</span><br><span class="hljs-line">	  (org-agenda-overriding-header <span class="hljs-string">&quot;Agenda for learning org mode&quot;</span>))</span><br><span class="hljs-line">	 (<span class="hljs-string">&quot;~/export/learn-org.html&quot;</span>)))</span>)</span></span><br></pre></td></tr></table></figure>
+</div>
+<p>
+&#x5176;&#x4E2D;&#xFF0C; <code>&quot;pc&quot;</code> &#x4E3A;&#x6253;&#x5F00;&#x8BE5; agenda &#x7684;&#x5FEB;&#x6377;&#x952E;&#xFF0C; <code>&quot;Learn Org&quot;</code> &#x4E3A;&#x9879;&#x76EE;&#x7684;&#x540D;&#x79F0;&#xFF0C;
+<code>&quot;~/Orgs/learn-org.org&quot;</code> &#x4E3A;&#x7ED1;&#x5B9A;&#x7684; Org &#x6587;&#x4EF6;&#xFF0C; <code>&quot;Agenda for learning org mode&quot;</code> &#x4E3A;
+agenda &#x4E0A;&#x65B9;&#x663E;&#x793A;&#x7684;&#x6807;&#x9898;&#xFF0C; <code>&quot;~/export/learn-org.html&quot;</code> &#x4E3A;&#x5BFC;&#x51FA; agenda &#x65F6;&#x7684;&#x8DEF;&#x5F84;&#x3002;&#x8BBE;&#x5B9A;&#x5B8C;
+&#x6210;&#x540E;&#xFF0C;&#x901A;&#x8FC7;&#x5FEB;&#x6377;&#x952E; <code>&lt;C-c a p c&gt;</code> &#x5373;&#x53EF;&#x547C;&#x51FA;&#x81EA;&#x5B9A;&#x4E49; agenda&#x3002;
+</p>
+</div>
+</div>
+
+<div id="outline-container-org36d5345" class="outline-2">
+<h2 id="org36d5345">&#x4E3A;&#x4EFB;&#x52A1;&#x6DFB;&#x52A0;&#x66F4;&#x591A;&#x5C5E;&#x6027;</h2>
+<div class="outline-text-2" id="text-org36d5345">
+<p>
+&#x6807;&#x7B7E;&#x662F;&#x4E00;&#x79CD;&#x975E;&#x7EBF;&#x6027;&#x7684;&#x7EC4;&#x7EC7;&#x65B9;&#x5F0F;&#xFF0C;Org mode &#x4E2D;&#x7684;&#x6BCF;&#x4E00;&#x4E2A; headline &#x90FD;&#x652F;&#x6301;&#x6807;&#x7B7E;&#x3002;&#x5728; headline
+&#x4F7F;&#x7528;&#x5FEB;&#x6377;&#x952E; <code>&lt;C-c C-c&gt;</code> &#x5373;&#x53EF;&#x7BA1;&#x7406;&#x6807;&#x7B7E;&#x3002;&#x6807;&#x7B7E;&#x4F1A;&#x6839;&#x636E;&#x5C42;&#x7EA7;&#x7ED3;&#x6784;&#x81EA;&#x52A8;&#x7EE7;&#x627F;&#xFF0C;&#x56E0;&#x6B64;&#x7236;&#x6807;&#x9898;&#x7684;&#x6807;&#x7B7E;
+&#x4F1A;&#x81EA;&#x52A8;&#x7EE7;&#x627F;&#x5230;&#x5B50;&#x6807;&#x9898;&#x3002;
+</p>
+
+<p>
+&#x53E6;&#x5916;&#xFF0C;Org mode &#x8FD8;&#x652F;&#x6301;&#x952E;&#x503C;&#x5BF9;&#x3002;&#x8BE5;&#x90E8;&#x5206;&#x7B49;&#x4EE5;&#x540E;&#x7814;&#x7A76;&#x660E;&#x767D;&#x518D;&#x505A;&#x8BB0;&#x5F55;&#x3002;
+</p>
+</div>
+</div>
+
+<div id="outline-container-org339a32a" class="outline-2">
+<h2 id="org339a32a">&#x67E5;&#x770B;&#x4EFB;&#x52A1;&#x6982;&#x89C8;</h2>
+<div class="outline-text-2" id="text-org339a32a">
+<p>
+Org mode &#x4E2D;&#x6709;&#x4E00;&#x79CD;&#x53EB;&#x505A;&#x5217;&#x89C6;&#x56FE;&#x7684;&#x6A21;&#x5F0F;&#xFF0C;&#x53EF;&#x4EE5;&#x5C06; headline &#x7684;&#x5C5E;&#x6027;&#x4EE5;&#x5217;&#x89C6;&#x56FE;&#x7684;&#x6A21;&#x5F0F;&#x663E;&#x793A;&#x51FA;&#x6765;&#x3002;
+&#x5217;&#x89C6;&#x56FE;&#x53EF;&#x4EE5;&#x5728; <code>org-mode</code> &#x6216; <code>agenda-mode</code> &#x4E2D;&#x4F7F;&#x7528;&#xFF0C;&#x5FEB;&#x6377;&#x952E;&#x4E3A; <code>&lt;C-c C-x C-c&gt;</code> &#x3002;&#x5F00;&#x542F;&#x540E;&#x6BCF;&#x4E2A;
+&#x4EFB;&#x52A1;&#x4F1A;&#x4EE5;&#x8868;&#x683C;&#x7684;&#x6837;&#x5F0F;&#x663E;&#x793A;&#x3002;
+<img src="column-view.png">
+</p>
+
+<p>
+&#x5C06;&#x5149;&#x6807;&#x653E;&#x7F6E;&#x5728;&#x4EFB;&#x610F;&#x4E00;&#x4E2A;&#x5904;&#x4E8E;&#x5217;&#x6A21;&#x5F0F;&#x7684;&#x884C;&#x4E0A;&#xFF0C;&#x53EF;&#x7528; <code>&lt;q&gt;</code> &#x9000;&#x51FA;&#x5217;&#x6A21;&#x5F0F;&#x3002;&#x5217;&#x6A21;&#x5F0F;&#x4E2D;&#x663E;&#x793A;&#x7684;&#x4FE1;&#x606F;&#x53EF;
+&#x4EE5;&#x81EA;&#x5B9A;&#x4E49;&#xFF0C;&#x5B9A;&#x4E49;&#x65B9;&#x6CD5;&#x5982;&#x4E0B;&#xFF0C;&#x5176;&#x4E2D; <code>Effort</code> &#x540E;&#x9762;&#x7684; <code>{:}</code> &#x662F;&#x8981;&#x5C06;&#x6240;&#x6709;&#x5B50;&#x4EFB;&#x52A1;&#x7684; Effort &#x6C42;&#x548C;&#x3002;
+</p>
+
+<div class="org-src-container">
+<figure class="highlight lisp hljs"><table><tr><td class="code"><pre><span class="line"><span class="hljs-list">(<span class="hljs-keyword">setq</span> org-columns-default-format <span class="hljs-string">&quot;%50ITEM(Task)</span><br><span class="hljs-line">%3PRIORITY(Priority) %5TODO(Status) %8EFFORT(Effort){:}</span><br><span class="hljs-line">%20SCHEDULED %20DEADLINE&quot;</span>)</span></span><br></pre></td></tr></table></figure>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9788bee" class="outline-2">
+<h2 id="org9788bee">&#x4EFB;&#x52A1;&#x5B8C;&#x6210;</h2>
+<div class="outline-text-2" id="text-org9788bee">
+<div class="org-src-container">
+<figure class="highlight lisp hljs"><table><tr><td class="code"><pre><span class="line"><span class="hljs-list">(<span class="hljs-keyword">setq</span></span><br><span class="hljs-line"> <span class="hljs-comment">;; &#x5F53;&#x6807;&#x7B7E;&#x8F6C;&#x6362;&#x4E3A; done &#x65F6;&#x81EA;&#x52A8;&#x8BB0;&#x5F55; close &#x65F6;&#x95F4;</span></span><br><span class="hljs-line"> <span class="hljs-comment">;; &#x5F53;&#x6807;&#x7B7E;&#x8F6C;&#x6362;&#x4E3A; done &#x65F6;&#x81EA;&#x52A8; clock out</span></span><br><span class="hljs-line"> org-log-done <span class="hljs-quoted">&apos;(time . org-clock-out)</span>)</span></span><br></pre></td></tr></table></figure>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5895445" class="outline-2">
+<h2 id="org5895445">&#x4EFB;&#x52A1;&#x56DE;&#x987E;</h2>
+<div class="outline-text-2" id="text-org5895445">
+<p>
+<code>&lt;C-c C-x C-d&gt;</code> &#x67E5;&#x770B;&#x5404;&#x4E2A;&#x4EFB;&#x52A1;&#x7684;&#x8017;&#x65F6;&#x4E0E;&#x603B;&#x548C;&#x3002;
+<img src="sumup.png">
+</p>
+</div>
+</div>
+</div>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Agenda/" rel="tag">Agenda</a>, <a class="has-link-grey -link" href="/tags/Emacs/" rel="tag">Emacs</a>, <a class="has-link-grey -link" href="/tags/GTD/" rel="tag">GTD</a>, <a class="has-link-grey -link" href="/tags/Linux/" rel="tag">Linux</a>, <a class="has-link-grey -link" href="/tags/Org/" rel="tag">Org</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <!-- AddToAny BEGIN -->
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share" target="_blank" rel="noopener"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_telegram"></a>
+<a class="a2a_button_whatsapp"></a>
+<a class="a2a_button_reddit"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="HTTPS://QR.ALIPAY.COM/FKX01669SBV7NA4ALTVPE8" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="wxp://f2f0PYx27X0CWU1yiBhSKeHHgYzfA27iOicM" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/02/28/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-mu4e-%E7%AE%A1%E7%90%86%E9%82%AE%E4%BB%B6/">
+                <span class="level-item">使用 Emacs 与 mu4e 管理邮件</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: false,
+        verify: false,
+        app_id: 'JMPgCt4i5QXYiepmd7ADdLfm-gzGzoHsz',
+        app_key: 'z6zWp6MXVNc4WnbBOCkVw3Ir',
+        placeholder: '友情提醒：你甚至不需要填写昵称、邮箱、网址就能匿名评论！（邮箱可接收回复提醒）'
+    });
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/avatar.png" alt="Cycoe">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        Cycoe
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Cycoe&#39;s Home Page
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Beijing</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            32
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            17
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            33
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/cycoe" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/cycoe">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Dribbble" href="https://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://yinr.cc" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">友情链接</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">yinr.cc</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Archlinux/">
+            <span class="level-start">
+                <span class="level-item">Archlinux</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Games/">
+            <span class="level-start">
+                <span class="level-item">Games</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/GitHub/">
+            <span class="level-start">
+                <span class="level-item">GitHub</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Linux/">
+            <span class="level-start">
+                <span class="level-item">Linux</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Linux/Emacs/">
+            <span class="level-start">
+                <span class="level-item">Emacs</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Math/">
+            <span class="level-start">
+                <span class="level-item">Math</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/">
+            <span class="level-start">
+                <span class="level-item">Python</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Python/Spider/">
+            <span class="level-start">
+                <span class="level-item">Spider</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/blog/">
+            <span class="level-start">
+                <span class="level-item">blog</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/linux/">
+            <span class="level-start">
+                <span class="level-item">linux</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/matplotlib/">
+            <span class="level-start">
+                <span class="level-item">matplotlib</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/personal/">
+            <span class="level-start">
+                <span class="level-item">personal</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/python/">
+            <span class="level-start">
+                <span class="level-item">python</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/python/spider/">
+            <span class="level-start">
+                <span class="level-item">spider</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/statistics/">
+            <span class="level-start">
+                <span class="level-item">statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Agenda/" style="font-size: 10px;">Agenda</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Archlinux/" style="font-size: 16.67px;">Archlinux</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/Emacs/" style="font-size: 13.33px;">Emacs</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/Org/" style="font-size: 10px;">Org</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Python/" style="font-size: 16.67px;">Python</a> <a href="/tags/Spider/" style="font-size: 10px;">Spider</a> <a href="/tags/Sploit/" style="font-size: 10px;">Sploit</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/matplotlib/" style="font-size: 13.33px;">matplotlib</a> <a href="/tags/mu4e/" style="font-size: 10px;">mu4e</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 13.33px;">plot</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/statistics/" style="font-size: 10px;">statistics</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/03/06/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Org-mode-%E8%BF%9B%E8%A1%8C-GTD-%E7%AE%A1%E7%90%86/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 Org mode 进行 GTD 管理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-06T11:51:00.000Z">2020-03-06</time></div>
+                    <a href="/2020/03/06/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Org-mode-%E8%BF%9B%E8%A1%8C-GTD-%E7%AE%A1%E7%90%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 Org mode 进行 GTD 管理</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/02/28/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-mu4e-%E7%AE%A1%E7%90%86%E9%82%AE%E4%BB%B6/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 mu4e 管理邮件">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-28T15:03:00.000Z">2020-02-28</time></div>
+                    <a href="/2020/02/28/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-mu4e-%E7%AE%A1%E7%90%86%E9%82%AE%E4%BB%B6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 mu4e 管理邮件</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第二弹-调整坐标轴">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T06:57:59.000Z">2019-12-06</time></div>
+                    <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第二弹-调整坐标轴</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/matplotlib/">matplotlib</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/05/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-matplotlib%E5%88%9D%E4%BD%93%E9%AA%8C/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第一弹-matplotlib初体验">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-05T14:55:57.000Z">2019-12-05</time></div>
+                    <a href="/2019/12/05/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-matplotlib%E5%88%9D%E4%BD%93%E9%AA%8C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第一弹-matplotlib初体验</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/matplotlib/">matplotlib</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/17/fcitx-%E8%BE%93%E5%85%A5%E6%B3%95%E9%85%8D%E7%BD%AE/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="fcitx 输入法配置">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-17T03:54:30.000Z">2019-11-17</time></div>
+                    <a href="/2019/11/17/fcitx-%E8%BE%93%E5%85%A5%E6%B3%95%E9%85%8D%E7%BD%AE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">fcitx 输入法配置</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AMD/">
+                        <span class="tag">AMD</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Agenda/">
+                        <span class="tag">Agenda</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Algorithm/">
+                        <span class="tag">Algorithm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Archlinux/">
+                        <span class="tag">Archlinux</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Brightness/">
+                        <span class="tag">Brightness</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Cantonese/">
+                        <span class="tag">Cantonese</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DWM/">
+                        <span class="tag">DWM</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DwarfFortress/">
+                        <span class="tag">DwarfFortress</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Emacs/">
+                        <span class="tag">Emacs</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GTD/">
+                        <span class="tag">GTD</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/HiDPI/">
+                        <span class="tag">HiDPI</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Linux/">
+                        <span class="tag">Linux</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Math/">
+                        <span class="tag">Math</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Org/">
+                        <span class="tag">Org</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PIL/">
+                        <span class="tag">PIL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Spider/">
+                        <span class="tag">Spider</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Sploit/">
+                        <span class="tag">Sploit</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vim/">
+                        <span class="tag">Vim</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fcitx/">
+                        <span class="tag">fcitx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mail/">
+                        <span class="tag">mail</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/matplotlib/">
+                        <span class="tag">matplotlib</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mu4e/">
+                        <span class="tag">mu4e</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/numpy/">
+                        <span class="tag">numpy</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/planche/">
+                        <span class="tag">planche</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/plot/">
+                        <span class="tag">plot</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/python/">
+                        <span class="tag">python</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/statistics/">
+                        <span class="tag">statistics</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
+                        <span class="tag">图像处理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/">
+                        <span class="tag">粒子羣優化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/">
+                        <span class="tag">線性代數</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/03/06/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Org-mode-%E8%BF%9B%E8%A1%8C-GTD-%E7%AE%A1%E7%90%86/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 Org mode 进行 GTD 管理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-06T11:51:00.000Z">2020-03-06</time></div>
+                    <a href="/2020/03/06/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Org-mode-%E8%BF%9B%E8%A1%8C-GTD-%E7%AE%A1%E7%90%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 Org mode 进行 GTD 管理</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/02/28/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-mu4e-%E7%AE%A1%E7%90%86%E9%82%AE%E4%BB%B6/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 mu4e 管理邮件">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-28T15:03:00.000Z">2020-02-28</time></div>
+                    <a href="/2020/02/28/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-mu4e-%E7%AE%A1%E7%90%86%E9%82%AE%E4%BB%B6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 mu4e 管理邮件</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第二弹-调整坐标轴">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T06:57:59.000Z">2019-12-06</time></div>
+                    <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第二弹-调整坐标轴</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/matplotlib/">matplotlib</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/05/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-matplotlib%E5%88%9D%E4%BD%93%E9%AA%8C/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第一弹-matplotlib初体验">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-05T14:55:57.000Z">2019-12-05</time></div>
+                    <a href="/2019/12/05/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-matplotlib%E5%88%9D%E4%BD%93%E9%AA%8C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第一弹-matplotlib初体验</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/matplotlib/">matplotlib</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/17/fcitx-%E8%BE%93%E5%85%A5%E6%B3%95%E9%85%8D%E7%BD%AE/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="fcitx 输入法配置">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-17T03:54:30.000Z">2019-11-17</time></div>
+                    <a href="/2019/11/17/fcitx-%E8%BE%93%E5%85%A5%E6%B3%95%E9%85%8D%E7%BD%AE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">fcitx 输入法配置</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AMD/">
+                        <span class="tag">AMD</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Agenda/">
+                        <span class="tag">Agenda</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Algorithm/">
+                        <span class="tag">Algorithm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Archlinux/">
+                        <span class="tag">Archlinux</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Brightness/">
+                        <span class="tag">Brightness</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Cantonese/">
+                        <span class="tag">Cantonese</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DWM/">
+                        <span class="tag">DWM</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DwarfFortress/">
+                        <span class="tag">DwarfFortress</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Emacs/">
+                        <span class="tag">Emacs</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GTD/">
+                        <span class="tag">GTD</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/HiDPI/">
+                        <span class="tag">HiDPI</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Linux/">
+                        <span class="tag">Linux</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Math/">
+                        <span class="tag">Math</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Org/">
+                        <span class="tag">Org</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PIL/">
+                        <span class="tag">PIL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Spider/">
+                        <span class="tag">Spider</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Sploit/">
+                        <span class="tag">Sploit</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vim/">
+                        <span class="tag">Vim</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fcitx/">
+                        <span class="tag">fcitx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mail/">
+                        <span class="tag">mail</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/matplotlib/">
+                        <span class="tag">matplotlib</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mu4e/">
+                        <span class="tag">mu4e</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/numpy/">
+                        <span class="tag">numpy</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/planche/">
+                        <span class="tag">planche</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/plot/">
+                        <span class="tag">plot</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/python/">
+                        <span class="tag">python</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/statistics/">
+                        <span class="tag">statistics</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
+                        <span class="tag">图像处理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/">
+                        <span class="tag">粒子羣優化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/">
+                        <span class="tag">線性代數</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="使用 Emacs 与 Org mode 进行 GTD 管理" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Cycoe&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv">
+                共<span id="busuanzi_value_site_uv">0</span>个访客
+                </span>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+<script src="/js/animation.js"></script>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+    
+    
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+    
+    
+<a id="back-to-top" title="回到顶端" href="javascript:;" target="_blank" rel="noopener">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+</html>
