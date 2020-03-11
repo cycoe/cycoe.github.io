@@ -165,7 +165,6 @@
         <div class="content">
             <h2 id="Included-With-This-Package"><a href="#Included-With-This-Package" class="headerlink" title="Included With This Package:"></a>Included With This Package:</h2><p>DwarfFortress-LNP 也就是我们常说的懒人包，由游戏本体、工具包和图形包组成。在 archlinux 上，我们无法通过 aur 简单地安装懒人包，因此我们需要分别安装懒人包中的各个部分来达到同样的效果。</p>
 <a id="more"></a>
-
 <p>懒人包主要包括如下部分：</p>
 <ul>
 <li><a href="http://www.bay12forums.com/smf/index.php?topic=140808.0" target="_blank" rel="noopener">Pidgeot’s PyLNP 0.13 Lazy Newb Pack Python interface</a><ul>
@@ -204,12 +203,8 @@
 </li>
 </ul>
 <h2 id="Utilities"><a href="#Utilities" class="headerlink" title="Utilities"></a>Utilities</h2><h3 id="DFHack-Linux-V0-44-09-r1-gcc-5-4-0"><a href="#DFHack-Linux-V0-44-09-r1-gcc-5-4-0" class="headerlink" title="DFHack Linux V0.44.09-r1 (gcc 5.4.0)"></a><a href="http://www.bay12forums.com/smf/index.php?topic=139553.0" target="_blank" rel="noopener">DFHack Linux V0.44.09-r1 (gcc 5.4.0)</a></h3><p>DfHack is an attempt to unite the various ways hack tools access DF memory and allow for easier development of new tools (and of course, make the game more enjoyable for players).</p>
-<p>In archlinux, we can get DfHack by install it with yay:</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">yay -S dfhack-twbt-bin</span></pre></td></tr></table></figure>
-<p>As we can see, we installed a DfHack version integrated with TWBT. That means we don’t need to install TWBT again. What’s more, package ‘dfhack-twbt-bin’ depends on the package ‘dwarffortress’ in community repository. </p>
-<p>But as default, the ‘PKGBIULD’ file of ‘dfhack-twbt-bin’ will download the dfhack binary compiled with gcc-4.8, which provide an out-of-date version of remotefortressreader plugin. To avoid this, you can command the PKGBIULD to download dfhack compiled with gcc-7. To get this magic as below, edit PKGBIULD with editor:</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># https://github.com/DFHack/dfhack/releases/download/$_pkgver/dfhack-$_pkgver-Linux-64-gcc-4.8.tar.bz2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">https://github.com/DFHack/dfhack/releases/download/<span class="hljs-variable">$_pkgver</span>/dfhack-<span class="hljs-variable">$_pkgver</span>-Linux-64-gcc-7.tar.bz2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">md5sums=(<span class="hljs-string">'e630ae2fc93c6c7b55552336da2b6c07'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'3853c6f890d3541f710f2c4833a9e696'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'6730da5fec400ece9102552e77996fcb'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'052a58e7f5f1af8be3ddefe9677b8fc6'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-comment"># 'e200a6225dcf285e2eac19c1d1e118ea'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'bdbe256099ec9ffd90f391f0d069742f'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'8eac5ae59dad0397090c4f50d50ef841'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr></table></figure>
-
+<p>In archlinux, we can get DfHack by install it with yay:<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">yay -S dfhack-twbt-bin</span></pre></td></tr></table></figure><br>As we can see, we installed a DfHack version integrated with TWBT. That means we don’t need to install TWBT again. What’s more, package ‘dfhack-twbt-bin’ depends on the package ‘dwarffortress’ in community repository. </p>
+<p>But as default, the ‘PKGBIULD’ file of ‘dfhack-twbt-bin’ will download the dfhack binary compiled with gcc-4.8, which provide an out-of-date version of remotefortressreader plugin. To avoid this, you can command the PKGBIULD to download dfhack compiled with gcc-7. To get this magic as below, edit PKGBIULD with editor:<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># https://github.com/DFHack/dfhack/releases/download/$_pkgver/dfhack-$_pkgver-Linux-64-gcc-4.8.tar.bz2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">https://github.com/DFHack/dfhack/releases/download/<span class="hljs-variable">$_pkgver</span>/dfhack-<span class="hljs-variable">$_pkgver</span>-Linux-64-gcc-7.tar.bz2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">md5sums=(<span class="hljs-string">'e630ae2fc93c6c7b55552336da2b6c07'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'3853c6f890d3541f710f2c4833a9e696'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'6730da5fec400ece9102552e77996fcb'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'052a58e7f5f1af8be3ddefe9677b8fc6'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-comment"># 'e200a6225dcf285e2eac19c1d1e118ea'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'bdbe256099ec9ffd90f391f0d069742f'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">         <span class="hljs-string">'8eac5ae59dad0397090c4f50d50ef841'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr></table></figure></p>
 <p>Then run <code>makepkg</code> to download lacking files.</p>
 <h3 id="TWBT-6-41"><a href="#TWBT-6-41" class="headerlink" title="TWBT 6.41"></a><a href="http://www.bay12forums.com/smf/index.php?topic=138754.0" target="_blank" rel="noopener">TWBT 6.41</a></h3><p>This plugin improves various aspects the game interface.</p>
 <p>Originally I wrote a small plugin because I was tired seeing coffins instead of zeroes and all that stuff. It has greately evolved since then. Some functions may not work or have issues in Adventurer Mode. See readme for all details.</p>
@@ -384,7 +379,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            32
+                            33
                         </p>
                     </a>
                 </div>
@@ -408,7 +403,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            33
+                            34
                         </p>
                     </a>
                 </div>
@@ -540,7 +535,7 @@
                 <span class="level-item">Linux</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">9</span>
+                <span class="level-item tag">10</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Linux/Emacs/">
@@ -548,7 +543,7 @@
                 <span class="level-item">Emacs</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li></ul></li><li>
         <a class="level is-marginless" href="/categories/Machine-Learning/">
@@ -649,7 +644,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Agenda/" style="font-size: 10px;">Agenda</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Archlinux/" style="font-size: 16.67px;">Archlinux</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/Emacs/" style="font-size: 13.33px;">Emacs</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/Org/" style="font-size: 10px;">Org</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Python/" style="font-size: 16.67px;">Python</a> <a href="/tags/Spider/" style="font-size: 10px;">Spider</a> <a href="/tags/Sploit/" style="font-size: 10px;">Sploit</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/matplotlib/" style="font-size: 13.33px;">matplotlib</a> <a href="/tags/mu4e/" style="font-size: 10px;">mu4e</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 13.33px;">plot</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/statistics/" style="font-size: 10px;">statistics</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
+        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Agenda/" style="font-size: 10px;">Agenda</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Archlinux/" style="font-size: 16.67px;">Archlinux</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/Emacs/" style="font-size: 16.67px;">Emacs</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Graphviz/" style="font-size: 10px;">Graphviz</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/Org/" style="font-size: 10px;">Org</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Python/" style="font-size: 16.67px;">Python</a> <a href="/tags/Spider/" style="font-size: 10px;">Spider</a> <a href="/tags/Sploit/" style="font-size: 10px;">Sploit</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/matplotlib/" style="font-size: 13.33px;">matplotlib</a> <a href="/tags/mu4e/" style="font-size: 10px;">mu4e</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 13.33px;">plot</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/statistics/" style="font-size: 10px;">statistics</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
     </div>
 </div>
     
@@ -661,6 +656,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 Graphviz 绘制流程图">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-11T02:37:00.000Z">2020-03-11</time></div>
+                    <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 Graphviz 绘制流程图</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -738,25 +752,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/11/17/fcitx-%E8%BE%93%E5%85%A5%E6%B3%95%E9%85%8D%E7%BD%AE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="fcitx 输入法配置">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-17T03:54:30.000Z">2019-11-17</time></div>
-                    <a href="/2019/11/17/fcitx-%E8%BE%93%E5%85%A5%E6%B3%95%E9%85%8D%E7%BD%AE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">fcitx 输入法配置</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -774,7 +769,7 @@
                     <span class="level-item">三月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1060,13 +1055,20 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Emacs/">
                         <span class="tag">Emacs</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/GTD/">
                         <span class="tag">GTD</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Graphviz/">
+                        <span class="tag">Graphviz</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1081,7 +1083,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Linux/">
                         <span class="tag">Linux</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1256,6 +1258,25 @@
         
         <article class="media">
             
+            <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 Graphviz 绘制流程图">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-11T02:37:00.000Z">2020-03-11</time></div>
+                    <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 Graphviz 绘制流程图</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/03/06/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Org-mode-%E8%BF%9B%E8%A1%8C-GTD-%E7%AE%A1%E7%90%86/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 Org mode 进行 GTD 管理">
@@ -1330,25 +1351,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/11/17/fcitx-%E8%BE%93%E5%85%A5%E6%B3%95%E9%85%8D%E7%BD%AE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="fcitx 输入法配置">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-17T03:54:30.000Z">2019-11-17</time></div>
-                    <a href="/2019/11/17/fcitx-%E8%BE%93%E5%85%A5%E6%B3%95%E9%85%8D%E7%BD%AE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">fcitx 输入法配置</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1366,7 +1368,7 @@
                     <span class="level-item">三月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1652,13 +1654,20 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Emacs/">
                         <span class="tag">Emacs</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/GTD/">
                         <span class="tag">GTD</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Graphviz/">
+                        <span class="tag">Graphviz</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1673,7 +1682,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Linux/">
                         <span class="tag">Linux</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 

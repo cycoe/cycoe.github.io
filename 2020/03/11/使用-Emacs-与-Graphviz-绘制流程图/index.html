@@ -1,0 +1,2483 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.0.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>使用 Emacs 与 Graphviz 绘制流程图 - Cycoe&#39;s Home Page</title>
+
+
+    <meta name="description" content="&amp;#x524D;&amp;#x51E0;&amp;#x5929;&amp;#x5728;&amp;#x5199; &amp;#x4F7F;&amp;#x7528; Emacs &amp;#x4E0E; Org mode &amp;#x8FDB;&amp;#x884C; GTD &amp;#x7BA1;&amp;#x7406; &amp;#x535A;&amp;#x5BA2;&amp;#x65F6;&amp;#xFF0C;&amp;#x7528;&amp;#x5230;&amp;#x4E86; Graphviz &amp;#x7ED">
+<meta name="keywords" content="Linux,Emacs,Graphviz">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Emacs 与 Graphviz 绘制流程图">
+<meta property="og:url" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;2020&#x2F;03&#x2F;11&#x2F;%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE&#x2F;index.html">
+<meta property="og:site_name" content="Cycoe&#39;s Home Page">
+<meta property="og:description" content="&amp;#x524D;&amp;#x51E0;&amp;#x5929;&amp;#x5728;&amp;#x5199; &amp;#x4F7F;&amp;#x7528; Emacs &amp;#x4E0E; Org mode &amp;#x8FDB;&amp;#x884C; GTD &amp;#x7BA1;&amp;#x7406; &amp;#x535A;&amp;#x5BA2;&amp;#x65F6;&amp;#xFF0C;&amp;#x7528;&amp;#x5230;&amp;#x4E86; Graphviz &amp;#x7ED">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
+<meta property="og:updated_time" content="2020-03-11T14:25:37.790Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="使用 Emacs 与 Graphviz 绘制流程图" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/cycoe">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;" target="_blank" rel="noopener">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-11T02:37:00.000Z">2020-03-11</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    18 分钟 读完 (大约 2638 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                使用 Emacs 与 Graphviz 绘制流程图
+            
+        </h1>
+        <div class="content">
+            <div id="content">
+
+<div class="figure">
+<p><img src="2020-03-11_10-40-29_app.png">
+</p>
+</div>
+
+<p>
+&#x524D;&#x51E0;&#x5929;&#x5728;&#x5199; <a href="&#x4F7F;&#x7528;-Emacs-&#x4E0E;-Org-mode-&#x8FDB;&#x884C;-GTD-&#x7BA1;&#x7406;.html">&#x4F7F;&#x7528; Emacs &#x4E0E; Org mode &#x8FDB;&#x884C; GTD &#x7BA1;&#x7406;</a> &#x535A;&#x5BA2;&#x65F6;&#xFF0C;&#x7528;&#x5230;&#x4E86; <a href="http://www.graphviz.org/" target="_blank" rel="noopener">Graphviz</a> &#x7ED8;&#x5236;&#x6D41;&#x7A0B;
+&#x56FE;&#x3002;&#x6B63;&#x5DE7;&#x4E4B;&#x524D;&#x5728; LaTeX &#x4E2D;&#x4E5F;&#x7528;&#x5B83;&#x753B;&#x8FC7;&#x4E00;&#x4E9B;&#x56FE;&#xFF0C;&#x4F46;&#x90FD;&#x6CA1;&#x6709;&#x7CFB;&#x7EDF;&#x5730;&#x5165;&#x8FC7;&#x95E8;&#xFF0C;&#x90A3;&#x5C31;&#x8D81;&#x6700;&#x8FD1;&#x5B66;&#x4E60;&#x4E00;
+&#x4E0B;&#x5427;&#x3002;
+</p>
+
+<a id="more"></a>
+
+<p>
+&#x4ECE;&#x5B98;&#x7F51;&#x4E0A;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;<a href="http://www.graphviz.org/" target="_blank" rel="noopener">Graphviz</a> &#x7684;&#x5168;&#x79F0;&#x4E3A;
+&lt;ruby&gt;&#x56FE;&lt;rt&gt;Graph&lt;/rt&gt;&#x53EF;&#x89C6;&#x5316; &lt;rt&gt;Visualization&lt;/rt&gt;&#x5DE5;&#x5177;&lt;rt&gt;Software&lt;/rt&gt;&lt;/ruby&gt;
+&#xFF0C;&#x8FD9;&#x91CC;&#x7684;&#x56FE;&#x8BF4;&#x7684;&#x5E94;&#x8BE5;&#x4E0D;&#x662F;&#x6570;&#x5B66;&#x610F;&#x4E49;&#x4E0A;&#x7684;&#x51FD;&#x6570;&#x56FE;&#x50CF;&#x90A3;&#x79CD;&#x56FE;&#xFF0C;&#x800C;&#x662F;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x4E2D;&#x7684;&#x56FE;&#xFF0C;&#x5F3A;&#x8C03;&#x7684;&#x5173;&#x7CFB;&#x3002;
+</p>
+
+<div id="outline-container-orge362bfb" class="outline-2">
+<h2 id="orge362bfb">&#x5B89;&#x88C5;</h2>
+<div class="outline-text-2" id="text-orge362bfb">
+</div>
+<div id="outline-container-orgb8ce943" class="outline-3">
+<h3 id="orgb8ce943">Graphviz</h3>
+<div class="outline-text-3" id="text-orgb8ce943">
+<p>
+Graphviz &#x672C;&#x8D28;&#x4E0A;&#x662F;&#x4E00;&#x4E2A;&#x547D;&#x4EE4;&#x884C;&#x5DE5;&#x5177;&#xFF0C;&#x5728; Archlinux &#x4E0A;&#x53EA;&#x9700;&#x8981;&#x901A;&#x8FC7; <code>sudo pacman -S
+graphviz</code> &#x5B89;&#x88C5;&#x5373;&#x53EF;&#xFF0C;&#x5176;&#x4ED6;&#x7CFB;&#x7EDF;&#x7C7B;&#x4F3C;&#x3002;
+</p>
+</div>
+</div>
+
+<div id="outline-container-org99a6151" class="outline-3">
+<h3 id="org99a6151">graphviz-dot-mode</h3>
+<div class="outline-text-3" id="text-org99a6151">
+<p>
+Graphviz &#x5728; Emacs &#x4E2D;&#x7684;&#x96C6;&#x6210;&#x662F;&#x901A;&#x8FC7; <code>graphviz-dot-mode</code> &#x8FD9;&#x4E2A;&#x5305;&#x6765;&#x5B9E;&#x73B0;&#x7684;&#xFF0C;&#x53EA;&#x9700;&#x8981; <code>&lt;M-x&gt;
+package-install graphviz-dot-mode &lt;RET&gt;</code> &#x5373;&#x53EF;&#x3002;
+</p>
+
+<p>
+&#x7136;&#x540E;&#x5728; Emacs &#x914D;&#x7F6E;&#x4E2D;&#x52A0;&#x5165;&#x4EE5;&#x4E0B;&#x5185;&#x5BB9;&#x6765;&#x542F;&#x7528;
+</p>
+<div class="org-src-container">
+<figure class="highlight lisp hljs"><table><tr><td class="code"><pre><span class="line"><span class="hljs-list">(<span class="hljs-keyword">use-package</span> graphviz-dot-mode</span><br><span class="hljs-line">  <span class="hljs-keyword">:ensure</span> <span class="hljs-literal">t</span></span><br><span class="hljs-line">  <span class="hljs-keyword">:config</span></span><br><span class="hljs-line">  <span class="hljs-list">(<span class="hljs-keyword">setq</span> graphviz-dot-indent-width <span class="hljs-number">4</span>)</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-list">(<span class="hljs-keyword">use-package</span> company-graphviz-dot)</span></span><br></pre></td></tr></table></figure>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd82cc5b" class="outline-2">
+<h2 id="orgd82cc5b">&#x5E03;&#x5C40;&#x5668;</h2>
+<div class="outline-text-2" id="text-orgd82cc5b">
+<p>
+Graphviz &#x4E2D;&#x5305;&#x542B;&#x4E86;&#x4F17;&#x591A;&#x7684;&#x5E03;&#x5C40;&#x5668;&#xFF1A;
+</p>
+<ul class="org-ul">
+<li>dot &#x9ED8;&#x8BA4;&#x5E03;&#x5C40;&#x65B9;&#x5F0F;&#xFF0C;&#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x6709;&#x5411;&#x56FE;</li>
+<li>neato &#x57FA;&#x4E8E; spring-model&#xFF08;&#x53C8;&#x79F0; force-based&#xFF09;&#x7B97;&#x6CD5;</li>
+<li>twopi &#x5F84;&#x5411;&#x5E03;&#x5C40;</li>
+<li>circo &#x5706;&#x73AF;&#x5E03;&#x5C40;</li>
+<li>fdp &#x7528;&#x4E8E;&#x65E0;&#x5411;&#x56FE;</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge8f09d5" class="outline-2">
+<h2 id="orge8f09d5">&#x57FA;&#x672C;&#x4F7F;&#x7528;</h2>
+<div class="outline-text-2" id="text-orge8f09d5">
+<p>
+Graphviz &#x6784;&#x5EFA;&#x7EC4;&#x4EF6;&#x4E3A;&#x56FE;&#xFF0C;&#x8282;&#x70B9;&#xFF0C;&#x8FB9;&#xFF0C;&#x7528;&#x5C5E;&#x6027;&#x5BF9;&#x5176;&#x8FDB;&#x884C;&#x63CF;&#x8FF0;&#x3002;
+</p>
+
+<p>
+&#x521B;&#x5EFA;&#x4E00;&#x4E2A; dot &#x5E03;&#x5C40;&#x7684;&#x56FE;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4EE5;&#x4E0B;&#x4EE3;&#x7801;
+</p>
+<div class="org-src-container">
+<figure class="highlight hljs"><table><tr><td class="code"><pre><span class="line">digraph first{
+    a;
+    b;
+    c;
+    d;
+    a-&gt;b;
+    b-&gt;d;
+    c-&gt;d;
+}</span><br></pre></td></tr></table></figure>
+</div>
+
+
+<div class="figure">
+<p><img src="first.png">
+</p>
+</div>
+
+<p>
+&#x4E0A;&#x8FF0;&#x4EE3;&#x7801;&#x7B49;&#x4EF7;&#x4E8E;
+</p>
+<div class="org-src-container">
+<figure class="highlight hljs"><table><tr><td class="code"><pre><span class="line">digraph first{
+    a-&gt;b;
+    b-&gt;d;
+    c-&gt;d;
+}</span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+&#x5982;&#x679C;&#x8981;&#x76F4;&#x63A5;&#x5728;&#x547D;&#x4EE4;&#x884C;&#x8FDB;&#x884C;&#x7ED8;&#x56FE;&#xFF0C;&#x4F7F;&#x7528;&#x547D;&#x4EE4; =dot -Tpng first.dot -o first.png=&#x3002;&#x5982;&#x679C;&#x5229;
+&#x7528; Emacs Babel &#x8FDB;&#x884C;&#x7ED8;&#x5236;&#xFF0C;&#x9700;&#x8981;&#x5982;&#x4E0B;&#x6240;&#x793A;&#x7684; Headers&#x3002;
+</p>
+<div class="org-src-container">
+<figure class="highlight hljs"><table><tr><td class="code"><pre><span class="line">#+begin_src dot :file first.png :cmdline -Tpng :results silent
+  digraph first{
+      a-&gt;b;
+      b-&gt;d;
+      c-&gt;d;
+  }
+#+end_src</span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+&#x5176;&#x4E2D;&#xFF0C;=:results silent= &#x8868;&#x793A;&#x4E0D;&#x5728; Org &#x6587;&#x4EF6;&#x4E2D;&#x8FDB;&#x884C;&#x4EFB;&#x4F55;&#x8F93;&#x51FA;&#x3002;
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc922ea1" class="outline-2">
+<h2 id="orgc922ea1">&#x7ED8;&#x5236;&#x5C5E;&#x6027;</h2>
+<div class="outline-text-2" id="text-orgc922ea1">
+<p>
+&#x4E00;&#x4E2A;&#x56FE;&#x4E2D;&#x53EF;&#x80FD;&#x6709;&#x975E;&#x5E38;&#x591A;&#x7684;&#x8282;&#x70B9;&#x4E0E;&#x8FB9;&#xFF0C;&#x5982;&#x679C;&#x6BCF;&#x6B21;&#x90FD;&#x9700;&#x8981;&#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x7684;&#x5C5E;&#x6027;&#x4F1A;&#x975E;&#x5E38;&#x9EBB;&#x70E6;&#x3002;&#x7C7B;&#x4F3C;
+&#x4E8E;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7F16;&#x7A0B;&#x7684;&#x601D;&#x60F3;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7528; <code>node</code> &#x548C; <code>edge</code> &#x7C7B;&#x6807;&#x7B7E;&#x6765;&#x8BBE;&#x7F6E;&#x5168;&#x5C40;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x7528;&#x5BF9;
+&#x8C61;&#x6807;&#x7B7E;&#x8BBE;&#x7F6E;&#x5355;&#x4E2A;&#x8282;&#x70B9;&#x4E0E;&#x8FB9;&#x7684;&#x5C5E;&#x6027;&#x3002;
+</p>
+
+<div class="org-src-container">
+<figure class="highlight hljs"><table><tr><td class="code"><pre><span class="line">digraph G{
+    // &#x8BBE;&#x7F6E;&#x56FE;&#x7247;&#x6700;&#x5927;&#x5C3A;&#x5BF8;
+    size = &quot;40, 40&quot;;
+    // &#x8BBE;&#x7F6E;&#x8282;&#x70B9;&#x6392;&#x5E03;&#x65B9;&#x5411;
+    rankdir = LR;
+    // &#x8BBE;&#x7F6E;&#x8282;&#x70B9;&#x5B57;&#x4F53;
+    node[fontname=&quot;SimHei&quot;];
+    // &#x8BBE;&#x7F6E;&#x8FDE;&#x7EBF;&#x5B57;&#x4F53;
+    edge[fontname=&quot;SimHei&quot;];
+
+    // &#x8BBE;&#x7F6E;&#x9ED8;&#x8BA4;&#x8282;&#x70B9;&#x5C5E;&#x6027;
+    node[shape=box, color=blue, style=unfilled];
+    // &#x8BBE;&#x7F6E;&#x8FB9;&#x7684;&#x5C5E;&#x6027;
+    edge[color=red];
+
+    // &#x8282;&#x70B9;
+    &#x5C0F;&#x84DD;;
+    &#x5C0F;&#x7EA2;[color=red];
+    // &#x8FB9;
+    &#x5C0F;&#x84DD;-&gt;&#x5C0F;&#x7EA2;; // &#x9ED8;&#x8BA4;&#x8FB9;&#x5C5E;&#x6027;
+    &#x5C0F;&#x7EA2;-&gt;&#x5C0F;&#x84DD;[color=blue, style=dashed]; // &#x81EA;&#x5B9A;&#x4E49;&#x8FB9;&#x5C5E;&#x6027;
+}</span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+<a id="org7ae12da"></a>
+<img src="property.png">
+</p>
+
+<p>
+&#x6240;&#x6709;&#x53EF;&#x7528;&#x7684;&#x5C5E;&#x6027;&#x89C1; <a href="https://graphviz.gitlab.io/_pages/doc/info/attrs.html" target="_blank" rel="noopener">&#x5B98;&#x7F51;</a>&#xFF0C;&#x6B64;&#x5904;&#x5217;&#x4E3E;&#x90E8;&#x5206;&#x5E38;&#x7528;&#x7684;&#x5C5E;&#x6027;
+</p>
+<ul class="org-ul">
+<li><b>charset</b> &#x7F16;&#x7801;&#xFF0C;&#x4E00;&#x822C;&#x8BBE;&#x7F6E; UTF-8</li>
+<li><b>fontname</b> &#x5B57;&#x4F53;&#x540D;&#x79F0;&#xFF0C;&#x8FD9;&#x4E2A;&#x5728;&#x4E2D;&#x6587;&#x7684;&#x60C5;&#x51B5;&#x9700;&#x8981;&#x8BBE;&#x7F6E;&#xFF0C;&#x5426;&#x5219;&#x5BFC;&#x51FA;&#x56FE;&#x7247;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x4E71;&#x7801;&#xFF0C;&#x4E00;&#x822C;&#x8BBE;
+&#x7F6E;&#x5FAE;&#x8F6F;&#x96C5;&#x9ED1;(&quot;Microsoft YaHei&quot;), linux &#x4E0B;&#x4E5F;&#x662F;&#x540C;&#x6837;&#x8BBE;&#x7F6E;&#x7CFB;&#x7EDF;&#x5E26;&#x7684;&#x5B57;&#x4F53;&#x5C31;&#x597D;&#xFF0C;&#x5176;&#x4ED6;&#x5B57;&#x4F53;
+&#x8BBE;&#x7F6E;&#x89C1;fontpath &#x5C5E;&#x6027;</li>
+<li><b>fontcolor</b> &#x5B57;&#x4F53;&#x989C;&#x8272;</li>
+<li><b>fontsize</b> &#x5B57;&#x4F53;&#x5927;&#x5C0F;&#xFF0C;&#x7528;&#x4E8E;&#x6587;&#x672C;&#x5185;&#x5BB9;</li>
+<li><b>fillcolor</b> &#x7528;&#x4E8E;&#x586B;&#x5145;&#x8282;&#x70B9;&#x6216;&#x8005;&#x96C6;&#x7FA4;(cluster)&#x7684;&#x80CC;&#x666F;&#x989C;&#x8272;&#x3002;</li>
+<li><b>size</b> &#x56FE;&#x5F62;&#x7684;&#x6700;&#x5927;&#x5BBD;&#x5EA6;&#x548C;&#x9AD8;&#x5EA6;</li>
+<li><b>label</b> &#x56FE;&#x5F62;&#x4E0A;&#x7684;&#x6587;&#x672C;&#x6807;&#x8BB0;</li>
+<li><b>margin</b> &#x8BBE;&#x7F6E;&#x56FE;&#x5F62;&#x7684;&#x8FB9;&#x8DDD;</li>
+<li><b>pad</b> &#x6307;&#x5B9A;&#x5C06;&#x7ED8;&#x5236;&#x533A;&#x57DF;&#x6269;&#x5C55;&#x5230;&#x7ED8;&#x5236;&#x56FE;&#x5F62;&#x6240;&#x9700;&#x7684;&#x6700;&#x5C0F;&#x533A;&#x57DF;&#x7684;&#x957F;&#x5EA6;&#xFF08;&#x4EE5;&#x82F1;&#x5BF8;&#x4E3A;&#x5355;&#x4F4D;&#xFF09;</li>
+<li><p>
+<b>style</b> &#x8BBE;&#x7F6E;&#x56FE;&#x5F62;&#x7EC4;&#x4EF6;&#x7684;&#x6837;&#x5F0F;&#x4FE1;&#x606F;&#x3002; &#x5BF9;&#x4E8E;&#x805A;&#x7C7B;&#x5B50;&#x56FE;&#x6216;&#x8005;&#x8282;&#x70B9;&#xFF0C;&#x5982;&#x679C; style = filled&#xFF0C;&#x5219;
+&#x586B;&#x5145;&#x805A;&#x7C7B;&#x6846;&#x7684;&#x80CC;&#x666F;
+</p>
+
+
+<div class="figure">
+<p><img src="Screenshot_20200311_143758_yfrBsd.png">
+</p>
+</div></li>
+
+<li><p>
+<b>rankdir</b> &#x8BBE;&#x7F6E;&#x56FE;&#x5F62;&#x5E03;&#x5C40;&#x7684;&#x6392;&#x5217;&#x65B9;&#x5411; (&#x5168;&#x5C40;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x751F;&#x6548;). &quot;TB&quot;, &quot;LR&quot;, &quot;BT&quot;, &quot;RL&quot;, &#x5206;
+&#x522B;&#x5BF9;&#x5E94;&#x4E8E;&#x4ECE;&#x4E0A;&#x5230;&#x4E0B;&#xFF0C;&#x4ECE;&#x5DE6;&#x5230;&#x53F3;&#xFF0C;&#x4ECE;&#x4E0B;&#x5230;&#x4E0A;&#x548C;&#x4ECE;&#x53F3;&#x5230;&#x5DE6;&#x7ED8;&#x5236;&#x7684;&#x6709;&#x5411;&#x56FE;&#x3002;
+</p>
+
+<div class="org-src-container">
+<figure class="highlight hljs"><table><tr><td class="code"><pre><span class="line">digraph {
+    rankdir = RL;
+    A-&gt;B-&gt;C[color=green];
+    A-&gt;C[label=&quot;RL&quot;];
+}</span><br></pre></td></tr></table></figure>
+</div>
+
+<div class="figure">
+<p><img src="rankdir.png">
+</p>
+</div></li>
+
+<li><b>ranksep</b> &#x4EE5;&#x82F1;&#x5BF8;&#x4E3A;&#x5355;&#x4F4D;&#x63D0;&#x4F9B;&#x6240;&#x9700;&#x7684;&#x6392;&#x5217;&#x95F4;&#x9694;</li>
+<li><b>ratio</b> &#x8BBE;&#x7F6E;&#x751F;&#x6210;&#x56FE;&#x7247;&#x7684;&#x7EB5;&#x6A2A;&#x6BD4;</li>
+</ul>
+</div>
+
+<div id="outline-container-org43d7b95" class="outline-3">
+<h3 id="org43d7b95">&#x8282;&#x70B9;</h3>
+<div class="outline-text-3" id="text-org43d7b95">
+<p>
+&#x8282;&#x70B9;&#x7684;&#x9ED8;&#x8BA4;&#x5C5E;&#x6027;&#x4E3A; shape = ellipse, width = .75, height = 0.5 &#x5E76;&#x4E14;&#x7528;&#x8282;&#x70B9;&#x6807;&#x8BC6;&#x7B26;&#x4F5C;&#x4E3A;
+&#x8282;&#x70B9;&#x7684;&#x663E;&#x793A;&#x6587;&#x5B57;&#x3002;
+</p>
+
+<p>
+&#x5982; <a href="#org7ae12da">&#x56FE; 1</a> &#x4E2D;&#x6240;&#x793A;&#xFF0C;&#x58F0;&#x660E;&#x4E24;&#x4E2A;&#x8282;&#x70B9; <i>&#x5C0F;&#x84DD;</i> &#x548C; <i>&#x5C0F;&#x7EA2;/&#xFF0C;/&#x5C0F;&#x84DD;</i> &#x6216; <i>&#x5C0F;&#x7EA2;</i> &#x5C31;&#x8868;&#x793A;&#x8FD9;&#x4E2A;&#x8282;&#x70B9;&#x7684;&#x8282;&#x70B9;&#x6807;
+&#x8BC6;&#x7B26;&#xFF0C;&#x540E;&#x9762;&#x7D27;&#x8DDF;&#x7684;&#x662F;&#x8BE5;&#x8282;&#x70B9;&#x7684;&#x5C5E;&#x6027;&#x5217;&#x8868;&#xFF1B;&#x53E6;&#x4E00;&#x79CD;&#x7528;&#x6CD5;&#x4E3A; &#x8282;&#x70B9;&#x6807;&#x8BC6;&#x7B26;:&#x8282;&#x70B9;&#x90E8;&#x5206;:&#x65B9;&#x5411;[&#x5C5E;&#x6027;&#x5217;
+&#x8868;] <code>&#x5C0F;&#x84DD;:body[style=filled color=lightblue]</code>, &#x8FD9;&#x4E2A;&#x4E3A;&#x5355;&#x4E00;&#x8282;&#x70B9;&#x58F0;&#x660E;&#x7684;&#x65B9;&#x5F0F;&#x3002;
+</p>
+
+<p>
+&#x8282;&#x70B9;&#x4E2D;&#x7684;&#x57FA;&#x672C;&#x5C5E;&#x6027;&#x6709;
+</p>
+<ul class="org-ul">
+<li><b>shape</b> &#x5F62;&#x72B6;&#xFF0C;&#x5168;&#x90E8;&#x5F62;&#x72B6;&#x89C1; <a href="https://graphviz.gitlab.io/_pages/doc/info/shapes.html" target="_blank" rel="noopener">Graphviz &#x5B98;&#x7F51;</a>&#xFF0C;&#x4E00;&#x4E9B;&#x5E38;&#x7528;&#x7684;&#x56FE;&#x5F62;&#x6709; box, circle, ellipse,
+plaintext, square</li>
+<li><b>width</b> <b>height</b>, &#x56FE;&#x5F62;&#x7684;&#x5BBD;&#x5EA6;&#x548C;&#x9AD8;&#x5EA6;&#xFF0C;&#x5982;&#x679C;&#x8BBE;&#x7F6E;&#x4E86; fixedsize &#x4E3A; true&#xFF0C;&#x5219;&#x5BBD;&#x548C;&#x9AD8;&#x4E3A;&#x6700;&#x7EC8;&#x7684;
+&#x957F;&#x5EA6;</li>
+<li><b>fixedsize</b> &#x5982;&#x679C;&#x4E3A;false&#xFF0C;&#x8282;&#x70B9;&#x7684;&#x5927;&#x5C0F;&#x7531;&#x5176;&#x6587;&#x672C;&#x5185;&#x5BB9;&#x6240;&#x9700;&#x8981;&#x7684;&#x6700;&#x5C0F;&#x503C;&#x51B3;&#x5B9A;</li>
+<li><b>rank</b> &#x5B50;&#x56FE;&#x4E2D;&#x8282;&#x70B9;&#x4E0A;&#x7684;&#x6392;&#x5217;&#x7B49;&#x7EA7;&#x7EA6;&#x675F;. &#x6700;&#x5C0F;&#x7B49;&#x7EA7;&#x662F;&#x6700;&#x9876;&#x90E8;&#x6216;&#x6700;&#x5DE6;&#x4FA7;&#xFF0C;&#x6700;&#x5927;&#x7B49;&#x7EA7;&#x662F;&#x6700;&#x5E95;&#x90E8;&#x6216;
+&#x6700;&#x53F3;&#x4FA7;&#x3002;
+<ul class="org-ul">
+<li>same. &#x6240;&#x6709;&#x8282;&#x70B9;&#x90FD;&#x4F4D;&#x4E8E;&#x540C;&#x4E00;&#x7B49;&#x7EA7;</li>
+<li>min. &#x6240;&#x6709;&#x8282;&#x70B9;&#x90FD;&#x4F4D;&#x4E8E;&#x6700;&#x5C0F;&#x7B49;&#x7EA7;&#x4E0A;</li>
+<li>source. &#x6240;&#x6709;&#x8282;&#x70B9;&#x90FD;&#x4F4D;&#x4E8E;&#x6700;&#x5C0F;&#x7B49;&#x7EA7;&#x4E0A;&#xFF0C;&#x5E76;&#x4E14;&#x6700;&#x5C0F;&#x7B49;&#x7EA7;&#x4E0A;&#x7684;&#x552F;&#x4E00;&#x8282;&#x70B9;&#x5C5E;&#x4E8E;&#x67D0;&#x4E2A;&#x7B49;&#x7EA7;
+source &#x6216; min &#x7684;&#x5B50;&#x56FE;</li>
+<li>max sink. &#x548C;&#x4E0A;&#x7C7B;&#x4F3C;</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org98b8954" class="outline-3">
+<h3 id="org98b8954">&#x8FB9;</h3>
+<div class="outline-text-3" id="text-org98b8954">
+<p>
+&#x6709;&#x5411;&#x56FE;&#x4E2D;&#x7684;&#x7684;&#x8FB9;&#x7528; <code>-&gt;</code> &#x8868;&#x793A;&#xFF0C;&#x65E0;&#x5411;&#x56FE;&#x7528; <code>--</code> &#x8868;&#x793A;&#x3002;
+</p>
+
+<p>
+&#x53EF;&#x4EE5;&#x540C;&#x65F6;&#x8FDE;&#x63A5;&#x591A;&#x4E2A;&#x8282;&#x70B9;&#x6216;&#x8005;&#x5B50;&#x56FE;&#xFF0C;&#x4F46;&#x662F;&#x53EA;&#x80FD;&#x6709;&#x4E00;&#x4E2A;&#x5C5E;&#x6027;&#x5217;&#x8868;&#xFF0C;&#x5982;&#x4E0B;
+</p>
+<div class="org-src-container">
+<figure class="highlight hljs"><table><tr><td class="code"><pre><span class="line">digraph {
+    rankdir = LR
+    A -&gt; B -&gt; c[color=green]
+}</span><br></pre></td></tr></table></figure>
+</div>
+
+<div class="figure">
+<p><img src="edge_color.png">
+</p>
+</div>
+
+<p>
+&#x4E00;&#x4E9B;&#x5173;&#x4E8E;&#x8FB9;&#x7684;&#x5C5E;&#x6027;&#x5982;&#x4E0B;&#xFF1A;
+</p>
+<ul class="org-ul">
+<li><b>len</b> &#x9996;&#x9009;&#x8FB9;&#x7684;&#x957F;&#x5EA6;</li>
+<li><p>
+<b>weight</b> &#x8FB9;&#x7684;&#x6743;&#x91CD;, &#x6743;&#x91CD;&#x8D8A;&#x5927;&#x8D8A;&#x63A5;&#x8FD1;&#x8FB9;&#x7684;&#x957F;&#x5EA6;
+</p>
+
+<p>
+&#x5982;&#x679C;&#x6211;&#x4EEC;&#x5E0C;&#x671B;&#x56FE;&#x4E2D;&#x7684;&#x7EFF;&#x8272;&#x8FB9;&#x4E3A;&#x4E3B;&#x8981;&#x903B;&#x8F91;&#x5206;&#x652F;&#xFF0C;&#x9700;&#x8981;&#x8BBE;&#x7F6E; <code>A-&gt;B-&gt;C-&gt;D-&gt;F</code> &#x7684;&#x6743;&#x91CD;&#x6700;&#x5927;&#xFF0C;&#x4FEE;&#x6539;
+&#x7EFF;&#x8272;&#x7684;&#x5206;&#x652F;&#x7684;&#x6743;&#x91CD;&#x4E3A; 100&#xFF0C;&#x4F7F;&#x5176;&#x53D8;&#x6210;&#x4E3B;&#x8981;&#x903B;&#x8F91;&#x5206;&#x652F;&#xFF0C;&#x4FEE;&#x6539;&#x540E;&#x7684;&#x6548;&#x679C;&#x5982;&#x4E0B;
+</p>
+
+<div class="org-src-container">
+<figure class="highlight hljs"><table><tr><td class="code"><pre><span class="line">digraph {
+    rankdir = LR
+    splines = ortho
+
+    A -&gt; B -&gt; C -&gt; D -&gt; F [color=green, weight=100]
+    E -&gt; F -&gt; B -&gt; D [color=blue]
+    B -&gt; E -&gt; H[color=red]
+}</span><br></pre></td></tr></table></figure>
+</div>
+
+<div class="figure">
+<p><img src="edge_weight.png">
+</p>
+</div></li>
+<li><b>lhead</b> &#x903B;&#x8F91;&#x8FB9;&#x7F18;&#x7684;&#x5934;&#x90E8;(&#x7BAD;&#x5934;&#x90A3;&#x4E2A;&#x4F4D;&#x7F6E;)&#xFF0C;compound &#x8BBE;&#x7F6E;&#x4E3A; true &#x65F6;&#xFF0C;&#x8FB9;&#x88AB;&#x88C1;&#x51CF;&#x5230;&#x5B50;&#x56FE;&#x7684;&#x8FB9;&#x754C;&#x5904;</li>
+<li><b>ltail</b> &#x7C7B;&#x4F3C; lhead</li>
+<li><b>headlabel</b> &#x8FB9;&#x4E0A;&#x9760;&#x8FD1;&#x7BAD;&#x5934;&#x90E8;&#x5206;&#x7684;&#x6807;&#x7B7E;</li>
+<li><b>taillabel</b> &#x8FB9;&#x4E0A;&#x9760;&#x8FD1;&#x5C3E;&#x90E8;&#x90E8;&#x5206;&#x7684;&#x6807;&#x7B7E;</li>
+<li><b>splines</b> &#x63A7;&#x5236;&#x5982;&#x4F55;&#x663E;&#x793A;&#x8FB9;&#xFF0C;&#x53D6;&#x503C;&#x53EF;&#x4EE5;&#x662F;
+<ul class="org-ul">
+<li><p>
+none &#x6216;&#x8005; &quot;&quot;, &#x65E0;&#x8FB9;
+</p>
+<div class="org-src-container">
+<figure class="highlight hljs"><table><tr><td class="code"><pre><span class="line">digraph {
+    rankdir = LR
+    splines = none
+
+    A -&gt; B -&gt; C -&gt; D -&gt; F [color=green]
+    E -&gt; F -&gt; B -&gt; D [color=blue]
+    B -&gt; E -&gt; H[color=red]
+}</span><br></pre></td></tr></table></figure>
+</div>
+
+<div class="figure">
+<p><img src="edge_splines_none.png">
+</p>
+</div></li>
+<li><p>
+true &#x6216;&#x8005; spline, &#x6837;&#x6761;&#x7EBF;&#xFF08;&#x65E0;&#x89C4;&#x5219;&#xFF0C;&#x53EF;&#x4E3A;&#x76F4;&#x6216;&#x8005;&#x66F2;&#x7EBF;&#xFF09;
+</p>
+<div class="org-src-container">
+<figure class="highlight hljs"><table><tr><td class="code"><pre><span class="line">digraph {
+    rankdir = LR
+    splines = spline
+
+    A -&gt; B -&gt; C -&gt; D -&gt; F [color=green]
+    E -&gt; F -&gt; B -&gt; D [color=blue]
+    B -&gt; E -&gt; H[color=red]
+}</span><br></pre></td></tr></table></figure>
+</div>
+
+<div class="figure">
+<p><img src="edge_splines_spline.png">
+</p>
+</div></li>
+<li><p>
+false &#x6216;&#x8005; line, &#x76F4;&#x7EBF;
+</p>
+<div class="org-src-container">
+<figure class="highlight hljs"><table><tr><td class="code"><pre><span class="line">digraph {
+    rankdir = LR
+    splines = line
+
+    A -&gt; B -&gt; C -&gt; D -&gt; F [color=green]
+    E -&gt; F -&gt; B -&gt; D [color=blue]
+    B -&gt; E -&gt; H[color=red]
+}</span><br></pre></td></tr></table></figure>
+</div>
+
+<div class="figure">
+<p><img src="edge_splines_line.png">
+</p>
+</div></li>
+<li><p>
+polyline, &#x6298;&#x7EBF;
+</p>
+<div class="org-src-container">
+<figure class="highlight hljs"><table><tr><td class="code"><pre><span class="line">digraph {
+    rankdir = LR
+    splines = polyline
+
+    A -&gt; B -&gt; C -&gt; D -&gt; F [color=green]
+    E -&gt; F -&gt; B -&gt; D [color=blue]
+    B -&gt; E -&gt; H[color=red]
+}</span><br></pre></td></tr></table></figure>
+</div>
+
+<div class="figure">
+<p><img src="edge_splines_polyline.png">
+</p>
+</div></li>
+<li><p>
+curved, &#x66F2;&#x5F27;&#x7EBF;&#xFF0C;&#x770B;&#x8D77;&#x6765;&#x50CF;&#x8D1D;&#x585E;&#x5C14;&#x66F2;&#x7EBF;
+</p>
+<div class="org-src-container">
+<figure class="highlight hljs"><table><tr><td class="code"><pre><span class="line">digraph {
+    rankdir = LR
+    splines = curved
+
+    A -&gt; B -&gt; C -&gt; D -&gt; F [color=green]
+    E -&gt; F -&gt; B -&gt; D [color=blue]
+    B -&gt; E -&gt; H[color=red]
+}</span><br></pre></td></tr></table></figure>
+</div>
+
+<div class="figure">
+<p><img src="edge_splines_curved.png">
+</p>
+</div></li>
+<li><p>
+ortho, &#x6B63;&#x4EA4;&#x6298;&#x7EBF;
+</p>
+<div class="org-src-container">
+<figure class="highlight hljs"><table><tr><td class="code"><pre><span class="line">digraph {
+    rankdir = LR
+    splines = ortho
+
+    A -&gt; B -&gt; C -&gt; D -&gt; F [color=green]
+    E -&gt; F -&gt; B -&gt; D [color=blue]
+    B -&gt; E -&gt; H[color=red]
+}</span><br></pre></td></tr></table></figure>
+</div>
+
+<div class="figure">
+<p><img src="edge_splines_ortho.png">
+</p>
+</div></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge59aac4" class="outline-3">
+<h3 id="orge59aac4">&#x8FB9;&#x7684;&#x65B9;&#x5411;</h3>
+<div class="outline-text-3" id="text-orge59aac4">
+<p>
+<b>&#x793A;&#x4F8B;</b> &#x58F0;&#x660E;&#x591A;&#x90E8;&#x5206;&#x8282;&#x70B9;&#xFF0C;&#x4EE5;&#x53CA;&#x5BF9;&#x5404;&#x90E8;&#x5206;&#x8FDB;&#x884C;&#x5355;&#x72EC;&#x8BBE;&#x7F6E;
+</p>
+<div class="org-src-container">
+<figure class="highlight hljs"><table><tr><td class="code"><pre><span class="line">node0 [label = &quot;&lt;postid1&gt; string|&lt;postid2&gt; string|&lt;postid3&gt; string3&quot;, height=.5];
+node0:head[color=lightblue];</span><br></pre></td></tr></table></figure>
+</div>
+
+<div class="org-src-container">
+<figure class="highlight hljs"><table><tr><td class="code"><pre><span class="line">digraph action {
+    node [shape = record,height=.1];
+
+    node0 [label = &quot;&lt;head&gt; head|&lt;body&gt; body|&lt;foot&gt; foot&quot;, height=.5]
+    node2 [shape = box label=&quot;mind&quot;]
+
+    node0:head:n -&gt; node2:n [label = &quot;n&quot;]
+    node0:head:ne -&gt; node2:ne [label = &quot;ne&quot;]
+    node0:head:e -&gt; node2:e [label = &quot;e&quot;]
+    node0:head:se -&gt; node2:se [label = &quot;se&quot;]
+    node0:head:s -&gt; node2:s [label = &quot;s&quot;]
+    node0:head:sw -&gt; node2:sw [label = &quot;sw&quot;]
+    node0:head:w -&gt; node2:w [label = &quot;w&quot;]
+    node0:head:nw -&gt; node2:nw [label = &quot;nw&quot;]
+    node0:head:c -&gt; node2:c [label = &quot;c&quot;] // center&#xFF0C;&#x4E2D;&#x95F4;
+    node0:head:_ -&gt; node2:_ [label = &quot;_&quot;] // &#x4EFB;&#x610F;
+
+    node0:body[style=filled color=lightblue]
+}</span><br></pre></td></tr></table></figure>
+</div>
+
+
+<div class="figure">
+<p><img src="direction.png">
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga1c6cde" class="outline-2">
+<h2 id="orga1c6cde">&#x5B50;&#x56FE;</h2>
+<div class="outline-text-2" id="text-orga1c6cde">
+<p>
+<b>subgraph</b> &#x5FC5;&#x987B;&#x914D;&#x5408; <b>cluster</b> &#x4E00;&#x8D77;&#x4F7F;&#x7528;&#xFF0C;&#x7528;&#x6CD5;&#x4E3A; =subgraph cluster* {} &#x3002;
+</p>
+
+<p>
+&#x9700;&#x8981;&#x8BBE;&#x7F6E; <b>compound</b> &#x4E3A; true&#xFF0C;&#x5219;&#x5728;&#x7FA4;&#x96C6;&#x4E4B;&#x95F4;&#x7559;&#x51FA;&#x8FB9;&#x7F18;&#xFF0C;&#x5B50;&#x56FE;&#x7684;&#x8FB9;&#x754C;&#x5173;&#x7CFB;&#x5728; &#x8FB9; &#x7684;&#x5B9A;&#x4E49;&#x4E2D;&#x6709;&#x7ED9;&#x51FA;&#xFF0C;&#x8FD9;&#x91CC;&#x76F4;&#x63A5;&#x7ED9;&#x4E2A;&#x793A;&#x4F8B;&#x3002;
+</p>
+
+<div class="org-src-container">
+<figure class="highlight hljs"><table><tr><td class="code"><pre><span class="line">digraph G {
+    compound = true  // &#x5141;&#x8BB8;&#x5B50;&#x56FE;&#x95F4;&#x5B58;&#x5728;&#x8FB9;
+    ranksep = 1
+    node [shape = record]
+
+    subgraph cluster_hardware {
+	label = &quot;hardware&quot;
+	color = lightblue
+	CPU Memory
+    }
+
+    subgraph cluster_kernel {
+	label = &quot;kernel&quot;
+	color = green
+	Init IPC
+    }
+
+    subgraph cluster_libc {
+	label = &quot;libc&quot;
+	color = yellow
+	glibc
+    }
+
+    CPU -&gt; Init [lhead = cluster_kernel ltail = cluster_hardware]
+    IPC -&gt; glibc [lhead = cluster_libc ltail = cluster_kernel]
+}</span><br></pre></td></tr></table></figure>
+</div>
+
+<div class="figure">
+<p><img src="subgraph.png">
+</p>
+</div>
+</div>
+</div>
+</div>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Emacs/" rel="tag">Emacs</a>, <a class="has-link-grey -link" href="/tags/Graphviz/" rel="tag">Graphviz</a>, <a class="has-link-grey -link" href="/tags/Linux/" rel="tag">Linux</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <!-- AddToAny BEGIN -->
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share" target="_blank" rel="noopener"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_telegram"></a>
+<a class="a2a_button_whatsapp"></a>
+<a class="a2a_button_reddit"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="HTTPS://QR.ALIPAY.COM/FKX01669SBV7NA4ALTVPE8" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="wxp://f2f0PYx27X0CWU1yiBhSKeHHgYzfA27iOicM" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/03/06/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Org-mode-%E8%BF%9B%E8%A1%8C-GTD-%E7%AE%A1%E7%90%86/">
+                <span class="level-item">使用 Emacs 与 Org mode 进行 GTD 管理</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: false,
+        verify: false,
+        app_id: 'JMPgCt4i5QXYiepmd7ADdLfm-gzGzoHsz',
+        app_key: 'z6zWp6MXVNc4WnbBOCkVw3Ir',
+        placeholder: '友情提醒：你甚至不需要填写昵称、邮箱、网址就能匿名评论！（邮箱可接收回复提醒）'
+    });
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/avatar.png" alt="Cycoe">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        Cycoe
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Cycoe&#39;s Home Page
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Beijing</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            33
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            17
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            34
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/cycoe" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/cycoe">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Dribbble" href="https://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://yinr.cc" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">友情链接</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">yinr.cc</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Archlinux/">
+            <span class="level-start">
+                <span class="level-item">Archlinux</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Games/">
+            <span class="level-start">
+                <span class="level-item">Games</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/GitHub/">
+            <span class="level-start">
+                <span class="level-item">GitHub</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Linux/">
+            <span class="level-start">
+                <span class="level-item">Linux</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">10</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Linux/Emacs/">
+            <span class="level-start">
+                <span class="level-item">Emacs</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Math/">
+            <span class="level-start">
+                <span class="level-item">Math</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/">
+            <span class="level-start">
+                <span class="level-item">Python</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Python/Spider/">
+            <span class="level-start">
+                <span class="level-item">Spider</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/blog/">
+            <span class="level-start">
+                <span class="level-item">blog</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/linux/">
+            <span class="level-start">
+                <span class="level-item">linux</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/matplotlib/">
+            <span class="level-start">
+                <span class="level-item">matplotlib</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/personal/">
+            <span class="level-start">
+                <span class="level-item">personal</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/python/">
+            <span class="level-start">
+                <span class="level-item">python</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/python/spider/">
+            <span class="level-start">
+                <span class="level-item">spider</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/statistics/">
+            <span class="level-start">
+                <span class="level-item">statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Agenda/" style="font-size: 10px;">Agenda</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Archlinux/" style="font-size: 16.67px;">Archlinux</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/Emacs/" style="font-size: 16.67px;">Emacs</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Graphviz/" style="font-size: 10px;">Graphviz</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/Org/" style="font-size: 10px;">Org</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Python/" style="font-size: 16.67px;">Python</a> <a href="/tags/Spider/" style="font-size: 10px;">Spider</a> <a href="/tags/Sploit/" style="font-size: 10px;">Sploit</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/matplotlib/" style="font-size: 13.33px;">matplotlib</a> <a href="/tags/mu4e/" style="font-size: 10px;">mu4e</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 13.33px;">plot</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/statistics/" style="font-size: 10px;">statistics</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 Graphviz 绘制流程图">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-11T02:37:00.000Z">2020-03-11</time></div>
+                    <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 Graphviz 绘制流程图</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/03/06/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Org-mode-%E8%BF%9B%E8%A1%8C-GTD-%E7%AE%A1%E7%90%86/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 Org mode 进行 GTD 管理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-06T11:51:00.000Z">2020-03-06</time></div>
+                    <a href="/2020/03/06/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Org-mode-%E8%BF%9B%E8%A1%8C-GTD-%E7%AE%A1%E7%90%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 Org mode 进行 GTD 管理</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/02/28/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-mu4e-%E7%AE%A1%E7%90%86%E9%82%AE%E4%BB%B6/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 mu4e 管理邮件">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-28T15:03:00.000Z">2020-02-28</time></div>
+                    <a href="/2020/02/28/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-mu4e-%E7%AE%A1%E7%90%86%E9%82%AE%E4%BB%B6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 mu4e 管理邮件</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第二弹-调整坐标轴">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T06:57:59.000Z">2019-12-06</time></div>
+                    <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第二弹-调整坐标轴</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/matplotlib/">matplotlib</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/05/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-matplotlib%E5%88%9D%E4%BD%93%E9%AA%8C/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第一弹-matplotlib初体验">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-05T14:55:57.000Z">2019-12-05</time></div>
+                    <a href="/2019/12/05/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-matplotlib%E5%88%9D%E4%BD%93%E9%AA%8C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第一弹-matplotlib初体验</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/matplotlib/">matplotlib</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AMD/">
+                        <span class="tag">AMD</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Agenda/">
+                        <span class="tag">Agenda</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Algorithm/">
+                        <span class="tag">Algorithm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Archlinux/">
+                        <span class="tag">Archlinux</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Brightness/">
+                        <span class="tag">Brightness</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Cantonese/">
+                        <span class="tag">Cantonese</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DWM/">
+                        <span class="tag">DWM</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DwarfFortress/">
+                        <span class="tag">DwarfFortress</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Emacs/">
+                        <span class="tag">Emacs</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GTD/">
+                        <span class="tag">GTD</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Graphviz/">
+                        <span class="tag">Graphviz</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/HiDPI/">
+                        <span class="tag">HiDPI</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Linux/">
+                        <span class="tag">Linux</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Math/">
+                        <span class="tag">Math</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Org/">
+                        <span class="tag">Org</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PIL/">
+                        <span class="tag">PIL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Spider/">
+                        <span class="tag">Spider</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Sploit/">
+                        <span class="tag">Sploit</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vim/">
+                        <span class="tag">Vim</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fcitx/">
+                        <span class="tag">fcitx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mail/">
+                        <span class="tag">mail</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/matplotlib/">
+                        <span class="tag">matplotlib</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mu4e/">
+                        <span class="tag">mu4e</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/numpy/">
+                        <span class="tag">numpy</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/planche/">
+                        <span class="tag">planche</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/plot/">
+                        <span class="tag">plot</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/python/">
+                        <span class="tag">python</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/statistics/">
+                        <span class="tag">statistics</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
+                        <span class="tag">图像处理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/">
+                        <span class="tag">粒子羣優化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/">
+                        <span class="tag">線性代數</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 Graphviz 绘制流程图">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-11T02:37:00.000Z">2020-03-11</time></div>
+                    <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 Graphviz 绘制流程图</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/03/06/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Org-mode-%E8%BF%9B%E8%A1%8C-GTD-%E7%AE%A1%E7%90%86/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 Org mode 进行 GTD 管理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-06T11:51:00.000Z">2020-03-06</time></div>
+                    <a href="/2020/03/06/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Org-mode-%E8%BF%9B%E8%A1%8C-GTD-%E7%AE%A1%E7%90%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 Org mode 进行 GTD 管理</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/02/28/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-mu4e-%E7%AE%A1%E7%90%86%E9%82%AE%E4%BB%B6/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 mu4e 管理邮件">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-28T15:03:00.000Z">2020-02-28</time></div>
+                    <a href="/2020/02/28/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-mu4e-%E7%AE%A1%E7%90%86%E9%82%AE%E4%BB%B6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 mu4e 管理邮件</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第二弹-调整坐标轴">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T06:57:59.000Z">2019-12-06</time></div>
+                    <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第二弹-调整坐标轴</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/matplotlib/">matplotlib</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/05/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-matplotlib%E5%88%9D%E4%BD%93%E9%AA%8C/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第一弹-matplotlib初体验">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-05T14:55:57.000Z">2019-12-05</time></div>
+                    <a href="/2019/12/05/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-matplotlib%E5%88%9D%E4%BD%93%E9%AA%8C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第一弹-matplotlib初体验</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/matplotlib/">matplotlib</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AMD/">
+                        <span class="tag">AMD</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Agenda/">
+                        <span class="tag">Agenda</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Algorithm/">
+                        <span class="tag">Algorithm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Archlinux/">
+                        <span class="tag">Archlinux</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Brightness/">
+                        <span class="tag">Brightness</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Cantonese/">
+                        <span class="tag">Cantonese</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DWM/">
+                        <span class="tag">DWM</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DwarfFortress/">
+                        <span class="tag">DwarfFortress</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Emacs/">
+                        <span class="tag">Emacs</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GTD/">
+                        <span class="tag">GTD</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Graphviz/">
+                        <span class="tag">Graphviz</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/HiDPI/">
+                        <span class="tag">HiDPI</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Linux/">
+                        <span class="tag">Linux</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Math/">
+                        <span class="tag">Math</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Org/">
+                        <span class="tag">Org</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PIL/">
+                        <span class="tag">PIL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Spider/">
+                        <span class="tag">Spider</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Sploit/">
+                        <span class="tag">Sploit</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vim/">
+                        <span class="tag">Vim</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fcitx/">
+                        <span class="tag">fcitx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mail/">
+                        <span class="tag">mail</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/matplotlib/">
+                        <span class="tag">matplotlib</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mu4e/">
+                        <span class="tag">mu4e</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/numpy/">
+                        <span class="tag">numpy</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/planche/">
+                        <span class="tag">planche</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/plot/">
+                        <span class="tag">plot</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/python/">
+                        <span class="tag">python</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/statistics/">
+                        <span class="tag">statistics</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
+                        <span class="tag">图像处理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/">
+                        <span class="tag">粒子羣優化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/">
+                        <span class="tag">線性代數</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="使用 Emacs 与 Graphviz 绘制流程图" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Cycoe&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv">
+                共<span id="busuanzi_value_site_uv">0</span>个访客
+                </span>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+<script src="/js/animation.js"></script>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+    
+    
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+    
+    
+<a id="back-to-top" title="回到顶端" href="javascript:;" target="_blank" rel="noopener">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+</html>
