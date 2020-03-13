@@ -19,7 +19,7 @@
 <meta property="og:description" content="在 Linux 下面其实有很多可以使用的邮件客户端，如 KDE 项目中的 Kmail、Gnome 项目 中的 Evolution 和 Mozilla 家族的 Thunderbird。这些客户端都只是简单地试用过，正 好最近将开发编辑器和写作环境从 Neovim 迁到了 Emacs。作为一个操作系统，不能管理 邮件怎么说的过去。可以利用 Emacs 的界面进行邮件管理，可以用 Org-mode">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2020-03-04T03:41:14.523Z">
+<meta property="og:updated_time" content="2020-03-13T09:31:28.622Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
 
@@ -174,37 +174,37 @@
 
 <a id="more"></a>
 
-<div id="outline-container-org790a3a8" class="outline-2">
-<h2 id="org790a3a8">邮件同步</h2>
-<div class="outline-text-2" id="text-org790a3a8">
+<div id="outline-container-org125049f" class="outline-2">
+<h2 id="org125049f">邮件同步</h2>
+<div class="outline-text-2" id="text-org125049f">
 <p>
 查看其他的博客，发现同步博客最常用的协议是 IMAP。Linux 下支持 IMAP 协议并且下载
 下来的目录结构是 MailDir 结构的工具主要有两个，offlineimap 和 isync。
 </p>
 </div>
-<div id="outline-container-org5a26212" class="outline-3">
-<h3 id="org5a26212">offlineimap 配置</h3>
-<div class="outline-text-3" id="text-org5a26212">
+<div id="outline-container-org4078dc2" class="outline-3">
+<h3 id="org4078dc2">offlineimap 配置</h3>
+<div class="outline-text-3" id="text-org4078dc2">
 <p>
 offlineimap 是一个由 Python 写成的 IMAP 同步工具，主要的缺点是依赖 Python2 的库，
 并且同步速度不如 isync，因此仅作记录。
 </p>
 </div>
-<div id="outline-container-org094714e" class="outline-4">
-<h4 id="org094714e">安装</h4>
-<div class="outline-text-4" id="text-org094714e">
+<div id="outline-container-org56c9d69" class="outline-4">
+<h4 id="org56c9d69">安装</h4>
+<div class="outline-text-4" id="text-org56c9d69">
 <p>
 在 Archlinux 中，可以直接从 community 仓库中安装。
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span class="linenr">1 </span>sudo pacman -S offlineimap
+<pre class="src src-sh"><span class="linenr">1 </span>sudo pacman -S offlineimap
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org494c68e" class="outline-4">
-<h4 id="org494c68e">配置</h4>
-<div class="outline-text-4" id="text-org494c68e">
+<div id="outline-container-orgdfc661e" class="outline-4">
+<h4 id="orgdfc661e">配置</h4>
+<div class="outline-text-4" id="text-orgdfc661e">
 <p>
 安装完成，要进行配置，需要创建一个 ~/.offlineimaprc 文件进行配置。详细的配置过程如下： 
 </p>
@@ -264,29 +264,29 @@ offlineimap 是一个由 Python 写成的 IMAP 同步工具，主要的缺点是
 </div>
 </div>
 </div>
-<div id="outline-container-org7ac7140" class="outline-3">
-<h3 id="org7ac7140">isync 配置</h3>
-<div class="outline-text-3" id="text-org7ac7140">
+<div id="outline-container-org1c82d2b" class="outline-3">
+<h3 id="org1c82d2b">isync 配置</h3>
+<div class="outline-text-3" id="text-org1c82d2b">
 <p>
 isync 是一个由 C++ 写成的 IMAP 同步工具，经测试同步速度要比 offlineimap 更快，但
 是同步出来的邮件数量比 offlineimap 更多不知道是怎么回事，目前主要使用这个。
 </p>
 </div>
-<div id="outline-container-orga68ad26" class="outline-4">
-<h4 id="orga68ad26">安装</h4>
-<div class="outline-text-4" id="text-orga68ad26">
+<div id="outline-container-org3fa2485" class="outline-4">
+<h4 id="org3fa2485">安装</h4>
+<div class="outline-text-4" id="text-org3fa2485">
 <p>
 在 Archlinux 中，可以直接从 community 仓库中安装。
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span class="linenr">1 </span>sudo pacman -S isync
+<pre class="src src-sh"><span class="linenr">1 </span>sudo pacman -S isync
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org1efb310" class="outline-4">
-<h4 id="org1efb310">配置</h4>
-<div class="outline-text-4" id="text-org1efb310">
+<div id="outline-container-orgcec3b01" class="outline-4">
+<h4 id="orgcec3b01">配置</h4>
+<div class="outline-text-4" id="text-orgcec3b01">
 <p>
 isync 的配置方式与 offlineimap 类似，将如下配置放在 '~/.mbsyncrc' 中，并运行
 `mbsync Netease` 即可更新 Netease 频道，mbsync 以频道的概念管理多个邮箱，可以通
@@ -370,9 +370,9 @@ isync 的配置方式与 offlineimap 类似，将如下配置放在 '~/.mbsyncrc
 </div>
 </div>
 </div>
-<div id="outline-container-orgdaa73c5" class="outline-3">
-<h3 id="orgdaa73c5">Unsafe login</h3>
-<div class="outline-text-3" id="text-orgdaa73c5">
+<div id="outline-container-org72392b5" class="outline-3">
+<h3 id="org72392b5">Unsafe login</h3>
+<div class="outline-text-3" id="text-org72392b5">
 <p>
 使用第三方 IMAP 服务同步 163 邮箱时，会提示 Unsafe login 错误，可以通过 <a href="http://config.mail.163.com/settings/imap/index.jsp?uid=xxxxxx@163.com" target="_blank" rel="noopener">网易邮箱
 设置</a> 解决。
@@ -381,13 +381,13 @@ isync 的配置方式与 offlineimap 类似，将如下配置放在 '~/.mbsyncrc
 </div>
 </div>
 
-<div id="outline-container-orgf6a2016" class="outline-2">
-<h2 id="orgf6a2016">mu 邮件管理器</h2>
-<div class="outline-text-2" id="text-orgf6a2016">
+<div id="outline-container-orgf03b8b3" class="outline-2">
+<h2 id="orgf03b8b3">mu 邮件管理器</h2>
+<div class="outline-text-2" id="text-orgf03b8b3">
 </div>
-<div id="outline-container-orgd49cd7f" class="outline-3">
-<h3 id="orgd49cd7f">安装</h3>
-<div class="outline-text-3" id="text-orgd49cd7f">
+<div id="outline-container-orge811b01" class="outline-3">
+<h3 id="orge811b01">安装</h3>
+<div class="outline-text-3" id="text-orge811b01">
 <div class="org-src-container">
 <pre class="src src-bash"><span class="linenr">1 </span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#20811;&#38534; mu &#20179;&#24211;</span>
 <span class="linenr">2 </span>git clone git://github.com/djcb/mu.git
@@ -401,9 +401,9 @@ isync 的配置方式与 offlineimap 类似，将如下配置放在 '~/.mbsyncrc
 </div>
 </div>
 </div>
-<div id="outline-container-orgd8df57a" class="outline-3">
-<h3 id="orgd8df57a">配置 mu</h3>
-<div class="outline-text-3" id="text-orgd8df57a">
+<div id="outline-container-org69996de" class="outline-3">
+<h3 id="org69996de">配置 mu</h3>
+<div class="outline-text-3" id="text-org69996de">
 <div class="org-src-container">
 <pre class="src src-bash"><span class="linenr">1 </span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#21021;&#22987;&#21270; mu &#30417;&#27979;&#30340;&#37038;&#31665;&#25991;&#20214;&#22841;</span>
 <span class="linenr">2 </span>mu init -m /data/cycoe/Documents/mail/
@@ -414,9 +414,9 @@ isync 的配置方式与 offlineimap 类似，将如下配置放在 '~/.mbsyncrc
 </div>
 </div>
 </div>
-<div id="outline-container-org2626e82" class="outline-2">
-<h2 id="org2626e82">mu4e 多账户设置</h2>
-<div class="outline-text-2" id="text-org2626e82">
+<div id="outline-container-org8854eb2" class="outline-2">
+<h2 id="org8854eb2">mu4e 多账户设置</h2>
+<div class="outline-text-2" id="text-org8854eb2">
 <p>
 mu4e (mu for emacs) 是 mu 在 emacs 中实现的一个邮件管理模块。后端调用 mu 进行邮
 件的检索和管理。在 <code>~/.config/emacs/lisp/</code> 目录下建立 <code>init-mu4e.el</code> 文件，并加入如
@@ -594,9 +594,9 @@ mu4e (mu for emacs) 是 mu 在 emacs 中实现的一个邮件管理模块。后�
 </div>
 </div>
 </div>
-<div id="outline-container-orgfd16692" class="outline-2">
-<h2 id="orgfd16692">配置 smtp 发送邮件</h2>
-<div class="outline-text-2" id="text-orgfd16692">
+<div id="outline-container-orgc6387fe" class="outline-2">
+<h2 id="orgc6387fe">配置 smtp 发送邮件</h2>
+<div class="outline-text-2" id="text-orgc6387fe">
 <p>
 emcas 可以使用 smtpmail 发送邮件，会自动读取 <code>~/.authinfo</code> 文件中的账户和密码，因
 此需要在该文件中配置 smtp 相关信息。
@@ -608,9 +608,9 @@ emcas 可以使用 smtpmail 发送邮件，会自动读取 <code>~/.authinfo</co
 </div>
 </div>
 </div>
-<div id="outline-container-orgbd1f2c4" class="outline-2">
-<h2 id="orgbd1f2c4">使用 Org mode 编辑新邮件</h2>
-<div class="outline-text-2" id="text-orgbd1f2c4">
+<div id="outline-container-orgc8c0b33" class="outline-2">
+<h2 id="orgc8c0b33">使用 Org mode 编辑新邮件</h2>
+<div class="outline-text-2" id="text-orgc8c0b33">
 <p>
 使用 Emacs 管理邮件的一大优势就是可以借助强大的 Org-mode 来写邮件，并自动导出为
 HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 plain 部分和 HTML 部分
@@ -641,9 +641,9 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
 </div>
 </div>
 </div>
-<div id="outline-container-org1fe7c51" class="outline-2">
-<h2 id="org1fe7c51">将邮件加入 TODO 列表中</h2>
-<div class="outline-text-2" id="text-org1fe7c51">
+<div id="outline-container-org236a38c" class="outline-2">
+<h2 id="org236a38c">将邮件加入 TODO 列表中</h2>
+<div class="outline-text-2" id="text-org236a38c">
 <p>
 如果想要将某封邮件加入代办事项用于记录，可以将如下代码加入 <code>init-mu4e.el</code> 中
 </p>
