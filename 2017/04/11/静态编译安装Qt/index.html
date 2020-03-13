@@ -165,6 +165,7 @@
         <div class="content">
             <p>由於 pyqt 寫的程序打包過程中依賴庫的問題，打算用 c++ 版的 Qt 重寫程序。但若用系統自帶的共享鏈接庫進行編譯，程序同樣無法在其他機器上運行。因此，此時需要自己手動靜態編譯 Qt，使用靜態鏈接庫編譯的程序會自動將依賴的庫加到最終編譯出的機器碼中。</p>
 <a id="more"></a>
+
 <h2 id="安裝依賴項"><a href="#安裝依賴項" class="headerlink" title="安裝依賴項"></a>安裝依賴項</h2><ul>
 <li>Qt 的界面顯示依賴 <code>freetype</code> 和 <code>fontconfig</code>，這兩個一定要裝上，否則編譯不成功。</li>
 <li>安裝完畢後創建 <code>freetype</code> 的軟鏈接到標準的安裝位置：<br><code>ln -s /usr/include/freetype2/freetype /usr/include/freetype</code></li>

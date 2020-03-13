@@ -169,36 +169,33 @@
 <p><img src="http://p1.bpimg.com/587851/b8e80b83eb2b7e31.jpg" alt="image1" title="Walle"></p>
 <p>機器學習在最近幾年有越來越火熱的趨勢。正巧打算做一個爬取教務網成績的爬蟲，碰到驗證碼識別的問題。於是通過各方瞭解後買了《機器學習實戰》這本書，開坑機器學習。<br>機器學習的內容其實很廣，涉及的知識也非常的雜，包括概率論、統計學、逼近論、凸分析、算法複雜度理論和編程等等。因爲不是本科涉及的內容，只能一點一點的補。</p>
 <a id="more"></a>
+
 <hr>
 <h2 id="分類"><a href="#分類" class="headerlink" title="分類"></a>分類</h2><p>機器學習分爲監督學習和無監督學習兩種，監督學習是指算法知道要預測的目標，即目標變量的分類信息；而無監督學習時，數據沒有類別信息，也不會給定目標值。</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
-<th style="text-align:center">監督學習</th>
-<th style="text-align:center">無監督學習</th>
+<th align="center">監督學習</th>
+<th align="center">無監督學習</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">k-近鄰算法</td>
-<td style="text-align:center">K-均值</td>
+<tbody><tr>
+<td align="center">k-近鄰算法</td>
+<td align="center">K-均值</td>
 </tr>
 <tr>
-<td style="text-align:center">樸素貝葉斯算法</td>
-<td style="text-align:center">DBSCAN</td>
+<td align="center">樸素貝葉斯算法</td>
+<td align="center">DBSCAN</td>
 </tr>
 <tr>
-<td style="text-align:center">支持向量機</td>
-<td style="text-align:center">\</td>
+<td align="center">支持向量機</td>
+<td align="center">\</td>
 </tr>
 <tr>
-<td style="text-align:center">決策樹</td>
-<td style="text-align:center">\</td>
+<td align="center">決策樹</td>
+<td align="center">\</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <h2 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h2><p>k-近鄰算法的原理很簡單，即選取 m 個已分類的樣本作爲訓練集，每個樣本擁有 n 個特徵。待測試樣本與每個訓練樣本求歐式距離，對得到的距離順序排序。根據預設的 k 值（k 一般取一個比較小的數）取出前 k 個距離。最後統計每個類別出現的次數，取出現次數最多的類別作爲待測樣本的類別標籤。<br>此處說明 KNN 算法的兩個特徵：  </p>
 <ul>
 <li>各個特徵等權重，不考慮各個特徵對類別的貢獻大小</li>
@@ -206,6 +203,8 @@
 </ul>
 <h2 id="代碼"><a href="#代碼" class="headerlink" title="代碼"></a>代碼</h2><p>爲了提高代碼的運行效率及編碼效率，import 了 <code>Numpy</code> 庫，具體的函數看 <a href="https://docs.scipy.org/doc/" target="_blank" rel="noopener">官方文檔</a> ，或者 <a href="http://cycoe.win/wiki/Numpy/" target="_blank" rel="noopener">Numpy 教程</a> 。</p>
 <h3 id="分類函數"><a href="#分類函數" class="headerlink" title="分類函數"></a>分類函數</h3><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">classify0</span><span class="hljs-params">(inX, dataSet, labels, k)</span>:</span> <span class="hljs-comment">#輸入(待測樣本向量，訓練樣本矩陣，標籤向量，k)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    dataSetSize = dataSet.shape[<span class="hljs-number">0</span>] <span class="hljs-comment">#shape函數用來讀取矩陣的維的長度，返回值爲(4L,2L)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    diffMat = tile(inX, (dataSetSize, <span class="hljs-number">1</span>)) - dataSet <span class="hljs-comment">#tile函數用來重複 A=[1,2] tile(A,(2,3)) -&gt; [[1,2,1,2，1,2], [1,2,1,2,1,2]]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    sqDiffMat = diffMat**<span class="hljs-number">2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    sqDistances = sqDiffMat.sum(axis=<span class="hljs-number">1</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    distances = sqDistances**<span class="hljs-number">0.5</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    sortedDistIndicies = distances.argsort()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    classCount = &#123;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(k):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        votedLabel = labels[sortedDistIndicies[i]]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        classCount[votedLabel] = classCount.get(votedLabel, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span> <span class="hljs-comment">#dict.get(key, default_value)函數用來取鍵對應的值，若鍵不存在則值爲defalut_vlaue</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    sortedClassCount = sorted(classCount.items(), key=operator.itemgetter(<span class="hljs-number">1</span>), reverse=<span class="hljs-literal">True</span>) <span class="hljs-comment">#operator.itemgetter(1)表示根據多級列表的第二個元素進行排序</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">return</span> sortedClassCount[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]</span></pre></td></tr></table></figure>
+
+
 <hr>
 
         </div>

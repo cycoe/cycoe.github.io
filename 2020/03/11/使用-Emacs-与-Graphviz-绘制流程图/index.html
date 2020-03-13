@@ -19,7 +19,7 @@
 <meta property="og:description" content="前几天在写 使用 Emacs 与 Org mode 进行 GTD 管理 博客时，用到了 Graphviz 绘制流程 图。正巧之前在 LaTeX 中也用它画过一些图，但都没有系统地入过门，那就趁最近学习一 下吧。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2020-03-11T14:36:25.740Z">
+<meta property="og:updated_time" content="2020-03-13T09:23:45.001Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
 
@@ -184,13 +184,13 @@
 义上的函数图像那种图，而是数据结构中的图，强调的关系。
 </p>
 
-<div id="outline-container-org84dd2f8" class="outline-2">
-<h2 id="org84dd2f8">安装</h2>
-<div class="outline-text-2" id="text-org84dd2f8">
+<div id="outline-container-org68afdd3" class="outline-2">
+<h2 id="org68afdd3">安装</h2>
+<div class="outline-text-2" id="text-org68afdd3">
 </div>
-<div id="outline-container-org67969b9" class="outline-3">
-<h3 id="org67969b9">Graphviz</h3>
-<div class="outline-text-3" id="text-org67969b9">
+<div id="outline-container-orga319116" class="outline-3">
+<h3 id="orga319116">Graphviz</h3>
+<div class="outline-text-3" id="text-orga319116">
 <p>
 Graphviz 本质上是一个命令行工具，在 Archlinux 上只需要通过 <code>sudo pacman -S
 graphviz</code> 安装即可，其他系统类似。
@@ -198,9 +198,9 @@ graphviz</code> 安装即可，其他系统类似。
 </div>
 </div>
 
-<div id="outline-container-orge2b0e15" class="outline-3">
-<h3 id="orge2b0e15">graphviz-dot-mode</h3>
-<div class="outline-text-3" id="text-orge2b0e15">
+<div id="outline-container-org68ebc9e" class="outline-3">
+<h3 id="org68ebc9e">graphviz-dot-mode</h3>
+<div class="outline-text-3" id="text-org68ebc9e">
 <p>
 Graphviz 在 Emacs 中的集成是通过 <code>graphviz-dot-mode</code> 这个包来实现的，只需要 <code>&lt;M-x&gt;
 package-install graphviz-dot-mode &lt;RET&gt;</code> 即可。
@@ -222,9 +222,9 @@ package-install graphviz-dot-mode &lt;RET&gt;</code> 即可。
 </div>
 </div>
 
-<div id="outline-container-orgeb1d6cf" class="outline-2">
-<h2 id="orgeb1d6cf">布局器</h2>
-<div class="outline-text-2" id="text-orgeb1d6cf">
+<div id="outline-container-org3915e6c" class="outline-2">
+<h2 id="org3915e6c">布局器</h2>
+<div class="outline-text-2" id="text-org3915e6c">
 <p>
 Graphviz 中包含了众多的布局器：
 </p>
@@ -238,9 +238,9 @@ Graphviz 中包含了众多的布局器：
 </div>
 </div>
 
-<div id="outline-container-orgd5eddca" class="outline-2">
-<h2 id="orgd5eddca">基本使用</h2>
-<div class="outline-text-2" id="text-orgd5eddca">
+<div id="outline-container-org2d48274" class="outline-2">
+<h2 id="org2d48274">基本使用</h2>
+<div class="outline-text-2" id="text-org2d48274">
 <p>
 Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </p>
@@ -249,7 +249,7 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 创建一个 dot 布局的图，可以使用以下代码
 </p>
 <div class="org-src-container">
-<pre class="src src-dot"><span class="linenr">1 </span>digraph first{
+<pre class="src src-dot"><span class="linenr">1 </span><span style="font-weight: bold;">digraph</span> <span style="font-weight: bold;">first</span>{
 <span class="linenr">2 </span>    a;
 <span class="linenr">3 </span>    b;
 <span class="linenr">4 </span>    c;
@@ -271,7 +271,7 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 上述代码等价于
 </p>
 <div class="org-src-container">
-<pre class="src src-dot"><span class="linenr">1 </span>digraph first{
+<pre class="src src-dot"><span class="linenr">1 </span><span style="font-weight: bold;">digraph</span> <span style="font-weight: bold;">first</span>{
 <span class="linenr">2 </span>    a-&gt;b;
 <span class="linenr">3 </span>    b-&gt;d;
 <span class="linenr">4 </span>    c-&gt;d;
@@ -285,7 +285,7 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </p>
 <div class="org-src-container">
 <pre class="src src-org"><span class="linenr">1 </span><span style="font-weight: bold; font-style: italic;">#+begin_src dot :file first.png :cmdline -Tpng :results silent</span>
-<span class="linenr">2 </span>  digraph first{
+<span class="linenr">2 </span>  <span style="font-weight: bold;">digraph</span> <span style="font-weight: bold;">first</span>{
 <span class="linenr">3 </span>      a-&gt;b;
 <span class="linenr">4 </span>      b-&gt;d;
 <span class="linenr">5 </span>      c-&gt;d;
@@ -300,9 +300,9 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </div>
 </div>
 
-<div id="outline-container-org427eef2" class="outline-2">
-<h2 id="org427eef2">绘制属性</h2>
-<div class="outline-text-2" id="text-org427eef2">
+<div id="outline-container-org25abace" class="outline-2">
+<h2 id="org25abace">绘制属性</h2>
+<div class="outline-text-2" id="text-org25abace">
 <p>
 一个图中可能有非常多的节点与边，如果每次都需要声明一个节点的属性会非常麻烦。类似
 于面向对象编程的思想，我们可以用 <code>node</code> 和 <code>edge</code> 类标签来设置全局的属性，也可以用对
@@ -310,33 +310,33 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </p>
 
 <div class="org-src-container">
-<pre class="src src-dot"><span class="linenr"> 1 </span>digraph G{
-<span class="linenr"> 2 </span>    // &#35774;&#32622;&#22270;&#29255;&#26368;&#22823;&#23610;&#23544;
-<span class="linenr"> 3 </span>    size = "40, 40";
-<span class="linenr"> 4 </span>    // &#35774;&#32622;&#33410;&#28857;&#25490;&#24067;&#26041;&#21521;
-<span class="linenr"> 5 </span>    rankdir = LR;
-<span class="linenr"> 6 </span>    // &#35774;&#32622;&#33410;&#28857;&#23383;&#20307;
-<span class="linenr"> 7 </span>    node[fontname="SimHei"];
-<span class="linenr"> 8 </span>    // &#35774;&#32622;&#36830;&#32447;&#23383;&#20307;
-<span class="linenr"> 9 </span>    edge[fontname="SimHei"];
+<pre class="src src-dot"><span class="linenr"> 1 </span><span style="font-weight: bold;">digraph</span> <span style="font-weight: bold;">G</span>{
+<span class="linenr"> 2 </span>    <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#35774;&#32622;&#22270;&#29255;&#26368;&#22823;&#23610;&#23544;</span>
+<span class="linenr"> 3 </span>    <span style="font-weight: bold; font-style: italic;">size =</span> <span style="font-style: italic;">"40, 40"</span>;
+<span class="linenr"> 4 </span>    <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#35774;&#32622;&#33410;&#28857;&#25490;&#24067;&#26041;&#21521;</span>
+<span class="linenr"> 5 </span>    <span style="font-weight: bold; font-style: italic;">rankdir =</span> <span style="font-weight: bold; text-decoration: underline;">LR</span>;
+<span class="linenr"> 6 </span>    <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#35774;&#32622;&#33410;&#28857;&#23383;&#20307;</span>
+<span class="linenr"> 7 </span>    <span style="font-weight: bold;">node</span>[<span style="font-weight: bold; font-style: italic;">fontname=</span><span style="font-style: italic;">"SimHei"</span>];
+<span class="linenr"> 8 </span>    <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#35774;&#32622;&#36830;&#32447;&#23383;&#20307;</span>
+<span class="linenr"> 9 </span>    <span style="font-weight: bold;">edge</span>[<span style="font-weight: bold; font-style: italic;">fontname=</span><span style="font-style: italic;">"SimHei"</span>];
 <span class="linenr">10 </span>
-<span class="linenr">11 </span>    // &#35774;&#32622;&#40664;&#35748;&#33410;&#28857;&#23646;&#24615;
-<span class="linenr">12 </span>    node[shape=box, color=blue, style=unfilled];
-<span class="linenr">13 </span>    // &#35774;&#32622;&#36793;&#30340;&#23646;&#24615;
-<span class="linenr">14 </span>    edge[color=red];
+<span class="linenr">11 </span>    <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#35774;&#32622;&#40664;&#35748;&#33410;&#28857;&#23646;&#24615;</span>
+<span class="linenr">12 </span>    <span style="font-weight: bold;">node</span>[<span style="font-weight: bold; font-style: italic;">shape=</span><span style="font-weight: bold; text-decoration: underline;">box</span>, <span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">blue</span>, <span style="font-weight: bold; font-style: italic;">style=</span>unfilled];
+<span class="linenr">13 </span>    <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#35774;&#32622;&#36793;&#30340;&#23646;&#24615;</span>
+<span class="linenr">14 </span>    <span style="font-weight: bold;">edge</span>[<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">red</span>];
 <span class="linenr">15 </span>
-<span class="linenr">16 </span>    // &#33410;&#28857;
+<span class="linenr">16 </span>    <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#33410;&#28857;</span>
 <span class="linenr">17 </span>    &#23567;&#34013;;
-<span class="linenr">18 </span>    &#23567;&#32418;[color=red];
-<span class="linenr">19 </span>    // &#36793;
-<span class="linenr">20 </span>    &#23567;&#34013;-&gt;&#23567;&#32418;; // &#40664;&#35748;&#36793;&#23646;&#24615;
-<span class="linenr">21 </span>    &#23567;&#32418;-&gt;&#23567;&#34013;[color=blue, style=dashed]; // &#33258;&#23450;&#20041;&#36793;&#23646;&#24615;
+<span class="linenr">18 </span>    &#23567;&#32418;[<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">red</span>];
+<span class="linenr">19 </span>    <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#36793;</span>
+<span class="linenr">20 </span>    &#23567;&#34013;-&gt;&#23567;&#32418;; <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#40664;&#35748;&#36793;&#23646;&#24615;</span>
+<span class="linenr">21 </span>    &#23567;&#32418;-&gt;&#23567;&#34013;[<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">blue</span>, <span style="font-weight: bold; font-style: italic;">style=</span><span style="font-weight: bold; text-decoration: underline;">dashed</span>]; <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#33258;&#23450;&#20041;&#36793;&#23646;&#24615;</span>
 <span class="linenr">22 </span>}
 </pre>
 </div>
 
 <p>
-<a id="org794582d"></a>
+<a id="org160aed4"></a>
 <img src="property.png">
 </p>
 
@@ -372,10 +372,10 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </p>
 
 <div class="org-src-container">
-<pre class="src src-dot"><span class="linenr">1 </span>digraph {
-<span class="linenr">2 </span>    rankdir = RL;
-<span class="linenr">3 </span>    A-&gt;B-&gt;C[color=green];
-<span class="linenr">4 </span>    A-&gt;C[label="RL"];
+<pre class="src src-dot"><span class="linenr">1 </span><span style="font-weight: bold;">digraph</span> {
+<span class="linenr">2 </span>    <span style="font-weight: bold; font-style: italic;">rankdir =</span> RL;
+<span class="linenr">3 </span>    A-&gt;B-&gt;C[<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">green</span>];
+<span class="linenr">4 </span>    A-&gt;C[<span style="font-weight: bold; font-style: italic;">label=</span><span style="font-style: italic;">"RL"</span>];
 <span class="linenr">5 </span>}
 </pre>
 </div>
@@ -390,16 +390,16 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </ul>
 </div>
 
-<div id="outline-container-orgd1a340b" class="outline-3">
-<h3 id="orgd1a340b">节点</h3>
-<div class="outline-text-3" id="text-orgd1a340b">
+<div id="outline-container-org0b8ce7c" class="outline-3">
+<h3 id="org0b8ce7c">节点</h3>
+<div class="outline-text-3" id="text-org0b8ce7c">
 <p>
 节点的默认属性为 shape = ellipse, width = .75, height = 0.5 并且用节点标识符作为
 节点的显示文字。
 </p>
 
 <p>
-如 <a href="#org794582d">图 1</a> 中所示，声明两个节点 <i>小蓝</i> 和 <i>小红/，/小蓝</i> 或 <i>小红</i> 就表示这个节点的节点标
+如 <a href="#org160aed4">图 1</a> 中所示，声明两个节点 <i>小蓝</i> 和 <i>小红/，/小蓝</i> 或 <i>小红</i> 就表示这个节点的节点标
 识符，后面紧跟的是该节点的属性列表；另一种用法为 节点标识符:节点部分:方向[属性列
 表] <code>小蓝:body[style=filled color=lightblue]</code>, 这个为单一节点声明的方式。
 </p>
@@ -426,9 +426,9 @@ source 或 min 的子图</li>
 </div>
 </div>
 
-<div id="outline-container-org1b461b3" class="outline-3">
-<h3 id="org1b461b3">边</h3>
-<div class="outline-text-3" id="text-org1b461b3">
+<div id="outline-container-org92e804a" class="outline-3">
+<h3 id="org92e804a">边</h3>
+<div class="outline-text-3" id="text-org92e804a">
 <p>
 有向图中的的边用 <code>-&gt;</code> 表示，无向图用 <code>--</code> 表示。
 </p>
@@ -437,9 +437,9 @@ source 或 min 的子图</li>
 可以同时连接多个节点或者子图，但是只能有一个属性列表，如下
 </p>
 <div class="org-src-container">
-<pre class="src src-dot"><span class="linenr">1 </span>digraph {
-<span class="linenr">2 </span>    rankdir = LR
-<span class="linenr">3 </span>    A -&gt; B -&gt; c[color=green]
+<pre class="src src-dot"><span class="linenr">1 </span><span style="font-weight: bold;">digraph</span> {
+<span class="linenr">2 </span>    <span style="font-weight: bold; font-style: italic;">rankdir =</span> <span style="font-weight: bold; text-decoration: underline;">LR</span>
+<span class="linenr">3 </span>    A -&gt; B -&gt; c[<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">green</span>]
 <span class="linenr">4 </span>}
 </pre>
 </div>
@@ -464,13 +464,13 @@ source 或 min 的子图</li>
 </p>
 
 <div class="org-src-container">
-<pre class="src src-dot"><span class="linenr">1 </span>digraph {
-<span class="linenr">2 </span>    rankdir = LR
-<span class="linenr">3 </span>    splines = ortho
+<pre class="src src-dot"><span class="linenr">1 </span><span style="font-weight: bold;">digraph</span> {
+<span class="linenr">2 </span>    <span style="font-weight: bold; font-style: italic;">rankdir =</span> <span style="font-weight: bold; text-decoration: underline;">LR</span>
+<span class="linenr">3 </span>    <span style="font-weight: bold; font-style: italic;">splines =</span> ortho
 <span class="linenr">4 </span>
-<span class="linenr">5 </span>    A -&gt; B -&gt; C -&gt; D -&gt; F [color=green, weight=100]
-<span class="linenr">6 </span>    E -&gt; F -&gt; B -&gt; D [color=blue]
-<span class="linenr">7 </span>    B -&gt; E -&gt; H[color=red]
+<span class="linenr">5 </span>    A -&gt; B -&gt; C -&gt; D -&gt; F [<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">green</span>, <span style="font-weight: bold; font-style: italic;">weight=</span>100]
+<span class="linenr">6 </span>    E -&gt; F -&gt; B -&gt; D [<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">blue</span>]
+<span class="linenr">7 </span>    B -&gt; E -&gt; H[<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">red</span>]
 <span class="linenr">8 </span>}
 </pre>
 </div>
@@ -489,13 +489,13 @@ source 或 min 的子图</li>
 none 或者 "", 无边
 </p>
 <div class="org-src-container">
-<pre class="src src-dot"><span class="linenr">1 </span>digraph {
-<span class="linenr">2 </span>    rankdir = LR
-<span class="linenr">3 </span>    splines = none
+<pre class="src src-dot"><span class="linenr">1 </span><span style="font-weight: bold;">digraph</span> {
+<span class="linenr">2 </span>    <span style="font-weight: bold; font-style: italic;">rankdir =</span> <span style="font-weight: bold; text-decoration: underline;">LR</span>
+<span class="linenr">3 </span>    <span style="font-weight: bold; font-style: italic;">splines =</span> <span style="font-weight: bold; text-decoration: underline;">none</span>
 <span class="linenr">4 </span>
-<span class="linenr">5 </span>    A -&gt; B -&gt; C -&gt; D -&gt; F [color=green]
-<span class="linenr">6 </span>    E -&gt; F -&gt; B -&gt; D [color=blue]
-<span class="linenr">7 </span>    B -&gt; E -&gt; H[color=red]
+<span class="linenr">5 </span>    A -&gt; B -&gt; C -&gt; D -&gt; F [<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">green</span>]
+<span class="linenr">6 </span>    E -&gt; F -&gt; B -&gt; D [<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">blue</span>]
+<span class="linenr">7 </span>    B -&gt; E -&gt; H[<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">red</span>]
 <span class="linenr">8 </span>}
 </pre>
 </div>
@@ -508,13 +508,13 @@ none 或者 "", 无边
 true 或者 spline, 样条线（无规则，可为直或者曲线）
 </p>
 <div class="org-src-container">
-<pre class="src src-dot"><span class="linenr">1 </span>digraph {
-<span class="linenr">2 </span>    rankdir = LR
-<span class="linenr">3 </span>    splines = spline
+<pre class="src src-dot"><span class="linenr">1 </span><span style="font-weight: bold;">digraph</span> {
+<span class="linenr">2 </span>    <span style="font-weight: bold; font-style: italic;">rankdir =</span> <span style="font-weight: bold; text-decoration: underline;">LR</span>
+<span class="linenr">3 </span>    <span style="font-weight: bold; font-style: italic;">splines =</span> spline
 <span class="linenr">4 </span>
-<span class="linenr">5 </span>    A -&gt; B -&gt; C -&gt; D -&gt; F [color=green]
-<span class="linenr">6 </span>    E -&gt; F -&gt; B -&gt; D [color=blue]
-<span class="linenr">7 </span>    B -&gt; E -&gt; H[color=red]
+<span class="linenr">5 </span>    A -&gt; B -&gt; C -&gt; D -&gt; F [<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">green</span>]
+<span class="linenr">6 </span>    E -&gt; F -&gt; B -&gt; D [<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">blue</span>]
+<span class="linenr">7 </span>    B -&gt; E -&gt; H[<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">red</span>]
 <span class="linenr">8 </span>}
 </pre>
 </div>
@@ -527,13 +527,13 @@ true 或者 spline, 样条线（无规则，可为直或者曲线）
 false 或者 line, 直线
 </p>
 <div class="org-src-container">
-<pre class="src src-dot"><span class="linenr">1 </span>digraph {
-<span class="linenr">2 </span>    rankdir = LR
-<span class="linenr">3 </span>    splines = line
+<pre class="src src-dot"><span class="linenr">1 </span><span style="font-weight: bold;">digraph</span> {
+<span class="linenr">2 </span>    <span style="font-weight: bold; font-style: italic;">rankdir =</span> <span style="font-weight: bold; text-decoration: underline;">LR</span>
+<span class="linenr">3 </span>    <span style="font-weight: bold; font-style: italic;">splines =</span> line
 <span class="linenr">4 </span>
-<span class="linenr">5 </span>    A -&gt; B -&gt; C -&gt; D -&gt; F [color=green]
-<span class="linenr">6 </span>    E -&gt; F -&gt; B -&gt; D [color=blue]
-<span class="linenr">7 </span>    B -&gt; E -&gt; H[color=red]
+<span class="linenr">5 </span>    A -&gt; B -&gt; C -&gt; D -&gt; F [<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">green</span>]
+<span class="linenr">6 </span>    E -&gt; F -&gt; B -&gt; D [<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">blue</span>]
+<span class="linenr">7 </span>    B -&gt; E -&gt; H[<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">red</span>]
 <span class="linenr">8 </span>}
 </pre>
 </div>
@@ -546,13 +546,13 @@ false 或者 line, 直线
 polyline, 折线
 </p>
 <div class="org-src-container">
-<pre class="src src-dot"><span class="linenr">1 </span>digraph {
-<span class="linenr">2 </span>    rankdir = LR
-<span class="linenr">3 </span>    splines = polyline
+<pre class="src src-dot"><span class="linenr">1 </span><span style="font-weight: bold;">digraph</span> {
+<span class="linenr">2 </span>    <span style="font-weight: bold; font-style: italic;">rankdir =</span> <span style="font-weight: bold; text-decoration: underline;">LR</span>
+<span class="linenr">3 </span>    <span style="font-weight: bold; font-style: italic;">splines =</span> polyline
 <span class="linenr">4 </span>
-<span class="linenr">5 </span>    A -&gt; B -&gt; C -&gt; D -&gt; F [color=green]
-<span class="linenr">6 </span>    E -&gt; F -&gt; B -&gt; D [color=blue]
-<span class="linenr">7 </span>    B -&gt; E -&gt; H[color=red]
+<span class="linenr">5 </span>    A -&gt; B -&gt; C -&gt; D -&gt; F [<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">green</span>]
+<span class="linenr">6 </span>    E -&gt; F -&gt; B -&gt; D [<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">blue</span>]
+<span class="linenr">7 </span>    B -&gt; E -&gt; H[<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">red</span>]
 <span class="linenr">8 </span>}
 </pre>
 </div>
@@ -565,13 +565,13 @@ polyline, 折线
 curved, 曲弧线，看起来像贝塞尔曲线
 </p>
 <div class="org-src-container">
-<pre class="src src-dot"><span class="linenr">1 </span>digraph {
-<span class="linenr">2 </span>    rankdir = LR
-<span class="linenr">3 </span>    splines = curved
+<pre class="src src-dot"><span class="linenr">1 </span><span style="font-weight: bold;">digraph</span> {
+<span class="linenr">2 </span>    <span style="font-weight: bold; font-style: italic;">rankdir =</span> <span style="font-weight: bold; text-decoration: underline;">LR</span>
+<span class="linenr">3 </span>    <span style="font-weight: bold; font-style: italic;">splines =</span> curved
 <span class="linenr">4 </span>
-<span class="linenr">5 </span>    A -&gt; B -&gt; C -&gt; D -&gt; F [color=green]
-<span class="linenr">6 </span>    E -&gt; F -&gt; B -&gt; D [color=blue]
-<span class="linenr">7 </span>    B -&gt; E -&gt; H[color=red]
+<span class="linenr">5 </span>    A -&gt; B -&gt; C -&gt; D -&gt; F [<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">green</span>]
+<span class="linenr">6 </span>    E -&gt; F -&gt; B -&gt; D [<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">blue</span>]
+<span class="linenr">7 </span>    B -&gt; E -&gt; H[<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">red</span>]
 <span class="linenr">8 </span>}
 </pre>
 </div>
@@ -584,13 +584,13 @@ curved, 曲弧线，看起来像贝塞尔曲线
 ortho, 正交折线
 </p>
 <div class="org-src-container">
-<pre class="src src-dot"><span class="linenr">1 </span>digraph {
-<span class="linenr">2 </span>    rankdir = LR
-<span class="linenr">3 </span>    splines = ortho
+<pre class="src src-dot"><span class="linenr">1 </span><span style="font-weight: bold;">digraph</span> {
+<span class="linenr">2 </span>    <span style="font-weight: bold; font-style: italic;">rankdir =</span> <span style="font-weight: bold; text-decoration: underline;">LR</span>
+<span class="linenr">3 </span>    <span style="font-weight: bold; font-style: italic;">splines =</span> ortho
 <span class="linenr">4 </span>
-<span class="linenr">5 </span>    A -&gt; B -&gt; C -&gt; D -&gt; F [color=green]
-<span class="linenr">6 </span>    E -&gt; F -&gt; B -&gt; D [color=blue]
-<span class="linenr">7 </span>    B -&gt; E -&gt; H[color=red]
+<span class="linenr">5 </span>    A -&gt; B -&gt; C -&gt; D -&gt; F [<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">green</span>]
+<span class="linenr">6 </span>    E -&gt; F -&gt; B -&gt; D [<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">blue</span>]
+<span class="linenr">7 </span>    B -&gt; E -&gt; H[<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">red</span>]
 <span class="linenr">8 </span>}
 </pre>
 </div>
@@ -604,37 +604,37 @@ ortho, 正交折线
 </div>
 </div>
 
-<div id="outline-container-orge7a6369" class="outline-3">
-<h3 id="orge7a6369">边的方向</h3>
-<div class="outline-text-3" id="text-orge7a6369">
+<div id="outline-container-org6c0dd45" class="outline-3">
+<h3 id="org6c0dd45">边的方向</h3>
+<div class="outline-text-3" id="text-org6c0dd45">
 <p>
 <b>示例</b> 声明多部分节点，以及对各部分进行单独设置
 </p>
 <div class="org-src-container">
-<pre class="src src-dot"><span class="linenr">1 </span>node0 [label = "&lt;postid1&gt; string|&lt;postid2&gt; string|&lt;postid3&gt; string3", height=.5];
-<span class="linenr">2 </span>node0:head[color=lightblue];
+<pre class="src src-dot"><span class="linenr">1 </span>node0 [<span style="font-weight: bold; font-style: italic;">label =</span> <span style="font-style: italic;">"&lt;postid1&gt; string|&lt;postid2&gt; string|&lt;postid3&gt; string3"</span>, <span style="font-weight: bold; font-style: italic;">height=</span>.5];
+<span class="linenr">2 </span>node0:head[<span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">lightblue</span>];
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-dot"><span class="linenr"> 1 </span>digraph action {
-<span class="linenr"> 2 </span>    node [shape = record,height=.1];
+<pre class="src src-dot"><span class="linenr"> 1 </span><span style="font-weight: bold;">digraph</span> <span style="font-weight: bold;">action</span> {
+<span class="linenr"> 2 </span>    <span style="font-weight: bold;">node</span> [<span style="font-weight: bold; font-style: italic;">shape =</span> <span style="font-weight: bold; text-decoration: underline;">record</span>,<span style="font-weight: bold; font-style: italic;">height=</span>.1];
 <span class="linenr"> 3 </span>
-<span class="linenr"> 4 </span>    node0 [label = "&lt;head&gt; head|&lt;body&gt; body|&lt;foot&gt; foot", height=.5]
-<span class="linenr"> 5 </span>    node2 [shape = box label="mind"]
+<span class="linenr"> 4 </span>    node0 [<span style="font-weight: bold; font-style: italic;">label =</span> <span style="font-style: italic;">"&lt;head&gt; head|&lt;body&gt; body|&lt;foot&gt; foot"</span>, <span style="font-weight: bold; font-style: italic;">height=</span>.5]
+<span class="linenr"> 5 </span>    node2 [<span style="font-weight: bold; font-style: italic;">shape =</span> <span style="font-weight: bold; text-decoration: underline;">box</span> <span style="font-weight: bold; font-style: italic;">label=</span><span style="font-style: italic;">"mind"</span>]
 <span class="linenr"> 6 </span>
-<span class="linenr"> 7 </span>    node0:head:n -&gt; node2:n [label = "n"]
-<span class="linenr"> 8 </span>    node0:head:ne -&gt; node2:ne [label = "ne"]
-<span class="linenr"> 9 </span>    node0:head:e -&gt; node2:e [label = "e"]
-<span class="linenr">10 </span>    node0:head:se -&gt; node2:se [label = "se"]
-<span class="linenr">11 </span>    node0:head:s -&gt; node2:s [label = "s"]
-<span class="linenr">12 </span>    node0:head:sw -&gt; node2:sw [label = "sw"]
-<span class="linenr">13 </span>    node0:head:w -&gt; node2:w [label = "w"]
-<span class="linenr">14 </span>    node0:head:nw -&gt; node2:nw [label = "nw"]
-<span class="linenr">15 </span>    node0:head:c -&gt; node2:c [label = "c"] // center&#65292;&#20013;&#38388;
-<span class="linenr">16 </span>    node0:head:_ -&gt; node2:_ [label = "_"] // &#20219;&#24847;
+<span class="linenr"> 7 </span>    node0:head:n -&gt; node2:n [<span style="font-weight: bold; font-style: italic;">label =</span> <span style="font-style: italic;">"n"</span>]
+<span class="linenr"> 8 </span>    node0:head:ne -&gt; node2:ne [<span style="font-weight: bold; font-style: italic;">label =</span> <span style="font-style: italic;">"ne"</span>]
+<span class="linenr"> 9 </span>    node0:head:e -&gt; node2:e [<span style="font-weight: bold; font-style: italic;">label =</span> <span style="font-style: italic;">"e"</span>]
+<span class="linenr">10 </span>    node0:head:se -&gt; node2:se [<span style="font-weight: bold; font-style: italic;">label =</span> <span style="font-style: italic;">"se"</span>]
+<span class="linenr">11 </span>    node0:head:s -&gt; node2:s [<span style="font-weight: bold; font-style: italic;">label =</span> <span style="font-style: italic;">"s"</span>]
+<span class="linenr">12 </span>    node0:head:sw -&gt; node2:sw [<span style="font-weight: bold; font-style: italic;">label =</span> <span style="font-style: italic;">"sw"</span>]
+<span class="linenr">13 </span>    node0:head:w -&gt; node2:w [<span style="font-weight: bold; font-style: italic;">label =</span> <span style="font-style: italic;">"w"</span>]
+<span class="linenr">14 </span>    node0:head:nw -&gt; node2:nw [<span style="font-weight: bold; font-style: italic;">label =</span> <span style="font-style: italic;">"nw"</span>]
+<span class="linenr">15 </span>    node0:head:c -&gt; node2:c [<span style="font-weight: bold; font-style: italic;">label =</span> <span style="font-style: italic;">"c"</span>] <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">center&#65292;&#20013;&#38388;</span>
+<span class="linenr">16 </span>    node0:head:_ -&gt; node2:_ [<span style="font-weight: bold; font-style: italic;">label =</span> <span style="font-style: italic;">"_"</span>] <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#20219;&#24847;</span>
 <span class="linenr">17 </span>
-<span class="linenr">18 </span>    node0:body[style=filled color=lightblue]
+<span class="linenr">18 </span>    node0:body[<span style="font-weight: bold; font-style: italic;">style=</span><span style="font-weight: bold; text-decoration: underline;">filled</span> <span style="font-weight: bold; font-style: italic;">color=</span><span style="font-style: italic;">lightblue</span>]
 <span class="linenr">19 </span>}
 </pre>
 </div>
@@ -648,9 +648,9 @@ ortho, 正交折线
 </div>
 </div>
 
-<div id="outline-container-orgf9f0a93" class="outline-2">
-<h2 id="orgf9f0a93">子图</h2>
-<div class="outline-text-2" id="text-orgf9f0a93">
+<div id="outline-container-orgbb69e09" class="outline-2">
+<h2 id="orgbb69e09">子图</h2>
+<div class="outline-text-2" id="text-orgbb69e09">
 <p>
 <b>subgraph</b> 必须配合 <b>cluster</b> 一起使用，用法为 =subgraph cluster* {} 。
 </p>
@@ -660,31 +660,31 @@ ortho, 正交折线
 </p>
 
 <div class="org-src-container">
-<pre class="src src-dot"><span class="linenr"> 1 </span>digraph G {
-<span class="linenr"> 2 </span>    compound = true  // &#20801;&#35768;&#23376;&#22270;&#38388;&#23384;&#22312;&#36793;
-<span class="linenr"> 3 </span>    ranksep = 1
-<span class="linenr"> 4 </span>    node [shape = record]
+<pre class="src src-dot"><span class="linenr"> 1 </span><span style="font-weight: bold;">digraph</span> <span style="font-weight: bold;">G</span> {
+<span class="linenr"> 2 </span>    <span style="font-weight: bold; font-style: italic;">compound =</span> <span style="font-weight: bold; text-decoration: underline;">true</span>  <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#20801;&#35768;&#23376;&#22270;&#38388;&#23384;&#22312;&#36793;</span>
+<span class="linenr"> 3 </span>    <span style="font-weight: bold; font-style: italic;">ranksep =</span> 1
+<span class="linenr"> 4 </span>    <span style="font-weight: bold;">node</span> [<span style="font-weight: bold; font-style: italic;">shape =</span> <span style="font-weight: bold; text-decoration: underline;">record</span>]
 <span class="linenr"> 5 </span>
-<span class="linenr"> 6 </span>    subgraph cluster_hardware {
-<span class="linenr"> 7 </span>        label = "hardware"
-<span class="linenr"> 8 </span>        color = lightblue
+<span class="linenr"> 6 </span>    <span style="font-weight: bold;">subgraph</span> <span style="font-weight: bold;">cluster_hardware</span> {
+<span class="linenr"> 7 </span>        <span style="font-weight: bold; font-style: italic;">label =</span> <span style="font-style: italic;">"hardware"</span>
+<span class="linenr"> 8 </span>        <span style="font-weight: bold; font-style: italic;">color =</span> <span style="font-style: italic;">lightblue</span>
 <span class="linenr"> 9 </span>        CPU Memory
 <span class="linenr">10 </span>    }
 <span class="linenr">11 </span>
-<span class="linenr">12 </span>    subgraph cluster_kernel {
-<span class="linenr">13 </span>        label = "kernel"
-<span class="linenr">14 </span>        color = green
+<span class="linenr">12 </span>    <span style="font-weight: bold;">subgraph</span> <span style="font-weight: bold;">cluster_kernel</span> {
+<span class="linenr">13 </span>        <span style="font-weight: bold; font-style: italic;">label =</span> <span style="font-style: italic;">"kernel"</span>
+<span class="linenr">14 </span>        <span style="font-weight: bold; font-style: italic;">color =</span> <span style="font-style: italic;">green</span>
 <span class="linenr">15 </span>        Init IPC
 <span class="linenr">16 </span>    }
 <span class="linenr">17 </span>
-<span class="linenr">18 </span>    subgraph cluster_libc {
-<span class="linenr">19 </span>        label = "libc"
-<span class="linenr">20 </span>        color = yellow
+<span class="linenr">18 </span>    <span style="font-weight: bold;">subgraph</span> <span style="font-weight: bold;">cluster_libc</span> {
+<span class="linenr">19 </span>        <span style="font-weight: bold; font-style: italic;">label =</span> <span style="font-style: italic;">"libc"</span>
+<span class="linenr">20 </span>        <span style="font-weight: bold; font-style: italic;">color =</span> <span style="font-style: italic;">yellow</span>
 <span class="linenr">21 </span>        glibc
 <span class="linenr">22 </span>    }
 <span class="linenr">23 </span>
-<span class="linenr">24 </span>    CPU -&gt; Init [lhead = cluster_kernel ltail = cluster_hardware]
-<span class="linenr">25 </span>    IPC -&gt; glibc [lhead = cluster_libc ltail = cluster_kernel]
+<span class="linenr">24 </span>    CPU -&gt; Init [<span style="font-weight: bold; font-style: italic;">lhead =</span> cluster_kernel <span style="font-weight: bold; font-style: italic;">ltail =</span> cluster_hardware]
+<span class="linenr">25 </span>    IPC -&gt; glibc [<span style="font-weight: bold; font-style: italic;">lhead =</span> cluster_libc <span style="font-weight: bold; font-style: italic;">ltail =</span> cluster_kernel]
 <span class="linenr">26 </span>}
 </pre>
 </div>
