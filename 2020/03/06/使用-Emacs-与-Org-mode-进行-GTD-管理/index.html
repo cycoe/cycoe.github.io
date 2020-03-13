@@ -10,13 +10,13 @@
 <title>使用 Emacs 与 Org mode 进行 GTD 管理 - Cycoe&#39;s Home Page</title>
 
 
-    <meta name="description" content="&amp;#x5728;&amp;#x63A5;&amp;#x89E6; Emacs &amp;#x4EE5;&amp;#x524D;&amp;#xFF0C;&amp;#x6211;&amp;#x7684;&amp;#x65F6;&amp;#x95F4;&amp;#x7BA1;&amp;#x7406;&amp;#x65B9;&amp;#x5F0F;&amp;#x4E3B;&amp;#x8981;&amp;#x662F;&amp;#x5229;&amp;#x7528;&amp;#x6E05;&amp;#x5355;&amp;#x8F6F;&amp;#x4EF6;&amp;">
+    <meta name="description" content="在接触 Emacs 以前，我的时间管理方式主要是利用清单软件建立待办事项，辅以纸笔随手 记录当前的临时任务。但这种方式最大的弊端是不能分项目进行记录，所有事项都堆在一起。 另外，完成的事项也不方便归档整理。早就听说了 Emacs 以及 Org-mode 的强大，也觊觎 网上大神用 Org-mode 做日程管理很久了，因此在此设计一个自己的 GTD 工作流。">
 <meta name="keywords" content="Linux,Emacs,Org,GTD,Agenda">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用 Emacs 与 Org mode 进行 GTD 管理">
 <meta property="og:url" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;2020&#x2F;03&#x2F;06&#x2F;%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Org-mode-%E8%BF%9B%E8%A1%8C-GTD-%E7%AE%A1%E7%90%86&#x2F;index.html">
 <meta property="og:site_name" content="Cycoe&#39;s Home Page">
-<meta property="og:description" content="&amp;#x5728;&amp;#x63A5;&amp;#x89E6; Emacs &amp;#x4EE5;&amp;#x524D;&amp;#xFF0C;&amp;#x6211;&amp;#x7684;&amp;#x65F6;&amp;#x95F4;&amp;#x7BA1;&amp;#x7406;&amp;#x65B9;&amp;#x5F0F;&amp;#x4E3B;&amp;#x8981;&amp;#x662F;&amp;#x5229;&amp;#x7528;&amp;#x6E05;&amp;#x5355;&amp;#x8F6F;&amp;#x4EF6;&amp;">
+<meta property="og:description" content="在接触 Emacs 以前，我的时间管理方式主要是利用清单软件建立待办事项，辅以纸笔随手 记录当前的临时任务。但这种方式最大的弊端是不能分项目进行记录，所有事项都堆在一起。 另外，完成的事项也不方便归档整理。早就听说了 Emacs 以及 Org-mode 的强大，也觊觎 网上大神用 Org-mode 做日程管理很久了，因此在此设计一个自己的 GTD 工作流。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2020-03-10T09:50:23.344Z">
@@ -171,47 +171,47 @@
 </div>
 
 <p>
-&#x5728;&#x63A5;&#x89E6; Emacs &#x4EE5;&#x524D;&#xFF0C;&#x6211;&#x7684;&#x65F6;&#x95F4;&#x7BA1;&#x7406;&#x65B9;&#x5F0F;&#x4E3B;&#x8981;&#x662F;&#x5229;&#x7528;&#x6E05;&#x5355;&#x8F6F;&#x4EF6;&#x5EFA;&#x7ACB;&#x5F85;&#x529E;&#x4E8B;&#x9879;&#xFF0C;&#x8F85;&#x4EE5;&#x7EB8;&#x7B14;&#x968F;&#x624B;
-&#x8BB0;&#x5F55;&#x5F53;&#x524D;&#x7684;&#x4E34;&#x65F6;&#x4EFB;&#x52A1;&#x3002;&#x4F46;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x6700;&#x5927;&#x7684;&#x5F0A;&#x7AEF;&#x662F;&#x4E0D;&#x80FD;&#x5206;&#x9879;&#x76EE;&#x8FDB;&#x884C;&#x8BB0;&#x5F55;&#xFF0C;&#x6240;&#x6709;&#x4E8B;&#x9879;&#x90FD;&#x5806;&#x5728;&#x4E00;&#x8D77;&#x3002;
-&#x53E6;&#x5916;&#xFF0C;&#x5B8C;&#x6210;&#x7684;&#x4E8B;&#x9879;&#x4E5F;&#x4E0D;&#x65B9;&#x4FBF;&#x5F52;&#x6863;&#x6574;&#x7406;&#x3002;&#x65E9;&#x5C31;&#x542C;&#x8BF4;&#x4E86; Emacs &#x4EE5;&#x53CA; Org-mode &#x7684;&#x5F3A;&#x5927;&#xFF0C;&#x4E5F;&#x89CA;&#x89CE;
-&#x7F51;&#x4E0A;&#x5927;&#x795E;&#x7528; Org-mode &#x505A;&#x65E5;&#x7A0B;&#x7BA1;&#x7406;&#x5F88;&#x4E45;&#x4E86;&#xFF0C;&#x56E0;&#x6B64;&#x5728;&#x6B64;&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;&#x81EA;&#x5DF1;&#x7684; GTD &#x5DE5;&#x4F5C;&#x6D41;&#x3002;
+在接触 Emacs 以前，我的时间管理方式主要是利用清单软件建立待办事项，辅以纸笔随手
+记录当前的临时任务。但这种方式最大的弊端是不能分项目进行记录，所有事项都堆在一起。
+另外，完成的事项也不方便归档整理。早就听说了 Emacs 以及 Org-mode 的强大，也觊觎
+网上大神用 Org-mode 做日程管理很久了，因此在此设计一个自己的 GTD 工作流。
 </p>
 
 <a id="more"></a>
 
-<div id="outline-container-org5cf7ed4" class="outline-2">
-<h2 id="org5cf7ed4">&#x57FA;&#x672C;&#x60F3;&#x6CD5;</h2>
-<div class="outline-text-2" id="text-org5cf7ed4">
+<div id="outline-container-org21ca290" class="outline-2">
+<h2 id="org21ca290">基本想法</h2>
+<div class="outline-text-2" id="text-org21ca290">
 <ol class="org-ol">
-<li>&#x4ECE;&#x7A7A;&#x95F4;&#x5C3A;&#x5EA6;&#x4E0A;&#xFF0C;&#x4E0D;&#x540C;&#x9879;&#x76EE;&#x96B6;&#x5C5E;&#x4E8E;&#x4E0D;&#x540C;&#x7684; Org &#x6587;&#x4EF6;&#xFF0C;&#x800C;&#x4E0D;&#x540C;&#x7684; Org &#x6587;&#x4EF6;&#x52A0;&#x5165;&#x5230;&#x4E0D;&#x540C;&#x7684;
-agenda &#x4E2D;&#xFF0C;&#x5B9E;&#x73B0;&#x57FA;&#x4E8E;&#x9879;&#x76EE;&#x7684;&#x7BA1;&#x7406;&#x65B9;&#x5F0F;&#x3002;</li>
-<li>&#x4ECE;&#x4EFB;&#x52A1;&#x7C7B;&#x578B;&#x4E0A;&#xFF0C;&#x4EFB;&#x52A1;&#x5206;&#x4E3A;&#x4E00;&#x6B21;&#x6027;&#x4EFB;&#x52A1;&#x4EE5;&#x53CA;&#x5468;&#x671F;&#x6027;&#x4EFB;&#x52A1;&#xFF08;Habit&#xFF09;&#x3002;</li>
-<li>&#x4ECE;&#x65F6;&#x95F4;&#x5C3A;&#x5EA6;&#x4E0A;&#xFF0C;&#x4EFB;&#x52A1;&#x53EF;&#x4EE5;&#x6309;&#x7167;&#x9700;&#x8981;&#x6295;&#x5165;&#x7684;&#x65F6;&#x95F4;&#xFF08;Effort estimate&#xFF09;&#xFF0C;&#x53EF;&#x4EE5;&#x5206;&#x4E3A;&#x5E74;&#x4EFB;&#x52A1;&#x3001;
-&#x6708;&#x4EFB;&#x52A1;&#x3001;&#x5468;&#x4EFB;&#x52A1;&#x3001;&#x65E5;&#x4EFB;&#x52A1;&#x3001;&#x5C0F;&#x65F6;&#x4EFB;&#x52A1;&#x7B49;&#x3002;&#x5982;&#x679C;&#x4EFB;&#x52A1;&#x7684; Effort &#x592A;&#x5927;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x5C31;&#x65E0;&#x6CD5;&#x5F88;&#x597D;
-&#x5730;&#x628A;&#x63E1;&#x4EFB;&#x52A1;&#x7684;&#x8FDB;&#x5EA6;&#x4EE5;&#x53CA;&#x6295;&#x5165;&#xFF0C;&#x6B64;&#x65F6;&#x6211;&#x4EEC;&#x4E5F;&#x5C31;&#x9700;&#x8981;&#x5C06;&#x5176;&#x62C6;&#x5206;&#x4E3A;&#x66F4;&#x5C0F;&#x7684;&#x4EFB;&#x52A1;&#x3002;</li>
+<li>从空间尺度上，不同项目隶属于不同的 Org 文件，而不同的 Org 文件加入到不同的
+agenda 中，实现基于项目的管理方式。</li>
+<li>从任务类型上，任务分为一次性任务以及周期性任务（Habit）。</li>
+<li>从时间尺度上，任务可以按照需要投入的时间（Effort estimate），可以分为年任务、
+月任务、周任务、日任务、小时任务等。如果任务的 Effort 太大，我们也就无法很好
+地把握任务的进度以及投入，此时我们也就需要将其拆分为更小的任务。</li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-orga529272" class="outline-2">
-<h2 id="orga529272">&#x6574;&#x4F53;&#x6D41;&#x7A0B;</h2>
-<div class="outline-text-2" id="text-orga529272">
+<div id="outline-container-org8c37dc2" class="outline-2">
+<h2 id="org8c37dc2">整体流程</h2>
+<div class="outline-text-2" id="text-org8c37dc2">
 <p>
-&#x53C2;&#x7167; <i>&#x76AE;&#x6CE2;&#x8FEA;</i> &#x7684;&#x535A;&#x5BA2; <a href="https://www.cnblogs.com/quantumman/p/10808174.html" target="_blank" rel="noopener">&#x4EE5; Emacs Org mode &#x4E3A;&#x6838;&#x5FC3;&#x7684;&#x4EFB;&#x52A1;&#x7BA1;&#x7406;&#x65B9;&#x6848;</a>&#xFF0C;&#x8BBE;&#x8BA1;&#x9002;&#x5408;&#x81EA;&#x5DF1;&#x7684;&#x5DE5;&#x4F5C;&#x6D41;&#x3002;
+参照 <i>皮波迪</i> 的博客 <a href="https://www.cnblogs.com/quantumman/p/10808174.html" target="_blank" rel="noopener">以 Emacs Org mode 为核心的任务管理方案</a>，设计适合自己的工作流。
 </p>
 
 <p>
-&#x5982;&#x4EE5;&#x4E0B;&#x6D41;&#x7A0B;&#x56FE;&#x6240;&#x793A;&#xFF0C;&#x53EF;&#x5C06;&#x4EFB;&#x52A1;&#x5206;&#x4E3A;&#x56DB;&#x4E2A;&#x9636;&#x6BB5;&#x3002;
+如以下流程图所示，可将任务分为四个阶段。
 </p>
 <ol class="org-ol">
-<li>&#x9996;&#x5148;&#x4E00;&#x65E6;&#x51FA;&#x73B0;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#xFF0C;&#x5C31;&#x5C06;&#x5176;&#x52A0;&#x5165;&#x5230; <i>&#x6536;&#x96C6;&#x7BB1;</i> &#x4E2D;&#x3002;&#x8FD9;&#x4E9B;&#x4EFB;&#x52A1;&#x4EE3;&#x8868;&#x51FA;&#x73B0;&#x7684;&#x7075;&#x611F;&#x6216;&#x8005;&#x60F3;&#x6CD5;&#xFF0C;
-&#x4F46;&#x6682;&#x65F6;&#x8FD8;&#x672A;&#x60F3;&#x597D;&#x5728;&#x4F55;&#x65F6;&#x5B8C;&#x6210;&#x3002;</li>
-<li>&#x5F53;&#x6536;&#x96C6;&#x7BB1;&#x4E2D;&#x7684;&#x4EFB;&#x52A1;&#x60F3;&#x8981;&#x88AB;&#x5B8C;&#x6210;&#x65F6;&#xFF0C;&#x5C31;&#x4E3A;&#x5176;&#x52A0;&#x4E0A; schedule (<code>C-c C-s</code>) &#x548C; deadline (<code>C-c
-   C-d</code>) &#x65F6;&#x95F4;&#x6233;&#xFF0C;&#x8FDB;&#x5165; <i>&#x8DDF;&#x8E2A;&#x4EFB;&#x52A1;&#x5217;&#x8868;</i> &#x3002;&#x8FD9;&#x4E9B;&#x4EFB;&#x52A1;&#x4EE3;&#x8868;&#x5DF2;&#x7ECF;&#x505A;&#x597D;&#x8BA1;&#x5212;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x540C;&#x65F6;&#x4E5F;&#x53EF;&#x4E3A;&#x4EFB;&#x52A1;
-&#x8BBE;&#x5B9A;&#x9884;&#x8BA1;&#x6295;&#x5165;&#x65F6;&#x95F4; (<code>C-c C-x e</code>)&#x3002;</li>
-<li>&#x5F53;&#x6709;&#x8DDF;&#x8E2A;&#x5217;&#x8868;&#x4E2D;&#x7684;&#x4EFB;&#x52A1;&#x5230;&#x8FBE;&#x8BA1;&#x5212;&#x7684;&#x6267;&#x884C;&#x65F6;&#x95F4;&#x65F6;&#xFF0C;&#x6267;&#x884C; clock in (<code>C-c C-x C-i</code>)&#xFF0C;&#x540C;&#x65F6;&#x4EFB;
-&#x52A1;&#x8FDB;&#x5165; <i>&#x5F53;&#x524D;&#x4EFB;&#x52A1;</i> &#x72B6;&#x6001;&#x3002;</li>
-<li>&#x5F53;&#x4EFB;&#x52A1;&#x5B8C;&#x6210;&#x65F6;&#xFF0C;&#x6267;&#x884C; clock out (<code>C-c C-x C-o</code>)&#xFF0C;&#x4EFB;&#x52A1;&#x8FDB;&#x5165; <i>&#x5DF2;&#x5B8C;&#x6210;&#x4EFB;&#x52A1;</i> &#x72B6;&#x6001;&#x3002;</li>
+<li>首先一旦出现一个任务，就将其加入到 <i>收集箱</i> 中。这些任务代表出现的灵感或者想法，
+但暂时还未想好在何时完成。</li>
+<li>当收集箱中的任务想要被完成时，就为其加上 schedule (<code>C-c C-s</code>) 和 deadline (<code>C-c
+   C-d</code>) 时间戳，进入 <i>跟踪任务列表</i> 。这些任务代表已经做好计划的任务，同时也可为任务
+设定预计投入时间 (<code>C-c C-x e</code>)。</li>
+<li>当有跟踪列表中的任务到达计划的执行时间时，执行 clock in (<code>C-c C-x C-i</code>)，同时任
+务进入 <i>当前任务</i> 状态。</li>
+<li>当任务完成时，执行 clock out (<code>C-c C-x C-o</code>)，任务进入 <i>已完成任务</i> 状态。</li>
 </ol>
 
 
@@ -222,75 +222,92 @@ agenda &#x4E2D;&#xFF0C;&#x5B9E;&#x73B0;&#x57FA;&#x4E8E;&#x9879;&#x76EE;&#x7684;&
 </div>
 </div>
 
-<div id="outline-container-org9ac2230" class="outline-2">
-<h2 id="org9ac2230">&#x4EFB;&#x52A1;&#x62C6;&#x5206;</h2>
-<div class="outline-text-2" id="text-org9ac2230">
+<div id="outline-container-orgeed0cc6" class="outline-2">
+<h2 id="orgeed0cc6">任务拆分</h2>
+<div class="outline-text-2" id="text-orgeed0cc6">
 <p>
-&#x5BF9;&#x4E8E;&#x8017;&#x65F6;&#x8F83;&#x957F;&#x7684;&#x975E;&#x5468;&#x671F;&#x4EFB;&#x52A1;&#xFF0C;&#x9700;&#x8981;&#x62C6;&#x5206;&#x6210;&#x66F4;&#x5C0F;&#x7684;&#x4EFB;&#x52A1;&#x6765;&#x8FDB;&#x884C;&#x5904;&#x7406;&#x3002;&#x5927;&#x578B;&#x7684;&#x4EFB;&#x52A1;&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x5355;&#x72EC;
-&#x7684;&#x9879;&#x76EE;&#x653E;&#x5728;&#x5355;&#x72EC;&#x7684; Org &#x6587;&#x4EF6;&#x4E2D;&#xFF0C;&#x5E76;&#x4F7F;&#x7528;&#x5982;&#x4E0B;&#x7684;&#x4EE3;&#x7801;&#x4E3A;&#x8BE5;&#x9879;&#x76EE;&#x8BBE;&#x5B9A;&#x4E00;&#x4E2A;&#x5355;&#x72EC;&#x7684; agenda&#x3002;
+对于耗时较长的非周期任务，需要拆分成更小的任务来进行处理。大型的任务可以作为单独
+的项目放在单独的 Org 文件中，并使用如下的代码为该项目设定一个单独的 agenda。
 </p>
 <div class="org-src-container">
-<figure class="highlight lisp hljs"><table><tr><td class="code"><pre><span class="line"><span class="hljs-list">(<span class="hljs-keyword">setq</span> org-agenda-custom-commands</span><br><span class="hljs-line">      <span class="hljs-quoted">&apos;((<span class="hljs-string">&quot;n&quot;</span> <span class="hljs-string">&quot;Agenda and all TODOs&quot;</span></span><br><span class="hljs-line">	 ((agenda <span class="hljs-string">&quot;&quot;</span> <span class="hljs-literal">nil</span>)</span><br><span class="hljs-line">	  (alltodo <span class="hljs-string">&quot;&quot;</span> <span class="hljs-literal">nil</span>))</span><br><span class="hljs-line">	 <span class="hljs-literal">nil</span>)</span><br><span class="hljs-line">	(<span class="hljs-string">&quot;pc&quot;</span> <span class="hljs-string">&quot;Learn Org&quot;</span> agenda <span class="hljs-string">&quot;&quot;</span></span><br><span class="hljs-line">	 ((org-agenda-files</span><br><span class="hljs-line">	   &apos;(<span class="hljs-string">&quot;~/Orgs/learn-org.org&quot;</span>))</span><br><span class="hljs-line">	  (org-agenda-overriding-header <span class="hljs-string">&quot;Agenda for learning org mode&quot;</span>))</span><br><span class="hljs-line">	 (<span class="hljs-string">&quot;~/export/learn-org.html&quot;</span>)))</span>)</span></span><br></pre></td></tr></table></figure>
+<pre class="src src-emacs-lisp"><span class="linenr"> 1 </span>(<span style="font-weight: bold;">setq</span> org-agenda-custom-commands
+<span class="linenr"> 2 </span>      '((<span style="font-style: italic;">"n"</span> <span style="font-style: italic;">"Agenda and all TODOs"</span>
+<span class="linenr"> 3 </span>         ((agenda <span style="font-style: italic;">""</span> nil)
+<span class="linenr"> 4 </span>          (alltodo <span style="font-style: italic;">""</span> nil))
+<span class="linenr"> 5 </span>         nil)
+<span class="linenr"> 6 </span>        (<span style="font-style: italic;">"pc"</span> <span style="font-style: italic;">"Learn Org"</span> agenda <span style="font-style: italic;">""</span>
+<span class="linenr"> 7 </span>         ((org-agenda-files
+<span class="linenr"> 8 </span>           '(<span style="font-style: italic;">"~/Orgs/learn-org.org"</span>))
+<span class="linenr"> 9 </span>          (org-agenda-overriding-header <span style="font-style: italic;">"Agenda for learning org mode"</span>))
+<span class="linenr">10 </span>         (<span style="font-style: italic;">"~/export/learn-org.html"</span>))))
+</pre>
 </div>
 <p>
-&#x5176;&#x4E2D;&#xFF0C; <code>&quot;pc&quot;</code> &#x4E3A;&#x6253;&#x5F00;&#x8BE5; agenda &#x7684;&#x5FEB;&#x6377;&#x952E;&#xFF0C; <code>&quot;Learn Org&quot;</code> &#x4E3A;&#x9879;&#x76EE;&#x7684;&#x540D;&#x79F0;&#xFF0C;
-<code>&quot;~/Orgs/learn-org.org&quot;</code> &#x4E3A;&#x7ED1;&#x5B9A;&#x7684; Org &#x6587;&#x4EF6;&#xFF0C; <code>&quot;Agenda for learning org mode&quot;</code> &#x4E3A;
-agenda &#x4E0A;&#x65B9;&#x663E;&#x793A;&#x7684;&#x6807;&#x9898;&#xFF0C; <code>&quot;~/export/learn-org.html&quot;</code> &#x4E3A;&#x5BFC;&#x51FA; agenda &#x65F6;&#x7684;&#x8DEF;&#x5F84;&#x3002;&#x8BBE;&#x5B9A;&#x5B8C;
-&#x6210;&#x540E;&#xFF0C;&#x901A;&#x8FC7;&#x5FEB;&#x6377;&#x952E; <code>&lt;C-c a p c&gt;</code> &#x5373;&#x53EF;&#x547C;&#x51FA;&#x81EA;&#x5B9A;&#x4E49; agenda&#x3002;
+其中， <code>"pc"</code> 为打开该 agenda 的快捷键， <code>"Learn Org"</code> 为项目的名称，
+<code>"~/Orgs/learn-org.org"</code> 为绑定的 Org 文件， <code>"Agenda for learning org mode"</code> 为
+agenda 上方显示的标题， <code>"~/export/learn-org.html"</code> 为导出 agenda 时的路径。设定完
+成后，通过快捷键 <code>&lt;C-c a p c&gt;</code> 即可呼出自定义 agenda。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org94630fa" class="outline-2">
-<h2 id="org94630fa">&#x4E3A;&#x4EFB;&#x52A1;&#x6DFB;&#x52A0;&#x66F4;&#x591A;&#x5C5E;&#x6027;</h2>
-<div class="outline-text-2" id="text-org94630fa">
+<div id="outline-container-org2b0d578" class="outline-2">
+<h2 id="org2b0d578">为任务添加更多属性</h2>
+<div class="outline-text-2" id="text-org2b0d578">
 <p>
-&#x6807;&#x7B7E;&#x662F;&#x4E00;&#x79CD;&#x975E;&#x7EBF;&#x6027;&#x7684;&#x7EC4;&#x7EC7;&#x65B9;&#x5F0F;&#xFF0C;Org mode &#x4E2D;&#x7684;&#x6BCF;&#x4E00;&#x4E2A; headline &#x90FD;&#x652F;&#x6301;&#x6807;&#x7B7E;&#x3002;&#x5728; headline
-&#x4F7F;&#x7528;&#x5FEB;&#x6377;&#x952E; <code>&lt;C-c C-c&gt;</code> &#x5373;&#x53EF;&#x7BA1;&#x7406;&#x6807;&#x7B7E;&#x3002;&#x6807;&#x7B7E;&#x4F1A;&#x6839;&#x636E;&#x5C42;&#x7EA7;&#x7ED3;&#x6784;&#x81EA;&#x52A8;&#x7EE7;&#x627F;&#xFF0C;&#x56E0;&#x6B64;&#x7236;&#x6807;&#x9898;&#x7684;&#x6807;&#x7B7E;
-&#x4F1A;&#x81EA;&#x52A8;&#x7EE7;&#x627F;&#x5230;&#x5B50;&#x6807;&#x9898;&#x3002;
+标签是一种非线性的组织方式，Org mode 中的每一个 headline 都支持标签。在 headline
+使用快捷键 <code>&lt;C-c C-c&gt;</code> 即可管理标签。标签会根据层级结构自动继承，因此父标题的标签
+会自动继承到子标题。
 </p>
 
 <p>
-&#x53E6;&#x5916;&#xFF0C;Org mode &#x8FD8;&#x652F;&#x6301;&#x952E;&#x503C;&#x5BF9;&#x3002;&#x8BE5;&#x90E8;&#x5206;&#x7B49;&#x4EE5;&#x540E;&#x7814;&#x7A76;&#x660E;&#x767D;&#x518D;&#x505A;&#x8BB0;&#x5F55;&#x3002;
+另外，Org mode 还支持键值对。该部分等以后研究明白再做记录。
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgbc7703a" class="outline-2">
-<h2 id="orgbc7703a">&#x67E5;&#x770B;&#x4EFB;&#x52A1;&#x6982;&#x89C8;</h2>
-<div class="outline-text-2" id="text-orgbc7703a">
+<div id="outline-container-orgf8d541e" class="outline-2">
+<h2 id="orgf8d541e">查看任务概览</h2>
+<div class="outline-text-2" id="text-orgf8d541e">
 <p>
-Org mode &#x4E2D;&#x6709;&#x4E00;&#x79CD;&#x53EB;&#x505A;&#x5217;&#x89C6;&#x56FE;&#x7684;&#x6A21;&#x5F0F;&#xFF0C;&#x53EF;&#x4EE5;&#x5C06; headline &#x7684;&#x5C5E;&#x6027;&#x4EE5;&#x5217;&#x89C6;&#x56FE;&#x7684;&#x6A21;&#x5F0F;&#x663E;&#x793A;&#x51FA;&#x6765;&#x3002;
-&#x5217;&#x89C6;&#x56FE;&#x53EF;&#x4EE5;&#x5728; <code>org-mode</code> &#x6216; <code>agenda-mode</code> &#x4E2D;&#x4F7F;&#x7528;&#xFF0C;&#x5FEB;&#x6377;&#x952E;&#x4E3A; <code>&lt;C-c C-x C-c&gt;</code> &#x3002;&#x5F00;&#x542F;&#x540E;&#x6BCF;&#x4E2A;
-&#x4EFB;&#x52A1;&#x4F1A;&#x4EE5;&#x8868;&#x683C;&#x7684;&#x6837;&#x5F0F;&#x663E;&#x793A;&#x3002;
+Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以列视图的模式显示出来。
+列视图可以在 <code>org-mode</code> 或 <code>agenda-mode</code> 中使用，快捷键为 <code>&lt;C-c C-x C-c&gt;</code> 。开启后每个
+任务会以表格的样式显示。
 <img src="column-view.png">
 </p>
 
 <p>
-&#x5C06;&#x5149;&#x6807;&#x653E;&#x7F6E;&#x5728;&#x4EFB;&#x610F;&#x4E00;&#x4E2A;&#x5904;&#x4E8E;&#x5217;&#x6A21;&#x5F0F;&#x7684;&#x884C;&#x4E0A;&#xFF0C;&#x53EF;&#x7528; <code>&lt;q&gt;</code> &#x9000;&#x51FA;&#x5217;&#x6A21;&#x5F0F;&#x3002;&#x5217;&#x6A21;&#x5F0F;&#x4E2D;&#x663E;&#x793A;&#x7684;&#x4FE1;&#x606F;&#x53EF;
-&#x4EE5;&#x81EA;&#x5B9A;&#x4E49;&#xFF0C;&#x5B9A;&#x4E49;&#x65B9;&#x6CD5;&#x5982;&#x4E0B;&#xFF0C;&#x5176;&#x4E2D; <code>Effort</code> &#x540E;&#x9762;&#x7684; <code>{:}</code> &#x662F;&#x8981;&#x5C06;&#x6240;&#x6709;&#x5B50;&#x4EFB;&#x52A1;&#x7684; Effort &#x6C42;&#x548C;&#x3002;
+将光标放置在任意一个处于列模式的行上，可用 <code>&lt;q&gt;</code> 退出列模式。列模式中显示的信息可
+以自定义，定义方法如下，其中 <code>Effort</code> 后面的 <code>{:}</code> 是要将所有子任务的 Effort 求和。
 </p>
 
 <div class="org-src-container">
-<figure class="highlight lisp hljs"><table><tr><td class="code"><pre><span class="line"><span class="hljs-list">(<span class="hljs-keyword">setq</span> org-columns-default-format <span class="hljs-string">&quot;%50ITEM(Task)</span><br><span class="hljs-line">%3PRIORITY(Priority) %5TODO(Status) %8EFFORT(Effort){:}</span><br><span class="hljs-line">%20SCHEDULED %20DEADLINE&quot;</span>)</span></span><br></pre></td></tr></table></figure>
+<pre class="src src-emacs-lisp"><span class="linenr">1 </span>(<span style="font-weight: bold;">setq</span> org-columns-default-format <span style="font-style: italic;">"%50ITEM(Task)</span>
+<span class="linenr">2 </span><span style="font-style: italic;">%3PRIORITY(Priority) %5TODO(Status) %8EFFORT(Effort){:}</span>
+<span class="linenr">3 </span><span style="font-style: italic;">%20SCHEDULED %20DEADLINE"</span>)
+</pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org49a36f2" class="outline-2">
-<h2 id="org49a36f2">&#x4EFB;&#x52A1;&#x5B8C;&#x6210;</h2>
-<div class="outline-text-2" id="text-org49a36f2">
+<div id="outline-container-org6def969" class="outline-2">
+<h2 id="org6def969">任务完成</h2>
+<div class="outline-text-2" id="text-org6def969">
 <div class="org-src-container">
-<figure class="highlight lisp hljs"><table><tr><td class="code"><pre><span class="line"><span class="hljs-list">(<span class="hljs-keyword">setq</span></span><br><span class="hljs-line"> <span class="hljs-comment">;; &#x5F53;&#x6807;&#x7B7E;&#x8F6C;&#x6362;&#x4E3A; done &#x65F6;&#x81EA;&#x52A8;&#x8BB0;&#x5F55; close &#x65F6;&#x95F4;</span></span><br><span class="hljs-line"> <span class="hljs-comment">;; &#x5F53;&#x6807;&#x7B7E;&#x8F6C;&#x6362;&#x4E3A; done &#x65F6;&#x81EA;&#x52A8; clock out</span></span><br><span class="hljs-line"> org-log-done <span class="hljs-quoted">&apos;(time . org-clock-out)</span>)</span></span><br></pre></td></tr></table></figure>
+<pre class="src src-emacs-lisp"><span class="linenr">1 </span>(<span style="font-weight: bold;">setq</span>
+<span class="linenr">2 </span> <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#24403;&#26631;&#31614;&#36716;&#25442;&#20026; done &#26102;&#33258;&#21160;&#35760;&#24405; close &#26102;&#38388;</span>
+<span class="linenr">3 </span> <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#24403;&#26631;&#31614;&#36716;&#25442;&#20026; done &#26102;&#33258;&#21160; clock out</span>
+<span class="linenr">4 </span> org-log-done '(time . org-clock-out))
+</pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org0121f9a" class="outline-2">
-<h2 id="org0121f9a">&#x4EFB;&#x52A1;&#x56DE;&#x987E;</h2>
-<div class="outline-text-2" id="text-org0121f9a">
+<div id="outline-container-org76fbacf" class="outline-2">
+<h2 id="org76fbacf">任务回顾</h2>
+<div class="outline-text-2" id="text-org76fbacf">
 <p>
-<code>&lt;C-c C-x C-d&gt;</code> &#x67E5;&#x770B;&#x5404;&#x4E2A;&#x4EFB;&#x52A1;&#x7684;&#x8017;&#x65F6;&#x4E0E;&#x603B;&#x548C;&#x3002;
+<code>&lt;C-c C-x C-d&gt;</code> 查看各个任务的耗时与总和。
 <img src="sumup.png">
 </p>
 </div>
