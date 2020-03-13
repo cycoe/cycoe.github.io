@@ -165,11 +165,9 @@
         <div class="content">
             <p>在 GitHub 上進行項目的團隊協作，一般都是 fork 組織倉庫到自己的賬號下，提交補丁後再提交 Pull Request。上游倉庫一直保持更新。<br>由於最近在做 <a href="https://github.com/LCTT/TranslateProject.git" target="_blank" rel="noopener">LCTT</a> 項目，經常需要同步上游其他人的翻譯，下面就以 <a href="https://github.com/LCTT/TranslateProject.git" target="_blank" rel="noopener">LCTT</a> 項目爲例，記錄一下 GitHub 上 fork 倉庫同步上游更新的操作。</p>
 <a id="more"></a>
-
 <ol>
 <li><p>使用 <code>git remote -v</code> 查看當前的遠程倉庫別名，輸出如下：</p>
  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">LCTT    https:&#x2F;&#x2F;github.com&#x2F;LCTT&#x2F;TranslateProject.git (fetch)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">LCTT    https:&#x2F;&#x2F;github.com&#x2F;LCTT&#x2F;TranslateProject.git (push)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">origin  git@github.com:cycoe&#x2F;TranslateProject.git (fetch)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">origin  git@github.com:cycoe&#x2F;TranslateProject.git (push)</span></pre></td></tr></table></figure>
-
 <p> 其中 <code>origin</code> 是自己賬號下的對應遠端倉庫地址別名， <code>LCTT</code> 是設定好的上游倉庫地址的別名。此處 LCTT 項目已經幫我們設置好了就不需要另外設置。<br> 如果沒有設置上游倉庫地址，可通過 <code>git remote add 上游倉庫別名 上游倉庫地址</code> 命令來設置上游倉庫的別名。</p>
 </li>
 <li><p>同步上游倉庫更新到本地，併合並更新到本地倉庫 master 分支</p>
