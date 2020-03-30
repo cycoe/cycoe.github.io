@@ -165,7 +165,6 @@
         <div class="content">
             <h2 id="素数（Prime）"><a href="#素数（Prime）" class="headerlink" title="素数（Prime）"></a>素数（Prime）</h2><p>对于一个自然数 $n\in\mathbb{N}$，若其只能被 $1$ 和它本身整除（即只有两个因子），则被称为素数；若其有多于两个因子，则被称为合数。素数是不能够进行质因式分解的最小单元，因此合数具有唯一的质因式分解（质因子不可再分）。</p>
 <a id="more"></a>
-
 <h3 id="1-的特殊性"><a href="#1-的特殊性" class="headerlink" title="1 的特殊性"></a>1 的特殊性</h3><p>1 能够被 $1$ 及其自身整除，但为了体系的自洽，不认为 $1$ 是素数。有如下两个原因：</p>
 <ol>
 <li>若 $1$ 是素数，则任意自然数的质因式分解将不是唯一的。$6=2\times 3=1\times 2\times 3$。</li>
@@ -179,23 +178,47 @@
 </ul>
 <h2 id="质因式分解"><a href="#质因式分解" class="headerlink" title="质因式分解"></a>质因式分解</h2><p>前几天，看杂志时发现一个有趣的问题，“对任意一个自然数 $n$，如何求其所有因子的和”。这个问题本身并不困难，但从中可以继续思考质数的相关规律。</p>
 <p>既然是要求因子的和，那么我们首先需要用数学语言将因子表示出来。在此之前，我们需要先将这个自然数表示出来。</p>
-<p>设 $n$ 有 $m+1$ 个质因子 $p_0 &lt; p_1 &lt; \cdots &lt; p_m$，则存在如下唯一的质因式分解<br>$$<br>    n = p_0^{a_0} \times p_1^{a_1} \times \cdots \times p_m^{a_m}<br>$$</p>
-<p>则 $n$ 的因子 $f$ 满足<br>$$<br>    f = p_0^{b_0} \times p_1^{b_1} \times \cdots \times p_m^{b_m}<br>$$<br>其中<br>$$<br>    \left{\begin{array}{c}<br>        0 \leq b_0 \leq a_0\<br>        0 \leq b_1 \leq a_1\<br>        \vdots\<br>        0 \leq b_m \leq a_m<br>    \end{array}\right.,\<br>    且\ b_0, b_1, \cdots, b_m \in \mathbb{N}<br>$$</p>
-<p>记所有质因子之和为 $S(n)$，即为所有满足上式的 $f$ 之和<br>$$<br>    \begin{split}<br>        S(n) &amp;= (p_0^0+p_0^1+\cdots+p_0^{a^0})\times (p_1^0+p_1^1+\cdots+p_1^{a^1})\times \cdots \times (p_m^0+p_m^1+\cdots+p_m^{a^m})\<br>        &amp;= \dfrac{p_0^{a_0+1}-1}{p_0-1}\times \dfrac{p_1^{a_1+1}-1}{p_1-1}\times \cdots \times\dfrac{p_m^{a_m+1}-1}{p_m-1}\<br>        &amp;= \prod\limits_{i=0}^m \dfrac{p_i^{a_i+1}-1}{p_i-1}<br>    \end{split}<br>$$</p>
-<p>至此，我们已经得到已知自然数 $n$ 所有因子和 $S(n)$ 的表达式。接下来验证一下，$24$ 的所有因子有 $1, 2, 3, 4, 6, 8, 12, 24$，求和得 $S_1(24)=60$。$24$ 的质因式分解为 $24=2^3\times3^1$，则 $S_2(24)=(2^0+2^1+2^2+2^3)\times(3^0+3^1)=60$。答案正确！</p>
+<p>设 $n$ 有 $m+1$ 个质因子 $p_0 &lt; p_1 &lt; \cdots &lt; p_m$，则存在如下唯一的质因式分解</p>
+<script type="math/tex; mode=display">
+    n = p_0^{a_0} \times p_1^{a_1} \times \cdots \times p_m^{a_m}</script><p>则 $n$ 的因子 $f$ 满足</p>
+<script type="math/tex; mode=display">
+    f = p_0^{b_0} \times p_1^{b_1} \times \cdots \times p_m^{b_m}</script><p>其中</p>
+<script type="math/tex; mode=display">
+    \left\{\begin{array}{c}
+        0 \leq b_0 \leq a_0\\
+        0 \leq b_1 \leq a_1\\
+        \vdots\\
+        0 \leq b_m \leq a_m
+    \end{array}\right.,\ 
+    且\ b_0, b_1, \cdots, b_m \in \mathbb{N}</script><p>记所有质因子之和为 $S(n)$，即为所有满足上式的 $f$ 之和</p>
+<script type="math/tex; mode=display">
+    \begin{split}
+        S(n) &= (p_0^0+p_0^1+\cdots+p_0^{a^0})\times (p_1^0+p_1^1+\cdots+p_1^{a^1})\times \cdots \times (p_m^0+p_m^1+\cdots+p_m^{a^m})\\
+        &= \dfrac{p_0^{a_0+1}-1}{p_0-1}\times \dfrac{p_1^{a_1+1}-1}{p_1-1}\times \cdots \times\dfrac{p_m^{a_m+1}-1}{p_m-1}\\
+        &= \prod\limits_{i=0}^m \dfrac{p_i^{a_i+1}-1}{p_i-1}
+    \end{split}</script><p>至此，我们已经得到已知自然数 $n$ 所有因子和 $S(n)$ 的表达式。接下来验证一下，$24$ 的所有因子有 $1, 2, 3, 4, 6, 8, 12, 24$，求和得 $S_1(24)=60$。$24$ 的质因式分解为 $24=2^3\times3^1$，则 $S_2(24)=(2^0+2^1+2^2+2^3)\times(3^0+3^1)=60$。答案正确！</p>
 <hr>
 <p>但通过观察发现，表达式的值并不直接与 $n$ 相关，而是与 $n$ 的所有质因子相关。我们知道，因式分解是一个 NPC 问题，我们无法在多项式时间内对 $n$ 进行因式分解。那么，我们有没有办法对 $S(n)$ 进行粗略的估计呢？即有没有办法用 $n$ 来表示 $S(n)$ 的上下界？或者更具体的，$S(n)$ 与 $n$ 是否存在某种倍数关系？</p>
-<p>对 $S(n)$ 的表达式进行缩放我们得到<br>$$<br>    \begin{split}<br>        S(n) &amp;= \dfrac{p_0^{a_0+1}-1}{p_0-1}\times \dfrac{p_1^{a_1+1}-1}{p_1-1}\times \cdots \times\dfrac{p_m^{a_m+1}-1}{p_m-1}\<br>        &amp;&lt; \dfrac{p_0^{a_0+1}}{p_0-1}\times \dfrac{p_1^{a_1+1}}{p_1-1}\times \cdots \times\dfrac{p_m^{a_m+1}}{p_m-1}\<br>        &amp;= \dfrac{p_0}{p_0-1}\times \dfrac{p_1}{p_1-1}\times \cdots \times\dfrac{p_m}{p_m-1}\times n<br>    \end{split}<br>$$</p>
-<p>得到<br>$$<br>    \dfrac{S(n)}{n} &lt; \dfrac{p_0}{p_0-1}\times \dfrac{p_1}{p_1-1}\times \cdots \times\dfrac{p_m}{p_m-1} = \Pi_p(m)<br>$$</p>
-<p>接下来，我们希望知道两件事</p>
+<p>对 $S(n)$ 的表达式进行缩放我们得到</p>
+<script type="math/tex; mode=display">
+    \begin{split}
+        S(n) &= \dfrac{p_0^{a_0+1}-1}{p_0-1}\times \dfrac{p_1^{a_1+1}-1}{p_1-1}\times \cdots \times\dfrac{p_m^{a_m+1}-1}{p_m-1}\\
+        &< \dfrac{p_0^{a_0+1}}{p_0-1}\times \dfrac{p_1^{a_1+1}}{p_1-1}\times \cdots \times\dfrac{p_m^{a_m+1}}{p_m-1}\\
+        &= \dfrac{p_0}{p_0-1}\times \dfrac{p_1}{p_1-1}\times \cdots \times\dfrac{p_m}{p_m-1}\times n
+    \end{split}</script><p>得到</p>
+<script type="math/tex; mode=display">
+    \dfrac{S(n)}{n} < \dfrac{p_0}{p_0-1}\times \dfrac{p_1}{p_1-1}\times \cdots \times\dfrac{p_m}{p_m-1} = \Pi_p(m)</script><p>接下来，我们希望知道两件事</p>
 <ol>
 <li>对于任意大的 $m$，$\Pi_p(m)$ 是否存在上界，若 $\Pi_p(m)$ 的上界存在，则 $\dfrac{S(n)}{n}$ 的上界存在。</li>
 <li>若$\Pi_p(m)$ 的上界不存在，那么对于确定的 $n$，我们能否得到 $\dfrac{S(n)}{n}$ 的上界。</li>
 </ol>
 <hr>
-<p>首先来解决第一个问题。使用计算机进行计算发现，前 $2^k$ 个质数的 $\Pi_p(2^k)$ 与 $k$ 呈近似线性关系<br>$$<br>    \Pi_p(2^k) = ak + b<br>$$</p>
-<p>另外 $2^k$ 以内的质数的分式乘积 $\Pi_p(\eta)$ 也与 $k$ 呈近似线性关系。</p>
-<p>设 $\Pi(n)$ 为前 $n$ 个自然数的类似分式积表达式<br>$$<br>    \Pi(n) = \dfrac21 \times \dfrac32 \times \cdots \times \dfrac{n}{n-1} = n<br>$$<br>则前 $n$ 个质数的 $\Pi(n)$ 与 $n$ 呈线性关系。</p>
+<p>首先来解决第一个问题。使用计算机进行计算发现，前 $2^k$ 个质数的 $\Pi_p(2^k)$ 与 $k$ 呈近似线性关系</p>
+<script type="math/tex; mode=display">
+    \Pi_p(2^k) = ak + b</script><p>另外 $2^k$ 以内的质数的分式乘积 $\Pi_p(\eta)$ 也与 $k$ 呈近似线性关系。</p>
+<p>设 $\Pi(n)$ 为前 $n$ 个自然数的类似分式积表达式</p>
+<script type="math/tex; mode=display">
+    \Pi(n) = \dfrac21 \times \dfrac32 \times \cdots \times \dfrac{n}{n-1} = n</script><p>则前 $n$ 个质数的 $\Pi(n)$ 与 $n$ 呈线性关系。</p>
 <p>一个为质数， 一个为自然数，其中必然蕴含着质数分布的某种真理。</p>
 
         </div>

@@ -19,7 +19,7 @@
 <meta property="og:description" content="最近我们 Campus TMC 要过九周年生日，因此要给以前的老会员发邮件邀请函。本来打算一 个一个手动发，后来一看有将近 100 个。本着 Coding for everything 的准则，尝试用 Python 来解决。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2020-03-30T08:07:33.573Z">
+<meta property="og:updated_time" content="2020-03-30T08:09:30.573Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
 
@@ -175,9 +175,9 @@
 Python 中已经实现了 <code>stmp</code> 的相关接口在 <code>smtplib</code> 模块中，邮件结构相关的接口在 <code>email</code> 模块中。
 </p>
 
-<div id="outline-container-org0b93a90" class="outline-2">
-<h2 id="org0b93a90">生成通讯录</h2>
-<div class="outline-text-2" id="text-org0b93a90">
+<div id="outline-container-orge11858a" class="outline-2">
+<h2 id="orge11858a">生成通讯录</h2>
+<div class="outline-text-2" id="text-orge11858a">
 <p>
 在批量发送邮件之前，一定要有一份结构化的通讯录，不管是用 list 也好，用 dict 存储也好。此处，我是使用 <code>xlrd</code> 模块从 Excel 表格中读取数据，并将其存储在 dict 中。对于邮件来说，收件人的名字可能会出现重名，但邮件地址应该是唯一的，因此选用邮件地址作为字典的键。
 </p>
@@ -216,9 +216,9 @@ Python 中已经实现了 <code>stmp</code> 的相关接口在 <code>smtplib</co
 </p>
 </div>
 </div>
-<div id="outline-container-org3b91a2b" class="outline-2">
-<h2 id="org3b91a2b">定义邮件内容</h2>
-<div class="outline-text-2" id="text-org3b91a2b">
+<div id="outline-container-org7292a6d" class="outline-2">
+<h2 id="org7292a6d">定义邮件内容</h2>
+<div class="outline-text-2" id="text-org7292a6d">
 <p>
 第一步是生成邮件对象，代码示例如下：
 </p>
@@ -271,9 +271,9 @@ Python 中已经实现了 <code>stmp</code> 的相关接口在 <code>smtplib</co
 </div>
 </div>
 </div>
-<div id="outline-container-orgc1588da" class="outline-2">
-<h2 id="orgc1588da">发送邮件</h2>
-<div class="outline-text-2" id="text-orgc1588da">
+<div id="outline-container-org3d44ca1" class="outline-2">
+<h2 id="org3d44ca1">发送邮件</h2>
+<div class="outline-text-2" id="text-org3d44ca1">
 <p>
 Python 中使用 <code>smtplib</code> 来处理 smtp 协议，示例代码如下：
 </p>
@@ -318,7 +318,7 @@ Python 中使用 <code>smtplib</code> 来处理 smtp 协议，示例代码如下
 </pre>
 </div>
 <p>
-此处有一点需要注意，不要 connect 一次服务器循环发 多封邮件，而是每次 connect 发送一封邮件就 quit 重新 connect。否则会被网易服务器当作垃圾邮件而连接错误。
+此处有一点需要注意，不要 connect 一次服务器循环发多封邮件，而是每次 connect 发送一封邮件就 quit 重新 connect。否则会被网易服务器当作垃圾邮件而连接错误。
 </p>
 </div>
 </div>
