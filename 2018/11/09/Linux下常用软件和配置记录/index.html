@@ -169,7 +169,7 @@
 <h3 id="APU-核显"><a href="#APU-核显" class="headerlink" title="APU 核显"></a>APU 核显</h3><p>就目前形式来看，牙膏厂的 CPU + iGPU 是问题概率最小的组合，虽然 10 代以前 Intel 核显的性能鸡肋得不行，但胜在稳定。APU 次之，本来我以为 APU 是与 Intel 同等稳定的存在，但 <code>xf86-video-amdgpu</code> 驱动竟然遇到了问题… Intel CPU + NVIDIA GPU 的组合在早些年是绝对不推荐的，但是最近 bumblebee 和 prime 等项目趋于成熟，NVIDIA 显卡的使用体验好了不少，但还是比不上 Intel 和 AMD 的核显。我的 CPU 和 显卡型号如下：<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">CPU:       Topology: Quad Core model: AMD Ryzen 5 3550H with Radeon Vega Mobile Gfx</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">           bits: 64 type: MT MCP arch: Zen+ rev: 1 L2 cache: 2048 KiB</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">           flags: avx avx2 lm nx pae sse sse2 sse3 sse4_1 sse4_2 sse4a ssse3 svm</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">           bogomips: 33550</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">           Speed: 2203 MHz min&#x2F;max: 1400&#x2F;2100 MHz boost: enabled Core speeds (MHz):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">           1: 2011 2: 1879 3: 1198 4: 1199 5: 1202 6: 1206 7: 1199 8: 1199</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">Graphics:  Device-1: AMD Picasso vendor: Lenovo driver: amdgpu v: kernel bus ID: 03:00.0</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">           chip ID: 1002:15d8</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">           Display: x11 server: X.Org 1.20.5 driver: amdgpu resolution: 2560x1600~60Hz</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">           OpenGL: renderer: AMD RAVEN (DRM 3.33.0 5.3.12-arch1-1 LLVM 9.0.0)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">           v: 4.5 Mesa 19.2.4 direct render: Yes</span></pre></td></tr></table></figure></p>
 <p>此处只有一点需要注意，不要安装官方源的 <code>xf86-video-amdgpu</code>，会导致机器异常耗电并且无法挂起大量发热。安装 AUR 上的 Git 版本可暂时解决问题。<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">yay -S xf86-video-amdgpu-git</span></pre></td></tr></table></figure></p>
 <p>在 <code>/etc/X11/xorg.conf.d/20-amdgpu.conf</code> 配置中加入如下 section 启用 TearFree<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Section &quot;Device&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    Identifier &quot;AMD&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    Driver &quot;amdgpu&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    Option &quot;TearFree&quot; &quot;true&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">EndSection</span></pre></td></tr></table></figure></p>
-<h3 id="亮度配置"><a href="#亮度配置" class="headerlink" title="亮度配置"></a>亮度配置</h3><p>Intel 核显与 AMD 核显调节亮度的方法不太相同，具体步骤参考我的另一篇博客 <a href="/2019/11/09/Archlinux-%E6%97%A0%E6%B3%95%E9%80%9A%E8%BF%87%E4%BA%AE%E5%BA%A6%E8%B0%83%E8%8A%82%E6%8C%89%E9%94%AE%E8%B0%83%E8%8A%82%E4%BA%AE%E5%BA%A6%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" title="Archlinux 无法通过亮度调节按键调节亮度的解决办法">Archlinux 无法通过亮度调节按键调节亮度的解决办法</a></p>
+<h3 id="亮度配置"><a href="#亮度配置" class="headerlink" title="亮度配置"></a>亮度配置</h3><p>Intel 核显与 AMD 核显调节亮度的方法不太相同，具体步骤参考我的另一篇博客 </p>
 <h2 id="Archlinux-配置"><a href="#Archlinux-配置" class="headerlink" title="Archlinux 配置"></a>Archlinux 配置</h2><h3 id="讓-Qt5-程序使用原生-GTK-主題"><a href="#讓-Qt5-程序使用原生-GTK-主題" class="headerlink" title="讓 Qt5 程序使用原生 GTK+ 主題"></a>讓 Qt5 程序使用原生 GTK+ 主題</h3><p>Qt5 程序在 GTK3 環境下主題不統一真的很難受，尤其是 GTK3 用了黑色主題而 Qt5 還是刺眼的白色主題的時候。不像在 KDE 設置中設置 GTK3 主題那麼方便，設置 Qt5 主題可需要好好折騰一番。而且這個解決方案也是我使用了近一年後才找到的答案。</p>
 <p>首先你需要安裝 qt5ct 來提供 Qt5 程序主題的設置入口。此時直接在應用列表中打開 qt5ct 會提示未設置環境變量，編輯 <code>.xprofile</code> 文件，並在其中加入如下內容<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">[ <span class="hljs-string">"<span class="hljs-variable">$XDG_CURRENT_DESKTOP</span>"</span> = <span class="hljs-string">"KDE"</span> ] || [ <span class="hljs-string">"<span class="hljs-variable">$XDG_CURRENT_DESKTOP</span>"</span> = <span class="hljs-string">"GNOME"</span> ] || <span class="hljs-built_in">export</span> QT_QPA_PLATFORMTHEME=<span class="hljs-string">"qt5ct"</span></span></pre></td></tr></table></figure><br>註銷後重新登錄，此時打開 qt5ct 應該就不報錯了。但此時你會發現主題列表中只有 Qt5 自帶的幾個樣式<del>，而沒有 Gtk3 主題。你需要安裝 qt5-styleplugins 來使 Qt5 支持 GTK2 主題。你沒有看錯，我也不知道爲啥 Qt5 只支持 GTK2 的主題。但是我們要如何設置 GTK2 主題呢，好吧，又需要安裝一個叫 gtk-theme-switch2 的工具。在 gtk-theme-switch2 中設置好滿意的 GTK2 主題後，再在 qt5ct 中設置 Qt5 主題爲 GTK2 即可</del>。</p>
 <h4 id="2019-08-11-更新"><a href="#2019-08-11-更新" class="headerlink" title="2019-08-11 更新"></a>2019-08-11 更新</h4><p>事实上現在有个更加好用的 qt 主题引擎叫 Kvantum，样式更加現代并且支持透明。<code>sudo pacman -S kvantum-qt5</code> 安装完成后，在 qt5ct 中将 kvantum 设置为默认主题引擎，并在 kvantum 中設置主题即可。</p>
@@ -273,8 +273,8 @@
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2018/10/23/%E4%B8%80%E7%A7%8D%E9%80%9A%E8%BF%87%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%BD%AC%E5%8F%98%E7%82%B9%E7%9A%84%E6%96%B9%E6%B3%95/">
-                <span class="level-item">一種通過最小二乘法求轉變點的方法</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/09/06/Nocturnal%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">
+                <span class="level-item">Nocturnal使用說明</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -349,7 +349,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            34
+                            27
                         </p>
                     </a>
                 </div>
@@ -361,7 +361,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            16
+                            13
                         </p>
                     </a>
                 </div>
@@ -373,7 +373,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            34
+                            20
                         </p>
                     </a>
                 </div>
@@ -476,14 +476,6 @@
             </h3>
             <ul class="menu-list">
             <li>
-        <a class="level is-marginless" href="/categories/Archlinux/">
-            <span class="level-start">
-                <span class="level-item">Archlinux</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/Games/">
             <span class="level-start">
                 <span class="level-item">Games</span>
@@ -505,7 +497,7 @@
                 <span class="level-item">Linux</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">11</span>
+                <span class="level-item tag">9</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Linux/Emacs/">
@@ -537,7 +529,7 @@
                 <span class="level-item">Python</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">5</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Python/Spider/">
@@ -547,7 +539,23 @@
             <span class="level-end">
                 <span class="level-item tag">1</span>
             </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/spider/">
+            <span class="level-start">
+                <span class="level-item">spider</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
         </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/blog/">
             <span class="level-start">
                 <span class="level-item">blog</span>
@@ -556,41 +564,9 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/matplotlib/">
-            <span class="level-start">
-                <span class="level-item">matplotlib</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/personal/">
             <span class="level-start">
                 <span class="level-item">personal</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/python/">
-            <span class="level-start">
-                <span class="level-item">python</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/python/spider/">
-            <span class="level-start">
-                <span class="level-item">spider</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/statistics/">
-            <span class="level-start">
-                <span class="level-item">statistics</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -606,7 +582,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Agenda/" style="font-size: 10px;">Agenda</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Archlinux/" style="font-size: 15px;">Archlinux</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/Emacs/" style="font-size: 15px;">Emacs</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Graphviz/" style="font-size: 10px;">Graphviz</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/Org/" style="font-size: 10px;">Org</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/Spider/" style="font-size: 10px;">Spider</a> <a href="/tags/Sploit/" style="font-size: 10px;">Sploit</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/matplotlib/" style="font-size: 12.5px;">matplotlib</a> <a href="/tags/mu4e/" style="font-size: 10px;">mu4e</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 12.5px;">plot</a> <a href="/tags/python/" style="font-size: 12.5px;">python</a> <a href="/tags/statistics/" style="font-size: 10px;">statistics</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
+        <a href="/tags/Agenda/" style="font-size: 10px;">Agenda</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Archlinux/" style="font-size: 10px;">Archlinux</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/Emacs/" style="font-size: 16.67px;">Emacs</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Graphviz/" style="font-size: 10px;">Graphviz</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Math/" style="font-size: 13.33px;">Math</a> <a href="/tags/Org/" style="font-size: 10px;">Org</a> <a href="/tags/Python/" style="font-size: 16.67px;">Python</a> <a href="/tags/Spider/" style="font-size: 10px;">Spider</a> <a href="/tags/Sploit/" style="font-size: 10px;">Sploit</a> <a href="/tags/Statistics/" style="font-size: 10px;">Statistics</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/mu4e/" style="font-size: 10px;">mu4e</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a>
     </div>
 </div>
     
@@ -697,18 +673,18 @@
         
         <article class="media">
             
-            <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="media-left">
+            <a href="/2019/08/09/Construct-Dwarf-Fortress-Lazy-Newbee-Package-in-ArchLinux/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第二弹-调整坐标轴">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Construct Dwarf Fortress Lazy Newbee Package in ArchLinux">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T06:57:59.000Z">2019-12-06</time></div>
-                    <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第二弹-调整坐标轴</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-09T05:36:01.000Z">2019-08-09</time></div>
+                    <a href="/2019/08/09/Construct-Dwarf-Fortress-Lazy-Newbee-Package-in-ArchLinux/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Construct Dwarf Fortress Lazy Newbee Package in ArchLinux</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/matplotlib/">matplotlib</a>
+                        <a class="has-link-grey -link" href="/categories/Games/">Games</a>
                     </p>
                 </div>
             </div>
@@ -748,34 +724,12 @@
         </li>
         
         <li>
-            <a class="level is-marginless" href="/archives/2019/12/">
-                <span class="level-start">
-                    <span class="level-item">十二月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/11/">
-                <span class="level-start">
-                    <span class="level-item">十一月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">3</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
             <a class="level is-marginless" href="/archives/2019/08/">
                 <span class="level-start">
                     <span class="level-item">八月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -820,17 +774,6 @@
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/10/">
-                <span class="level-start">
-                    <span class="level-item">十月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -959,13 +902,6 @@
             <div class="field is-grouped is-grouped-multiline">
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/AMD/">
-                        <span class="tag">AMD</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Agenda/">
                         <span class="tag">Agenda</span>
                         <span class="tag is-grey">1</span>
@@ -982,13 +918,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Archlinux/">
                         <span class="tag">Archlinux</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Brightness/">
-                        <span class="tag">Brightness</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -996,13 +925,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Cantonese/">
                         <span class="tag">Cantonese</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/DWM/">
-                        <span class="tag">DWM</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1036,13 +958,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/HiDPI/">
-                        <span class="tag">HiDPI</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Linux/">
                         <span class="tag">Linux</span>
                         <span class="tag is-grey">6</span>
@@ -1052,7 +967,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Math/">
                         <span class="tag">Math</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1064,16 +979,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/PIL/">
-                        <span class="tag">PIL</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Python/">
                         <span class="tag">Python</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1092,15 +1000,15 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Vim/">
-                        <span class="tag">Vim</span>
+                    <a class="tags has-addons" href="/tags/Statistics/">
+                        <span class="tag">Statistics</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/fcitx/">
-                        <span class="tag">fcitx</span>
+                    <a class="tags has-addons" href="/tags/Vim/">
+                        <span class="tag">Vim</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1120,13 +1028,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/matplotlib/">
-                        <span class="tag">matplotlib</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/mu4e/">
                         <span class="tag">mu4e</span>
                         <span class="tag is-grey">1</span>
@@ -1134,64 +1035,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/numpy/">
-                        <span class="tag">numpy</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/planche/">
                         <span class="tag">planche</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/plot/">
-                        <span class="tag">plot</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/python/">
-                        <span class="tag">python</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/statistics/">
-                        <span class="tag">statistics</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
-                        <span class="tag">图像处理</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/">
-                        <span class="tag">算法</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/">
-                        <span class="tag">粒子羣優化</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/">
-                        <span class="tag">線性代數</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1296,18 +1141,18 @@
         
         <article class="media">
             
-            <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="media-left">
+            <a href="/2019/08/09/Construct-Dwarf-Fortress-Lazy-Newbee-Package-in-ArchLinux/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第二弹-调整坐标轴">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Construct Dwarf Fortress Lazy Newbee Package in ArchLinux">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T06:57:59.000Z">2019-12-06</time></div>
-                    <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第二弹-调整坐标轴</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-09T05:36:01.000Z">2019-08-09</time></div>
+                    <a href="/2019/08/09/Construct-Dwarf-Fortress-Lazy-Newbee-Package-in-ArchLinux/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Construct Dwarf Fortress Lazy Newbee Package in ArchLinux</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/matplotlib/">matplotlib</a>
+                        <a class="has-link-grey -link" href="/categories/Games/">Games</a>
                     </p>
                 </div>
             </div>
@@ -1347,34 +1192,12 @@
         </li>
         
         <li>
-            <a class="level is-marginless" href="/archives/2019/12/">
-                <span class="level-start">
-                    <span class="level-item">十二月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/11/">
-                <span class="level-start">
-                    <span class="level-item">十一月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">3</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
             <a class="level is-marginless" href="/archives/2019/08/">
                 <span class="level-start">
                     <span class="level-item">八月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -1419,17 +1242,6 @@
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/10/">
-                <span class="level-start">
-                    <span class="level-item">十月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -1558,13 +1370,6 @@
             <div class="field is-grouped is-grouped-multiline">
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/AMD/">
-                        <span class="tag">AMD</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Agenda/">
                         <span class="tag">Agenda</span>
                         <span class="tag is-grey">1</span>
@@ -1581,13 +1386,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Archlinux/">
                         <span class="tag">Archlinux</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Brightness/">
-                        <span class="tag">Brightness</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1595,13 +1393,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Cantonese/">
                         <span class="tag">Cantonese</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/DWM/">
-                        <span class="tag">DWM</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1635,13 +1426,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/HiDPI/">
-                        <span class="tag">HiDPI</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Linux/">
                         <span class="tag">Linux</span>
                         <span class="tag is-grey">6</span>
@@ -1651,7 +1435,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Math/">
                         <span class="tag">Math</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1663,16 +1447,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/PIL/">
-                        <span class="tag">PIL</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Python/">
                         <span class="tag">Python</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1691,15 +1468,15 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Vim/">
-                        <span class="tag">Vim</span>
+                    <a class="tags has-addons" href="/tags/Statistics/">
+                        <span class="tag">Statistics</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/fcitx/">
-                        <span class="tag">fcitx</span>
+                    <a class="tags has-addons" href="/tags/Vim/">
+                        <span class="tag">Vim</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1719,13 +1496,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/matplotlib/">
-                        <span class="tag">matplotlib</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/mu4e/">
                         <span class="tag">mu4e</span>
                         <span class="tag is-grey">1</span>
@@ -1733,64 +1503,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/numpy/">
-                        <span class="tag">numpy</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/planche/">
                         <span class="tag">planche</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/plot/">
-                        <span class="tag">plot</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/python/">
-                        <span class="tag">python</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/statistics/">
-                        <span class="tag">statistics</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
-                        <span class="tag">图像处理</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/">
-                        <span class="tag">算法</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/">
-                        <span class="tag">粒子羣優化</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/">
-                        <span class="tag">線性代數</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
