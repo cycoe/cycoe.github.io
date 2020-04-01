@@ -19,7 +19,7 @@
 <meta property="og:description" content="前几天在写 使用 Emacs 与 Org mode 进行 GTD 管理 博客时，用到了 Graphviz 绘制流程 图。正巧之前在 LaTeX 中也用它画过一些图，但都没有系统地入过门，那就趁最近学习一 下吧。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2020-03-13T10:41:54.735Z">
+<meta property="og:updated_time" content="2020-04-01T09:22:39.498Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
 
@@ -184,13 +184,13 @@
 义上的函数图像那种图，而是数据结构中的图，强调的关系。
 </p>
 
-<div id="outline-container-org011e371" class="outline-2">
-<h2 id="org011e371">安装</h2>
-<div class="outline-text-2" id="text-org011e371">
+<div id="outline-container-orgbc9094c" class="outline-2">
+<h2 id="orgbc9094c">安装</h2>
+<div class="outline-text-2" id="text-orgbc9094c">
 </div>
-<div id="outline-container-org38f30af" class="outline-3">
-<h3 id="org38f30af">Graphviz</h3>
-<div class="outline-text-3" id="text-org38f30af">
+<div id="outline-container-org915003b" class="outline-3">
+<h3 id="org915003b">Graphviz</h3>
+<div class="outline-text-3" id="text-org915003b">
 <p>
 Graphviz 本质上是一个命令行工具，在 Archlinux 上只需要通过 <code>sudo pacman -S
 graphviz</code> 安装即可，其他系统类似。
@@ -198,9 +198,9 @@ graphviz</code> 安装即可，其他系统类似。
 </div>
 </div>
 
-<div id="outline-container-orgbeca6d5" class="outline-3">
-<h3 id="orgbeca6d5">graphviz-dot-mode</h3>
-<div class="outline-text-3" id="text-orgbeca6d5">
+<div id="outline-container-org7ef5f9e" class="outline-3">
+<h3 id="org7ef5f9e">graphviz-dot-mode</h3>
+<div class="outline-text-3" id="text-org7ef5f9e">
 <p>
 Graphviz 在 Emacs 中的集成是通过 <code>graphviz-dot-mode</code> 这个包来实现的，只需要 <code>&lt;M-x&gt;
 package-install graphviz-dot-mode &lt;RET&gt;</code> 即可。
@@ -222,9 +222,9 @@ package-install graphviz-dot-mode &lt;RET&gt;</code> 即可。
 </div>
 </div>
 
-<div id="outline-container-org3aa671e" class="outline-2">
-<h2 id="org3aa671e">布局器</h2>
-<div class="outline-text-2" id="text-org3aa671e">
+<div id="outline-container-org3441f5e" class="outline-2">
+<h2 id="org3441f5e">布局器</h2>
+<div class="outline-text-2" id="text-org3441f5e">
 <p>
 Graphviz 中包含了众多的布局器：
 </p>
@@ -238,9 +238,9 @@ Graphviz 中包含了众多的布局器：
 </div>
 </div>
 
-<div id="outline-container-orgb8584fb" class="outline-2">
-<h2 id="orgb8584fb">基本使用</h2>
-<div class="outline-text-2" id="text-orgb8584fb">
+<div id="outline-container-org302f224" class="outline-2">
+<h2 id="org302f224">基本使用</h2>
+<div class="outline-text-2" id="text-org302f224">
 <p>
 Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </p>
@@ -280,7 +280,7 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </div>
 
 <p>
-如果要直接在命令行进行绘图，使用命令 =dot -Tpng first.dot -o first.png=。如果利
+如果要直接在命令行进行绘图，使用命令 <code>dot -Tpng first.dot -o first.png</code> 。如果利
 用 Emacs Babel 进行绘制，需要如下所示的 Headers。
 </p>
 <div class="org-src-container">
@@ -295,14 +295,14 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </div>
 
 <p>
-其中，=:results silent= 表示不在 Org 文件中进行任何输出。
+其中， <code>:results silent</code> 表示不在 Org 文件中进行任何输出。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org098f9fe" class="outline-2">
-<h2 id="org098f9fe">绘制属性</h2>
-<div class="outline-text-2" id="text-org098f9fe">
+<div id="outline-container-orgab0ea04" class="outline-2">
+<h2 id="orgab0ea04">绘制属性</h2>
+<div class="outline-text-2" id="text-orgab0ea04">
 <p>
 一个图中可能有非常多的节点与边，如果每次都需要声明一个节点的属性会非常麻烦。类似
 于面向对象编程的思想，我们可以用 <code>node</code> 和 <code>edge</code> 类标签来设置全局的属性，也可以用对
@@ -336,7 +336,7 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </div>
 
 <p>
-<a id="orgf2bc40f"></a>
+<a id="org9160244"></a>
 <img src="property.png">
 </p>
 
@@ -390,16 +390,16 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </ul>
 </div>
 
-<div id="outline-container-org1015cbd" class="outline-3">
-<h3 id="org1015cbd">节点</h3>
-<div class="outline-text-3" id="text-org1015cbd">
+<div id="outline-container-orge98d2aa" class="outline-3">
+<h3 id="orge98d2aa">节点</h3>
+<div class="outline-text-3" id="text-orge98d2aa">
 <p>
 节点的默认属性为 shape = ellipse, width = .75, height = 0.5 并且用节点标识符作为
 节点的显示文字。
 </p>
 
 <p>
-如 <a href="#orgf2bc40f">图 1</a> 中所示，声明两个节点 <i>小蓝</i> 和 <i>小红/，/小蓝</i> 或 <i>小红</i> 就表示这个节点的节点标
+如 <a href="#org9160244">图 1</a> 中所示，声明两个节点 <i>小蓝</i> 和 <i>小红/，/小蓝</i> 或 <i>小红</i> 就表示这个节点的节点标
 识符，后面紧跟的是该节点的属性列表；另一种用法为 节点标识符:节点部分:方向[属性列
 表] <code>小蓝:body[style=filled color=lightblue]</code>, 这个为单一节点声明的方式。
 </p>
@@ -426,9 +426,9 @@ source 或 min 的子图</li>
 </div>
 </div>
 
-<div id="outline-container-org137a1f7" class="outline-3">
-<h3 id="org137a1f7">边</h3>
-<div class="outline-text-3" id="text-org137a1f7">
+<div id="outline-container-orgfaa518a" class="outline-3">
+<h3 id="orgfaa518a">边</h3>
+<div class="outline-text-3" id="text-orgfaa518a">
 <p>
 有向图中的的边用 <code>-&gt;</code> 表示，无向图用 <code>--</code> 表示。
 </p>
@@ -604,9 +604,9 @@ ortho, 正交折线
 </div>
 </div>
 
-<div id="outline-container-org81aaa15" class="outline-3">
-<h3 id="org81aaa15">边的方向</h3>
-<div class="outline-text-3" id="text-org81aaa15">
+<div id="outline-container-org27420f2" class="outline-3">
+<h3 id="org27420f2">边的方向</h3>
+<div class="outline-text-3" id="text-org27420f2">
 <p>
 <b>示例</b> 声明多部分节点，以及对各部分进行单独设置
 </p>
@@ -648,9 +648,9 @@ ortho, 正交折线
 </div>
 </div>
 
-<div id="outline-container-orgbae7e84" class="outline-2">
-<h2 id="orgbae7e84">子图</h2>
-<div class="outline-text-2" id="text-orgbae7e84">
+<div id="outline-container-orgd76b1b9" class="outline-2">
+<h2 id="orgd76b1b9">子图</h2>
+<div class="outline-text-2" id="text-orgd76b1b9">
 <p>
 <b>subgraph</b> 必须配合 <b>cluster</b> 一起使用，用法为 =subgraph cluster* {} 。
 </p>
