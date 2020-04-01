@@ -19,7 +19,7 @@
 <meta property="og:description" content="最近实验室又配置了一台新的计算平台，噪声堪比飞机起飞，再加上本校区不允许实验过夜，只能将其安置在学校外面。但从学校到计算平台车程 40Km，每次都过去做计算显然不现实，如果能从学校直接远程连接是最好的。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2020-03-30T14:09:12.803Z">
+<meta property="og:updated_time" content="2020-04-01T09:20:37.716Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
 
@@ -137,6 +137,10 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-04-30T15:42:57.000Z">2019-04-30</time>
                 
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
+                </div>
+                
                 
                 <span class="level-item has-text-grey">
                     
@@ -161,6 +165,7 @@
         <div class="content">
             <p>最近实验室又配置了一台新的计算平台，噪声堪比飞机起飞，再加上本校区不允许实验过夜，只能将其安置在学校外面。但从学校到计算平台车程 40Km，每次都过去做计算显然不现实，如果能从学校直接远程连接是最好的。</p>
 <a id="more"></a>
+
 <p>通过相关资料的查询及对专业人士的请教，找到如下几种解决方法:</p>
 <ol>
 <li>联系网络运营商将动态 IP 转为静态的公网 IP，这样就可以直接从学校的内网连接到计算平台，是最完美的解决方案。但是查询资费后发现，价钱不那么完美，一个月 6000 块大洋怎么负担得起啊！</li>
@@ -178,9 +183,10 @@
 </blockquote>
 <p>以上对 SSH 的解释来自<a href="https://baike.baidu.com/item/ssh/10407?fr=aladdin" target="_blank" rel="noopener">百度百科</a>，别问我为什么不用 Wikipedia。从中我们看到，SSH 是建立在应用层基础上的一种安全协议，可以用来进行远程控制，或在计算机之间传送文件，比传统的 telnet 或 ftp 协议要更安全。Linux 下最常使用的就是 OpenSSH。OpenSSH 是 SSH 协议的免费开源实现，提供了服务端后台程序（SSH Daemon）和客户端工具(SSH Client)。主机可以通过 SSH 客户端连接运行了 SSH 服务端的主机。</p>
 <h2 id="网络拓扑分析"><a href="#网络拓扑分析" class="headerlink" title="网络拓扑分析"></a>网络拓扑分析</h2><p>互联网是一张巨大的网，其中所有的主机都由有线或无线的方式相连，但并不代表任意两台主机都能互相可见。网络是有方向的，与其说是网我觉得更像一棵树。网络在向下进行传输时，会经过 NAT（Network Address Translation 网络地址转换），因此外网的主机无法直接访问内网的主机。</p>
-<p>在我们本次遇到的问题中，网络连接可表示为如下的拓扑结构。<br><img src="/2019/04/30/%E5%8F%8D%E5%90%91SSH%E5%AE%9E%E7%8E%B0%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/topology.png" class title="网络拓扑结构"></p>
+<p>在我们本次遇到的问题中，网络连接可表示为如下的拓扑结构。</p>
+<img src="/2019/04/30/%E5%8F%8D%E5%90%91SSH%E5%AE%9E%E7%8E%B0%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/topology.png" class title="网络拓扑结构">
+
 <p>各个主机的 IP 地址如下表所示</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -190,8 +196,7 @@
 <th>备注</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>计算平台 A</td>
 <td>10.0.0.100</td>
 <td>cal</td>
@@ -209,33 +214,63 @@
 <td>server</td>
 <td>公网服务器，起桥梁作用</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <p>其中 A、B 能够访问 O，但 O 不能访问 A、B，并且 A、B 之间不能直接互相访问。我们最后要实现的目标就是使用 B 访问 A。</p>
 <h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>通俗地说：就是在主机 A 上做到 O 的反向代理；然后在 O 上做正向的代理实现本地端口的转发。</p>
 <h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>A、B、O 上都要安装 SSH Client，A、O 上需要安装 SSH Daemon。</p>
-<p>需要用到的 ssh 参数<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">反向代理</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">ssh -fCNR</span></pre></td></tr></table></figure><br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">正向代理</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">ssh -fCNL</span></pre></td></tr></table></figure><br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">-f 后台执行 ssh 指令</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">-C 允许压缩数据</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">-N 不执行远程指令</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">-R 将远程主机（服务器）的某个端口转发到本地端指定主机的指定端口</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">-L 将本地机（客户机）的某个端口转发到远端指定主机的指定端口</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">-p 指定远程主机的端口</span></pre></td></tr></table></figure></p>
-<h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3><p>首先在 A 主机上操作，建立 A 到 O 的反向代理，具体命令为<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh -fCNR [O 主机 IP 或省略]:[O 主机端口]:[A 主机 IP ]:[A 主机端口] [O 主机的用户名@O 主机 IP]</span></pre></td></tr></table></figure><br>在这里我使用了 O 主机的 3333 端口，以及 A 主机的 22 端口，按照以上命令即为<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh -fCNR 3333:localhost:22 server@123.123.123.123</span></pre></td></tr></table></figure><br>此时我们就将 O 的 3333 端口映射到了 A 的 22 端口，也就是说访问 O 的 3333 端口与访问 A 的 22 端口效果相同。</p>
+<p>需要用到的 ssh 参数</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">反向代理</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">ssh -fCNR</span></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">正向代理</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">ssh -fCNL</span></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">-f 后台执行 ssh 指令</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">-C 允许压缩数据</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">-N 不执行远程指令</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">-R 将远程主机（服务器）的某个端口转发到本地端指定主机的指定端口</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">-L 将本地机（客户机）的某个端口转发到远端指定主机的指定端口</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">-p 指定远程主机的端口</span></pre></td></tr></table></figure>
+
+<h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3><p>首先在 A 主机上操作，建立 A 到 O 的反向代理，具体命令为</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh -fCNR [O 主机 IP 或省略]:[O 主机端口]:[A 主机 IP ]:[A 主机端口] [O 主机的用户名@O 主机 IP]</span></pre></td></tr></table></figure>
+<p>在这里我使用了 O 主机的 3333 端口，以及 A 主机的 22 端口，按照以上命令即为</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh -fCNR 3333:localhost:22 server@123.123.123.123</span></pre></td></tr></table></figure>
+<p>此时我们就将 O 的 3333 端口映射到了 A 的 22 端口，也就是说访问 O 的 3333 端口与访问 A 的 22 端口效果相同。</p>
 <p>使用 <code>ps aux | grep 3333</code> 命令来查看反向代理是否运行成功。</p>
-<h3 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h3><p>接下来在 O 主机上操作。完成上一步的反向代理后，在主机 O 上运行如下命令应该就可以登陆 A 主机。<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh -p 3333 cal@localhost</span></pre></td></tr></table></figure></p>
+<h3 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h3><p>接下来在 O 主机上操作。完成上一步的反向代理后，在主机 O 上运行如下命令应该就可以登陆 A 主机。</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh -p 3333 cal@localhost</span></pre></td></tr></table></figure>
+
 <p>该命令的含义为，使用 cal 用户登陆本机的 3333 端口。上面已经说过，访问 O 的 3333 端口与访问 A 的 22 端口效果相同，那么我们就成功从  O 主机登陆了 A 主机。</p>
-<p>但此时我们仍只能从 O 主机本机上登陆 A 主机，无法从其他主机登陆，因此需要再对 3333 端口进行一次端口转发，使其他主机可以访问。具体命令为<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh -fCNL [O 主机 IP 或省略]:[转发端口]:[O 主机 IP]:[被转发端口] [登陆 O 主机的用户名@O 主机的 IP]</span></pre></td></tr></table></figure><br>此处我们想要将 3333 端口转发到 2222 端口，因此转发端口为 2222，被转发端口为 3333。<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh -fCNL *:2222:localhost:3333 localhost</span></pre></td></tr></table></figure><br>此处 <code>*</code> 表示允许任意其他主机访问，本机的用户名可省略。使用 <code>ps aux | grep 2222</code> 命令来查看正向代理是否运行成功。此处 2222 端口为本地转发端口，负责与外网进行通信，并将数据转发到 3333 端口，实现了可以从其他主机访问的功能。</p>
-<h3 id="展现奇迹的时候到了"><a href="#展现奇迹的时候到了" class="headerlink" title="展现奇迹的时候到了"></a>展现奇迹的时候到了</h3><p>到次为至，我们已经配置好了 AO 主机，那么我们可以从任意可联网的设备登录到计算平台中去啦。指令为<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh -p 2222 cal@123.123.123.123</span></pre></td></tr></table></figure><br>我们实现了从任意地方连入内网计算平台的连接！</p>
+<p>但此时我们仍只能从 O 主机本机上登陆 A 主机，无法从其他主机登陆，因此需要再对 3333 端口进行一次端口转发，使其他主机可以访问。具体命令为</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh -fCNL [O 主机 IP 或省略]:[转发端口]:[O 主机 IP]:[被转发端口] [登陆 O 主机的用户名@O 主机的 IP]</span></pre></td></tr></table></figure>
+<p>此处我们想要将 3333 端口转发到 2222 端口，因此转发端口为 2222，被转发端口为 3333。</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh -fCNL *:2222:localhost:3333 localhost</span></pre></td></tr></table></figure>
+<p>此处 <code>*</code> 表示允许任意其他主机访问，本机的用户名可省略。使用 <code>ps aux | grep 2222</code> 命令来查看正向代理是否运行成功。此处 2222 端口为本地转发端口，负责与外网进行通信，并将数据转发到 3333 端口，实现了可以从其他主机访问的功能。</p>
+<h3 id="展现奇迹的时候到了"><a href="#展现奇迹的时候到了" class="headerlink" title="展现奇迹的时候到了"></a>展现奇迹的时候到了</h3><p>到次为至，我们已经配置好了 AO 主机，那么我们可以从任意可联网的设备登录到计算平台中去啦。指令为</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh -p 2222 cal@123.123.123.123</span></pre></td></tr></table></figure>
+<p>我们实现了从任意地方连入内网计算平台的连接！</p>
 <h3 id="这种反向代理是不稳定的"><a href="#这种反向代理是不稳定的" class="headerlink" title="这种反向代理是不稳定的"></a>这种反向代理是不稳定的</h3><p>不幸的是这种 ssh 连接会因为超时和网络堵塞等原因而关闭，那么从的外网连通内网的通道就无法维持了，为此我们需要维持稳定 ssh 反向代理隧道的方法。</p>
 <h4 id="配置-ssh-key-实现免密登陆"><a href="#配置-ssh-key-实现免密登陆" class="headerlink" title="配置 ssh key 实现免密登陆"></a>配置 ssh key 实现免密登陆</h4><p>在使用 ssh 进行连接时，每次都需要输入密码，一方面不安全，另一方面也为我们接下来使用的自动化工具带来了阻碍。</p>
-<p>首先登陆 A 主机，并运行如下命令生成公钥私钥对。中间的配置过程一路回车即可。<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="hljs-string">"youremail@example.com"</span></span></pre></td></tr></table></figure></p>
-<p>此时就在 A 主机的 <code>~/.ssh/</code> 目录下生成了公钥与私钥对，接下来我们需要将公钥传到 O 主机上作为我们登陆的一个比对凭证<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh-copy-id server@123.123.123.123</span></pre></td></tr></table></figure><br>此时，我们再使用 <code>ssh server@123.123.123.123</code> 登陆路 O 主机就不再需要密码了。</p>
+<p>首先登陆 A 主机，并运行如下命令生成公钥私钥对。中间的配置过程一路回车即可。</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="hljs-string">"youremail@example.com"</span></span></pre></td></tr></table></figure>
+
+<p>此时就在 A 主机的 <code>~/.ssh/</code> 目录下生成了公钥与私钥对，接下来我们需要将公钥传到 O 主机上作为我们登陆的一个比对凭证</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh-copy-id server@123.123.123.123</span></pre></td></tr></table></figure>
+<p>此时，我们再使用 <code>ssh server@123.123.123.123</code> 登陆路 O 主机就不再需要密码了。</p>
 <h4 id="用-autossh-建立稳定隧道"><a href="#用-autossh-建立稳定隧道" class="headerlink" title="用 autossh 建立稳定隧道"></a>用 autossh 建立稳定隧道</h4><p>从 A 主机到 O 主机的反向代理连接是不稳定的，也就是说，我们需要一个工具来时刻监听着这个连接。一但断开，再次自动重新建立连接即可。幸运的是，已经有人写出了这个工具，那就是 autossh！感谢开源！</p>
-<p>CentOS 的官方仓库中并没有这个软件包，我们需要从源码编译安装<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo yum install wget gcc make</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">wget http://www.harding.motd.ca/autossh/autossh-1.4e.tgz</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">tar -xf autossh-1.4e.tgz</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">cd</span> autossh-1.4e</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">./configure</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">make</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">sudo make install</span></pre></td></tr></table></figure><br>至此我们已经安装好了 autossh，利用下面的命令来启动守护进程。<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">autossh -M 7200 -fCNR 3333:localhost:22 server@123.123.123.123</span></pre></td></tr></table></figure><br>autossh 命令的参数与 ssh 一致，不同的是我们需要指出的 <code>-M`` </code>参数，这个参数指定一个端口，这个端口是外网的 O 主机用来接收内网 A 主机的信息，如果隧道不正常而返回给 A 主机让它实现重新连接。</p>
+<p>CentOS 的官方仓库中并没有这个软件包，我们需要从源码编译安装</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo yum install wget gcc make</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">wget http://www.harding.motd.ca/autossh/autossh-1.4e.tgz</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">tar -xf autossh-1.4e.tgz</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">cd</span> autossh-1.4e</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">./configure</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">make</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">sudo make install</span></pre></td></tr></table></figure>
+<p>至此我们已经安装好了 autossh，利用下面的命令来启动守护进程。</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">autossh -M 7200 -fCNR 3333:localhost:22 server@123.123.123.123</span></pre></td></tr></table></figure>
+<p>autossh 命令的参数与 ssh 一致，不同的是我们需要指出的 <code>-M``</code>参数，这个参数指定一个端口，这个端口是外网的 O 主机用来接收内网 A 主机的信息，如果隧道不正常而返回给 A 主机让它实现重新连接。</p>
 <h4 id="配置自动启动"><a href="#配置自动启动" class="headerlink" title="配置自动启动"></a>配置自动启动</h4><p>我们需要将 autossh 命令配置在开机自动启动脚本中，免去了每次开机都需要重新运行脚本的麻烦。</p>
-<p>我们需要在 A 主机的 <code>/etc/rc.d/rc.local</code> 文件中添加如下内容<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">/bin/su -c <span class="hljs-string">'/usr/local/bin/autossh -M 7200 -fCNR 3333:localhost:22 server@123.123.123.123'</span> - cal</span></pre></td></tr></table></figure><br>此命令表示，以 cal 用户运行 autossh 命令，这样我们就能够使用 cal 用户反向连接到 A 主机。</p>
-<p>为了保险起见，我们需要为自启动脚本添加执行权限<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo chmod +x /etc/rc.d/rc.local</span></pre></td></tr></table></figure></p>
+<p>我们需要在 A 主机的 <code>/etc/rc.d/rc.local</code> 文件中添加如下内容</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">/bin/su -c <span class="hljs-string">'/usr/local/bin/autossh -M 7200 -fCNR 3333:localhost:22 server@123.123.123.123'</span> - cal</span></pre></td></tr></table></figure>
+<p>此命令表示，以 cal 用户运行 autossh 命令，这样我们就能够使用 cal 用户反向连接到 A 主机。</p>
+<p>为了保险起见，我们需要为自启动脚本添加执行权限</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo chmod +x /etc/rc.d/rc.local</span></pre></td></tr></table></figure>
+
 <p>至此我们就建立好了稳定的连接隧道。</p>
 <h3 id="进一步优化"><a href="#进一步优化" class="headerlink" title="进一步优化"></a>进一步优化</h3><h4 id="保持活连接"><a href="#保持活连接" class="headerlink" title="保持活连接"></a>保持活连接</h4><p>在测试中发现，如果一个连接长时间空置，那么就会冻结。反向代理连接也是一样，此时便只能通过重启 A 主机使连接重置。为保持一个活连接（Keep alive），需要服务端或客户端定时发送心跳包来确保连接活跃，此处我们选择配置服务端的心跳。</p>
-<p>在 A 和 O 的 <code>/etc/ssh/sshd_config</code> 文件中添加如下内容<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># server 每隔 60 秒发送一次请求给 client，然后 client 响应，从而保持连接</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">ClientAliveInterval 60</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># server 发出请求后，客户端没有响应得次数达到 3，就自动断开连接，正常情况下，client 不会不响应</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">ClientAliveCountMax 3</span></pre></td></tr></table></figure></p>
+<p>在 A 和 O 的 <code>/etc/ssh/sshd_config</code> 文件中添加如下内容</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># server 每隔 60 秒发送一次请求给 client，然后 client 响应，从而保持连接</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">ClientAliveInterval 60</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># server 发出请求后，客户端没有响应得次数达到 3，就自动断开连接，正常情况下，client 不会不响应</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">ClientAliveCountMax 3</span></pre></td></tr></table></figure>
+
 <h4 id="Windows-SSH-Client-连接提示错误"><a href="#Windows-SSH-Client-连接提示错误" class="headerlink" title="Windows SSH Client 连接提示错误"></a>Windows SSH Client 连接提示错误</h4><p>使用 Windows 的 SSH Client 连接 Linux 运行的 SSH 服务端时，会提示“ssh algorithm negotiation failed”错误，导致此问题的原因是 ssh 升级后，为了安全，默认不再采用原来一些加密算法，我们手工添加进去即可。</p>
-<p>在 O 主机的 <code>/etc/ssh/sshd_config</code> 文件中添加如下内容<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># add crypt format for window ssh client</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Ciphers aes128-cbc,aes192-cbc,aes256-cbc,aes128-ctr,aes192-ctr,aes256-ctr,3des-cbc,arcfour128,arcfour256,arcfour,blowfish-cbc,cast128-cbc</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">MACs hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-sha1-96,hmac-md5-96</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">KexAlgorithms diffie-hellman-group1-sha1,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group-exchange-sha256,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group1-sha1,curve25519-sha256@libssh.org</span></pre></td></tr></table></figure></p>
+<p>在 O 主机的 <code>/etc/ssh/sshd_config</code> 文件中添加如下内容</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># add crypt format for window ssh client</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Ciphers aes128-cbc,aes192-cbc,aes256-cbc,aes128-ctr,aes192-ctr,aes256-ctr,3des-cbc,arcfour128,arcfour256,arcfour,blowfish-cbc,cast128-cbc</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">MACs hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-sha1-96,hmac-md5-96</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">KexAlgorithms diffie-hellman-group1-sha1,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group-exchange-sha256,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group1-sha1,curve25519-sha256@libssh.org</span></pre></td></tr></table></figure>
+
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p> <a href="https://www.cnblogs.com/zjutlitao/p/6223486.html" target="_blank" rel="noopener">Windows SSH Client 报 Algorithm negotiation failed 的解决方法之一</a><br> <a href="https://blog.csdn.net/jiangbenchu/article/details/84438959" target="_blank" rel="noopener">使用SSH反向隧道进行内网穿透</a></p>
 
         </div>
@@ -388,7 +423,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            27
+                            34
                         </p>
                     </a>
                 </div>
@@ -400,7 +435,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            13
+                            14
                         </p>
                     </a>
                 </div>
@@ -412,7 +447,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            20
+                            32
                         </p>
                     </a>
                 </div>
@@ -536,7 +571,7 @@
                 <span class="level-item">Linux</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">9</span>
+                <span class="level-item tag">13</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Linux/Emacs/">
@@ -568,7 +603,7 @@
                 <span class="level-item">Python</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">5</span>
+                <span class="level-item tag">8</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Python/Spider/">
@@ -577,6 +612,14 @@
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/matplotlib/">
+            <span class="level-start">
+                <span class="level-item">matplotlib</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Python/spider/">
@@ -621,7 +664,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Agenda/" style="font-size: 10px;">Agenda</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Archlinux/" style="font-size: 10px;">Archlinux</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/Emacs/" style="font-size: 16.67px;">Emacs</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Graphviz/" style="font-size: 10px;">Graphviz</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Math/" style="font-size: 13.33px;">Math</a> <a href="/tags/Org/" style="font-size: 10px;">Org</a> <a href="/tags/Python/" style="font-size: 16.67px;">Python</a> <a href="/tags/Spider/" style="font-size: 10px;">Spider</a> <a href="/tags/Sploit/" style="font-size: 10px;">Sploit</a> <a href="/tags/Statistics/" style="font-size: 10px;">Statistics</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/mu4e/" style="font-size: 10px;">mu4e</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a>
+        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Agenda/" style="font-size: 10px;">Agenda</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/Emacs/" style="font-size: 15px;">Emacs</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Graphviz/" style="font-size: 10px;">Graphviz</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Math/" style="font-size: 12.5px;">Math</a> <a href="/tags/Org/" style="font-size: 10px;">Org</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/Spider/" style="font-size: 10px;">Spider</a> <a href="/tags/Sploit/" style="font-size: 10px;">Sploit</a> <a href="/tags/Statistics/" style="font-size: 10px;">Statistics</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/matplotlib/" style="font-size: 12.5px;">matplotlib</a> <a href="/tags/mu4e/" style="font-size: 10px;">mu4e</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 12.5px;">plot</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
     </div>
 </div>
     
@@ -712,18 +755,18 @@
         
         <article class="media">
             
-            <a href="/2019/08/09/Construct-Dwarf-Fortress-Lazy-Newbee-Package-in-ArchLinux/" class="media-left">
+            <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Construct Dwarf Fortress Lazy Newbee Package in ArchLinux">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第二弹-调整坐标轴">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-09T05:36:01.000Z">2019-08-09</time></div>
-                    <a href="/2019/08/09/Construct-Dwarf-Fortress-Lazy-Newbee-Package-in-ArchLinux/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Construct Dwarf Fortress Lazy Newbee Package in ArchLinux</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T06:57:59.000Z">2019-12-06</time></div>
+                    <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第二弹-调整坐标轴</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Games/">Games</a>
+                        <a class="has-link-grey -link" href="/categories/Python/">Python</a> / <a class="has-link-grey -link" href="/categories/Python/matplotlib/">matplotlib</a>
                     </p>
                 </div>
             </div>
@@ -763,12 +806,34 @@
         </li>
         
         <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
             <a class="level is-marginless" href="/archives/2019/08/">
                 <span class="level-start">
                     <span class="level-item">八月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -813,6 +878,17 @@
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -941,6 +1017,13 @@
             <div class="field is-grouped is-grouped-multiline">
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/AMD/">
+                        <span class="tag">AMD</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/Agenda/">
                         <span class="tag">Agenda</span>
                         <span class="tag is-grey">1</span>
@@ -955,8 +1038,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Archlinux/">
-                        <span class="tag">Archlinux</span>
+                    <a class="tags has-addons" href="/tags/Brightness/">
+                        <span class="tag">Brightness</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -964,6 +1047,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Cantonese/">
                         <span class="tag">Cantonese</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DWM/">
+                        <span class="tag">DWM</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -997,9 +1087,16 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/HiDPI/">
+                        <span class="tag">HiDPI</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/Linux/">
                         <span class="tag">Linux</span>
-                        <span class="tag is-grey">6</span>
+                        <span class="tag is-grey">10</span>
                     </a>
                 </div>
                 
@@ -1018,9 +1115,16 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/PIL/">
+                        <span class="tag">PIL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/Python/">
                         <span class="tag">Python</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1053,6 +1157,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/fcitx/">
+                        <span class="tag">fcitx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/hexo/">
                         <span class="tag">hexo</span>
                         <span class="tag is-grey">1</span>
@@ -1067,6 +1178,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/matplotlib/">
+                        <span class="tag">matplotlib</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/mu4e/">
                         <span class="tag">mu4e</span>
                         <span class="tag is-grey">1</span>
@@ -1074,8 +1192,50 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/numpy/">
+                        <span class="tag">numpy</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/planche/">
                         <span class="tag">planche</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/plot/">
+                        <span class="tag">plot</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
+                        <span class="tag">图像处理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/">
+                        <span class="tag">粒子羣優化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/">
+                        <span class="tag">線性代數</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1180,18 +1340,18 @@
         
         <article class="media">
             
-            <a href="/2019/08/09/Construct-Dwarf-Fortress-Lazy-Newbee-Package-in-ArchLinux/" class="media-left">
+            <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Construct Dwarf Fortress Lazy Newbee Package in ArchLinux">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第二弹-调整坐标轴">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-09T05:36:01.000Z">2019-08-09</time></div>
-                    <a href="/2019/08/09/Construct-Dwarf-Fortress-Lazy-Newbee-Package-in-ArchLinux/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Construct Dwarf Fortress Lazy Newbee Package in ArchLinux</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T06:57:59.000Z">2019-12-06</time></div>
+                    <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第二弹-调整坐标轴</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Games/">Games</a>
+                        <a class="has-link-grey -link" href="/categories/Python/">Python</a> / <a class="has-link-grey -link" href="/categories/Python/matplotlib/">matplotlib</a>
                     </p>
                 </div>
             </div>
@@ -1231,12 +1391,34 @@
         </li>
         
         <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
             <a class="level is-marginless" href="/archives/2019/08/">
                 <span class="level-start">
                     <span class="level-item">八月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1281,6 +1463,17 @@
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -1409,6 +1602,13 @@
             <div class="field is-grouped is-grouped-multiline">
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/AMD/">
+                        <span class="tag">AMD</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/Agenda/">
                         <span class="tag">Agenda</span>
                         <span class="tag is-grey">1</span>
@@ -1423,8 +1623,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Archlinux/">
-                        <span class="tag">Archlinux</span>
+                    <a class="tags has-addons" href="/tags/Brightness/">
+                        <span class="tag">Brightness</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1432,6 +1632,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Cantonese/">
                         <span class="tag">Cantonese</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DWM/">
+                        <span class="tag">DWM</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1465,9 +1672,16 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/HiDPI/">
+                        <span class="tag">HiDPI</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/Linux/">
                         <span class="tag">Linux</span>
-                        <span class="tag is-grey">6</span>
+                        <span class="tag is-grey">10</span>
                     </a>
                 </div>
                 
@@ -1486,9 +1700,16 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/PIL/">
+                        <span class="tag">PIL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/Python/">
                         <span class="tag">Python</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1521,6 +1742,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/fcitx/">
+                        <span class="tag">fcitx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/hexo/">
                         <span class="tag">hexo</span>
                         <span class="tag is-grey">1</span>
@@ -1535,6 +1763,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/matplotlib/">
+                        <span class="tag">matplotlib</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/mu4e/">
                         <span class="tag">mu4e</span>
                         <span class="tag is-grey">1</span>
@@ -1542,8 +1777,50 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/numpy/">
+                        <span class="tag">numpy</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/planche/">
                         <span class="tag">planche</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/plot/">
+                        <span class="tag">plot</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
+                        <span class="tag">图像处理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/">
+                        <span class="tag">粒子羣優化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/">
+                        <span class="tag">線性代數</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
