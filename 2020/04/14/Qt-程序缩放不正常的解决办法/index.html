@@ -19,7 +19,7 @@
 <meta property="og:description" content="最近在装了一次 KDE Plasma 桌面环境后，我的 DWM 中的缩放就变得不正常了。GTK 程序 都没有问题，但是 Qt 程序整个界面被放得非常大，一点都不精致了看着好难受。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2020-04-14T13:21:09.143Z">
+<meta property="og:updated_time" content="2020-04-14T13:23:39.649Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
 
@@ -145,7 +145,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 301 个字)
+                    2 分钟 读完 (大约 311 个字)
                 </span>
                 
                 
@@ -174,11 +174,18 @@
 <p>
 我在系统中只在 <code>~/.Xresources</code> 文件中设置了 <code>Xft.dpi: 144</code> ，其它地方都没有关于 DPI
 或者是缩放相关的设置，一定是 KDE 把我的设置弄脏了。经过 Archlinux-CN TG 群大佬的
-提点以及搜索，终于找到了解决办法。在 <code>~/.xprofile</code> 文件中设置环境变量 <code>export
-QT_AUTO_SCREEN_SCALE_FACTOR=0</code> 禁用 Qt 的自动缩放即可。不过话说回来，qt5ct 竟然显
-示都正常，难道 qt5ct 不是用 Qt 写的？另外，我的 Archlinux 中本来并没有
-<code>QT_AUTO_SCREEN_SCALE_FACTOR</code> 这个环境变量存在，应该还是 KDE 中的某个配置文件还存在
-在我系统的某个角落，不过我是真的找不到了，只能先这样勉强用着这样子。
+提点以及搜索，终于找到了解决办法。在 <code>~/.xprofile</code> 文件中设置环境变量
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span class="linenr">1 </span><span style="font-weight: bold;">export</span> <span style="font-weight: bold; font-style: italic;">QT_AUTO_SCREEN_SCALE_FACTOR</span>=0
+</pre>
+</div>
+
+<p>
+用此变量禁用掉 Qt 的自动缩放即可。不过话说回来，qt5ct 竟然显示都正常，难道 qt5ct
+不是用 Qt 写的？另外，我的 Archlinux 中本来并没有 <code>QT_AUTO_SCREEN_SCALE_FACTOR</code> 这
+个环境变量存在，应该还是 KDE 中的某个配置文件还存在在我系统的某个角落，不过我是
+真的找不到了，只能先这样勉强用着这样子。
 </p>
 </div>
 
