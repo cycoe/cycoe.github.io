@@ -174,25 +174,25 @@
 
 <a id="more"></a>
 
-<div id="outline-container-org03a5ed4" class="outline-2">
-<h2 id="org03a5ed4">邮件同步</h2>
-<div class="outline-text-2" id="text-org03a5ed4">
+<div id="outline-container-org7bdf147" class="outline-2">
+<h2 id="org7bdf147">邮件同步</h2>
+<div class="outline-text-2" id="text-org7bdf147">
 <p>
 查看其他的博客，发现同步博客最常用的协议是 IMAP。Linux 下支持 IMAP 协议并且下载
 下来的目录结构是 MailDir 结构的工具主要有两个，offlineimap 和 isync。
 </p>
 </div>
-<div id="outline-container-org153c59e" class="outline-3">
-<h3 id="org153c59e">offlineimap 配置</h3>
-<div class="outline-text-3" id="text-org153c59e">
+<div id="outline-container-orgd3b4739" class="outline-3">
+<h3 id="orgd3b4739">offlineimap 配置</h3>
+<div class="outline-text-3" id="text-orgd3b4739">
 <p>
 offlineimap 是一个由 Python 写成的 IMAP 同步工具，主要的缺点是依赖 Python2 的库，
 并且同步速度不如 isync，因此仅作记录。
 </p>
 </div>
-<div id="outline-container-orgba19ba5" class="outline-4">
-<h4 id="orgba19ba5">安装</h4>
-<div class="outline-text-4" id="text-orgba19ba5">
+<div id="outline-container-org14eef26" class="outline-4">
+<h4 id="org14eef26">安装</h4>
+<div class="outline-text-4" id="text-org14eef26">
 <p>
 在 Archlinux 中，可以直接从 community 仓库中安装。
 </p>
@@ -202,9 +202,9 @@ offlineimap 是一个由 Python 写成的 IMAP 同步工具，主要的缺点是
 </div>
 </div>
 </div>
-<div id="outline-container-org4aa7cab" class="outline-4">
-<h4 id="org4aa7cab">配置</h4>
-<div class="outline-text-4" id="text-org4aa7cab">
+<div id="outline-container-orge3786d6" class="outline-4">
+<h4 id="orge3786d6">配置</h4>
+<div class="outline-text-4" id="text-orge3786d6">
 <p>
 安装完成，要进行配置，需要创建一个 ~/.offlineimaprc 文件进行配置。详细的配置过程如下： 
 </p>
@@ -264,17 +264,17 @@ offlineimap 是一个由 Python 写成的 IMAP 同步工具，主要的缺点是
 </div>
 </div>
 </div>
-<div id="outline-container-org0320443" class="outline-3">
-<h3 id="org0320443">isync 配置</h3>
-<div class="outline-text-3" id="text-org0320443">
+<div id="outline-container-org126c95d" class="outline-3">
+<h3 id="org126c95d">isync 配置</h3>
+<div class="outline-text-3" id="text-org126c95d">
 <p>
 isync 是一个由 C++ 写成的 IMAP 同步工具，经测试同步速度要比 offlineimap 更快，但
 是同步出来的邮件数量比 offlineimap 更多不知道是怎么回事，目前主要使用这个。
 </p>
 </div>
-<div id="outline-container-org1365ff8" class="outline-4">
-<h4 id="org1365ff8">安装</h4>
-<div class="outline-text-4" id="text-org1365ff8">
+<div id="outline-container-org0b2918c" class="outline-4">
+<h4 id="org0b2918c">安装</h4>
+<div class="outline-text-4" id="text-org0b2918c">
 <p>
 在 Archlinux 中，可以直接从 community 仓库中安装。
 </p>
@@ -284,9 +284,9 @@ isync 是一个由 C++ 写成的 IMAP 同步工具，经测试同步速度要比
 </div>
 </div>
 </div>
-<div id="outline-container-org8725d4e" class="outline-4">
-<h4 id="org8725d4e">配置</h4>
-<div class="outline-text-4" id="text-org8725d4e">
+<div id="outline-container-org9980c1f" class="outline-4">
+<h4 id="org9980c1f">配置</h4>
+<div class="outline-text-4" id="text-org9980c1f">
 <p>
 isync 的配置方式与 offlineimap 类似，将如下配置放在 '~/.mbsyncrc' 中，并运行
 `mbsync Netease` 即可更新 Netease 频道，mbsync 以频道的概念管理多个邮箱，可以通
@@ -370,9 +370,9 @@ isync 的配置方式与 offlineimap 类似，将如下配置放在 '~/.mbsyncrc
 </div>
 </div>
 </div>
-<div id="outline-container-org0390b07" class="outline-3">
-<h3 id="org0390b07">Unsafe login</h3>
-<div class="outline-text-3" id="text-org0390b07">
+<div id="outline-container-org1a5657f" class="outline-3">
+<h3 id="org1a5657f">Unsafe login</h3>
+<div class="outline-text-3" id="text-org1a5657f">
 <p>
 使用第三方 IMAP 服务同步 163 邮箱时，会提示 Unsafe login 错误，可以通过 <a href="http://config.mail.163.com/settings/imap/index.jsp?uid=xxxxxx@163.com" target="_blank" rel="noopener">网易邮箱
 设置</a> 解决。
@@ -381,13 +381,13 @@ isync 的配置方式与 offlineimap 类似，将如下配置放在 '~/.mbsyncrc
 </div>
 </div>
 
-<div id="outline-container-org69d4101" class="outline-2">
-<h2 id="org69d4101">mu 邮件管理器</h2>
-<div class="outline-text-2" id="text-org69d4101">
+<div id="outline-container-orgd3d059e" class="outline-2">
+<h2 id="orgd3d059e">mu 邮件管理器</h2>
+<div class="outline-text-2" id="text-orgd3d059e">
 </div>
-<div id="outline-container-org1be3e88" class="outline-3">
-<h3 id="org1be3e88">安装</h3>
-<div class="outline-text-3" id="text-org1be3e88">
+<div id="outline-container-org57dcff5" class="outline-3">
+<h3 id="org57dcff5">安装</h3>
+<div class="outline-text-3" id="text-org57dcff5">
 <div class="org-src-container">
 <pre class="src src-bash"><span class="linenr">1 </span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#20811;&#38534; mu &#20179;&#24211;</span>
 <span class="linenr">2 </span>git clone git://github.com/djcb/mu.git
@@ -401,9 +401,9 @@ isync 的配置方式与 offlineimap 类似，将如下配置放在 '~/.mbsyncrc
 </div>
 </div>
 </div>
-<div id="outline-container-org832ab3b" class="outline-3">
-<h3 id="org832ab3b">配置 mu</h3>
-<div class="outline-text-3" id="text-org832ab3b">
+<div id="outline-container-org9213c6f" class="outline-3">
+<h3 id="org9213c6f">配置 mu</h3>
+<div class="outline-text-3" id="text-org9213c6f">
 <div class="org-src-container">
 <pre class="src src-bash"><span class="linenr">1 </span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#21021;&#22987;&#21270; mu &#30417;&#27979;&#30340;&#37038;&#31665;&#25991;&#20214;&#22841;</span>
 <span class="linenr">2 </span>mu init -m /data/cycoe/Documents/mail/
@@ -414,9 +414,9 @@ isync 的配置方式与 offlineimap 类似，将如下配置放在 '~/.mbsyncrc
 </div>
 </div>
 </div>
-<div id="outline-container-orgb85d060" class="outline-2">
-<h2 id="orgb85d060">mu4e 多账户设置</h2>
-<div class="outline-text-2" id="text-orgb85d060">
+<div id="outline-container-org4cc06ed" class="outline-2">
+<h2 id="org4cc06ed">mu4e 多账户设置</h2>
+<div class="outline-text-2" id="text-org4cc06ed">
 <p>
 mu4e (mu for emacs) 是 mu 在 emacs 中实现的一个邮件管理模块。后端调用 mu 进行邮
 件的检索和管理。在 <code>~/.config/emacs/lisp/</code> 目录下建立 <code>init-mu4e.el</code> 文件，并加入如
@@ -594,9 +594,9 @@ mu4e (mu for emacs) 是 mu 在 emacs 中实现的一个邮件管理模块。后�
 </div>
 </div>
 </div>
-<div id="outline-container-orga8d4563" class="outline-2">
-<h2 id="orga8d4563">配置 smtp 发送邮件</h2>
-<div class="outline-text-2" id="text-orga8d4563">
+<div id="outline-container-orgd3f35eb" class="outline-2">
+<h2 id="orgd3f35eb">配置 smtp 发送邮件</h2>
+<div class="outline-text-2" id="text-orgd3f35eb">
 <p>
 emcas 可以使用 smtpmail 发送邮件，会自动读取 <code>~/.authinfo</code> 文件中的账户和密码，因
 此需要在该文件中配置 smtp 相关信息。
@@ -608,9 +608,9 @@ emcas 可以使用 smtpmail 发送邮件，会自动读取 <code>~/.authinfo</co
 </div>
 </div>
 </div>
-<div id="outline-container-org723cc87" class="outline-2">
-<h2 id="org723cc87">使用 Org mode 编辑新邮件</h2>
-<div class="outline-text-2" id="text-org723cc87">
+<div id="outline-container-org922c32e" class="outline-2">
+<h2 id="org922c32e">使用 Org mode 编辑新邮件</h2>
+<div class="outline-text-2" id="text-org922c32e">
 <p>
 使用 Emacs 管理邮件的一大优势就是可以借助强大的 Org-mode 来写邮件，并自动导出为
 HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 plain 部分和 HTML 部分
@@ -641,9 +641,9 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
 </div>
 </div>
 </div>
-<div id="outline-container-org59c883a" class="outline-2">
-<h2 id="org59c883a">将邮件加入 TODO 列表中</h2>
-<div class="outline-text-2" id="text-org59c883a">
+<div id="outline-container-org58f1924" class="outline-2">
+<h2 id="org58f1924">将邮件加入 TODO 列表中</h2>
+<div class="outline-text-2" id="text-org58f1924">
 <p>
 如果想要将某封邮件加入代办事项用于记录，可以将如下代码加入 <code>init-mu4e.el</code> 中
 </p>
@@ -814,7 +814,7 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            34
+                            35
                         </p>
                     </a>
                 </div>
@@ -962,7 +962,7 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
                 <span class="level-item">Linux</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">13</span>
+                <span class="level-item tag">14</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Linux/Emacs/">
@@ -1070,6 +1070,25 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
         
         <article class="media">
             
+            <a href="/2020/04/14/Qt-%E7%A8%8B%E5%BA%8F%E7%BC%A9%E6%94%BE%E4%B8%8D%E6%AD%A3%E5%B8%B8%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Qt 程序缩放不正常的解决办法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-14T13:04:00.000Z">2020-04-14</time></div>
+                    <a href="/2020/04/14/Qt-%E7%A8%8B%E5%BA%8F%E7%BC%A9%E6%94%BE%E4%B8%8D%E6%AD%A3%E5%B8%B8%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Qt 程序缩放不正常的解决办法</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/03/30/%E5%88%A9%E7%94%A8-Python-%E5%AE%8C%E6%88%90%E8%87%AA%E5%8A%A8%E5%8C%96%E7%BE%A4%E5%8F%91%E9%82%AE%E4%BB%B6/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="利用 Python 完成自动化群发邮件">
@@ -1144,25 +1163,6 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第二弹-调整坐标轴">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T06:57:59.000Z">2019-12-06</time></div>
-                    <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第二弹-调整坐标轴</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Python/">Python</a> / <a class="has-link-grey -link" href="/categories/Python/matplotlib/">matplotlib</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -1173,6 +1173,17 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/03/">
@@ -1487,7 +1498,7 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Linux/">
                         <span class="tag">Linux</span>
-                        <span class="tag is-grey">10</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1655,6 +1666,25 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
         
         <article class="media">
             
+            <a href="/2020/04/14/Qt-%E7%A8%8B%E5%BA%8F%E7%BC%A9%E6%94%BE%E4%B8%8D%E6%AD%A3%E5%B8%B8%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Qt 程序缩放不正常的解决办法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-14T13:04:00.000Z">2020-04-14</time></div>
+                    <a href="/2020/04/14/Qt-%E7%A8%8B%E5%BA%8F%E7%BC%A9%E6%94%BE%E4%B8%8D%E6%AD%A3%E5%B8%B8%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Qt 程序缩放不正常的解决办法</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/03/30/%E5%88%A9%E7%94%A8-Python-%E5%AE%8C%E6%88%90%E8%87%AA%E5%8A%A8%E5%8C%96%E7%BE%A4%E5%8F%91%E9%82%AE%E4%BB%B6/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="利用 Python 完成自动化群发邮件">
@@ -1729,25 +1759,6 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第二弹-调整坐标轴">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T06:57:59.000Z">2019-12-06</time></div>
-                    <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第二弹-调整坐标轴</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Python/">Python</a> / <a class="has-link-grey -link" href="/categories/Python/matplotlib/">matplotlib</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1758,6 +1769,17 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/03/">
@@ -2072,7 +2094,7 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Linux/">
                         <span class="tag">Linux</span>
-                        <span class="tag is-grey">10</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 

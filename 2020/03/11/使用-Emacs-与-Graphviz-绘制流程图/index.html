@@ -19,7 +19,7 @@
 <meta property="og:description" content="前几天在写 使用 Emacs 与 Org mode 进行 GTD 管理 博客时，用到了 Graphviz 绘制流程 图。正巧之前在 LaTeX 中也用它画过一些图，但都没有系统地入过门，那就趁最近学习一 下吧。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2020-04-01T09:22:39.498Z">
+<meta property="og:updated_time" content="2020-04-03T11:16:51.099Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
 
@@ -184,13 +184,13 @@
 义上的函数图像那种图，而是数据结构中的图，强调的关系。
 </p>
 
-<div id="outline-container-orgbc9094c" class="outline-2">
-<h2 id="orgbc9094c">安装</h2>
-<div class="outline-text-2" id="text-orgbc9094c">
+<div id="outline-container-org138d67b" class="outline-2">
+<h2 id="org138d67b">安装</h2>
+<div class="outline-text-2" id="text-org138d67b">
 </div>
-<div id="outline-container-org915003b" class="outline-3">
-<h3 id="org915003b">Graphviz</h3>
-<div class="outline-text-3" id="text-org915003b">
+<div id="outline-container-org30a7ffd" class="outline-3">
+<h3 id="org30a7ffd">Graphviz</h3>
+<div class="outline-text-3" id="text-org30a7ffd">
 <p>
 Graphviz 本质上是一个命令行工具，在 Archlinux 上只需要通过 <code>sudo pacman -S
 graphviz</code> 安装即可，其他系统类似。
@@ -198,9 +198,9 @@ graphviz</code> 安装即可，其他系统类似。
 </div>
 </div>
 
-<div id="outline-container-org7ef5f9e" class="outline-3">
-<h3 id="org7ef5f9e">graphviz-dot-mode</h3>
-<div class="outline-text-3" id="text-org7ef5f9e">
+<div id="outline-container-org52e6d5c" class="outline-3">
+<h3 id="org52e6d5c">graphviz-dot-mode</h3>
+<div class="outline-text-3" id="text-org52e6d5c">
 <p>
 Graphviz 在 Emacs 中的集成是通过 <code>graphviz-dot-mode</code> 这个包来实现的，只需要 <code>&lt;M-x&gt;
 package-install graphviz-dot-mode &lt;RET&gt;</code> 即可。
@@ -221,10 +221,9 @@ package-install graphviz-dot-mode &lt;RET&gt;</code> 即可。
 </div>
 </div>
 </div>
-
-<div id="outline-container-org3441f5e" class="outline-2">
-<h2 id="org3441f5e">布局器</h2>
-<div class="outline-text-2" id="text-org3441f5e">
+<div id="outline-container-org23e37a7" class="outline-2">
+<h2 id="org23e37a7">布局器</h2>
+<div class="outline-text-2" id="text-org23e37a7">
 <p>
 Graphviz 中包含了众多的布局器：
 </p>
@@ -238,9 +237,9 @@ Graphviz 中包含了众多的布局器：
 </div>
 </div>
 
-<div id="outline-container-org302f224" class="outline-2">
-<h2 id="org302f224">基本使用</h2>
-<div class="outline-text-2" id="text-org302f224">
+<div id="outline-container-orgd84f309" class="outline-2">
+<h2 id="orgd84f309">基本使用</h2>
+<div class="outline-text-2" id="text-orgd84f309">
 <p>
 Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </p>
@@ -300,9 +299,9 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </div>
 </div>
 
-<div id="outline-container-orgab0ea04" class="outline-2">
-<h2 id="orgab0ea04">绘制属性</h2>
-<div class="outline-text-2" id="text-orgab0ea04">
+<div id="outline-container-org97e9063" class="outline-2">
+<h2 id="org97e9063">绘制属性</h2>
+<div class="outline-text-2" id="text-org97e9063">
 <p>
 一个图中可能有非常多的节点与边，如果每次都需要声明一个节点的属性会非常麻烦。类似
 于面向对象编程的思想，我们可以用 <code>node</code> 和 <code>edge</code> 类标签来设置全局的属性，也可以用对
@@ -336,7 +335,7 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </div>
 
 <p>
-<a id="org9160244"></a>
+<a id="orgdf4fbc6"></a>
 <img src="property.png">
 </p>
 
@@ -390,16 +389,16 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </ul>
 </div>
 
-<div id="outline-container-orge98d2aa" class="outline-3">
-<h3 id="orge98d2aa">节点</h3>
-<div class="outline-text-3" id="text-orge98d2aa">
+<div id="outline-container-org9cfa1be" class="outline-3">
+<h3 id="org9cfa1be">节点</h3>
+<div class="outline-text-3" id="text-org9cfa1be">
 <p>
 节点的默认属性为 shape = ellipse, width = .75, height = 0.5 并且用节点标识符作为
 节点的显示文字。
 </p>
 
 <p>
-如 <a href="#org9160244">图 1</a> 中所示，声明两个节点 <i>小蓝</i> 和 <i>小红/，/小蓝</i> 或 <i>小红</i> 就表示这个节点的节点标
+如 <a href="#orgdf4fbc6">图 1</a> 中所示，声明两个节点 <i>小蓝</i> 和 <i>小红/，/小蓝</i> 或 <i>小红</i> 就表示这个节点的节点标
 识符，后面紧跟的是该节点的属性列表；另一种用法为 节点标识符:节点部分:方向[属性列
 表] <code>小蓝:body[style=filled color=lightblue]</code>, 这个为单一节点声明的方式。
 </p>
@@ -426,9 +425,9 @@ source 或 min 的子图</li>
 </div>
 </div>
 
-<div id="outline-container-orgfaa518a" class="outline-3">
-<h3 id="orgfaa518a">边</h3>
-<div class="outline-text-3" id="text-orgfaa518a">
+<div id="outline-container-org8e8164a" class="outline-3">
+<h3 id="org8e8164a">边</h3>
+<div class="outline-text-3" id="text-org8e8164a">
 <p>
 有向图中的的边用 <code>-&gt;</code> 表示，无向图用 <code>--</code> 表示。
 </p>
@@ -604,9 +603,9 @@ ortho, 正交折线
 </div>
 </div>
 
-<div id="outline-container-org27420f2" class="outline-3">
-<h3 id="org27420f2">边的方向</h3>
-<div class="outline-text-3" id="text-org27420f2">
+<div id="outline-container-orgafb067b" class="outline-3">
+<h3 id="orgafb067b">边的方向</h3>
+<div class="outline-text-3" id="text-orgafb067b">
 <p>
 <b>示例</b> 声明多部分节点，以及对各部分进行单独设置
 </p>
@@ -648,9 +647,9 @@ ortho, 正交折线
 </div>
 </div>
 
-<div id="outline-container-orgd76b1b9" class="outline-2">
-<h2 id="orgd76b1b9">子图</h2>
-<div class="outline-text-2" id="text-orgd76b1b9">
+<div id="outline-container-orgb0fa32d" class="outline-2">
+<h2 id="orgb0fa32d">子图</h2>
+<div class="outline-text-2" id="text-orgb0fa32d">
 <p>
 <b>subgraph</b> 必须配合 <b>cluster</b> 一起使用，用法为 =subgraph cluster* {} 。
 </p>
@@ -847,7 +846,7 @@ ortho, 正交折线
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            34
+                            35
                         </p>
                     </a>
                 </div>
@@ -995,7 +994,7 @@ ortho, 正交折线
                 <span class="level-item">Linux</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">13</span>
+                <span class="level-item tag">14</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Linux/Emacs/">
@@ -1103,6 +1102,25 @@ ortho, 正交折线
         
         <article class="media">
             
+            <a href="/2020/04/14/Qt-%E7%A8%8B%E5%BA%8F%E7%BC%A9%E6%94%BE%E4%B8%8D%E6%AD%A3%E5%B8%B8%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Qt 程序缩放不正常的解决办法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-14T13:04:00.000Z">2020-04-14</time></div>
+                    <a href="/2020/04/14/Qt-%E7%A8%8B%E5%BA%8F%E7%BC%A9%E6%94%BE%E4%B8%8D%E6%AD%A3%E5%B8%B8%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Qt 程序缩放不正常的解决办法</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/03/30/%E5%88%A9%E7%94%A8-Python-%E5%AE%8C%E6%88%90%E8%87%AA%E5%8A%A8%E5%8C%96%E7%BE%A4%E5%8F%91%E9%82%AE%E4%BB%B6/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="利用 Python 完成自动化群发邮件">
@@ -1177,25 +1195,6 @@ ortho, 正交折线
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第二弹-调整坐标轴">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T06:57:59.000Z">2019-12-06</time></div>
-                    <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第二弹-调整坐标轴</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Python/">Python</a> / <a class="has-link-grey -link" href="/categories/Python/matplotlib/">matplotlib</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -1206,6 +1205,17 @@ ortho, 正交折线
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/03/">
@@ -1520,7 +1530,7 @@ ortho, 正交折线
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Linux/">
                         <span class="tag">Linux</span>
-                        <span class="tag is-grey">10</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1688,6 +1698,25 @@ ortho, 正交折线
         
         <article class="media">
             
+            <a href="/2020/04/14/Qt-%E7%A8%8B%E5%BA%8F%E7%BC%A9%E6%94%BE%E4%B8%8D%E6%AD%A3%E5%B8%B8%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Qt 程序缩放不正常的解决办法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-14T13:04:00.000Z">2020-04-14</time></div>
+                    <a href="/2020/04/14/Qt-%E7%A8%8B%E5%BA%8F%E7%BC%A9%E6%94%BE%E4%B8%8D%E6%AD%A3%E5%B8%B8%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Qt 程序缩放不正常的解决办法</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/03/30/%E5%88%A9%E7%94%A8-Python-%E5%AE%8C%E6%88%90%E8%87%AA%E5%8A%A8%E5%8C%96%E7%BE%A4%E5%8F%91%E9%82%AE%E4%BB%B6/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="利用 Python 完成自动化群发邮件">
@@ -1762,25 +1791,6 @@ ortho, 正交折线
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第二弹-调整坐标轴">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T06:57:59.000Z">2019-12-06</time></div>
-                    <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第二弹-调整坐标轴</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Python/">Python</a> / <a class="has-link-grey -link" href="/categories/Python/matplotlib/">matplotlib</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1791,6 +1801,17 @@ ortho, 正交折线
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/03/">
@@ -2105,7 +2126,7 @@ ortho, 正交折线
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Linux/">
                         <span class="tag">Linux</span>
-                        <span class="tag is-grey">10</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 

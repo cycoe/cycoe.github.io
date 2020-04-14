@@ -165,11 +165,16 @@
         <div class="content">
             <p>閒來無事，打算搭建個人主頁。查閱了各種資料，發現目前最省錢省力的方法就是在 GitHub Pages 上利用 jekyll 靜態網頁生成器搭建。<br>對於 Web 開發小白來說，自己寫網頁代碼不太現實。 好在GitHub 上有許多其他大神製作好的 jekyll 模板，直接 fork 過來修改一下就可以使用，其餘的精力都可以用在文章內容本身上。</p>
 <a id="more"></a>
+
 <h2 id="搭建步驟"><a href="#搭建步驟" class="headerlink" title="搭建步驟"></a>搭建步驟</h2><ol>
-<li>在 GitHub 上找到自己喜歡的 jekyll 模板， fork 到自己的倉庫下，然後點擊 Setting 修改倉庫名稱爲 <code>username.github.io</code></li>
-<li>將 fork 後的項目 clone 至本地</li>
-<li>打開 <code>_config.yml</code> 文件修改其中的信息，包括網站名稱、用戶信息等</li>
-<li>將 html 或 MarkDown 格式的文章和博客添加到 <code>_posts</code> 文件夾</li>
+<li><p>在 GitHub 上找到自己喜歡的 jekyll 模板， fork 到自己的倉庫下，然後點擊 Setting 修改倉庫名稱爲 <code>username.github.io</code></p>
+</li>
+<li><p>將 fork 後的項目 clone 至本地</p>
+</li>
+<li><p>打開 <code>_config.yml</code> 文件修改其中的信息，包括網站名稱、用戶信息等</p>
+</li>
+<li><p>將 html 或 MarkDown 格式的文章和博客添加到 <code>_posts</code> 文件夾</p>
+</li>
 <li><p>使用以下命令即可提交更新並推送更新至遠端倉庫</p>
  <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">git add .</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">git commit -am <span class="hljs-string">"post update"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">git push</span></pre></td></tr></table></figure>
 </li>
@@ -179,8 +184,7 @@
 <h2 id="注意事項"><a href="#注意事項" class="headerlink" title="注意事項"></a>注意事項</h2><pre><code>comments_provider: duoshuo
 duoshuo_username: cycoe
 disqus_username: cycoe
-lazy_load_duoshuo: true
-</code></pre><p><strong>此處的usrname一定要填自己申請的賬號名</strong></p>
+lazy_load_duoshuo: true</code></pre><p><strong>此處的usrname一定要填自己申請的賬號名</strong></p>
 <h2 id="進階配置"><a href="#進階配置" class="headerlink" title="進階配置"></a>進階配置</h2><ol>
 <li>申請域名</li>
 </ol>
@@ -320,7 +324,7 @@ lazy_load_duoshuo: true
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            34
+                            35
                         </p>
                     </a>
                 </div>
@@ -468,7 +472,7 @@ lazy_load_duoshuo: true
                 <span class="level-item">Linux</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">13</span>
+                <span class="level-item tag">14</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Linux/Emacs/">
@@ -576,6 +580,25 @@ lazy_load_duoshuo: true
         
         <article class="media">
             
+            <a href="/2020/04/14/Qt-%E7%A8%8B%E5%BA%8F%E7%BC%A9%E6%94%BE%E4%B8%8D%E6%AD%A3%E5%B8%B8%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Qt 程序缩放不正常的解决办法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-14T13:04:00.000Z">2020-04-14</time></div>
+                    <a href="/2020/04/14/Qt-%E7%A8%8B%E5%BA%8F%E7%BC%A9%E6%94%BE%E4%B8%8D%E6%AD%A3%E5%B8%B8%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Qt 程序缩放不正常的解决办法</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/03/30/%E5%88%A9%E7%94%A8-Python-%E5%AE%8C%E6%88%90%E8%87%AA%E5%8A%A8%E5%8C%96%E7%BE%A4%E5%8F%91%E9%82%AE%E4%BB%B6/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="利用 Python 完成自动化群发邮件">
@@ -650,25 +673,6 @@ lazy_load_duoshuo: true
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第二弹-调整坐标轴">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T06:57:59.000Z">2019-12-06</time></div>
-                    <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第二弹-调整坐标轴</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Python/">Python</a> / <a class="has-link-grey -link" href="/categories/Python/matplotlib/">matplotlib</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -679,6 +683,17 @@ lazy_load_duoshuo: true
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/03/">
@@ -993,7 +1008,7 @@ lazy_load_duoshuo: true
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Linux/">
                         <span class="tag">Linux</span>
-                        <span class="tag is-grey">10</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1161,6 +1176,25 @@ lazy_load_duoshuo: true
         
         <article class="media">
             
+            <a href="/2020/04/14/Qt-%E7%A8%8B%E5%BA%8F%E7%BC%A9%E6%94%BE%E4%B8%8D%E6%AD%A3%E5%B8%B8%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Qt 程序缩放不正常的解决办法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-14T13:04:00.000Z">2020-04-14</time></div>
+                    <a href="/2020/04/14/Qt-%E7%A8%8B%E5%BA%8F%E7%BC%A9%E6%94%BE%E4%B8%8D%E6%AD%A3%E5%B8%B8%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Qt 程序缩放不正常的解决办法</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/03/30/%E5%88%A9%E7%94%A8-Python-%E5%AE%8C%E6%88%90%E8%87%AA%E5%8A%A8%E5%8C%96%E7%BE%A4%E5%8F%91%E9%82%AE%E4%BB%B6/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="利用 Python 完成自动化群发邮件">
@@ -1235,25 +1269,6 @@ lazy_load_duoshuo: true
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用matplotlib进行科学绘图第二弹-调整坐标轴">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T06:57:59.000Z">2019-12-06</time></div>
-                    <a href="/2019/12/06/%E4%BD%BF%E7%94%A8matplotlib%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E8%B0%83%E6%95%B4%E5%9D%90%E6%A0%87%E8%BD%B4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用matplotlib进行科学绘图第二弹-调整坐标轴</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Python/">Python</a> / <a class="has-link-grey -link" href="/categories/Python/matplotlib/">matplotlib</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1264,6 +1279,17 @@ lazy_load_duoshuo: true
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/03/">
@@ -1578,7 +1604,7 @@ lazy_load_duoshuo: true
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Linux/">
                         <span class="tag">Linux</span>
-                        <span class="tag is-grey">10</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
