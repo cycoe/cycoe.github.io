@@ -165,12 +165,17 @@
         <div class="content">
             <p>前几天换了新机器，也算是让贫穷的我第一次体验到了高分屏。13.3 寸的 2K 屏，用默认的缩放比例，字比蚂蚁大不了多少。为了保护视力，我决定将调整屏幕缩放提到最高优先级，摸索一阵后，得到了比较完美的配置方案。</p>
 <a id="more"></a>
+
 <p>在 Linux 中（此处特指 X.org 显示服务器，Wayland 不了解），传统的 X Clients 的缩放由 xrandr 控制，GTK 的 QT 程序的缩放由它们自己的环境变量控制。因此想要完美调整所有界面的缩放比例需要一番摸索。当然，Gnome、KDE 之类的桌面环境除外，桌面环境设置中一般都自带缩放设置。</p>
 <h2 id="降低分辨率"><a href="#降低分辨率" class="headerlink" title="降低分辨率"></a>降低分辨率</h2><p>直接通过 xrandr 降低显示器的分辨率是最简单粗暴的办法，但这样高分屏就相当于废了，不推荐。</p>
 <h2 id="调整-Scale"><a href="#调整-Scale" class="headerlink" title="调整 Scale"></a>调整 Scale</h2><p>通过 xrandr 调整显示界面的 Scale，这种方法相当于用放大镜将屏幕上的内容放大，会使内容严重模糊，同样不推荐。</p>
-<h2 id="通过-xrandr-设置-DPI"><a href="#通过-xrandr-设置-DPI" class="headerlink" title="通过 xrandr 设置 DPI"></a>通过 xrandr 设置 DPI</h2><p>通过设置 DPI，其实就是告诉程序我的屏幕的细腻程度如何。如设置 DPI 为 144，就是告诉程序我的屏幕一英寸长度上有 144 个像素点。但此处也有技巧，第一种方法是直接使用 xrandr 设置 DPI，在 <code>.xinitrc</code> 或 <code>.xprofile</code> 中加入 <code>xrandr --dpi 144</code>，使得每次登录 X Server 时都会自动设置 DPI。但此方法对 GTK 程序无效，需要继续在文件中加入<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">export</span> GDK_SCALE=2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">export</span> GDK_DPI_SCALE=0.5</span></pre></td></tr></table></figure></p>
+<h2 id="通过-xrandr-设置-DPI"><a href="#通过-xrandr-设置-DPI" class="headerlink" title="通过 xrandr 设置 DPI"></a>通过 xrandr 设置 DPI</h2><p>通过设置 DPI，其实就是告诉程序我的屏幕的细腻程度如何。如设置 DPI 为 144，就是告诉程序我的屏幕一英寸长度上有 144 个像素点。但此处也有技巧，第一种方法是直接使用 xrandr 设置 DPI，在 <code>.xinitrc</code> 或 <code>.xprofile</code> 中加入 <code>xrandr --dpi 144</code>，使得每次登录 X Server 时都会自动设置 DPI。但此方法对 GTK 程序无效，需要继续在文件中加入</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">export</span> GDK_SCALE=2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">export</span> GDK_DPI_SCALE=0.5</span></pre></td></tr></table></figure>
+
 <p>使得 GTK 程序支持缩放，但你应该也注意到了此处的两个问题。一是此处仍然使用的是缩放而非 DPI，会导致 GTK 程序界面模糊；二是 <code>GDK_SCALE</code> 只支持整数倍缩放。</p>
-<h2 id="通过-xft-设置-DPI"><a href="#通过-xft-设置-DPI" class="headerlink" title="通过 xft 设置 DPI"></a>通过 xft 设置 DPI</h2><p>这是我目前找到的完美的方法，还未遇到什么问题。在 <code>.Xresources</code> 文件中加入<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Xft.dpi: 144</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Xft.autohint: 0</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">Xft.lcdfilter:  lcddefault</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">Xft.hintstyle:  hintfull</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">Xft.hinting: 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">Xft.antialias: 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">Xft.rgba: rgb</span></pre></td></tr></table></figure></p>
+<h2 id="通过-xft-设置-DPI"><a href="#通过-xft-设置-DPI" class="headerlink" title="通过 xft 设置 DPI"></a>通过 xft 设置 DPI</h2><p>这是我目前找到的完美的方法，还未遇到什么问题。在 <code>.Xresources</code> 文件中加入</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Xft.dpi: 144</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Xft.autohint: 0</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">Xft.lcdfilter:  lcddefault</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">Xft.hintstyle:  hintfull</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">Xft.hinting: 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">Xft.antialias: 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">Xft.rgba: rgb</span></pre></td></tr></table></figure>
+
 <p>并在 <code>.xinitrc</code> 或 <code>.xprofile</code> 中加入 <code>xrdb -merge &quot;.Xresources&quot;</code> 使得每次登录时都会使 <code>.Xresources</code> 生效。<code>xrdb</code> 命令需要首先安装 <code>xorg-xrdb</code> 包。至此，终于拥有了一个比较舒适的 DPI。</p>
 
         </div>
@@ -323,7 +328,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            35
+                            36
                         </p>
                     </a>
                 </div>
@@ -335,7 +340,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            14
+                            15
                         </p>
                     </a>
                 </div>
@@ -347,7 +352,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            32
+                            34
                         </p>
                     </a>
                 </div>
@@ -453,6 +458,14 @@
         <a class="level is-marginless" href="/categories/Games/">
             <span class="level-start">
                 <span class="level-item">Games</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Git/">
+            <span class="level-start">
+                <span class="level-item">Git</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -564,7 +577,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Agenda/" style="font-size: 10px;">Agenda</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/Emacs/" style="font-size: 15px;">Emacs</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Graphviz/" style="font-size: 10px;">Graphviz</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Math/" style="font-size: 12.5px;">Math</a> <a href="/tags/Org/" style="font-size: 10px;">Org</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/Spider/" style="font-size: 10px;">Spider</a> <a href="/tags/Sploit/" style="font-size: 10px;">Sploit</a> <a href="/tags/Statistics/" style="font-size: 10px;">Statistics</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/matplotlib/" style="font-size: 12.5px;">matplotlib</a> <a href="/tags/mu4e/" style="font-size: 10px;">mu4e</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 12.5px;">plot</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
+        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Agenda/" style="font-size: 10px;">Agenda</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/Emacs/" style="font-size: 15px;">Emacs</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Graphviz/" style="font-size: 10px;">Graphviz</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Magit/" style="font-size: 10px;">Magit</a> <a href="/tags/Math/" style="font-size: 12.5px;">Math</a> <a href="/tags/Org/" style="font-size: 10px;">Org</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/Spider/" style="font-size: 10px;">Spider</a> <a href="/tags/Sploit/" style="font-size: 10px;">Sploit</a> <a href="/tags/Statistics/" style="font-size: 10px;">Statistics</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/matplotlib/" style="font-size: 12.5px;">matplotlib</a> <a href="/tags/mu4e/" style="font-size: 10px;">mu4e</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 12.5px;">plot</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
     </div>
 </div>
     
@@ -576,6 +589,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/04/20/Git-%E5%90%88%E5%B9%B6%E5%A4%9A%E6%AC%A1-Commit-%E5%8F%8A%E5%9C%A8-Magit-%E4%B8%AD%E7%9A%84%E6%93%8D%E4%BD%9C/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Git 合并多次 Commit 及在 Magit 中的操作">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-20T12:56:00.000Z">2020-04-20</time></div>
+                    <a href="/2020/04/20/Git-%E5%90%88%E5%B9%B6%E5%A4%9A%E6%AC%A1-Commit-%E5%8F%8A%E5%9C%A8-Magit-%E4%B8%AD%E7%9A%84%E6%93%8D%E4%BD%9C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Git 合并多次 Commit 及在 Magit 中的操作</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Git/">Git</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -653,25 +685,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/02/28/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-mu4e-%E7%AE%A1%E7%90%86%E9%82%AE%E4%BB%B6/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 mu4e 管理邮件">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-28T15:03:00.000Z">2020-02-28</time></div>
-                    <a href="/2020/02/28/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-mu4e-%E7%AE%A1%E7%90%86%E9%82%AE%E4%BB%B6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 mu4e 管理邮件</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -689,7 +702,7 @@
                     <span class="level-item">四月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -979,13 +992,20 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Emacs/">
                         <span class="tag">Emacs</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/GTD/">
                         <span class="tag">GTD</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1008,6 +1028,13 @@
                     <a class="tags has-addons" href="/tags/Linux/">
                         <span class="tag">Linux</span>
                         <span class="tag is-grey">11</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Magit/">
+                        <span class="tag">Magit</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1175,6 +1202,25 @@
         
         <article class="media">
             
+            <a href="/2020/04/20/Git-%E5%90%88%E5%B9%B6%E5%A4%9A%E6%AC%A1-Commit-%E5%8F%8A%E5%9C%A8-Magit-%E4%B8%AD%E7%9A%84%E6%93%8D%E4%BD%9C/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Git 合并多次 Commit 及在 Magit 中的操作">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-20T12:56:00.000Z">2020-04-20</time></div>
+                    <a href="/2020/04/20/Git-%E5%90%88%E5%B9%B6%E5%A4%9A%E6%AC%A1-Commit-%E5%8F%8A%E5%9C%A8-Magit-%E4%B8%AD%E7%9A%84%E6%93%8D%E4%BD%9C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Git 合并多次 Commit 及在 Magit 中的操作</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Git/">Git</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/04/14/Qt-%E7%A8%8B%E5%BA%8F%E7%BC%A9%E6%94%BE%E4%B8%8D%E6%AD%A3%E5%B8%B8%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Qt 程序缩放不正常的解决办法">
@@ -1249,25 +1295,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/02/28/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-mu4e-%E7%AE%A1%E7%90%86%E9%82%AE%E4%BB%B6/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 mu4e 管理邮件">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-28T15:03:00.000Z">2020-02-28</time></div>
-                    <a href="/2020/02/28/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-mu4e-%E7%AE%A1%E7%90%86%E9%82%AE%E4%BB%B6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 mu4e 管理邮件</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1285,7 +1312,7 @@
                     <span class="level-item">四月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1575,13 +1602,20 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Emacs/">
                         <span class="tag">Emacs</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/GTD/">
                         <span class="tag">GTD</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1604,6 +1638,13 @@
                     <a class="tags has-addons" href="/tags/Linux/">
                         <span class="tag">Linux</span>
                         <span class="tag is-grey">11</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Magit/">
+                        <span class="tag">Magit</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

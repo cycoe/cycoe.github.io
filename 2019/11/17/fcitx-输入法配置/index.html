@@ -166,10 +166,16 @@
             <p>fcitx 是 Linux 下最常用的输入法框架之一，另一个是 ibus。这两个框架的关 系，就好像 KDE 与 Gnome 的关系一般。因为在早些年，ibus 是作为 Gnome 的 依赖项被默认安装的，而 fcitx 被认为与 KDE 共同工作的更好。</p>
 <p>fcitx 的安装非常简单，但是想让她在非桌面环境下正常运行，还是需要一番配置的。</p>
 <a id="more"></a>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装 fcitx 只需要安装以下几个包即可<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo pacman -S fcitx fcitx-rime fcitx-gtk3 fcitx-qt5 fcitx-configtool</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># fcitx: fcitx 可执行主程序</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># fcitx-rime: fcitx 中的 rime 输入法实现，可根据喜好换为其他输入法</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># fcitx-gtk3: 使 fcitx 能够在 gtk3 程序中使用</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># fcitx-qt5: 使 fcitx 能够在 qt5 程序中使用</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># fcitx-configtool: fcitx 配置工具界面</span></span></pre></td></tr></table></figure></p>
-<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p>在 <code>.xprofile</code> 文件中加入以下行，使得在 X 启动时，可以自动设置 fcitx 相关的环境变量。<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># export for fcitx</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">export</span> XMODIFIERS=<span class="hljs-string">"@im=fcitx"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">export</span> XIM=fcitx</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">export</span> XIM_PROGRAM=fcitx</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">export</span> GTK_IM_MODULE=fcitx</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">export</span> QT_IM_MODULE=fcitx</span></pre></td></tr></table></figure></p>
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装 fcitx 只需要安装以下几个包即可</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo pacman -S fcitx fcitx-rime fcitx-gtk3 fcitx-qt5 fcitx-configtool</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># fcitx: fcitx 可执行主程序</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># fcitx-rime: fcitx 中的 rime 输入法实现，可根据喜好换为其他输入法</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># fcitx-gtk3: 使 fcitx 能够在 gtk3 程序中使用</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># fcitx-qt5: 使 fcitx 能够在 qt5 程序中使用</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># fcitx-configtool: fcitx 配置工具界面</span></span></pre></td></tr></table></figure>
+
+<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p>在 <code>.xprofile</code> 文件中加入以下行，使得在 X 启动时，可以自动设置 fcitx 相关的环境变量。</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># export for fcitx</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">export</span> XMODIFIERS=<span class="hljs-string">"@im=fcitx"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">export</span> XIM=fcitx</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">export</span> XIM_PROGRAM=fcitx</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">export</span> GTK_IM_MODULE=fcitx</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">export</span> QT_IM_MODULE=fcitx</span></pre></td></tr></table></figure>
+
 <p>如果 fcitx 在 gtk 或者 qt 其中一个图形库的程序中无法使用时，很有可能是相对应的环境变量没有设置，或者没有安装对应图形库的 fcitx 支持。</p>
-<h2 id="fcitx-无法在-Emacs-中使用"><a href="#fcitx-无法在-Emacs-中使用" class="headerlink" title="fcitx 无法在 Emacs 中使用"></a>fcitx 无法在 Emacs 中使用</h2><p>前段时间开始使用 Emacs，但发现 fcitx 在 gtk 和 qt 程序下都没有问题，唯独在 Emacs 下无法使用。在网上搜索了很久找不到答案，最后看到一个看起来不那么靠谱的答案，抱着试一试的心态，没想到竟真的解决了。解决办法就是安装 <code>terminus-font</code>，真的不可思议是什么原理。<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo pacman -S terminus-font</span></pre></td></tr></table></figure></p>
+<h2 id="fcitx-无法在-Emacs-中使用"><a href="#fcitx-无法在-Emacs-中使用" class="headerlink" title="fcitx 无法在 Emacs 中使用"></a>fcitx 无法在 Emacs 中使用</h2><p>前段时间开始使用 Emacs，但发现 fcitx 在 gtk 和 qt 程序下都没有问题，唯独在 Emacs 下无法使用。在网上搜索了很久找不到答案，最后看到一个看起来不那么靠谱的答案，抱着试一试的心态，没想到竟真的解决了。解决办法就是安装 <code>terminus-font</code>，真的不可思议是什么原理。</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo pacman -S terminus-font</span></pre></td></tr></table></figure>
 
         </div>
         
@@ -321,7 +327,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            35
+                            36
                         </p>
                     </a>
                 </div>
@@ -333,7 +339,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            14
+                            15
                         </p>
                     </a>
                 </div>
@@ -345,7 +351,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            32
+                            34
                         </p>
                     </a>
                 </div>
@@ -451,6 +457,14 @@
         <a class="level is-marginless" href="/categories/Games/">
             <span class="level-start">
                 <span class="level-item">Games</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Git/">
+            <span class="level-start">
+                <span class="level-item">Git</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -562,7 +576,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Agenda/" style="font-size: 10px;">Agenda</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/Emacs/" style="font-size: 15px;">Emacs</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Graphviz/" style="font-size: 10px;">Graphviz</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Math/" style="font-size: 12.5px;">Math</a> <a href="/tags/Org/" style="font-size: 10px;">Org</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/Spider/" style="font-size: 10px;">Spider</a> <a href="/tags/Sploit/" style="font-size: 10px;">Sploit</a> <a href="/tags/Statistics/" style="font-size: 10px;">Statistics</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/matplotlib/" style="font-size: 12.5px;">matplotlib</a> <a href="/tags/mu4e/" style="font-size: 10px;">mu4e</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 12.5px;">plot</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
+        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Agenda/" style="font-size: 10px;">Agenda</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/Emacs/" style="font-size: 15px;">Emacs</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Graphviz/" style="font-size: 10px;">Graphviz</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Magit/" style="font-size: 10px;">Magit</a> <a href="/tags/Math/" style="font-size: 12.5px;">Math</a> <a href="/tags/Org/" style="font-size: 10px;">Org</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/Spider/" style="font-size: 10px;">Spider</a> <a href="/tags/Sploit/" style="font-size: 10px;">Sploit</a> <a href="/tags/Statistics/" style="font-size: 10px;">Statistics</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/matplotlib/" style="font-size: 12.5px;">matplotlib</a> <a href="/tags/mu4e/" style="font-size: 10px;">mu4e</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 12.5px;">plot</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
     </div>
 </div>
     
@@ -574,6 +588,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/04/20/Git-%E5%90%88%E5%B9%B6%E5%A4%9A%E6%AC%A1-Commit-%E5%8F%8A%E5%9C%A8-Magit-%E4%B8%AD%E7%9A%84%E6%93%8D%E4%BD%9C/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Git 合并多次 Commit 及在 Magit 中的操作">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-20T12:56:00.000Z">2020-04-20</time></div>
+                    <a href="/2020/04/20/Git-%E5%90%88%E5%B9%B6%E5%A4%9A%E6%AC%A1-Commit-%E5%8F%8A%E5%9C%A8-Magit-%E4%B8%AD%E7%9A%84%E6%93%8D%E4%BD%9C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Git 合并多次 Commit 及在 Magit 中的操作</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Git/">Git</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -651,25 +684,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/02/28/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-mu4e-%E7%AE%A1%E7%90%86%E9%82%AE%E4%BB%B6/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 mu4e 管理邮件">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-28T15:03:00.000Z">2020-02-28</time></div>
-                    <a href="/2020/02/28/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-mu4e-%E7%AE%A1%E7%90%86%E9%82%AE%E4%BB%B6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 mu4e 管理邮件</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -687,7 +701,7 @@
                     <span class="level-item">四月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -977,13 +991,20 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Emacs/">
                         <span class="tag">Emacs</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/GTD/">
                         <span class="tag">GTD</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1006,6 +1027,13 @@
                     <a class="tags has-addons" href="/tags/Linux/">
                         <span class="tag">Linux</span>
                         <span class="tag is-grey">11</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Magit/">
+                        <span class="tag">Magit</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1173,6 +1201,25 @@
         
         <article class="media">
             
+            <a href="/2020/04/20/Git-%E5%90%88%E5%B9%B6%E5%A4%9A%E6%AC%A1-Commit-%E5%8F%8A%E5%9C%A8-Magit-%E4%B8%AD%E7%9A%84%E6%93%8D%E4%BD%9C/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Git 合并多次 Commit 及在 Magit 中的操作">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-20T12:56:00.000Z">2020-04-20</time></div>
+                    <a href="/2020/04/20/Git-%E5%90%88%E5%B9%B6%E5%A4%9A%E6%AC%A1-Commit-%E5%8F%8A%E5%9C%A8-Magit-%E4%B8%AD%E7%9A%84%E6%93%8D%E4%BD%9C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Git 合并多次 Commit 及在 Magit 中的操作</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Git/">Git</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/04/14/Qt-%E7%A8%8B%E5%BA%8F%E7%BC%A9%E6%94%BE%E4%B8%8D%E6%AD%A3%E5%B8%B8%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Qt 程序缩放不正常的解决办法">
@@ -1247,25 +1294,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/02/28/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-mu4e-%E7%AE%A1%E7%90%86%E9%82%AE%E4%BB%B6/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 mu4e 管理邮件">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-28T15:03:00.000Z">2020-02-28</time></div>
-                    <a href="/2020/02/28/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-mu4e-%E7%AE%A1%E7%90%86%E9%82%AE%E4%BB%B6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 mu4e 管理邮件</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1283,7 +1311,7 @@
                     <span class="level-item">四月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1573,13 +1601,20 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Emacs/">
                         <span class="tag">Emacs</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/GTD/">
                         <span class="tag">GTD</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1602,6 +1637,13 @@
                     <a class="tags has-addons" href="/tags/Linux/">
                         <span class="tag">Linux</span>
                         <span class="tag is-grey">11</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Magit/">
+                        <span class="tag">Magit</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
