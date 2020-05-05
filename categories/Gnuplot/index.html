@@ -159,7 +159,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 784 个字)
+                    5 分钟 读完 (大约 786 个字)
                 </span>
                 
                 
@@ -176,158 +176,17 @@
 <p>
 上一弹中介绍了 Gnuplot 能够绘制的 2D 图形，这一弹接着来介绍一下 Gnuplot 中的标签
 与图例。
-</p>
-
-<p>
-设置标签
-</p>
-<div class="org-src-container">
-<pre class="src src-gnuplot"><span class="linenr"> 1 </span><span style="font-weight: bold; text-decoration: underline;">set</span> xrange [<span style="font-weight: bold; text-decoration: underline;">0:4*pi</span>]
-<span class="linenr"> 2 </span><span style="font-weight: bold; text-decoration: underline;">set</span> yrange [<span style="font-weight: bold; text-decoration: underline;">-1.2:2</span>]
-<span class="linenr"> 3 </span><span style="font-weight: bold; text-decoration: underline;">set</span> y2range [<span style="font-weight: bold; text-decoration: underline;">0:2</span>]
-<span class="linenr"> 4 </span><span style="font-weight: bold; text-decoration: underline;">set</span> ytics nomirror
-<span class="linenr"> 5 </span><span style="font-weight: bold; text-decoration: underline;">set</span> y2tics 0, .1
-<span class="linenr"> 6 </span><span style="font-weight: bold; text-decoration: underline;">set</span> style fill pattern 5
-<span class="linenr"> 7 </span><span style="font-weight: bold; text-decoration: underline;">set</span> xlabel <span style="font-style: italic;">"Time (sec.)"</span>
-<span class="linenr"> 8 </span><span style="font-weight: bold; text-decoration: underline;">set</span> ylabel <span style="font-style: italic;">"Amplitude of Waves"</span>
-<span class="linenr"> 9 </span><span style="font-weight: bold; text-decoration: underline;">set</span> y2label <span style="font-style: italic;">"Difference"</span>
-<span class="linenr">10 </span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#25991;&#26412;&#38656;&#35201;&#25163;&#21160;&#25442;&#34892;</span>
-<span class="linenr">11 </span><span style="font-weight: bold; text-decoration: underline;">set</span> <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"Amplitude with time\nAnd Difference between waves"</span>
-<span class="linenr">12 </span>
-<span class="linenr">13 </span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#32472;&#21046;&#27599;&#19968;&#26465;&#32447;&#30340; title &#29992;&#26469;&#35774;&#23450;&#22270;&#20363;&#25991;&#26412;</span>
-<span class="linenr">14 </span><span style="font-weight: bold;">plot</span> <span style="font-style: italic;">'+'</span> <span style="font-weight: bold; text-decoration: underline;">using</span> 1:(<span style="font-weight: bold;">sin</span>($1)):(<span style="font-weight: bold;">cos</span>($1)) <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">filledcurves</span> <span style="font-weight: bold; text-decoration: underline;">notitle</span>,\
-<span class="linenr">15 </span>     <span style="font-weight: bold;">sin</span>(x) w l <span style="font-weight: bold; text-decoration: underline;">lw</span> 2,\
-<span class="linenr">16 </span>     <span style="font-weight: bold;">cos</span>(x) w l <span style="font-weight: bold; text-decoration: underline;">lw</span> 2,\
-<span class="linenr">17 </span>     <span style="font-style: italic;">''</span> <span style="font-weight: bold; text-decoration: underline;">using</span> 1:(<span style="font-weight: bold;">abs</span>(<span style="font-weight: bold;">sin</span>($1)-<span style="font-weight: bold;">cos</span>($1))) w l <span style="font-weight: bold; text-decoration: underline;">lw</span> 2 axis x1y2 <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"Difference"</span>
-</pre>
-</div>
-
-
-<div class="figure">
-<p><img src="c2-labels.png">
-</p>
-</div>
-
-<p>
-改变标签字体大小
-</p>
-<div class="org-src-container">
-<pre class="src src-gnuplot"><span class="linenr"> 1 </span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#20840;&#23616;&#23383;&#20307;</span>
-<span class="linenr"> 2 </span><span style="font-weight: bold; text-decoration: underline;">set</span> term png font <span style="font-style: italic;">'Arial, 14'</span>
-<span class="linenr"> 3 </span>
-<span class="linenr"> 4 </span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#21333;&#29420;&#35774;&#32622;&#26576;&#19968;&#37096;&#20998;&#30340;&#23383;&#20307;&#22823;&#23567;</span>
-<span class="linenr"> 5 </span><span style="font-weight: bold; text-decoration: underline;">set</span> xlabel font <span style="font-style: italic;">",18"</span>
-<span class="linenr"> 6 </span><span style="font-weight: bold; text-decoration: underline;">set</span> ylabel font <span style="font-style: italic;">",18"</span>
-<span class="linenr"> 7 </span><span style="font-weight: bold; text-decoration: underline;">set</span> y2label font <span style="font-style: italic;">",18"</span>
-<span class="linenr"> 8 </span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#21516;&#26102;&#35774;&#32622;&#20869;&#23481;&#21644;&#22823;&#23567;</span>
-<span class="linenr"> 9 </span><span style="font-weight: bold; text-decoration: underline;">set</span> <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"Amplitude with time\nAnd Difference between waves"</span> font <span style="font-style: italic;">",24"</span>
-<span class="linenr">10 </span>
-<span class="linenr">11 </span><span style="font-weight: bold; text-decoration: underline;">replot</span>
-</pre>
-</div>
-
-
-<div class="figure">
-<p><img src="c2-font-size.png">
-</p>
-</div>
-
-<p>
-设置图例的位置和字体等属性
-</p>
-<div class="org-src-container">
-<pre class="src src-gnuplot"><span class="linenr">1 </span>  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">spacing &#35843;&#25972;&#22270;&#20363;&#20043;&#38388;&#30340;&#38388;&#36317;&#65292;&#40664;&#35748;&#20540;&#26159; 1.25</span>
-<span class="linenr">2 </span>  <span style="font-weight: bold; text-decoration: underline;">set</span> key at graph .4, .95 spacing 1
-<span class="linenr">3 </span>
-<span class="linenr">4 </span><span style="font-weight: bold; text-decoration: underline;">replot</span>
-</pre>
-</div>
-
-
-<div class="figure">
-<p><img src="c2-key.png">
-</p>
-</div>
-
-<p>
-图例显示在图外面
-</p>
-<div class="org-src-container">
-<pre class="src src-gnuplot"><span class="linenr">1 </span><span style="font-weight: bold; text-decoration: underline;">set</span> term png size 500,200
-<span class="linenr">2 </span><span style="font-weight: bold; text-decoration: underline;">set</span> key outside
-<span class="linenr">3 </span>
-<span class="linenr">4 </span><span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">sin</span>(x) <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"sine"</span>, <span style="font-weight: bold;">cos</span>(x) <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"cosine"</span>
-</pre>
-</div>
-
-
-<div class="figure">
-<p><img src="c2-legend-outside.png">
-</p>
-</div>
-
-<div class="org-src-container">
-<pre class="src src-gnuplot"><span class="linenr">1 </span><span style="font-weight: bold; text-decoration: underline;">set</span> key box <span style="font-weight: bold; text-decoration: underline;">lt</span> -1 <span style="font-weight: bold; text-decoration: underline;">lw</span> 2
-<span class="linenr">2 </span>
-<span class="linenr">3 </span><span style="font-weight: bold; text-decoration: underline;">replot</span>
-</pre>
-</div>
-
-
-<div class="figure">
-<p><img src="c2-key-box.png">
-</p>
-</div>
-
-
-<p>
-带箭头的文本
-</p>
-<div class="org-src-container">
-<pre class="src src-gnuplot"><span class="linenr">1 </span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">left at &#21518;&#38754;&#30340;&#25968;&#23383;&#26159; x1y1 &#22352;&#26631;&#36724;&#65292;offset &#21518;&#38754;&#26159;&#20197;&#23383;&#20307;&#32593;&#26684;&#20026;&#22352;&#26631;</span>
-<span class="linenr">2 </span><span style="font-weight: bold; text-decoration: underline;">set</span> label <span style="font-style: italic;">"Max Difference"</span> left at 8, 1.5 offset .5, 0
-<span class="linenr">3 </span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">arrow &#21518;&#38754;&#30340; 1 &#26159;&#19968;&#20010; tag&#65292;front &#26159;&#21578;&#35785; gnuplot &#22312;&#26368;&#21069;&#38754;&#32472;&#21046; arrow</span>
-<span class="linenr">4 </span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">size &#20013;&#30340;&#31532;&#19968;&#20010;&#25968;&#23383;&#26159;&#31661;&#22836;&#20498;&#38057;&#30340;&#38271;&#24230;&#65292;&#31532;&#20108;&#20010;&#25968;&#23383;&#26159;&#20498;&#38057;&#30340;&#35282;&#24230;</span>
-<span class="linenr">5 </span><span style="font-weight: bold; text-decoration: underline;">set</span> arrow 1 from first 8, 1.5 to pi*7/4, 1 <span style="font-weight: bold; text-decoration: underline;">lt</span> -1 <span style="font-weight: bold; text-decoration: underline;">lw</span> 2 front size .3, 15
-<span class="linenr">6 </span>
-<span class="linenr">7 </span><span style="font-weight: bold; text-decoration: underline;">replot</span>
-</pre>
-</div>
-
-
-<div class="figure">
-<p><img src="c2-label-with-arrow.png">
-</p>
-</div>
-
-<p>
-在标签和标题中使用 Unicod 字符，需要注意三点：
-</p>
-<ul class="org-ul">
-<li>并不是所有的 Term 都支持 Unicod 字符，比如 PostScript 不支持，pdf 和 png 后端
-支持；</li>
-<li>设置编码方式为 <code>utf8</code> ，这一步并不是必需的，如果系统本身编码已经是 <code>utf8</code> 则不用重
-新设置；</li>
-<li>设置支持 Unicod 的字体。</li>
-</ul>
-<div class="org-src-container">
-<pre class="src src-gnuplot"><span class="linenr">1 </span><span style="font-weight: bold; text-decoration: underline;">set</span> term png
-<span class="linenr">2 </span><span style="font-weight: bold; text-decoration: underline;">set</span> encoding utf8
-<span class="linenr">3 </span><span style="font-weight: bold; text-decoration: underline;">set</span> <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"&#25391;&#24133;&#38543;&#26102;&#38388;&#30340;&#21464;&#21270;\n&#24046;&#20540;&#38543;&#26102;&#38388;&#30340;&#21464;&#21270;"</span> font <span style="font-style: italic;">"Sarasa Term SC,18"</span>
-<span class="linenr">4 </span>
-<span class="linenr">5 </span><span style="font-weight: bold; text-decoration: underline;">replot</span>
-</pre>
-</div>
-
-
-<div class="figure">
-<p><img src="c2-unicode.png">
-</p>
-</div>
-</div>
-
+</p></div>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%9B%BE%E4%BE%8B/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
