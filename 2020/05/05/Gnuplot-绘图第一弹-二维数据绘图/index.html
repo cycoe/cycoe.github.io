@@ -19,7 +19,7 @@
 <meta property="og:description" content="Gnuplot is a portable command-line driven graphing utility for Linux, OS&#x2F;2, MS Windows, OSX, VMS, and many other platforms. The source code is copyrighted but freely distributed (i.e., you don&amp;apos;t ha">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2020-05-05T06:13:27.457Z">
+<meta property="og:updated_time" content="2020-05-05T06:52:41.074Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
 
@@ -145,7 +145,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    11 分钟 读完 (大约 1606 个字)
+                    10 分钟 读完 (大约 1574 个字)
                 </span>
                 
                 
@@ -200,12 +200,24 @@ like Octave. Gnuplot has been supported and under active development since 1986.
 </pre>
 </div>
 
+
+<div class="figure">
+<p><img src="c1-simple.png">
+</p>
+</div>
+
 <p>
 绘制曲线的同时指定 <code>x</code> 的范围
 </p>
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span class="linenr">1 </span>plot [-5:5] (sin(1/x) - cos(x))*erfc(x)
 </pre>
+</div>
+
+
+<div class="figure">
+<p><img src="c1-xrange.png">
+</p>
 </div>
 
 <p>
@@ -226,12 +238,24 @@ like Octave. Gnuplot has been supported and under active development since 1986.
 </pre>
 </div>
 
+
+<div class="figure">
+<p><img src="c1-multipe-lines.png">
+</p>
+</div>
+
 <p>
 使用文件中的数据进行绘制
 </p>
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span class="linenr">1 </span>plot [-1:1] 'f1.dat' with lines lw 1, -x, -x**3
 </pre>
+</div>
+
+
+<div class="figure">
+<p><img src="c1-use-file-data.png">
+</p>
 </div>
 
 <p>
@@ -242,6 +266,12 @@ like Octave. Gnuplot has been supported and under active development since 1986.
 <span class="linenr">2 </span>set ytics nomirror
 <span class="linenr">3 </span>plot sin(1/x) axis x1y1,100*cos(x) axis x1y2
 </pre>
+</div>
+
+
+<div class="figure">
+<p><img src="c1-double-y.png">
+</p>
 </div>
 
 <p>
@@ -256,6 +286,12 @@ like Octave. Gnuplot has been supported and under active development since 1986.
 </pre>
 </div>
 
+
+<div class="figure">
+<p><img src="c1-set-sample.png">
+</p>
+</div>
+
 <p>
 绘制散点图
 </p>
@@ -263,6 +299,12 @@ like Octave. Gnuplot has been supported and under active development since 1986.
 <pre class="src src-gnuplot"><span class="linenr">1 </span>reset
 <span class="linenr">2 </span>plot 'f1.dat' with points pt 7
 </pre>
+</div>
+
+
+<div class="figure">
+<p><img src="c1-scatter.png">
+</p>
 </div>
 
 <p>
@@ -281,6 +323,12 @@ like Octave. Gnuplot has been supported and under active development since 1986.
 </pre>
 </div>
 
+
+<div class="figure">
+<p><img src="c1-boxes.png">
+</p>
+</div>
+
 <p>
 绘制圆圈图，圆圈图需要 3 列数据， <code>x:y:r</code>
 </p>
@@ -288,6 +336,12 @@ like Octave. Gnuplot has been supported and under active development since 1986.
 <pre class="src src-gnuplot"><span class="linenr">1 </span>reset
 <span class="linenr">2 </span>plot '+' using 1:(sin($1)):(cos($1)+1) with circles
 </pre>
+</div>
+
+
+<div class="figure">
+<p><img src="c1-plot-circles.png">
+</p>
 </div>
 
 <p>
@@ -298,6 +352,12 @@ like Octave. Gnuplot has been supported and under active development since 1986.
 <span class="linenr">2 </span>set style fill solid
 <span class="linenr">3 </span>plot [0:20] besy0(x) with filledcurves above y1=0
 </pre>
+</div>
+
+
+<div class="figure">
+<p><img src="c1-fill-curves.png">
+</p>
 </div>
 
 <p>
@@ -311,6 +371,12 @@ like Octave. Gnuplot has been supported and under active development since 1986.
 </pre>
 </div>
 
+
+<div class="figure">
+<p><img src="c1-fill-between-lines.png">
+</p>
+</div>
+
 <p>
 以直方图的形式绘制曲线
 </p>
@@ -318,6 +384,12 @@ like Octave. Gnuplot has been supported and under active development since 1986.
 <pre class="src src-gnuplot"><span class="linenr">1 </span>reset
 <span class="linenr">2 </span>plot [-10:10] sin(x) with histeps
 </pre>
+</div>
+
+
+<div class="figure">
+<p><img src="c1-histeps.png">
+</p>
 </div>
 
 <p>
@@ -331,6 +403,12 @@ like Octave. Gnuplot has been supported and under active development since 1986.
 </pre>
 </div>
 
+
+<div class="figure">
+<p><img src="c1-histograms.png">
+</p>
+</div>
+
 <p>
 叠加的直方图
 </p>
@@ -342,6 +420,12 @@ like Octave. Gnuplot has been supported and under active development since 1986.
 <span class="linenr">5 </span>set style histogram rowstacked
 <span class="linenr">6 </span>plot [0:20] '+' using (cos($1)), '' using (sin($1))
 </pre>
+</div>
+
+
+<div class="figure">
+<p><img src="c1-histograms-rowstacked.png">
+</p>
 </div>
 
 <p>
@@ -358,6 +442,12 @@ like Octave. Gnuplot has been supported and under active development since 1986.
 </pre>
 </div>
 
+
+<div class="figure">
+<p><img src="c1-error-bars.png">
+</p>
+</div>
+
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span class="linenr">1 </span>reset
 <span class="linenr">2 </span>set sample 30
@@ -365,6 +455,12 @@ like Octave. Gnuplot has been supported and under active development since 1986.
 <span class="linenr">4 </span>set style fill pattern 2 border lt -1
 <span class="linenr">5 </span>plot [0:10] '+' using 1:(sin($1)):(0.5*cos($1)) with boxerrorbars
 </pre>
+</div>
+
+
+<div class="figure">
+<p><img src="c1-boxerrorbars.png">
+</p>
 </div>
 
 <p>
@@ -376,6 +472,12 @@ like Octave. Gnuplot has been supported and under active development since 1986.
 </pre>
 </div>
 
+
+<div class="figure">
+<p><img src="c1-impulse.png">
+</p>
+</div>
+
 <p>
 绘制参数方程曲线
 </p>
@@ -384,6 +486,12 @@ like Octave. Gnuplot has been supported and under active development since 1986.
 <span class="linenr">2 </span>set parametric
 <span class="linenr">3 </span>plot sin(7*t), cos(11*t) notitle
 </pre>
+</div>
+
+
+<div class="figure">
+<p><img src="c1-parametric-curves.png">
+</p>
 </div>
 
 <p>
@@ -399,6 +507,12 @@ like Octave. Gnuplot has been supported and under active development since 1986.
 <span class="linenr">7 </span>set polar
 <span class="linenr">8 </span>plot [0:12*pi] t
 </pre>
+</div>
+
+
+<div class="figure">
+<p><img src="c1-polar-axis.png">
+</p>
 </div>
 </div>
 
@@ -2254,21 +2368,5 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/search.css">
 <link rel="stylesheet" href="/css/insight.css">
     
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
 </body>
 </html>
