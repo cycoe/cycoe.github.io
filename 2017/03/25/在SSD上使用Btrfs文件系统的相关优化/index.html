@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
 
-<meta name="generator" content="Hexo 4.0.0" />
+<meta name="generator" content="Hexo 4.2.0" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
@@ -11,17 +11,21 @@
 
 
     <meta name="description" content="折騰Linux">
-<meta name="keywords" content="SSD, Btrfs, Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在SSD上使用Btrfs文件系統的相關優化">
-<meta property="og:url" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;2017&#x2F;03&#x2F;25&#x2F;%E5%9C%A8SSD%E4%B8%8A%E4%BD%BF%E7%94%A8Btrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%9B%B8%E5%85%B3%E4%BC%98%E5%8C%96&#x2F;index.html">
+<meta property="og:url" content="http://cycoe.cc/2017/03/25/%E5%9C%A8SSD%E4%B8%8A%E4%BD%BF%E7%94%A8Btrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%9B%B8%E5%85%B3%E4%BC%98%E5%8C%96/index.html">
 <meta property="og:site_name" content="Cycoe&#39;s Home Page">
 <meta property="og:description" content="折騰Linux">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-12-07T15:05:41.954Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cycoe.cc/images/og_image.png">
+<meta property="article:published_time" content="2017-03-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2019-12-07T15:05:41.954Z">
+<meta property="article:author" content="Cycoe">
+<meta property="article:tag" content="SSD">
+<meta property="article:tag" content=" Btrfs">
+<meta property="article:tag" content=" Linux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
+<meta name="twitter:image" content="http://cycoe.cc/images/og_image.png">
 
 
 
@@ -116,7 +120,7 @@
                 
                 
                 
-                <a class="navbar-item search" title="搜索" href="javascript:;" target="_blank" rel="noopener">
+                <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
                 </a>
                 
@@ -167,11 +171,11 @@
 <a id="more"></a>
 
 <h2 id="優化掛載參數"><a href="#優化掛載參數" class="headerlink" title="優化掛載參數"></a>優化掛載參數</h2><p>在 Linux 中掛載 SSD 上的 btrfs，可以採用各種參數進行優化：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">#&lt;file system&gt;&lt;mount point&gt;&lt;type&gt;&lt;options&gt;&lt;dump&gt;&lt;pass&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">UUID&#x3D;&lt;略&gt;&#x2F; btrfs defaults,ssd,discard,noatime,compress&#x3D;lzo,subvol&#x3D;@</span></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#&lt;file system&gt;&lt;mount point&gt;&lt;type&gt;&lt;options&gt;&lt;dump&gt;&lt;pass&gt;</span><br><span class="line">UUID&#x3D;&lt;略&gt;&#x2F; btrfs defaults,ssd,discard,noatime,compress&#x3D;lzo,subvol&#x3D;@</span><br></pre></td></tr></table></figure>
 
 <h3 id="ssd"><a href="#ssd" class="headerlink" title="ssd"></a>ssd</h3><p>btrfs 文件系統有對 SSD 進行優化，在掛載參數中加入 ssd 即可。該參數不會自動啓用 TRIM/discard。</p>
 <h3 id="discard"><a href="#discard" class="headerlink" title="discard"></a>discard</h3><p>可以通過以下命令確認 SSD 是否支持 TRIM：</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo hdparm -I /dev/sdX | grep TRIM</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">*Data Set Management TRIM supported (limit 8 blocks)</span></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo hdparm -I /dev/sdX | grep TRIM</span><br><span class="line">*Data Set Management TRIM supported (limit 8 blocks)</span><br></pre></td></tr></table></figure>
 <p>若 SSD 支持 TRIM 命令，可以在 <code>/etc/fstab</code> 中啓用 discard 參數。建議將 discard 掛載參數作爲首選。據 debian wiki 所述，包括三星、鎂光、英睿達在內的一些 SSD <a href="https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/drivers/ata/libata-core.c#n4227" target="_blank" rel="noopener">在 discard/TRIM 上有問題</a>，不能合適地處理 TRIM 命令。<br>該參數不是必需的，也可以自定義週期性運行 fstrim 命令來取代該參數，使用該命令前要確認 SSD 支持 TRIM，否則可能造成數據丟失。當 SSD 有足夠的空餘空間或（未分配的）可用空間時不需要該參數。</p>
 <h3 id="noatime"><a href="#noatime" class="headerlink" title="noatime"></a>noatime</h3><p>掛載參數可以加入 noatime，通過禁止更新訪問記錄來減少不必要的寫操作以提高性能。該選項對 HDD 同樣有性能提升。btrfs 的默認配置爲 relatime。</p>
 <h3 id="compress"><a href="#compress" class="headerlink" title="compress"></a>compress</h3><p>打開壓縮功能在通常情況下有利於提高傳輸性能（並非絕對），也可以節省存儲空間。加入以下掛載參數：</p>
@@ -183,11 +187,11 @@
 <h3 id="寫緩存"><a href="#寫緩存" class="headerlink" title="寫緩存"></a>寫緩存</h3><p>若 SSD 帶有緩存，啓用 Write Cache 可以提高性能：Disks -&gt; Drive Setting -&gt; Enable Write Cache，但在突然斷電的情況下可能造成數據丟失。</p>
 <hr>
 <h2 id="I-O-調度"><a href="#I-O-調度" class="headerlink" title="I/O 調度"></a>I/O 調度</h2><p>SSD 結構不同於傳統硬盤，尋址時間短，I/O 調度算法可選擇 noop 以降低延遲。以下命令可查看與修改調度器：</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">cat/sys/block/sdX/queue/scheduler # sdX 指你的設備</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sudotee/sys/block/sdX/queue/scheduler &lt;&lt;&lt; noop</span></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat/sys/block/sdX/queue/scheduler # sdX 指你的設備</span><br><span class="line">sudotee/sys/block/sdX/queue/scheduler &lt;&lt;&lt; noop</span><br></pre></td></tr></table></figure>
 <p>注意以上方法並不持久，重啓後會重置。如果 SSD 是系統唯一的存儲設備，可考慮通過 elevator=noop 內核參數設置 I/O 調度器。也可使用 udev 規則來修改調度器，對多存儲設備同樣有效：</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo touch /etc/udev/rules.d/60-ssd-scheduler.rules #創建該文件</span></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo touch /etc/udev/rules.d/60-ssd-scheduler.rules #創建該文件</span><br></pre></td></tr></table></figure>
 <p>文件內容如下：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"># set deadline scheduler for non-rotating disks</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">ACTION&#x3D;&#x3D;&quot;add|change&quot;, KERNEL&#x3D;&#x3D;&quot;sd[a-z]&quot;, ATTR&#123;queue&#x2F;rotational&#125;&#x3D;&#x3D;&quot;0&quot;, ATTR&#123;queue&#x2F;scheduler&#125;&#x3D;&quot;noop&quot;</span></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># set deadline scheduler for non-rotating disks</span><br><span class="line">ACTION&#x3D;&#x3D;&quot;add|change&quot;, KERNEL&#x3D;&#x3D;&quot;sd[a-z]&quot;, ATTR&#123;queue&#x2F;rotational&#125;&#x3D;&#x3D;&quot;0&quot;, ATTR&#123;queue&#x2F;scheduler&#125;&#x3D;&quot;noop&quot;</span><br></pre></td></tr></table></figure>
 
 <hr>
 
@@ -332,7 +336,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            37
+                            38
                         </p>
                     </a>
                 </div>
@@ -488,15 +492,15 @@
                 <span class="level-item">Gnuplot</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Linux/">
             <span class="level-start">
-                <span class="level-item">Linux</span>
+                <span class="level-item">LinuxEmacs</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">14</span>
+                <span class="level-item tag">143</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Linux/Emacs/">
@@ -507,6 +511,14 @@
                 <span class="level-item tag">3</span>
             </span>
         </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Linux/Emacs/">
+            <span class="level-start">
+                <span class="level-item">Emacs</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/Machine-Learning/">
             <span class="level-start">
                 <span class="level-item">Machine Learning</span>
@@ -525,10 +537,10 @@
         </a></li><li>
         <a class="level is-marginless" href="/categories/Python/">
             <span class="level-start">
-                <span class="level-item">Python</span>
+                <span class="level-item">PythonSpidermatplotlibspider</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">8122</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Python/Spider/">
@@ -555,6 +567,30 @@
                 <span class="level-item tag">2</span>
             </span>
         </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Python/Spider/">
+            <span class="level-start">
+                <span class="level-item">Spider</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/matplotlib/">
+            <span class="level-start">
+                <span class="level-item">matplotlib</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/spider/">
+            <span class="level-start">
+                <span class="level-item">spider</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/Statistics/">
             <span class="level-start">
                 <span class="level-item">Statistics</span>
@@ -589,7 +625,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Agenda/" style="font-size: 10px;">Agenda</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/Emacs/" style="font-size: 15px;">Emacs</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Gnuplot/" style="font-size: 10px;">Gnuplot</a> <a href="/tags/Graphviz/" style="font-size: 10px;">Graphviz</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Magit/" style="font-size: 10px;">Magit</a> <a href="/tags/Math/" style="font-size: 12.5px;">Math</a> <a href="/tags/Org/" style="font-size: 10px;">Org</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Plot/" style="font-size: 10px;">Plot</a> <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/Spider/" style="font-size: 10px;">Spider</a> <a href="/tags/Sploit/" style="font-size: 10px;">Sploit</a> <a href="/tags/Statistics/" style="font-size: 10px;">Statistics</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/matplotlib/" style="font-size: 12.5px;">matplotlib</a> <a href="/tags/mu4e/" style="font-size: 10px;">mu4e</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 12.5px;">plot</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
+        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Agenda/" style="font-size: 10px;">Agenda</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/Emacs/" style="font-size: 15px;">Emacs</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Gnuplot/" style="font-size: 12.5px;">Gnuplot</a> <a href="/tags/Graphviz/" style="font-size: 10px;">Graphviz</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Magit/" style="font-size: 10px;">Magit</a> <a href="/tags/Math/" style="font-size: 12.5px;">Math</a> <a href="/tags/Org/" style="font-size: 10px;">Org</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Plot/" style="font-size: 12.5px;">Plot</a> <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/Spider/" style="font-size: 10px;">Spider</a> <a href="/tags/Sploit/" style="font-size: 10px;">Sploit</a> <a href="/tags/Statistics/" style="font-size: 10px;">Statistics</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/matplotlib/" style="font-size: 12.5px;">matplotlib</a> <a href="/tags/mu4e/" style="font-size: 10px;">mu4e</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 12.5px;">plot</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
     </div>
 </div>
     
@@ -601,6 +637,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%9B%BE%E4%BE%8B/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Gnuplot 绘图第二弹-标签与图例">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-05T07:01:00.000Z">2020-05-05</time></div>
+                    <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%9B%BE%E4%BE%8B/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Gnuplot 绘图第二弹-标签与图例</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Gnuplot/">Gnuplot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -678,25 +733,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 Graphviz 绘制流程图">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-11T02:37:00.000Z">2020-03-11</time></div>
-                    <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 Graphviz 绘制流程图</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -714,7 +750,7 @@
                     <span class="level-item">五月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1036,7 +1072,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gnuplot/">
                         <span class="tag">Gnuplot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1092,7 +1128,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Plot/">
                         <span class="tag">Plot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1239,6 +1275,25 @@
         
         <article class="media">
             
+            <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%9B%BE%E4%BE%8B/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Gnuplot 绘图第二弹-标签与图例">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-05T07:01:00.000Z">2020-05-05</time></div>
+                    <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%9B%BE%E4%BE%8B/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Gnuplot 绘图第二弹-标签与图例</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Gnuplot/">Gnuplot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-%E4%BA%8C%E7%BB%B4%E6%95%B0%E6%8D%AE%E7%BB%98%E5%9B%BE/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Gnuplot 绘图第一弹-二维数据绘图">
@@ -1313,25 +1368,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 Graphviz 绘制流程图">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-11T02:37:00.000Z">2020-03-11</time></div>
-                    <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 Graphviz 绘制流程图</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1349,7 +1385,7 @@
                     <span class="level-item">五月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1671,7 +1707,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gnuplot/">
                         <span class="tag">Gnuplot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1727,7 +1763,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Plot/">
                         <span class="tag">Plot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1990,7 +2026,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
     
     
-<a id="back-to-top" title="回到顶端" href="javascript:;" target="_blank" rel="noopener">
+<a id="back-to-top" title="回到顶端" href="javascript:;">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>
@@ -2041,5 +2077,21 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/search.css">
 <link rel="stylesheet" href="/css/insight.css">
     
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 </body>
 </html>

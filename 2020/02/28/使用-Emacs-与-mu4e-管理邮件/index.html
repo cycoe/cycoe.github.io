@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
 
-<meta name="generator" content="Hexo 4.0.0" />
+<meta name="generator" content="Hexo 4.2.0" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
@@ -11,17 +11,22 @@
 
 
     <meta name="description" content="在 Linux 下面其实有很多可以使用的邮件客户端，如 KDE 项目中的 Kmail、Gnome 项目 中的 Evolution 和 Mozilla 家族的 Thunderbird。这些客户端都只是简单地试用过，正 好最近将开发编辑器和写作环境从 Neovim 迁到了 Emacs。作为一个操作系统，不能管理 邮件怎么说的过去。可以利用 Emacs 的界面进行邮件管理，可以用 Org-mode">
-<meta name="keywords" content="Linux,Emacs,mu4e,mail">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用 Emacs 与 mu4e 管理邮件">
-<meta property="og:url" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;2020&#x2F;02&#x2F;28&#x2F;%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-mu4e-%E7%AE%A1%E7%90%86%E9%82%AE%E4%BB%B6&#x2F;index.html">
+<meta property="og:url" content="http://cycoe.cc/2020/02/28/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-mu4e-%E7%AE%A1%E7%90%86%E9%82%AE%E4%BB%B6/index.html">
 <meta property="og:site_name" content="Cycoe&#39;s Home Page">
 <meta property="og:description" content="在 Linux 下面其实有很多可以使用的邮件客户端，如 KDE 项目中的 Kmail、Gnome 项目 中的 Evolution 和 Mozilla 家族的 Thunderbird。这些客户端都只是简单地试用过，正 好最近将开发编辑器和写作环境从 Neovim 迁到了 Emacs。作为一个操作系统，不能管理 邮件怎么说的过去。可以利用 Emacs 的界面进行邮件管理，可以用 Org-mode">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2020-03-13T09:32:51.885Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cycoe.cc/images/og_image.png">
+<meta property="article:published_time" content="2020-02-28T15:03:00.000Z">
+<meta property="article:modified_time" content="2020-03-13T09:32:51.885Z">
+<meta property="article:author" content="Cycoe">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Emacs">
+<meta property="article:tag" content="mu4e">
+<meta property="article:tag" content="mail">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
+<meta name="twitter:image" content="http://cycoe.cc/images/og_image.png">
 
 
 
@@ -116,7 +121,7 @@
                 
                 
                 
-                <a class="navbar-item search" title="搜索" href="javascript:;" target="_blank" rel="noopener">
+                <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
                 </a>
                 
@@ -174,25 +179,25 @@
 
 <a id="more"></a>
 
-<div id="outline-container-org7bdf147" class="outline-2">
-<h2 id="org7bdf147">邮件同步</h2>
-<div class="outline-text-2" id="text-org7bdf147">
+<div id="outline-container-orgc353bbd" class="outline-2">
+<h2 id="orgc353bbd">邮件同步</h2>
+<div class="outline-text-2" id="text-orgc353bbd">
 <p>
 查看其他的博客，发现同步博客最常用的协议是 IMAP。Linux 下支持 IMAP 协议并且下载
 下来的目录结构是 MailDir 结构的工具主要有两个，offlineimap 和 isync。
 </p>
 </div>
-<div id="outline-container-orgd3b4739" class="outline-3">
-<h3 id="orgd3b4739">offlineimap 配置</h3>
-<div class="outline-text-3" id="text-orgd3b4739">
+<div id="outline-container-orgfa610e1" class="outline-3">
+<h3 id="orgfa610e1">offlineimap 配置</h3>
+<div class="outline-text-3" id="text-orgfa610e1">
 <p>
 offlineimap 是一个由 Python 写成的 IMAP 同步工具，主要的缺点是依赖 Python2 的库，
 并且同步速度不如 isync，因此仅作记录。
 </p>
 </div>
-<div id="outline-container-org14eef26" class="outline-4">
-<h4 id="org14eef26">安装</h4>
-<div class="outline-text-4" id="text-org14eef26">
+<div id="outline-container-org7d0498a" class="outline-4">
+<h4 id="org7d0498a">安装</h4>
+<div class="outline-text-4" id="text-org7d0498a">
 <p>
 在 Archlinux 中，可以直接从 community 仓库中安装。
 </p>
@@ -202,60 +207,60 @@ offlineimap 是一个由 Python 写成的 IMAP 同步工具，主要的缺点是
 </div>
 </div>
 </div>
-<div id="outline-container-orge3786d6" class="outline-4">
-<h4 id="orge3786d6">配置</h4>
-<div class="outline-text-4" id="text-orge3786d6">
+<div id="outline-container-org40592cb" class="outline-4">
+<h4 id="org40592cb">配置</h4>
+<div class="outline-text-4" id="text-org40592cb">
 <p>
 安装完成，要进行配置，需要创建一个 ~/.offlineimaprc 文件进行配置。详细的配置过程如下： 
 </p>
 <div class="org-src-container">
 <pre class="src src-bash"><span class="linenr"> 1 </span>[general]
 <span class="linenr"> 2 </span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#27492;&#22788;&#21015;&#20986;&#25152;&#26377;&#35201;&#21516;&#27493;&#30340;&#36134;&#25143;&#21517;&#65292;&#19982;&#19979;&#26041; [Account] &#33410;&#20013;&#30340;&#21517;&#23383;&#35201;&#19968;&#33268;</span>
-<span class="linenr"> 3 </span>accounts = Netease, QQ
-<span class="linenr"> 4 </span>maxsyncaccounts = 3
+<span class="linenr"> 3 </span><span style="font-weight: bold; font-style: italic;">accounts</span> = Netease, QQ
+<span class="linenr"> 4 </span><span style="font-weight: bold; font-style: italic;">maxsyncaccounts</span> = 3
 <span class="linenr"> 5 </span>
 <span class="linenr"> 6 </span>[Account Netease]
 <span class="linenr"> 7 </span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#32465;&#23450;&#20179;&#24211;&#65292;&#19982;&#19979;&#26041;&#30340; [Repository] &#33410;&#20013;&#30340;&#21517;&#23383;&#19968;&#33268;</span>
-<span class="linenr"> 8 </span>localrepository = NeteaseLocal
-<span class="linenr"> 9 </span>remoterepository = NeteaseRemote
+<span class="linenr"> 8 </span><span style="font-weight: bold; font-style: italic;">localrepository</span> = NeteaseLocal
+<span class="linenr"> 9 </span><span style="font-weight: bold; font-style: italic;">remoterepository</span> = NeteaseRemote
 <span class="linenr">10 </span>
 <span class="linenr">11 </span>[Repository NeteaseLocal]
-<span class="linenr">12 </span><span style="font-weight: bold;">type</span> = Maildir
+<span class="linenr">12 </span><span style="font-weight: bold; font-style: italic;">type</span> = Maildir
 <span class="linenr">13 </span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#25351;&#23450;&#26412;&#22320;&#20445;&#23384;&#30340;&#36335;&#24452;</span>
-<span class="linenr">14 </span>localfolders = /data/cycoe/Documents/mail/myneteasemail@163.com
+<span class="linenr">14 </span><span style="font-weight: bold; font-style: italic;">localfolders</span> = /data/cycoe/Documents/mail/myneteasemail@163.com
 <span class="linenr">15 </span>
 <span class="linenr">16 </span>[Repository NeteaseRemote]
-<span class="linenr">17 </span><span style="font-weight: bold;">type</span> = IMAP
+<span class="linenr">17 </span><span style="font-weight: bold; font-style: italic;">type</span> = IMAP
 <span class="linenr">18 </span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#36828;&#31243; imap &#20027;&#26426;</span>
-<span class="linenr">19 </span>remotehost = imap.163.com
+<span class="linenr">19 </span><span style="font-weight: bold; font-style: italic;">remotehost</span> = imap.163.com
 <span class="linenr">20 </span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#37038;&#31665;&#22320;&#22336;</span>
-<span class="linenr">21 </span>remoteuser = myneteasemail@163.com
+<span class="linenr">21 </span><span style="font-weight: bold; font-style: italic;">remoteuser</span> = myneteasemail@163.com
 <span class="linenr">22 </span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#37038;&#31665;&#23494;&#30721;</span>
-<span class="linenr">23 </span>remotepass = ********
-<span class="linenr">24 </span>ssl = yes
+<span class="linenr">23 </span><span style="font-weight: bold; font-style: italic;">remotepass</span> = ********
+<span class="linenr">24 </span><span style="font-weight: bold; font-style: italic;">ssl</span> = yes
 <span class="linenr">25 </span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">*&#38750;&#24120;&#37325;&#35201;* &#21542;&#21017;&#25552;&#31034;&#30830;&#23454; CA &#35777;&#20070;</span>
-<span class="linenr">26 </span>sslcacertfile = /etc/ssl/certs/ca-certificates.crt
-<span class="linenr">27 </span>maxconnections = 1
+<span class="linenr">26 </span><span style="font-weight: bold; font-style: italic;">sslcacertfile</span> = /etc/ssl/certs/ca-certificates.crt
+<span class="linenr">27 </span><span style="font-weight: bold; font-style: italic;">maxconnections</span> = 1
 <span class="linenr">28 </span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#26159;&#21542;&#20174;&#26381;&#21153;&#22120;&#19978;&#21024;&#38500;&#37038;&#20214;</span>
-<span class="linenr">29 </span>realdelete = no
+<span class="linenr">29 </span><span style="font-weight: bold; font-style: italic;">realdelete</span> = no
 <span class="linenr">30 </span>
 <span class="linenr">31 </span>[Account QQ]
-<span class="linenr">32 </span>localrepository = QQLocal
-<span class="linenr">33 </span>remoterepository = QQRemote
+<span class="linenr">32 </span><span style="font-weight: bold; font-style: italic;">localrepository</span> = QQLocal
+<span class="linenr">33 </span><span style="font-weight: bold; font-style: italic;">remoterepository</span> = QQRemote
 <span class="linenr">34 </span>
 <span class="linenr">35 </span>[Repository QQLocal]
-<span class="linenr">36 </span><span style="font-weight: bold;">type</span> = Maildir
-<span class="linenr">37 </span>localfolders = /data/cycoe/Documents/mail/myqqmail@qq.com
+<span class="linenr">36 </span><span style="font-weight: bold; font-style: italic;">type</span> = Maildir
+<span class="linenr">37 </span><span style="font-weight: bold; font-style: italic;">localfolders</span> = /data/cycoe/Documents/mail/myqqmail@qq.com
 <span class="linenr">38 </span>
 <span class="linenr">39 </span>[Repository QQRemote]
-<span class="linenr">40 </span><span style="font-weight: bold;">type</span> = IMAP
-<span class="linenr">41 </span>remotehost = imap.qq.com
-<span class="linenr">42 </span>remoteuser = myqqmail@qq.com
-<span class="linenr">43 </span>remotepass = ***********
-<span class="linenr">44 </span>ssl = yes
-<span class="linenr">45 </span>sslcacertfile = /etc/ssl/certs/ca-certificates.crt
-<span class="linenr">46 </span>maxconnections = 1
-<span class="linenr">47 </span>realdelete = no
+<span class="linenr">40 </span><span style="font-weight: bold; font-style: italic;">type</span> = IMAP
+<span class="linenr">41 </span><span style="font-weight: bold; font-style: italic;">remotehost</span> = imap.qq.com
+<span class="linenr">42 </span><span style="font-weight: bold; font-style: italic;">remoteuser</span> = myqqmail@qq.com
+<span class="linenr">43 </span><span style="font-weight: bold; font-style: italic;">remotepass</span> = ***********
+<span class="linenr">44 </span><span style="font-weight: bold; font-style: italic;">ssl</span> = yes
+<span class="linenr">45 </span><span style="font-weight: bold; font-style: italic;">sslcacertfile</span> = /etc/ssl/certs/ca-certificates.crt
+<span class="linenr">46 </span><span style="font-weight: bold; font-style: italic;">maxconnections</span> = 1
+<span class="linenr">47 </span><span style="font-weight: bold; font-style: italic;">realdelete</span> = no
 </pre>
 </div>
 <p>
@@ -264,17 +269,17 @@ offlineimap 是一个由 Python 写成的 IMAP 同步工具，主要的缺点是
 </div>
 </div>
 </div>
-<div id="outline-container-org126c95d" class="outline-3">
-<h3 id="org126c95d">isync 配置</h3>
-<div class="outline-text-3" id="text-org126c95d">
+<div id="outline-container-org6d1efdb" class="outline-3">
+<h3 id="org6d1efdb">isync 配置</h3>
+<div class="outline-text-3" id="text-org6d1efdb">
 <p>
 isync 是一个由 C++ 写成的 IMAP 同步工具，经测试同步速度要比 offlineimap 更快，但
 是同步出来的邮件数量比 offlineimap 更多不知道是怎么回事，目前主要使用这个。
 </p>
 </div>
-<div id="outline-container-org0b2918c" class="outline-4">
-<h4 id="org0b2918c">安装</h4>
-<div class="outline-text-4" id="text-org0b2918c">
+<div id="outline-container-org65afe4d" class="outline-4">
+<h4 id="org65afe4d">安装</h4>
+<div class="outline-text-4" id="text-org65afe4d">
 <p>
 在 Archlinux 中，可以直接从 community 仓库中安装。
 </p>
@@ -284,9 +289,9 @@ isync 是一个由 C++ 写成的 IMAP 同步工具，经测试同步速度要比
 </div>
 </div>
 </div>
-<div id="outline-container-org9980c1f" class="outline-4">
-<h4 id="org9980c1f">配置</h4>
-<div class="outline-text-4" id="text-org9980c1f">
+<div id="outline-container-org2d35a29" class="outline-4">
+<h4 id="org2d35a29">配置</h4>
+<div class="outline-text-4" id="text-org2d35a29">
 <p>
 isync 的配置方式与 offlineimap 类似，将如下配置放在 '~/.mbsyncrc' 中，并运行
 `mbsync Netease` 即可更新 Netease 频道，mbsync 以频道的概念管理多个邮箱，可以通
@@ -370,9 +375,9 @@ isync 的配置方式与 offlineimap 类似，将如下配置放在 '~/.mbsyncrc
 </div>
 </div>
 </div>
-<div id="outline-container-org1a5657f" class="outline-3">
-<h3 id="org1a5657f">Unsafe login</h3>
-<div class="outline-text-3" id="text-org1a5657f">
+<div id="outline-container-org931b0d7" class="outline-3">
+<h3 id="org931b0d7">Unsafe login</h3>
+<div class="outline-text-3" id="text-org931b0d7">
 <p>
 使用第三方 IMAP 服务同步 163 邮箱时，会提示 Unsafe login 错误，可以通过 <a href="http://config.mail.163.com/settings/imap/index.jsp?uid=xxxxxx@163.com" target="_blank" rel="noopener">网易邮箱
 设置</a> 解决。
@@ -381,13 +386,13 @@ isync 的配置方式与 offlineimap 类似，将如下配置放在 '~/.mbsyncrc
 </div>
 </div>
 
-<div id="outline-container-orgd3d059e" class="outline-2">
-<h2 id="orgd3d059e">mu 邮件管理器</h2>
-<div class="outline-text-2" id="text-orgd3d059e">
+<div id="outline-container-org5b6196e" class="outline-2">
+<h2 id="org5b6196e">mu 邮件管理器</h2>
+<div class="outline-text-2" id="text-org5b6196e">
 </div>
-<div id="outline-container-org57dcff5" class="outline-3">
-<h3 id="org57dcff5">安装</h3>
-<div class="outline-text-3" id="text-org57dcff5">
+<div id="outline-container-orgbc9d3d3" class="outline-3">
+<h3 id="orgbc9d3d3">安装</h3>
+<div class="outline-text-3" id="text-orgbc9d3d3">
 <div class="org-src-container">
 <pre class="src src-bash"><span class="linenr">1 </span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#20811;&#38534; mu &#20179;&#24211;</span>
 <span class="linenr">2 </span>git clone git://github.com/djcb/mu.git
@@ -401,9 +406,9 @@ isync 的配置方式与 offlineimap 类似，将如下配置放在 '~/.mbsyncrc
 </div>
 </div>
 </div>
-<div id="outline-container-org9213c6f" class="outline-3">
-<h3 id="org9213c6f">配置 mu</h3>
-<div class="outline-text-3" id="text-org9213c6f">
+<div id="outline-container-org60c69b8" class="outline-3">
+<h3 id="org60c69b8">配置 mu</h3>
+<div class="outline-text-3" id="text-org60c69b8">
 <div class="org-src-container">
 <pre class="src src-bash"><span class="linenr">1 </span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#21021;&#22987;&#21270; mu &#30417;&#27979;&#30340;&#37038;&#31665;&#25991;&#20214;&#22841;</span>
 <span class="linenr">2 </span>mu init -m /data/cycoe/Documents/mail/
@@ -414,9 +419,9 @@ isync 的配置方式与 offlineimap 类似，将如下配置放在 '~/.mbsyncrc
 </div>
 </div>
 </div>
-<div id="outline-container-org4cc06ed" class="outline-2">
-<h2 id="org4cc06ed">mu4e 多账户设置</h2>
-<div class="outline-text-2" id="text-org4cc06ed">
+<div id="outline-container-org8efdd9e" class="outline-2">
+<h2 id="org8efdd9e">mu4e 多账户设置</h2>
+<div class="outline-text-2" id="text-org8efdd9e">
 <p>
 mu4e (mu for emacs) 是 mu 在 emacs 中实现的一个邮件管理模块。后端调用 mu 进行邮
 件的检索和管理。在 <code>~/.config/emacs/lisp/</code> 目录下建立 <code>init-mu4e.el</code> 文件，并加入如
@@ -594,9 +599,9 @@ mu4e (mu for emacs) 是 mu 在 emacs 中实现的一个邮件管理模块。后�
 </div>
 </div>
 </div>
-<div id="outline-container-orgd3f35eb" class="outline-2">
-<h2 id="orgd3f35eb">配置 smtp 发送邮件</h2>
-<div class="outline-text-2" id="text-orgd3f35eb">
+<div id="outline-container-orgc52315b" class="outline-2">
+<h2 id="orgc52315b">配置 smtp 发送邮件</h2>
+<div class="outline-text-2" id="text-orgc52315b">
 <p>
 emcas 可以使用 smtpmail 发送邮件，会自动读取 <code>~/.authinfo</code> 文件中的账户和密码，因
 此需要在该文件中配置 smtp 相关信息。
@@ -608,9 +613,9 @@ emcas 可以使用 smtpmail 发送邮件，会自动读取 <code>~/.authinfo</co
 </div>
 </div>
 </div>
-<div id="outline-container-org922c32e" class="outline-2">
-<h2 id="org922c32e">使用 Org mode 编辑新邮件</h2>
-<div class="outline-text-2" id="text-org922c32e">
+<div id="outline-container-orga39b122" class="outline-2">
+<h2 id="orga39b122">使用 Org mode 编辑新邮件</h2>
+<div class="outline-text-2" id="text-orga39b122">
 <p>
 使用 Emacs 管理邮件的一大优势就是可以借助强大的 Org-mode 来写邮件，并自动导出为
 HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 plain 部分和 HTML 部分
@@ -641,9 +646,9 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
 </div>
 </div>
 </div>
-<div id="outline-container-org58f1924" class="outline-2">
-<h2 id="org58f1924">将邮件加入 TODO 列表中</h2>
-<div class="outline-text-2" id="text-org58f1924">
+<div id="outline-container-orgdb85a7a" class="outline-2">
+<h2 id="orgdb85a7a">将邮件加入 TODO 列表中</h2>
+<div class="outline-text-2" id="text-orgdb85a7a">
 <p>
 如果想要将某封邮件加入代办事项用于记录，可以将如下代码加入 <code>init-mu4e.el</code> 中
 </p>
@@ -814,7 +819,7 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            37
+                            38
                         </p>
                     </a>
                 </div>
@@ -970,15 +975,15 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
                 <span class="level-item">Gnuplot</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Linux/">
             <span class="level-start">
-                <span class="level-item">Linux</span>
+                <span class="level-item">LinuxEmacs</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">14</span>
+                <span class="level-item tag">143</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Linux/Emacs/">
@@ -989,6 +994,14 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
                 <span class="level-item tag">3</span>
             </span>
         </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Linux/Emacs/">
+            <span class="level-start">
+                <span class="level-item">Emacs</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/Machine-Learning/">
             <span class="level-start">
                 <span class="level-item">Machine Learning</span>
@@ -1007,10 +1020,10 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
         </a></li><li>
         <a class="level is-marginless" href="/categories/Python/">
             <span class="level-start">
-                <span class="level-item">Python</span>
+                <span class="level-item">PythonSpidermatplotlibspider</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">8122</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Python/Spider/">
@@ -1037,6 +1050,30 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
                 <span class="level-item tag">2</span>
             </span>
         </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Python/Spider/">
+            <span class="level-start">
+                <span class="level-item">Spider</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/matplotlib/">
+            <span class="level-start">
+                <span class="level-item">matplotlib</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/spider/">
+            <span class="level-start">
+                <span class="level-item">spider</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/Statistics/">
             <span class="level-start">
                 <span class="level-item">Statistics</span>
@@ -1071,7 +1108,7 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Agenda/" style="font-size: 10px;">Agenda</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/Emacs/" style="font-size: 15px;">Emacs</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Gnuplot/" style="font-size: 10px;">Gnuplot</a> <a href="/tags/Graphviz/" style="font-size: 10px;">Graphviz</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Magit/" style="font-size: 10px;">Magit</a> <a href="/tags/Math/" style="font-size: 12.5px;">Math</a> <a href="/tags/Org/" style="font-size: 10px;">Org</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Plot/" style="font-size: 10px;">Plot</a> <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/Spider/" style="font-size: 10px;">Spider</a> <a href="/tags/Sploit/" style="font-size: 10px;">Sploit</a> <a href="/tags/Statistics/" style="font-size: 10px;">Statistics</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/matplotlib/" style="font-size: 12.5px;">matplotlib</a> <a href="/tags/mu4e/" style="font-size: 10px;">mu4e</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 12.5px;">plot</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
+        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Agenda/" style="font-size: 10px;">Agenda</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/Emacs/" style="font-size: 15px;">Emacs</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Gnuplot/" style="font-size: 12.5px;">Gnuplot</a> <a href="/tags/Graphviz/" style="font-size: 10px;">Graphviz</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Magit/" style="font-size: 10px;">Magit</a> <a href="/tags/Math/" style="font-size: 12.5px;">Math</a> <a href="/tags/Org/" style="font-size: 10px;">Org</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Plot/" style="font-size: 12.5px;">Plot</a> <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/Spider/" style="font-size: 10px;">Spider</a> <a href="/tags/Sploit/" style="font-size: 10px;">Sploit</a> <a href="/tags/Statistics/" style="font-size: 10px;">Statistics</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/matplotlib/" style="font-size: 12.5px;">matplotlib</a> <a href="/tags/mu4e/" style="font-size: 10px;">mu4e</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 12.5px;">plot</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
     </div>
 </div>
     
@@ -1083,6 +1120,25 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%9B%BE%E4%BE%8B/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Gnuplot 绘图第二弹-标签与图例">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-05T07:01:00.000Z">2020-05-05</time></div>
+                    <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%9B%BE%E4%BE%8B/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Gnuplot 绘图第二弹-标签与图例</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Gnuplot/">Gnuplot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1160,25 +1216,6 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 Graphviz 绘制流程图">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-11T02:37:00.000Z">2020-03-11</time></div>
-                    <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 Graphviz 绘制流程图</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -1196,7 +1233,7 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
                     <span class="level-item">五月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1518,7 +1555,7 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gnuplot/">
                         <span class="tag">Gnuplot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1574,7 +1611,7 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Plot/">
                         <span class="tag">Plot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1721,6 +1758,25 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
         
         <article class="media">
             
+            <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%9B%BE%E4%BE%8B/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Gnuplot 绘图第二弹-标签与图例">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-05T07:01:00.000Z">2020-05-05</time></div>
+                    <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%9B%BE%E4%BE%8B/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Gnuplot 绘图第二弹-标签与图例</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Gnuplot/">Gnuplot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-%E4%BA%8C%E7%BB%B4%E6%95%B0%E6%8D%AE%E7%BB%98%E5%9B%BE/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Gnuplot 绘图第一弹-二维数据绘图">
@@ -1795,25 +1851,6 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 Graphviz 绘制流程图">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-11T02:37:00.000Z">2020-03-11</time></div>
-                    <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 Graphviz 绘制流程图</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1831,7 +1868,7 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
                     <span class="level-item">五月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2153,7 +2190,7 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gnuplot/">
                         <span class="tag">Gnuplot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2209,7 +2246,7 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Plot/">
                         <span class="tag">Plot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2472,7 +2509,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
     
     
-<a id="back-to-top" title="回到顶端" href="javascript:;" target="_blank" rel="noopener">
+<a id="back-to-top" title="回到顶端" href="javascript:;">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>
@@ -2523,5 +2560,21 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/search.css">
 <link rel="stylesheet" href="/css/insight.css">
     
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 </body>
 </html>

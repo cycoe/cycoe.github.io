@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
 
-<meta name="generator" content="Hexo 4.0.0" />
+<meta name="generator" content="Hexo 4.2.0" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
@@ -11,17 +11,23 @@
 
 
     <meta name="description" content="在接触 Emacs 以前，我的时间管理方式主要是利用清单软件建立待办事项，辅以纸笔随手 记录当前的临时任务。但这种方式最大的弊端是不能分项目进行记录，所有事项都堆在一起。 另外，完成的事项也不方便归档整理。早就听说了 Emacs 以及 Org-mode 的强大，也觊觎 网上大神用 Org-mode 做日程管理很久了，因此在此设计一个自己的 GTD 工作流。">
-<meta name="keywords" content="Linux,Emacs,Org,GTD,Agenda">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用 Emacs 与 Org mode 进行 GTD 管理">
-<meta property="og:url" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;2020&#x2F;03&#x2F;06&#x2F;%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Org-mode-%E8%BF%9B%E8%A1%8C-GTD-%E7%AE%A1%E7%90%86&#x2F;index.html">
+<meta property="og:url" content="http://cycoe.cc/2020/03/06/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Org-mode-%E8%BF%9B%E8%A1%8C-GTD-%E7%AE%A1%E7%90%86/index.html">
 <meta property="og:site_name" content="Cycoe&#39;s Home Page">
 <meta property="og:description" content="在接触 Emacs 以前，我的时间管理方式主要是利用清单软件建立待办事项，辅以纸笔随手 记录当前的临时任务。但这种方式最大的弊端是不能分项目进行记录，所有事项都堆在一起。 另外，完成的事项也不方便归档整理。早就听说了 Emacs 以及 Org-mode 的强大，也觊觎 网上大神用 Org-mode 做日程管理很久了，因此在此设计一个自己的 GTD 工作流。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2020-03-10T09:50:23.344Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cycoe.cc/images/og_image.png">
+<meta property="article:published_time" content="2020-03-06T11:51:00.000Z">
+<meta property="article:modified_time" content="2020-03-10T09:50:23.344Z">
+<meta property="article:author" content="Cycoe">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Emacs">
+<meta property="article:tag" content="Org">
+<meta property="article:tag" content="GTD">
+<meta property="article:tag" content="Agenda">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
+<meta name="twitter:image" content="http://cycoe.cc/images/og_image.png">
 
 
 
@@ -116,7 +122,7 @@
                 
                 
                 
-                <a class="navbar-item search" title="搜索" href="javascript:;" target="_blank" rel="noopener">
+                <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
                 </a>
                 
@@ -179,9 +185,9 @@
 
 <a id="more"></a>
 
-<div id="outline-container-orgfcd97e3" class="outline-2">
-<h2 id="orgfcd97e3">基本想法</h2>
-<div class="outline-text-2" id="text-orgfcd97e3">
+<div id="outline-container-org85950bd" class="outline-2">
+<h2 id="org85950bd">基本想法</h2>
+<div class="outline-text-2" id="text-org85950bd">
 <ol class="org-ol">
 <li>从空间尺度上，不同项目隶属于不同的 Org 文件，而不同的 Org 文件加入到不同的
 agenda 中，实现基于项目的管理方式。</li>
@@ -193,9 +199,9 @@ agenda 中，实现基于项目的管理方式。</li>
 </div>
 </div>
 
-<div id="outline-container-orgd809f9b" class="outline-2">
-<h2 id="orgd809f9b">整体流程</h2>
-<div class="outline-text-2" id="text-orgd809f9b">
+<div id="outline-container-org047980a" class="outline-2">
+<h2 id="org047980a">整体流程</h2>
+<div class="outline-text-2" id="text-org047980a">
 <p>
 参照 <i>皮波迪</i> 的博客 <a href="https://www.cnblogs.com/quantumman/p/10808174.html" target="_blank" rel="noopener">以 Emacs Org mode 为核心的任务管理方案</a>，设计适合自己的工作流。
 </p>
@@ -222,9 +228,9 @@ agenda 中，实现基于项目的管理方式。</li>
 </div>
 </div>
 
-<div id="outline-container-orge7b0f3a" class="outline-2">
-<h2 id="orge7b0f3a">任务拆分</h2>
-<div class="outline-text-2" id="text-orge7b0f3a">
+<div id="outline-container-orgf7c4524" class="outline-2">
+<h2 id="orgf7c4524">任务拆分</h2>
+<div class="outline-text-2" id="text-orgf7c4524">
 <p>
 对于耗时较长的非周期任务，需要拆分成更小的任务来进行处理。大型的任务可以作为单独
 的项目放在单独的 Org 文件中，并使用如下的代码为该项目设定一个单独的 agenda。
@@ -251,9 +257,9 @@ agenda 上方显示的标题， <code>"~/export/learn-org.html"</code> 为导出
 </div>
 </div>
 
-<div id="outline-container-org4392844" class="outline-2">
-<h2 id="org4392844">为任务添加更多属性</h2>
-<div class="outline-text-2" id="text-org4392844">
+<div id="outline-container-org469b7c3" class="outline-2">
+<h2 id="org469b7c3">为任务添加更多属性</h2>
+<div class="outline-text-2" id="text-org469b7c3">
 <p>
 标签是一种非线性的组织方式，Org mode 中的每一个 headline 都支持标签。在 headline
 使用快捷键 <code>&lt;C-c C-c&gt;</code> 即可管理标签。标签会根据层级结构自动继承，因此父标题的标签
@@ -266,9 +272,9 @@ agenda 上方显示的标题， <code>"~/export/learn-org.html"</code> 为导出
 </div>
 </div>
 
-<div id="outline-container-orgdd95ac7" class="outline-2">
-<h2 id="orgdd95ac7">查看任务概览</h2>
-<div class="outline-text-2" id="text-orgdd95ac7">
+<div id="outline-container-orgf97c867" class="outline-2">
+<h2 id="orgf97c867">查看任务概览</h2>
+<div class="outline-text-2" id="text-orgf97c867">
 <p>
 Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以列视图的模式显示出来。
 列视图可以在 <code>org-mode</code> 或 <code>agenda-mode</code> 中使用，快捷键为 <code>&lt;C-c C-x C-c&gt;</code> 。开启后每个
@@ -290,9 +296,9 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
 </div>
 </div>
 
-<div id="outline-container-org10f2c79" class="outline-2">
-<h2 id="org10f2c79">任务完成</h2>
-<div class="outline-text-2" id="text-org10f2c79">
+<div id="outline-container-org3b0a4a9" class="outline-2">
+<h2 id="org3b0a4a9">任务完成</h2>
+<div class="outline-text-2" id="text-org3b0a4a9">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span class="linenr">1 </span>(<span style="font-weight: bold;">setq</span>
 <span class="linenr">2 </span> <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#24403;&#26631;&#31614;&#36716;&#25442;&#20026; done &#26102;&#33258;&#21160;&#35760;&#24405; close &#26102;&#38388;</span>
@@ -303,9 +309,9 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
 </div>
 </div>
 
-<div id="outline-container-orge5fd1b8" class="outline-2">
-<h2 id="orge5fd1b8">任务回顾</h2>
-<div class="outline-text-2" id="text-orge5fd1b8">
+<div id="outline-container-org88db170" class="outline-2">
+<h2 id="org88db170">任务回顾</h2>
+<div class="outline-text-2" id="text-org88db170">
 <p>
 <code>&lt;C-c C-x C-d&gt;</code> 查看各个任务的耗时与总和。
 <img src="sumup.png">
@@ -464,7 +470,7 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            37
+                            38
                         </p>
                     </a>
                 </div>
@@ -620,15 +626,15 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
                 <span class="level-item">Gnuplot</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Linux/">
             <span class="level-start">
-                <span class="level-item">Linux</span>
+                <span class="level-item">LinuxEmacs</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">14</span>
+                <span class="level-item tag">143</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Linux/Emacs/">
@@ -639,6 +645,14 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
                 <span class="level-item tag">3</span>
             </span>
         </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Linux/Emacs/">
+            <span class="level-start">
+                <span class="level-item">Emacs</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/Machine-Learning/">
             <span class="level-start">
                 <span class="level-item">Machine Learning</span>
@@ -657,10 +671,10 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
         </a></li><li>
         <a class="level is-marginless" href="/categories/Python/">
             <span class="level-start">
-                <span class="level-item">Python</span>
+                <span class="level-item">PythonSpidermatplotlibspider</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">8122</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Python/Spider/">
@@ -687,6 +701,30 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
                 <span class="level-item tag">2</span>
             </span>
         </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Python/Spider/">
+            <span class="level-start">
+                <span class="level-item">Spider</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/matplotlib/">
+            <span class="level-start">
+                <span class="level-item">matplotlib</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/spider/">
+            <span class="level-start">
+                <span class="level-item">spider</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/Statistics/">
             <span class="level-start">
                 <span class="level-item">Statistics</span>
@@ -721,7 +759,7 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Agenda/" style="font-size: 10px;">Agenda</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/Emacs/" style="font-size: 15px;">Emacs</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Gnuplot/" style="font-size: 10px;">Gnuplot</a> <a href="/tags/Graphviz/" style="font-size: 10px;">Graphviz</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Magit/" style="font-size: 10px;">Magit</a> <a href="/tags/Math/" style="font-size: 12.5px;">Math</a> <a href="/tags/Org/" style="font-size: 10px;">Org</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Plot/" style="font-size: 10px;">Plot</a> <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/Spider/" style="font-size: 10px;">Spider</a> <a href="/tags/Sploit/" style="font-size: 10px;">Sploit</a> <a href="/tags/Statistics/" style="font-size: 10px;">Statistics</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/matplotlib/" style="font-size: 12.5px;">matplotlib</a> <a href="/tags/mu4e/" style="font-size: 10px;">mu4e</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 12.5px;">plot</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
+        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Agenda/" style="font-size: 10px;">Agenda</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/Emacs/" style="font-size: 15px;">Emacs</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Gnuplot/" style="font-size: 12.5px;">Gnuplot</a> <a href="/tags/Graphviz/" style="font-size: 10px;">Graphviz</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Magit/" style="font-size: 10px;">Magit</a> <a href="/tags/Math/" style="font-size: 12.5px;">Math</a> <a href="/tags/Org/" style="font-size: 10px;">Org</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Plot/" style="font-size: 12.5px;">Plot</a> <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/Spider/" style="font-size: 10px;">Spider</a> <a href="/tags/Sploit/" style="font-size: 10px;">Sploit</a> <a href="/tags/Statistics/" style="font-size: 10px;">Statistics</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/matplotlib/" style="font-size: 12.5px;">matplotlib</a> <a href="/tags/mu4e/" style="font-size: 10px;">mu4e</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 12.5px;">plot</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
     </div>
 </div>
     
@@ -733,6 +771,25 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%9B%BE%E4%BE%8B/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Gnuplot 绘图第二弹-标签与图例">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-05T07:01:00.000Z">2020-05-05</time></div>
+                    <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%9B%BE%E4%BE%8B/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Gnuplot 绘图第二弹-标签与图例</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Gnuplot/">Gnuplot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -810,25 +867,6 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 Graphviz 绘制流程图">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-11T02:37:00.000Z">2020-03-11</time></div>
-                    <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 Graphviz 绘制流程图</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -846,7 +884,7 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
                     <span class="level-item">五月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1168,7 +1206,7 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gnuplot/">
                         <span class="tag">Gnuplot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1224,7 +1262,7 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Plot/">
                         <span class="tag">Plot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1371,6 +1409,25 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
         
         <article class="media">
             
+            <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%9B%BE%E4%BE%8B/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Gnuplot 绘图第二弹-标签与图例">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-05T07:01:00.000Z">2020-05-05</time></div>
+                    <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%9B%BE%E4%BE%8B/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Gnuplot 绘图第二弹-标签与图例</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Gnuplot/">Gnuplot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-%E4%BA%8C%E7%BB%B4%E6%95%B0%E6%8D%AE%E7%BB%98%E5%9B%BE/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Gnuplot 绘图第一弹-二维数据绘图">
@@ -1445,25 +1502,6 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 Graphviz 绘制流程图">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-11T02:37:00.000Z">2020-03-11</time></div>
-                    <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 Graphviz 绘制流程图</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1481,7 +1519,7 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
                     <span class="level-item">五月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1803,7 +1841,7 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gnuplot/">
                         <span class="tag">Gnuplot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1859,7 +1897,7 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Plot/">
                         <span class="tag">Plot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2122,7 +2160,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
     
     
-<a id="back-to-top" title="回到顶端" href="javascript:;" target="_blank" rel="noopener">
+<a id="back-to-top" title="回到顶端" href="javascript:;">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>
@@ -2173,5 +2211,21 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/search.css">
 <link rel="stylesheet" href="/css/insight.css">
     
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 </body>
 </html>

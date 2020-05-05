@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
 
-<meta name="generator" content="Hexo 4.0.0" />
+<meta name="generator" content="Hexo 4.2.0" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
@@ -11,17 +11,21 @@
 
 
     <meta name="description" content="前几天在写 使用 Emacs 与 Org mode 进行 GTD 管理 博客时，用到了 Graphviz 绘制流程 图。正巧之前在 LaTeX 中也用它画过一些图，但都没有系统地入过门，那就趁最近学习一 下吧。">
-<meta name="keywords" content="Linux,Emacs,Graphviz">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用 Emacs 与 Graphviz 绘制流程图">
-<meta property="og:url" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;2020&#x2F;03&#x2F;11&#x2F;%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE&#x2F;index.html">
+<meta property="og:url" content="http://cycoe.cc/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/index.html">
 <meta property="og:site_name" content="Cycoe&#39;s Home Page">
 <meta property="og:description" content="前几天在写 使用 Emacs 与 Org mode 进行 GTD 管理 博客时，用到了 Graphviz 绘制流程 图。正巧之前在 LaTeX 中也用它画过一些图，但都没有系统地入过门，那就趁最近学习一 下吧。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2020-04-03T11:16:51.099Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cycoe.cc/images/og_image.png">
+<meta property="article:published_time" content="2020-03-11T02:37:00.000Z">
+<meta property="article:modified_time" content="2020-04-03T11:16:51.099Z">
+<meta property="article:author" content="Cycoe">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Emacs">
+<meta property="article:tag" content="Graphviz">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
+<meta name="twitter:image" content="http://cycoe.cc/images/og_image.png">
 
 
 
@@ -116,7 +120,7 @@
                 
                 
                 
-                <a class="navbar-item search" title="搜索" href="javascript:;" target="_blank" rel="noopener">
+                <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
                 </a>
                 
@@ -184,13 +188,13 @@
 义上的函数图像那种图，而是数据结构中的图，强调的关系。
 </p>
 
-<div id="outline-container-org138d67b" class="outline-2">
-<h2 id="org138d67b">安装</h2>
-<div class="outline-text-2" id="text-org138d67b">
+<div id="outline-container-org81ce76f" class="outline-2">
+<h2 id="org81ce76f">安装</h2>
+<div class="outline-text-2" id="text-org81ce76f">
 </div>
-<div id="outline-container-org30a7ffd" class="outline-3">
-<h3 id="org30a7ffd">Graphviz</h3>
-<div class="outline-text-3" id="text-org30a7ffd">
+<div id="outline-container-org235d45d" class="outline-3">
+<h3 id="org235d45d">Graphviz</h3>
+<div class="outline-text-3" id="text-org235d45d">
 <p>
 Graphviz 本质上是一个命令行工具，在 Archlinux 上只需要通过 <code>sudo pacman -S
 graphviz</code> 安装即可，其他系统类似。
@@ -198,9 +202,9 @@ graphviz</code> 安装即可，其他系统类似。
 </div>
 </div>
 
-<div id="outline-container-org52e6d5c" class="outline-3">
-<h3 id="org52e6d5c">graphviz-dot-mode</h3>
-<div class="outline-text-3" id="text-org52e6d5c">
+<div id="outline-container-org2eeab21" class="outline-3">
+<h3 id="org2eeab21">graphviz-dot-mode</h3>
+<div class="outline-text-3" id="text-org2eeab21">
 <p>
 Graphviz 在 Emacs 中的集成是通过 <code>graphviz-dot-mode</code> 这个包来实现的，只需要 <code>&lt;M-x&gt;
 package-install graphviz-dot-mode &lt;RET&gt;</code> 即可。
@@ -221,9 +225,9 @@ package-install graphviz-dot-mode &lt;RET&gt;</code> 即可。
 </div>
 </div>
 </div>
-<div id="outline-container-org23e37a7" class="outline-2">
-<h2 id="org23e37a7">布局器</h2>
-<div class="outline-text-2" id="text-org23e37a7">
+<div id="outline-container-orgbaa867f" class="outline-2">
+<h2 id="orgbaa867f">布局器</h2>
+<div class="outline-text-2" id="text-orgbaa867f">
 <p>
 Graphviz 中包含了众多的布局器：
 </p>
@@ -237,9 +241,9 @@ Graphviz 中包含了众多的布局器：
 </div>
 </div>
 
-<div id="outline-container-orgd84f309" class="outline-2">
-<h2 id="orgd84f309">基本使用</h2>
-<div class="outline-text-2" id="text-orgd84f309">
+<div id="outline-container-org2729394" class="outline-2">
+<h2 id="org2729394">基本使用</h2>
+<div class="outline-text-2" id="text-org2729394">
 <p>
 Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </p>
@@ -299,9 +303,9 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </div>
 </div>
 
-<div id="outline-container-org97e9063" class="outline-2">
-<h2 id="org97e9063">绘制属性</h2>
-<div class="outline-text-2" id="text-org97e9063">
+<div id="outline-container-org982e574" class="outline-2">
+<h2 id="org982e574">绘制属性</h2>
+<div class="outline-text-2" id="text-org982e574">
 <p>
 一个图中可能有非常多的节点与边，如果每次都需要声明一个节点的属性会非常麻烦。类似
 于面向对象编程的思想，我们可以用 <code>node</code> 和 <code>edge</code> 类标签来设置全局的属性，也可以用对
@@ -335,7 +339,7 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </div>
 
 <p>
-<a id="orgdf4fbc6"></a>
+<a id="org707acec"></a>
 <img src="property.png">
 </p>
 
@@ -389,16 +393,16 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </ul>
 </div>
 
-<div id="outline-container-org9cfa1be" class="outline-3">
-<h3 id="org9cfa1be">节点</h3>
-<div class="outline-text-3" id="text-org9cfa1be">
+<div id="outline-container-orgd2af137" class="outline-3">
+<h3 id="orgd2af137">节点</h3>
+<div class="outline-text-3" id="text-orgd2af137">
 <p>
 节点的默认属性为 shape = ellipse, width = .75, height = 0.5 并且用节点标识符作为
 节点的显示文字。
 </p>
 
 <p>
-如 <a href="#orgdf4fbc6">图 1</a> 中所示，声明两个节点 <i>小蓝</i> 和 <i>小红/，/小蓝</i> 或 <i>小红</i> 就表示这个节点的节点标
+如 <a href="#org707acec">图 1</a> 中所示，声明两个节点 <i>小蓝</i> 和 <i>小红/，/小蓝</i> 或 <i>小红</i> 就表示这个节点的节点标
 识符，后面紧跟的是该节点的属性列表；另一种用法为 节点标识符:节点部分:方向[属性列
 表] <code>小蓝:body[style=filled color=lightblue]</code>, 这个为单一节点声明的方式。
 </p>
@@ -425,9 +429,9 @@ source 或 min 的子图</li>
 </div>
 </div>
 
-<div id="outline-container-org8e8164a" class="outline-3">
-<h3 id="org8e8164a">边</h3>
-<div class="outline-text-3" id="text-org8e8164a">
+<div id="outline-container-orgc6a9b31" class="outline-3">
+<h3 id="orgc6a9b31">边</h3>
+<div class="outline-text-3" id="text-orgc6a9b31">
 <p>
 有向图中的的边用 <code>-&gt;</code> 表示，无向图用 <code>--</code> 表示。
 </p>
@@ -603,9 +607,9 @@ ortho, 正交折线
 </div>
 </div>
 
-<div id="outline-container-orgafb067b" class="outline-3">
-<h3 id="orgafb067b">边的方向</h3>
-<div class="outline-text-3" id="text-orgafb067b">
+<div id="outline-container-org4fddff2" class="outline-3">
+<h3 id="org4fddff2">边的方向</h3>
+<div class="outline-text-3" id="text-org4fddff2">
 <p>
 <b>示例</b> 声明多部分节点，以及对各部分进行单独设置
 </p>
@@ -647,9 +651,9 @@ ortho, 正交折线
 </div>
 </div>
 
-<div id="outline-container-orgb0fa32d" class="outline-2">
-<h2 id="orgb0fa32d">子图</h2>
-<div class="outline-text-2" id="text-orgb0fa32d">
+<div id="outline-container-orgfb82cdb" class="outline-2">
+<h2 id="orgfb82cdb">子图</h2>
+<div class="outline-text-2" id="text-orgfb82cdb">
 <p>
 <b>subgraph</b> 必须配合 <b>cluster</b> 一起使用，用法为 =subgraph cluster* {} 。
 </p>
@@ -846,7 +850,7 @@ ortho, 正交折线
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            37
+                            38
                         </p>
                     </a>
                 </div>
@@ -1002,15 +1006,15 @@ ortho, 正交折线
                 <span class="level-item">Gnuplot</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Linux/">
             <span class="level-start">
-                <span class="level-item">Linux</span>
+                <span class="level-item">LinuxEmacs</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">14</span>
+                <span class="level-item tag">143</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Linux/Emacs/">
@@ -1021,6 +1025,14 @@ ortho, 正交折线
                 <span class="level-item tag">3</span>
             </span>
         </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Linux/Emacs/">
+            <span class="level-start">
+                <span class="level-item">Emacs</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/Machine-Learning/">
             <span class="level-start">
                 <span class="level-item">Machine Learning</span>
@@ -1039,10 +1051,10 @@ ortho, 正交折线
         </a></li><li>
         <a class="level is-marginless" href="/categories/Python/">
             <span class="level-start">
-                <span class="level-item">Python</span>
+                <span class="level-item">PythonSpidermatplotlibspider</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">8122</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Python/Spider/">
@@ -1069,6 +1081,30 @@ ortho, 正交折线
                 <span class="level-item tag">2</span>
             </span>
         </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Python/Spider/">
+            <span class="level-start">
+                <span class="level-item">Spider</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/matplotlib/">
+            <span class="level-start">
+                <span class="level-item">matplotlib</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/spider/">
+            <span class="level-start">
+                <span class="level-item">spider</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/Statistics/">
             <span class="level-start">
                 <span class="level-item">Statistics</span>
@@ -1103,7 +1139,7 @@ ortho, 正交折线
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Agenda/" style="font-size: 10px;">Agenda</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/Emacs/" style="font-size: 15px;">Emacs</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Gnuplot/" style="font-size: 10px;">Gnuplot</a> <a href="/tags/Graphviz/" style="font-size: 10px;">Graphviz</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Magit/" style="font-size: 10px;">Magit</a> <a href="/tags/Math/" style="font-size: 12.5px;">Math</a> <a href="/tags/Org/" style="font-size: 10px;">Org</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Plot/" style="font-size: 10px;">Plot</a> <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/Spider/" style="font-size: 10px;">Spider</a> <a href="/tags/Sploit/" style="font-size: 10px;">Sploit</a> <a href="/tags/Statistics/" style="font-size: 10px;">Statistics</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/matplotlib/" style="font-size: 12.5px;">matplotlib</a> <a href="/tags/mu4e/" style="font-size: 10px;">mu4e</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 12.5px;">plot</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
+        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Agenda/" style="font-size: 10px;">Agenda</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/Emacs/" style="font-size: 15px;">Emacs</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Gnuplot/" style="font-size: 12.5px;">Gnuplot</a> <a href="/tags/Graphviz/" style="font-size: 10px;">Graphviz</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Magit/" style="font-size: 10px;">Magit</a> <a href="/tags/Math/" style="font-size: 12.5px;">Math</a> <a href="/tags/Org/" style="font-size: 10px;">Org</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Plot/" style="font-size: 12.5px;">Plot</a> <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/Spider/" style="font-size: 10px;">Spider</a> <a href="/tags/Sploit/" style="font-size: 10px;">Sploit</a> <a href="/tags/Statistics/" style="font-size: 10px;">Statistics</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/matplotlib/" style="font-size: 12.5px;">matplotlib</a> <a href="/tags/mu4e/" style="font-size: 10px;">mu4e</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 12.5px;">plot</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
     </div>
 </div>
     
@@ -1115,6 +1151,25 @@ ortho, 正交折线
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%9B%BE%E4%BE%8B/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Gnuplot 绘图第二弹-标签与图例">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-05T07:01:00.000Z">2020-05-05</time></div>
+                    <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%9B%BE%E4%BE%8B/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Gnuplot 绘图第二弹-标签与图例</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Gnuplot/">Gnuplot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1192,25 +1247,6 @@ ortho, 正交折线
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 Graphviz 绘制流程图">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-11T02:37:00.000Z">2020-03-11</time></div>
-                    <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 Graphviz 绘制流程图</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -1228,7 +1264,7 @@ ortho, 正交折线
                     <span class="level-item">五月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1550,7 +1586,7 @@ ortho, 正交折线
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gnuplot/">
                         <span class="tag">Gnuplot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1606,7 +1642,7 @@ ortho, 正交折线
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Plot/">
                         <span class="tag">Plot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1753,6 +1789,25 @@ ortho, 正交折线
         
         <article class="media">
             
+            <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%9B%BE%E4%BE%8B/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Gnuplot 绘图第二弹-标签与图例">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-05T07:01:00.000Z">2020-05-05</time></div>
+                    <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%9B%BE%E4%BE%8B/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Gnuplot 绘图第二弹-标签与图例</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Gnuplot/">Gnuplot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-%E4%BA%8C%E7%BB%B4%E6%95%B0%E6%8D%AE%E7%BB%98%E5%9B%BE/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Gnuplot 绘图第一弹-二维数据绘图">
@@ -1827,25 +1882,6 @@ ortho, 正交折线
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 Graphviz 绘制流程图">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-11T02:37:00.000Z">2020-03-11</time></div>
-                    <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 Graphviz 绘制流程图</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1863,7 +1899,7 @@ ortho, 正交折线
                     <span class="level-item">五月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2185,7 +2221,7 @@ ortho, 正交折线
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gnuplot/">
                         <span class="tag">Gnuplot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2241,7 +2277,7 @@ ortho, 正交折线
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Plot/">
                         <span class="tag">Plot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2504,7 +2540,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
     
     
-<a id="back-to-top" title="回到顶端" href="javascript:;" target="_blank" rel="noopener">
+<a id="back-to-top" title="回到顶端" href="javascript:;">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>
@@ -2555,5 +2591,21 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/search.css">
 <link rel="stylesheet" href="/css/insight.css">
     
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 </body>
 </html>

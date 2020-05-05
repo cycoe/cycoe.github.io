@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
 
-<meta name="generator" content="Hexo 4.0.0" />
+<meta name="generator" content="Hexo 4.2.0" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
@@ -11,17 +11,21 @@
 
 
     <meta name="description" content="爬蟲小記">
-<meta name="keywords" content="Python,Spider,Sploit">
 <meta property="og:type" content="article">
 <meta property="og:title" content="教務網現驚天大 bug？！談談弱密碼如何暴露你的信息">
-<meta property="og:url" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;2017&#x2F;12&#x2F;07&#x2F;%E6%95%99%E5%8A%A1%E7%BD%91%E7%8E%B0%E6%83%8A%E5%A4%A9%E5%A4%A7bug&#x2F;index.html">
+<meta property="og:url" content="http://cycoe.cc/2017/12/07/%E6%95%99%E5%8A%A1%E7%BD%91%E7%8E%B0%E6%83%8A%E5%A4%A9%E5%A4%A7bug/index.html">
 <meta property="og:site_name" content="Cycoe&#39;s Home Page">
 <meta property="og:description" content="爬蟲小記">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2020-02-27T11:54:03.213Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cycoe.cc/images/og_image.png">
+<meta property="article:published_time" content="2017-12-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-02-27T11:54:03.213Z">
+<meta property="article:author" content="Cycoe">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Spider">
+<meta property="article:tag" content="Sploit">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;cycoe.cc&#x2F;images&#x2F;og_image.png">
+<meta name="twitter:image" content="http://cycoe.cc/images/og_image.png">
 
 
 
@@ -116,7 +120,7 @@
                 
                 
                 
-                <a class="navbar-item search" title="搜索" href="javascript:;" target="_blank" rel="noopener">
+                <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
                 </a>
                 
@@ -166,7 +170,7 @@
             <h2 id="漏洞發現"><a href="#漏洞發現" class="headerlink" title="漏洞發現"></a>漏洞發現</h2><p>最近在爲之前寫的爬蟲做批註的時候發現了一段有趣的代碼，代碼如下</p>
 <a id="more"></a>
 
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">MisUtils.initAttempt()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">while</span> MisUtils.descAttempt():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    self.response = self.session.send(prepareBody)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">if</span> self.response.status_code == <span class="hljs-number">200</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-keyword">break</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> MisUtils.descAttempt():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    Logger.log(<span class="hljs-string">'Up to max attempts!'</span>, [<span class="hljs-string">'Maybe remote server unreachable'</span>], level=Logger.error)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> re.search(<span class="hljs-string">'用戶名不存在'</span>, self.response.text):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    print(Logger.log(<span class="hljs-string">'No such a user!'</span>, [<span class="hljs-string">'Cleaning password file'</span>], level=Logger.error))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    reInput = <span class="hljs-literal">True</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">elif</span> re.search(<span class="hljs-string">'密碼錯誤'</span>, self.response.text):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    print(Logger.log(<span class="hljs-string">'Wrong password!'</span>, [<span class="hljs-string">'Cleaning password file'</span>], level=Logger.error))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    reInput = <span class="hljs-literal">True</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">elif</span> re.search(<span class="hljs-string">'請輸入驗證碼'</span>, self.response.text):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    print(Logger.log(<span class="hljs-string">'Please input vertify code!'</span>, [<span class="hljs-string">'Retrying...'</span>], level=Logger.error))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">elif</span> re.search(<span class="hljs-string">'驗證碼錯誤'</span>, self.response.text):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    print(Logger.log(<span class="hljs-string">'Wrong vertify code!'</span>, [<span class="hljs-string">'Retrying...'</span>], level=Logger.error))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">else</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    print(Logger.log(<span class="hljs-string">'Login successfully!'</span>, [<span class="hljs-string">'UserName: '</span> + MisUtils.confDict[<span class="hljs-string">'userName'</span>]], level=Logger.error))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    MisUtils.dumpConfFile()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">break</span></span></pre></td></tr></table></figure>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">MisUtils.initAttempt()</span><br><span class="line"><span class="hljs-keyword">while</span> MisUtils.descAttempt():</span><br><span class="line">    self.response = self.session.send(prepareBody)</span><br><span class="line">    <span class="hljs-keyword">if</span> self.response.status_code == <span class="hljs-number">200</span>:</span><br><span class="line">        <span class="hljs-keyword">break</span></span><br><span class="line"><span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> MisUtils.descAttempt():</span><br><span class="line">    Logger.log(<span class="hljs-string">'Up to max attempts!'</span>, [<span class="hljs-string">'Maybe remote server unreachable'</span>], level=Logger.error)</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> re.search(<span class="hljs-string">'用戶名不存在'</span>, self.response.text):</span><br><span class="line">    print(Logger.log(<span class="hljs-string">'No such a user!'</span>, [<span class="hljs-string">'Cleaning password file'</span>], level=Logger.error))</span><br><span class="line">    reInput = <span class="hljs-literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">elif</span> re.search(<span class="hljs-string">'密碼錯誤'</span>, self.response.text):</span><br><span class="line">    print(Logger.log(<span class="hljs-string">'Wrong password!'</span>, [<span class="hljs-string">'Cleaning password file'</span>], level=Logger.error))</span><br><span class="line">    reInput = <span class="hljs-literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">elif</span> re.search(<span class="hljs-string">'請輸入驗證碼'</span>, self.response.text):</span><br><span class="line">    print(Logger.log(<span class="hljs-string">'Please input vertify code!'</span>, [<span class="hljs-string">'Retrying...'</span>], level=Logger.error))</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">elif</span> re.search(<span class="hljs-string">'驗證碼錯誤'</span>, self.response.text):</span><br><span class="line">    print(Logger.log(<span class="hljs-string">'Wrong vertify code!'</span>, [<span class="hljs-string">'Retrying...'</span>], level=Logger.error))</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">else</span>:</span><br><span class="line">    print(Logger.log(<span class="hljs-string">'Login successfully!'</span>, [<span class="hljs-string">'UserName: '</span> + MisUtils.confDict[<span class="hljs-string">'userName'</span>]], level=Logger.error))</span><br><span class="line">    MisUtils.dumpConfFile()</span><br><span class="line">    <span class="hljs-keyword">break</span></span><br></pre></td></tr></table></figure>
 <p>當時寫的時候沒注意，現在回過頭來看看，驚奇地發現教務網對於用戶名和密碼的驗證順序是如下的優先級：</p>
 <ol>
 <li>首先驗證用戶名是否存在</li>
@@ -190,7 +194,7 @@
 <h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>通過上面的兩條信息可以至少做到兩件事情</p>
 <h3 id="枚舉用戶名"><a href="#枚舉用戶名" class="headerlink" title="枚舉用戶名"></a>枚舉用戶名</h3><p>目前所有在讀研究生的入學時間大部分爲 2013-2017 年，學號的前四位爲入學年份，中間三位與所在的專業有關，最後三位爲流水號。對所有形如 2013XXXXXX 的學號進行嘗試登錄，根據信息 1，能夠枚舉出所有 13 年入學的學生學號。</p>
 <h3 id="暴破"><a href="#暴破" class="headerlink" title="暴破"></a>暴破</h3><p>利用上一步得到的用戶名列表，再配合字典就可以進行在線的密碼暴破，這種破解方法一般來說是非常低效的，嚴重依賴於網絡狀況和服務器的機能。嘗試發現在單線程的情況下，每秒只能對服務器進行 1k 次左右的訪問。也就是說如果使用 16 位的數字加字母作爲密碼，最多需要 2.5 百萬億年的時間才能成功破解。看起來是非常安全吧。<br>然而實際情況又是什麼樣呢？教務網的初始密碼爲身份證號中的生日，一般來說我們在第一次登錄時都會改密碼，但還總會有人抱着僥倖的心理用初始密碼，這就爲暴破帶來了捷徑。<br>以生日作爲密碼具有非常明顯的結構，如 2017 年入學學生的生日大多在 1994-1996 之間，利用下面簡單的字典生成器可得到 1994-1996 年所有的日期列表：</p>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">big_month_ = [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">10</span>, <span class="hljs-number">12</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">small_month_ = [<span class="hljs-number">4</span>, <span class="hljs-number">6</span>, <span class="hljs-number">9</span>, <span class="hljs-number">11</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">gen_</span><span class="hljs-params">(begin, end)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    password_ = []</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">for</span> year <span class="hljs-keyword">in</span> range(begin, end + <span class="hljs-number">1</span>):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-keyword">for</span> month <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">13</span>):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-keyword">if</span> month <span class="hljs-keyword">in</span> big_month_:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                month_len = <span class="hljs-number">31</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-keyword">elif</span> month <span class="hljs-keyword">in</span> small_month_:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                month_len = <span class="hljs-number">30</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-keyword">elif</span> month == <span class="hljs-number">2</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                <span class="hljs-keyword">if</span> year % <span class="hljs-number">4</span> != <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> (year % <span class="hljs-number">100</span> == <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> year % <span class="hljs-number">400</span> != <span class="hljs-number">0</span>):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                    month_len = <span class="hljs-number">28</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                <span class="hljs-keyword">else</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                    month_len = <span class="hljs-number">29</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-keyword">else</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                month_len = <span class="hljs-number">31</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            <span class="hljs-keyword">for</span> day <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, month_len + <span class="hljs-number">1</span>):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">                password_.append(str(year) + str(month).zfill(<span class="hljs-number">2</span>) + str(day).zfill(<span class="hljs-number">2</span>))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    <span class="hljs-keyword">with</span> open(<span class="hljs-string">'password.dict'</span>, <span class="hljs-string">'w'</span>) <span class="hljs-keyword">as</span> fr:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        <span class="hljs-keyword">for</span> password <span class="hljs-keyword">in</span> password_:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">            fr.write(password)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">            fr.write(<span class="hljs-string">'\n'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    gen_(<span class="hljs-number">1994</span>, <span class="hljs-number">1996</span>)</span></pre></td></tr></table></figure>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">big_month_ = [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">10</span>, <span class="hljs-number">12</span>]</span><br><span class="line">small_month_ = [<span class="hljs-number">4</span>, <span class="hljs-number">6</span>, <span class="hljs-number">9</span>, <span class="hljs-number">11</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">gen_</span><span class="hljs-params">(begin, end)</span>:</span></span><br><span class="line">    password_ = []</span><br><span class="line">    <span class="hljs-keyword">for</span> year <span class="hljs-keyword">in</span> range(begin, end + <span class="hljs-number">1</span>):</span><br><span class="line">        <span class="hljs-keyword">for</span> month <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">13</span>):</span><br><span class="line">            <span class="hljs-keyword">if</span> month <span class="hljs-keyword">in</span> big_month_:</span><br><span class="line">                month_len = <span class="hljs-number">31</span></span><br><span class="line">            <span class="hljs-keyword">elif</span> month <span class="hljs-keyword">in</span> small_month_:</span><br><span class="line">                month_len = <span class="hljs-number">30</span></span><br><span class="line">            <span class="hljs-keyword">elif</span> month == <span class="hljs-number">2</span>:</span><br><span class="line">                <span class="hljs-keyword">if</span> year % <span class="hljs-number">4</span> != <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> (year % <span class="hljs-number">100</span> == <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> year % <span class="hljs-number">400</span> != <span class="hljs-number">0</span>):</span><br><span class="line">                    month_len = <span class="hljs-number">28</span></span><br><span class="line">                <span class="hljs-keyword">else</span>:</span><br><span class="line">                    month_len = <span class="hljs-number">29</span></span><br><span class="line">            <span class="hljs-keyword">else</span>:</span><br><span class="line">                month_len = <span class="hljs-number">31</span></span><br><span class="line"></span><br><span class="line">            <span class="hljs-keyword">for</span> day <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, month_len + <span class="hljs-number">1</span>):</span><br><span class="line">                password_.append(str(year) + str(month).zfill(<span class="hljs-number">2</span>) + str(day).zfill(<span class="hljs-number">2</span>))</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">with</span> open(<span class="hljs-string">'password.dict'</span>, <span class="hljs-string">'w'</span>) <span class="hljs-keyword">as</span> fr:</span><br><span class="line">        <span class="hljs-keyword">for</span> password <span class="hljs-keyword">in</span> password_:</span><br><span class="line">            fr.write(password)</span><br><span class="line">            fr.write(<span class="hljs-string">'\n'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span></span><br><span class="line">    gen_(<span class="hljs-number">1994</span>, <span class="hljs-number">1996</span>)</span><br></pre></td></tr></table></figure>
 <p>利用得到的用戶名列表和密碼字典就可以對所有未修改的用戶密碼進行暴破。</p>
 <h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>最後結果怎麼樣？使用 100 個線程，並設置單個線程的訪問頻率爲 1 次/秒進行暴破，10 分鐘破解出了接近 40 個用戶密碼！並且平均每四個人裏就有一個人沒有修改密碼！<br>可能很多人會覺得教務網密碼不涉及錢財也就不那麼在意。但其實教務網上有詳細的個人資料，包括你的姓名、照片和家庭住址。另外還有你的課表，你某時某刻會在哪個教室出現都會被人知道啊！<br>所以，弱密碼的危害顯而易見，很多的信息泄漏也都是由弱密碼引起的。給自己換個複雜點的密碼吧，畢竟密碼這種東西一寸長一寸強。現在也快到年底了，騙子也要賺錢備年貨了，希望大家能夠保護好自己的信息，不要給騙子可乘之機。<br>最後討伐一下這個軟件提供商，一個商業化的系統裏面竟然有如此明顯的邏輯漏洞，只希望快點被修復吧。<br><img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/source_code.png" alt="source_code"></p>
 
@@ -344,7 +348,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            37
+                            38
                         </p>
                     </a>
                 </div>
@@ -500,15 +504,15 @@
                 <span class="level-item">Gnuplot</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Linux/">
             <span class="level-start">
-                <span class="level-item">Linux</span>
+                <span class="level-item">LinuxEmacs</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">14</span>
+                <span class="level-item tag">143</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Linux/Emacs/">
@@ -519,6 +523,14 @@
                 <span class="level-item tag">3</span>
             </span>
         </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Linux/Emacs/">
+            <span class="level-start">
+                <span class="level-item">Emacs</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/Machine-Learning/">
             <span class="level-start">
                 <span class="level-item">Machine Learning</span>
@@ -537,10 +549,10 @@
         </a></li><li>
         <a class="level is-marginless" href="/categories/Python/">
             <span class="level-start">
-                <span class="level-item">Python</span>
+                <span class="level-item">PythonSpidermatplotlibspider</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">8122</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Python/Spider/">
@@ -567,6 +579,30 @@
                 <span class="level-item tag">2</span>
             </span>
         </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Python/Spider/">
+            <span class="level-start">
+                <span class="level-item">Spider</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/matplotlib/">
+            <span class="level-start">
+                <span class="level-item">matplotlib</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/spider/">
+            <span class="level-start">
+                <span class="level-item">spider</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/Statistics/">
             <span class="level-start">
                 <span class="level-item">Statistics</span>
@@ -601,7 +637,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Agenda/" style="font-size: 10px;">Agenda</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/Emacs/" style="font-size: 15px;">Emacs</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Gnuplot/" style="font-size: 10px;">Gnuplot</a> <a href="/tags/Graphviz/" style="font-size: 10px;">Graphviz</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Magit/" style="font-size: 10px;">Magit</a> <a href="/tags/Math/" style="font-size: 12.5px;">Math</a> <a href="/tags/Org/" style="font-size: 10px;">Org</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Plot/" style="font-size: 10px;">Plot</a> <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/Spider/" style="font-size: 10px;">Spider</a> <a href="/tags/Sploit/" style="font-size: 10px;">Sploit</a> <a href="/tags/Statistics/" style="font-size: 10px;">Statistics</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/matplotlib/" style="font-size: 12.5px;">matplotlib</a> <a href="/tags/mu4e/" style="font-size: 10px;">mu4e</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 12.5px;">plot</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
+        <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/Agenda/" style="font-size: 10px;">Agenda</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/Brightness/" style="font-size: 10px;">Brightness</a> <a href="/tags/Cantonese/" style="font-size: 10px;">Cantonese</a> <a href="/tags/DWM/" style="font-size: 10px;">DWM</a> <a href="/tags/DwarfFortress/" style="font-size: 10px;">DwarfFortress</a> <a href="/tags/Emacs/" style="font-size: 15px;">Emacs</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Gnuplot/" style="font-size: 12.5px;">Gnuplot</a> <a href="/tags/Graphviz/" style="font-size: 10px;">Graphviz</a> <a href="/tags/HiDPI/" style="font-size: 10px;">HiDPI</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Magit/" style="font-size: 10px;">Magit</a> <a href="/tags/Math/" style="font-size: 12.5px;">Math</a> <a href="/tags/Org/" style="font-size: 10px;">Org</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Plot/" style="font-size: 12.5px;">Plot</a> <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/Spider/" style="font-size: 10px;">Spider</a> <a href="/tags/Sploit/" style="font-size: 10px;">Sploit</a> <a href="/tags/Statistics/" style="font-size: 10px;">Statistics</a> <a href="/tags/Vim/" style="font-size: 10px;">Vim</a> <a href="/tags/fcitx/" style="font-size: 10px;">fcitx</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/matplotlib/" style="font-size: 12.5px;">matplotlib</a> <a href="/tags/mu4e/" style="font-size: 10px;">mu4e</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/planche/" style="font-size: 10px;">planche</a> <a href="/tags/plot/" style="font-size: 12.5px;">plot</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" style="font-size: 10px;">图像处理</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E7%B2%92%E5%AD%90%E7%BE%A3%E5%84%AA%E5%8C%96/" style="font-size: 10px;">粒子羣優化</a> <a href="/tags/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8/" style="font-size: 10px;">線性代數</a>
     </div>
 </div>
     
@@ -613,6 +649,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%9B%BE%E4%BE%8B/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Gnuplot 绘图第二弹-标签与图例">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-05T07:01:00.000Z">2020-05-05</time></div>
+                    <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%9B%BE%E4%BE%8B/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Gnuplot 绘图第二弹-标签与图例</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Gnuplot/">Gnuplot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -690,25 +745,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 Graphviz 绘制流程图">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-11T02:37:00.000Z">2020-03-11</time></div>
-                    <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 Graphviz 绘制流程图</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -726,7 +762,7 @@
                     <span class="level-item">五月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1048,7 +1084,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gnuplot/">
                         <span class="tag">Gnuplot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1104,7 +1140,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Plot/">
                         <span class="tag">Plot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1251,6 +1287,25 @@
         
         <article class="media">
             
+            <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%9B%BE%E4%BE%8B/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Gnuplot 绘图第二弹-标签与图例">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-05T07:01:00.000Z">2020-05-05</time></div>
+                    <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%BA%8C%E5%BC%B9-%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%9B%BE%E4%BE%8B/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Gnuplot 绘图第二弹-标签与图例</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Gnuplot/">Gnuplot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/05/05/Gnuplot-%E7%BB%98%E5%9B%BE%E7%AC%AC%E4%B8%80%E5%BC%B9-%E4%BA%8C%E7%BB%B4%E6%95%B0%E6%8D%AE%E7%BB%98%E5%9B%BE/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Gnuplot 绘图第一弹-二维数据绘图">
@@ -1325,25 +1380,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用 Emacs 与 Graphviz 绘制流程图">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-11T02:37:00.000Z">2020-03-11</time></div>
-                    <a href="/2020/03/11/%E4%BD%BF%E7%94%A8-Emacs-%E4%B8%8E-Graphviz-%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用 Emacs 与 Graphviz 绘制流程图</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a> / <a class="has-link-grey -link" href="/categories/Linux/Emacs/">Emacs</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1361,7 +1397,7 @@
                     <span class="level-item">五月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1683,7 +1719,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gnuplot/">
                         <span class="tag">Gnuplot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1739,7 +1775,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Plot/">
                         <span class="tag">Plot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2002,7 +2038,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
     
     
-<a id="back-to-top" title="回到顶端" href="javascript:;" target="_blank" rel="noopener">
+<a id="back-to-top" title="回到顶端" href="javascript:;">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>
@@ -2053,5 +2089,21 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/search.css">
 <link rel="stylesheet" href="/css/insight.css">
     
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 </body>
 </html>
