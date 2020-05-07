@@ -159,7 +159,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 600 个字)
+                    4 分钟 读完 (大约 621 个字)
                 </span>
                 
                 
@@ -215,7 +215,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    8 分钟 读完 (大约 1247 个字)
+                    8 分钟 读完 (大约 1274 个字)
                 </span>
                 
                 
@@ -2227,5 +2227,21 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/search.css">
 <link rel="stylesheet" href="/css/insight.css">
     
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 </body>
 </html>

@@ -19,7 +19,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://cycoe.cc/images/og_image.png">
 <meta property="article:published_time" content="2020-05-06T12:37:00.000Z">
-<meta property="article:modified_time" content="2020-05-06T14:06:41.576Z">
+<meta property="article:modified_time" content="2020-05-07T02:03:01.103Z">
 <meta property="article:author" content="Cycoe">
 <meta property="article:tag" content="Gnuplot">
 <meta property="article:tag" content="Plot">
@@ -148,7 +148,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 600 个字)
+                    4 分钟 读完 (大约 621 个字)
                 </span>
                 
                 
@@ -173,16 +173,18 @@
 
 <a id="more"></a>
 
-<div id="outline-container-org3d8b8ec" class="outline-2">
-<h2 id="org3d8b8ec">安排子图阵列</h2>
-<div class="outline-text-2" id="text-org3d8b8ec">
+<div id="outline-container-org2b3ff43" class="outline-2">
+<h2 id="org2b3ff43">安排子图阵列</h2>
+<div class="outline-text-2" id="text-org2b3ff43">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span class="linenr">1 </span><span style="font-weight: bold; text-decoration: underline;">set</span> multiplot layout 2, 2
-<span class="linenr">2 </span><span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">besj0</span>(x)
-<span class="linenr">3 </span><span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">besj1</span>(x)
-<span class="linenr">4 </span><span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">besy0</span>(x)
-<span class="linenr">5 </span><span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">besy1</span>(x)
-<span class="linenr">6 </span><span style="font-weight: bold; text-decoration: underline;">unset</span> multiplot
+<span class="linenr">2 </span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#23558; key &#25918;&#22312; top margin &#20013;&#65292;&#24182;&#29992; box &#21253;&#35065;&#36215;&#26469;</span>
+<span class="linenr">3 </span><span style="font-weight: bold; text-decoration: underline;">set</span> key tmargin left box <span style="font-weight: bold; text-decoration: underline;">lt</span> -1
+<span class="linenr">4 </span><span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">besj0</span>(x)
+<span class="linenr">5 </span><span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">besj1</span>(x)
+<span class="linenr">6 </span><span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">besy0</span>(x)
+<span class="linenr">7 </span><span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">besy1</span>(x)
+<span class="linenr">8 </span><span style="font-weight: bold; text-decoration: underline;">unset</span> multiplot
 </pre>
 </div>
 
@@ -194,9 +196,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgb56384e" class="outline-2">
-<h2 id="orgb56384e">手动摆放位置</h2>
-<div class="outline-text-2" id="text-orgb56384e">
+<div id="outline-container-orgaff37fe" class="outline-2">
+<h2 id="orgaff37fe">手动摆放位置</h2>
+<div class="outline-text-2" id="text-orgaff37fe">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span class="linenr"> 1 </span><span style="font-weight: bold; text-decoration: underline;">set</span> multiplot
 <span class="linenr"> 2 </span><span style="font-weight: bold; text-decoration: underline;">unset</span> key
@@ -227,9 +229,9 @@
 </div>
 </div>
 
-<div id="outline-container-org34c2a38" class="outline-2">
-<h2 id="org34c2a38">内嵌子图</h2>
-<div class="outline-text-2" id="text-org34c2a38">
+<div id="outline-container-org2b98461" class="outline-2">
+<h2 id="org2b98461">内嵌子图</h2>
+<div class="outline-text-2" id="text-org2b98461">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span class="linenr"> 1 </span><span style="font-weight: bold; text-decoration: underline;">set</span> multiplot
 <span class="linenr"> 2 </span><span style="font-weight: bold; text-decoration: underline;">set</span> object ellipse center .13, 0 size .4, 4
@@ -270,9 +272,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgf7f2324" class="outline-2">
-<h2 id="orgf7f2324">多子图中的标签与箭头</h2>
-<div class="outline-text-2" id="text-orgf7f2324">
+<div id="outline-container-org5643023" class="outline-2">
+<h2 id="org5643023">多子图中的标签与箭头</h2>
+<div class="outline-text-2" id="text-org5643023">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span class="linenr"> 1 </span><span style="font-weight: bold; text-decoration: underline;">set</span> xrange [<span style="font-weight: bold; text-decoration: underline;">-pi:pi</span>]
 <span class="linenr"> 2 </span><span style="font-weight: bold; text-decoration: underline;">set</span> ytics 0.5
@@ -2190,5 +2192,21 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/search.css">
 <link rel="stylesheet" href="/css/insight.css">
     
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 </body>
 </html>
