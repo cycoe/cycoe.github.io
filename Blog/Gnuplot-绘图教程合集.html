@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-05-15 Fri 22:06 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gnuplot 绘图教程合集</title>
+<meta name="generator" content="Org mode" />
+<link rel="stylesheet" type="text/css" href="/static/css/default.css" />
+</head>
+<body>
+<div id="preamble" class="status">
+<header>
+    <nav>Cycoe@Home</nav>
+    <ul class="menu">
+        <li><a href="/">Index</a></li>
+        <li><a href="/Photo/index.html">Photo</a></li>
+        <li><a href="/about.html">About</a></li>
+    </ul>
+</header>
+</div>
+<div id="content">
+<h1 class="title">Gnuplot 绘图教程合集</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org896c508">1. Gnuplot 绘图第一弹-二维数据绘图</a></li>
+<li><a href="#org7626dcd">2. Gnuplot 绘图第二弹-标签与图例</a></li>
+<li><a href="#org5bb9446">3. Gnuplot 绘图第三弹-颜色与样式</a></li>
+<li><a href="#orgf4f4a7d">4. Gnuplot 绘图第四弹-调整刻度</a></li>
+<li><a href="#orgb8df055">5. Gnuplot 绘图第五弹-多子图绘制 </a></li>
+<li><a href="#org5d077af">6. Gnuplot 绘图第七弹-Gnuplot 式编程与数据处理</a></li>
+<li><a href="#org880e85a">7. Gnuplot 绘图第八弹-3D 绘图</a></li>
+</ul>
+</div>
+</div>
+<blockquote>
+<p>
+<a href="https://http//gnuplot.info/">Gnuplot</a> is a portable command-line driven graphing utility for Linux, OS/2, MS
+Windows, OSX, VMS, and many other platforms. The source code is copyrighted but
+freely distributed (i.e., you don't have to pay for it). It was originally
+created to allow scientists and students to visualize mathematical functions and
+data interactively, but has grown to support many non-interactive uses such as
+web scripting. It is also used as a plotting engine by third-party applications
+like Octave. Gnuplot has been supported and under active development since 1986.
+</p>
+</blockquote>
+
+<p>
+我等科研狗选择的图形界面绘图工具一般是 Origin，无奈 Origin 并不支持 Linux，另一
+方面希望选择一款命令行下的绘图工具可以更好地整合至我的工作流中。Linux 中我等凡人
+能够驾驭的绘图工具主要是 Gnuplot 和 Matplotlib，Matplotlib 是 Python 的一个第三
+方模块，可生成印制质量的数据图。但是 Gnuplot 的官方 Demo 一下就让我心动了，
+Gnuplot的默认配色也太好看了，清新淡雅。因此花了几日研究了一下 Gnuplot 的语法，看
+了网上一些博客。还没来得及看官方 1000 多页的手册，先下了一本叫 <i>Gnuplot Cookbook</i>
+的书学习了一下，本教程中的内容与代码也全部来自于此书，并对其中一些不合理以及过时
+的地方进行了一些修改，我使用的 Gnuplot 版本为 <code>Version 5.2 patchlevel 8</code> 。另提一
+句，Gnuplot 虽然名字中带有 <code>Gnu</code> 但并不是 <code>GNU</code> 项目的一部分，这也是为什么没有全部大
+写的原因。
+</p>
+
+<!-- more -->
+
+<div id="outline-container-org896c508" class="outline-2">
+<h2 id="org896c508"><span class="section-number-2">1</span> <a href="Gnuplot-绘图第一弹-二维数据绘图.html">Gnuplot 绘图第一弹-二维数据绘图</a></h2>
+</div>
+<div id="outline-container-org7626dcd" class="outline-2">
+<h2 id="org7626dcd"><span class="section-number-2">2</span> <a href="Gnuplot-绘图第二弹-标签与图例.html">Gnuplot 绘图第二弹-标签与图例</a></h2>
+</div>
+<div id="outline-container-org5bb9446" class="outline-2">
+<h2 id="org5bb9446"><span class="section-number-2">3</span> <a href="Gnuplot-绘图第三弹-颜色与样式.html">Gnuplot 绘图第三弹-颜色与样式</a></h2>
+</div>
+<div id="outline-container-orgf4f4a7d" class="outline-2">
+<h2 id="orgf4f4a7d"><span class="section-number-2">4</span> <a href="Gnuplot-绘图第四弹-调整刻度.html">Gnuplot 绘图第四弹-调整刻度</a></h2>
+</div>
+<div id="outline-container-orgb8df055" class="outline-2">
+<h2 id="orgb8df055"><span class="section-number-2">5</span> <a href="Gnuplot-绘图第五弹-多子图绘制.html">Gnuplot 绘图第五弹-多子图绘制 </a></h2>
+</div>
+<div id="outline-container-org5d077af" class="outline-2">
+<h2 id="org5d077af"><span class="section-number-2">6</span> <a href="Gnuplot-绘图第七弹-Gnuplot-式编程与数据处理.html">Gnuplot 绘图第七弹-Gnuplot 式编程与数据处理</a></h2>
+</div>
+<div id="outline-container-org880e85a" class="outline-2">
+<h2 id="org880e85a"><span class="section-number-2">7</span> <a href="Gnuplot-绘图第八弹-3D-绘图.html">Gnuplot 绘图第八弹-3D 绘图</a></h2>
+</div>
+</div>
+<div id="postamble" class="status">
+<footer>
+    <img src="/img/Cc-logo-128x128.png" height="14px" width="14px" />
+    本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
+</footer>
+</div>
+</body>
+</html>

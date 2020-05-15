@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-05-15 Fri 22:06 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Git 合并多次 Commit 及在 Magit 中的操作</title>
+<meta name="generator" content="Org mode" />
+<link rel="stylesheet" type="text/css" href="/static/css/default.css" />
+</head>
+<body>
+<div id="preamble" class="status">
+<header>
+    <nav>Cycoe@Home</nav>
+    <ul class="menu">
+        <li><a href="/">Index</a></li>
+        <li><a href="/Photo/index.html">Photo</a></li>
+        <li><a href="/about.html">About</a></li>
+    </ul>
+</header>
+</div>
+<div id="content">
+<h1 class="title">Git 合并多次 Commit 及在 Magit 中的操作</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org76c7cfe">1. 查看 Git 记录</a></li>
+<li><a href="#orgc74af56">2. 合并记录</a></li>
+<li><a href="#orgf9026a4">3. 使用 Magit 合并记录</a></li>
+</ul>
+</div>
+</div>
+<p>
+用 Git 的时候经常会有这么一个需求，就是提交了一次 Commit 后发现还有一个文件忘了
+提交进去，或者最近的几次提交都是相似的更新内容。那可以 Reset 到之前的状态再重新
+提交，虽然可行，但有的时候会很麻烦。其实在 Git 中 Rebase 也可以简单地实现这个功
+能。
+</p>
+
+<!-- more -->
+
+<div id="outline-container-org76c7cfe" class="outline-2">
+<h2 id="org76c7cfe"><span class="section-number-2">1</span> 查看 Git 记录</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+使用 <code>git log</code> 可以查看最近的提交记录，可以看到我最近提交了三个具有同样信息的
+Commit。
+</p>
+
+
+<div class="figure">
+<p><img src="./Git-合并多次-Commit-及在-Magit-中的操作/Screenshot_20200420_212329_vcag6x.png" alt="Screenshot_20200420_212329_vcag6x.png" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc74af56" class="outline-2">
+<h2 id="orgc74af56"><span class="section-number-2">2</span> 合并记录</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+执行 <code>git rebase -i HEAD~3</code> 对最近的三个 Commit 进行合并，其实此处的真实含义是以当
+前节点前面的第三个节点为基，并计算当前与该节点的差异，并重新生成 Commit。Git 会
+自动地打开 Vim 或什么其它编辑器你可以看到以下文本。
+</p>
+
+
+<div class="figure">
+<p><img src="./Git-合并多次-Commit-及在-Magit-中的操作/Screenshot_20200420_212420_e22p6F.png" alt="Screenshot_20200420_212420_e22p6F.png" />
+</p>
+</div>
+
+<p>
+你可以看到每一个 Commit 最前面都有一个描述词，该描述词决定了如何处理该 Commit 。
+如此处我只想保留第一个 Commit 的 Message，那么我就将后面两个 Commit 改为 <code>fixup</code> 。
+</p>
+
+
+<div class="figure">
+<p><img src="./Git-合并多次-Commit-及在-Magit-中的操作/Screenshot_20200420_212920_pS9Kzy.png" alt="Screenshot_20200420_212920_pS9Kzy.png" />
+</p>
+</div>
+
+<p>
+然后保存退出，Git 会自动合并多个历史。如果有冲突，记得解决冲突后，使用 <code>git
+rebase --continue</code> 重新回到当前的过程。
+</p>
+
+
+<div class="figure">
+<p><img src="./Git-合并多次-Commit-及在-Magit-中的操作/Screenshot_20200420_213131_bxEGbB.png" alt="Screenshot_20200420_213131_bxEGbB.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf9026a4" class="outline-2">
+<h2 id="orgf9026a4"><span class="section-number-2">3</span> 使用 Magit 合并记录</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+使用 Magit 进行记录合并与 Git 命令行是相似的。将光标放在要作为基的 Commit 上，并
+使用快捷键 <code>r i</code> 。
+</p>
+
+
+<div class="figure">
+<p><img src="./Git-合并多次-Commit-及在-Magit-中的操作/Screenshot_20200420_213548_6oXCeJ.png" alt="Screenshot_20200420_213548_6oXCeJ.png" />
+</p>
+</div>
+
+<p>
+不同之处在于 Magit 中可以很方便地利用快捷键完成工作。
+</p>
+
+
+<div class="figure">
+<p><img src="./Git-合并多次-Commit-及在-Magit-中的操作/Screenshot_20200420_213644_fC9olF.png" alt="Screenshot_20200420_213644_fC9olF.png" />
+</p>
+</div>
+
+<p>
+可以看到注释中已经贴心地列出了快捷键，我们只需要在第二个和第三个 <code>pick</code> 上按下 <code>f</code>
+，然后 <code>C-c C-c</code> 提交即可。
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<footer>
+    <img src="/img/Cc-logo-128x128.png" height="14px" width="14px" />
+    本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-05-15 Fri 22:06 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gnuplot 绘图第五弹-多子图绘制</title>
+<meta name="generator" content="Org mode" />
+<link rel="stylesheet" type="text/css" href="/static/css/default.css" />
+</head>
+<body>
+<div id="preamble" class="status">
+<header>
+    <nav>Cycoe@Home</nav>
+    <ul class="menu">
+        <li><a href="/">Index</a></li>
+        <li><a href="/Photo/index.html">Photo</a></li>
+        <li><a href="/about.html">About</a></li>
+    </ul>
+</header>
+</div>
+<div id="content">
+<h1 class="title">Gnuplot 绘图第五弹-多子图绘制</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org9a79423">1. 安排子图阵列</a></li>
+<li><a href="#org0c26cd7">2. 手动摆放位置</a></li>
+<li><a href="#orgaf66588">3. 内嵌子图</a></li>
+<li><a href="#orga98b45c">4. 多子图中的标签与箭头</a></li>
+</ul>
+</div>
+</div>
+<p>
+在本弹中，主要介绍关于在 Gnuplot 绘制多个子图的一些事。
+</p>
+
+<!-- more -->
+
+<div id="outline-container-org9a79423" class="outline-2">
+<h2 id="org9a79423"><span class="section-number-2">1</span> 安排子图阵列</h2>
+<div class="outline-text-2" id="text-1">
+<div class="org-src-container">
+<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> multiplot layout 2, 2
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#23558; key &#25918;&#22312; top margin &#20013;&#65292;&#24182;&#29992; box &#21253;&#35065;&#36215;&#26469;</span>
+<span style="font-weight: bold; text-decoration: underline;">set</span> key tmargin left box <span style="font-weight: bold; text-decoration: underline;">lt</span> -1
+<span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">besj0</span>(x)
+<span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">besj1</span>(x)
+<span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">besy0</span>(x)
+<span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">besy1</span>(x)
+<span style="font-weight: bold; text-decoration: underline;">unset</span> multiplot
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="./Gnuplot-绘图第五弹-多子图绘制/c5-array-of-plots.png" alt="c5-array-of-plots.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0c26cd7" class="outline-2">
+<h2 id="org0c26cd7"><span class="section-number-2">2</span> 手动摆放位置</h2>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
+<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> multiplot
+<span style="font-weight: bold; text-decoration: underline;">unset</span> key
+<span style="font-weight: bold; text-decoration: underline;">unset</span> tics
+<span style="font-weight: bold; text-decoration: underline;">set</span> polar
+<span style="font-weight: bold; text-decoration: underline;">unset</span> border
+
+<span style="font-weight: bold; text-decoration: underline;">set</span> size 1, .5
+<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">pi:2*pi</span>] 1 <span style="font-weight: bold; text-decoration: underline;">lw</span> 5
+
+<span style="font-weight: bold; text-decoration: underline;">set</span> origin 0, .5
+<span style="font-weight: bold; text-decoration: underline;">set</span> size .5, .5
+<span style="font-weight: bold;">plot</span> 1 <span style="font-weight: bold; text-decoration: underline;">lw</span> 2, .2 <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">filledcurves</span>
+
+<span style="font-weight: bold; text-decoration: underline;">set</span> origin .5, .5
+<span style="font-weight: bold; text-decoration: underline;">set</span> size .5, .5
+<span style="font-weight: bold;">plot</span> 1 <span style="font-weight: bold; text-decoration: underline;">lw</span> 2, .2 <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">filledcurves</span>
+
+<span style="font-weight: bold; text-decoration: underline;">unset</span> multiplot
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="./Gnuplot-绘图第五弹-多子图绘制/c5-position-manually.png" alt="c5-position-manually.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgaf66588" class="outline-2">
+<h2 id="orgaf66588"><span class="section-number-2">3</span> 内嵌子图</h2>
+<div class="outline-text-2" id="text-3">
+<div class="org-src-container">
+<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> multiplot
+<span style="font-weight: bold; text-decoration: underline;">set</span> object ellipse center .13, 0 size .4, 4
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#27492;&#22788;&#26159;&#19968;&#20010;&#38750;&#24120;&#22909;&#30340;&#21033;&#29992;&#22810;&#20010;&#22352;&#26631;&#31995;&#36827;&#34892;&#23450;&#20301;&#30340;&#31034;&#20363;&#65292;arrow &#40664;&#35748;&#30340;&#22352;&#26631;&#31995;&#26159;&#31532;&#19968;&#22352;&#26631;&#31995;&#65292;</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#20063;&#23601;&#26159; axis &#22352;&#26631;&#31995;&#65292;screen &#20851;&#38190;&#23383;&#26159;&#23631;&#24149;&#22352;&#26631;&#31995;&#65292;&#26159;&#22312;&#23631;&#24149;&#19978;&#20301;&#32622;&#30340;&#30334;&#20998;&#27604;</span>
+<span style="font-weight: bold; text-decoration: underline;">set</span> arrow from .1, 2.1 to screen .22, .4 front head filled size screen 0.03, 15, 135
+<span style="font-weight: bold; text-decoration: underline;">set</span> samples 1000
+<span style="font-weight: bold; text-decoration: underline;">set</span> grid
+<span style="font-weight: bold; text-decoration: underline;">set</span> xtics .4
+<span style="font-weight: bold; text-decoration: underline;">set</span> ytics 10
+<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">0:2*pi</span>] <span style="font-weight: bold;">exp</span>(x)*<span style="font-weight: bold;">sin</span>(1/x)
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">reset &#20250;&#23558;&#25152;&#26377;&#30340;&#35774;&#32622;&#37325;&#32622;&#65292;&#21253;&#25324; samples &#35774;&#32622;&#12290;&#27492;&#22788;&#20063;&#21487;&#20197;&#21333;&#29420; unset arrow,</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">object &#31561;&#20869;&#23481;</span>
+<span style="font-weight: bold; text-decoration: underline;">reset</span>
+<span style="font-weight: bold; text-decoration: underline;">set</span> origin .2, .4
+<span style="font-weight: bold; text-decoration: underline;">set</span> size .4, .4
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">clear &#29992;&#20110;&#28165;&#38500;&#26032;&#23450;&#20041;&#30340;&#23376;&#22270;&#21306;&#22495;&#20869;&#30340;&#20869;&#23481;&#65292;&#27492;&#22788;&#20027;&#35201;&#26159;&#20026;&#20102;&#28165;&#38500;&#32593;&#26684;&#32447;</span>
+<span style="font-weight: bold; text-decoration: underline;">clear</span>
+<span style="font-weight: bold; text-decoration: underline;">set</span> sample 1000
+<span style="font-weight: bold; text-decoration: underline;">set</span> nokey
+<span style="font-weight: bold; text-decoration: underline;">set</span> xtics .1
+<span style="font-weight: bold; text-decoration: underline;">set</span> ytics .5
+<span style="font-weight: bold; text-decoration: underline;">set</span> bmargin 1
+<span style="font-weight: bold; text-decoration: underline;">set</span> tmargin 1
+<span style="font-weight: bold; text-decoration: underline;">set</span> lmargin 3
+<span style="font-weight: bold; text-decoration: underline;">set</span> rmargin 1
+<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">0:.2</span>] <span style="font-weight: bold;">exp</span>(x)*<span style="font-weight: bold;">sin</span>(1/x)
+<span style="font-weight: bold; text-decoration: underline;">unset</span> multiplot
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="./Gnuplot-绘图第五弹-多子图绘制/c5-insert-plot.png" alt="c5-insert-plot.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga98b45c" class="outline-2">
+<h2 id="orga98b45c"><span class="section-number-2">4</span> 多子图中的标签与箭头</h2>
+<div class="outline-text-2" id="text-4">
+<div class="org-src-container">
+<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> xrange [<span style="font-weight: bold; text-decoration: underline;">-pi:pi</span>]
+<span style="font-weight: bold; text-decoration: underline;">set</span> ytics 0.5
+<span style="font-weight: bold; text-decoration: underline;">unset</span> key
+<span style="font-weight: bold; text-decoration: underline;">set</span> multiplot layout 2,2 <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"Derivatives of Sin(x)"</span> font <span style="font-style: italic;">",22"</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">size screen &#21518;&#38754;&#30340;&#31532;&#19968;&#20010;&#25968;&#23383;&#26159;&#31661;&#22836;&#30340;&#38271;&#24230;&#65292;15 &#26159;&#21069;&#38754;&#30340;&#35282;&#24230;&#65292;135 &#26159;&#21518;&#38754;&#30340;&#35282;&#24230;</span>
+<span style="font-weight: bold; text-decoration: underline;">set</span> style arrow 1 head filled size screen 0.03,15,135 <span style="font-weight: bold; text-decoration: underline;">lt</span> 2 <span style="font-weight: bold; text-decoration: underline;">lw</span> 2
+<span style="font-weight: bold; text-decoration: underline;">set</span> arrow 1 from screen .41,.74 to screen .65,.74 arrowstyle 1
+<span style="font-weight: bold; text-decoration: underline;">set</span> arrow 2 from screen .87,.64 to screen .87,.3 arrowstyle 1
+<span style="font-weight: bold; text-decoration: underline;">set</span> arrow 3 from screen .7,.15 to screen .4,.15 arrowstyle 1
+<span style="font-weight: bold; text-decoration: underline;">set</span> arrow 4 from screen .35,.35 to screen .35,.7 arrowstyle 1
+
+<span style="font-weight: bold; text-decoration: underline;">set</span> <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"sin(x)"</span>
+<span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">sin</span>(x)
+<span style="font-weight: bold; text-decoration: underline;">set</span> <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"sin\'(x) = cos(x)"</span>
+<span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">cos</span>(x)
+<span style="font-weight: bold; text-decoration: underline;">set</span> <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"sin\'\'\'(x) = cos\'\'(x) = -sin\'(x) = -cos(x)"</span>
+<span style="font-weight: bold;">plot</span> -<span style="font-weight: bold;">cos</span>(x)
+<span style="font-weight: bold; text-decoration: underline;">set</span> <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"sin\'\'(x) = cos\'(x) = -sin(x)"</span>
+<span style="font-weight: bold;">plot</span> -<span style="font-weight: bold;">sin</span>(x)
+<span style="font-weight: bold; text-decoration: underline;">unset</span> multiplot
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="./Gnuplot-绘图第五弹-多子图绘制/c5-multiplot-with-label.png" alt="c5-multiplot-with-label.png" />
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<footer>
+    <img src="/img/Cc-logo-128x128.png" height="14px" width="14px" />
+    本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
+</footer>
+</div>
+</body>
+</html>
