@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-05-15 Fri 22:14 -->
+<!-- 2020-05-15 Fri 23:51 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gnuplot 绘图第三弹-颜色与样式</title>
@@ -27,14 +27,14 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgdff8997">1. 设置曲线的颜色</a></li>
-<li><a href="#org1ff6f40">2. 自定义曲线的样式</a></li>
-<li><a href="#org5b6aa33">3. 透明的技术</a></li>
-<li><a href="#org00a9031">4. 带点的线</a></li>
-<li><a href="#org602bdec">5. 定制点的样式</a></li>
-<li><a href="#org1f73bf0">6. 改变图像的大小</a></li>
-<li><a href="#org65593d3">7. 改变 Axes 的大小</a></li>
-<li><a href="#orgb7b8221">8. 绘制对象</a></li>
+<li><a href="#orgee9aa27">1. 设置曲线的颜色</a></li>
+<li><a href="#org3b5f943">2. 自定义曲线的样式</a></li>
+<li><a href="#org8d0be3d">3. 透明的技术</a></li>
+<li><a href="#org6dc9571">4. 带点的线</a></li>
+<li><a href="#org9286db3">5. 定制点的样式</a></li>
+<li><a href="#org2b72010">6. 改变图像的大小</a></li>
+<li><a href="#orga04e80c">7. 改变 Axes 的大小</a></li>
+<li><a href="#org7b26c88">8. 绘制对象</a></li>
 </ul>
 </div>
 </div>
@@ -45,8 +45,8 @@
 
 <!-- more -->
 
-<div id="outline-container-orgdff8997" class="outline-2">
-<h2 id="orgdff8997"><span class="section-number-2">1</span> 设置曲线的颜色</h2>
+<div id="outline-container-orgee9aa27" class="outline-2">
+<h2 id="orgee9aa27"><span class="section-number-2">1</span> 设置曲线的颜色</h2>
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#35774;&#32622;&#20840;&#23616;&#30340;&#32447;&#23485;&#65292;&#21253;&#25324;&#26354;&#32447;&#12289;&#36793;&#26694;&#12289;&#21051;&#24230;</span>
@@ -69,8 +69,8 @@
 </div>
 </div>
 
-<div id="outline-container-org1ff6f40" class="outline-2">
-<h2 id="org1ff6f40"><span class="section-number-2">2</span> 自定义曲线的样式</h2>
+<div id="outline-container-org3b5f943" class="outline-2">
+<h2 id="org3b5f943"><span class="section-number-2">2</span> 自定义曲线的样式</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">png &#21518;&#31471;&#19981;&#25903;&#25345;&#26174;&#31034; dash &#65292;&#27880;&#24847;&#27492;&#22788;&#20999;&#25442;&#33267; pngcairo</span>
@@ -95,8 +95,8 @@
 </div>
 </div>
 
-<div id="outline-container-org5b6aa33" class="outline-2">
-<h2 id="org5b6aa33"><span class="section-number-2">3</span> 透明的技术</h2>
+<div id="outline-container-org8d0be3d" class="outline-2">
+<h2 id="org8d0be3d"><span class="section-number-2">3</span> 透明的技术</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> term pngcairo
@@ -117,8 +117,8 @@
 </div>
 </div>
 
-<div id="outline-container-org00a9031" class="outline-2">
-<h2 id="org00a9031"><span class="section-number-2">4</span> 带点的线</h2>
+<div id="outline-container-org6dc9571" class="outline-2">
+<h2 id="org6dc9571"><span class="section-number-2">4</span> 带点的线</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">sin</span>(x)/x <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">linespoints</span> <span style="font-weight: bold; text-decoration: underline;">pointsize</span> 2 <span style="font-weight: bold; text-decoration: underline;">pointtype</span> 6 <span style="font-weight: bold; text-decoration: underline;">lw</span> 2
@@ -133,8 +133,8 @@
 </div>
 </div>
 
-<div id="outline-container-org602bdec" class="outline-2">
-<h2 id="org602bdec"><span class="section-number-2">5</span> 定制点的样式</h2>
+<div id="outline-container-org9286db3" class="outline-2">
+<h2 id="org9286db3"><span class="section-number-2">5</span> 定制点的样式</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> key top left
@@ -159,8 +159,8 @@
 </div>
 </div>
 
-<div id="outline-container-org1f73bf0" class="outline-2">
-<h2 id="org1f73bf0"><span class="section-number-2">6</span> 改变图像的大小</h2>
+<div id="outline-container-org2b72010" class="outline-2">
+<h2 id="org2b72010"><span class="section-number-2">6</span> 改变图像的大小</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#27492;&#22788;&#30340; size &#23545;&#20110; eps &#31561;&#30690;&#37327;&#22270;&#26469;&#35828;&#32477;&#23545;&#23610;&#23544;&#24182;&#27809;&#26377;&#24847;&#20041;&#65292;&#21482;&#26159;&#34920;&#31034;&#38271;&#23485;&#27604;&#65292;&#35774;&#20026; 6,3</span>
@@ -179,8 +179,8 @@
 </div>
 </div>
 
-<div id="outline-container-org65593d3" class="outline-2">
-<h2 id="org65593d3"><span class="section-number-2">7</span> 改变 Axes 的大小</h2>
+<div id="outline-container-orga04e80c" class="outline-2">
+<h2 id="orga04e80c"><span class="section-number-2">7</span> 改变 Axes 的大小</h2>
 <div class="outline-text-2" id="text-7">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> key off
@@ -197,8 +197,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgb7b8221" class="outline-2">
-<h2 id="orgb7b8221"><span class="section-number-2">8</span> 绘制对象</h2>
+<div id="outline-container-org7b26c88" class="outline-2">
+<h2 id="org7b26c88"><span class="section-number-2">8</span> 绘制对象</h2>
 <div class="outline-text-2" id="text-8">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">unset</span> key
