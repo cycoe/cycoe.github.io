@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-05-15 Fri 22:06 -->
+<!-- 2020-05-15 Fri 23:50 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>利用 Python 完成自动化群发邮件</title>
@@ -27,9 +27,9 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org752ddeb">1. 生成通讯录</a></li>
-<li><a href="#orgad00fbc">2. 定义邮件内容</a></li>
-<li><a href="#org2a11cb4">3. 发送邮件</a></li>
+<li><a href="#org94de52a">1. 生成通讯录</a></li>
+<li><a href="#org20fe921">2. 定义邮件内容</a></li>
+<li><a href="#org5802e85">3. 发送邮件</a></li>
 </ul>
 </div>
 </div>
@@ -44,8 +44,8 @@
 Python 中已经实现了 <code>stmp</code> 的相关接口在 <code>smtplib</code> 模块中，邮件结构相关的接口在 <code>email</code> 模块中。
 </p>
 
-<div id="outline-container-org752ddeb" class="outline-2">
-<h2 id="org752ddeb"><span class="section-number-2">1</span> 生成通讯录</h2>
+<div id="outline-container-org94de52a" class="outline-2">
+<h2 id="org94de52a"><span class="section-number-2">1</span> 生成通讯录</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 在批量发送邮件之前，一定要有一份结构化的通讯录，不管是用 list 也好，用 dict 存储也好。此处，我是使用 <code>xlrd</code> 模块从 Excel 表格中读取数据，并将其存储在 dict 中。对于邮件来说，收件人的名字可能会出现重名，但邮件地址应该是唯一的，因此选用邮件地址作为字典的键。
@@ -85,8 +85,8 @@ Python 中已经实现了 <code>stmp</code> 的相关接口在 <code>smtplib</co
 </p>
 </div>
 </div>
-<div id="outline-container-orgad00fbc" class="outline-2">
-<h2 id="orgad00fbc"><span class="section-number-2">2</span> 定义邮件内容</h2>
+<div id="outline-container-org20fe921" class="outline-2">
+<h2 id="org20fe921"><span class="section-number-2">2</span> 定义邮件内容</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 第一步是生成邮件对象，代码示例如下：
@@ -140,8 +140,8 @@ Python 中已经实现了 <code>stmp</code> 的相关接口在 <code>smtplib</co
 </div>
 </div>
 </div>
-<div id="outline-container-org2a11cb4" class="outline-2">
-<h2 id="org2a11cb4"><span class="section-number-2">3</span> 发送邮件</h2>
+<div id="outline-container-org5802e85" class="outline-2">
+<h2 id="org5802e85"><span class="section-number-2">3</span> 发送邮件</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Python 中使用 <code>smtplib</code> 来处理 smtp 协议，示例代码如下：

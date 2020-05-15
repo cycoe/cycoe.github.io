@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-05-15 Fri 22:06 -->
+<!-- 2020-05-15 Fri 23:50 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gnuplot 绘图第八弹-3D 绘图</title>
@@ -27,22 +27,22 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgfc2c666">1. 绘制表面</a></li>
-<li><a href="#org2521e8f">2. 坐标映射</a></li>
-<li><a href="#org42ebb3d">3. 给表面上色</a></li>
-<li><a href="#orgd1f9fdf">4. 等高线图</a></li>
-<li><a href="#org32c368c">5. 矢量图</a></li>
-<li><a href="#orgc81a748">6. 热力图</a></li>
-<li><a href="#orgd87ab7d">7. 同时绘制热力图和等高线图</a></li>
-<li><a href="#org4adab2e">8. 同时绘制热力图和表面</a></li>
-<li><a href="#orgffd42de">9. 使用参数方程绘制路径</a></li>
-<li><a href="#org9e00fd4">10. 使用参数方程绘制表面</a></li>
+<li><a href="#org2277f74">1. 绘制表面</a></li>
+<li><a href="#org154b7f0">2. 坐标映射</a></li>
+<li><a href="#orgd85b8ff">3. 给表面上色</a></li>
+<li><a href="#org09af64d">4. 等高线图</a></li>
+<li><a href="#org86654d8">5. 矢量图</a></li>
+<li><a href="#orga7f03d5">6. 热力图</a></li>
+<li><a href="#orge11f8d2">7. 同时绘制热力图和等高线图</a></li>
+<li><a href="#org721cf88">8. 同时绘制热力图和表面</a></li>
+<li><a href="#org1a4b9da">9. 使用参数方程绘制路径</a></li>
+<li><a href="#org126ab54">10. 使用参数方程绘制表面</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgfc2c666" class="outline-2">
-<h2 id="orgfc2c666"><span class="section-number-2">1</span> 绘制表面</h2>
+<div id="outline-container-org2277f74" class="outline-2">
+<h2 id="org2277f74"><span class="section-number-2">1</span> 绘制表面</h2>
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#32593;&#26684;&#30340;&#37319;&#26679;&#25968;</span>
@@ -69,8 +69,8 @@
 </div>
 </div>
 
-<div id="outline-container-org2521e8f" class="outline-2">
-<h2 id="org2521e8f"><span class="section-number-2">2</span> 坐标映射</h2>
+<div id="outline-container-org154b7f0" class="outline-2">
+<h2 id="org154b7f0"><span class="section-number-2">2</span> 坐标映射</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#23558;&#25968;&#25454;&#35299;&#37322;&#20026;&#22278;&#26609;&#24418;&#22352;&#26631;&#31995;</span>
@@ -97,8 +97,8 @@
 </div>
 </div>
 
-<div id="outline-container-org42ebb3d" class="outline-2">
-<h2 id="org42ebb3d"><span class="section-number-2">3</span> 给表面上色</h2>
+<div id="outline-container-orgd85b8ff" class="outline-2">
+<h2 id="orgd85b8ff"><span class="section-number-2">3</span> 给表面上色</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> iso 100
@@ -145,8 +145,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgd1f9fdf" class="outline-2">
-<h2 id="orgd1f9fdf"><span class="section-number-2">4</span> 等高线图</h2>
+<div id="outline-container-org09af64d" class="outline-2">
+<h2 id="org09af64d"><span class="section-number-2">4</span> 等高线图</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#35774;&#32622;&#31561;&#39640;&#32447;&#30340;&#25968;&#37327;</span>
@@ -197,8 +197,8 @@
 </div>
 </div>
 
-<div id="outline-container-org32c368c" class="outline-2">
-<h2 id="org32c368c"><span class="section-number-2">5</span> 矢量图</h2>
+<div id="outline-container-org86654d8" class="outline-2">
+<h2 id="org86654d8"><span class="section-number-2">5</span> 矢量图</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> xrange [<span style="font-weight: bold; text-decoration: underline;">0:pi</span>]
@@ -242,8 +242,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgc81a748" class="outline-2">
-<h2 id="orgc81a748"><span class="section-number-2">6</span> 热力图</h2>
+<div id="outline-container-orga7f03d5" class="outline-2">
+<h2 id="orga7f03d5"><span class="section-number-2">6</span> 热力图</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> xrange [<span style="font-weight: bold; text-decoration: underline;">-4:4</span>]
@@ -290,8 +290,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgd87ab7d" class="outline-2">
-<h2 id="orgd87ab7d"><span class="section-number-2">7</span> 同时绘制热力图和等高线图</h2>
+<div id="outline-container-orge11f8d2" class="outline-2">
+<h2 id="orge11f8d2"><span class="section-number-2">7</span> 同时绘制热力图和等高线图</h2>
 <div class="outline-text-2" id="text-7">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> xrange [<span style="font-weight: bold; text-decoration: underline;">0:pi</span>]
@@ -319,8 +319,8 @@
 </div>
 </div>
 
-<div id="outline-container-org4adab2e" class="outline-2">
-<h2 id="org4adab2e"><span class="section-number-2">8</span> 同时绘制热力图和表面</h2>
+<div id="outline-container-org721cf88" class="outline-2">
+<h2 id="org721cf88"><span class="section-number-2">8</span> 同时绘制热力图和表面</h2>
 <div class="outline-text-2" id="text-8">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> iso 40
@@ -387,8 +387,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgffd42de" class="outline-2">
-<h2 id="orgffd42de"><span class="section-number-2">9</span> 使用参数方程绘制路径</h2>
+<div id="outline-container-org1a4b9da" class="outline-2">
+<h2 id="org1a4b9da"><span class="section-number-2">9</span> 使用参数方程绘制路径</h2>
 <div class="outline-text-2" id="text-9">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> samp 100
@@ -410,8 +410,8 @@
 </div>
 </div>
 
-<div id="outline-container-org9e00fd4" class="outline-2">
-<h2 id="org9e00fd4"><span class="section-number-2">10</span> 使用参数方程绘制表面</h2>
+<div id="outline-container-org126ab54" class="outline-2">
+<h2 id="org126ab54"><span class="section-number-2">10</span> 使用参数方程绘制表面</h2>
 <div class="outline-text-2" id="text-10">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> param

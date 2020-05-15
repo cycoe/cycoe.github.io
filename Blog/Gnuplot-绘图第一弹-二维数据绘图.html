@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-05-15 Fri 22:06 -->
+<!-- 2020-05-15 Fri 23:50 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gnuplot 绘图第一弹-二维数据绘图</title>
@@ -27,9 +27,9 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgac1ccb5">1. 调色板</a></li>
-<li><a href="#org1cd4ad2">2. Hello World</a></li>
-<li><a href="#orgd46ccf5">3. 绘制曲线的同时指定坐标范围</a></li>
+<li><a href="#org7e9114b">1. 调色板</a></li>
+<li><a href="#org4cb8a32">2. Hello World</a></li>
+<li><a href="#org8d7b1cb">3. 绘制曲线的同时指定坐标范围</a></li>
 </ul>
 </div>
 </div>
@@ -47,8 +47,8 @@ like Octave. Gnuplot has been supported and under active development since 1986.
 
 <!-- more -->
 
-<div id="outline-container-orgac1ccb5" class="outline-2">
-<h2 id="orgac1ccb5"><span class="section-number-2">1</span> 调色板</h2>
+<div id="outline-container-org7e9114b" class="outline-2">
+<h2 id="org7e9114b"><span class="section-number-2">1</span> 调色板</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 在 Gnuplot 的交互式命令行中使用 <code>test</code> 命令可以调出调色板，查看 Gnuplot 支持的样式
@@ -88,8 +88,8 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 </div>
 
-<div id="outline-container-org1cd4ad2" class="outline-2">
-<h2 id="org1cd4ad2"><span class="section-number-2">2</span> Hello World</h2>
+<div id="outline-container-org4cb8a32" class="outline-2">
+<h2 id="org4cb8a32"><span class="section-number-2">2</span> Hello World</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">reset</span>
@@ -105,8 +105,8 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 </div>
 
-<div id="outline-container-orgd46ccf5" class="outline-2">
-<h2 id="orgd46ccf5"><span class="section-number-2">3</span> 绘制曲线的同时指定坐标范围</h2>
+<div id="outline-container-org8d7b1cb" class="outline-2">
+<h2 id="org8d7b1cb"><span class="section-number-2">3</span> 绘制曲线的同时指定坐标范围</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold;">plot</span> [][<span style="font-weight: bold; text-decoration: underline;">-3:1.5</span>] (<span style="font-weight: bold;">sin</span>(1/x) - <span style="font-weight: bold;">cos</span>(x))*<span style="font-weight: bold;">erfc</span>(x)
