@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-05-15 Fri 23:50 -->
+<!-- 2020-05-16 Sat 11:21 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>使用 Emacs 与 Org mode 进行 GTD 管理</title>
@@ -27,13 +27,13 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgbce822b">1. 基本想法</a></li>
-<li><a href="#org4227b92">2. 整体流程</a></li>
-<li><a href="#org1b42421">3. 任务拆分</a></li>
-<li><a href="#orgb1294cd">4. 为任务添加更多属性</a></li>
-<li><a href="#org24dd306">5. 查看任务概览</a></li>
-<li><a href="#org7d645fa">6. 任务完成</a></li>
-<li><a href="#orgf17220a">7. 任务回顾</a></li>
+<li><a href="#org760b539">1. 基本想法</a></li>
+<li><a href="#org3a08438">2. 整体流程</a></li>
+<li><a href="#org1bea939">3. 任务拆分</a></li>
+<li><a href="#org9b67c0e">4. 为任务添加更多属性</a></li>
+<li><a href="#org3891a3b">5. 查看任务概览</a></li>
+<li><a href="#orgca2afb3">6. 任务完成</a></li>
+<li><a href="#org945ad49">7. 任务回顾</a></li>
 </ul>
 </div>
 </div>
@@ -52,8 +52,8 @@
 
 <!-- more -->
 
-<div id="outline-container-orgbce822b" class="outline-2">
-<h2 id="orgbce822b"><span class="section-number-2">1</span> 基本想法</h2>
+<div id="outline-container-org760b539" class="outline-2">
+<h2 id="org760b539"><span class="section-number-2">1</span> 基本想法</h2>
 <div class="outline-text-2" id="text-1">
 <ol class="org-ol">
 <li>从空间尺度上，不同项目隶属于不同的 Org 文件，而不同的 Org 文件加入到不同的
@@ -66,8 +66,8 @@ agenda 中，实现基于项目的管理方式。</li>
 </div>
 </div>
 
-<div id="outline-container-org4227b92" class="outline-2">
-<h2 id="org4227b92"><span class="section-number-2">2</span> 整体流程</h2>
+<div id="outline-container-org3a08438" class="outline-2">
+<h2 id="org3a08438"><span class="section-number-2">2</span> 整体流程</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 参照 <i>皮波迪</i> 的博客 <a href="https://www.cnblogs.com/quantumman/p/10808174.html">以 Emacs Org mode 为核心的任务管理方案</a>，设计适合自己的工作流。
@@ -95,8 +95,8 @@ agenda 中，实现基于项目的管理方式。</li>
 </div>
 </div>
 
-<div id="outline-container-org1b42421" class="outline-2">
-<h2 id="org1b42421"><span class="section-number-2">3</span> 任务拆分</h2>
+<div id="outline-container-org1bea939" class="outline-2">
+<h2 id="org1bea939"><span class="section-number-2">3</span> 任务拆分</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 对于耗时较长的非周期任务，需要拆分成更小的任务来进行处理。大型的任务可以作为单独
@@ -124,8 +124,8 @@ agenda 上方显示的标题， <code>"~/export/learn-org.html"</code> 为导出
 </div>
 </div>
 
-<div id="outline-container-orgb1294cd" class="outline-2">
-<h2 id="orgb1294cd"><span class="section-number-2">4</span> 为任务添加更多属性</h2>
+<div id="outline-container-org9b67c0e" class="outline-2">
+<h2 id="org9b67c0e"><span class="section-number-2">4</span> 为任务添加更多属性</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 标签是一种非线性的组织方式，Org mode 中的每一个 headline 都支持标签。在 headline
@@ -139,8 +139,8 @@ agenda 上方显示的标题， <code>"~/export/learn-org.html"</code> 为导出
 </div>
 </div>
 
-<div id="outline-container-org24dd306" class="outline-2">
-<h2 id="org24dd306"><span class="section-number-2">5</span> 查看任务概览</h2>
+<div id="outline-container-org3891a3b" class="outline-2">
+<h2 id="org3891a3b"><span class="section-number-2">5</span> 查看任务概览</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以列视图的模式显示出来。
@@ -163,8 +163,8 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
 </div>
 </div>
 
-<div id="outline-container-org7d645fa" class="outline-2">
-<h2 id="org7d645fa"><span class="section-number-2">6</span> 任务完成</h2>
+<div id="outline-container-orgca2afb3" class="outline-2">
+<h2 id="orgca2afb3"><span class="section-number-2">6</span> 任务完成</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span>
@@ -176,8 +176,8 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
 </div>
 </div>
 
-<div id="outline-container-orgf17220a" class="outline-2">
-<h2 id="orgf17220a"><span class="section-number-2">7</span> 任务回顾</h2>
+<div id="outline-container-org945ad49" class="outline-2">
+<h2 id="org945ad49"><span class="section-number-2">7</span> 任务回顾</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 <code>&lt;C-c C-x C-d&gt;</code> 查看各个任务的耗时与总和。

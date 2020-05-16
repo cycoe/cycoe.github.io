@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-05-15 Fri 23:50 -->
+<!-- 2020-05-16 Sat 11:21 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gnuplot 绘图第四弹-调整刻度</title>
@@ -27,17 +27,17 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgac69984">1. 启用副刻度</a></li>
-<li><a href="#org8fdbd62">2. 第二坐标轴上的刻度</a></li>
-<li><a href="#orge827e2c">3. 调整刻度的长度</a></li>
-<li><a href="#org06da9b2">4. 移除所有的刻度</a></li>
-<li><a href="#orgc272b28">5. 精细调整刻度值</a></li>
-<li><a href="#org6959c82">6. 刻度朝外</a></li>
-<li><a href="#org7b78489">7. 手动设置刻度标签</a></li>
-<li><a href="#org6336525">8. 时间和日期标签</a></li>
-<li><a href="#org25e4fe7">9. 在时间标签中启用地域设置</a></li>
-<li><a href="#org61d1c7c">10. 设置不同地域的数字格式</a></li>
-<li><a href="#org4075377">11. 格式化刻度标签</a></li>
+<li><a href="#org265c9ca">1. 启用副刻度</a></li>
+<li><a href="#org22e4132">2. 第二坐标轴上的刻度</a></li>
+<li><a href="#org6d21c8c">3. 调整刻度的长度</a></li>
+<li><a href="#org0cb492e">4. 移除所有的刻度</a></li>
+<li><a href="#org756c34b">5. 精细调整刻度值</a></li>
+<li><a href="#org7adcf56">6. 刻度朝外</a></li>
+<li><a href="#orge560bb0">7. 手动设置刻度标签</a></li>
+<li><a href="#org545c7cc">8. 时间和日期标签</a></li>
+<li><a href="#org242504a">9. 在时间标签中启用地域设置</a></li>
+<li><a href="#orgc32635e">10. 设置不同地域的数字格式</a></li>
+<li><a href="#org62ce931">11. 格式化刻度标签</a></li>
 </ul>
 </div>
 </div>
@@ -48,8 +48,8 @@
 
 <!-- more -->
 
-<div id="outline-container-orgac69984" class="outline-2">
-<h2 id="orgac69984"><span class="section-number-2">1</span> 启用副刻度</h2>
+<div id="outline-container-org265c9ca" class="outline-2">
+<h2 id="org265c9ca"><span class="section-number-2">1</span> 启用副刻度</h2>
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> sample 500
@@ -71,8 +71,8 @@
 </div>
 </div>
 
-<div id="outline-container-org8fdbd62" class="outline-2">
-<h2 id="org8fdbd62"><span class="section-number-2">2</span> 第二坐标轴上的刻度</h2>
+<div id="outline-container-org22e4132" class="outline-2">
+<h2 id="org22e4132"><span class="section-number-2">2</span> 第二坐标轴上的刻度</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> ytics nomirror
@@ -95,8 +95,8 @@
 </div>
 </div>
 
-<div id="outline-container-orge827e2c" class="outline-2">
-<h2 id="orge827e2c"><span class="section-number-2">3</span> 调整刻度的长度</h2>
+<div id="outline-container-org6d21c8c" class="outline-2">
+<h2 id="org6d21c8c"><span class="section-number-2">3</span> 调整刻度的长度</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#23558;&#20027;&#21051;&#24230;&#30340;&#38271;&#24230;&#35843;&#25972;&#33267;&#40664;&#35748;&#20540;&#30340; 3 &#20493;&#12290;&#22914;&#26524;&#27809;&#26377;&#29305;&#27530;&#25351;&#23450;&#65292;&#21103;&#21051;&#24230;&#30340;&#38271;&#24230;&#26159;&#20027;&#21051;&#24230;&#30340;&#19968;</span>
@@ -117,8 +117,8 @@
 </div>
 </div>
 
-<div id="outline-container-org06da9b2" class="outline-2">
-<h2 id="org06da9b2"><span class="section-number-2">4</span> 移除所有的刻度</h2>
+<div id="outline-container-org0cb492e" class="outline-2">
+<h2 id="org0cb492e"><span class="section-number-2">4</span> 移除所有的刻度</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Gnuplot &#20013;&#26377;&#20004;&#31181;&#34920;&#36798;&#26041;&#24335;&#65292;=unset tics= &#21644; =set notics= &#31561;&#20215;</span>
@@ -136,8 +136,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgc272b28" class="outline-2">
-<h2 id="orgc272b28"><span class="section-number-2">5</span> 精细调整刻度值</h2>
+<div id="outline-container-org756c34b" class="outline-2">
+<h2 id="org756c34b"><span class="section-number-2">5</span> 精细调整刻度值</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> size ratio 1
@@ -172,8 +172,8 @@
 </div>
 </div>
 
-<div id="outline-container-org6959c82" class="outline-2">
-<h2 id="org6959c82"><span class="section-number-2">6</span> 刻度朝外</h2>
+<div id="outline-container-org7adcf56" class="outline-2">
+<h2 id="org7adcf56"><span class="section-number-2">6</span> 刻度朝外</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> tics out
@@ -191,8 +191,8 @@
 </div>
 </div>
 
-<div id="outline-container-org7b78489" class="outline-2">
-<h2 id="org7b78489"><span class="section-number-2">7</span> 手动设置刻度标签</h2>
+<div id="outline-container-orge560bb0" class="outline-2">
+<h2 id="orge560bb0"><span class="section-number-2">7</span> 手动设置刻度标签</h2>
 <div class="outline-text-2" id="text-7">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> xtics (<span style="font-style: italic;">"{/Symbol p}"</span> pi, <span style="font-style: italic;">"{/Symbol p}/2"</span> pi/2,\
@@ -212,10 +212,10 @@
 </div>
 </div>
 
-<div id="outline-container-org6336525" class="outline-2">
-<h2 id="org6336525"><span class="section-number-2">8</span> 时间和日期标签</h2>
+<div id="outline-container-org545c7cc" class="outline-2">
+<h2 id="org545c7cc"><span class="section-number-2">8</span> 时间和日期标签</h2>
 <div class="outline-text-2" id="text-8">
-<table id="org8f7d41f" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org125a0f1" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -279,8 +279,8 @@
 </div>
 </div>
 
-<div id="outline-container-org25e4fe7" class="outline-2">
-<h2 id="org25e4fe7"><span class="section-number-2">9</span> 在时间标签中启用地域设置</h2>
+<div id="outline-container-org242504a" class="outline-2">
+<h2 id="org242504a"><span class="section-number-2">9</span> 在时间标签中启用地域设置</h2>
 <div class="outline-text-2" id="text-9">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#21578;&#35785; Gnuplot x &#36724;&#30340;&#25968;&#25454;&#26159;&#26102;&#38388;</span>
@@ -306,8 +306,8 @@
 </div>
 </div>
 
-<div id="outline-container-org61d1c7c" class="outline-2">
-<h2 id="org61d1c7c"><span class="section-number-2">10</span> 设置不同地域的数字格式</h2>
+<div id="outline-container-orgc32635e" class="outline-2">
+<h2 id="orgc32635e"><span class="section-number-2">10</span> 设置不同地域的数字格式</h2>
 <div class="outline-text-2" id="text-10">
 <p>
 此处本来应该用 <code>set decimalsign locale "es_ES.utf8"</code> 来做演示才能看出区别，但是不
@@ -330,8 +330,8 @@
 </div>
 </div>
 
-<div id="outline-container-org4075377" class="outline-2">
-<h2 id="org4075377"><span class="section-number-2">11</span> 格式化刻度标签</h2>
+<div id="outline-container-org62ce931" class="outline-2">
+<h2 id="org62ce931"><span class="section-number-2">11</span> 格式化刻度标签</h2>
 <div class="outline-text-2" id="text-11">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> ylabel <span style="font-style: italic;">"Output power"</span>
