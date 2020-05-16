@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-05-15 Fri 23:51 -->
+<!-- 2020-05-16 Sat 10:44 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>使用 Emacs 与 Graphviz 绘制流程图</title>
@@ -27,22 +27,22 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org920dade">1. 安装</a>
+<li><a href="#org3e95cfe">1. 安装</a>
 <ul>
-<li><a href="#orgda6d134">1.1. Graphviz</a></li>
-<li><a href="#org9d9716c">1.2. graphviz-dot-mode</a></li>
+<li><a href="#orgf7af92c">1.1. Graphviz</a></li>
+<li><a href="#orgeb21540">1.2. graphviz-dot-mode</a></li>
 </ul>
 </li>
-<li><a href="#org9bb47a4">2. 布局器</a></li>
-<li><a href="#orgbaa834f">3. 基本使用</a></li>
-<li><a href="#orge74a3b2">4. 绘制属性</a>
+<li><a href="#orgfeea283">2. 布局器</a></li>
+<li><a href="#orge64ed49">3. 基本使用</a></li>
+<li><a href="#org7c7a59b">4. 绘制属性</a>
 <ul>
-<li><a href="#org1477346">4.1. 节点</a></li>
-<li><a href="#orgd452580">4.2. 边</a></li>
-<li><a href="#org5311390">4.3. 边的方向</a></li>
+<li><a href="#org6f17d6b">4.1. 节点</a></li>
+<li><a href="#orgf76c66f">4.2. 边</a></li>
+<li><a href="#org8d3e905">4.3. 边的方向</a></li>
 </ul>
 </li>
-<li><a href="#org60416b8">5. 子图</a></li>
+<li><a href="#org17b9e83">5. 子图</a></li>
 </ul>
 </div>
 </div>
@@ -66,12 +66,12 @@
 义上的函数图像那种图，而是数据结构中的图，强调的关系。
 </p>
 
-<div id="outline-container-org920dade" class="outline-2">
-<h2 id="org920dade"><span class="section-number-2">1</span> 安装</h2>
+<div id="outline-container-org3e95cfe" class="outline-2">
+<h2 id="org3e95cfe"><span class="section-number-2">1</span> 安装</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgda6d134" class="outline-3">
-<h3 id="orgda6d134"><span class="section-number-3">1.1</span> Graphviz</h3>
+<div id="outline-container-orgf7af92c" class="outline-3">
+<h3 id="orgf7af92c"><span class="section-number-3">1.1</span> Graphviz</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Graphviz 本质上是一个命令行工具，在 Archlinux 上只需要通过 <code>sudo pacman -S
@@ -80,8 +80,8 @@ graphviz</code> 安装即可，其他系统类似。
 </div>
 </div>
 
-<div id="outline-container-org9d9716c" class="outline-3">
-<h3 id="org9d9716c"><span class="section-number-3">1.2</span> graphviz-dot-mode</h3>
+<div id="outline-container-orgeb21540" class="outline-3">
+<h3 id="orgeb21540"><span class="section-number-3">1.2</span> graphviz-dot-mode</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Graphviz 在 Emacs 中的集成是通过 <code>graphviz-dot-mode</code> 这个包来实现的，只需要 <code>&lt;M-x&gt;
@@ -103,8 +103,8 @@ package-install graphviz-dot-mode &lt;RET&gt;</code> 即可。
 </div>
 </div>
 </div>
-<div id="outline-container-org9bb47a4" class="outline-2">
-<h2 id="org9bb47a4"><span class="section-number-2">2</span> 布局器</h2>
+<div id="outline-container-orgfeea283" class="outline-2">
+<h2 id="orgfeea283"><span class="section-number-2">2</span> 布局器</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Graphviz 中包含了众多的布局器：
@@ -119,8 +119,8 @@ Graphviz 中包含了众多的布局器：
 </div>
 </div>
 
-<div id="outline-container-orgbaa834f" class="outline-2">
-<h2 id="orgbaa834f"><span class="section-number-2">3</span> 基本使用</h2>
+<div id="outline-container-orge64ed49" class="outline-2">
+<h2 id="orge64ed49"><span class="section-number-2">3</span> 基本使用</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Graphviz 构建组件为图，节点，边，用属性对其进行描述。
@@ -181,8 +181,8 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </div>
 </div>
 
-<div id="outline-container-orge74a3b2" class="outline-2">
-<h2 id="orge74a3b2"><span class="section-number-2">4</span> 绘制属性</h2>
+<div id="outline-container-org7c7a59b" class="outline-2">
+<h2 id="org7c7a59b"><span class="section-number-2">4</span> 绘制属性</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 一个图中可能有非常多的节点与边，如果每次都需要声明一个节点的属性会非常麻烦。类似
@@ -217,7 +217,7 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </div>
 
 <p>
-<a id="org2951c7c"></a>
+<a id="org9e8cf33"></a>
 <img src="使用-Emacs-与-Graphviz-绘制流程图/property.png" alt="property.png" />
 </p>
 
@@ -271,8 +271,8 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </ul>
 </div>
 
-<div id="outline-container-org1477346" class="outline-3">
-<h3 id="org1477346"><span class="section-number-3">4.1</span> 节点</h3>
+<div id="outline-container-org6f17d6b" class="outline-3">
+<h3 id="org6f17d6b"><span class="section-number-3">4.1</span> 节点</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 节点的默认属性为 shape = ellipse, width = .75, height = 0.5 并且用节点标识符作为
@@ -280,7 +280,7 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </p>
 
 <p>
-如 <a href="#org2951c7c">图 1</a> 中所示，声明两个节点 <i>小蓝</i> 和 <i>小红/，/小蓝</i> 或 <i>小红</i> 就表示这个节点的节点标
+如 <a href="#org9e8cf33">图 1</a> 中所示，声明两个节点 <i>小蓝</i> 和 <i>小红/，/小蓝</i> 或 <i>小红</i> 就表示这个节点的节点标
 识符，后面紧跟的是该节点的属性列表；另一种用法为 节点标识符:节点部分:方向[属性列
 表] <code>小蓝:body[style=filled color=lightblue]</code>, 这个为单一节点声明的方式。
 </p>
@@ -307,8 +307,8 @@ source 或 min 的子图</li>
 </div>
 </div>
 
-<div id="outline-container-orgd452580" class="outline-3">
-<h3 id="orgd452580"><span class="section-number-3">4.2</span> 边</h3>
+<div id="outline-container-orgf76c66f" class="outline-3">
+<h3 id="orgf76c66f"><span class="section-number-3">4.2</span> 边</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 有向图中的的边用 <code>-&gt;</code> 表示，无向图用 <code>--</code> 表示。
@@ -485,8 +485,8 @@ ortho, 正交折线
 </div>
 </div>
 
-<div id="outline-container-org5311390" class="outline-3">
-<h3 id="org5311390"><span class="section-number-3">4.3</span> 边的方向</h3>
+<div id="outline-container-org8d3e905" class="outline-3">
+<h3 id="org8d3e905"><span class="section-number-3">4.3</span> 边的方向</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 <b>示例</b> 声明多部分节点，以及对各部分进行单独设置
@@ -529,8 +529,8 @@ node0:head[color=lightblue];
 </div>
 </div>
 
-<div id="outline-container-org60416b8" class="outline-2">
-<h2 id="org60416b8"><span class="section-number-2">5</span> 子图</h2>
+<div id="outline-container-org17b9e83" class="outline-2">
+<h2 id="org17b9e83"><span class="section-number-2">5</span> 子图</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 <b>subgraph</b> 必须配合 <b>cluster</b> 一起使用，用法为 =subgraph cluster* {} 。

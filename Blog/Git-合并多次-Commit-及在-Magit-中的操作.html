@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-05-15 Fri 23:51 -->
+<!-- 2020-05-16 Sat 10:44 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Git 合并多次 Commit 及在 Magit 中的操作</title>
@@ -27,9 +27,9 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgcd08557">1. 查看 Git 记录</a></li>
-<li><a href="#org15a2ac9">2. 合并记录</a></li>
-<li><a href="#org587bb69">3. 使用 Magit 合并记录</a></li>
+<li><a href="#org53d5827">1. 查看 Git 记录</a></li>
+<li><a href="#org47bf2ac">2. 合并记录</a></li>
+<li><a href="#org785a1fd">3. 使用 Magit 合并记录</a></li>
 </ul>
 </div>
 </div>
@@ -42,8 +42,8 @@
 
 <!-- more -->
 
-<div id="outline-container-orgcd08557" class="outline-2">
-<h2 id="orgcd08557"><span class="section-number-2">1</span> 查看 Git 记录</h2>
+<div id="outline-container-org53d5827" class="outline-2">
+<h2 id="org53d5827"><span class="section-number-2">1</span> 查看 Git 记录</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 使用 <code>git log</code> 可以查看最近的提交记录，可以看到我最近提交了三个具有同样信息的
@@ -57,8 +57,8 @@ Commit。
 </div>
 </div>
 </div>
-<div id="outline-container-org15a2ac9" class="outline-2">
-<h2 id="org15a2ac9"><span class="section-number-2">2</span> 合并记录</h2>
+<div id="outline-container-org47bf2ac" class="outline-2">
+<h2 id="org47bf2ac"><span class="section-number-2">2</span> 合并记录</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 执行 <code>git rebase -i HEAD~3</code> 对最近的三个 Commit 进行合并，其实此处的真实含义是以当
@@ -96,8 +96,8 @@ rebase --continue</code> 重新回到当前的过程。
 </div>
 </div>
 
-<div id="outline-container-org587bb69" class="outline-2">
-<h2 id="org587bb69"><span class="section-number-2">3</span> 使用 Magit 合并记录</h2>
+<div id="outline-container-org785a1fd" class="outline-2">
+<h2 id="org785a1fd"><span class="section-number-2">3</span> 使用 Magit 合并记录</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 使用 Magit 进行记录合并与 Git 命令行是相似的。将光标放在要作为基的 Commit 上，并
