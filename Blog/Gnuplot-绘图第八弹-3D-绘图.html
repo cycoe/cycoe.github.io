@@ -3,11 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-05-16 Sat 11:21 -->
+<!-- 2020-05-16 Sat 15:14 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gnuplot 绘图第八弹-3D 绘图</title>
 <meta name="generator" content="Org mode" />
+<meta name="author" content="Cycoe Joo" />
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 </head>
 <body>
@@ -24,40 +25,45 @@
 <div id="content">
 <h1 class="title">Gnuplot 绘图第八弹-3D 绘图</h1>
 <div id="table-of-contents">
-<h2>Table of Contents</h2>
+<h2> <a href="javascript:window.scrollTo(0,0)"
+        style="color: black !important; border-bottom: none !important;"
+        class="tooltip"
+        title="Go to the top of the page">
+       Ξ
+     </a> </h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgb85edb4">1. 绘制表面</a></li>
-<li><a href="#org837e0d4">2. 坐标映射</a></li>
-<li><a href="#org564f318">3. 给表面上色</a></li>
-<li><a href="#org83b961b">4. 等高线图</a></li>
-<li><a href="#org586aadc">5. 矢量图</a></li>
-<li><a href="#org298d595">6. 热力图</a></li>
-<li><a href="#org39dbaa1">7. 同时绘制热力图和等高线图</a></li>
-<li><a href="#orgfdf20d0">8. 同时绘制热力图和表面</a></li>
-<li><a href="#orgc25a376">9. 使用参数方程绘制路径</a></li>
-<li><a href="#orga848559">10. 使用参数方程绘制表面</a></li>
+<li><a href="#orgb11cf92">1. 绘制表面</a></li>
+<li><a href="#org3148d72">2. 坐标映射</a></li>
+<li><a href="#org6c90221">3. 给表面上色</a></li>
+<li><a href="#org0f94249">4. 等高线图</a></li>
+<li><a href="#orgb0b8cdc">5. 矢量图</a></li>
+<li><a href="#org93b827c">6. 热力图</a></li>
+<li><a href="#org222fbc3">7. 同时绘制热力图和等高线图</a></li>
+<li><a href="#org876b987">8. 同时绘制热力图和表面</a></li>
+<li><a href="#orge1bf07b">9. 使用参数方程绘制路径</a></li>
+<li><a href="#orgd228dda">10. 使用参数方程绘制表面</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgb85edb4" class="outline-2">
-<h2 id="orgb85edb4"><span class="section-number-2">1</span> 绘制表面</h2>
+<div id="outline-container-orgb11cf92" class="outline-2">
+<h2 id="orgb11cf92"><span class="section-number-2">1</span> 绘制表面</h2>
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#32593;&#26684;&#30340;&#37319;&#26679;&#25968;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> isosamples 40
-<span style="font-weight: bold; text-decoration: underline;">unset</span> key
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#38544;&#34255;&#34987;&#32593;&#26684;&#36974;&#25377;&#30340;&#20803;&#32032;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> hidden3d
-<span style="font-weight: bold; text-decoration: underline;">set</span> <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"J_0(r^2)"</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> xrange [<span style="font-weight: bold; text-decoration: underline;">-4:4</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> yrange [<span style="font-weight: bold; text-decoration: underline;">-4:4</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> ztics 1
+<pre class="src src-gnuplot"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#32593;&#26684;&#30340;&#37319;&#26679;&#25968;</span>
+<span style="color: #1f5bff;">set</span> isosamples 40
+<span style="color: #1f5bff;">unset</span> key
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#38544;&#34255;&#34987;&#32593;&#26684;&#36974;&#25377;&#30340;&#20803;&#32032;</span>
+<span style="color: #1f5bff;">set</span> hidden3d
+<span style="color: #1f5bff;">set</span> <span style="color: #18b2b2;">title</span> <span style="color: #ff1f8b;">"J_0(r^2)"</span>
+<span style="color: #1f5bff;">set</span> xrange [<span style="color: #1f5bff;">-4:4</span>]
+<span style="color: #1f5bff;">set</span> yrange [<span style="color: #1f5bff;">-4:4</span>]
+<span style="color: #1f5bff;">set</span> ztics 1
 
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#35270;&#35282;&#35282;&#24230;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> view 29,53
-<span style="font-weight: bold;">splot</span> <span style="font-weight: bold;">besj0</span>(x**2 + y**2)
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#35270;&#35282;&#35282;&#24230;</span>
+<span style="color: #1f5bff;">set</span> view 29,53
+<span style="color: #00af00;">splot</span> <span style="color: #ef2929;">besj0</span>(x**2 + y**2)
 </pre>
 </div>
 
@@ -69,23 +75,23 @@
 </div>
 </div>
 
-<div id="outline-container-org837e0d4" class="outline-2">
-<h2 id="org837e0d4"><span class="section-number-2">2</span> 坐标映射</h2>
+<div id="outline-container-org3148d72" class="outline-2">
+<h2 id="org3148d72"><span class="section-number-2">2</span> 坐标映射</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#23558;&#25968;&#25454;&#35299;&#37322;&#20026;&#22278;&#26609;&#24418;&#22352;&#26631;&#31995;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> mapping cylindrical
-<span style="font-weight: bold; text-decoration: underline;">set</span> hidden
-<span style="font-weight: bold; text-decoration: underline;">unset</span> border
-<span style="font-weight: bold; text-decoration: underline;">unset</span> tics
-<span style="font-weight: bold; text-decoration: underline;">set</span> xrange [<span style="font-weight: bold; text-decoration: underline;">-pi:pi</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> yrange [<span style="font-weight: bold; text-decoration: underline;">-pi:pi</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> zrange [<span style="font-weight: bold; text-decoration: underline;">0:pi</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> iso 60
-<span style="font-weight: bold; text-decoration: underline;">unset</span> key
-<span style="font-weight: bold; text-decoration: underline;">set</span> view 90,0
+<pre class="src src-gnuplot"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#23558;&#25968;&#25454;&#35299;&#37322;&#20026;&#22278;&#26609;&#24418;&#22352;&#26631;&#31995;</span>
+<span style="color: #1f5bff;">set</span> mapping cylindrical
+<span style="color: #1f5bff;">set</span> hidden
+<span style="color: #1f5bff;">unset</span> border
+<span style="color: #1f5bff;">unset</span> tics
+<span style="color: #1f5bff;">set</span> xrange [<span style="color: #1f5bff;">-pi:pi</span>]
+<span style="color: #1f5bff;">set</span> yrange [<span style="color: #1f5bff;">-pi:pi</span>]
+<span style="color: #1f5bff;">set</span> zrange [<span style="color: #1f5bff;">0:pi</span>]
+<span style="color: #1f5bff;">set</span> iso 60
+<span style="color: #1f5bff;">unset</span> key
+<span style="color: #1f5bff;">set</span> view 90,0
 
-<span style="font-weight: bold;">splot</span> <span style="font-style: italic;">'++'</span> <span style="font-weight: bold; text-decoration: underline;">using</span> 1:2:(<span style="font-weight: bold;">sin</span>($2)) <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">lines</span>
+<span style="color: #00af00;">splot</span> <span style="color: #ff1f8b;">'++'</span> <span style="color: #18b2b2;">using</span> 1:2:(<span style="color: #ef2929;">sin</span>($2)) <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">lines</span>
 </pre>
 </div>
 
@@ -97,21 +103,21 @@
 </div>
 </div>
 
-<div id="outline-container-org564f318" class="outline-2">
-<h2 id="org564f318"><span class="section-number-2">3</span> 给表面上色</h2>
+<div id="outline-container-org6c90221" class="outline-2">
+<h2 id="org6c90221"><span class="section-number-2">3</span> 给表面上色</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> iso 100
-<span style="font-weight: bold; text-decoration: underline;">set</span> samples 100
-<span style="font-weight: bold; text-decoration: underline;">unset</span> key
-<span style="font-weight: bold; text-decoration: underline;">set</span> <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"J_0(r^2)"</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> xrange [<span style="font-weight: bold; text-decoration: underline;">-4:4</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> yrange [<span style="font-weight: bold; text-decoration: underline;">-4:4</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> ztics 1
-<span style="font-weight: bold; text-decoration: underline;">unset</span> surface
-<span style="font-weight: bold; text-decoration: underline;">set</span> <span style="font-weight: bold;">pm3d</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> view 29,53
-<span style="font-weight: bold;">splot</span> <span style="font-weight: bold;">besj0</span>(x**2 + y**2)
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> iso 100
+<span style="color: #1f5bff;">set</span> samples 100
+<span style="color: #1f5bff;">unset</span> key
+<span style="color: #1f5bff;">set</span> <span style="color: #18b2b2;">title</span> <span style="color: #ff1f8b;">"J_0(r^2)"</span>
+<span style="color: #1f5bff;">set</span> xrange [<span style="color: #1f5bff;">-4:4</span>]
+<span style="color: #1f5bff;">set</span> yrange [<span style="color: #1f5bff;">-4:4</span>]
+<span style="color: #1f5bff;">set</span> ztics 1
+<span style="color: #1f5bff;">unset</span> surface
+<span style="color: #1f5bff;">set</span> <span style="color: #ef2929;">pm3d</span>
+<span style="color: #1f5bff;">set</span> view 29,53
+<span style="color: #00af00;">splot</span> <span style="color: #ef2929;">besj0</span>(x**2 + y**2)
 </pre>
 </div>
 
@@ -122,18 +128,18 @@
 </div>
 
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> iso 30
-<span style="font-weight: bold; text-decoration: underline;">set</span> samples 30
-<span style="font-weight: bold; text-decoration: underline;">unset</span> key
-<span style="font-weight: bold; text-decoration: underline;">set</span> <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"J_0(r^2)"</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> xrange [<span style="font-weight: bold; text-decoration: underline;">-4:4</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> yrange [<span style="font-weight: bold; text-decoration: underline;">-4:4</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> ztics 1
-<span style="font-weight: bold; text-decoration: underline;">unset</span> surface
-<span style="font-weight: bold; text-decoration: underline;">set</span> style line 1 <span style="font-weight: bold; text-decoration: underline;">lt</span> 4 <span style="font-weight: bold; text-decoration: underline;">lw</span> .5
-<span style="font-weight: bold; text-decoration: underline;">set</span> <span style="font-weight: bold;">pm3d</span> at s hidden3d 1
-<span style="font-weight: bold; text-decoration: underline;">set</span> view 29,53
-<span style="font-weight: bold;">splot</span> <span style="font-weight: bold;">besj0</span>(x**2 + y**2)
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> iso 30
+<span style="color: #1f5bff;">set</span> samples 30
+<span style="color: #1f5bff;">unset</span> key
+<span style="color: #1f5bff;">set</span> <span style="color: #18b2b2;">title</span> <span style="color: #ff1f8b;">"J_0(r^2)"</span>
+<span style="color: #1f5bff;">set</span> xrange [<span style="color: #1f5bff;">-4:4</span>]
+<span style="color: #1f5bff;">set</span> yrange [<span style="color: #1f5bff;">-4:4</span>]
+<span style="color: #1f5bff;">set</span> ztics 1
+<span style="color: #1f5bff;">unset</span> surface
+<span style="color: #1f5bff;">set</span> style line 1 <span style="color: #18b2b2;">lt</span> 4 <span style="color: #18b2b2;">lw</span> .5
+<span style="color: #1f5bff;">set</span> <span style="color: #ef2929;">pm3d</span> at s hidden3d 1
+<span style="color: #1f5bff;">set</span> view 29,53
+<span style="color: #00af00;">splot</span> <span style="color: #ef2929;">besj0</span>(x**2 + y**2)
 </pre>
 </div>
 
@@ -145,23 +151,23 @@
 </div>
 </div>
 
-<div id="outline-container-org83b961b" class="outline-2">
-<h2 id="org83b961b"><span class="section-number-2">4</span> 等高线图</h2>
+<div id="outline-container-org0f94249" class="outline-2">
+<h2 id="org0f94249"><span class="section-number-2">4</span> 等高线图</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#35774;&#32622;&#31561;&#39640;&#32447;&#30340;&#25968;&#37327;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> cntrparam levels 10
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#21578;&#35785; Gnuplot &#32472;&#21046;&#31561;&#39640;&#32447;&#22270;&#65292;&#24182;&#19988;&#32472;&#21046;&#22312; x-y &#38754;&#19978;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> contour base
-<span style="font-weight: bold; text-decoration: underline;">unset</span> sur
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#20174;&#27491;&#19978;&#26041;&#30475;&#19979;&#26469;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> view map
-<span style="font-weight: bold; text-decoration: underline;">set</span> xrange [<span style="font-weight: bold; text-decoration: underline;">-4:4</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> yrange [<span style="font-weight: bold; text-decoration: underline;">-4:4</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> iso 100
-<span style="font-weight: bold; text-decoration: underline;">set</span> samp 100
-<span style="font-weight: bold; text-decoration: underline;">set</span> key rmargin
-<span style="font-weight: bold;">splot</span> <span style="font-weight: bold;">sin</span>(x) + <span style="font-weight: bold;">cos</span>(2*y)
+<pre class="src src-gnuplot"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622;&#31561;&#39640;&#32447;&#30340;&#25968;&#37327;</span>
+<span style="color: #1f5bff;">set</span> cntrparam levels 10
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#21578;&#35785; Gnuplot &#32472;&#21046;&#31561;&#39640;&#32447;&#22270;&#65292;&#24182;&#19988;&#32472;&#21046;&#22312; x-y &#38754;&#19978;</span>
+<span style="color: #1f5bff;">set</span> contour base
+<span style="color: #1f5bff;">unset</span> sur
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#20174;&#27491;&#19978;&#26041;&#30475;&#19979;&#26469;</span>
+<span style="color: #1f5bff;">set</span> view map
+<span style="color: #1f5bff;">set</span> xrange [<span style="color: #1f5bff;">-4:4</span>]
+<span style="color: #1f5bff;">set</span> yrange [<span style="color: #1f5bff;">-4:4</span>]
+<span style="color: #1f5bff;">set</span> iso 100
+<span style="color: #1f5bff;">set</span> samp 100
+<span style="color: #1f5bff;">set</span> key rmargin
+<span style="color: #00af00;">splot</span> <span style="color: #ef2929;">sin</span>(x) + <span style="color: #ef2929;">cos</span>(2*y)
 </pre>
 </div>
 
@@ -172,20 +178,20 @@
 </div>
 
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#35774;&#32622;&#31561;&#39640;&#32447;&#30340;&#25968;&#37327;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> cntrparam levels 10
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#21578;&#35785; Gnuplot &#32472;&#21046;&#31561;&#39640;&#32447;&#22270;&#21644;&#34920;&#38754;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> contour both
-<span style="font-weight: bold; text-decoration: underline;">set</span> xrange [<span style="font-weight: bold; text-decoration: underline;">-4:4</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> yrange [<span style="font-weight: bold; text-decoration: underline;">-4:4</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> ztics 1
-<span style="font-weight: bold; text-decoration: underline;">set</span> iso 50
-<span style="font-weight: bold; text-decoration: underline;">set</span> samp 50
-<span style="font-weight: bold; text-decoration: underline;">set</span> hidden3d
-<span style="font-weight: bold; text-decoration: underline;">set</span> key rmargin
-<span style="font-weight: bold; text-decoration: underline;">set</span> style line 1 lc rgb <span style="font-style: italic;">'#cccccc'</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> view 60, 30
-<span style="font-weight: bold;">splot</span> <span style="font-weight: bold;">sin</span>(x) + <span style="font-weight: bold;">cos</span>(2*y) <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">lines</span> <span style="font-weight: bold; text-decoration: underline;">ls</span> 1
+<pre class="src src-gnuplot"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622;&#31561;&#39640;&#32447;&#30340;&#25968;&#37327;</span>
+<span style="color: #1f5bff;">set</span> cntrparam levels 10
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#21578;&#35785; Gnuplot &#32472;&#21046;&#31561;&#39640;&#32447;&#22270;&#21644;&#34920;&#38754;</span>
+<span style="color: #1f5bff;">set</span> contour both
+<span style="color: #1f5bff;">set</span> xrange [<span style="color: #1f5bff;">-4:4</span>]
+<span style="color: #1f5bff;">set</span> yrange [<span style="color: #1f5bff;">-4:4</span>]
+<span style="color: #1f5bff;">set</span> ztics 1
+<span style="color: #1f5bff;">set</span> iso 50
+<span style="color: #1f5bff;">set</span> samp 50
+<span style="color: #1f5bff;">set</span> hidden3d
+<span style="color: #1f5bff;">set</span> key rmargin
+<span style="color: #1f5bff;">set</span> style line 1 lc rgb <span style="color: #ff1f8b;">'#cccccc'</span>
+<span style="color: #1f5bff;">set</span> view 60, 30
+<span style="color: #00af00;">splot</span> <span style="color: #ef2929;">sin</span>(x) + <span style="color: #ef2929;">cos</span>(2*y) <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">lines</span> <span style="color: #18b2b2;">ls</span> 1
 </pre>
 </div>
 
@@ -197,18 +203,18 @@
 </div>
 </div>
 
-<div id="outline-container-org586aadc" class="outline-2">
-<h2 id="org586aadc"><span class="section-number-2">5</span> 矢量图</h2>
+<div id="outline-container-orgb0b8cdc" class="outline-2">
+<h2 id="orgb0b8cdc"><span class="section-number-2">5</span> 矢量图</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> xrange [<span style="font-weight: bold; text-decoration: underline;">0:pi</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> yrange [<span style="font-weight: bold; text-decoration: underline;">0:pi</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> iso 60
-<span style="font-weight: bold; text-decoration: underline;">set</span> samp 60
-<span style="font-weight: bold; text-decoration: underline;">unset</span> key
-<span style="font-weight: bold; font-style: italic;">a =</span> .2
-<span style="font-weight: bold;">plot</span> <span style="font-style: italic;">'++'</span> <span style="font-weight: bold; text-decoration: underline;">using</span> 1:2:(-a*<span style="font-weight: bold;">sin</span>($1)*<span style="font-weight: bold;">cos</span>($2)):(a*<span style="font-weight: bold;">cos</span>($1)*<span style="font-weight: bold;">sin</span>($2))\
-     <span style="font-weight: bold; text-decoration: underline;">with</span> vec size .06, 15 filled
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> xrange [<span style="color: #1f5bff;">0:pi</span>]
+<span style="color: #1f5bff;">set</span> yrange [<span style="color: #1f5bff;">0:pi</span>]
+<span style="color: #1f5bff;">set</span> iso 60
+<span style="color: #1f5bff;">set</span> samp 60
+<span style="color: #1f5bff;">unset</span> key
+<span style="color: #ff8700;">a =</span> .2
+<span style="color: #00af00;">plot</span> <span style="color: #ff1f8b;">'++'</span> <span style="color: #18b2b2;">using</span> 1:2:(-a*<span style="color: #ef2929;">sin</span>($1)*<span style="color: #ef2929;">cos</span>($2)):(a*<span style="color: #ef2929;">cos</span>($1)*<span style="color: #ef2929;">sin</span>($2))\
+     <span style="color: #18b2b2;">with</span> vec size .06, 15 filled
 </pre>
 </div>
 
@@ -219,18 +225,18 @@
 </div>
 
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> xrange [<span style="font-weight: bold; text-decoration: underline;">-pi:pi</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> yrange [<span style="font-weight: bold; text-decoration: underline;">-pi:pi</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> zrange [<span style="font-weight: bold; text-decoration: underline;">-pi:pi</span>]
-<span style="font-weight: bold; text-decoration: underline;">unset</span> key
-<span style="font-weight: bold; text-decoration: underline;">set</span> iso 50
-<span style="font-weight: bold; text-decoration: underline;">set</span> samp 20
-<span style="font-weight: bold; text-decoration: underline;">set</span> ztics 1.5
-<span style="font-weight: bold; text-decoration: underline;">set</span> view 37, 300
-<span style="font-weight: bold; font-style: italic;">a =</span> .9
-<span style="font-weight: bold;">splot</span> <span style="font-style: italic;">'++'</span> <span style="font-weight: bold; text-decoration: underline;">using</span> 1:2:(2*a*<span style="font-weight: bold;">cos</span>($2)*<span style="font-weight: bold;">sin</span>($1)):\
-      (-a*<span style="font-weight: bold;">sin</span>($1)*<span style="font-weight: bold;">cos</span>($2)):(a*<span style="font-weight: bold;">cos</span>($1)*<span style="font-weight: bold;">sin</span>($2)):(a*<span style="font-weight: bold;">cos</span>($1))\
-      <span style="font-weight: bold; text-decoration: underline;">with</span> vec size .06, 15 filled
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> xrange [<span style="color: #1f5bff;">-pi:pi</span>]
+<span style="color: #1f5bff;">set</span> yrange [<span style="color: #1f5bff;">-pi:pi</span>]
+<span style="color: #1f5bff;">set</span> zrange [<span style="color: #1f5bff;">-pi:pi</span>]
+<span style="color: #1f5bff;">unset</span> key
+<span style="color: #1f5bff;">set</span> iso 50
+<span style="color: #1f5bff;">set</span> samp 20
+<span style="color: #1f5bff;">set</span> ztics 1.5
+<span style="color: #1f5bff;">set</span> view 37, 300
+<span style="color: #ff8700;">a =</span> .9
+<span style="color: #00af00;">splot</span> <span style="color: #ff1f8b;">'++'</span> <span style="color: #18b2b2;">using</span> 1:2:(2*a*<span style="color: #ef2929;">cos</span>($2)*<span style="color: #ef2929;">sin</span>($1)):\
+      (-a*<span style="color: #ef2929;">sin</span>($1)*<span style="color: #ef2929;">cos</span>($2)):(a*<span style="color: #ef2929;">cos</span>($1)*<span style="color: #ef2929;">sin</span>($2)):(a*<span style="color: #ef2929;">cos</span>($1))\
+      <span style="color: #18b2b2;">with</span> vec size .06, 15 filled
 </pre>
 </div>
 
@@ -242,19 +248,19 @@
 </div>
 </div>
 
-<div id="outline-container-org298d595" class="outline-2">
-<h2 id="org298d595"><span class="section-number-2">6</span> 热力图</h2>
+<div id="outline-container-org93b827c" class="outline-2">
+<h2 id="org93b827c"><span class="section-number-2">6</span> 热力图</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> xrange [<span style="font-weight: bold; text-decoration: underline;">-4:4</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> yrange [<span style="font-weight: bold; text-decoration: underline;">-4:4</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> iso 100
-<span style="font-weight: bold; text-decoration: underline;">set</span> samp 100
-<span style="font-weight: bold; text-decoration: underline;">unset</span> key
-<span style="font-weight: bold; text-decoration: underline;">unset</span> surface
-<span style="font-weight: bold; text-decoration: underline;">set</span> view map
-<span style="font-weight: bold; text-decoration: underline;">set</span> <span style="font-weight: bold;">pm3d</span> at b
-<span style="font-weight: bold;">splot</span> <span style="font-weight: bold;">sin</span>(y**2 + x**2) - <span style="font-weight: bold;">cos</span>(x**2)
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> xrange [<span style="color: #1f5bff;">-4:4</span>]
+<span style="color: #1f5bff;">set</span> yrange [<span style="color: #1f5bff;">-4:4</span>]
+<span style="color: #1f5bff;">set</span> iso 100
+<span style="color: #1f5bff;">set</span> samp 100
+<span style="color: #1f5bff;">unset</span> key
+<span style="color: #1f5bff;">unset</span> surface
+<span style="color: #1f5bff;">set</span> view map
+<span style="color: #1f5bff;">set</span> <span style="color: #ef2929;">pm3d</span> at b
+<span style="color: #00af00;">splot</span> <span style="color: #ef2929;">sin</span>(y**2 + x**2) - <span style="color: #ef2929;">cos</span>(x**2)
 </pre>
 </div>
 
@@ -265,8 +271,8 @@
 </div>
 
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> palette <span style="font-weight: bold;">defined</span> (0 <span style="font-style: italic;">'black'</span>, 1 <span style="font-style: italic;">'gold'</span>)
-<span style="font-weight: bold; text-decoration: underline;">replot</span>
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> palette <span style="color: #ef2929;">defined</span> (0 <span style="color: #ff1f8b;">'black'</span>, 1 <span style="color: #ff1f8b;">'gold'</span>)
+<span style="color: #1f5bff;">replot</span>
 </pre>
 </div>
 
@@ -277,8 +283,8 @@
 </div>
 
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> palette <span style="font-weight: bold;">defined</span> (0 <span style="font-style: italic;">'black'</span>, 1 <span style="font-style: italic;">'aquamarine'</span>, 1.5 <span style="font-style: italic;">'red'</span>, 2 <span style="font-style: italic;">'gold'</span>)
-<span style="font-weight: bold; text-decoration: underline;">replot</span>
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> palette <span style="color: #ef2929;">defined</span> (0 <span style="color: #ff1f8b;">'black'</span>, 1 <span style="color: #ff1f8b;">'aquamarine'</span>, 1.5 <span style="color: #ff1f8b;">'red'</span>, 2 <span style="color: #ff1f8b;">'gold'</span>)
+<span style="color: #1f5bff;">replot</span>
 </pre>
 </div>
 
@@ -290,24 +296,24 @@
 </div>
 </div>
 
-<div id="outline-container-org39dbaa1" class="outline-2">
-<h2 id="org39dbaa1"><span class="section-number-2">7</span> 同时绘制热力图和等高线图</h2>
+<div id="outline-container-org222fbc3" class="outline-2">
+<h2 id="org222fbc3"><span class="section-number-2">7</span> 同时绘制热力图和等高线图</h2>
 <div class="outline-text-2" id="text-7">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> xrange [<span style="font-weight: bold; text-decoration: underline;">0:pi</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> yrange [<span style="font-weight: bold; text-decoration: underline;">0:pi</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> iso 200
-<span style="font-weight: bold; text-decoration: underline;">set</span> samp 200
-<span style="font-weight: bold; text-decoration: underline;">set</span> cntrparam levels 10
-<span style="font-weight: bold; text-decoration: underline;">unset</span> key
-<span style="font-weight: bold; text-decoration: underline;">unset</span> surface
-<span style="font-weight: bold; text-decoration: underline;">set</span> view map
-<span style="font-weight: bold; text-decoration: underline;">set</span> contour base
-<span style="font-weight: bold; text-decoration: underline;">set</span> <span style="font-weight: bold;">pm3d</span> at b
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> xrange [<span style="color: #1f5bff;">0:pi</span>]
+<span style="color: #1f5bff;">set</span> yrange [<span style="color: #1f5bff;">0:pi</span>]
+<span style="color: #1f5bff;">set</span> iso 200
+<span style="color: #1f5bff;">set</span> samp 200
+<span style="color: #1f5bff;">set</span> cntrparam levels 10
+<span style="color: #1f5bff;">unset</span> key
+<span style="color: #1f5bff;">unset</span> surface
+<span style="color: #1f5bff;">set</span> view map
+<span style="color: #1f5bff;">set</span> contour base
+<span style="color: #1f5bff;">set</span> <span style="color: #ef2929;">pm3d</span> at b
 
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#27492;&#22788;&#26377;&#22235;&#21015;&#25968;&#25454;&#65292;&#22240;&#20026;&#25105;&#20204;&#22312;&#19978;&#38754;&#21578;&#35785; Gnuplot &#35201;&#30011;&#31561;&#39640;&#32447;&#22270;&#65292;&#31561; 4 &#21015;&#25968;&#25454;&#26159;&#21487;&#36873;&#30340;&#65292;</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#29992;&#20110;&#32473; surface &#19978;&#33394;</span>
-<span style="font-weight: bold;">splot</span> <span style="font-style: italic;">'++'</span> <span style="font-weight: bold; text-decoration: underline;">using</span> 1:2:($1**2-$2**2):(<span style="font-weight: bold;">sin</span>($1**2+$2**2)) w l <span style="font-weight: bold; text-decoration: underline;">lw</span> 2
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#27492;&#22788;&#26377;&#22235;&#21015;&#25968;&#25454;&#65292;&#22240;&#20026;&#25105;&#20204;&#22312;&#19978;&#38754;&#21578;&#35785; Gnuplot &#35201;&#30011;&#31561;&#39640;&#32447;&#22270;&#65292;&#31561; 4 &#21015;&#25968;&#25454;&#26159;&#21487;&#36873;&#30340;&#65292;</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#29992;&#20110;&#32473; surface &#19978;&#33394;</span>
+<span style="color: #00af00;">splot</span> <span style="color: #ff1f8b;">'++'</span> <span style="color: #18b2b2;">using</span> 1:2:($1**2-$2**2):(<span style="color: #ef2929;">sin</span>($1**2+$2**2)) w l <span style="color: #18b2b2;">lw</span> 2
 </pre>
 </div>
 
@@ -319,23 +325,23 @@
 </div>
 </div>
 
-<div id="outline-container-orgfdf20d0" class="outline-2">
-<h2 id="orgfdf20d0"><span class="section-number-2">8</span> 同时绘制热力图和表面</h2>
+<div id="outline-container-org876b987" class="outline-2">
+<h2 id="org876b987"><span class="section-number-2">8</span> 同时绘制热力图和表面</h2>
 <div class="outline-text-2" id="text-8">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> iso 40
-<span style="font-weight: bold; text-decoration: underline;">set</span> samp 40
-<span style="font-weight: bold; text-decoration: underline;">unset</span> key
-<span style="font-weight: bold; text-decoration: underline;">set</span> xrange [<span style="font-weight: bold; text-decoration: underline;">-pi:pi</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> yrange [<span style="font-weight: bold; text-decoration: underline;">-pi:pi</span>]
-<span style="font-weight: bold; font-style: italic;">f(x,y) =</span> <span style="font-weight: bold;">sin</span>(x)*<span style="font-weight: bold;">cos</span>(y)
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#36825;&#19968;&#34892;&#20351; surface &#32472;&#21046;&#20986;&#36974;&#25377;&#20851;&#31995;&#30340;&#21516;&#26102;&#65292;&#22312;&#26368;&#21518;&#25165;&#32472;&#21046; surface&#65292;&#21542;&#21017;&#20250;&#34987;&#19979;&#38754;&#30340;&#28909;</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#22270;&#30422;&#20303;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> hidden front
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#23558; xy &#24179;&#38754;&#31227;&#21160;&#21040; -1 &#22788;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> xyplane at -1
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> iso 40
+<span style="color: #1f5bff;">set</span> samp 40
+<span style="color: #1f5bff;">unset</span> key
+<span style="color: #1f5bff;">set</span> xrange [<span style="color: #1f5bff;">-pi:pi</span>]
+<span style="color: #1f5bff;">set</span> yrange [<span style="color: #1f5bff;">-pi:pi</span>]
+<span style="color: #ff8700;">f(x,y) =</span> <span style="color: #ef2929;">sin</span>(x)*<span style="color: #ef2929;">cos</span>(y)
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#36825;&#19968;&#34892;&#20351; surface &#32472;&#21046;&#20986;&#36974;&#25377;&#20851;&#31995;&#30340;&#21516;&#26102;&#65292;&#22312;&#26368;&#21518;&#25165;&#32472;&#21046; surface&#65292;&#21542;&#21017;&#20250;&#34987;&#19979;&#38754;&#30340;&#28909;</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#22270;&#30422;&#20303;</span>
+<span style="color: #1f5bff;">set</span> hidden front
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#23558; xy &#24179;&#38754;&#31227;&#21160;&#21040; -1 &#22788;</span>
+<span style="color: #1f5bff;">set</span> xyplane at -1
 
-<span style="font-weight: bold;">splot</span> f(x,y) <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">pm3d</span> at b, f(x,y) <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">lines</span>
+<span style="color: #00af00;">splot</span> f(x,y) <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">pm3d</span> at b, f(x,y) <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">lines</span>
 </pre>
 </div>
 
@@ -346,21 +352,21 @@
 </div>
 
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">reset</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> samp 40
-<span style="font-weight: bold; text-decoration: underline;">set</span> iso 40
-<span style="font-weight: bold; text-decoration: underline;">set</span> yrange [<span style="font-weight: bold; text-decoration: underline;">-1.5:1.5</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> xrange [<span style="font-weight: bold; text-decoration: underline;">-1.5:1.5</span>]
-<span style="font-weight: bold; text-decoration: underline;">unset</span> ytics
-<span style="font-weight: bold; text-decoration: underline;">unset</span> xtics
-<span style="font-weight: bold; text-decoration: underline;">unset</span> key
-<span style="font-weight: bold; text-decoration: underline;">unset</span> colorbox
-<span style="font-weight: bold; text-decoration: underline;">set</span> hidden3d front
-<span style="font-weight: bold; font-style: italic;">a =</span> .5
-<span style="font-weight: bold; text-decoration: underline;">set</span> xyplane at a
-<span style="font-weight: bold; font-style: italic;">f(x,y) =</span> <span style="font-weight: bold;">exp</span>(-x**2-y**2)
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">reset</span>
+<span style="color: #1f5bff;">set</span> samp 40
+<span style="color: #1f5bff;">set</span> iso 40
+<span style="color: #1f5bff;">set</span> yrange [<span style="color: #1f5bff;">-1.5:1.5</span>]
+<span style="color: #1f5bff;">set</span> xrange [<span style="color: #1f5bff;">-1.5:1.5</span>]
+<span style="color: #1f5bff;">unset</span> ytics
+<span style="color: #1f5bff;">unset</span> xtics
+<span style="color: #1f5bff;">unset</span> key
+<span style="color: #1f5bff;">unset</span> colorbox
+<span style="color: #1f5bff;">set</span> hidden3d front
+<span style="color: #ff8700;">a =</span> .5
+<span style="color: #1f5bff;">set</span> xyplane at a
+<span style="color: #ff8700;">f(x,y) =</span> <span style="color: #ef2929;">exp</span>(-x**2-y**2)
 
-<span style="font-weight: bold;">splot</span> f(x,y) <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">pm3d</span> at b, f(x,y) <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">lines</span>, a <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">lines</span> <span style="font-weight: bold; text-decoration: underline;">lt</span> -100
+<span style="color: #00af00;">splot</span> f(x,y) <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">pm3d</span> at b, f(x,y) <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">lines</span>, a <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">lines</span> <span style="color: #18b2b2;">lt</span> -100
 </pre>
 </div>
 
@@ -371,11 +377,11 @@
 </div>
 
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> zrange [<span style="font-weight: bold; text-decoration: underline;">0:1</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> contour base
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> zrange [<span style="color: #1f5bff;">0:1</span>]
+<span style="color: #1f5bff;">set</span> contour base
 
-<span style="font-weight: bold;">splot</span> <span style="font-style: italic;">'++'</span> <span style="font-weight: bold; text-decoration: underline;">using</span> 1:2:(a):(<span style="font-weight: bold;">sin</span>($1)*<span style="font-weight: bold;">cos</span>($2)) <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">pm3d</span> at b,\
-      <span style="font-style: italic;">'++'</span> <span style="font-weight: bold; text-decoration: underline;">using</span> 1:2:(f($1,$2)) <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">lines</span>, a <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">lines</span> <span style="font-weight: bold; text-decoration: underline;">lt</span> -100
+<span style="color: #00af00;">splot</span> <span style="color: #ff1f8b;">'++'</span> <span style="color: #18b2b2;">using</span> 1:2:(a):(<span style="color: #ef2929;">sin</span>($1)*<span style="color: #ef2929;">cos</span>($2)) <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">pm3d</span> at b,\
+      <span style="color: #ff1f8b;">'++'</span> <span style="color: #18b2b2;">using</span> 1:2:(f($1,$2)) <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">lines</span>, a <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">lines</span> <span style="color: #18b2b2;">lt</span> -100
 </pre>
 </div>
 
@@ -387,18 +393,18 @@
 </div>
 </div>
 
-<div id="outline-container-orgc25a376" class="outline-2">
-<h2 id="orgc25a376"><span class="section-number-2">9</span> 使用参数方程绘制路径</h2>
+<div id="outline-container-orge1bf07b" class="outline-2">
+<h2 id="orge1bf07b"><span class="section-number-2">9</span> 使用参数方程绘制路径</h2>
 <div class="outline-text-2" id="text-9">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> samp 100
-<span style="font-weight: bold; text-decoration: underline;">set</span> xtics .4
-<span style="font-weight: bold; text-decoration: underline;">set</span> ytics .4
-<span style="font-weight: bold; text-decoration: underline;">set</span> parametric
-<span style="font-weight: bold; text-decoration: underline;">set</span> urange [<span style="font-weight: bold; text-decoration: underline;">-pi:pi</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> ztics 1
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> samp 100
+<span style="color: #1f5bff;">set</span> xtics .4
+<span style="color: #1f5bff;">set</span> ytics .4
+<span style="color: #1f5bff;">set</span> parametric
+<span style="color: #1f5bff;">set</span> urange [<span style="color: #1f5bff;">-pi:pi</span>]
+<span style="color: #1f5bff;">set</span> ztics 1
 
-<span style="font-weight: bold;">splot</span> <span style="font-weight: bold;">cos</span>(u),<span style="font-weight: bold;">sin</span>(3*u),<span style="font-weight: bold;">cos</span>(5*u) <span style="font-weight: bold; text-decoration: underline;">lw</span> 2
+<span style="color: #00af00;">splot</span> <span style="color: #ef2929;">cos</span>(u),<span style="color: #ef2929;">sin</span>(3*u),<span style="color: #ef2929;">cos</span>(5*u) <span style="color: #18b2b2;">lw</span> 2
 </pre>
 </div>
 
@@ -410,21 +416,21 @@
 </div>
 </div>
 
-<div id="outline-container-orga848559" class="outline-2">
-<h2 id="orga848559"><span class="section-number-2">10</span> 使用参数方程绘制表面</h2>
+<div id="outline-container-orgd228dda" class="outline-2">
+<h2 id="orgd228dda"><span class="section-number-2">10</span> 使用参数方程绘制表面</h2>
 <div class="outline-text-2" id="text-10">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> param
-<span style="font-weight: bold; text-decoration: underline;">set</span> iso 50
-<span style="font-weight: bold; text-decoration: underline;">set</span> ztics .5
-<span style="font-weight: bold; text-decoration: underline;">set</span> xtics .4
-<span style="font-weight: bold; text-decoration: underline;">set</span> ytics .4
-<span style="font-weight: bold; text-decoration: underline;">set</span> urange [<span style="font-weight: bold; text-decoration: underline;">-pi:pi</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> vrange [<span style="font-weight: bold; text-decoration: underline;">-pi:pi</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> hidd
-<span style="font-weight: bold; text-decoration: underline;">set</span> view 50, 60
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> param
+<span style="color: #1f5bff;">set</span> iso 50
+<span style="color: #1f5bff;">set</span> ztics .5
+<span style="color: #1f5bff;">set</span> xtics .4
+<span style="color: #1f5bff;">set</span> ytics .4
+<span style="color: #1f5bff;">set</span> urange [<span style="color: #1f5bff;">-pi:pi</span>]
+<span style="color: #1f5bff;">set</span> vrange [<span style="color: #1f5bff;">-pi:pi</span>]
+<span style="color: #1f5bff;">set</span> hidd
+<span style="color: #1f5bff;">set</span> view 50, 60
 
- <span style="font-weight: bold;">splot</span> <span style="font-weight: bold;">cos</span>(u)*<span style="font-weight: bold;">cos</span>(v), <span style="font-weight: bold;">sin</span>(u)*<span style="font-weight: bold;">cos</span>(v), <span style="font-weight: bold;">sin</span>(u)
+ <span style="color: #00af00;">splot</span> <span style="color: #ef2929;">cos</span>(u)*<span style="color: #ef2929;">cos</span>(v), <span style="color: #ef2929;">sin</span>(u)*<span style="color: #ef2929;">cos</span>(v), <span style="color: #ef2929;">sin</span>(u)
 </pre>
 </div>
 
@@ -438,18 +444,18 @@
 甚至我们还能给表面上色
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> param
-<span style="font-weight: bold; text-decoration: underline;">set</span> iso 50
-<span style="font-weight: bold; text-decoration: underline;">set</span> ztics .5
-<span style="font-weight: bold; text-decoration: underline;">set</span> xtics .4
-<span style="font-weight: bold; text-decoration: underline;">set</span> ytics .4
-<span style="font-weight: bold; text-decoration: underline;">set</span> urange [<span style="font-weight: bold; text-decoration: underline;">-pi:pi</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> vrange [<span style="font-weight: bold; text-decoration: underline;">-pi:pi</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> view 50, 60
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">depthorder &#26159; pm3d &#30340;&#19968;&#20010;&#29305;&#27530;&#36873;&#39033;&#65292;&#20250;&#25353;&#31163;&#35266;&#23519;&#28857;&#30340;&#36828;&#36817;&#28210;&#26579;&#39068;&#33394;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> <span style="font-weight: bold;">pm3d</span> depthorder
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> param
+<span style="color: #1f5bff;">set</span> iso 50
+<span style="color: #1f5bff;">set</span> ztics .5
+<span style="color: #1f5bff;">set</span> xtics .4
+<span style="color: #1f5bff;">set</span> ytics .4
+<span style="color: #1f5bff;">set</span> urange [<span style="color: #1f5bff;">-pi:pi</span>]
+<span style="color: #1f5bff;">set</span> vrange [<span style="color: #1f5bff;">-pi:pi</span>]
+<span style="color: #1f5bff;">set</span> view 50, 60
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">depthorder &#26159; pm3d &#30340;&#19968;&#20010;&#29305;&#27530;&#36873;&#39033;&#65292;&#20250;&#25353;&#31163;&#35266;&#23519;&#28857;&#30340;&#36828;&#36817;&#28210;&#26579;&#39068;&#33394;</span>
+<span style="color: #1f5bff;">set</span> <span style="color: #ef2929;">pm3d</span> depthorder
 
-<span style="font-weight: bold;">splot</span> <span style="font-weight: bold;">cos</span>(u)*<span style="font-weight: bold;">cos</span>(v), <span style="font-weight: bold;">sin</span>(u)*<span style="font-weight: bold;">cos</span>(v), <span style="font-weight: bold;">sin</span>(u) <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">pm3d</span>
+<span style="color: #00af00;">splot</span> <span style="color: #ef2929;">cos</span>(u)*<span style="color: #ef2929;">cos</span>(v), <span style="color: #ef2929;">sin</span>(u)*<span style="color: #ef2929;">cos</span>(v), <span style="color: #ef2929;">sin</span>(u) <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">pm3d</span>
 </pre>
 </div>
 

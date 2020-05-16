@@ -3,11 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-05-16 Sat 11:21 -->
+<!-- 2020-05-16 Sat 15:14 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Qt 程序缩放不正常的解决办法</title>
 <meta name="generator" content="Org mode" />
+<meta name="author" content="Cycoe Joo" />
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 </head>
 <body>
@@ -36,7 +37,7 @@
 提点以及搜索，终于找到了解决办法。在 <code>~/.xprofile</code> 文件中设置环境变量
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="font-weight: bold;">export</span> <span style="font-weight: bold; font-style: italic;">QT_AUTO_SCREEN_SCALE_FACTOR</span>=0
+<pre class="src src-bash"><span style="color: #b218b2;">export</span> <span style="color: #ff8700;">QT_AUTO_SCREEN_SCALE_FACTOR</span>=0
 </pre>
 </div>
 

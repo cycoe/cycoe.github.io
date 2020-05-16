@@ -3,11 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-05-16 Sat 11:21 -->
+<!-- 2020-05-16 Sat 15:14 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gnuplot 绘图第四弹-调整刻度</title>
 <meta name="generator" content="Org mode" />
+<meta name="author" content="Cycoe Joo" />
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 </head>
 <body>
@@ -24,20 +25,25 @@
 <div id="content">
 <h1 class="title">Gnuplot 绘图第四弹-调整刻度</h1>
 <div id="table-of-contents">
-<h2>Table of Contents</h2>
+<h2> <a href="javascript:window.scrollTo(0,0)"
+        style="color: black !important; border-bottom: none !important;"
+        class="tooltip"
+        title="Go to the top of the page">
+       Ξ
+     </a> </h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org265c9ca">1. 启用副刻度</a></li>
-<li><a href="#org22e4132">2. 第二坐标轴上的刻度</a></li>
-<li><a href="#org6d21c8c">3. 调整刻度的长度</a></li>
-<li><a href="#org0cb492e">4. 移除所有的刻度</a></li>
-<li><a href="#org756c34b">5. 精细调整刻度值</a></li>
-<li><a href="#org7adcf56">6. 刻度朝外</a></li>
-<li><a href="#orge560bb0">7. 手动设置刻度标签</a></li>
-<li><a href="#org545c7cc">8. 时间和日期标签</a></li>
-<li><a href="#org242504a">9. 在时间标签中启用地域设置</a></li>
-<li><a href="#orgc32635e">10. 设置不同地域的数字格式</a></li>
-<li><a href="#org62ce931">11. 格式化刻度标签</a></li>
+<li><a href="#orgad7e606">1. 启用副刻度</a></li>
+<li><a href="#orgf493106">2. 第二坐标轴上的刻度</a></li>
+<li><a href="#org71f4e06">3. 调整刻度的长度</a></li>
+<li><a href="#orgf4c95df">4. 移除所有的刻度</a></li>
+<li><a href="#org115ab6e">5. 精细调整刻度值</a></li>
+<li><a href="#orgb4224de">6. 刻度朝外</a></li>
+<li><a href="#org48ac360">7. 手动设置刻度标签</a></li>
+<li><a href="#orga52dc7f">8. 时间和日期标签</a></li>
+<li><a href="#org48c1933">9. 在时间标签中启用地域设置</a></li>
+<li><a href="#orgabc5414">10. 设置不同地域的数字格式</a></li>
+<li><a href="#orgbf2dff0">11. 格式化刻度标签</a></li>
 </ul>
 </div>
 </div>
@@ -48,18 +54,18 @@
 
 <!-- more -->
 
-<div id="outline-container-org265c9ca" class="outline-2">
-<h2 id="org265c9ca"><span class="section-number-2">1</span> 启用副刻度</h2>
+<div id="outline-container-orgad7e606" class="outline-2">
+<h2 id="orgad7e606"><span class="section-number-2">1</span> 启用副刻度</h2>
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> sample 500
-<span style="font-weight: bold; text-decoration: underline;">set</span> grid
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">x &#36724;&#27599;&#20010;&#20027;&#21051;&#24230;&#25317;&#26377; 4 &#20010;&#21103;&#21051;&#24230;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> mxtics 4
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">y &#36724;&#27599;&#20010;&#20027;&#21051;&#24230;&#25317;&#26377; 2 &#20010;&#21103;&#21051;&#24230;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> mytics 2
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> sample 500
+<span style="color: #1f5bff;">set</span> grid
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">x &#36724;&#27599;&#20010;&#20027;&#21051;&#24230;&#25317;&#26377; 4 &#20010;&#21103;&#21051;&#24230;</span>
+<span style="color: #1f5bff;">set</span> mxtics 4
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">y &#36724;&#27599;&#20010;&#20027;&#21051;&#24230;&#25317;&#26377; 2 &#20010;&#21103;&#21051;&#24230;</span>
+<span style="color: #1f5bff;">set</span> mytics 2
 
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">0:2*pi</span>] <span style="font-weight: bold;">sin</span>(12*x)*<span style="font-weight: bold;">exp</span>(-x/4)
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">0:2*pi</span>] <span style="color: #ef2929;">sin</span>(12*x)*<span style="color: #ef2929;">exp</span>(-x/4)
 </pre>
 </div>
 
@@ -71,19 +77,19 @@
 </div>
 </div>
 
-<div id="outline-container-org22e4132" class="outline-2">
-<h2 id="org22e4132"><span class="section-number-2">2</span> 第二坐标轴上的刻度</h2>
+<div id="outline-container-orgf493106" class="outline-2">
+<h2 id="orgf493106"><span class="section-number-2">2</span> 第二坐标轴上的刻度</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> ytics nomirror
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">y2 &#20027;&#21051;&#24230;&#30340;&#38388;&#36317;&#26159; 0.4</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> y2tics 0.4
-<span style="font-weight: bold; text-decoration: underline;">set</span> my2tics 4
-<span style="font-weight: bold; text-decoration: underline;">set</span> xtics pi/4.
-<span style="font-weight: bold; text-decoration: underline;">set</span> mxtics 4
-<span style="font-weight: bold; text-decoration: underline;">set</span> grid
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> ytics nomirror
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">y2 &#20027;&#21051;&#24230;&#30340;&#38388;&#36317;&#26159; 0.4</span>
+<span style="color: #1f5bff;">set</span> y2tics 0.4
+<span style="color: #1f5bff;">set</span> my2tics 4
+<span style="color: #1f5bff;">set</span> xtics pi/4.
+<span style="color: #1f5bff;">set</span> mxtics 4
+<span style="color: #1f5bff;">set</span> grid
 
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">0:2*pi</span>] <span style="font-weight: bold;">sin</span>(x) axis x1y1, 2*<span style="font-weight: bold;">cos</span>(8*x)*<span style="font-weight: bold;">exp</span>(-x) axis x1y2
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">0:2*pi</span>] <span style="color: #ef2929;">sin</span>(x) axis x1y1, 2*<span style="color: #ef2929;">cos</span>(8*x)*<span style="color: #ef2929;">exp</span>(-x) axis x1y2
 </pre>
 </div>
 
@@ -95,17 +101,17 @@
 </div>
 </div>
 
-<div id="outline-container-org6d21c8c" class="outline-2">
-<h2 id="org6d21c8c"><span class="section-number-2">3</span> 调整刻度的长度</h2>
+<div id="outline-container-org71f4e06" class="outline-2">
+<h2 id="org71f4e06"><span class="section-number-2">3</span> 调整刻度的长度</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#23558;&#20027;&#21051;&#24230;&#30340;&#38271;&#24230;&#35843;&#25972;&#33267;&#40664;&#35748;&#20540;&#30340; 3 &#20493;&#12290;&#22914;&#26524;&#27809;&#26377;&#29305;&#27530;&#25351;&#23450;&#65292;&#21103;&#21051;&#24230;&#30340;&#38271;&#24230;&#26159;&#20027;&#21051;&#24230;&#30340;&#19968;</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#21322;&#65292;&#21487;&#36890;&#36807; =set tics scale a, b &#21516;&#26102;&#35843;&#25972;&#20027;&#21103;&#21051;&#24230;&#30340;&#38271;&#24230;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> tics scale 3
-<span style="font-weight: bold; text-decoration: underline;">set</span> mxtics 4
-<span style="font-weight: bold; text-decoration: underline;">set</span> mytics 4
+<pre class="src src-gnuplot"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#23558;&#20027;&#21051;&#24230;&#30340;&#38271;&#24230;&#35843;&#25972;&#33267;&#40664;&#35748;&#20540;&#30340; 3 &#20493;&#12290;&#22914;&#26524;&#27809;&#26377;&#29305;&#27530;&#25351;&#23450;&#65292;&#21103;&#21051;&#24230;&#30340;&#38271;&#24230;&#26159;&#20027;&#21051;&#24230;&#30340;&#19968;</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#21322;&#65292;&#21487;&#36890;&#36807; =set tics scale a, b &#21516;&#26102;&#35843;&#25972;&#20027;&#21103;&#21051;&#24230;&#30340;&#38271;&#24230;</span>
+<span style="color: #1f5bff;">set</span> tics scale 3
+<span style="color: #1f5bff;">set</span> mxtics 4
+<span style="color: #1f5bff;">set</span> mytics 4
 
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">0:4*pi</span>] <span style="font-weight: bold;">sin</span>(x)/x <span style="font-weight: bold; text-decoration: underline;">notitle</span>
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">0:4*pi</span>] <span style="color: #ef2929;">sin</span>(x)/x <span style="color: #18b2b2;">notitle</span>
 </pre>
 </div>
 
@@ -117,14 +123,14 @@
 </div>
 </div>
 
-<div id="outline-container-org0cb492e" class="outline-2">
-<h2 id="org0cb492e"><span class="section-number-2">4</span> 移除所有的刻度</h2>
+<div id="outline-container-orgf4c95df" class="outline-2">
+<h2 id="orgf4c95df"><span class="section-number-2">4</span> 移除所有的刻度</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Gnuplot &#20013;&#26377;&#20004;&#31181;&#34920;&#36798;&#26041;&#24335;&#65292;=unset tics= &#21644; =set notics= &#31561;&#20215;</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#21516;&#26679;&#22320;&#65292;=unset border= &#20063;&#21644; =set noborder= &#31561;&#20215;</span>
-<span style="font-weight: bold; text-decoration: underline;">unset</span> tics
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">0:2*pi</span>] x**2*<span style="font-weight: bold;">sin</span>(x)
+<pre class="src src-gnuplot"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Gnuplot &#20013;&#26377;&#20004;&#31181;&#34920;&#36798;&#26041;&#24335;&#65292;=unset tics= &#21644; =set notics= &#31561;&#20215;</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#21516;&#26679;&#22320;&#65292;=unset border= &#20063;&#21644; =set noborder= &#31561;&#20215;</span>
+<span style="color: #1f5bff;">unset</span> tics
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">0:2*pi</span>] x**2*<span style="color: #ef2929;">sin</span>(x)
 </pre>
 </div>
 
@@ -136,31 +142,31 @@
 </div>
 </div>
 
-<div id="outline-container-org756c34b" class="outline-2">
-<h2 id="org756c34b"><span class="section-number-2">5</span> 精细调整刻度值</h2>
+<div id="outline-container-org115ab6e" class="outline-2">
+<h2 id="org115ab6e"><span class="section-number-2">5</span> 精细调整刻度值</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> size ratio 1
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#35774;&#32622;&#26497;&#22352;&#26631;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> polar
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#25353;&#22352;&#26631;&#31995;&#30340;&#20301;&#32622;&#35774;&#32622;&#22352;&#26631;&#36724;&#65292;&#24182;&#20851;&#38381;&#21103;&#36724;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> xtics axis nomirror
-<span style="font-weight: bold; text-decoration: underline;">set</span> ytics axis nomirror
-<span style="font-weight: bold; text-decoration: underline;">set</span> zeroaxis
-<span style="font-weight: bold; text-decoration: underline;">unset</span> border
-<span style="font-weight: bold; text-decoration: underline;">set</span> border polar
-<span style="font-weight: bold; text-decoration: underline;">unset</span> key
-<span style="font-weight: bold; text-decoration: underline;">set</span> samples 500
-<span style="font-weight: bold; text-decoration: underline;">set</span> grid
-<span style="font-weight: bold; text-decoration: underline;">set</span> rrange [<span style="font-weight: bold; text-decoration: underline;">0:11</span>]
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#20851;&#38381;&#31515;&#21345;&#23572;&#22352;&#26631;&#31995;&#19979; x, y &#36724;&#21051;&#24230;</span>
-<span style="font-weight: bold; text-decoration: underline;">unset</span> xtics
-<span style="font-weight: bold; text-decoration: underline;">unset</span> ytics
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#35774;&#32622;&#26497;&#22352;&#26631;&#31995;&#19979;&#30340; r &#21644; t &#36724;&#65292;&#20854;&#20013;&#19977;&#20010;&#25968;&#23383;&#20998;&#21035;&#34920;&#31034;&#36215;&#22987;&#65292;&#38388;&#38548;&#21644;&#32456;&#28857;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> rtics 0,2,10
-<span style="font-weight: bold; text-decoration: underline;">set</span> ttics 30
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> size ratio 1
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622;&#26497;&#22352;&#26631;</span>
+<span style="color: #1f5bff;">set</span> polar
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#25353;&#22352;&#26631;&#31995;&#30340;&#20301;&#32622;&#35774;&#32622;&#22352;&#26631;&#36724;&#65292;&#24182;&#20851;&#38381;&#21103;&#36724;</span>
+<span style="color: #1f5bff;">set</span> xtics axis nomirror
+<span style="color: #1f5bff;">set</span> ytics axis nomirror
+<span style="color: #1f5bff;">set</span> zeroaxis
+<span style="color: #1f5bff;">unset</span> border
+<span style="color: #1f5bff;">set</span> border polar
+<span style="color: #1f5bff;">unset</span> key
+<span style="color: #1f5bff;">set</span> samples 500
+<span style="color: #1f5bff;">set</span> grid
+<span style="color: #1f5bff;">set</span> rrange [<span style="color: #1f5bff;">0:11</span>]
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#20851;&#38381;&#31515;&#21345;&#23572;&#22352;&#26631;&#31995;&#19979; x, y &#36724;&#21051;&#24230;</span>
+<span style="color: #1f5bff;">unset</span> xtics
+<span style="color: #1f5bff;">unset</span> ytics
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622;&#26497;&#22352;&#26631;&#31995;&#19979;&#30340; r &#21644; t &#36724;&#65292;&#20854;&#20013;&#19977;&#20010;&#25968;&#23383;&#20998;&#21035;&#34920;&#31034;&#36215;&#22987;&#65292;&#38388;&#38548;&#21644;&#32456;&#28857;</span>
+<span style="color: #1f5bff;">set</span> rtics 0,2,10
+<span style="color: #1f5bff;">set</span> ttics 30
 
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">0:2*pi</span>] 4*(1-<span style="font-weight: bold;">sin</span>(t))
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">0:2*pi</span>] 4*(1-<span style="color: #ef2929;">sin</span>(t))
 </pre>
 </div>
 
@@ -172,14 +178,14 @@
 </div>
 </div>
 
-<div id="outline-container-org7adcf56" class="outline-2">
-<h2 id="org7adcf56"><span class="section-number-2">6</span> 刻度朝外</h2>
+<div id="outline-container-orgb4224de" class="outline-2">
+<h2 id="orgb4224de"><span class="section-number-2">6</span> 刻度朝外</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> tics out
-<span style="font-weight: bold; text-decoration: underline;">set</span> grid
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> tics out
+<span style="color: #1f5bff;">set</span> grid
 
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">-3:3</span>] <span style="font-weight: bold;">tanh</span>(x)
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">-3:3</span>] <span style="color: #ef2929;">tanh</span>(x)
 </pre>
 </div>
 
@@ -191,16 +197,16 @@
 </div>
 </div>
 
-<div id="outline-container-orge560bb0" class="outline-2">
-<h2 id="orge560bb0"><span class="section-number-2">7</span> 手动设置刻度标签</h2>
+<div id="outline-container-org48ac360" class="outline-2">
+<h2 id="org48ac360"><span class="section-number-2">7</span> 手动设置刻度标签</h2>
 <div class="outline-text-2" id="text-7">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> xtics (<span style="font-style: italic;">"{/Symbol p}"</span> pi, <span style="font-style: italic;">"{/Symbol p}/2"</span> pi/2,\
-    <span style="font-style: italic;">"2{/Symbol p}"</span> 2*pi, <span style="font-style: italic;">"3{/Symbol p}/2"</span> 3*pi/2, <span style="font-style: italic;">"0"</span> 0)
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">add &#20851;&#38190;&#23383;&#29992;&#20110;&#28155;&#21152;&#26631;&#31614;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> xtics add (<span style="font-style: italic;">"3{/Symbol p}/4"</span> pi*3/4)
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> xtics (<span style="color: #ff1f8b;">"{/Symbol p}"</span> pi, <span style="color: #ff1f8b;">"{/Symbol p}/2"</span> pi/2,\
+    <span style="color: #ff1f8b;">"2{/Symbol p}"</span> 2*pi, <span style="color: #ff1f8b;">"3{/Symbol p}/2"</span> 3*pi/2, <span style="color: #ff1f8b;">"0"</span> 0)
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">add &#20851;&#38190;&#23383;&#29992;&#20110;&#28155;&#21152;&#26631;&#31614;</span>
+<span style="color: #1f5bff;">set</span> xtics add (<span style="color: #ff1f8b;">"3{/Symbol p}/4"</span> pi*3/4)
 
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">0:2*pi</span>] <span style="font-weight: bold;">sin</span>(x)
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">0:2*pi</span>] <span style="color: #ef2929;">sin</span>(x)
 </pre>
 </div>
 
@@ -212,10 +218,10 @@
 </div>
 </div>
 
-<div id="outline-container-org545c7cc" class="outline-2">
-<h2 id="org545c7cc"><span class="section-number-2">8</span> 时间和日期标签</h2>
+<div id="outline-container-orga52dc7f" class="outline-2">
+<h2 id="orga52dc7f"><span class="section-number-2">8</span> 时间和日期标签</h2>
 <div class="outline-text-2" id="text-8">
-<table id="org125a0f1" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org700ebe0" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -257,17 +263,17 @@
 </table>
 
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#21578;&#35785; Gnuplot x &#36724;&#30340;&#25968;&#25454;&#26159;&#26102;&#38388;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> xdata time
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#21448;&#20160;&#20040;&#26684;&#24335;&#35299;&#26512;&#25968;&#25454;&#20013;&#30340;&#26102;&#38388;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> timefmt <span style="font-style: italic;">"%d/%m/%Y %H:%M"</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">x &#36724;&#26631;&#31614;&#30340;&#36755;&#20986;&#26684;&#24335;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> format x <span style="font-style: italic;">"%d/%m/%y"</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#26059;&#36716; xtics -30 &#24230;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> xtics rotate by -30
-<span style="font-weight: bold; text-decoration: underline;">set</span> rmargin 7
+<pre class="src src-gnuplot"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#21578;&#35785; Gnuplot x &#36724;&#30340;&#25968;&#25454;&#26159;&#26102;&#38388;</span>
+<span style="color: #1f5bff;">set</span> xdata time
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#21448;&#20160;&#20040;&#26684;&#24335;&#35299;&#26512;&#25968;&#25454;&#20013;&#30340;&#26102;&#38388;</span>
+<span style="color: #1f5bff;">set</span> timefmt <span style="color: #ff1f8b;">"%d/%m/%Y %H:%M"</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">x &#36724;&#26631;&#31614;&#30340;&#36755;&#20986;&#26684;&#24335;</span>
+<span style="color: #1f5bff;">set</span> format x <span style="color: #ff1f8b;">"%d/%m/%y"</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#26059;&#36716; xtics -30 &#24230;</span>
+<span style="color: #1f5bff;">set</span> xtics rotate by -30
+<span style="color: #1f5bff;">set</span> rmargin 7
 
-<span style="font-weight: bold;">plot</span> data <span style="font-weight: bold; text-decoration: underline;">using</span> 1:2 <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">linespoints</span> <span style="font-weight: bold; text-decoration: underline;">notitle</span>
+<span style="color: #00af00;">plot</span> data <span style="color: #18b2b2;">using</span> 1:2 <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">linespoints</span> <span style="color: #18b2b2;">notitle</span>
 </pre>
 </div>
 
@@ -279,22 +285,22 @@
 </div>
 </div>
 
-<div id="outline-container-org242504a" class="outline-2">
-<h2 id="org242504a"><span class="section-number-2">9</span> 在时间标签中启用地域设置</h2>
+<div id="outline-container-org48c1933" class="outline-2">
+<h2 id="org48c1933"><span class="section-number-2">9</span> 在时间标签中启用地域设置</h2>
 <div class="outline-text-2" id="text-9">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#21578;&#35785; Gnuplot x &#36724;&#30340;&#25968;&#25454;&#26159;&#26102;&#38388;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> xdata time
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#21551;&#29992;&#22320;&#22495;&#35774;&#32622;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> locale <span style="font-style: italic;">"zh_CN.utf8"</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#21448;&#20160;&#20040;&#26684;&#24335;&#35299;&#26512;&#25968;&#25454;&#20013;&#30340;&#26102;&#38388;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> timefmt <span style="font-style: italic;">"%d/%m/%Y %H:%M"</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">x &#36724;&#26631;&#31614;&#30340;&#36755;&#20986;&#26684;&#24335;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> format x <span style="font-style: italic;">"%Y&#24180;%b"</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> xtics rotate by -30
-<span style="font-weight: bold; text-decoration: underline;">set</span> rmargin 8
+<pre class="src src-gnuplot"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#21578;&#35785; Gnuplot x &#36724;&#30340;&#25968;&#25454;&#26159;&#26102;&#38388;</span>
+<span style="color: #1f5bff;">set</span> xdata time
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#21551;&#29992;&#22320;&#22495;&#35774;&#32622;</span>
+<span style="color: #1f5bff;">set</span> locale <span style="color: #ff1f8b;">"zh_CN.utf8"</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#21448;&#20160;&#20040;&#26684;&#24335;&#35299;&#26512;&#25968;&#25454;&#20013;&#30340;&#26102;&#38388;</span>
+<span style="color: #1f5bff;">set</span> timefmt <span style="color: #ff1f8b;">"%d/%m/%Y %H:%M"</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">x &#36724;&#26631;&#31614;&#30340;&#36755;&#20986;&#26684;&#24335;</span>
+<span style="color: #1f5bff;">set</span> format x <span style="color: #ff1f8b;">"%Y&#24180;%b"</span>
+<span style="color: #1f5bff;">set</span> xtics rotate by -30
+<span style="color: #1f5bff;">set</span> rmargin 8
 
-<span style="font-weight: bold;">plot</span> data <span style="font-weight: bold; text-decoration: underline;">using</span> 1:2 <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">linespoints</span> <span style="font-weight: bold; text-decoration: underline;">notitle</span>
+<span style="color: #00af00;">plot</span> data <span style="color: #18b2b2;">using</span> 1:2 <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">linespoints</span> <span style="color: #18b2b2;">notitle</span>
 </pre>
 </div>
 
@@ -306,8 +312,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgc32635e" class="outline-2">
-<h2 id="orgc32635e"><span class="section-number-2">10</span> 设置不同地域的数字格式</h2>
+<div id="outline-container-orgabc5414" class="outline-2">
+<h2 id="orgabc5414"><span class="section-number-2">10</span> 设置不同地域的数字格式</h2>
 <div class="outline-text-2" id="text-10">
 <p>
 此处本来应该用 <code>set decimalsign locale "es_ES.utf8"</code> 来做演示才能看出区别，但是不
@@ -315,10 +321,10 @@
 开启了这两个编码。
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> decimalsign locale <span style="font-style: italic;">"zh_CN.utf8"</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#25163;&#21160;&#35774;&#32622;&#25968;&#23383;&#20998;&#38548;&#31526;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> decimalsign <span style="font-style: italic;">"|"</span>
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">0:1</span>] x**3 <span style="font-weight: bold; text-decoration: underline;">notitle</span>
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> decimalsign locale <span style="color: #ff1f8b;">"zh_CN.utf8"</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#25163;&#21160;&#35774;&#32622;&#25968;&#23383;&#20998;&#38548;&#31526;</span>
+<span style="color: #1f5bff;">set</span> decimalsign <span style="color: #ff1f8b;">"|"</span>
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">0:1</span>] x**3 <span style="color: #18b2b2;">notitle</span>
 </pre>
 </div>
 
@@ -330,17 +336,17 @@
 </div>
 </div>
 
-<div id="outline-container-org62ce931" class="outline-2">
-<h2 id="org62ce931"><span class="section-number-2">11</span> 格式化刻度标签</h2>
+<div id="outline-container-orgbf2dff0" class="outline-2">
+<h2 id="orgbf2dff0"><span class="section-number-2">11</span> 格式化刻度标签</h2>
 <div class="outline-text-2" id="text-11">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> ylabel <span style="font-style: italic;">"Output power"</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> format y <span style="font-style: italic;">"P = %.2f Watts"</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> format x <span style="font-style: italic;">"%.3f%%"</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Axes &#30340;&#21491;&#20391;&#19982; Canvas &#30340;&#21491;&#20391;&#38388;&#36317; 6 &#20010;&#23383;&#31526;&#23485;&#24230;&#65292;&#38450;&#27490;&#26368;&#21518;&#19968;&#20010;&#26631;&#31614;&#36305;&#21040;&#22806;&#38754;&#21435;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> rmargin 6
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> ylabel <span style="color: #ff1f8b;">"Output power"</span>
+<span style="color: #1f5bff;">set</span> format y <span style="color: #ff1f8b;">"P = %.2f Watts"</span>
+<span style="color: #1f5bff;">set</span> format x <span style="color: #ff1f8b;">"%.3f%%"</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Axes &#30340;&#21491;&#20391;&#19982; Canvas &#30340;&#21491;&#20391;&#38388;&#36317; 6 &#20010;&#23383;&#31526;&#23485;&#24230;&#65292;&#38450;&#27490;&#26368;&#21518;&#19968;&#20010;&#26631;&#31614;&#36305;&#21040;&#22806;&#38754;&#21435;</span>
+<span style="color: #1f5bff;">set</span> rmargin 6
 
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">0:100</span>] x**2 <span style="font-weight: bold; text-decoration: underline;">notitle</span>
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">0:100</span>] x**2 <span style="color: #18b2b2;">notitle</span>
 </pre>
 </div>
 
@@ -354,12 +360,12 @@
 这里有个小技巧，我们可以通过 format 的方式隐藏所有的标签
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> format y <span style="font-style: italic;">""</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> format x <span style="font-style: italic;">""</span>
-<span style="font-weight: bold; text-decoration: underline;">unset</span> key
-<span style="font-weight: bold; text-decoration: underline;">set</span> grid
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> format y <span style="color: #ff1f8b;">""</span>
+<span style="color: #1f5bff;">set</span> format x <span style="color: #ff1f8b;">""</span>
+<span style="color: #1f5bff;">unset</span> key
+<span style="color: #1f5bff;">set</span> grid
 
-<span style="font-weight: bold;">plot</span> x, -x
+<span style="color: #00af00;">plot</span> x, -x
 </pre>
 </div>
 

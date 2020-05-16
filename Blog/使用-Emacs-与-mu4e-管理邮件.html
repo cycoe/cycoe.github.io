@@ -3,11 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-05-16 Sat 11:21 -->
+<!-- 2020-05-16 Sat 15:14 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>使用 Emacs 与 mu4e 管理邮件</title>
 <meta name="generator" content="Org mode" />
+<meta name="author" content="Cycoe Joo" />
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 </head>
 <body>
@@ -24,36 +25,41 @@
 <div id="content">
 <h1 class="title">使用 Emacs 与 mu4e 管理邮件</h1>
 <div id="table-of-contents">
-<h2>Table of Contents</h2>
+<h2> <a href="javascript:window.scrollTo(0,0)"
+        style="color: black !important; border-bottom: none !important;"
+        class="tooltip"
+        title="Go to the top of the page">
+       Ξ
+     </a> </h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org0b0c58f">1. 邮件同步</a>
+<li><a href="#org0d47b45">1. 邮件同步</a>
 <ul>
-<li><a href="#org2a0ec35">1.1. offlineimap 配置</a>
+<li><a href="#orga17e493">1.1. offlineimap 配置</a>
 <ul>
-<li><a href="#org1434954">1.1.1. 安装</a></li>
-<li><a href="#orge2981d4">1.1.2. 配置</a></li>
+<li><a href="#org7f760a2">1.1.1. 安装</a></li>
+<li><a href="#org3d367a9">1.1.2. 配置</a></li>
 </ul>
 </li>
-<li><a href="#orgf3935f3">1.2. isync 配置</a>
+<li><a href="#org98c0ef3">1.2. isync 配置</a>
 <ul>
-<li><a href="#org842c097">1.2.1. 安装</a></li>
-<li><a href="#orge83dc89">1.2.2. 配置</a></li>
+<li><a href="#org3071f03">1.2.1. 安装</a></li>
+<li><a href="#org1f819a6">1.2.2. 配置</a></li>
 </ul>
 </li>
-<li><a href="#org956d318">1.3. Unsafe login</a></li>
+<li><a href="#orgbd00cf7">1.3. Unsafe login</a></li>
 </ul>
 </li>
-<li><a href="#org69b3186">2. mu 邮件管理器</a>
+<li><a href="#org202682e">2. mu 邮件管理器</a>
 <ul>
-<li><a href="#orgb7a4e8b">2.1. 安装</a></li>
-<li><a href="#org75be639">2.2. 配置 mu</a></li>
+<li><a href="#org75816a5">2.1. 安装</a></li>
+<li><a href="#org84ed4c9">2.2. 配置 mu</a></li>
 </ul>
 </li>
-<li><a href="#org78beb48">3. mu4e 多账户设置</a></li>
-<li><a href="#orgb48fed9">4. 配置 smtp 发送邮件</a></li>
-<li><a href="#orge565507">5. 使用 Org mode 编辑新邮件</a></li>
-<li><a href="#org58d457c">6. 将邮件加入 TODO 列表中</a></li>
+<li><a href="#org6ed3453">3. mu4e 多账户设置</a></li>
+<li><a href="#orgdf5c101">4. 配置 smtp 发送邮件</a></li>
+<li><a href="#orgd9a524e">5. 使用 Org mode 编辑新邮件</a></li>
+<li><a href="#org1aec479">6. 将邮件加入 TODO 列表中</a></li>
 </ul>
 </div>
 </div>
@@ -67,24 +73,24 @@
 
 <!-- more -->
 
-<div id="outline-container-org0b0c58f" class="outline-2">
-<h2 id="org0b0c58f"><span class="section-number-2">1</span> 邮件同步</h2>
+<div id="outline-container-org0d47b45" class="outline-2">
+<h2 id="org0d47b45"><span class="section-number-2">1</span> 邮件同步</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 查看其他的博客，发现同步博客最常用的协议是 IMAP。Linux 下支持 IMAP 协议并且下载
 下来的目录结构是 MailDir 结构的工具主要有两个，offlineimap 和 isync。
 </p>
 </div>
-<div id="outline-container-org2a0ec35" class="outline-3">
-<h3 id="org2a0ec35"><span class="section-number-3">1.1</span> offlineimap 配置</h3>
+<div id="outline-container-orga17e493" class="outline-3">
+<h3 id="orga17e493"><span class="section-number-3">1.1</span> offlineimap 配置</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 offlineimap 是一个由 Python 写成的 IMAP 同步工具，主要的缺点是依赖 Python2 的库，
 并且同步速度不如 isync，因此仅作记录。
 </p>
 </div>
-<div id="outline-container-org1434954" class="outline-4">
-<h4 id="org1434954"><span class="section-number-4">1.1.1</span> 安装</h4>
+<div id="outline-container-org7f760a2" class="outline-4">
+<h4 id="org7f760a2"><span class="section-number-4">1.1.1</span> 安装</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 在 Archlinux 中，可以直接从 community 仓库中安装。
@@ -95,60 +101,60 @@ offlineimap 是一个由 Python 写成的 IMAP 同步工具，主要的缺点是
 </div>
 </div>
 </div>
-<div id="outline-container-orge2981d4" class="outline-4">
-<h4 id="orge2981d4"><span class="section-number-4">1.1.2</span> 配置</h4>
+<div id="outline-container-org3d367a9" class="outline-4">
+<h4 id="org3d367a9"><span class="section-number-4">1.1.2</span> 配置</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 安装完成，要进行配置，需要创建一个 ~/.offlineimaprc 文件进行配置。详细的配置过程如下： 
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">[general]
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#27492;&#22788;&#21015;&#20986;&#25152;&#26377;&#35201;&#21516;&#27493;&#30340;&#36134;&#25143;&#21517;&#65292;&#19982;&#19979;&#26041; [Account] &#33410;&#20013;&#30340;&#21517;&#23383;&#35201;&#19968;&#33268;</span>
-<span style="font-weight: bold; font-style: italic;">accounts</span> = Netease, QQ
-<span style="font-weight: bold; font-style: italic;">maxsyncaccounts</span> = 3
+<pre class="src src-bash"><span style="color: #cc0000; font-weight: bold;">[</span>general<span style="color: #cc0000; font-weight: bold;">]</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#27492;&#22788;&#21015;&#20986;&#25152;&#26377;&#35201;&#21516;&#27493;&#30340;&#36134;&#25143;&#21517;&#65292;&#19982;&#19979;&#26041; [Account] &#33410;&#20013;&#30340;&#21517;&#23383;&#35201;&#19968;&#33268;</span>
+<span style="color: #ff8700;">accounts</span> = Netease, QQ
+<span style="color: #ff8700;">maxsyncaccounts</span> = 3
 
-[Account Netease]
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#32465;&#23450;&#20179;&#24211;&#65292;&#19982;&#19979;&#26041;&#30340; [Repository] &#33410;&#20013;&#30340;&#21517;&#23383;&#19968;&#33268;</span>
-<span style="font-weight: bold; font-style: italic;">localrepository</span> = NeteaseLocal
-<span style="font-weight: bold; font-style: italic;">remoterepository</span> = NeteaseRemote
+<span style="color: #cc0000; font-weight: bold;">[</span>Account Netease<span style="color: #cc0000; font-weight: bold;">]</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#32465;&#23450;&#20179;&#24211;&#65292;&#19982;&#19979;&#26041;&#30340; [Repository] &#33410;&#20013;&#30340;&#21517;&#23383;&#19968;&#33268;</span>
+<span style="color: #ff8700;">localrepository</span> = NeteaseLocal
+<span style="color: #ff8700;">remoterepository</span> = NeteaseRemote
 
-[Repository NeteaseLocal]
-<span style="font-weight: bold; font-style: italic;">type</span> = Maildir
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#25351;&#23450;&#26412;&#22320;&#20445;&#23384;&#30340;&#36335;&#24452;</span>
-<span style="font-weight: bold; font-style: italic;">localfolders</span> = /data/cycoe/Documents/mail/myneteasemail@163.com
+<span style="color: #cc0000; font-weight: bold;">[</span>Repository NeteaseLocal<span style="color: #cc0000; font-weight: bold;">]</span>
+<span style="color: #ff8700;">type</span> = Maildir
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#25351;&#23450;&#26412;&#22320;&#20445;&#23384;&#30340;&#36335;&#24452;</span>
+<span style="color: #ff8700;">localfolders</span> = /data/cycoe/Documents/mail/myneteasemail@163.com
 
-[Repository NeteaseRemote]
-<span style="font-weight: bold; font-style: italic;">type</span> = IMAP
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#36828;&#31243; imap &#20027;&#26426;</span>
-<span style="font-weight: bold; font-style: italic;">remotehost</span> = imap.163.com
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#37038;&#31665;&#22320;&#22336;</span>
-<span style="font-weight: bold; font-style: italic;">remoteuser</span> = myneteasemail@163.com
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#37038;&#31665;&#23494;&#30721;</span>
-<span style="font-weight: bold; font-style: italic;">remotepass</span> = ********
-<span style="font-weight: bold; font-style: italic;">ssl</span> = yes
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">*&#38750;&#24120;&#37325;&#35201;* &#21542;&#21017;&#25552;&#31034;&#30830;&#23454; CA &#35777;&#20070;</span>
-<span style="font-weight: bold; font-style: italic;">sslcacertfile</span> = /etc/ssl/certs/ca-certificates.crt
-<span style="font-weight: bold; font-style: italic;">maxconnections</span> = 1
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#26159;&#21542;&#20174;&#26381;&#21153;&#22120;&#19978;&#21024;&#38500;&#37038;&#20214;</span>
-<span style="font-weight: bold; font-style: italic;">realdelete</span> = no
+<span style="color: #cc0000; font-weight: bold;">[</span>Repository NeteaseRemote<span style="color: #cc0000; font-weight: bold;">]</span>
+<span style="color: #ff8700;">type</span> = IMAP
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#36828;&#31243; imap &#20027;&#26426;</span>
+<span style="color: #ff8700;">remotehost</span> = imap.163.com
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#37038;&#31665;&#22320;&#22336;</span>
+<span style="color: #ff8700;">remoteuser</span> = myneteasemail@163.com
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#37038;&#31665;&#23494;&#30721;</span>
+<span style="color: #ff8700;">remotepass</span> = ********
+<span style="color: #ff8700;">ssl</span> = yes
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">*&#38750;&#24120;&#37325;&#35201;* &#21542;&#21017;&#25552;&#31034;&#30830;&#23454; CA &#35777;&#20070;</span>
+<span style="color: #ff8700;">sslcacertfile</span> = /etc/ssl/certs/ca-certificates.crt
+<span style="color: #ff8700;">maxconnections</span> = 1
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#26159;&#21542;&#20174;&#26381;&#21153;&#22120;&#19978;&#21024;&#38500;&#37038;&#20214;</span>
+<span style="color: #ff8700;">realdelete</span> = no
 
-[Account QQ]
-<span style="font-weight: bold; font-style: italic;">localrepository</span> = QQLocal
-<span style="font-weight: bold; font-style: italic;">remoterepository</span> = QQRemote
+<span style="color: #cc0000; font-weight: bold;">[</span>Account QQ<span style="color: #cc0000; font-weight: bold;">]</span>
+<span style="color: #ff8700;">localrepository</span> = QQLocal
+<span style="color: #ff8700;">remoterepository</span> = QQRemote
 
-[Repository QQLocal]
-<span style="font-weight: bold; font-style: italic;">type</span> = Maildir
-<span style="font-weight: bold; font-style: italic;">localfolders</span> = /data/cycoe/Documents/mail/myqqmail@qq.com
+<span style="color: #cc0000; font-weight: bold;">[</span>Repository QQLocal<span style="color: #cc0000; font-weight: bold;">]</span>
+<span style="color: #ff8700;">type</span> = Maildir
+<span style="color: #ff8700;">localfolders</span> = /data/cycoe/Documents/mail/myqqmail@qq.com
 
-[Repository QQRemote]
-<span style="font-weight: bold; font-style: italic;">type</span> = IMAP
-<span style="font-weight: bold; font-style: italic;">remotehost</span> = imap.qq.com
-<span style="font-weight: bold; font-style: italic;">remoteuser</span> = myqqmail@qq.com
-<span style="font-weight: bold; font-style: italic;">remotepass</span> = ***********
-<span style="font-weight: bold; font-style: italic;">ssl</span> = yes
-<span style="font-weight: bold; font-style: italic;">sslcacertfile</span> = /etc/ssl/certs/ca-certificates.crt
-<span style="font-weight: bold; font-style: italic;">maxconnections</span> = 1
-<span style="font-weight: bold; font-style: italic;">realdelete</span> = no
+<span style="color: #cc0000; font-weight: bold;">[</span>Repository QQRemote<span style="color: #cc0000; font-weight: bold;">]</span>
+<span style="color: #ff8700;">type</span> = IMAP
+<span style="color: #ff8700;">remotehost</span> = imap.qq.com
+<span style="color: #ff8700;">remoteuser</span> = myqqmail@qq.com
+<span style="color: #ff8700;">remotepass</span> = ***********
+<span style="color: #ff8700;">ssl</span> = yes
+<span style="color: #ff8700;">sslcacertfile</span> = /etc/ssl/certs/ca-certificates.crt
+<span style="color: #ff8700;">maxconnections</span> = 1
+<span style="color: #ff8700;">realdelete</span> = no
 </pre>
 </div>
 <p>
@@ -157,16 +163,16 @@ offlineimap 是一个由 Python 写成的 IMAP 同步工具，主要的缺点是
 </div>
 </div>
 </div>
-<div id="outline-container-orgf3935f3" class="outline-3">
-<h3 id="orgf3935f3"><span class="section-number-3">1.2</span> isync 配置</h3>
+<div id="outline-container-org98c0ef3" class="outline-3">
+<h3 id="org98c0ef3"><span class="section-number-3">1.2</span> isync 配置</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 isync 是一个由 C++ 写成的 IMAP 同步工具，经测试同步速度要比 offlineimap 更快，但
 是同步出来的邮件数量比 offlineimap 更多不知道是怎么回事，目前主要使用这个。
 </p>
 </div>
-<div id="outline-container-org842c097" class="outline-4">
-<h4 id="org842c097"><span class="section-number-4">1.2.1</span> 安装</h4>
+<div id="outline-container-org3071f03" class="outline-4">
+<h4 id="org3071f03"><span class="section-number-4">1.2.1</span> 安装</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 在 Archlinux 中，可以直接从 community 仓库中安装。
@@ -177,8 +183,8 @@ isync 是一个由 C++ 写成的 IMAP 同步工具，经测试同步速度要比
 </div>
 </div>
 </div>
-<div id="outline-container-orge83dc89" class="outline-4">
-<h4 id="orge83dc89"><span class="section-number-4">1.2.2</span> 配置</h4>
+<div id="outline-container-org1f819a6" class="outline-4">
+<h4 id="org1f819a6"><span class="section-number-4">1.2.2</span> 配置</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 isync 的配置方式与 offlineimap 类似，将如下配置放在 '~/.mbsyncrc' 中，并运行
@@ -187,84 +193,84 @@ isync 的配置方式与 offlineimap 类似，将如下配置放在 '~/.mbsyncrc
 </p>
 <div class="org-src-container">
 <pre class="src src-bash">IMAPAccount Netease
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Address to connect to</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Address to connect to</span>
 Host imap.163.com
 User myneteasemail@163.com
 Pass **********
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">To store the password in an encrypted file use PassCmd instead of Pass</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">PassCmd "gpg2 -q --for-your-eyes-only --no-tty -d ~/.mailpass.gpg"</span>
-<span style="font-weight: bold; font-style: italic;">#</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Use SSL</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">To store the password in an encrypted file use PassCmd instead of Pass</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">PassCmd "gpg2 -q --for-your-eyes-only --no-tty -d ~/.mailpass.gpg"</span>
+<span style="color: #b2b2b2; font-style: italic;">#</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Use SSL</span>
 SSLType IMAPS
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">The following line should work. If get certificate errors, uncomment the two following lines and read the "Troubleshooting" section.</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">The following line should work. If get certificate errors, uncomment the two following lines and read the "Troubleshooting" section.</span>
 CertificateFile /etc/ssl/certs/ca-certificates.crt
-<span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">CertificateFile ~/.cert/imap.gmail.com.pem</span>
-<span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">CertificateFile ~/.cert/Equifax_Secure_CA.pem</span>
+<span style="color: #b2b2b2; font-style: italic;">#</span><span style="color: #b2b2b2; font-style: italic;">CertificateFile ~/.cert/imap.gmail.com.pem</span>
+<span style="color: #b2b2b2; font-style: italic;">#</span><span style="color: #b2b2b2; font-style: italic;">CertificateFile ~/.cert/Equifax_Secure_CA.pem</span>
 
 IMAPStore Netease-remote
 Account Netease
 
 MaildirStore Netease-local
 Subfolders Verbatim
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">The trailing "/" is important</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">The trailing "/" is important</span>
 Path /data/cycoe/Documents/mail/myneteasemail@163.com/
 Inbox /data/cycoe/Documents/mail/myneteasemail@163.com/INBOX
 
 Channel Netease
 Master :Netease-remote:
 Slave :Netease-local:
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Exclude everything under the internal [Gmail] folder, except the interesting folders</span>
-Patterns * ![myneteasemail@163.com]* <span style="font-style: italic;">"[myneteasemail@163.com]/INBOX"</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Or include everything</span>
-<span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">Patterns *</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Automatically create missing mailboxes, both locally and on the server</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Exclude everything under the internal [Gmail] folder, except the interesting folders</span>
+Patterns * !<span style="color: #cc0000; font-weight: bold;">[</span>myneteasemail@163.com<span style="color: #cc0000; font-weight: bold;">]</span>* <span style="color: #ff1f8b;">"[myneteasemail@163.com]/INBOX"</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Or include everything</span>
+<span style="color: #b2b2b2; font-style: italic;">#</span><span style="color: #b2b2b2; font-style: italic;">Patterns *</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Automatically create missing mailboxes, both locally and on the server</span>
 Create Both
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Save the synchronization state files in the relevant directory</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Save the synchronization state files in the relevant directory</span>
 SyncState *
 
 
 IMAPAccount QQ
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Address to connect to</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Address to connect to</span>
 Host imap.qq.com
 User myqqmail@qq.com
 Pass **********
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">To store the password in an encrypted file use PassCmd instead of Pass</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">PassCmd "gpg2 -q --for-your-eyes-only --no-tty -d ~/.mailpass.gpg"</span>
-<span style="font-weight: bold; font-style: italic;">#</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Use SSL</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">To store the password in an encrypted file use PassCmd instead of Pass</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">PassCmd "gpg2 -q --for-your-eyes-only --no-tty -d ~/.mailpass.gpg"</span>
+<span style="color: #b2b2b2; font-style: italic;">#</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Use SSL</span>
 SSLType IMAPS
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">The following line should work. If get certificate errors, uncomment the two following lines and read the "Troubleshooting" section.</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">The following line should work. If get certificate errors, uncomment the two following lines and read the "Troubleshooting" section.</span>
 CertificateFile /etc/ssl/certs/ca-certificates.crt
-<span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">CertificateFile ~/.cert/imap.gmail.com.pem</span>
-<span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">CertificateFile ~/.cert/Equifax_Secure_CA.pem</span>
+<span style="color: #b2b2b2; font-style: italic;">#</span><span style="color: #b2b2b2; font-style: italic;">CertificateFile ~/.cert/imap.gmail.com.pem</span>
+<span style="color: #b2b2b2; font-style: italic;">#</span><span style="color: #b2b2b2; font-style: italic;">CertificateFile ~/.cert/Equifax_Secure_CA.pem</span>
 
 IMAPStore QQ-remote
 Account QQ
 
 MaildirStore QQ-local
 Subfolders Verbatim
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">The trailing "/" is important</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">The trailing "/" is important</span>
 Path /data/cycoe/Documents/mail/myqqmail@qq.com/
 Inbox /data/cycoe/Documents/mail/myqqmail@qq.com/INBOX
 
 Channel QQ
 Master :QQ-remote:
 Slave :QQ-local:
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Exclude everything under the internal [Gmail] folder, except the interesting folders</span>
-Patterns * ![myqqmail@qq.com]* <span style="font-style: italic;">"[myqqmail@qq.com]/INBOX"</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Or include everything</span>
-<span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">Patterns *</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Automatically create missing mailboxes, both locally and on the server</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Exclude everything under the internal [Gmail] folder, except the interesting folders</span>
+Patterns * !<span style="color: #cc0000; font-weight: bold;">[</span>myqqmail@qq.com<span style="color: #cc0000; font-weight: bold;">]</span>* <span style="color: #ff1f8b;">"[myqqmail@qq.com]/INBOX"</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Or include everything</span>
+<span style="color: #b2b2b2; font-style: italic;">#</span><span style="color: #b2b2b2; font-style: italic;">Patterns *</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Automatically create missing mailboxes, both locally and on the server</span>
 Create Both
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Save the synchronization state files in the relevant directory</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Save the synchronization state files in the relevant directory</span>
 SyncState *
 </pre>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org956d318" class="outline-3">
-<h3 id="org956d318"><span class="section-number-3">1.3</span> Unsafe login</h3>
+<div id="outline-container-orgbd00cf7" class="outline-3">
+<h3 id="orgbd00cf7"><span class="section-number-3">1.3</span> Unsafe login</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 使用第三方 IMAP 服务同步 163 邮箱时，会提示 Unsafe login 错误，可以通过 <a href="http://config.mail.163.com/settings/imap/index.jsp?uid=xxxxxx@163.com">网易邮箱
@@ -274,41 +280,41 @@ SyncState *
 </div>
 </div>
 
-<div id="outline-container-org69b3186" class="outline-2">
-<h2 id="org69b3186"><span class="section-number-2">2</span> mu 邮件管理器</h2>
+<div id="outline-container-org202682e" class="outline-2">
+<h2 id="org202682e"><span class="section-number-2">2</span> mu 邮件管理器</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgb7a4e8b" class="outline-3">
-<h3 id="orgb7a4e8b"><span class="section-number-3">2.1</span> 安装</h3>
+<div id="outline-container-org75816a5" class="outline-3">
+<h3 id="org75816a5"><span class="section-number-3">2.1</span> 安装</h3>
 <div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
-<pre class="src src-bash"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#20811;&#38534; mu &#20179;&#24211;</span>
+<pre class="src src-bash"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#20811;&#38534; mu &#20179;&#24211;</span>
 git clone git://github.com/djcb/mu.git
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#29983;&#25104;&#37197;&#32622;</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#29983;&#25104;&#37197;&#32622;</span>
 ./autogen.sh
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#37197;&#32622;&#32534;&#35793;&#35774;&#32622;</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#37197;&#32622;&#32534;&#35793;&#35774;&#32622;</span>
 ./configure
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#32534;&#35793;&#23433;&#35013;</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#32534;&#35793;&#23433;&#35013;</span>
 make -j 4 &amp;&amp; sudo make install
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org75be639" class="outline-3">
-<h3 id="org75be639"><span class="section-number-3">2.2</span> 配置 mu</h3>
+<div id="outline-container-org84ed4c9" class="outline-3">
+<h3 id="org84ed4c9"><span class="section-number-3">2.2</span> 配置 mu</h3>
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
-<pre class="src src-bash"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#21021;&#22987;&#21270; mu &#30417;&#27979;&#30340;&#37038;&#31665;&#25991;&#20214;&#22841;</span>
+<pre class="src src-bash"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#21021;&#22987;&#21270; mu &#30417;&#27979;&#30340;&#37038;&#31665;&#25991;&#20214;&#22841;</span>
 mu init -m /data/cycoe/Documents/mail/
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#24314;&#31435;&#37038;&#20214;&#32034;&#24341;</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#24314;&#31435;&#37038;&#20214;&#32034;&#24341;</span>
 mu index
 </pre>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org78beb48" class="outline-2">
-<h2 id="org78beb48"><span class="section-number-2">3</span> mu4e 多账户设置</h2>
+<div id="outline-container-org6ed3453" class="outline-2">
+<h2 id="org6ed3453"><span class="section-number-2">3</span> mu4e 多账户设置</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 mu4e (mu for emacs) 是 mu 在 emacs 中实现的一个邮件管理模块。后端调用 mu 进行邮
@@ -319,176 +325,176 @@ mu4e (mu for emacs) 是 mu 在 emacs 中实现的一个邮件管理模块。后�
 件能够被移动到对应的 maildir 中。
 </p>
 <div class="org-src-container">
-<pre class="src src-elisp">(<span style="font-weight: bold;">setq</span> mu4e-contexts
-      `( ,(make-mu4e-context
-           <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"netease"</span>
-           <span style="font-weight: bold;">:match-func</span> (<span style="font-weight: bold;">lambda</span> (msg)
-                         (<span style="font-weight: bold;">when</span> msg
-                           (string-match-p <span style="font-style: italic;">"myneteasemail@163.com"</span> (mu4e-message-field msg <span style="font-weight: bold;">:maildir</span>)))))))
+<pre class="src src-elisp"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">setq</span> <span style="color: #ff8700;">mu4e-contexts</span>
+      `<span style="color: #1f5bff; font-weight: bold;">(</span> ,<span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ef2929;">make-mu4e-context</span>
+           <span style="color: #b218b2;">:name</span> <span style="color: #ff1f8b;">"netease"</span>
+           <span style="color: #b218b2;">:match-func</span> <span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #00af00;">lambda</span> <span style="color: #00d7af; font-weight: bold;">(</span>msg<span style="color: #00d7af; font-weight: bold;">)</span>
+                         <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #00af00;">when</span> msg
+                           <span style="color: #ff8700; font-weight: bold;">(</span><span style="color: #ef2929;">string-match-p</span> <span style="color: #ff1f8b;">"myneteasemail@163.com"</span> <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ef2929;">mu4e-message-field</span> msg <span style="color: #b218b2;">:maildir</span><span style="color: #b218b2; font-weight: bold;">)</span><span style="color: #ff8700; font-weight: bold;">)</span><span style="color: #00d7af; font-weight: bold;">)</span><span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 <p>
 完整配置如下：
 </p>
 <div class="org-src-container">
-<pre class="src src-elisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">the exact path may different -- check it</span>
-(add-to-list 'load-path <span style="font-style: italic;">"/usr/local/share/emacs/site-lisp/mu4e"</span>)
+<pre class="src src-elisp"><span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">the exact path may different -- check it</span>
+<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ef2929;">add-to-list</span> '<span style="color: #ff8700;">load-path</span> <span style="color: #ff1f8b;">"/usr/local/share/emacs/site-lisp/mu4e"</span><span style="color: #cc0000; font-weight: bold;">)</span>
 
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">require the mu4e main package</span>
-(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">mu4e</span>)
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">use smtpmail to sent mail</span>
-(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">smtpmail</span>)
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">convert org content in mu4e to html</span>
-(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">org-mime</span>)
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">use org-mode in mu4e-message-mode</span>
-(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">org-mu4e</span>)
+<span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">require the mu4e main package</span>
+<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">require</span> '<span style="color: #1f5bff;">mu4e</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">use smtpmail to sent mail</span>
+<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">require</span> '<span style="color: #1f5bff;">smtpmail</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">convert org content in mu4e to html</span>
+<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">require</span> '<span style="color: #1f5bff;">org-mime</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">use org-mode in mu4e-message-mode</span>
+<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">require</span> '<span style="color: #1f5bff;">org-mu4e</span><span style="color: #cc0000; font-weight: bold;">)</span>
 
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">set default values about mu4e</span>
-(<span style="font-weight: bold;">setq</span>
- <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">auto update maildir with isync and index it</span>
- mu4e-update-interval 300
- <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">don't do a full cleanup check</span>
- mu4e-index-cleanup nil
- <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">don't consider up-to-date dirs</span>
- mu4e-index-lazy-check t
- <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">show images in message mode</span>
- mu4e-view-show-images t
- <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">set the default download dir for attachment</span>
- mu4e-attachment-dir <span style="font-style: italic;">"/data/cycoe/downloads"</span>
- <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">prefer html view</span>
- mu4e-view-prefer-html t
- <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">don't save message to sent messages, gmail/imap takes care of this</span>
- <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(see the documentation for `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">mu4e-sent-messages-behavior</span><span style="font-weight: bold; font-style: italic;">' if you have</span>
- <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">additional non-gmail addresses and want assign them different</span>
- <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">behavior.)</span>
- mu4e-sent-messages-behavior 'delete
- )
+<span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">set default values about mu4e</span>
+<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">setq</span>
+ <span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">auto update maildir with isync and index it</span>
+ <span style="color: #ff8700;">mu4e-update-interval</span> 300
+ <span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">don't do a full cleanup check</span>
+ <span style="color: #ff8700;">mu4e-index-cleanup</span> nil
+ <span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">don't consider up-to-date dirs</span>
+ <span style="color: #ff8700;">mu4e-index-lazy-check</span> <span style="color: #ff8700;">t</span>
+ <span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">show images in message mode</span>
+ <span style="color: #ff8700;">mu4e-view-show-images</span> <span style="color: #ff8700;">t</span>
+ <span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">set the default download dir for attachment</span>
+ <span style="color: #ff8700;">mu4e-attachment-dir</span> <span style="color: #ff1f8b;">"/data/cycoe/downloads"</span>
+ <span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">prefer html view</span>
+ <span style="color: #ff8700;">mu4e-view-prefer-html</span> <span style="color: #ff8700;">t</span>
+ <span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">don't save message to sent messages, gmail/imap takes care of this</span>
+ <span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">(see the documentation for `</span><span style="color: #1f5bff; font-style: italic;">mu4e-sent-messages-behavior</span><span style="color: #b2b2b2; font-style: italic;">' if you have</span>
+ <span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">additional non-gmail addresses and want assign them different</span>
+ <span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">behavior.)</span>
+ <span style="color: #ff8700;">mu4e-sent-messages-behavior</span> '<span style="color: #ef2929;">delete</span>
+ <span style="color: #cc0000; font-weight: bold;">)</span>
 
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">set default values for sending mails</span>
-(<span style="font-weight: bold;">setq</span>
- <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">user agent when send mail</span>
- mail-user-agent 'mu4e-user-agent
- <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#35774;&#32622;&#37038;&#20214;&#21457;&#36865;&#26041;&#27861;&#20026; smtpmail</span>
- message-send-mail-function 'smtpmail-send-it
- <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#26681;&#25454; from &#37038;&#20214;&#22836;&#20351;&#29992;&#27491;&#30830;&#30340;&#36134;&#25143;&#19978;&#19979;&#25991;&#21457;&#36865; email.</span>
- message-sendmail-envelope-from 'header
- <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#35774;&#32622;&#37038;&#31665;&#35748;&#35777;&#21152;&#23494;&#26041;&#24335;</span>
- smtpmail-stream-type 'ssl
- <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">don't keep message buffers around</span>
- message-kill-buffer-on-exit t
- )
+<span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">set default values for sending mails</span>
+<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">setq</span>
+ <span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">user agent when send mail</span>
+ <span style="color: #ff8700;">mail-user-agent</span> '<span style="color: #ef2929;">mu4e-user-agent</span>
+ <span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622;&#37038;&#20214;&#21457;&#36865;&#26041;&#27861;&#20026; smtpmail</span>
+ <span style="color: #ef2929;">message-send-mail-function</span> '<span style="color: #ef2929;">smtpmail-send-it</span>
+ <span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">&#26681;&#25454; from &#37038;&#20214;&#22836;&#20351;&#29992;&#27491;&#30830;&#30340;&#36134;&#25143;&#19978;&#19979;&#25991;&#21457;&#36865; email.</span>
+ <span style="color: #ef2929;">message-sendmail-envelope-from</span> 'header
+ <span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622;&#37038;&#31665;&#35748;&#35777;&#21152;&#23494;&#26041;&#24335;</span>
+ <span style="color: #ff8700;">smtpmail-stream-type</span> 'ssl
+ <span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">don't keep message buffers around</span>
+ <span style="color: #ff8700;">message-kill-buffer-on-exit</span> <span style="color: #ff8700;">t</span>
+ <span style="color: #cc0000; font-weight: bold;">)</span>
 
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">some information about me</span>
-(<span style="font-weight: bold;">setq</span>
- user-full-name  <span style="font-style: italic;">"Cycoe Joo"</span>
- <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">set a mail address list using when reply a message</span>
- mu4e-user-mail-address-list '(<span style="font-style: italic;">"myneteasemail@163.com"</span>
-                               <span style="font-style: italic;">"myqqmail@qq.com"</span>)
- mu4e-compose-signature
- (concat
-  <span style="font-style: italic;">"Cycoe\n"</span>
-  <span style="font-style: italic;">"BLOG https://cycoe.cc\n"</span>)
- )
+<span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">some information about me</span>
+<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">setq</span>
+ <span style="color: #ef2929;">user-full-name</span>  <span style="color: #ff1f8b;">"Cycoe Joo"</span>
+ <span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">set a mail address list using when reply a message</span>
+ mu4e-user-mail-address-list '<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"myneteasemail@163.com"</span>
+                               <span style="color: #ff1f8b;">"myqqmail@qq.com"</span><span style="color: #1f5bff; font-weight: bold;">)</span>
+ <span style="color: #ff8700;">mu4e-compose-signature</span>
+ <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ef2929;">concat</span>
+  <span style="color: #ff1f8b;">"Cycoe\n"</span>
+  <span style="color: #ff1f8b;">"BLOG https://cycoe.cc\n"</span><span style="color: #1f5bff; font-weight: bold;">)</span>
+ <span style="color: #cc0000; font-weight: bold;">)</span>
 
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#35813;&#20989;&#25968;&#22522;&#20110;&#24403;&#21069;&#25152;&#22312;&#30340; maildir &#26469;&#21028;&#23450;&#25152;&#36134;&#25143;&#19978;&#19979;&#25991;&#12290;</span>
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(defun mu4e-message-maildir-matches (msg rx)</span>
-<span style="font-weight: bold; font-style: italic;">;;   </span><span style="font-weight: bold; font-style: italic;">(when rx</span>
-<span style="font-weight: bold; font-style: italic;">;;     </span><span style="font-weight: bold; font-style: italic;">(if (listp rx)</span>
-<span style="font-weight: bold; font-style: italic;">;;         </span><span style="font-weight: bold; font-style: italic;">;; If rx is a list, try each one for a match</span>
-<span style="font-weight: bold; font-style: italic;">;;         </span><span style="font-weight: bold; font-style: italic;">(or (mu4e-message-maildir-matches msg (car rx))</span>
-<span style="font-weight: bold; font-style: italic;">;;             </span><span style="font-weight: bold; font-style: italic;">(mu4e-message-maildir-matches msg (cdr rx)))</span>
-<span style="font-weight: bold; font-style: italic;">;;       </span><span style="font-weight: bold; font-style: italic;">;; Not a list, check rx</span>
-<span style="font-weight: bold; font-style: italic;">;;       </span><span style="font-weight: bold; font-style: italic;">(string-match rx (mu4e-message-field msg :maildir)))))</span>
+<span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">&#35813;&#20989;&#25968;&#22522;&#20110;&#24403;&#21069;&#25152;&#22312;&#30340; maildir &#26469;&#21028;&#23450;&#25152;&#36134;&#25143;&#19978;&#19979;&#25991;&#12290;</span>
+<span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">(defun mu4e-message-maildir-matches (msg rx)</span>
+<span style="color: #b2b2b2; font-style: italic;">;;   </span><span style="color: #b2b2b2; font-style: italic;">(when rx</span>
+<span style="color: #b2b2b2; font-style: italic;">;;     </span><span style="color: #b2b2b2; font-style: italic;">(if (listp rx)</span>
+<span style="color: #b2b2b2; font-style: italic;">;;         </span><span style="color: #b2b2b2; font-style: italic;">;; If rx is a list, try each one for a match</span>
+<span style="color: #b2b2b2; font-style: italic;">;;         </span><span style="color: #b2b2b2; font-style: italic;">(or (mu4e-message-maildir-matches msg (car rx))</span>
+<span style="color: #b2b2b2; font-style: italic;">;;             </span><span style="color: #b2b2b2; font-style: italic;">(mu4e-message-maildir-matches msg (cdr rx)))</span>
+<span style="color: #b2b2b2; font-style: italic;">;;       </span><span style="color: #b2b2b2; font-style: italic;">;; Not a list, check rx</span>
+<span style="color: #b2b2b2; font-style: italic;">;;       </span><span style="color: #b2b2b2; font-style: italic;">(string-match rx (mu4e-message-field msg :maildir)))))</span>
 
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#35774;&#32622; mu4e &#19978;&#19979;&#25991;</span>
-(<span style="font-weight: bold;">setq</span> mu4e-contexts
-      `( ,(make-mu4e-context
-           <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Netease"</span>
-           <span style="font-weight: bold;">:enter-func</span> (<span style="font-weight: bold;">lambda</span> ()
-                         (mu4e-message <span style="font-style: italic;">"Entering Netease context"</span>)
-                         <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">update index after switch context, otherwise the</span>
-                         <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">counting is not updated</span>
-                         (mu4e-update-index))
-           <span style="font-weight: bold;">:leave-func</span> (<span style="font-weight: bold;">lambda</span> () (mu4e-message <span style="font-style: italic;">"Leaving Netease context"</span>))
-           <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">we match based on the contact-fields of the message</span>
-           <span style="font-weight: bold;">:match-func</span> (<span style="font-weight: bold;">lambda</span> (msg)
-                         (<span style="font-weight: bold;">when</span> msg
-                           (string-match-p <span style="font-style: italic;">"myneteasemail@163.com"</span> (mu4e-message-field msg <span style="font-weight: bold;">:maildir</span>))))
+<span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622; mu4e &#19978;&#19979;&#25991;</span>
+<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">setq</span> <span style="color: #ff8700;">mu4e-contexts</span>
+      `<span style="color: #1f5bff; font-weight: bold;">(</span> ,<span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ef2929;">make-mu4e-context</span>
+           <span style="color: #b218b2;">:name</span> <span style="color: #ff1f8b;">"Netease"</span>
+           <span style="color: #b218b2;">:enter-func</span> <span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #00af00;">lambda</span> <span style="color: #00d7af; font-weight: bold;">()</span>
+                         <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ef2929;">mu4e-message</span> <span style="color: #ff1f8b;">"Entering Netease context"</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                         <span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">update index after switch context, otherwise the</span>
+                         <span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">counting is not updated</span>
+                         <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ef2929;">mu4e-update-index</span><span style="color: #00d7af; font-weight: bold;">)</span><span style="color: #ff4ea3; font-weight: bold;">)</span>
+           <span style="color: #b218b2;">:leave-func</span> <span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #00af00;">lambda</span> <span style="color: #00d7af; font-weight: bold;">()</span> <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ef2929;">mu4e-message</span> <span style="color: #ff1f8b;">"Leaving Netease context"</span><span style="color: #00d7af; font-weight: bold;">)</span><span style="color: #ff4ea3; font-weight: bold;">)</span>
+           <span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">we match based on the contact-fields of the message</span>
+           <span style="color: #b218b2;">:match-func</span> <span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #00af00;">lambda</span> <span style="color: #00d7af; font-weight: bold;">(</span>msg<span style="color: #00d7af; font-weight: bold;">)</span>
+                         <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #00af00;">when</span> msg
+                           <span style="color: #ff8700; font-weight: bold;">(</span><span style="color: #ef2929;">string-match-p</span> <span style="color: #ff1f8b;">"myneteasemail@163.com"</span> <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ef2929;">mu4e-message-field</span> msg <span style="color: #b218b2;">:maildir</span><span style="color: #b218b2; font-weight: bold;">)</span><span style="color: #ff8700; font-weight: bold;">)</span><span style="color: #00d7af; font-weight: bold;">)</span><span style="color: #ff4ea3; font-weight: bold;">)</span>
 
-           <span style="font-weight: bold;">:vars</span> '((user-mail-address             . <span style="font-style: italic;">"myneteasemail@163.com"</span>)
-                   (mu4e-sent-folder              . <span style="font-style: italic;">"/myneteasemail@163.com/Sent"</span>)
-                   (mu4e-drafts-folder            . <span style="font-style: italic;">"/myneteasemail@163.com/Drafts"</span>)
-                   (mu4e-trash-folder             . <span style="font-style: italic;">"/myneteasemail@163.com/Trash"</span>)
-                   (mu4e-refile-folder            . <span style="font-style: italic;">"/myneteasemail@163.com/Refile"</span>)
-                   (smtpmail-smtp-user            . <span style="font-style: italic;">"myneteasemail@163.com"</span>)
-                   (smtpmail-default-smtp-server  . <span style="font-style: italic;">"smtp.163.com"</span>)
-                   (smtpmail-smtp-server          . <span style="font-style: italic;">"smtp.163.com"</span>)
-                   (smtpmail-smtp-service         . 994)
-                   (mu4e-get-mail-command         . <span style="font-style: italic;">"mbsync Netease"</span>)
-                   (mu4e-maildir-shortcuts . ((<span style="font-style: italic;">"/myneteasemail@163.com/INBOX"</span>   . ?i)
-                                              (<span style="font-style: italic;">"/myneteasemail@163.com/Sent"</span>    . ?s)
-                                              (<span style="font-style: italic;">"/myneteasemail@163.com/Refile"</span>  . ?r)
-                                              (<span style="font-style: italic;">"/myneteasemail@163.com/Trash"</span>   . ?t)
-                                              (<span style="font-style: italic;">"/myneteasemail@163.com/Drafts"</span>  . ?d)))
-                   (mu4e-bookmarks . ( (<span style="font-style: italic;">"maildir:/myneteasemail@163.com/INBOX AND flag:unread AND NOT flag:trashed"</span>   <span style="font-style: italic;">"Unread messages"</span>        ?u)
-                                       (<span style="font-style: italic;">"maildir:/myneteasemail@163.com/INBOX AND date:today..now"</span>                    <span style="font-style: italic;">"Today's messages"</span>       ?t)
-                                       (<span style="font-style: italic;">"maildir:/myneteasemail@163.com/INBOX AND date:7d..now"</span>                       <span style="font-style: italic;">"Last 7 days"</span>            ?w)
-                                       (<span style="font-style: italic;">"maildir:/myneteasemail@163.com/INBOX AND date:1d..now"</span>                       <span style="font-style: italic;">"Last 1 days"</span>            ?o)
-                                       (<span style="font-style: italic;">"maildir:/myneteasemail@163.com/INBOX"</span>                                        <span style="font-style: italic;">"Inbox"</span>                  ?i)
-                                       (<span style="font-style: italic;">"maildir:/myneteasemail@163.com/Sent"</span>                                         <span style="font-style: italic;">"Sent"</span>                   ?s)
-                                       (<span style="font-style: italic;">"maildir:/myneteasemail@163.com/Refile"</span>                                       <span style="font-style: italic;">"Refile"</span>                 ?r)
-                                       (<span style="font-style: italic;">"maildir:/myneteasemail@163.com/Trash"</span>                                        <span style="font-style: italic;">"Trash"</span>                  ?t)
-                                       (<span style="font-style: italic;">"maildir:/myneteasemail@163.com/Drafts"</span>                                       <span style="font-style: italic;">"Drafts"</span>                 ?d)
-                                       (<span style="font-style: italic;">"maildir:/myneteasemail@163.com/INBOX AND mime:image/*"</span>                       <span style="font-style: italic;">"Messages with images"</span>   ?p)))
-                   ))
+           <span style="color: #b218b2;">:vars</span> '<span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ff8700;">user-mail-address</span>             . <span style="color: #ff1f8b;">"myneteasemail@163.com"</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                   <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ff8700;">mu4e-sent-folder</span>              . <span style="color: #ff1f8b;">"/myneteasemail@163.com/Sent"</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                   <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ff8700;">mu4e-drafts-folder</span>            . <span style="color: #ff1f8b;">"/myneteasemail@163.com/Drafts"</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                   <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ff8700;">mu4e-trash-folder</span>             . <span style="color: #ff1f8b;">"/myneteasemail@163.com/Trash"</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                   <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ff8700;">mu4e-refile-folder</span>            . <span style="color: #ff1f8b;">"/myneteasemail@163.com/Refile"</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                   <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ff8700;">smtpmail-smtp-user</span>            . <span style="color: #ff1f8b;">"myneteasemail@163.com"</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                   <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ff8700;">smtpmail-default-smtp-server</span>  . <span style="color: #ff1f8b;">"smtp.163.com"</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                   <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ff8700;">smtpmail-smtp-server</span>          . <span style="color: #ff1f8b;">"smtp.163.com"</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                   <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ff8700;">smtpmail-smtp-service</span>         . 994<span style="color: #00d7af; font-weight: bold;">)</span>
+                   <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ff8700;">mu4e-get-mail-command</span>         . <span style="color: #ff1f8b;">"mbsync Netease"</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                   <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ef2929;">mu4e-maildir-shortcuts</span> . <span style="color: #ff8700; font-weight: bold;">(</span><span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"/myneteasemail@163.com/INBOX"</span>   . ?i<span style="color: #b218b2; font-weight: bold;">)</span>
+                                              <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"/myneteasemail@163.com/Sent"</span>    . ?s<span style="color: #b218b2; font-weight: bold;">)</span>
+                                              <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"/myneteasemail@163.com/Refile"</span>  . ?r<span style="color: #b218b2; font-weight: bold;">)</span>
+                                              <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"/myneteasemail@163.com/Trash"</span>   . ?t<span style="color: #b218b2; font-weight: bold;">)</span>
+                                              <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"/myneteasemail@163.com/Drafts"</span>  . ?d<span style="color: #b218b2; font-weight: bold;">)</span><span style="color: #ff8700; font-weight: bold;">)</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                   <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ef2929;">mu4e-bookmarks</span> . <span style="color: #ff8700; font-weight: bold;">(</span> <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"maildir:/myneteasemail@163.com/INBOX AND flag:unread AND NOT flag:trashed"</span>   <span style="color: #ff1f8b;">"Unread messages"</span>        ?u<span style="color: #b218b2; font-weight: bold;">)</span>
+                                       <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"maildir:/myneteasemail@163.com/INBOX AND date:today..now"</span>                    <span style="color: #ff1f8b;">"Today's messages"</span>       ?t<span style="color: #b218b2; font-weight: bold;">)</span>
+                                       <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"maildir:/myneteasemail@163.com/INBOX AND date:7d..now"</span>                       <span style="color: #ff1f8b;">"Last 7 days"</span>            ?w<span style="color: #b218b2; font-weight: bold;">)</span>
+                                       <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"maildir:/myneteasemail@163.com/INBOX AND date:1d..now"</span>                       <span style="color: #ff1f8b;">"Last 1 days"</span>            ?o<span style="color: #b218b2; font-weight: bold;">)</span>
+                                       <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"maildir:/myneteasemail@163.com/INBOX"</span>                                        <span style="color: #ff1f8b;">"Inbox"</span>                  ?i<span style="color: #b218b2; font-weight: bold;">)</span>
+                                       <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"maildir:/myneteasemail@163.com/Sent"</span>                                         <span style="color: #ff1f8b;">"Sent"</span>                   ?s<span style="color: #b218b2; font-weight: bold;">)</span>
+                                       <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"maildir:/myneteasemail@163.com/Refile"</span>                                       <span style="color: #ff1f8b;">"Refile"</span>                 ?r<span style="color: #b218b2; font-weight: bold;">)</span>
+                                       <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"maildir:/myneteasemail@163.com/Trash"</span>                                        <span style="color: #ff1f8b;">"Trash"</span>                  ?t<span style="color: #b218b2; font-weight: bold;">)</span>
+                                       <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"maildir:/myneteasemail@163.com/Drafts"</span>                                       <span style="color: #ff1f8b;">"Drafts"</span>                 ?d<span style="color: #b218b2; font-weight: bold;">)</span>
+                                       <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"maildir:/myneteasemail@163.com/INBOX AND mime:image/*"</span>                       <span style="color: #ff1f8b;">"Messages with images"</span>   ?p<span style="color: #b218b2; font-weight: bold;">)</span><span style="color: #ff8700; font-weight: bold;">)</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                   <span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span>
 
-         ,(make-mu4e-context
-           <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"QQ"</span>
-           <span style="font-weight: bold;">:enter-func</span> (<span style="font-weight: bold;">lambda</span> ()
-                         (mu4e-message <span style="font-style: italic;">"Switch to the QQ context"</span>)
-                         (mu4e-update-index))
-           <span style="font-weight: bold;">:match-func</span> (<span style="font-weight: bold;">lambda</span> (msg)
-                         (<span style="font-weight: bold;">when</span> msg
-                           (string-match-p <span style="font-style: italic;">"myqqmail@qq.com"</span> (mu4e-message-field msg <span style="font-weight: bold;">:maildir</span>))))
+         ,<span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ef2929;">make-mu4e-context</span>
+           <span style="color: #b218b2;">:name</span> <span style="color: #ff1f8b;">"QQ"</span>
+           <span style="color: #b218b2;">:enter-func</span> <span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #00af00;">lambda</span> <span style="color: #00d7af; font-weight: bold;">()</span>
+                         <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ef2929;">mu4e-message</span> <span style="color: #ff1f8b;">"Switch to the QQ context"</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                         <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ef2929;">mu4e-update-index</span><span style="color: #00d7af; font-weight: bold;">)</span><span style="color: #ff4ea3; font-weight: bold;">)</span>
+           <span style="color: #b218b2;">:match-func</span> <span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #00af00;">lambda</span> <span style="color: #00d7af; font-weight: bold;">(</span>msg<span style="color: #00d7af; font-weight: bold;">)</span>
+                         <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #00af00;">when</span> msg
+                           <span style="color: #ff8700; font-weight: bold;">(</span><span style="color: #ef2929;">string-match-p</span> <span style="color: #ff1f8b;">"myqqmail@qq.com"</span> <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ef2929;">mu4e-message-field</span> msg <span style="color: #b218b2;">:maildir</span><span style="color: #b218b2; font-weight: bold;">)</span><span style="color: #ff8700; font-weight: bold;">)</span><span style="color: #00d7af; font-weight: bold;">)</span><span style="color: #ff4ea3; font-weight: bold;">)</span>
 
-           <span style="font-weight: bold;">:vars</span> '((user-mail-address             . <span style="font-style: italic;">"myqqmail@qq.com"</span>)
-                   (mu4e-sent-folder              . <span style="font-style: italic;">"/myqqmail@qq.com/Sent"</span>)
-                   (mu4e-drafts-folder            . <span style="font-style: italic;">"/myqqmail@qq.com/Drafts"</span>)
-                   (mu4e-trash-folder             . <span style="font-style: italic;">"/myqqmail@qq.com/Trash"</span>)
-                   (mu4e-refile-folder            . <span style="font-style: italic;">"/myqqmail@qq.com/Refile"</span>)
-                   (smtpmail-smtp-user            . <span style="font-style: italic;">"myqqmail@qq.com"</span>)
-                   (smtpmail-default-smtp-server  . <span style="font-style: italic;">"smtp.qq.com"</span>)
-                   (smtpmail-smtp-server          . <span style="font-style: italic;">"smtp.qq.com"</span>)
-                   (smtpmail-smtp-service         . 465)
-                   (mu4e-get-mail-command         . <span style="font-style: italic;">"mbsync QQ"</span>)
-                   (mu4e-maildir-shortcuts . ((<span style="font-style: italic;">"/myqqmail@qq.com/INBOX"</span>   . ?i)
-                                              (<span style="font-style: italic;">"/myqqmail@qq.com/Sent"</span>    . ?s)
-                                              (<span style="font-style: italic;">"/myqqmail@qq.com/Refile"</span>  . ?r)
-                                              (<span style="font-style: italic;">"/myqqmail@qq.com/Trash"</span>   . ?t)
-                                              (<span style="font-style: italic;">"/myqqmail@qq.com/Drafts"</span>  . ?d)))
-                   (mu4e-bookmarks . ( (<span style="font-style: italic;">"maildir:/myqqmail@qq.com/INBOX AND flag:unread AND NOT flag:trashed"</span>   <span style="font-style: italic;">"Unread messages"</span>        ?u)
-                                       (<span style="font-style: italic;">"maildir:/myqqmail@qq.com/INBOX AND date:today..now"</span>                    <span style="font-style: italic;">"Today's messages"</span>       ?t)
-                                       (<span style="font-style: italic;">"maildir:/myqqmail@qq.com/INBOX AND date:7d..now"</span>                       <span style="font-style: italic;">"Last 7 days"</span>            ?w)
-                                       (<span style="font-style: italic;">"maildir:/myqqmail@qq.com/INBOX AND date:1d..now"</span>                       <span style="font-style: italic;">"Last 1 days"</span>            ?o)
-                                       (<span style="font-style: italic;">"maildir:/myqqmail@qq.com/INBOX"</span>                                        <span style="font-style: italic;">"Inbox"</span>                  ?i)
-                                       (<span style="font-style: italic;">"maildir:/myqqmail@qq.com/Sent"</span>                                         <span style="font-style: italic;">"Sent"</span>                   ?s)
-                                       (<span style="font-style: italic;">"maildir:/myqqmail@qq.com/Refile"</span>                                       <span style="font-style: italic;">"Refile"</span>                 ?r)
-                                       (<span style="font-style: italic;">"maildir:/myqqmail@qq.com/Trash"</span>                                        <span style="font-style: italic;">"Trash"</span>                  ?t)
-                                       (<span style="font-style: italic;">"maildir:/myqqmail@qq.com/Drafts"</span>                                       <span style="font-style: italic;">"Drafts"</span>                 ?d)
-                                       (<span style="font-style: italic;">"maildir:/myqqmail@qq.com/INBOX AND mime:image/*"</span>                       <span style="font-style: italic;">"Messages with images"</span>   ?p)))
-                   ))))
+           <span style="color: #b218b2;">:vars</span> '<span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ff8700;">user-mail-address</span>             . <span style="color: #ff1f8b;">"myqqmail@qq.com"</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                   <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ff8700;">mu4e-sent-folder</span>              . <span style="color: #ff1f8b;">"/myqqmail@qq.com/Sent"</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                   <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ff8700;">mu4e-drafts-folder</span>            . <span style="color: #ff1f8b;">"/myqqmail@qq.com/Drafts"</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                   <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ff8700;">mu4e-trash-folder</span>             . <span style="color: #ff1f8b;">"/myqqmail@qq.com/Trash"</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                   <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ff8700;">mu4e-refile-folder</span>            . <span style="color: #ff1f8b;">"/myqqmail@qq.com/Refile"</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                   <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ff8700;">smtpmail-smtp-user</span>            . <span style="color: #ff1f8b;">"myqqmail@qq.com"</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                   <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ff8700;">smtpmail-default-smtp-server</span>  . <span style="color: #ff1f8b;">"smtp.qq.com"</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                   <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ff8700;">smtpmail-smtp-server</span>          . <span style="color: #ff1f8b;">"smtp.qq.com"</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                   <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ff8700;">smtpmail-smtp-service</span>         . 465<span style="color: #00d7af; font-weight: bold;">)</span>
+                   <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ff8700;">mu4e-get-mail-command</span>         . <span style="color: #ff1f8b;">"mbsync QQ"</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                   <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ef2929;">mu4e-maildir-shortcuts</span> . <span style="color: #ff8700; font-weight: bold;">(</span><span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"/myqqmail@qq.com/INBOX"</span>   . ?i<span style="color: #b218b2; font-weight: bold;">)</span>
+                                              <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"/myqqmail@qq.com/Sent"</span>    . ?s<span style="color: #b218b2; font-weight: bold;">)</span>
+                                              <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"/myqqmail@qq.com/Refile"</span>  . ?r<span style="color: #b218b2; font-weight: bold;">)</span>
+                                              <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"/myqqmail@qq.com/Trash"</span>   . ?t<span style="color: #b218b2; font-weight: bold;">)</span>
+                                              <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"/myqqmail@qq.com/Drafts"</span>  . ?d<span style="color: #b218b2; font-weight: bold;">)</span><span style="color: #ff8700; font-weight: bold;">)</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                   <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ef2929;">mu4e-bookmarks</span> . <span style="color: #ff8700; font-weight: bold;">(</span> <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"maildir:/myqqmail@qq.com/INBOX AND flag:unread AND NOT flag:trashed"</span>   <span style="color: #ff1f8b;">"Unread messages"</span>        ?u<span style="color: #b218b2; font-weight: bold;">)</span>
+                                       <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"maildir:/myqqmail@qq.com/INBOX AND date:today..now"</span>                    <span style="color: #ff1f8b;">"Today's messages"</span>       ?t<span style="color: #b218b2; font-weight: bold;">)</span>
+                                       <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"maildir:/myqqmail@qq.com/INBOX AND date:7d..now"</span>                       <span style="color: #ff1f8b;">"Last 7 days"</span>            ?w<span style="color: #b218b2; font-weight: bold;">)</span>
+                                       <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"maildir:/myqqmail@qq.com/INBOX AND date:1d..now"</span>                       <span style="color: #ff1f8b;">"Last 1 days"</span>            ?o<span style="color: #b218b2; font-weight: bold;">)</span>
+                                       <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"maildir:/myqqmail@qq.com/INBOX"</span>                                        <span style="color: #ff1f8b;">"Inbox"</span>                  ?i<span style="color: #b218b2; font-weight: bold;">)</span>
+                                       <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"maildir:/myqqmail@qq.com/Sent"</span>                                         <span style="color: #ff1f8b;">"Sent"</span>                   ?s<span style="color: #b218b2; font-weight: bold;">)</span>
+                                       <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"maildir:/myqqmail@qq.com/Refile"</span>                                       <span style="color: #ff1f8b;">"Refile"</span>                 ?r<span style="color: #b218b2; font-weight: bold;">)</span>
+                                       <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"maildir:/myqqmail@qq.com/Trash"</span>                                        <span style="color: #ff1f8b;">"Trash"</span>                  ?t<span style="color: #b218b2; font-weight: bold;">)</span>
+                                       <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"maildir:/myqqmail@qq.com/Drafts"</span>                                       <span style="color: #ff1f8b;">"Drafts"</span>                 ?d<span style="color: #b218b2; font-weight: bold;">)</span>
+                                       <span style="color: #b218b2; font-weight: bold;">(</span><span style="color: #ff1f8b;">"maildir:/myqqmail@qq.com/INBOX AND mime:image/*"</span>                       <span style="color: #ff1f8b;">"Messages with images"</span>   ?p<span style="color: #b218b2; font-weight: bold;">)</span><span style="color: #ff8700; font-weight: bold;">)</span><span style="color: #00d7af; font-weight: bold;">)</span>
+                   <span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">start with the first (default) context;</span>
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">default is to ask-if-none (ask when there's no context yet, and none match)</span>
-(<span style="font-weight: bold;">setq</span> mu4e-context-policy 'pick-first)
+<span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">start with the first (default) context;</span>
+<span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">default is to ask-if-none (ask when there's no context yet, and none match)</span>
+<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">setq</span> <span style="color: #ff8700;">mu4e-context-policy</span> 'pick-first<span style="color: #cc0000; font-weight: bold;">)</span>
 
-(<span style="font-weight: bold;">provide</span> '<span style="font-weight: bold; text-decoration: underline;">init-mu4e</span>)
+<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">provide</span> '<span style="color: #1f5bff;">init-mu4e</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgb48fed9" class="outline-2">
-<h2 id="orgb48fed9"><span class="section-number-2">4</span> 配置 smtp 发送邮件</h2>
+<div id="outline-container-orgdf5c101" class="outline-2">
+<h2 id="orgdf5c101"><span class="section-number-2">4</span> 配置 smtp 发送邮件</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 emcas 可以使用 smtpmail 发送邮件，会自动读取 <code>~/.authinfo</code> 文件中的账户和密码，因
@@ -501,8 +507,8 @@ machine smtp.qq.com login myqqmail@qq.com password xxxxxxxxxx
 </div>
 </div>
 </div>
-<div id="outline-container-orge565507" class="outline-2">
-<h2 id="orge565507"><span class="section-number-2">5</span> 使用 Org mode 编辑新邮件</h2>
+<div id="outline-container-orgd9a524e" class="outline-2">
+<h2 id="orgd9a524e"><span class="section-number-2">5</span> 使用 Org mode 编辑新邮件</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 使用 Emacs 管理邮件的一大优势就是可以借助强大的 Org-mode 来写邮件，并自动导出为
@@ -512,41 +518,41 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
 <code>~/.config/emacs/lisp/init-mu4e.el</code> 中加入如下配置。
 </p>
 <div class="org-src-container">
-<pre class="src src-elisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">convert org content in mu4e to html and send</span>
-(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">org-mime</span>)
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">convert org content in mu4e to html and send</span>
-(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">org-mu4e</span>)
+<pre class="src src-elisp"><span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">convert org content in mu4e to html and send</span>
+<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">require</span> '<span style="color: #1f5bff;">org-mime</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">convert org content in mu4e to html and send</span>
+<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">require</span> '<span style="color: #1f5bff;">org-mu4e</span><span style="color: #cc0000; font-weight: bold;">)</span>
 
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">auto enable the org-mu4e-compose-org-mode when enter the mu4e-compose-mode</span>
-(add-hook 'mu4e-compose-mode-hook
-          (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">do-compose-stuff</span> ()
-            (org-mu4e-compose-org-mode)))
+<span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">auto enable the org-mu4e-compose-org-mode when enter the mu4e-compose-mode</span>
+<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ef2929;">add-hook</span> '<span style="color: #ff8700;">mu4e-compose-mode-hook</span>
+          <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">defun</span> <span style="color: #ef2929;">do-compose-stuff</span> <span style="color: #00af00; font-weight: bold;">()</span>
+            <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ef2929;">org-mu4e-compose-org-mode</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">htmlize-and-send</span> ()
-  <span style="font-style: italic;">"When in an org-mu4e-compose-org-mode message, htmlize and send it."</span>
-  (<span style="font-weight: bold;">interactive</span>)
-  (<span style="font-weight: bold;">when</span> (member 'org~mu4e-mime-switch-headers-or-body post-command-hook)
-    (org-mime-htmlize)
-    (message-send-and-exit)))
+<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">defun</span> <span style="color: #ef2929;">htmlize-and-send</span> <span style="color: #1f5bff; font-weight: bold;">()</span>
+  <span style="color: #cc0000;">"When in an org-mu4e-compose-org-mode message, htmlize and send it."</span>
+  <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">interactive</span><span style="color: #1f5bff; font-weight: bold;">)</span>
+  <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">when</span> <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ef2929;">member</span> '<span style="color: #ef2929;">org~mu4e-mime-switch-headers-or-body</span> <span style="color: #ff8700;">post-command-hook</span><span style="color: #00af00; font-weight: bold;">)</span>
+    <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ef2929;">org-mime-htmlize</span><span style="color: #00af00; font-weight: bold;">)</span>
+    <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ef2929;">message-send-and-exit</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 
-(add-hook 'org-ctrl-c-ctrl-c-hook 'htmlize-and-send t)
+<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ef2929;">add-hook</span> '<span style="color: #ff8700;">org-ctrl-c-ctrl-c-hook</span> '<span style="color: #ef2929;">htmlize-and-send</span> <span style="color: #ff8700;">t</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org58d457c" class="outline-2">
-<h2 id="org58d457c"><span class="section-number-2">6</span> 将邮件加入 TODO 列表中</h2>
+<div id="outline-container-org1aec479" class="outline-2">
+<h2 id="org1aec479"><span class="section-number-2">6</span> 将邮件加入 TODO 列表中</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 如果想要将某封邮件加入代办事项用于记录，可以将如下代码加入 <code>init-mu4e.el</code> 中
 </p>
 <div class="org-src-container">
-<pre class="src src-elisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">store link to message if in header view, not to header query</span>
-(<span style="font-weight: bold;">setq</span> org-mu4e-link-query-in-headers-mode nil)
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">use org-capture to add a new todo</span>
-(<span style="font-weight: bold;">setq</span> org-capture-templates
-      '((<span style="font-style: italic;">"t"</span> <span style="font-style: italic;">"todo"</span> entry (file+headline <span style="font-style: italic;">"/data/cycoe/Documents/Orgs/TODO.org"</span> <span style="font-style: italic;">"Tasks"</span>)
-         <span style="font-style: italic;">"* TODO [#A] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n%a\n"</span>)))
+<pre class="src src-elisp"><span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">store link to message if in header view, not to header query</span>
+<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">setq</span> <span style="color: #ff8700;">org-mu4e-link-query-in-headers-mode</span> nil<span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">use org-capture to add a new todo</span>
+<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">setq</span> <span style="color: #ff8700;">org-capture-templates</span>
+      '<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ff1f8b;">"t"</span> <span style="color: #ff1f8b;">"todo"</span> entry <span style="color: #ff4ea3; font-weight: bold;">(</span>file+headline <span style="color: #ff1f8b;">"/data/cycoe/Documents/Orgs/</span><span style="color: #cc9393;">TODO</span><span style="color: #ff1f8b;">.org"</span> <span style="color: #ff1f8b;">"Tasks"</span><span style="color: #ff4ea3; font-weight: bold;">)</span>
+         <span style="color: #ff1f8b;">"* </span><span style="color: #cc9393;">TODO</span><span style="color: #ff1f8b;"> [#A] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n%a\n"</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 <p>

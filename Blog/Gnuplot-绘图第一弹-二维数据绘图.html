@@ -3,11 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-05-16 Sat 11:21 -->
+<!-- 2020-05-16 Sat 15:14 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gnuplot 绘图第一弹-二维数据绘图</title>
 <meta name="generator" content="Org mode" />
+<meta name="author" content="Cycoe Joo" />
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 </head>
 <body>
@@ -24,12 +25,17 @@
 <div id="content">
 <h1 class="title">Gnuplot 绘图第一弹-二维数据绘图</h1>
 <div id="table-of-contents">
-<h2>Table of Contents</h2>
+<h2> <a href="javascript:window.scrollTo(0,0)"
+        style="color: black !important; border-bottom: none !important;"
+        class="tooltip"
+        title="Go to the top of the page">
+       Ξ
+     </a> </h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgcc525db">1. 调色板</a></li>
-<li><a href="#org81ede32">2. Hello World</a></li>
-<li><a href="#orgd72bcb5">3. 绘制曲线的同时指定坐标范围</a></li>
+<li><a href="#org1a3b2bb">1. 调色板</a></li>
+<li><a href="#org93a6791">2. Hello World</a></li>
+<li><a href="#orgc4bacd7">3. 绘制曲线的同时指定坐标范围</a></li>
 </ul>
 </div>
 </div>
@@ -47,15 +53,15 @@ like Octave. Gnuplot has been supported and under active development since 1986.
 
 <!-- more -->
 
-<div id="outline-container-orgcc525db" class="outline-2">
-<h2 id="orgcc525db"><span class="section-number-2">1</span> 调色板</h2>
+<div id="outline-container-org1a3b2bb" class="outline-2">
+<h2 id="org1a3b2bb"><span class="section-number-2">1</span> 调色板</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 在 Gnuplot 的交互式命令行中使用 <code>test</code> 命令可以调出调色板，查看 Gnuplot 支持的样式
 与配色。 
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">test</span>
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">test</span>
 </pre>
 </div>
 
@@ -75,8 +81,8 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> term png
-<span style="font-weight: bold; text-decoration: underline;">test</span>
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> term png
+<span style="color: #1f5bff;">test</span>
 </pre>
 </div>
 
@@ -88,12 +94,12 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 </div>
 
-<div id="outline-container-org81ede32" class="outline-2">
-<h2 id="org81ede32"><span class="section-number-2">2</span> Hello World</h2>
+<div id="outline-container-org93a6791" class="outline-2">
+<h2 id="org93a6791"><span class="section-number-2">2</span> Hello World</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">reset</span>
-<span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">besj0</span>(x)
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">reset</span>
+<span style="color: #00af00;">plot</span> <span style="color: #ef2929;">besj0</span>(x)
 </pre>
 </div>
 
@@ -105,11 +111,11 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 </div>
 
-<div id="outline-container-orgd72bcb5" class="outline-2">
-<h2 id="orgd72bcb5"><span class="section-number-2">3</span> 绘制曲线的同时指定坐标范围</h2>
+<div id="outline-container-orgc4bacd7" class="outline-2">
+<h2 id="orgc4bacd7"><span class="section-number-2">3</span> 绘制曲线的同时指定坐标范围</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold;">plot</span> [][<span style="font-weight: bold; text-decoration: underline;">-3:1.5</span>] (<span style="font-weight: bold;">sin</span>(1/x) - <span style="font-weight: bold;">cos</span>(x))*<span style="font-weight: bold;">erfc</span>(x)
+<pre class="src src-gnuplot"><span style="color: #00af00;">plot</span> [][<span style="color: #1f5bff;">-3:1.5</span>] (<span style="color: #ef2929;">sin</span>(1/x) - <span style="color: #ef2929;">cos</span>(x))*<span style="color: #ef2929;">erfc</span>(x)
 </pre>
 </div>
 
@@ -123,9 +129,9 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 将函数的数据写入到文件
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> table <span style="font-style: italic;">'f1.dat'</span>
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">-5:5</span>] (<span style="font-weight: bold;">sin</span>(1/x) - <span style="font-weight: bold;">cos</span>(x))*<span style="font-weight: bold;">erfc</span>(x)
-<span style="font-weight: bold; text-decoration: underline;">unset</span> table
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> table <span style="color: #ff1f8b;">'f1.dat'</span>
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">-5:5</span>] (<span style="color: #ef2929;">sin</span>(1/x) - <span style="color: #ef2929;">cos</span>(x))*<span style="color: #ef2929;">erfc</span>(x)
+<span style="color: #1f5bff;">unset</span> table
 </pre>
 </div>
 
@@ -133,7 +139,7 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 绘制多条曲线
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">-1:1</span>] x, x**2, x**3
+<pre class="src src-gnuplot"><span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">-1:1</span>] x, x**2, x**3
 </pre>
 </div>
 
@@ -147,7 +153,7 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 使用文件中的数据进行绘制
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">-1:1</span>] <span style="font-style: italic;">'f1.dat'</span> <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">lines</span> <span style="font-weight: bold; text-decoration: underline;">lw</span> 1, -x, -x**3
+<pre class="src src-gnuplot"><span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">-1:1</span>] <span style="color: #ff1f8b;">'f1.dat'</span> <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">lines</span> <span style="color: #18b2b2;">lw</span> 1, -x, -x**3
 </pre>
 </div>
 
@@ -161,9 +167,9 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 绘制双 <code>y</code> 轴图， <code>set y2tics start, sep</code> 设置 <code>y2</code> 轴的起始值以及间隔
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> y2tics -100, 20
-<span style="font-weight: bold; text-decoration: underline;">set</span> ytics nomirror
-<span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">sin</span>(1/x) axis x1y1,100*<span style="font-weight: bold;">cos</span>(x) axis x1y2
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> y2tics -100, 20
+<span style="color: #1f5bff;">set</span> ytics nomirror
+<span style="color: #00af00;">plot</span> <span style="color: #ef2929;">sin</span>(1/x) axis x1y1,100*<span style="color: #ef2929;">cos</span>(x) axis x1y2
 </pre>
 </div>
 
@@ -177,11 +183,11 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 设定采样数
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">reset</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> sample 100000
-<span style="font-weight: bold; text-decoration: underline;">set</span> x2tics -20, 2
-<span style="font-weight: bold; text-decoration: underline;">set</span> xtics nomirror
-<span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">sin</span>(1/x) axis x1y1, 100*<span style="font-weight: bold;">cos</span>(x-1) axis x2y2
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">reset</span>
+<span style="color: #1f5bff;">set</span> sample 100000
+<span style="color: #1f5bff;">set</span> x2tics -20, 2
+<span style="color: #1f5bff;">set</span> xtics nomirror
+<span style="color: #00af00;">plot</span> <span style="color: #ef2929;">sin</span>(1/x) axis x1y1, 100*<span style="color: #ef2929;">cos</span>(x-1) axis x2y2
 </pre>
 </div>
 
@@ -195,8 +201,8 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 绘制散点图
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">reset</span>
-<span style="font-weight: bold;">plot</span> <span style="font-style: italic;">'f1.dat'</span> <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">points</span> <span style="font-weight: bold; text-decoration: underline;">pt</span> 7
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">reset</span>
+<span style="color: #00af00;">plot</span> <span style="color: #ff1f8b;">'f1.dat'</span> <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">points</span> <span style="color: #18b2b2;">pt</span> 7
 </pre>
 </div>
 
@@ -216,9 +222,9 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">reset</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> style fill pattern
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">-6:6</span>]  <span style="font-weight: bold;">besj0</span>(x) <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">boxes</span>, <span style="font-weight: bold;">sin</span>(x) <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">boxes</span>, <span style="font-weight: bold;">cos</span>(x) <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">boxes</span>
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">reset</span>
+<span style="color: #1f5bff;">set</span> style fill pattern
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">-6:6</span>]  <span style="color: #ef2929;">besj0</span>(x) <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">boxes</span>, <span style="color: #ef2929;">sin</span>(x) <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">boxes</span>, <span style="color: #ef2929;">cos</span>(x) <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">boxes</span>
 </pre>
 </div>
 
@@ -232,8 +238,8 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 绘制圆圈图，圆圈图需要 3 列数据， <code>x:y:r</code>
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">reset</span>
-<span style="font-weight: bold;">plot</span> <span style="font-style: italic;">'+'</span> <span style="font-weight: bold; text-decoration: underline;">using</span> 1:(<span style="font-weight: bold;">sin</span>($1)):(<span style="font-weight: bold;">cos</span>($1)+1) <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">circles</span>
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">reset</span>
+<span style="color: #00af00;">plot</span> <span style="color: #ff1f8b;">'+'</span> <span style="color: #18b2b2;">using</span> 1:(<span style="color: #ef2929;">sin</span>($1)):(<span style="color: #ef2929;">cos</span>($1)+1) <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">circles</span>
 </pre>
 </div>
 
@@ -247,9 +253,9 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 填充曲线
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">reset</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> style fill solid
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">0:20</span>] <span style="font-weight: bold;">besy0</span>(x) <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">filledcurves</span> above <span style="font-weight: bold; font-style: italic;">y1=</span>0
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">reset</span>
+<span style="color: #1f5bff;">set</span> style fill solid
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">0:20</span>] <span style="color: #ef2929;">besy0</span>(x) <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">filledcurves</span> above <span style="color: #ff8700;">y1=</span>0
 </pre>
 </div>
 
@@ -264,9 +270,9 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 动生成的 <code>x</code> 采样值
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">reset</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> style fill pattern 5
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">0:1</span>] <span style="font-style: italic;">'+'</span> <span style="font-weight: bold; text-decoration: underline;">using</span> 1:(-$1):(-$1**2) <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">filledcurves</span>, -x <span style="font-weight: bold; text-decoration: underline;">lw</span> 3 <span style="font-weight: bold; text-decoration: underline;">notitle</span>, -x**2 <span style="font-weight: bold; text-decoration: underline;">lw</span> 3 <span style="font-weight: bold; text-decoration: underline;">notitle</span>
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">reset</span>
+<span style="color: #1f5bff;">set</span> style fill pattern 5
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">0:1</span>] <span style="color: #ff1f8b;">'+'</span> <span style="color: #18b2b2;">using</span> 1:(-$1):(-$1**2) <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">filledcurves</span>, -x <span style="color: #18b2b2;">lw</span> 3 <span style="color: #18b2b2;">notitle</span>, -x**2 <span style="color: #18b2b2;">lw</span> 3 <span style="color: #18b2b2;">notitle</span>
 </pre>
 </div>
 
@@ -280,8 +286,8 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 以直方图的形式绘制曲线
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">reset</span>
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">-10:10</span>] <span style="font-weight: bold;">sin</span>(x) <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">histeps</span>
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">reset</span>
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">-10:10</span>] <span style="color: #ef2929;">sin</span>(x) <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">histeps</span>
 </pre>
 </div>
 
@@ -295,10 +301,10 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 并排的直方图
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">reset</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> style fill solid 1.0 border <span style="font-weight: bold; text-decoration: underline;">lt</span> -1
-<span style="font-weight: bold; text-decoration: underline;">set</span> style data <span style="font-weight: bold;">histograms</span>
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">0:20</span>] <span style="font-style: italic;">'+'</span> <span style="font-weight: bold; text-decoration: underline;">using</span> (<span style="font-weight: bold;">cos</span>($1)), <span style="font-style: italic;">''</span> <span style="font-weight: bold; text-decoration: underline;">using</span> (<span style="font-weight: bold;">sin</span>($1))
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">reset</span>
+<span style="color: #1f5bff;">set</span> style fill solid 1.0 border <span style="color: #18b2b2;">lt</span> -1
+<span style="color: #1f5bff;">set</span> style data <span style="color: #ef2929;">histograms</span>
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">0:20</span>] <span style="color: #ff1f8b;">'+'</span> <span style="color: #18b2b2;">using</span> (<span style="color: #ef2929;">cos</span>($1)), <span style="color: #ff1f8b;">''</span> <span style="color: #18b2b2;">using</span> (<span style="color: #ef2929;">sin</span>($1))
 </pre>
 </div>
 
@@ -312,12 +318,12 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 叠加的直方图
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">reset</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> style fill solid 1.0 border <span style="font-weight: bold; text-decoration: underline;">lt</span> -1
-<span style="font-weight: bold; text-decoration: underline;">set</span> style data <span style="font-weight: bold;">histograms</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#25976;&#25818;&#26371;&#25353;&#34892;&#36914;&#34892;&#32047;&#21152;&#65292;&#22914;&#26524;&#27794;&#26377;&#36889;&#34892;&#65292;&#40664;&#35469;&#26159;&#22810;&#32068;&#25976;&#25818;&#20006;&#25490;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> style histogram rowstacked
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">0:20</span>] <span style="font-style: italic;">'+'</span> <span style="font-weight: bold; text-decoration: underline;">using</span> (<span style="font-weight: bold;">cos</span>($1)), <span style="font-style: italic;">''</span> <span style="font-weight: bold; text-decoration: underline;">using</span> (<span style="font-weight: bold;">sin</span>($1))
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">reset</span>
+<span style="color: #1f5bff;">set</span> style fill solid 1.0 border <span style="color: #18b2b2;">lt</span> -1
+<span style="color: #1f5bff;">set</span> style data <span style="color: #ef2929;">histograms</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#25976;&#25818;&#26371;&#25353;&#34892;&#36914;&#34892;&#32047;&#21152;&#65292;&#22914;&#26524;&#27794;&#26377;&#36889;&#34892;&#65292;&#40664;&#35469;&#26159;&#22810;&#32068;&#25976;&#25818;&#20006;&#25490;</span>
+<span style="color: #1f5bff;">set</span> style histogram rowstacked
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">0:20</span>] <span style="color: #ff1f8b;">'+'</span> <span style="color: #18b2b2;">using</span> (<span style="color: #ef2929;">cos</span>($1)), <span style="color: #ff1f8b;">''</span> <span style="color: #18b2b2;">using</span> (<span style="color: #ef2929;">sin</span>($1))
 </pre>
 </div>
 
@@ -331,13 +337,13 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 绘制带误差条的点图
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">reset</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> sample 30
-<span style="font-weight: bold; text-decoration: underline;">set</span> <span style="font-weight: bold; text-decoration: underline;">pointsize</span> 3
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">errorbar &#30340;&#23485;&#24230;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> bars 3
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">0:10</span>] <span style="font-style: italic;">'+'</span> <span style="font-weight: bold; text-decoration: underline;">using</span> 1:(<span style="font-weight: bold;">sin</span>($1)):(0.5*<span style="font-weight: bold;">cos</span>($1)) <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">errorbars</span>,\
-     <span style="font-style: italic;">''</span> <span style="font-weight: bold; text-decoration: underline;">using</span> 1:(<span style="font-weight: bold;">sin</span>($1)) <span style="font-weight: bold; text-decoration: underline;">pt</span> 7 <span style="font-weight: bold; text-decoration: underline;">notitle</span>
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">reset</span>
+<span style="color: #1f5bff;">set</span> sample 30
+<span style="color: #1f5bff;">set</span> <span style="color: #18b2b2;">pointsize</span> 3
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">errorbar &#30340;&#23485;&#24230;</span>
+<span style="color: #1f5bff;">set</span> bars 3
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">0:10</span>] <span style="color: #ff1f8b;">'+'</span> <span style="color: #18b2b2;">using</span> 1:(<span style="color: #ef2929;">sin</span>($1)):(0.5*<span style="color: #ef2929;">cos</span>($1)) <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">errorbars</span>,\
+     <span style="color: #ff1f8b;">''</span> <span style="color: #18b2b2;">using</span> 1:(<span style="color: #ef2929;">sin</span>($1)) <span style="color: #18b2b2;">pt</span> 7 <span style="color: #18b2b2;">notitle</span>
 </pre>
 </div>
 
@@ -348,11 +354,11 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">reset</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> sample 30
-<span style="font-weight: bold; text-decoration: underline;">set</span> bars 3
-<span style="font-weight: bold; text-decoration: underline;">set</span> style fill pattern 2 border <span style="font-weight: bold; text-decoration: underline;">lt</span> -1
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">0:10</span>] <span style="font-style: italic;">'+'</span> <span style="font-weight: bold; text-decoration: underline;">using</span> 1:(<span style="font-weight: bold;">sin</span>($1)):(0.5*<span style="font-weight: bold;">cos</span>($1)) <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">boxerrorbars</span>
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">reset</span>
+<span style="color: #1f5bff;">set</span> sample 30
+<span style="color: #1f5bff;">set</span> bars 3
+<span style="color: #1f5bff;">set</span> style fill pattern 2 border <span style="color: #18b2b2;">lt</span> -1
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">0:10</span>] <span style="color: #ff1f8b;">'+'</span> <span style="color: #18b2b2;">using</span> 1:(<span style="color: #ef2929;">sin</span>($1)):(0.5*<span style="color: #ef2929;">cos</span>($1)) <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">boxerrorbars</span>
 </pre>
 </div>
 
@@ -366,8 +372,8 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 棒状图
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> samples 30
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">0:2*pi</span>] <span style="font-weight: bold;">sin</span>(x) <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">impulses</span> <span style="font-weight: bold; text-decoration: underline;">lw</span> 2
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> samples 30
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">0:2*pi</span>] <span style="color: #ef2929;">sin</span>(x) <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">impulses</span> <span style="color: #18b2b2;">lw</span> 2
 </pre>
 </div>
 
@@ -381,9 +387,9 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 绘制参数方程曲线
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> samples 1000
-<span style="font-weight: bold; text-decoration: underline;">set</span> parametric
-<span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">sin</span>(7*t), <span style="font-weight: bold;">cos</span>(11*t) <span style="font-weight: bold; text-decoration: underline;">notitle</span>
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> samples 1000
+<span style="color: #1f5bff;">set</span> parametric
+<span style="color: #00af00;">plot</span> <span style="color: #ef2929;">sin</span>(7*t), <span style="color: #ef2929;">cos</span>(11*t) <span style="color: #18b2b2;">notitle</span>
 </pre>
 </div>
 
@@ -397,15 +403,15 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 极坐标绘图
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">reset</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> size ratio 1
-<span style="font-weight: bold; text-decoration: underline;">set</span> xtics axis nomirror
-<span style="font-weight: bold; text-decoration: underline;">set</span> ytics axis nomirror
-<span style="font-weight: bold; text-decoration: underline;">set</span> zeroaxis
-<span style="font-weight: bold; text-decoration: underline;">unset</span> border
-<span style="font-weight: bold; text-decoration: underline;">set</span> samples 500
-<span style="font-weight: bold; text-decoration: underline;">set</span> polar
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">0:12*pi</span>] t
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">reset</span>
+<span style="color: #1f5bff;">set</span> size ratio 1
+<span style="color: #1f5bff;">set</span> xtics axis nomirror
+<span style="color: #1f5bff;">set</span> ytics axis nomirror
+<span style="color: #1f5bff;">set</span> zeroaxis
+<span style="color: #1f5bff;">unset</span> border
+<span style="color: #1f5bff;">set</span> samples 500
+<span style="color: #1f5bff;">set</span> polar
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">0:12*pi</span>] t
 </pre>
 </div>
 

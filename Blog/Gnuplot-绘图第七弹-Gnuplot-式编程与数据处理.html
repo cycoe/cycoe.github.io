@@ -3,11 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-05-16 Sat 11:21 -->
+<!-- 2020-05-16 Sat 15:13 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gnuplot 绘图第七弹-Gnuplot 式编程与数据处理</title>
 <meta name="generator" content="Org mode" />
+<meta name="author" content="Cycoe Joo" />
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 </head>
 <body>
@@ -24,13 +25,18 @@
 <div id="content">
 <h1 class="title">Gnuplot 绘图第七弹-Gnuplot 式编程与数据处理</h1>
 <div id="table-of-contents">
-<h2>Table of Contents</h2>
+<h2> <a href="javascript:window.scrollTo(0,0)"
+        style="color: black !important; border-bottom: none !important;"
+        class="tooltip"
+        title="Go to the top of the page">
+       Ξ
+     </a> </h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orge124a3f">1. <code>for</code> 循环</a></li>
-<li><a href="#orgf151fba">2. <code>a:b:c</code> 三目运算符</a></li>
-<li><a href="#org9644079">3. 平滑曲线</a></li>
-<li><a href="#org94bbf9d">4. 拟合曲线</a></li>
+<li><a href="#org527cc76">1. <code>for</code> 循环</a></li>
+<li><a href="#orgefa1e74">2. <code>a:b:c</code> 三目运算符</a></li>
+<li><a href="#orge7e29c5">3. 平滑曲线</a></li>
+<li><a href="#org883e130">4. 拟合曲线</a></li>
 </ul>
 </div>
 </div>
@@ -40,14 +46,14 @@
 
 <!-- more -->
 
-<div id="outline-container-orge124a3f" class="outline-2">
-<h2 id="orge124a3f"><span class="section-number-2">1</span> <code>for</code> 循环</h2>
+<div id="outline-container-org527cc76" class="outline-2">
+<h2 id="org527cc76"><span class="section-number-2">1</span> <code>for</code> 循环</h2>
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> term pngcairo mono dashed enhanced
-<span style="font-weight: bold; text-decoration: underline;">set</span> rmargin at screen .8
-<span style="font-weight: bold; text-decoration: underline;">set</span> key right center at screen 1,.6
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">0:3</span>] for [<span style="font-weight: bold; text-decoration: underline;">n=1:10:2</span>] <span style="font-weight: bold;">besj0</span>(n*x) <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"J_0("</span>.n.<span style="font-style: italic;">"x)"</span>
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> term pngcairo mono dashed enhanced
+<span style="color: #1f5bff;">set</span> rmargin at screen .8
+<span style="color: #1f5bff;">set</span> key right center at screen 1,.6
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">0:3</span>] for [<span style="color: #1f5bff;">n=1:10:2</span>] <span style="color: #ef2929;">besj0</span>(n*x) <span style="color: #18b2b2;">title</span> <span style="color: #ff1f8b;">"J_0("</span>.n.<span style="color: #ff1f8b;">"x)"</span>
 </pre>
 </div>
 
@@ -59,14 +65,14 @@
 </div>
 </div>
 
-<div id="outline-container-orgf151fba" class="outline-2">
-<h2 id="orgf151fba"><span class="section-number-2">2</span> <code>a:b:c</code> 三目运算符</h2>
+<div id="outline-container-orgefa1e74" class="outline-2">
+<h2 id="orgefa1e74"><span class="section-number-2">2</span> <code>a:b:c</code> 三目运算符</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> samples 2000
-<span style="font-weight: bold; font-style: italic;">f(x) =</span> x &lt; 0? <span style="font-weight: bold;">sin</span>(x) : NaN
-<span style="font-weight: bold; font-style: italic;">g(x) =</span> x <span style="font-weight: bold; font-style: italic;">&gt;=</span> 0? <span style="font-weight: bold;">exp</span>(-x/5.)*<span style="font-weight: bold;">sin</span>(x) : NaN
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">-20:20</span>] f(x), g(x)
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> samples 2000
+<span style="color: #ff8700;">f(x) =</span> x &lt; 0? <span style="color: #ef2929;">sin</span>(x) : NaN
+<span style="color: #ff8700;">g(x) =</span> x <span style="color: #ff8700;">&gt;=</span> 0? <span style="color: #ef2929;">exp</span>(-x/5.)*<span style="color: #ef2929;">sin</span>(x) : NaN
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">-20:20</span>] f(x), g(x)
 </pre>
 </div>
 
@@ -78,20 +84,20 @@
 </div>
 </div>
 
-<div id="outline-container-org9644079" class="outline-2">
-<h2 id="org9644079"><span class="section-number-2">3</span> 平滑曲线</h2>
+<div id="outline-container-orge7e29c5" class="outline-2">
+<h2 id="orge7e29c5"><span class="section-number-2">3</span> 平滑曲线</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> samples 500
-<span style="font-weight: bold; text-decoration: underline;">set</span> key right top box
-<span style="font-weight: bold; text-decoration: underline;">set</span> xrange [<span style="font-weight: bold; text-decoration: underline;">0:2*pi</span>]
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> samples 500
+<span style="color: #1f5bff;">set</span> key right top box
+<span style="color: #1f5bff;">set</span> xrange [<span style="color: #1f5bff;">0:2*pi</span>]
 
-<span style="font-weight: bold; text-decoration: underline;">set</span> table <span style="font-style: italic;">'~/random.dat'</span>
-<span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">sin</span>(x) + 0.5 * <span style="font-weight: bold;">rand</span>(0)
-<span style="font-weight: bold; text-decoration: underline;">unset</span> table
+<span style="color: #1f5bff;">set</span> table <span style="color: #ff1f8b;">'~/random.dat'</span>
+<span style="color: #00af00;">plot</span> <span style="color: #ef2929;">sin</span>(x) + 0.5 * <span style="color: #ef2929;">rand</span>(0)
+<span style="color: #1f5bff;">unset</span> table
 
-<span style="font-weight: bold;">plot</span> <span style="font-style: italic;">'~/random.dat'</span> w l <span style="font-weight: bold; text-decoration: underline;">lw</span> 0.5 <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"Original"</span>,\
-     <span style="font-style: italic;">''</span> <span style="font-weight: bold; text-decoration: underline;">smooth</span> bezier <span style="font-weight: bold; text-decoration: underline;">lw</span> 4 <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"Bezier Smoothed"</span>
+<span style="color: #00af00;">plot</span> <span style="color: #ff1f8b;">'~/random.dat'</span> w l <span style="color: #18b2b2;">lw</span> 0.5 <span style="color: #18b2b2;">title</span> <span style="color: #ff1f8b;">"Original"</span>,\
+     <span style="color: #ff1f8b;">''</span> <span style="color: #18b2b2;">smooth</span> bezier <span style="color: #18b2b2;">lw</span> 4 <span style="color: #18b2b2;">title</span> <span style="color: #ff1f8b;">"Bezier Smoothed"</span>
 </pre>
 </div>
 
@@ -103,18 +109,18 @@
 </div>
 </div>
 
-<div id="outline-container-org94bbf9d" class="outline-2">
-<h2 id="org94bbf9d"><span class="section-number-2">4</span> 拟合曲线</h2>
+<div id="outline-container-org883e130" class="outline-2">
+<h2 id="org883e130"><span class="section-number-2">4</span> 拟合曲线</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> key right top box
-<span style="font-weight: bold; text-decoration: underline;">set</span> xrange [<span style="font-weight: bold; text-decoration: underline;">0:2*pi</span>]
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> key right top box
+<span style="color: #1f5bff;">set</span> xrange [<span style="color: #1f5bff;">0:2*pi</span>]
 
-<span style="font-weight: bold; font-style: italic;">f(x) =</span> a * <span style="font-weight: bold;">sin</span>(b * x) + c
-<span style="font-weight: bold; text-decoration: underline;">fit</span> f(x) <span style="font-style: italic;">'~/random.dat'</span> via a, b, c
+<span style="color: #ff8700;">f(x) =</span> a * <span style="color: #ef2929;">sin</span>(b * x) + c
+<span style="color: #1f5bff;">fit</span> f(x) <span style="color: #ff1f8b;">'~/random.dat'</span> via a, b, c
 
-<span style="font-weight: bold;">plot</span> <span style="font-style: italic;">'~/random.dat'</span> w l <span style="font-weight: bold; text-decoration: underline;">lw</span> 0.5 <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"Original"</span>,\
-     f(x) w l <span style="font-weight: bold; text-decoration: underline;">lw</span> 4 <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"Fit by Gnuplot"</span>
+<span style="color: #00af00;">plot</span> <span style="color: #ff1f8b;">'~/random.dat'</span> w l <span style="color: #18b2b2;">lw</span> 0.5 <span style="color: #18b2b2;">title</span> <span style="color: #ff1f8b;">"Original"</span>,\
+     f(x) w l <span style="color: #18b2b2;">lw</span> 4 <span style="color: #18b2b2;">title</span> <span style="color: #ff1f8b;">"Fit by Gnuplot"</span>
 </pre>
 </div>
 

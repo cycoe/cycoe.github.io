@@ -3,11 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-05-16 Sat 11:21 -->
+<!-- 2020-05-16 Sat 15:14 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>使用 Emacs 与 Org mode 进行 GTD 管理</title>
 <meta name="generator" content="Org mode" />
+<meta name="author" content="Cycoe Joo" />
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 </head>
 <body>
@@ -24,16 +25,21 @@
 <div id="content">
 <h1 class="title">使用 Emacs 与 Org mode 进行 GTD 管理</h1>
 <div id="table-of-contents">
-<h2>Table of Contents</h2>
+<h2> <a href="javascript:window.scrollTo(0,0)"
+        style="color: black !important; border-bottom: none !important;"
+        class="tooltip"
+        title="Go to the top of the page">
+       Ξ
+     </a> </h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org760b539">1. 基本想法</a></li>
-<li><a href="#org3a08438">2. 整体流程</a></li>
-<li><a href="#org1bea939">3. 任务拆分</a></li>
-<li><a href="#org9b67c0e">4. 为任务添加更多属性</a></li>
-<li><a href="#org3891a3b">5. 查看任务概览</a></li>
-<li><a href="#orgca2afb3">6. 任务完成</a></li>
-<li><a href="#org945ad49">7. 任务回顾</a></li>
+<li><a href="#orgf26d293">1. 基本想法</a></li>
+<li><a href="#org4e8fd7d">2. 整体流程</a></li>
+<li><a href="#org4a7ad0e">3. 任务拆分</a></li>
+<li><a href="#org921cadc">4. 为任务添加更多属性</a></li>
+<li><a href="#org271b9e8">5. 查看任务概览</a></li>
+<li><a href="#org8412633">6. 任务完成</a></li>
+<li><a href="#org6ca16ba">7. 任务回顾</a></li>
 </ul>
 </div>
 </div>
@@ -52,8 +58,8 @@
 
 <!-- more -->
 
-<div id="outline-container-org760b539" class="outline-2">
-<h2 id="org760b539"><span class="section-number-2">1</span> 基本想法</h2>
+<div id="outline-container-orgf26d293" class="outline-2">
+<h2 id="orgf26d293"><span class="section-number-2">1</span> 基本想法</h2>
 <div class="outline-text-2" id="text-1">
 <ol class="org-ol">
 <li>从空间尺度上，不同项目隶属于不同的 Org 文件，而不同的 Org 文件加入到不同的
@@ -66,8 +72,8 @@ agenda 中，实现基于项目的管理方式。</li>
 </div>
 </div>
 
-<div id="outline-container-org3a08438" class="outline-2">
-<h2 id="org3a08438"><span class="section-number-2">2</span> 整体流程</h2>
+<div id="outline-container-org4e8fd7d" class="outline-2">
+<h2 id="org4e8fd7d"><span class="section-number-2">2</span> 整体流程</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 参照 <i>皮波迪</i> 的博客 <a href="https://www.cnblogs.com/quantumman/p/10808174.html">以 Emacs Org mode 为核心的任务管理方案</a>，设计适合自己的工作流。
@@ -95,24 +101,24 @@ agenda 中，实现基于项目的管理方式。</li>
 </div>
 </div>
 
-<div id="outline-container-org1bea939" class="outline-2">
-<h2 id="org1bea939"><span class="section-number-2">3</span> 任务拆分</h2>
+<div id="outline-container-org4a7ad0e" class="outline-2">
+<h2 id="org4a7ad0e"><span class="section-number-2">3</span> 任务拆分</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 对于耗时较长的非周期任务，需要拆分成更小的任务来进行处理。大型的任务可以作为单独
 的项目放在单独的 Org 文件中，并使用如下的代码为该项目设定一个单独的 agenda。
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> org-agenda-custom-commands
-      '((<span style="font-style: italic;">"n"</span> <span style="font-style: italic;">"Agenda and all TODOs"</span>
-         ((agenda <span style="font-style: italic;">""</span> nil)
-          (alltodo <span style="font-style: italic;">""</span> nil))
-         nil)
-        (<span style="font-style: italic;">"pc"</span> <span style="font-style: italic;">"Learn Org"</span> agenda <span style="font-style: italic;">""</span>
-         ((org-agenda-files
-           '(<span style="font-style: italic;">"~/Orgs/learn-org.org"</span>))
-          (org-agenda-overriding-header <span style="font-style: italic;">"Agenda for learning org mode"</span>))
-         (<span style="font-style: italic;">"~/export/learn-org.html"</span>))))
+<pre class="src src-emacs-lisp"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">setq</span> org-agenda-custom-commands
+      '<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ff1f8b;">"n"</span> <span style="color: #ff1f8b;">"Agenda and all TODOs"</span>
+         <span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #00d7af; font-weight: bold;">(</span>agenda <span style="color: #ff1f8b;">""</span> nil<span style="color: #00d7af; font-weight: bold;">)</span>
+          <span style="color: #00d7af; font-weight: bold;">(</span>alltodo <span style="color: #ff1f8b;">""</span> nil<span style="color: #00d7af; font-weight: bold;">)</span><span style="color: #ff4ea3; font-weight: bold;">)</span>
+         nil<span style="color: #00af00; font-weight: bold;">)</span>
+        <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ff1f8b;">"pc"</span> <span style="color: #ff1f8b;">"Learn Org"</span> agenda <span style="color: #ff1f8b;">""</span>
+         <span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #ef2929;">org-agenda-files</span>
+           '<span style="color: #ff8700; font-weight: bold;">(</span><span style="color: #ff1f8b;">"~/Orgs/learn-org.org"</span><span style="color: #ff8700; font-weight: bold;">)</span><span style="color: #00d7af; font-weight: bold;">)</span>
+          <span style="color: #00d7af; font-weight: bold;">(</span>org-agenda-overriding-header <span style="color: #ff1f8b;">"Agenda for learning org mode"</span><span style="color: #00d7af; font-weight: bold;">)</span><span style="color: #ff4ea3; font-weight: bold;">)</span>
+         <span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #ff1f8b;">"~/export/learn-org.html"</span><span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 <p>
@@ -124,8 +130,8 @@ agenda 上方显示的标题， <code>"~/export/learn-org.html"</code> 为导出
 </div>
 </div>
 
-<div id="outline-container-org9b67c0e" class="outline-2">
-<h2 id="org9b67c0e"><span class="section-number-2">4</span> 为任务添加更多属性</h2>
+<div id="outline-container-org921cadc" class="outline-2">
+<h2 id="org921cadc"><span class="section-number-2">4</span> 为任务添加更多属性</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 标签是一种非线性的组织方式，Org mode 中的每一个 headline 都支持标签。在 headline
@@ -139,8 +145,8 @@ agenda 上方显示的标题， <code>"~/export/learn-org.html"</code> 为导出
 </div>
 </div>
 
-<div id="outline-container-org3891a3b" class="outline-2">
-<h2 id="org3891a3b"><span class="section-number-2">5</span> 查看任务概览</h2>
+<div id="outline-container-org271b9e8" class="outline-2">
+<h2 id="org271b9e8"><span class="section-number-2">5</span> 查看任务概览</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以列视图的模式显示出来。
@@ -155,29 +161,29 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> org-columns-default-format <span style="font-style: italic;">"%50ITEM(Task)</span>
-<span style="font-style: italic;">%3PRIORITY(Priority) %5TODO(Status) %8EFFORT(Effort){:}</span>
-<span style="font-style: italic;">%20SCHEDULED %20DEADLINE"</span>)
+<pre class="src src-emacs-lisp"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">setq</span> <span style="color: #ff8700;">org-columns-default-format</span> <span style="color: #ff1f8b;">"%50ITEM(Task)</span>
+<span style="color: #ff1f8b;">%3PRIORITY(Priority) %5TODO(Status) %8EFFORT(Effort){:}</span>
+<span style="color: #ff1f8b;">%20SCHEDULED %20DEADLINE"</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgca2afb3" class="outline-2">
-<h2 id="orgca2afb3"><span class="section-number-2">6</span> 任务完成</h2>
+<div id="outline-container-org8412633" class="outline-2">
+<h2 id="org8412633"><span class="section-number-2">6</span> 任务完成</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span>
- <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#24403;&#26631;&#31614;&#36716;&#25442;&#20026; done &#26102;&#33258;&#21160;&#35760;&#24405; close &#26102;&#38388;</span>
- <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#24403;&#26631;&#31614;&#36716;&#25442;&#20026; done &#26102;&#33258;&#21160; clock out</span>
- org-log-done '(time . org-clock-out))
+<pre class="src src-emacs-lisp"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">setq</span>
+ <span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">&#24403;&#26631;&#31614;&#36716;&#25442;&#20026; done &#26102;&#33258;&#21160;&#35760;&#24405; close &#26102;&#38388;</span>
+ <span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">&#24403;&#26631;&#31614;&#36716;&#25442;&#20026; done &#26102;&#33258;&#21160; clock out</span>
+ <span style="color: #ff8700;">org-log-done</span> '<span style="color: #1f5bff; font-weight: bold;">(</span>time . <span style="color: #ef2929;">org-clock-out</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org945ad49" class="outline-2">
-<h2 id="org945ad49"><span class="section-number-2">7</span> 任务回顾</h2>
+<div id="outline-container-org6ca16ba" class="outline-2">
+<h2 id="org6ca16ba"><span class="section-number-2">7</span> 任务回顾</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 <code>&lt;C-c C-x C-d&gt;</code> 查看各个任务的耗时与总和。

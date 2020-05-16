@@ -3,11 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-05-16 Sat 11:21 -->
+<!-- 2020-05-16 Sat 15:14 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gnuplot 绘图第二弹-标签与图例</title>
 <meta name="generator" content="Org mode" />
+<meta name="author" content="Cycoe Joo" />
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 </head>
 <body>
@@ -34,23 +35,23 @@
 设置标签
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> xrange [<span style="font-weight: bold; text-decoration: underline;">0:4*pi</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> yrange [<span style="font-weight: bold; text-decoration: underline;">-1.2:2</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> y2range [<span style="font-weight: bold; text-decoration: underline;">0:2</span>]
-<span style="font-weight: bold; text-decoration: underline;">set</span> ytics nomirror
-<span style="font-weight: bold; text-decoration: underline;">set</span> y2tics 0, .1
-<span style="font-weight: bold; text-decoration: underline;">set</span> style fill pattern 5
-<span style="font-weight: bold; text-decoration: underline;">set</span> xlabel <span style="font-style: italic;">"Time (sec.)"</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> ylabel <span style="font-style: italic;">"Amplitude of Waves"</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> y2label <span style="font-style: italic;">"Difference"</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#25991;&#26412;&#38656;&#35201;&#25163;&#21160;&#25442;&#34892;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"Amplitude with time\nAnd Difference between waves"</span>
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> xrange [<span style="color: #1f5bff;">0:4*pi</span>]
+<span style="color: #1f5bff;">set</span> yrange [<span style="color: #1f5bff;">-1.2:2</span>]
+<span style="color: #1f5bff;">set</span> y2range [<span style="color: #1f5bff;">0:2</span>]
+<span style="color: #1f5bff;">set</span> ytics nomirror
+<span style="color: #1f5bff;">set</span> y2tics 0, .1
+<span style="color: #1f5bff;">set</span> style fill pattern 5
+<span style="color: #1f5bff;">set</span> xlabel <span style="color: #ff1f8b;">"Time (sec.)"</span>
+<span style="color: #1f5bff;">set</span> ylabel <span style="color: #ff1f8b;">"Amplitude of Waves"</span>
+<span style="color: #1f5bff;">set</span> y2label <span style="color: #ff1f8b;">"Difference"</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#25991;&#26412;&#38656;&#35201;&#25163;&#21160;&#25442;&#34892;</span>
+<span style="color: #1f5bff;">set</span> <span style="color: #18b2b2;">title</span> <span style="color: #ff1f8b;">"Amplitude with time\nAnd Difference between waves"</span>
 
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#32472;&#21046;&#27599;&#19968;&#26465;&#32447;&#30340; title &#29992;&#26469;&#35774;&#23450;&#22270;&#20363;&#25991;&#26412;</span>
-<span style="font-weight: bold;">plot</span> <span style="font-style: italic;">'+'</span> <span style="font-weight: bold; text-decoration: underline;">using</span> 1:(<span style="font-weight: bold;">sin</span>($1)):(<span style="font-weight: bold;">cos</span>($1)) <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">filledcurves</span> <span style="font-weight: bold; text-decoration: underline;">notitle</span>,\
-     <span style="font-weight: bold;">sin</span>(x) w l <span style="font-weight: bold; text-decoration: underline;">lw</span> 2,\
-     <span style="font-weight: bold;">cos</span>(x) w l <span style="font-weight: bold; text-decoration: underline;">lw</span> 2,\
-     <span style="font-style: italic;">''</span> <span style="font-weight: bold; text-decoration: underline;">using</span> 1:(<span style="font-weight: bold;">abs</span>(<span style="font-weight: bold;">sin</span>($1)-<span style="font-weight: bold;">cos</span>($1))) w l <span style="font-weight: bold; text-decoration: underline;">lw</span> 2 axis x1y2 <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"Difference"</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#32472;&#21046;&#27599;&#19968;&#26465;&#32447;&#30340; title &#29992;&#26469;&#35774;&#23450;&#22270;&#20363;&#25991;&#26412;</span>
+<span style="color: #00af00;">plot</span> <span style="color: #ff1f8b;">'+'</span> <span style="color: #18b2b2;">using</span> 1:(<span style="color: #ef2929;">sin</span>($1)):(<span style="color: #ef2929;">cos</span>($1)) <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">filledcurves</span> <span style="color: #18b2b2;">notitle</span>,\
+     <span style="color: #ef2929;">sin</span>(x) w l <span style="color: #18b2b2;">lw</span> 2,\
+     <span style="color: #ef2929;">cos</span>(x) w l <span style="color: #18b2b2;">lw</span> 2,\
+     <span style="color: #ff1f8b;">''</span> <span style="color: #18b2b2;">using</span> 1:(<span style="color: #ef2929;">abs</span>(<span style="color: #ef2929;">sin</span>($1)-<span style="color: #ef2929;">cos</span>($1))) w l <span style="color: #18b2b2;">lw</span> 2 axis x1y2 <span style="color: #18b2b2;">title</span> <span style="color: #ff1f8b;">"Difference"</span>
 </pre>
 </div>
 
@@ -64,17 +65,17 @@
 改变标签字体大小
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#20840;&#23616;&#23383;&#20307;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> term png font <span style="font-style: italic;">'Arial, 14'</span>
+<pre class="src src-gnuplot"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#20840;&#23616;&#23383;&#20307;</span>
+<span style="color: #1f5bff;">set</span> term png font <span style="color: #ff1f8b;">'Arial, 14'</span>
 
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#21333;&#29420;&#35774;&#32622;&#26576;&#19968;&#37096;&#20998;&#30340;&#23383;&#20307;&#22823;&#23567;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> xlabel font <span style="font-style: italic;">",18"</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> ylabel font <span style="font-style: italic;">",18"</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> y2label font <span style="font-style: italic;">",18"</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#21516;&#26102;&#35774;&#32622;&#20869;&#23481;&#21644;&#22823;&#23567;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"Amplitude with time\nAnd Difference between waves"</span> font <span style="font-style: italic;">",24"</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#21333;&#29420;&#35774;&#32622;&#26576;&#19968;&#37096;&#20998;&#30340;&#23383;&#20307;&#22823;&#23567;</span>
+<span style="color: #1f5bff;">set</span> xlabel font <span style="color: #ff1f8b;">",18"</span>
+<span style="color: #1f5bff;">set</span> ylabel font <span style="color: #ff1f8b;">",18"</span>
+<span style="color: #1f5bff;">set</span> y2label font <span style="color: #ff1f8b;">",18"</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#21516;&#26102;&#35774;&#32622;&#20869;&#23481;&#21644;&#22823;&#23567;</span>
+<span style="color: #1f5bff;">set</span> <span style="color: #18b2b2;">title</span> <span style="color: #ff1f8b;">"Amplitude with time\nAnd Difference between waves"</span> font <span style="color: #ff1f8b;">",24"</span>
 
-<span style="font-weight: bold; text-decoration: underline;">replot</span>
+<span style="color: #1f5bff;">replot</span>
 </pre>
 </div>
 
@@ -88,10 +89,10 @@
 设置图例的位置和字体等属性
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot">  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">spacing &#35843;&#25972;&#22270;&#20363;&#20043;&#38388;&#30340;&#38388;&#36317;&#65292;&#40664;&#35748;&#20540;&#26159; 1.25</span>
-  <span style="font-weight: bold; text-decoration: underline;">set</span> key at graph .4, .95 spacing 1
+<pre class="src src-gnuplot">  <span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">spacing &#35843;&#25972;&#22270;&#20363;&#20043;&#38388;&#30340;&#38388;&#36317;&#65292;&#40664;&#35748;&#20540;&#26159; 1.25</span>
+  <span style="color: #1f5bff;">set</span> key at graph .4, .95 spacing 1
 
-<span style="font-weight: bold; text-decoration: underline;">replot</span>
+<span style="color: #1f5bff;">replot</span>
 </pre>
 </div>
 
@@ -105,10 +106,10 @@
 图例显示在图外面
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> term png size 500,200
-<span style="font-weight: bold; text-decoration: underline;">set</span> key outside
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> term png size 500,200
+<span style="color: #1f5bff;">set</span> key outside
 
-<span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">sin</span>(x) <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"sine"</span>, <span style="font-weight: bold;">cos</span>(x) <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"cosine"</span>
+<span style="color: #00af00;">plot</span> <span style="color: #ef2929;">sin</span>(x) <span style="color: #18b2b2;">title</span> <span style="color: #ff1f8b;">"sine"</span>, <span style="color: #ef2929;">cos</span>(x) <span style="color: #18b2b2;">title</span> <span style="color: #ff1f8b;">"cosine"</span>
 </pre>
 </div>
 
@@ -119,9 +120,9 @@
 </div>
 
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> key box <span style="font-weight: bold; text-decoration: underline;">lt</span> -1 <span style="font-weight: bold; text-decoration: underline;">lw</span> 2
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> key box <span style="color: #18b2b2;">lt</span> -1 <span style="color: #18b2b2;">lw</span> 2
 
-<span style="font-weight: bold; text-decoration: underline;">replot</span>
+<span style="color: #1f5bff;">replot</span>
 </pre>
 </div>
 
@@ -136,13 +137,13 @@
 带箭头的文本
 </p>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">left at &#21518;&#38754;&#30340;&#25968;&#23383;&#26159; x1y1 &#22352;&#26631;&#36724;&#65292;offset &#21518;&#38754;&#26159;&#20197;&#23383;&#20307;&#32593;&#26684;&#20026;&#22352;&#26631;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> label <span style="font-style: italic;">"Max Difference"</span> left at 8, 1.5 offset .5, 0
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">arrow &#21518;&#38754;&#30340; 1 &#26159;&#19968;&#20010; tag&#65292;front &#26159;&#21578;&#35785; gnuplot &#22312;&#26368;&#21069;&#38754;&#32472;&#21046; arrow</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">size &#20013;&#30340;&#31532;&#19968;&#20010;&#25968;&#23383;&#26159;&#31661;&#22836;&#20498;&#38057;&#30340;&#38271;&#24230;&#65292;&#31532;&#20108;&#20010;&#25968;&#23383;&#26159;&#20498;&#38057;&#30340;&#35282;&#24230;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> arrow 1 from first 8, 1.5 to pi*7/4, 1 <span style="font-weight: bold; text-decoration: underline;">lt</span> -1 <span style="font-weight: bold; text-decoration: underline;">lw</span> 2 front size .3, 15
+<pre class="src src-gnuplot"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">left at &#21518;&#38754;&#30340;&#25968;&#23383;&#26159; x1y1 &#22352;&#26631;&#36724;&#65292;offset &#21518;&#38754;&#26159;&#20197;&#23383;&#20307;&#32593;&#26684;&#20026;&#22352;&#26631;</span>
+<span style="color: #1f5bff;">set</span> label <span style="color: #ff1f8b;">"Max Difference"</span> left at 8, 1.5 offset .5, 0
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">arrow &#21518;&#38754;&#30340; 1 &#26159;&#19968;&#20010; tag&#65292;front &#26159;&#21578;&#35785; gnuplot &#22312;&#26368;&#21069;&#38754;&#32472;&#21046; arrow</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">size &#20013;&#30340;&#31532;&#19968;&#20010;&#25968;&#23383;&#26159;&#31661;&#22836;&#20498;&#38057;&#30340;&#38271;&#24230;&#65292;&#31532;&#20108;&#20010;&#25968;&#23383;&#26159;&#20498;&#38057;&#30340;&#35282;&#24230;</span>
+<span style="color: #1f5bff;">set</span> arrow 1 from first 8, 1.5 to pi*7/4, 1 <span style="color: #18b2b2;">lt</span> -1 <span style="color: #18b2b2;">lw</span> 2 front size .3, 15
 
-<span style="font-weight: bold; text-decoration: underline;">replot</span>
+<span style="color: #1f5bff;">replot</span>
 </pre>
 </div>
 
@@ -163,11 +164,11 @@
 <li>设置支持 Unicod 的字体。</li>
 </ul>
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> term png
-<span style="font-weight: bold; text-decoration: underline;">set</span> encoding utf8
-<span style="font-weight: bold; text-decoration: underline;">set</span> <span style="font-weight: bold; text-decoration: underline;">title</span> <span style="font-style: italic;">"&#25391;&#24133;&#38543;&#26102;&#38388;&#30340;&#21464;&#21270;\n&#24046;&#20540;&#38543;&#26102;&#38388;&#30340;&#21464;&#21270;"</span> font <span style="font-style: italic;">"Sarasa Term SC,18"</span>
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> term png
+<span style="color: #1f5bff;">set</span> encoding utf8
+<span style="color: #1f5bff;">set</span> <span style="color: #18b2b2;">title</span> <span style="color: #ff1f8b;">"&#25391;&#24133;&#38543;&#26102;&#38388;&#30340;&#21464;&#21270;\n&#24046;&#20540;&#38543;&#26102;&#38388;&#30340;&#21464;&#21270;"</span> font <span style="color: #ff1f8b;">"Sarasa Term SC,18"</span>
 
-<span style="font-weight: bold; text-decoration: underline;">replot</span>
+<span style="color: #1f5bff;">replot</span>
 </pre>
 </div>
 

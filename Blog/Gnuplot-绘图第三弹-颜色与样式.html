@@ -3,11 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-05-16 Sat 11:21 -->
+<!-- 2020-05-16 Sat 15:14 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gnuplot 绘图第三弹-颜色与样式</title>
 <meta name="generator" content="Org mode" />
+<meta name="author" content="Cycoe Joo" />
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 </head>
 <body>
@@ -24,17 +25,22 @@
 <div id="content">
 <h1 class="title">Gnuplot 绘图第三弹-颜色与样式</h1>
 <div id="table-of-contents">
-<h2>Table of Contents</h2>
+<h2> <a href="javascript:window.scrollTo(0,0)"
+        style="color: black !important; border-bottom: none !important;"
+        class="tooltip"
+        title="Go to the top of the page">
+       Ξ
+     </a> </h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgb9b4558">1. 设置曲线的颜色</a></li>
-<li><a href="#org6b678af">2. 自定义曲线的样式</a></li>
-<li><a href="#org2b09553">3. 透明的技术</a></li>
-<li><a href="#org12380ba">4. 带点的线</a></li>
-<li><a href="#org08ea6fc">5. 定制点的样式</a></li>
-<li><a href="#orgf5299d0">6. 改变图像的大小</a></li>
-<li><a href="#orgd8d6393">7. 改变 Axes 的大小</a></li>
-<li><a href="#org0e38c51">8. 绘制对象</a></li>
+<li><a href="#org42d3df4">1. 设置曲线的颜色</a></li>
+<li><a href="#orge1df0ce">2. 自定义曲线的样式</a></li>
+<li><a href="#org23c7043">3. 透明的技术</a></li>
+<li><a href="#org7c49b60">4. 带点的线</a></li>
+<li><a href="#orga39e752">5. 定制点的样式</a></li>
+<li><a href="#org5fc059a">6. 改变图像的大小</a></li>
+<li><a href="#org0d1b67b">7. 改变 Axes 的大小</a></li>
+<li><a href="#org07f13b3">8. 绘制对象</a></li>
 </ul>
 </div>
 </div>
@@ -45,19 +51,19 @@
 
 <!-- more -->
 
-<div id="outline-container-orgb9b4558" class="outline-2">
-<h2 id="orgb9b4558"><span class="section-number-2">1</span> 设置曲线的颜色</h2>
+<div id="outline-container-org42d3df4" class="outline-2">
+<h2 id="org42d3df4"><span class="section-number-2">1</span> 设置曲线的颜色</h2>
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#35774;&#32622;&#20840;&#23616;&#30340;&#32447;&#23485;&#65292;&#21253;&#25324;&#26354;&#32447;&#12289;&#36793;&#26694;&#12289;&#21051;&#24230;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> term pngcairo <span style="font-weight: bold; text-decoration: underline;">lw</span> 4
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#23558;&#36793;&#26694;&#12289;&#21051;&#24230;&#37325;&#26032;&#35774;&#32622;&#20026; .25</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> border <span style="font-weight: bold; text-decoration: underline;">lw</span> .25
-<span style="font-weight: bold; text-decoration: underline;">set</span> key top left
+<pre class="src src-gnuplot"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622;&#20840;&#23616;&#30340;&#32447;&#23485;&#65292;&#21253;&#25324;&#26354;&#32447;&#12289;&#36793;&#26694;&#12289;&#21051;&#24230;</span>
+<span style="color: #1f5bff;">set</span> term pngcairo <span style="color: #18b2b2;">lw</span> 4
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#23558;&#36793;&#26694;&#12289;&#21051;&#24230;&#37325;&#26032;&#35774;&#32622;&#20026; .25</span>
+<span style="color: #1f5bff;">set</span> border <span style="color: #18b2b2;">lw</span> .25
+<span style="color: #1f5bff;">set</span> key top left
 
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#20351;&#29992; =show colors= &#26597;&#30475;&#26356;&#22810;&#39068;&#33394;&#65292;&#27880;&#24847;&#21313;&#20845;&#36827;&#21046;&#30340;&#39068;&#33394;&#20063;&#35201;&#21333;&#24341;&#21495;</span>
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">0:1</span>] x**0.5 lc rgb <span style="font-style: italic;">'orange'</span>, x lc rgb <span style="font-style: italic;">'steelblue'</span>,\
-     x**2 lc rgb <span style="font-style: italic;">'bisque'</span>, x**3  lc rgb <span style="font-style: italic;">'#2e8b57'</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#20351;&#29992; =show colors= &#26597;&#30475;&#26356;&#22810;&#39068;&#33394;&#65292;&#27880;&#24847;&#21313;&#20845;&#36827;&#21046;&#30340;&#39068;&#33394;&#20063;&#35201;&#21333;&#24341;&#21495;</span>
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">0:1</span>] x**0.5 lc rgb <span style="color: #ff1f8b;">'orange'</span>, x lc rgb <span style="color: #ff1f8b;">'steelblue'</span>,\
+     x**2 lc rgb <span style="color: #ff1f8b;">'bisque'</span>, x**3  lc rgb <span style="color: #ff1f8b;">'#2e8b57'</span>
 </pre>
 </div>
 
@@ -69,21 +75,21 @@
 </div>
 </div>
 
-<div id="outline-container-org6b678af" class="outline-2">
-<h2 id="org6b678af"><span class="section-number-2">2</span> 自定义曲线的样式</h2>
+<div id="outline-container-orge1df0ce" class="outline-2">
+<h2 id="orge1df0ce"><span class="section-number-2">2</span> 自定义曲线的样式</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">png &#21518;&#31471;&#19981;&#25903;&#25345;&#26174;&#31034; dash &#65292;&#27880;&#24847;&#27492;&#22788;&#20999;&#25442;&#33267; pngcairo</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> term pngcairo
-<span style="font-weight: bold; text-decoration: underline;">set</span> key top left
-<span style="font-weight: bold; text-decoration: underline;">set</span> style line 1 dashtype 2 <span style="font-weight: bold; text-decoration: underline;">lw</span> 4 lc rgb <span style="font-style: italic;">'#990042'</span>         
-<span style="font-weight: bold; text-decoration: underline;">set</span> style line 2 dashtype 3 <span style="font-weight: bold; text-decoration: underline;">lw</span> 3 lc rgb <span style="font-style: italic;">'#31f120'</span>         
-<span style="font-weight: bold; text-decoration: underline;">set</span> style line 3 dashtype 4 <span style="font-weight: bold; text-decoration: underline;">lw</span> 3 lc rgb <span style="font-style: italic;">'#0044a5'</span>         
-<span style="font-weight: bold; text-decoration: underline;">set</span> style line 4 dashtype 5 <span style="font-weight: bold; text-decoration: underline;">lw</span> 4 lc rgb <span style="font-style: italic;">'#888888'</span>         
+<pre class="src src-gnuplot"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">png &#21518;&#31471;&#19981;&#25903;&#25345;&#26174;&#31034; dash &#65292;&#27880;&#24847;&#27492;&#22788;&#20999;&#25442;&#33267; pngcairo</span>
+<span style="color: #1f5bff;">set</span> term pngcairo
+<span style="color: #1f5bff;">set</span> key top left
+<span style="color: #1f5bff;">set</span> style line 1 dashtype 2 <span style="color: #18b2b2;">lw</span> 4 lc rgb <span style="color: #ff1f8b;">'#990042'</span>         
+<span style="color: #1f5bff;">set</span> style line 2 dashtype 3 <span style="color: #18b2b2;">lw</span> 3 lc rgb <span style="color: #ff1f8b;">'#31f120'</span>         
+<span style="color: #1f5bff;">set</span> style line 3 dashtype 4 <span style="color: #18b2b2;">lw</span> 3 lc rgb <span style="color: #ff1f8b;">'#0044a5'</span>         
+<span style="color: #1f5bff;">set</span> style line 4 dashtype 5 <span style="color: #18b2b2;">lw</span> 4 lc rgb <span style="color: #ff1f8b;">'#888888'</span>         
 
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#27492;&#26102;&#20173;&#38656;&#25163;&#21160;&#25351;&#23450;&#26354;&#32447;&#26679;&#24335;&#65292;&#35201;&#24819;&#33258;&#21160;&#25351;&#23450;&#65292;&#21487;&#35774;&#32622; =set style increment userstyles=</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#31995;&#32479;&#20250;&#33258;&#21160;&#22312;&#29992;&#25143;&#35774;&#32622;&#30340;&#26679;&#24335;&#20013;&#24490;&#29615;&#65292;=set style increment default= &#24674;&#22797;&#40664;&#35748;</span>
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">0:1</span>] x**0.5 <span style="font-weight: bold; text-decoration: underline;">ls</span> 1, x <span style="font-weight: bold; text-decoration: underline;">ls</span> 2, x**2 <span style="font-weight: bold; text-decoration: underline;">ls</span> 3, x**3 <span style="font-weight: bold; text-decoration: underline;">ls</span> 4
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#27492;&#26102;&#20173;&#38656;&#25163;&#21160;&#25351;&#23450;&#26354;&#32447;&#26679;&#24335;&#65292;&#35201;&#24819;&#33258;&#21160;&#25351;&#23450;&#65292;&#21487;&#35774;&#32622; =set style increment userstyles=</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#31995;&#32479;&#20250;&#33258;&#21160;&#22312;&#29992;&#25143;&#35774;&#32622;&#30340;&#26679;&#24335;&#20013;&#24490;&#29615;&#65292;=set style increment default= &#24674;&#22797;&#40664;&#35748;</span>
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">0:1</span>] x**0.5 <span style="color: #18b2b2;">ls</span> 1, x <span style="color: #18b2b2;">ls</span> 2, x**2 <span style="color: #18b2b2;">ls</span> 3, x**3 <span style="color: #18b2b2;">ls</span> 4
 </pre>
 </div>
 
@@ -95,17 +101,17 @@
 </div>
 </div>
 
-<div id="outline-container-org2b09553" class="outline-2">
-<h2 id="org2b09553"><span class="section-number-2">3</span> 透明的技术</h2>
+<div id="outline-container-org23c7043" class="outline-2">
+<h2 id="org23c7043"><span class="section-number-2">3</span> 透明的技术</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> term pngcairo
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">pattern &#19968;&#26679;&#21487;&#20197;&#35774;&#32622;&#36879;&#26126;&#24230; =style fill transparency pattern n= &#20854;&#20013; n &#26159;</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">pattern &#30340;&#24207;&#21495;&#65292;&#36825;&#37324;&#30340;&#36879;&#26126;&#25351;&#30340;&#26159; pattern &#20013;&#38388;&#30340;&#38210;&#31354;&#37096;&#20998;&#21487;&#20197;&#30475;&#21040;&#21518;&#38754;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> style fill transparent solid 0.3
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> term pngcairo
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">pattern &#19968;&#26679;&#21487;&#20197;&#35774;&#32622;&#36879;&#26126;&#24230; =style fill transparency pattern n= &#20854;&#20013; n &#26159;</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">pattern &#30340;&#24207;&#21495;&#65292;&#36825;&#37324;&#30340;&#36879;&#26126;&#25351;&#30340;&#26159; pattern &#20013;&#38388;&#30340;&#38210;&#31354;&#37096;&#20998;&#21487;&#20197;&#30475;&#21040;&#21518;&#38754;</span>
+<span style="color: #1f5bff;">set</span> style fill transparent solid 0.3
 
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">0:pi</span>] <span style="font-weight: bold;">sin</span>(x)**2 <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">filledcurves</span> above <span style="font-weight: bold; font-style: italic;">y1=</span>0 lc rgb  <span style="font-style: italic;">'#00ffff'</span>,\
-     0.75*<span style="font-weight: bold;">cos</span>(2*x)**2 <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">filledcurves</span> above <span style="font-weight: bold; font-style: italic;">y1=</span>0 lc rgb <span style="font-style: italic;">'#aa00aa'</span>
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">0:pi</span>] <span style="color: #ef2929;">sin</span>(x)**2 <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">filledcurves</span> above <span style="color: #ff8700;">y1=</span>0 lc rgb  <span style="color: #ff1f8b;">'#00ffff'</span>,\
+     0.75*<span style="color: #ef2929;">cos</span>(2*x)**2 <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">filledcurves</span> above <span style="color: #ff8700;">y1=</span>0 lc rgb <span style="color: #ff1f8b;">'#aa00aa'</span>
 </pre>
 </div>
 
@@ -117,11 +123,11 @@
 </div>
 </div>
 
-<div id="outline-container-org12380ba" class="outline-2">
-<h2 id="org12380ba"><span class="section-number-2">4</span> 带点的线</h2>
+<div id="outline-container-org7c49b60" class="outline-2">
+<h2 id="org7c49b60"><span class="section-number-2">4</span> 带点的线</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">sin</span>(x)/x <span style="font-weight: bold; text-decoration: underline;">with</span> <span style="font-weight: bold;">linespoints</span> <span style="font-weight: bold; text-decoration: underline;">pointsize</span> 2 <span style="font-weight: bold; text-decoration: underline;">pointtype</span> 6 <span style="font-weight: bold; text-decoration: underline;">lw</span> 2
+<pre class="src src-gnuplot"><span style="color: #00af00;">plot</span> <span style="color: #ef2929;">sin</span>(x)/x <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">linespoints</span> <span style="color: #18b2b2;">pointsize</span> 2 <span style="color: #18b2b2;">pointtype</span> 6 <span style="color: #18b2b2;">lw</span> 2
 </pre>
 </div>
 
@@ -133,21 +139,21 @@
 </div>
 </div>
 
-<div id="outline-container-org08ea6fc" class="outline-2">
-<h2 id="org08ea6fc"><span class="section-number-2">5</span> 定制点的样式</h2>
+<div id="outline-container-orga39e752" class="outline-2">
+<h2 id="orga39e752"><span class="section-number-2">5</span> 定制点的样式</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> key top left
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> key top left
 
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#27492;&#34892;&#21578;&#35785; Gnuplot &#25105;&#35201;&#35774;&#32622;&#30340;&#26159; linespoints &#30340;&#26679;&#24335;&#32780;&#19981;&#26159; lines &#30340;&#26679;&#24335;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> style function <span style="font-weight: bold;">linespoints</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#27492;&#22788; pi &#26159;&#25351; pointinterval&#65292;&#25351;&#22810;&#23569;&#20010;&#37319;&#26679;&#28857;&#25918;&#32622;&#19968;&#20010; Marker</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> style line 1 <span style="font-weight: bold; text-decoration: underline;">lw</span> 4 lc rgb <span style="font-style: italic;">'#990042'</span> <span style="font-weight: bold; text-decoration: underline;">ps</span> 2 <span style="font-weight: bold; text-decoration: underline;">pt</span> 6 pi 5
-<span style="font-weight: bold; text-decoration: underline;">set</span> style line 2 <span style="font-weight: bold; text-decoration: underline;">lw</span> 3 lc rgb <span style="font-style: italic;">'#31f120'</span> <span style="font-weight: bold; text-decoration: underline;">ps</span> 2 <span style="font-weight: bold; text-decoration: underline;">pt</span> 12 pi 3
-<span style="font-weight: bold; text-decoration: underline;">set</span> style line 3 <span style="font-weight: bold; text-decoration: underline;">lw</span> 3 lc rgb <span style="font-style: italic;">'#0044a5'</span> <span style="font-weight: bold; text-decoration: underline;">ps</span> 2 <span style="font-weight: bold; text-decoration: underline;">pt</span> 9 pi 5
-<span style="font-weight: bold; text-decoration: underline;">set</span> style line 4 <span style="font-weight: bold; text-decoration: underline;">lw</span> 4 lc rgb <span style="font-style: italic;">'#888888'</span> <span style="font-weight: bold; text-decoration: underline;">ps</span> 2 <span style="font-weight: bold; text-decoration: underline;">pt</span> 7 pi 4
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#27492;&#34892;&#21578;&#35785; Gnuplot &#25105;&#35201;&#35774;&#32622;&#30340;&#26159; linespoints &#30340;&#26679;&#24335;&#32780;&#19981;&#26159; lines &#30340;&#26679;&#24335;</span>
+<span style="color: #1f5bff;">set</span> style function <span style="color: #ef2929;">linespoints</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#27492;&#22788; pi &#26159;&#25351; pointinterval&#65292;&#25351;&#22810;&#23569;&#20010;&#37319;&#26679;&#28857;&#25918;&#32622;&#19968;&#20010; Marker</span>
+<span style="color: #1f5bff;">set</span> style line 1 <span style="color: #18b2b2;">lw</span> 4 lc rgb <span style="color: #ff1f8b;">'#990042'</span> <span style="color: #18b2b2;">ps</span> 2 <span style="color: #18b2b2;">pt</span> 6 pi 5
+<span style="color: #1f5bff;">set</span> style line 2 <span style="color: #18b2b2;">lw</span> 3 lc rgb <span style="color: #ff1f8b;">'#31f120'</span> <span style="color: #18b2b2;">ps</span> 2 <span style="color: #18b2b2;">pt</span> 12 pi 3
+<span style="color: #1f5bff;">set</span> style line 3 <span style="color: #18b2b2;">lw</span> 3 lc rgb <span style="color: #ff1f8b;">'#0044a5'</span> <span style="color: #18b2b2;">ps</span> 2 <span style="color: #18b2b2;">pt</span> 9 pi 5
+<span style="color: #1f5bff;">set</span> style line 4 <span style="color: #18b2b2;">lw</span> 4 lc rgb <span style="color: #ff1f8b;">'#888888'</span> <span style="color: #18b2b2;">ps</span> 2 <span style="color: #18b2b2;">pt</span> 7 pi 4
 
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">0:1</span>] x**0.5 <span style="font-weight: bold; text-decoration: underline;">ls</span> 1, x <span style="font-weight: bold; text-decoration: underline;">ls</span> 2, x**2 <span style="font-weight: bold; text-decoration: underline;">ls</span> 3, x**3 <span style="font-weight: bold; text-decoration: underline;">ls</span> 4
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">0:1</span>] x**0.5 <span style="color: #18b2b2;">ls</span> 1, x <span style="color: #18b2b2;">ls</span> 2, x**2 <span style="color: #18b2b2;">ls</span> 3, x**3 <span style="color: #18b2b2;">ls</span> 4
 </pre>
 </div>
 
@@ -159,15 +165,15 @@
 </div>
 </div>
 
-<div id="outline-container-orgf5299d0" class="outline-2">
-<h2 id="orgf5299d0"><span class="section-number-2">6</span> 改变图像的大小</h2>
+<div id="outline-container-org5fc059a" class="outline-2">
+<h2 id="org5fc059a"><span class="section-number-2">6</span> 改变图像的大小</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#27492;&#22788;&#30340; size &#23545;&#20110; eps &#31561;&#30690;&#37327;&#22270;&#26469;&#35828;&#32477;&#23545;&#23610;&#23544;&#24182;&#27809;&#26377;&#24847;&#20041;&#65292;&#21482;&#26159;&#34920;&#31034;&#38271;&#23485;&#27604;&#65292;&#35774;&#20026; 6,3</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#20063;&#26159;&#19968;&#26679;&#30340;&#25928;&#26524;&#65292;&#20294;&#26159;&#23545;&#20110; png &#26469;&#35828;&#21482;&#33021;&#35774;&#32622;&#32477;&#23545;&#23610;&#23544;</span>
-<span style="font-weight: bold; text-decoration: underline;">set</span> term pngcairo size 600,300
-<span style="font-weight: bold; text-decoration: underline;">set</span> key off
-<span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">sin</span>(x)
+<pre class="src src-gnuplot"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#27492;&#22788;&#30340; size &#23545;&#20110; eps &#31561;&#30690;&#37327;&#22270;&#26469;&#35828;&#32477;&#23545;&#23610;&#23544;&#24182;&#27809;&#26377;&#24847;&#20041;&#65292;&#21482;&#26159;&#34920;&#31034;&#38271;&#23485;&#27604;&#65292;&#35774;&#20026; 6,3</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#20063;&#26159;&#19968;&#26679;&#30340;&#25928;&#26524;&#65292;&#20294;&#26159;&#23545;&#20110; png &#26469;&#35828;&#21482;&#33021;&#35774;&#32622;&#32477;&#23545;&#23610;&#23544;</span>
+<span style="color: #1f5bff;">set</span> term pngcairo size 600,300
+<span style="color: #1f5bff;">set</span> key off
+<span style="color: #00af00;">plot</span> <span style="color: #ef2929;">sin</span>(x)
 </pre>
 </div>
 
@@ -179,13 +185,13 @@
 </div>
 </div>
 
-<div id="outline-container-orgd8d6393" class="outline-2">
-<h2 id="orgd8d6393"><span class="section-number-2">7</span> 改变 Axes 的大小</h2>
+<div id="outline-container-org0d1b67b" class="outline-2">
+<h2 id="org0d1b67b"><span class="section-number-2">7</span> 改变 Axes 的大小</h2>
 <div class="outline-text-2" id="text-7">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">set</span> key off
-<span style="font-weight: bold; text-decoration: underline;">set</span> size .75,.75
-<span style="font-weight: bold;">plot</span> <span style="font-weight: bold;">sin</span>(x)
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> key off
+<span style="color: #1f5bff;">set</span> size .75,.75
+<span style="color: #00af00;">plot</span> <span style="color: #ef2929;">sin</span>(x)
 </pre>
 </div>
 
@@ -197,24 +203,24 @@
 </div>
 </div>
 
-<div id="outline-container-org0e38c51" class="outline-2">
-<h2 id="org0e38c51"><span class="section-number-2">8</span> 绘制对象</h2>
+<div id="outline-container-org07f13b3" class="outline-2">
+<h2 id="org07f13b3"><span class="section-number-2">8</span> 绘制对象</h2>
 <div class="outline-text-2" id="text-8">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="font-weight: bold; text-decoration: underline;">unset</span> key
-<span style="font-weight: bold; text-decoration: underline;">unset</span> tics
-<span style="font-weight: bold; text-decoration: underline;">set</span> object 1 circle at graph .5,.5 size graph .25 fillcolor rgb <span style="font-style: italic;">'blue'</span>\
-    <span style="font-weight: bold; text-decoration: underline;">fillstyle</span> solid arc [<span style="font-weight: bold; text-decoration: underline;">0:30</span>] front
-<span style="font-weight: bold; text-decoration: underline;">set</span> object 2 circle at graph .5,.5 size graph .25 fillcolor rgb <span style="font-style: italic;">'red'</span>\
-    <span style="font-weight: bold; text-decoration: underline;">fillstyle</span> solid arc [<span style="font-weight: bold; text-decoration: underline;">30:80</span>] front
-<span style="font-weight: bold; text-decoration: underline;">set</span> object 3 circle at graph .5,.5 size graph .25 fillcolor rgb <span style="font-style: italic;">'orange'</span>\
-    <span style="font-weight: bold; text-decoration: underline;">fillstyle</span> solid arc [<span style="font-weight: bold; text-decoration: underline;">80:180</span>] front
-<span style="font-weight: bold; text-decoration: underline;">set</span> object 4 circle at graph .5,.5 size graph .25 fillcolor rgb <span style="font-style: italic;">'green'</span>\
-    <span style="font-weight: bold; text-decoration: underline;">fillstyle</span> solid arc [<span style="font-weight: bold; text-decoration: underline;">180:240</span>] front  
-<span style="font-weight: bold; text-decoration: underline;">set</span> object 5 circle at graph .5,.5 size graph .25 fillcolor rgb <span style="font-style: italic;">'sandybrown'</span>\
-    <span style="font-weight: bold; text-decoration: underline;">fillstyle</span> solid arc [<span style="font-weight: bold; text-decoration: underline;">240:360</span>] front
+<pre class="src src-gnuplot"><span style="color: #1f5bff;">unset</span> key
+<span style="color: #1f5bff;">unset</span> tics
+<span style="color: #1f5bff;">set</span> object 1 circle at graph .5,.5 size graph .25 fillcolor rgb <span style="color: #ff1f8b;">'blue'</span>\
+    <span style="color: #18b2b2;">fillstyle</span> solid arc [<span style="color: #1f5bff;">0:30</span>] front
+<span style="color: #1f5bff;">set</span> object 2 circle at graph .5,.5 size graph .25 fillcolor rgb <span style="color: #ff1f8b;">'red'</span>\
+    <span style="color: #18b2b2;">fillstyle</span> solid arc [<span style="color: #1f5bff;">30:80</span>] front
+<span style="color: #1f5bff;">set</span> object 3 circle at graph .5,.5 size graph .25 fillcolor rgb <span style="color: #ff1f8b;">'orange'</span>\
+    <span style="color: #18b2b2;">fillstyle</span> solid arc [<span style="color: #1f5bff;">80:180</span>] front
+<span style="color: #1f5bff;">set</span> object 4 circle at graph .5,.5 size graph .25 fillcolor rgb <span style="color: #ff1f8b;">'green'</span>\
+    <span style="color: #18b2b2;">fillstyle</span> solid arc [<span style="color: #1f5bff;">180:240</span>] front  
+<span style="color: #1f5bff;">set</span> object 5 circle at graph .5,.5 size graph .25 fillcolor rgb <span style="color: #ff1f8b;">'sandybrown'</span>\
+    <span style="color: #18b2b2;">fillstyle</span> solid arc [<span style="color: #1f5bff;">240:360</span>] front
 
-<span style="font-weight: bold;">plot</span> [<span style="font-weight: bold; text-decoration: underline;">0:1</span>][<span style="font-weight: bold; text-decoration: underline;">0:1</span>] -1
+<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">0:1</span>][<span style="color: #1f5bff;">0:1</span>] -1
 </pre>
 </div>
 
