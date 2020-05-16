@@ -3,18 +3,19 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-05-16 Sat 15:14 -->
+<!-- 2020-05-16 Sat 16:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gnuplot 绘图第三弹-颜色与样式</title>
 <meta name="generator" content="Org mode" />
-<meta name="author" content="Cycoe Joo" />
+<meta name="author" content="朱浩南" />
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 </head>
 <body>
 <div id="preamble" class="status">
 <header>
-    <nav>Cycoe@Home</nav>
+  <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+  <nav>Cycoe@Home</nav>
     <ul class="menu">
         <li><a href="/">Index</a></li>
         <li><a href="/Photo/index.html">Photo</a></li>
@@ -33,14 +34,14 @@
      </a> </h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org42d3df4">1. 设置曲线的颜色</a></li>
-<li><a href="#orge1df0ce">2. 自定义曲线的样式</a></li>
-<li><a href="#org23c7043">3. 透明的技术</a></li>
-<li><a href="#org7c49b60">4. 带点的线</a></li>
-<li><a href="#orga39e752">5. 定制点的样式</a></li>
-<li><a href="#org5fc059a">6. 改变图像的大小</a></li>
-<li><a href="#org0d1b67b">7. 改变 Axes 的大小</a></li>
-<li><a href="#org07f13b3">8. 绘制对象</a></li>
+<li><a href="#orge769ccf">1. 设置曲线的颜色</a></li>
+<li><a href="#orgc68af5a">2. 自定义曲线的样式</a></li>
+<li><a href="#orgf440199">3. 透明的技术</a></li>
+<li><a href="#org25b00c8">4. 带点的线</a></li>
+<li><a href="#org5dff61f">5. 定制点的样式</a></li>
+<li><a href="#org2d1ceca">6. 改变图像的大小</a></li>
+<li><a href="#org6e460ca">7. 改变 Axes 的大小</a></li>
+<li><a href="#orgabdcc03">8. 绘制对象</a></li>
 </ul>
 </div>
 </div>
@@ -51,8 +52,8 @@
 
 <!-- more -->
 
-<div id="outline-container-org42d3df4" class="outline-2">
-<h2 id="org42d3df4"><span class="section-number-2">1</span> 设置曲线的颜色</h2>
+<div id="outline-container-orge769ccf" class="outline-2">
+<h2 id="orge769ccf"><span class="section-number-2">1</span> 设置曲线的颜色</h2>
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622;&#20840;&#23616;&#30340;&#32447;&#23485;&#65292;&#21253;&#25324;&#26354;&#32447;&#12289;&#36793;&#26694;&#12289;&#21051;&#24230;</span>
@@ -75,8 +76,8 @@
 </div>
 </div>
 
-<div id="outline-container-orge1df0ce" class="outline-2">
-<h2 id="orge1df0ce"><span class="section-number-2">2</span> 自定义曲线的样式</h2>
+<div id="outline-container-orgc68af5a" class="outline-2">
+<h2 id="orgc68af5a"><span class="section-number-2">2</span> 自定义曲线的样式</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">png &#21518;&#31471;&#19981;&#25903;&#25345;&#26174;&#31034; dash &#65292;&#27880;&#24847;&#27492;&#22788;&#20999;&#25442;&#33267; pngcairo</span>
@@ -101,8 +102,8 @@
 </div>
 </div>
 
-<div id="outline-container-org23c7043" class="outline-2">
-<h2 id="org23c7043"><span class="section-number-2">3</span> 透明的技术</h2>
+<div id="outline-container-orgf440199" class="outline-2">
+<h2 id="orgf440199"><span class="section-number-2">3</span> 透明的技术</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> term pngcairo
@@ -123,8 +124,8 @@
 </div>
 </div>
 
-<div id="outline-container-org7c49b60" class="outline-2">
-<h2 id="org7c49b60"><span class="section-number-2">4</span> 带点的线</h2>
+<div id="outline-container-org25b00c8" class="outline-2">
+<h2 id="org25b00c8"><span class="section-number-2">4</span> 带点的线</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #00af00;">plot</span> <span style="color: #ef2929;">sin</span>(x)/x <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">linespoints</span> <span style="color: #18b2b2;">pointsize</span> 2 <span style="color: #18b2b2;">pointtype</span> 6 <span style="color: #18b2b2;">lw</span> 2
@@ -139,8 +140,8 @@
 </div>
 </div>
 
-<div id="outline-container-orga39e752" class="outline-2">
-<h2 id="orga39e752"><span class="section-number-2">5</span> 定制点的样式</h2>
+<div id="outline-container-org5dff61f" class="outline-2">
+<h2 id="org5dff61f"><span class="section-number-2">5</span> 定制点的样式</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> key top left
@@ -165,8 +166,8 @@
 </div>
 </div>
 
-<div id="outline-container-org5fc059a" class="outline-2">
-<h2 id="org5fc059a"><span class="section-number-2">6</span> 改变图像的大小</h2>
+<div id="outline-container-org2d1ceca" class="outline-2">
+<h2 id="org2d1ceca"><span class="section-number-2">6</span> 改变图像的大小</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#27492;&#22788;&#30340; size &#23545;&#20110; eps &#31561;&#30690;&#37327;&#22270;&#26469;&#35828;&#32477;&#23545;&#23610;&#23544;&#24182;&#27809;&#26377;&#24847;&#20041;&#65292;&#21482;&#26159;&#34920;&#31034;&#38271;&#23485;&#27604;&#65292;&#35774;&#20026; 6,3</span>
@@ -185,8 +186,8 @@
 </div>
 </div>
 
-<div id="outline-container-org0d1b67b" class="outline-2">
-<h2 id="org0d1b67b"><span class="section-number-2">7</span> 改变 Axes 的大小</h2>
+<div id="outline-container-org6e460ca" class="outline-2">
+<h2 id="org6e460ca"><span class="section-number-2">7</span> 改变 Axes 的大小</h2>
 <div class="outline-text-2" id="text-7">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> key off
@@ -203,8 +204,8 @@
 </div>
 </div>
 
-<div id="outline-container-org07f13b3" class="outline-2">
-<h2 id="org07f13b3"><span class="section-number-2">8</span> 绘制对象</h2>
+<div id="outline-container-orgabdcc03" class="outline-2">
+<h2 id="orgabdcc03"><span class="section-number-2">8</span> 绘制对象</h2>
 <div class="outline-text-2" id="text-8">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">unset</span> key
@@ -234,7 +235,7 @@
 </div>
 <div id="postamble" class="status">
 <footer>
-    <img src="/img/Cc-logo-128x128.png" height="14px" width="14px" />
+    <img src="/static/img/Cc-logo-128x128.png" height="14px" width="14px" />
     本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </footer>
 </div>

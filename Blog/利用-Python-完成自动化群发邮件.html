@@ -3,18 +3,19 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-05-16 Sat 15:14 -->
+<!-- 2020-05-16 Sat 16:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>利用 Python 完成自动化群发邮件</title>
 <meta name="generator" content="Org mode" />
-<meta name="author" content="Cycoe Joo" />
+<meta name="author" content="朱浩南" />
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 </head>
 <body>
 <div id="preamble" class="status">
 <header>
-    <nav>Cycoe@Home</nav>
+  <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+  <nav>Cycoe@Home</nav>
     <ul class="menu">
         <li><a href="/">Index</a></li>
         <li><a href="/Photo/index.html">Photo</a></li>
@@ -33,9 +34,9 @@
      </a> </h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org47fc602">1. 生成通讯录</a></li>
-<li><a href="#org1e7f246">2. 定义邮件内容</a></li>
-<li><a href="#orga04a941">3. 发送邮件</a></li>
+<li><a href="#org42ccb23">1. 生成通讯录</a></li>
+<li><a href="#org66c0aaf">2. 定义邮件内容</a></li>
+<li><a href="#orgaeed72c">3. 发送邮件</a></li>
 </ul>
 </div>
 </div>
@@ -50,8 +51,8 @@
 Python 中已经实现了 <code>stmp</code> 的相关接口在 <code>smtplib</code> 模块中，邮件结构相关的接口在 <code>email</code> 模块中。
 </p>
 
-<div id="outline-container-org47fc602" class="outline-2">
-<h2 id="org47fc602"><span class="section-number-2">1</span> 生成通讯录</h2>
+<div id="outline-container-org42ccb23" class="outline-2">
+<h2 id="org42ccb23"><span class="section-number-2">1</span> 生成通讯录</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 在批量发送邮件之前，一定要有一份结构化的通讯录，不管是用 list 也好，用 dict 存储也好。此处，我是使用 <code>xlrd</code> 模块从 Excel 表格中读取数据，并将其存储在 dict 中。对于邮件来说，收件人的名字可能会出现重名，但邮件地址应该是唯一的，因此选用邮件地址作为字典的键。
@@ -91,8 +92,8 @@ Python 中已经实现了 <code>stmp</code> 的相关接口在 <code>smtplib</co
 </p>
 </div>
 </div>
-<div id="outline-container-org1e7f246" class="outline-2">
-<h2 id="org1e7f246"><span class="section-number-2">2</span> 定义邮件内容</h2>
+<div id="outline-container-org66c0aaf" class="outline-2">
+<h2 id="org66c0aaf"><span class="section-number-2">2</span> 定义邮件内容</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 第一步是生成邮件对象，代码示例如下：
@@ -146,8 +147,8 @@ Python 中已经实现了 <code>stmp</code> 的相关接口在 <code>smtplib</co
 </div>
 </div>
 </div>
-<div id="outline-container-orga04a941" class="outline-2">
-<h2 id="orga04a941"><span class="section-number-2">3</span> 发送邮件</h2>
+<div id="outline-container-orgaeed72c" class="outline-2">
+<h2 id="orgaeed72c"><span class="section-number-2">3</span> 发送邮件</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Python 中使用 <code>smtplib</code> 来处理 smtp 协议，示例代码如下：
@@ -200,7 +201,7 @@ Python 中使用 <code>smtplib</code> 来处理 smtp 协议，示例代码如下
 </div>
 <div id="postamble" class="status">
 <footer>
-    <img src="/img/Cc-logo-128x128.png" height="14px" width="14px" />
+    <img src="/static/img/Cc-logo-128x128.png" height="14px" width="14px" />
     本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </footer>
 </div>

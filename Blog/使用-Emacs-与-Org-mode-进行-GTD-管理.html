@@ -3,18 +3,19 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-05-16 Sat 15:14 -->
+<!-- 2020-05-16 Sat 16:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>使用 Emacs 与 Org mode 进行 GTD 管理</title>
 <meta name="generator" content="Org mode" />
-<meta name="author" content="Cycoe Joo" />
+<meta name="author" content="朱浩南" />
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 </head>
 <body>
 <div id="preamble" class="status">
 <header>
-    <nav>Cycoe@Home</nav>
+  <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+  <nav>Cycoe@Home</nav>
     <ul class="menu">
         <li><a href="/">Index</a></li>
         <li><a href="/Photo/index.html">Photo</a></li>
@@ -33,13 +34,13 @@
      </a> </h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgf26d293">1. 基本想法</a></li>
-<li><a href="#org4e8fd7d">2. 整体流程</a></li>
-<li><a href="#org4a7ad0e">3. 任务拆分</a></li>
-<li><a href="#org921cadc">4. 为任务添加更多属性</a></li>
-<li><a href="#org271b9e8">5. 查看任务概览</a></li>
-<li><a href="#org8412633">6. 任务完成</a></li>
-<li><a href="#org6ca16ba">7. 任务回顾</a></li>
+<li><a href="#org9182bcd">1. 基本想法</a></li>
+<li><a href="#orgc799b06">2. 整体流程</a></li>
+<li><a href="#org21326ed">3. 任务拆分</a></li>
+<li><a href="#orge8c14d4">4. 为任务添加更多属性</a></li>
+<li><a href="#orgc667042">5. 查看任务概览</a></li>
+<li><a href="#org017cb0e">6. 任务完成</a></li>
+<li><a href="#org9f3dc2e">7. 任务回顾</a></li>
 </ul>
 </div>
 </div>
@@ -58,8 +59,8 @@
 
 <!-- more -->
 
-<div id="outline-container-orgf26d293" class="outline-2">
-<h2 id="orgf26d293"><span class="section-number-2">1</span> 基本想法</h2>
+<div id="outline-container-org9182bcd" class="outline-2">
+<h2 id="org9182bcd"><span class="section-number-2">1</span> 基本想法</h2>
 <div class="outline-text-2" id="text-1">
 <ol class="org-ol">
 <li>从空间尺度上，不同项目隶属于不同的 Org 文件，而不同的 Org 文件加入到不同的
@@ -72,8 +73,8 @@ agenda 中，实现基于项目的管理方式。</li>
 </div>
 </div>
 
-<div id="outline-container-org4e8fd7d" class="outline-2">
-<h2 id="org4e8fd7d"><span class="section-number-2">2</span> 整体流程</h2>
+<div id="outline-container-orgc799b06" class="outline-2">
+<h2 id="orgc799b06"><span class="section-number-2">2</span> 整体流程</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 参照 <i>皮波迪</i> 的博客 <a href="https://www.cnblogs.com/quantumman/p/10808174.html">以 Emacs Org mode 为核心的任务管理方案</a>，设计适合自己的工作流。
@@ -101,8 +102,8 @@ agenda 中，实现基于项目的管理方式。</li>
 </div>
 </div>
 
-<div id="outline-container-org4a7ad0e" class="outline-2">
-<h2 id="org4a7ad0e"><span class="section-number-2">3</span> 任务拆分</h2>
+<div id="outline-container-org21326ed" class="outline-2">
+<h2 id="org21326ed"><span class="section-number-2">3</span> 任务拆分</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 对于耗时较长的非周期任务，需要拆分成更小的任务来进行处理。大型的任务可以作为单独
@@ -130,8 +131,8 @@ agenda 上方显示的标题， <code>"~/export/learn-org.html"</code> 为导出
 </div>
 </div>
 
-<div id="outline-container-org921cadc" class="outline-2">
-<h2 id="org921cadc"><span class="section-number-2">4</span> 为任务添加更多属性</h2>
+<div id="outline-container-orge8c14d4" class="outline-2">
+<h2 id="orge8c14d4"><span class="section-number-2">4</span> 为任务添加更多属性</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 标签是一种非线性的组织方式，Org mode 中的每一个 headline 都支持标签。在 headline
@@ -145,8 +146,8 @@ agenda 上方显示的标题， <code>"~/export/learn-org.html"</code> 为导出
 </div>
 </div>
 
-<div id="outline-container-org271b9e8" class="outline-2">
-<h2 id="org271b9e8"><span class="section-number-2">5</span> 查看任务概览</h2>
+<div id="outline-container-orgc667042" class="outline-2">
+<h2 id="orgc667042"><span class="section-number-2">5</span> 查看任务概览</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以列视图的模式显示出来。
@@ -169,8 +170,8 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
 </div>
 </div>
 
-<div id="outline-container-org8412633" class="outline-2">
-<h2 id="org8412633"><span class="section-number-2">6</span> 任务完成</h2>
+<div id="outline-container-org017cb0e" class="outline-2">
+<h2 id="org017cb0e"><span class="section-number-2">6</span> 任务完成</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">setq</span>
@@ -182,8 +183,8 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
 </div>
 </div>
 
-<div id="outline-container-org6ca16ba" class="outline-2">
-<h2 id="org6ca16ba"><span class="section-number-2">7</span> 任务回顾</h2>
+<div id="outline-container-org9f3dc2e" class="outline-2">
+<h2 id="org9f3dc2e"><span class="section-number-2">7</span> 任务回顾</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 <code>&lt;C-c C-x C-d&gt;</code> 查看各个任务的耗时与总和。
@@ -194,7 +195,7 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
 </div>
 <div id="postamble" class="status">
 <footer>
-    <img src="/img/Cc-logo-128x128.png" height="14px" width="14px" />
+    <img src="/static/img/Cc-logo-128x128.png" height="14px" width="14px" />
     本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </footer>
 </div>
