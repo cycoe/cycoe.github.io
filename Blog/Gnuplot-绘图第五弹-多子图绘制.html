@@ -3,18 +3,20 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-05-16 Sat 16:39 -->
+<!-- 2020-05-17 Sun 15:09 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gnuplot 绘图第五弹-多子图绘制</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="朱浩南" />
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
+<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+<script language="JavaScript" type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/main.js"></script>
 </head>
 <body>
 <div id="preamble" class="status">
 <header>
-  <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
   <nav>Cycoe@Home</nav>
     <ul class="menu">
         <li><a href="/">Index</a></li>
@@ -34,10 +36,10 @@
      </a> </h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org244e69c">1. 安排子图阵列</a></li>
-<li><a href="#orge25872b">2. 手动摆放位置</a></li>
-<li><a href="#orgdbdf573">3. 内嵌子图</a></li>
-<li><a href="#orga04bb3d">4. 多子图中的标签与箭头</a></li>
+<li><a href="#org4292b0e">1. 安排子图阵列</a></li>
+<li><a href="#org4233f73">2. 手动摆放位置</a></li>
+<li><a href="#org9f99056">3. 内嵌子图</a></li>
+<li><a href="#org0498486">4. 多子图中的标签与箭头</a></li>
 </ul>
 </div>
 </div>
@@ -47,8 +49,8 @@
 
 <!-- more -->
 
-<div id="outline-container-org244e69c" class="outline-2">
-<h2 id="org244e69c"><span class="section-number-2">1</span> 安排子图阵列</h2>
+<div id="outline-container-org4292b0e" class="outline-2">
+<h2 id="org4292b0e"><span class="section-number-2">1</span> 安排子图阵列</h2>
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> multiplot layout 2, 2
@@ -70,8 +72,8 @@
 </div>
 </div>
 
-<div id="outline-container-orge25872b" class="outline-2">
-<h2 id="orge25872b"><span class="section-number-2">2</span> 手动摆放位置</h2>
+<div id="outline-container-org4233f73" class="outline-2">
+<h2 id="org4233f73"><span class="section-number-2">2</span> 手动摆放位置</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> multiplot
@@ -103,8 +105,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgdbdf573" class="outline-2">
-<h2 id="orgdbdf573"><span class="section-number-2">3</span> 内嵌子图</h2>
+<div id="outline-container-org9f99056" class="outline-2">
+<h2 id="org9f99056"><span class="section-number-2">3</span> 内嵌子图</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> multiplot
@@ -146,8 +148,8 @@
 </div>
 </div>
 
-<div id="outline-container-orga04bb3d" class="outline-2">
-<h2 id="orga04bb3d"><span class="section-number-2">4</span> 多子图中的标签与箭头</h2>
+<div id="outline-container-org0498486" class="outline-2">
+<h2 id="org0498486"><span class="section-number-2">4</span> 多子图中的标签与箭头</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> xrange [<span style="color: #1f5bff;">-pi:pi</span>]
