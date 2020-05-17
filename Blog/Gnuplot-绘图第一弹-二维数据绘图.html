@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<!-- 2020-05-17 Sun 15:40 -->
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- 2020-05-17 Sun 23:19 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gnuplot 绘图第一弹-二维数据绘图</title>
-<meta name="generator" content="Org mode" />
-<meta name="author" content="朱浩南" />
+<meta name="generator" content="Org mode">
+<meta name="author" content="Cycoe">
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
 <script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
@@ -26,8 +24,9 @@
 </header>
 </div>
 <div id="content">
+<header>
 <h1 class="title">Gnuplot 绘图第一弹-二维数据绘图</h1>
-<div id="table-of-contents">
+</header><nav id="table-of-contents">
 <h2> <a href="javascript:window.scrollTo(0,0)"
         style="color: black !important; border-bottom: none !important;"
         class="tooltip"
@@ -36,12 +35,12 @@
      </a> </h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org4482722">1. 调色板</a></li>
-<li><a href="#org69e408f">2. Hello World</a></li>
-<li><a href="#org3afea7e">3. 绘制曲线的同时指定坐标范围</a></li>
+<li><a href="#org127f11e">1. 调色板</a></li>
+<li><a href="#org6bd1fae">2. Hello World</a></li>
+<li><a href="#orge708c09">3. 绘制曲线的同时指定坐标范围</a></li>
 </ul>
 </div>
-</div>
+</nav>
 <blockquote>
 <p>
 <a href="https://http//gnuplot.info/">Gnuplot</a> is a portable command-line driven graphing utility for Linux, OS/2, MS
@@ -56,8 +55,8 @@ like Octave. Gnuplot has been supported and under active development since 1986.
 
 <!-- more -->
 
-<div id="outline-container-org4482722" class="outline-2">
-<h2 id="org4482722"><span class="section-number-2">1</span> 调色板</h2>
+<div id="outline-container-org127f11e" class="outline-2">
+<h2 id="org127f11e"><span class="section-number-2">1</span> 调色板</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 在 Gnuplot 的交互式命令行中使用 <code>test</code> 命令可以调出调色板，查看 Gnuplot 支持的样式
@@ -69,10 +68,10 @@ like Octave. Gnuplot has been supported and under active development since 1986.
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第一弹-二维数据绘图/test.png" alt="test.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第一弹-二维数据绘图/test.png" alt="test.png">
+
+</figure>
 
 <p>
 <b>注意</b>: 不同的后端支持的颜色和样式是不同的，同时同一个序号所代表的样式也很可能是不
@@ -90,15 +89,15 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第一弹-二维数据绘图/test-pngcairo.png" alt="test-pngcairo.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第一弹-二维数据绘图/test-pngcairo.png" alt="test-pngcairo.png">
+
+</figure>
 </div>
 </div>
 
-<div id="outline-container-org69e408f" class="outline-2">
-<h2 id="org69e408f"><span class="section-number-2">2</span> Hello World</h2>
+<div id="outline-container-org6bd1fae" class="outline-2">
+<h2 id="org6bd1fae"><span class="section-number-2">2</span> Hello World</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">reset</span>
@@ -107,15 +106,15 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 
 
-<div class="figure">
-<p><img src="Gnuplot-绘图第一弹-二维数据绘图/c1-simple.png" alt="c1-simple.png" />
-</p>
-</div>
+<figure>
+<img src="Gnuplot-绘图第一弹-二维数据绘图/c1-simple.png" alt="c1-simple.png">
+
+</figure>
 </div>
 </div>
 
-<div id="outline-container-org3afea7e" class="outline-2">
-<h2 id="org3afea7e"><span class="section-number-2">3</span> 绘制曲线的同时指定坐标范围</h2>
+<div id="outline-container-orge708c09" class="outline-2">
+<h2 id="orge708c09"><span class="section-number-2">3</span> 绘制曲线的同时指定坐标范围</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #00af00;">plot</span> [][<span style="color: #1f5bff;">-3:1.5</span>] (<span style="color: #ef2929;">sin</span>(1/x) - <span style="color: #ef2929;">cos</span>(x))*<span style="color: #ef2929;">erfc</span>(x)
@@ -123,10 +122,10 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 
 
-<div class="figure">
-<p><img src="Gnuplot-绘图第一弹-二维数据绘图/c1-xrange.png" alt="c1-xrange.png" />
-</p>
-</div>
+<figure>
+<img src="Gnuplot-绘图第一弹-二维数据绘图/c1-xrange.png" alt="c1-xrange.png">
+
+</figure>
 
 <p>
 将函数的数据写入到文件
@@ -147,10 +146,10 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 
 
-<div class="figure">
-<p><img src="Gnuplot-绘图第一弹-二维数据绘图/c1-multipe-lines.png" alt="c1-multipe-lines.png" />
-</p>
-</div>
+<figure>
+<img src="Gnuplot-绘图第一弹-二维数据绘图/c1-multipe-lines.png" alt="c1-multipe-lines.png">
+
+</figure>
 
 <p>
 使用文件中的数据进行绘制
@@ -161,10 +160,10 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 
 
-<div class="figure">
-<p><img src="Gnuplot-绘图第一弹-二维数据绘图/c1-use-file-data.png" alt="c1-use-file-data.png" />
-</p>
-</div>
+<figure>
+<img src="Gnuplot-绘图第一弹-二维数据绘图/c1-use-file-data.png" alt="c1-use-file-data.png">
+
+</figure>
 
 <p>
 绘制双 <code>y</code> 轴图， <code>set y2tics start, sep</code> 设置 <code>y2</code> 轴的起始值以及间隔
@@ -177,10 +176,10 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 
 
-<div class="figure">
-<p><img src="Gnuplot-绘图第一弹-二维数据绘图/c1-double-y.png" alt="c1-double-y.png" />
-</p>
-</div>
+<figure>
+<img src="Gnuplot-绘图第一弹-二维数据绘图/c1-double-y.png" alt="c1-double-y.png">
+
+</figure>
 
 <p>
 设定采样数
@@ -195,10 +194,10 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 
 
-<div class="figure">
-<p><img src="Gnuplot-绘图第一弹-二维数据绘图/c1-set-sample.png" alt="c1-set-sample.png" />
-</p>
-</div>
+<figure>
+<img src="Gnuplot-绘图第一弹-二维数据绘图/c1-set-sample.png" alt="c1-set-sample.png">
+
+</figure>
 
 <p>
 绘制散点图
@@ -210,10 +209,10 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 
 
-<div class="figure">
-<p><img src="Gnuplot-绘图第一弹-二维数据绘图/c1-scatter.png" alt="c1-scatter.png" />
-</p>
-</div>
+<figure>
+<img src="Gnuplot-绘图第一弹-二维数据绘图/c1-scatter.png" alt="c1-scatter.png">
+
+</figure>
 
 <p>
 绘制盒形图，其中 <code>set style</code> 有以下几种取值
@@ -232,10 +231,10 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 
 
-<div class="figure">
-<p><img src="Gnuplot-绘图第一弹-二维数据绘图/c1-boxes.png" alt="c1-boxes.png" />
-</p>
-</div>
+<figure>
+<img src="Gnuplot-绘图第一弹-二维数据绘图/c1-boxes.png" alt="c1-boxes.png">
+
+</figure>
 
 <p>
 绘制圆圈图，圆圈图需要 3 列数据， <code>x:y:r</code>
@@ -247,10 +246,10 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 
 
-<div class="figure">
-<p><img src="Gnuplot-绘图第一弹-二维数据绘图/c1-plot-circles.png" alt="c1-plot-circles.png" />
-</p>
-</div>
+<figure>
+<img src="Gnuplot-绘图第一弹-二维数据绘图/c1-plot-circles.png" alt="c1-plot-circles.png">
+
+</figure>
 
 <p>
 填充曲线
@@ -263,10 +262,10 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 
 
-<div class="figure">
-<p><img src="Gnuplot-绘图第一弹-二维数据绘图/c1-fill-curves.png" alt="c1-fill-curves.png" />
-</p>
-</div>
+<figure>
+<img src="Gnuplot-绘图第一弹-二维数据绘图/c1-fill-curves.png" alt="c1-fill-curves.png">
+
+</figure>
 
 <p>
 曲线填充也不用真实的文件，这里的 <code>+</code> 表示一个虚拟文件，其中的第一列是由 Gnuplot 自
@@ -280,10 +279,10 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 
 
-<div class="figure">
-<p><img src="Gnuplot-绘图第一弹-二维数据绘图/c1-fill-between-lines.png" alt="c1-fill-between-lines.png" />
-</p>
-</div>
+<figure>
+<img src="Gnuplot-绘图第一弹-二维数据绘图/c1-fill-between-lines.png" alt="c1-fill-between-lines.png">
+
+</figure>
 
 <p>
 以直方图的形式绘制曲线
@@ -295,10 +294,10 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 
 
-<div class="figure">
-<p><img src="Gnuplot-绘图第一弹-二维数据绘图/c1-histeps.png" alt="c1-histeps.png" />
-</p>
-</div>
+<figure>
+<img src="Gnuplot-绘图第一弹-二维数据绘图/c1-histeps.png" alt="c1-histeps.png">
+
+</figure>
 
 <p>
 并排的直方图
@@ -312,10 +311,10 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 
 
-<div class="figure">
-<p><img src="Gnuplot-绘图第一弹-二维数据绘图/c1-histograms.png" alt="c1-histograms.png" />
-</p>
-</div>
+<figure>
+<img src="Gnuplot-绘图第一弹-二维数据绘图/c1-histograms.png" alt="c1-histograms.png">
+
+</figure>
 
 <p>
 叠加的直方图
@@ -331,10 +330,10 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 
 
-<div class="figure">
-<p><img src="Gnuplot-绘图第一弹-二维数据绘图/c1-histograms-rowstacked.png" alt="c1-histograms-rowstacked.png" />
-</p>
-</div>
+<figure>
+<img src="Gnuplot-绘图第一弹-二维数据绘图/c1-histograms-rowstacked.png" alt="c1-histograms-rowstacked.png">
+
+</figure>
 
 <p>
 绘制带误差条的点图
@@ -351,10 +350,10 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 
 
-<div class="figure">
-<p><img src="Gnuplot-绘图第一弹-二维数据绘图/c1-error-bars.png" alt="c1-error-bars.png" />
-</p>
-</div>
+<figure>
+<img src="Gnuplot-绘图第一弹-二维数据绘图/c1-error-bars.png" alt="c1-error-bars.png">
+
+</figure>
 
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">reset</span>
@@ -366,10 +365,10 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 
 
-<div class="figure">
-<p><img src="Gnuplot-绘图第一弹-二维数据绘图/c1-boxerrorbars.png" alt="c1-boxerrorbars.png" />
-</p>
-</div>
+<figure>
+<img src="Gnuplot-绘图第一弹-二维数据绘图/c1-boxerrorbars.png" alt="c1-boxerrorbars.png">
+
+</figure>
 
 <p>
 棒状图
@@ -381,10 +380,10 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 
 
-<div class="figure">
-<p><img src="Gnuplot-绘图第一弹-二维数据绘图/c1-impulse.png" alt="c1-impulse.png" />
-</p>
-</div>
+<figure>
+<img src="Gnuplot-绘图第一弹-二维数据绘图/c1-impulse.png" alt="c1-impulse.png">
+
+</figure>
 
 <p>
 绘制参数方程曲线
@@ -397,10 +396,10 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 
 
-<div class="figure">
-<p><img src="Gnuplot-绘图第一弹-二维数据绘图/c1-parametric-curves.png" alt="c1-parametric-curves.png" />
-</p>
-</div>
+<figure>
+<img src="Gnuplot-绘图第一弹-二维数据绘图/c1-parametric-curves.png" alt="c1-parametric-curves.png">
+
+</figure>
 
 <p>
 极坐标绘图
@@ -419,10 +418,10 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 
 
-<div class="figure">
-<p><img src="Gnuplot-绘图第一弹-二维数据绘图/c1-polar-axis.png" alt="c1-polar-axis.png" />
-</p>
-</div>
+<figure>
+<img src="Gnuplot-绘图第一弹-二维数据绘图/c1-polar-axis.png" alt="c1-polar-axis.png">
+
+</figure>
 </div>
 </div>
 </div>

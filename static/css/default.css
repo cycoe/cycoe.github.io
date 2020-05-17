@@ -57,7 +57,7 @@ body {
     font-family: Menlo, Monaco, monospace;
     font-size: 14px;
     line-height: 1.5;
-    color: #666;
+    color: #333;
     background-color: #fff;
 }
 p {
@@ -121,6 +121,7 @@ b:before, b:after, strong:before, strong:after {
 }
 i:before, i:after, em:before, em:after {
     content: "/";
+    color: #ccc;
 }
 hr {
     margin: 0;
@@ -408,6 +409,7 @@ table th.right, table td.right {
 #table-of-contents li {
     padding: 0;
     margin: 1px;
+    font-size: 18px;
     list-style: none;
 }
 

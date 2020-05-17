@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<!-- 2020-05-17 Sun 15:39 -->
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- 2020-05-17 Sun 23:19 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gnuplot 绘图第七弹-Gnuplot 式编程与数据处理</title>
-<meta name="generator" content="Org mode" />
-<meta name="author" content="朱浩南" />
+<meta name="generator" content="Org mode">
+<meta name="author" content="Cycoe">
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
 <script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
@@ -26,8 +24,9 @@
 </header>
 </div>
 <div id="content">
+<header>
 <h1 class="title">Gnuplot 绘图第七弹-Gnuplot 式编程与数据处理</h1>
-<div id="table-of-contents">
+</header><nav id="table-of-contents">
 <h2> <a href="javascript:window.scrollTo(0,0)"
         style="color: black !important; border-bottom: none !important;"
         class="tooltip"
@@ -36,21 +35,21 @@
      </a> </h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgf534d22">1. <code>for</code> 循环</a></li>
-<li><a href="#orgb47ba73">2. <code>a:b:c</code> 三目运算符</a></li>
-<li><a href="#org99b7eb8">3. 平滑曲线</a></li>
-<li><a href="#org937f905">4. 拟合曲线</a></li>
+<li><a href="#orgaa14d29">1. <code>for</code> 循环</a></li>
+<li><a href="#org1250c63">2. <code>a:b:c</code> 三目运算符</a></li>
+<li><a href="#org4e3c6cd">3. 平滑曲线</a></li>
+<li><a href="#org4981c1c">4. 拟合曲线</a></li>
 </ul>
 </div>
-</div>
+</nav>
 <p>
 目前为此，所有绘图相关的操作都已经介绍完毕，接下来来点高级的。
 </p>
 
 <!-- more -->
 
-<div id="outline-container-orgf534d22" class="outline-2">
-<h2 id="orgf534d22"><span class="section-number-2">1</span> <code>for</code> 循环</h2>
+<div id="outline-container-orgaa14d29" class="outline-2">
+<h2 id="orgaa14d29"><span class="section-number-2">1</span> <code>for</code> 循环</h2>
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> term pngcairo mono dashed enhanced
@@ -61,15 +60,15 @@
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第七弹-Gnuplot-式编程与数据处理/c7-for.png" alt="c7-for.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第七弹-Gnuplot-式编程与数据处理/c7-for.png" alt="c7-for.png">
+
+</figure>
 </div>
 </div>
 
-<div id="outline-container-orgb47ba73" class="outline-2">
-<h2 id="orgb47ba73"><span class="section-number-2">2</span> <code>a:b:c</code> 三目运算符</h2>
+<div id="outline-container-org1250c63" class="outline-2">
+<h2 id="org1250c63"><span class="section-number-2">2</span> <code>a:b:c</code> 三目运算符</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> samples 2000
@@ -80,15 +79,15 @@
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第七弹-Gnuplot-式编程与数据处理/c7-multi-section.png" alt="c7-multi-section.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第七弹-Gnuplot-式编程与数据处理/c7-multi-section.png" alt="c7-multi-section.png">
+
+</figure>
 </div>
 </div>
 
-<div id="outline-container-org99b7eb8" class="outline-2">
-<h2 id="org99b7eb8"><span class="section-number-2">3</span> 平滑曲线</h2>
+<div id="outline-container-org4e3c6cd" class="outline-2">
+<h2 id="org4e3c6cd"><span class="section-number-2">3</span> 平滑曲线</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> samples 500
@@ -105,15 +104,15 @@
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第七弹-Gnuplot-式编程与数据处理/c7-smooth.png" alt="c7-smooth.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第七弹-Gnuplot-式编程与数据处理/c7-smooth.png" alt="c7-smooth.png">
+
+</figure>
 </div>
 </div>
 
-<div id="outline-container-org937f905" class="outline-2">
-<h2 id="org937f905"><span class="section-number-2">4</span> 拟合曲线</h2>
+<div id="outline-container-org4981c1c" class="outline-2">
+<h2 id="org4981c1c"><span class="section-number-2">4</span> 拟合曲线</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> key right top box
@@ -128,10 +127,10 @@
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第七弹-Gnuplot-式编程与数据处理/c7-fit.png" alt="c7-fit.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第七弹-Gnuplot-式编程与数据处理/c7-fit.png" alt="c7-fit.png">
+
+</figure>
 </div>
 </div>
 </div>

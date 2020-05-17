@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<!-- 2020-05-17 Sun 15:39 -->
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- 2020-05-17 Sun 23:19 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gnuplot 绘图第四弹-调整刻度</title>
-<meta name="generator" content="Org mode" />
-<meta name="author" content="朱浩南" />
+<meta name="generator" content="Org mode">
+<meta name="author" content="Cycoe">
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
 <script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
@@ -26,8 +24,9 @@
 </header>
 </div>
 <div id="content">
+<header>
 <h1 class="title">Gnuplot 绘图第四弹-调整刻度</h1>
-<div id="table-of-contents">
+</header><nav id="table-of-contents">
 <h2> <a href="javascript:window.scrollTo(0,0)"
         style="color: black !important; border-bottom: none !important;"
         class="tooltip"
@@ -36,20 +35,20 @@
      </a> </h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org8182112">1. 启用副刻度</a></li>
-<li><a href="#org56af0ba">2. 第二坐标轴上的刻度</a></li>
-<li><a href="#org2983c75">3. 调整刻度的长度</a></li>
-<li><a href="#orgf85c651">4. 移除所有的刻度</a></li>
-<li><a href="#org27daefe">5. 精细调整刻度值</a></li>
-<li><a href="#org948fdf1">6. 刻度朝外</a></li>
-<li><a href="#org7b07a75">7. 手动设置刻度标签</a></li>
-<li><a href="#orgf0683a5">8. 时间和日期标签</a></li>
-<li><a href="#orgee6ea59">9. 在时间标签中启用地域设置</a></li>
-<li><a href="#org25a06af">10. 设置不同地域的数字格式</a></li>
-<li><a href="#orgded871e">11. 格式化刻度标签</a></li>
+<li><a href="#orgc1ebc91">1. 启用副刻度</a></li>
+<li><a href="#orgddf7975">2. 第二坐标轴上的刻度</a></li>
+<li><a href="#orgfd66ca2">3. 调整刻度的长度</a></li>
+<li><a href="#org6c60e03">4. 移除所有的刻度</a></li>
+<li><a href="#orgad6d4eb">5. 精细调整刻度值</a></li>
+<li><a href="#orgf62da17">6. 刻度朝外</a></li>
+<li><a href="#orgbb89c81">7. 手动设置刻度标签</a></li>
+<li><a href="#org0aea1d4">8. 时间和日期标签</a></li>
+<li><a href="#org081c803">9. 在时间标签中启用地域设置</a></li>
+<li><a href="#orgaa291c9">10. 设置不同地域的数字格式</a></li>
+<li><a href="#orgd87e0ff">11. 格式化刻度标签</a></li>
 </ul>
 </div>
-</div>
+</nav>
 <p>
 现在，我们已经能够使用 Gnuplot 绘制出自己想要的图形，接下来在第四弹中，我们将对
 刻度进行更细致的调整。
@@ -57,8 +56,8 @@
 
 <!-- more -->
 
-<div id="outline-container-org8182112" class="outline-2">
-<h2 id="org8182112"><span class="section-number-2">1</span> 启用副刻度</h2>
+<div id="outline-container-orgc1ebc91" class="outline-2">
+<h2 id="orgc1ebc91"><span class="section-number-2">1</span> 启用副刻度</h2>
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> sample 500
@@ -73,15 +72,15 @@
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第四弹-调整刻度/c4-minor-ticks.png" alt="c4-minor-ticks.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第四弹-调整刻度/c4-minor-ticks.png" alt="c4-minor-ticks.png">
+
+</figure>
 </div>
 </div>
 
-<div id="outline-container-org56af0ba" class="outline-2">
-<h2 id="org56af0ba"><span class="section-number-2">2</span> 第二坐标轴上的刻度</h2>
+<div id="outline-container-orgddf7975" class="outline-2">
+<h2 id="orgddf7975"><span class="section-number-2">2</span> 第二坐标轴上的刻度</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> ytics nomirror
@@ -97,15 +96,15 @@
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第四弹-调整刻度/c4-ticks-on-second-axis.png" alt="c4-ticks-on-second-axis.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第四弹-调整刻度/c4-ticks-on-second-axis.png" alt="c4-ticks-on-second-axis.png">
+
+</figure>
 </div>
 </div>
 
-<div id="outline-container-org2983c75" class="outline-2">
-<h2 id="org2983c75"><span class="section-number-2">3</span> 调整刻度的长度</h2>
+<div id="outline-container-orgfd66ca2" class="outline-2">
+<h2 id="orgfd66ca2"><span class="section-number-2">3</span> 调整刻度的长度</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#23558;&#20027;&#21051;&#24230;&#30340;&#38271;&#24230;&#35843;&#25972;&#33267;&#40664;&#35748;&#20540;&#30340; 3 &#20493;&#12290;&#22914;&#26524;&#27809;&#26377;&#29305;&#27530;&#25351;&#23450;&#65292;&#21103;&#21051;&#24230;&#30340;&#38271;&#24230;&#26159;&#20027;&#21051;&#24230;&#30340;&#19968;</span>
@@ -119,15 +118,15 @@
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第四弹-调整刻度/c4-ticks-size.png" alt="c4-ticks-size.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第四弹-调整刻度/c4-ticks-size.png" alt="c4-ticks-size.png">
+
+</figure>
 </div>
 </div>
 
-<div id="outline-container-orgf85c651" class="outline-2">
-<h2 id="orgf85c651"><span class="section-number-2">4</span> 移除所有的刻度</h2>
+<div id="outline-container-org6c60e03" class="outline-2">
+<h2 id="org6c60e03"><span class="section-number-2">4</span> 移除所有的刻度</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Gnuplot &#20013;&#26377;&#20004;&#31181;&#34920;&#36798;&#26041;&#24335;&#65292;=unset tics= &#21644; =set notics= &#31561;&#20215;</span>
@@ -138,15 +137,15 @@
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第四弹-调整刻度/c4-remove-ticks.png" alt="c4-remove-ticks.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第四弹-调整刻度/c4-remove-ticks.png" alt="c4-remove-ticks.png">
+
+</figure>
 </div>
 </div>
 
-<div id="outline-container-org27daefe" class="outline-2">
-<h2 id="org27daefe"><span class="section-number-2">5</span> 精细调整刻度值</h2>
+<div id="outline-container-orgad6d4eb" class="outline-2">
+<h2 id="orgad6d4eb"><span class="section-number-2">5</span> 精细调整刻度值</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> size ratio 1
@@ -174,15 +173,15 @@
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第四弹-调整刻度/c4-define-ticks-values.png" alt="c4-define-ticks-values.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第四弹-调整刻度/c4-define-ticks-values.png" alt="c4-define-ticks-values.png">
+
+</figure>
 </div>
 </div>
 
-<div id="outline-container-org948fdf1" class="outline-2">
-<h2 id="org948fdf1"><span class="section-number-2">6</span> 刻度朝外</h2>
+<div id="outline-container-orgf62da17" class="outline-2">
+<h2 id="orgf62da17"><span class="section-number-2">6</span> 刻度朝外</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> tics out
@@ -193,15 +192,15 @@
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第四弹-调整刻度/c4-ticks-stick-out.png" alt="c4-ticks-stick-out.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第四弹-调整刻度/c4-ticks-stick-out.png" alt="c4-ticks-stick-out.png">
+
+</figure>
 </div>
 </div>
 
-<div id="outline-container-org7b07a75" class="outline-2">
-<h2 id="org7b07a75"><span class="section-number-2">7</span> 手动设置刻度标签</h2>
+<div id="outline-container-orgbb89c81" class="outline-2">
+<h2 id="orgbb89c81"><span class="section-number-2">7</span> 手动设置刻度标签</h2>
 <div class="outline-text-2" id="text-7">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> xtics (<span style="color: #ff1f8b;">"{/Symbol p}"</span> pi, <span style="color: #ff1f8b;">"{/Symbol p}/2"</span> pi/2,\
@@ -214,23 +213,23 @@
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第四弹-调整刻度/c4-manual-ticks.png" alt="c4-manual-ticks.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第四弹-调整刻度/c4-manual-ticks.png" alt="c4-manual-ticks.png">
+
+</figure>
 </div>
 </div>
 
-<div id="outline-container-orgf0683a5" class="outline-2">
-<h2 id="orgf0683a5"><span class="section-number-2">8</span> 时间和日期标签</h2>
+<div id="outline-container-org0aea1d4" class="outline-2">
+<h2 id="org0aea1d4"><span class="section-number-2">8</span> 时间和日期标签</h2>
 <div class="outline-text-2" id="text-8">
-<table id="orgc316dcb" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org405f60b">
 
 
 <colgroup>
-<col  class="org-left" />
+<col  class="org-left">
 
-<col  class="org-right" />
+<col  class="org-right">
 </colgroup>
 <tbody>
 <tr>
@@ -281,15 +280,15 @@
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第四弹-调整刻度/c4-dates-and-times.png" alt="c4-dates-and-times.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第四弹-调整刻度/c4-dates-and-times.png" alt="c4-dates-and-times.png">
+
+</figure>
 </div>
 </div>
 
-<div id="outline-container-orgee6ea59" class="outline-2">
-<h2 id="orgee6ea59"><span class="section-number-2">9</span> 在时间标签中启用地域设置</h2>
+<div id="outline-container-org081c803" class="outline-2">
+<h2 id="org081c803"><span class="section-number-2">9</span> 在时间标签中启用地域设置</h2>
 <div class="outline-text-2" id="text-9">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#21578;&#35785; Gnuplot x &#36724;&#30340;&#25968;&#25454;&#26159;&#26102;&#38388;</span>
@@ -308,15 +307,15 @@
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第四弹-调整刻度/c4-ticks-region.png" alt="c4-ticks-region.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第四弹-调整刻度/c4-ticks-region.png" alt="c4-ticks-region.png">
+
+</figure>
 </div>
 </div>
 
-<div id="outline-container-org25a06af" class="outline-2">
-<h2 id="org25a06af"><span class="section-number-2">10</span> 设置不同地域的数字格式</h2>
+<div id="outline-container-orgaa291c9" class="outline-2">
+<h2 id="orgaa291c9"><span class="section-number-2">10</span> 设置不同地域的数字格式</h2>
 <div class="outline-text-2" id="text-10">
 <p>
 此处本来应该用 <code>set decimalsign locale "es_ES.utf8"</code> 来做演示才能看出区别，但是不
@@ -332,15 +331,15 @@
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第四弹-调整刻度/c4-decimals-region.png" alt="c4-decimals-region.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第四弹-调整刻度/c4-decimals-region.png" alt="c4-decimals-region.png">
+
+</figure>
 </div>
 </div>
 
-<div id="outline-container-orgded871e" class="outline-2">
-<h2 id="orgded871e"><span class="section-number-2">11</span> 格式化刻度标签</h2>
+<div id="outline-container-orgd87e0ff" class="outline-2">
+<h2 id="orgd87e0ff"><span class="section-number-2">11</span> 格式化刻度标签</h2>
 <div class="outline-text-2" id="text-11">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> ylabel <span style="color: #ff1f8b;">"Output power"</span>
@@ -354,10 +353,10 @@
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第四弹-调整刻度/c4-format-ticks-labels.png" alt="c4-format-ticks-labels.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第四弹-调整刻度/c4-format-ticks-labels.png" alt="c4-format-ticks-labels.png">
+
+</figure>
 
 <p>
 这里有个小技巧，我们可以通过 format 的方式隐藏所有的标签
@@ -373,10 +372,10 @@
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第四弹-调整刻度/c4-hide-tick-labels.png" alt="c4-hide-tick-labels.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第四弹-调整刻度/c4-hide-tick-labels.png" alt="c4-hide-tick-labels.png">
+
+</figure>
 </div>
 </div>
 </div>

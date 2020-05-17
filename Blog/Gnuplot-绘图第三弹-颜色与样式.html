@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<!-- 2020-05-17 Sun 15:39 -->
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- 2020-05-17 Sun 23:19 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gnuplot 绘图第三弹-颜色与样式</title>
-<meta name="generator" content="Org mode" />
-<meta name="author" content="朱浩南" />
+<meta name="generator" content="Org mode">
+<meta name="author" content="Cycoe">
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
 <script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
@@ -26,8 +24,9 @@
 </header>
 </div>
 <div id="content">
+<header>
 <h1 class="title">Gnuplot 绘图第三弹-颜色与样式</h1>
-<div id="table-of-contents">
+</header><nav id="table-of-contents">
 <h2> <a href="javascript:window.scrollTo(0,0)"
         style="color: black !important; border-bottom: none !important;"
         class="tooltip"
@@ -36,17 +35,17 @@
      </a> </h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org4f077c4">1. 设置曲线的颜色</a></li>
-<li><a href="#orgbfbf4fc">2. 自定义曲线的样式</a></li>
-<li><a href="#org6458da3">3. 透明的技术</a></li>
-<li><a href="#orgd4a4364">4. 带点的线</a></li>
-<li><a href="#org003e023">5. 定制点的样式</a></li>
-<li><a href="#org18eefed">6. 改变图像的大小</a></li>
-<li><a href="#org957858f">7. 改变 Axes 的大小</a></li>
-<li><a href="#org451cc56">8. 绘制对象</a></li>
+<li><a href="#org3cf1c83">1. 设置曲线的颜色</a></li>
+<li><a href="#orgf9f2576">2. 自定义曲线的样式</a></li>
+<li><a href="#orgd72127e">3. 透明的技术</a></li>
+<li><a href="#orgeb06d20">4. 带点的线</a></li>
+<li><a href="#orge3d3056">5. 定制点的样式</a></li>
+<li><a href="#org83e20f3">6. 改变图像的大小</a></li>
+<li><a href="#org37128f3">7. 改变 Axes 的大小</a></li>
+<li><a href="#org67a91c3">8. 绘制对象</a></li>
 </ul>
 </div>
-</div>
+</nav>
 <p>
 前两弹已经介绍了使用 Gnuplot 绘制图像的一些基本操作，在第三弹中我们将看到如何对
 图像进行美化。
@@ -54,8 +53,8 @@
 
 <!-- more -->
 
-<div id="outline-container-org4f077c4" class="outline-2">
-<h2 id="org4f077c4"><span class="section-number-2">1</span> 设置曲线的颜色</h2>
+<div id="outline-container-org3cf1c83" class="outline-2">
+<h2 id="org3cf1c83"><span class="section-number-2">1</span> 设置曲线的颜色</h2>
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622;&#20840;&#23616;&#30340;&#32447;&#23485;&#65292;&#21253;&#25324;&#26354;&#32447;&#12289;&#36793;&#26694;&#12289;&#21051;&#24230;</span>
@@ -71,15 +70,15 @@
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第三弹-颜色与样式/c3-color-of-curves.png" alt="c3-color-of-curves.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第三弹-颜色与样式/c3-color-of-curves.png" alt="c3-color-of-curves.png">
+
+</figure>
 </div>
 </div>
 
-<div id="outline-container-orgbfbf4fc" class="outline-2">
-<h2 id="orgbfbf4fc"><span class="section-number-2">2</span> 自定义曲线的样式</h2>
+<div id="outline-container-orgf9f2576" class="outline-2">
+<h2 id="orgf9f2576"><span class="section-number-2">2</span> 自定义曲线的样式</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">png &#21518;&#31471;&#19981;&#25903;&#25345;&#26174;&#31034; dash &#65292;&#27880;&#24847;&#27492;&#22788;&#20999;&#25442;&#33267; pngcairo</span>
@@ -97,15 +96,15 @@
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第三弹-颜色与样式/c3-style-of-curves.png" alt="c3-style-of-curves.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第三弹-颜色与样式/c3-style-of-curves.png" alt="c3-style-of-curves.png">
+
+</figure>
 </div>
 </div>
 
-<div id="outline-container-org6458da3" class="outline-2">
-<h2 id="org6458da3"><span class="section-number-2">3</span> 透明的技术</h2>
+<div id="outline-container-orgd72127e" class="outline-2">
+<h2 id="orgd72127e"><span class="section-number-2">3</span> 透明的技术</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> term pngcairo
@@ -119,15 +118,15 @@
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第三弹-颜色与样式/transparency.png" alt="transparency.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第三弹-颜色与样式/transparency.png" alt="transparency.png">
+
+</figure>
 </div>
 </div>
 
-<div id="outline-container-orgd4a4364" class="outline-2">
-<h2 id="orgd4a4364"><span class="section-number-2">4</span> 带点的线</h2>
+<div id="outline-container-orgeb06d20" class="outline-2">
+<h2 id="orgeb06d20"><span class="section-number-2">4</span> 带点的线</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #00af00;">plot</span> <span style="color: #ef2929;">sin</span>(x)/x <span style="color: #18b2b2;">with</span> <span style="color: #ef2929;">linespoints</span> <span style="color: #18b2b2;">pointsize</span> 2 <span style="color: #18b2b2;">pointtype</span> 6 <span style="color: #18b2b2;">lw</span> 2
@@ -135,15 +134,15 @@
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第三弹-颜色与样式/c3-points-with-curves.png" alt="c3-points-with-curves.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第三弹-颜色与样式/c3-points-with-curves.png" alt="c3-points-with-curves.png">
+
+</figure>
 </div>
 </div>
 
-<div id="outline-container-org003e023" class="outline-2">
-<h2 id="org003e023"><span class="section-number-2">5</span> 定制点的样式</h2>
+<div id="outline-container-orge3d3056" class="outline-2">
+<h2 id="orge3d3056"><span class="section-number-2">5</span> 定制点的样式</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> key top left
@@ -161,15 +160,15 @@
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第三弹-颜色与样式/c3-point-style.png" alt="c3-point-style.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第三弹-颜色与样式/c3-point-style.png" alt="c3-point-style.png">
+
+</figure>
 </div>
 </div>
 
-<div id="outline-container-org18eefed" class="outline-2">
-<h2 id="org18eefed"><span class="section-number-2">6</span> 改变图像的大小</h2>
+<div id="outline-container-org83e20f3" class="outline-2">
+<h2 id="org83e20f3"><span class="section-number-2">6</span> 改变图像的大小</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#27492;&#22788;&#30340; size &#23545;&#20110; eps &#31561;&#30690;&#37327;&#22270;&#26469;&#35828;&#32477;&#23545;&#23610;&#23544;&#24182;&#27809;&#26377;&#24847;&#20041;&#65292;&#21482;&#26159;&#34920;&#31034;&#38271;&#23485;&#27604;&#65292;&#35774;&#20026; 6,3</span>
@@ -181,15 +180,15 @@
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第三弹-颜色与样式/c3-plot-size.png" alt="c3-plot-size.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第三弹-颜色与样式/c3-plot-size.png" alt="c3-plot-size.png">
+
+</figure>
 </div>
 </div>
 
-<div id="outline-container-org957858f" class="outline-2">
-<h2 id="org957858f"><span class="section-number-2">7</span> 改变 Axes 的大小</h2>
+<div id="outline-container-org37128f3" class="outline-2">
+<h2 id="org37128f3"><span class="section-number-2">7</span> 改变 Axes 的大小</h2>
 <div class="outline-text-2" id="text-7">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> key off
@@ -199,15 +198,15 @@
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第三弹-颜色与样式/c3-axes-size.png" alt="c3-axes-size.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第三弹-颜色与样式/c3-axes-size.png" alt="c3-axes-size.png">
+
+</figure>
 </div>
 </div>
 
-<div id="outline-container-org451cc56" class="outline-2">
-<h2 id="org451cc56"><span class="section-number-2">8</span> 绘制对象</h2>
+<div id="outline-container-org67a91c3" class="outline-2">
+<h2 id="org67a91c3"><span class="section-number-2">8</span> 绘制对象</h2>
 <div class="outline-text-2" id="text-8">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">unset</span> key
@@ -228,10 +227,10 @@
 </div>
 
 
-<div class="figure">
-<p><img src="./Gnuplot-绘图第三弹-颜色与样式/c3-plot-objects.png" alt="c3-plot-objects.png" />
-</p>
-</div>
+<figure>
+<img src="./Gnuplot-绘图第三弹-颜色与样式/c3-plot-objects.png" alt="c3-plot-objects.png">
+
+</figure>
 </div>
 </div>
 </div>

@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<!-- 2020-05-17 Sun 15:39 -->
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- 2020-05-17 Sun 23:19 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Git 合并多次 Commit 及在 Magit 中的操作</title>
-<meta name="generator" content="Org mode" />
-<meta name="author" content="朱浩南" />
+<meta name="generator" content="Org mode">
+<meta name="author" content="Cycoe">
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
 <script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
@@ -26,8 +24,9 @@
 </header>
 </div>
 <div id="content">
+<header>
 <h1 class="title">Git 合并多次 Commit 及在 Magit 中的操作</h1>
-<div id="table-of-contents">
+</header><nav id="table-of-contents">
 <h2> <a href="javascript:window.scrollTo(0,0)"
         style="color: black !important; border-bottom: none !important;"
         class="tooltip"
@@ -36,12 +35,12 @@
      </a> </h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orga32c44e">1. 查看 Git 记录</a></li>
-<li><a href="#orgfff54fd">2. 合并记录</a></li>
-<li><a href="#org587a5cd">3. 使用 Magit 合并记录</a></li>
+<li><a href="#org2c61ba5">1. 查看 Git 记录</a></li>
+<li><a href="#orgbfd1e10">2. 合并记录</a></li>
+<li><a href="#org4e8b2dc">3. 使用 Magit 合并记录</a></li>
 </ul>
 </div>
-</div>
+</nav>
 <p>
 用 Git 的时候经常会有这么一个需求，就是提交了一次 Commit 后发现还有一个文件忘了
 提交进去，或者最近的几次提交都是相似的更新内容。那可以 Reset 到之前的状态再重新
@@ -51,8 +50,8 @@
 
 <!-- more -->
 
-<div id="outline-container-orga32c44e" class="outline-2">
-<h2 id="orga32c44e"><span class="section-number-2">1</span> 查看 Git 记录</h2>
+<div id="outline-container-org2c61ba5" class="outline-2">
+<h2 id="org2c61ba5"><span class="section-number-2">1</span> 查看 Git 记录</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 使用 <code>git log</code> 可以查看最近的提交记录，可以看到我最近提交了三个具有同样信息的
@@ -60,14 +59,14 @@ Commit。
 </p>
 
 
-<div class="figure">
-<p><img src="./Git-合并多次-Commit-及在-Magit-中的操作/Screenshot_20200420_212329_vcag6x.png" alt="Screenshot_20200420_212329_vcag6x.png" />
-</p>
+<figure>
+<img src="./Git-合并多次-Commit-及在-Magit-中的操作/Screenshot_20200420_212329_vcag6x.png" alt="Screenshot_20200420_212329_vcag6x.png">
+
+</figure>
 </div>
 </div>
-</div>
-<div id="outline-container-orgfff54fd" class="outline-2">
-<h2 id="orgfff54fd"><span class="section-number-2">2</span> 合并记录</h2>
+<div id="outline-container-orgbfd1e10" class="outline-2">
+<h2 id="orgbfd1e10"><span class="section-number-2">2</span> 合并记录</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 执行 <code>git rebase -i HEAD~3</code> 对最近的三个 Commit 进行合并，其实此处的真实含义是以当
@@ -76,10 +75,10 @@ Commit。
 </p>
 
 
-<div class="figure">
-<p><img src="./Git-合并多次-Commit-及在-Magit-中的操作/Screenshot_20200420_212420_e22p6F.png" alt="Screenshot_20200420_212420_e22p6F.png" />
-</p>
-</div>
+<figure>
+<img src="./Git-合并多次-Commit-及在-Magit-中的操作/Screenshot_20200420_212420_e22p6F.png" alt="Screenshot_20200420_212420_e22p6F.png">
+
+</figure>
 
 <p>
 你可以看到每一个 Commit 最前面都有一个描述词，该描述词决定了如何处理该 Commit 。
@@ -87,10 +86,10 @@ Commit。
 </p>
 
 
-<div class="figure">
-<p><img src="./Git-合并多次-Commit-及在-Magit-中的操作/Screenshot_20200420_212920_pS9Kzy.png" alt="Screenshot_20200420_212920_pS9Kzy.png" />
-</p>
-</div>
+<figure>
+<img src="./Git-合并多次-Commit-及在-Magit-中的操作/Screenshot_20200420_212920_pS9Kzy.png" alt="Screenshot_20200420_212920_pS9Kzy.png">
+
+</figure>
 
 <p>
 然后保存退出，Git 会自动合并多个历史。如果有冲突，记得解决冲突后，使用 <code>git
@@ -98,15 +97,15 @@ rebase --continue</code> 重新回到当前的过程。
 </p>
 
 
-<div class="figure">
-<p><img src="./Git-合并多次-Commit-及在-Magit-中的操作/Screenshot_20200420_213131_bxEGbB.png" alt="Screenshot_20200420_213131_bxEGbB.png" />
-</p>
-</div>
+<figure>
+<img src="./Git-合并多次-Commit-及在-Magit-中的操作/Screenshot_20200420_213131_bxEGbB.png" alt="Screenshot_20200420_213131_bxEGbB.png">
+
+</figure>
 </div>
 </div>
 
-<div id="outline-container-org587a5cd" class="outline-2">
-<h2 id="org587a5cd"><span class="section-number-2">3</span> 使用 Magit 合并记录</h2>
+<div id="outline-container-org4e8b2dc" class="outline-2">
+<h2 id="org4e8b2dc"><span class="section-number-2">3</span> 使用 Magit 合并记录</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 使用 Magit 进行记录合并与 Git 命令行是相似的。将光标放在要作为基的 Commit 上，并
@@ -114,20 +113,20 @@ rebase --continue</code> 重新回到当前的过程。
 </p>
 
 
-<div class="figure">
-<p><img src="./Git-合并多次-Commit-及在-Magit-中的操作/Screenshot_20200420_213548_6oXCeJ.png" alt="Screenshot_20200420_213548_6oXCeJ.png" />
-</p>
-</div>
+<figure>
+<img src="./Git-合并多次-Commit-及在-Magit-中的操作/Screenshot_20200420_213548_6oXCeJ.png" alt="Screenshot_20200420_213548_6oXCeJ.png">
+
+</figure>
 
 <p>
 不同之处在于 Magit 中可以很方便地利用快捷键完成工作。
 </p>
 
 
-<div class="figure">
-<p><img src="./Git-合并多次-Commit-及在-Magit-中的操作/Screenshot_20200420_213644_fC9olF.png" alt="Screenshot_20200420_213644_fC9olF.png" />
-</p>
-</div>
+<figure>
+<img src="./Git-合并多次-Commit-及在-Magit-中的操作/Screenshot_20200420_213644_fC9olF.png" alt="Screenshot_20200420_213644_fC9olF.png">
+
+</figure>
 
 <p>
 可以看到注释中已经贴心地列出了快捷键，我们只需要在第二个和第三个 <code>pick</code> 上按下 <code>f</code>
