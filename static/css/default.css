@@ -186,6 +186,7 @@ blockquote {
 blockquote p:last-child {
     margin-bottom: 0;
 }
+
 img {
     border: 2px solid #e5e5e5;
     /* Set image in a block and centering */
@@ -194,6 +195,10 @@ img {
     margin-right: auto;
     max-width: 90%;
     /* border-radius: 5px; */
+}
+figcaption {
+  margin-top: 5px;
+  text-align: center;
 }
 .img-wrapper {
   position: fixed;

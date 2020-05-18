@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2020-05-18 Mon 20:38 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>教務網現驚天大 bug？！談談弱密碼如何暴露你的信息</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Cycoe">
+<link rel="stylesheet" type="text/css" href="/static/css/default.css" />
+<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+<script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<header>
+  <nav>Cycoe@Home</nav>
+    <ul class="menu">
+        <li><a href="/">Index</a></li>
+        <li><a href="/Photo/index.html">Photo</a></li>
+        <li><a href="/about.html">About</a></li>
+    </ul>
+</header>
+</div>
+<div id="content">
+<header>
+<h1 class="title">教務網現驚天大 bug？！談談弱密碼如何暴露你的信息</h1>
+</header><nav id="table-of-contents">
+<h2> <a href="javascript:window.scrollTo(0,0)"
+        style="color: black !important; border-bottom: none !important;"
+        class="tooltip"
+        title="Go to the top of the page">
+       Ξ
+     </a> </h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#漏洞發現">1. 漏洞發現</a></li>
+<li><a href="#漏洞驗證">2. 漏洞驗證</a></li>
+<li><a href="#漏洞利用">3. 漏洞利用</a>
+<ul>
+<li><a href="#暴破">3.1. 暴破</a></li>
+</ul>
+</li>
+<li><a href="#總結">4. 總結</a></li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-org5457475" class="outline-2">
+<h2 id="漏洞發現"><span class="section-number-2">1</span> 漏洞發現</h2>
+<div class="outline-text-2" id="text-漏洞發現">
+<p>
+最近在爲之前寫的爬蟲做批註的時候發現了一段有趣的代碼，代碼如下
+</p>
+
+<div class="HTML">
+<p>
+&lt;!&#x2013;more&#x2013;&gt;
+</p>
+
+</div>
+
+<div class="org-src-container">
+<pre class="src src-python">MisUtils.initAttempt<span style="color: #cc0000; font-weight: bold;">()</span>
+<span style="color: #00af00;">while</span> MisUtils.descAttempt<span style="color: #cc0000; font-weight: bold;">()</span>:
+    <span style="color: #00af00;">self</span>.response = <span style="color: #00af00;">self</span>.session.send<span style="color: #cc0000; font-weight: bold;">(</span>prepareBody<span style="color: #cc0000; font-weight: bold;">)</span>
+    <span style="color: #00af00;">if</span> <span style="color: #00af00;">self</span>.response.status_code == 200:
+        <span style="color: #00af00;">break</span>
+<span style="color: #00af00;">if</span> <span style="color: #00af00;">not</span> MisUtils.descAttempt<span style="color: #cc0000; font-weight: bold;">()</span>:
+    Logger.log<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">'Up to max attempts!'</span>, <span style="color: #1f5bff; font-weight: bold;">[</span><span style="color: #ff1f8b;">'Maybe remote server unreachable'</span><span style="color: #1f5bff; font-weight: bold;">]</span>, level=Logger.error<span style="color: #cc0000; font-weight: bold;">)</span>
+    <span style="color: #00af00;">return</span> <span style="color: #1f5bff;">False</span>
+
+<span style="color: #00af00;">if</span> re.search<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">'&#29992;&#25142;&#21517;&#19981;&#23384;&#22312;'</span>, <span style="color: #00af00;">self</span>.response.text<span style="color: #cc0000; font-weight: bold;">)</span>:
+    <span style="color: #00af00;">print</span><span style="color: #cc0000; font-weight: bold;">(</span>Logger.log<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">'No such a user!'</span>, <span style="color: #00af00; font-weight: bold;">[</span><span style="color: #ff1f8b;">'Cleaning password file'</span><span style="color: #00af00; font-weight: bold;">]</span>, level=Logger.error<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+    <span style="color: #ff8700;">reInput</span> = <span style="color: #1f5bff;">True</span>
+
+<span style="color: #00af00;">elif</span> re.search<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">'&#23494;&#30908;&#37679;&#35492;'</span>, <span style="color: #00af00;">self</span>.response.text<span style="color: #cc0000; font-weight: bold;">)</span>:
+    <span style="color: #00af00;">print</span><span style="color: #cc0000; font-weight: bold;">(</span>Logger.log<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">'Wrong password!'</span>, <span style="color: #00af00; font-weight: bold;">[</span><span style="color: #ff1f8b;">'Cleaning password file'</span><span style="color: #00af00; font-weight: bold;">]</span>, level=Logger.error<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+    <span style="color: #ff8700;">reInput</span> = <span style="color: #1f5bff;">True</span>
+
+<span style="color: #00af00;">elif</span> re.search<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">'&#35531;&#36664;&#20837;&#39511;&#35657;&#30908;'</span>, <span style="color: #00af00;">self</span>.response.text<span style="color: #cc0000; font-weight: bold;">)</span>:
+    <span style="color: #00af00;">print</span><span style="color: #cc0000; font-weight: bold;">(</span>Logger.log<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">'Please input vertify code!'</span>, <span style="color: #00af00; font-weight: bold;">[</span><span style="color: #ff1f8b;">'Retrying...'</span><span style="color: #00af00; font-weight: bold;">]</span>, level=Logger.error<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+
+<span style="color: #00af00;">elif</span> re.search<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">'&#39511;&#35657;&#30908;&#37679;&#35492;'</span>, <span style="color: #00af00;">self</span>.response.text<span style="color: #cc0000; font-weight: bold;">)</span>:
+    <span style="color: #00af00;">print</span><span style="color: #cc0000; font-weight: bold;">(</span>Logger.log<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">'Wrong vertify code!'</span>, <span style="color: #00af00; font-weight: bold;">[</span><span style="color: #ff1f8b;">'Retrying...'</span><span style="color: #00af00; font-weight: bold;">]</span>, level=Logger.error<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+
+<span style="color: #00af00;">else</span>:
+    <span style="color: #00af00;">print</span><span style="color: #cc0000; font-weight: bold;">(</span>Logger.log<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">'Login successfully!'</span>, <span style="color: #00af00; font-weight: bold;">[</span><span style="color: #ff1f8b;">'UserName: '</span> + MisUtils.confDict<span style="color: #ff4ea3; font-weight: bold;">[</span><span style="color: #ff1f8b;">'userName'</span><span style="color: #ff4ea3; font-weight: bold;">]</span><span style="color: #00af00; font-weight: bold;">]</span>, level=Logger.error<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+    MisUtils.dumpConfFile<span style="color: #cc0000; font-weight: bold;">()</span>
+    <span style="color: #00af00;">break</span>
+</pre>
+</div>
+
+<p>
+當時寫的時候沒注意，現在回過頭來看看，驚奇地發現教務網對於用戶名和密碼的驗證順序是如下的優先級：
+</p>
+<ol class="org-ol">
+<li>首先驗證用戶名是否存在</li>
+<li>再驗證密碼是否正確</li>
+<li>然後驗證碼是否爲空</li>
+<li>最後纔是驗證碼是否正確</li>
+</ol>
+
+<p>
+這。。。我只想說，誰寫的驗證邏輯。。。我要這驗證碼有何用？！！！
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9e1f3c8" class="outline-2">
+<h2 id="漏洞驗證"><span class="section-number-2">2</span> 漏洞驗證</h2>
+<div class="outline-text-2" id="text-漏洞驗證">
+<p>
+接下來去教務網上驗證一下整個驗證邏輯是否如所想的那樣
+</p>
+
+<ol class="org-ol">
+<li>首先在用戶名輸入框中隨意輸入一串數字，並保持密碼和驗證碼都爲空，嘗試登錄發現
+彈出"用戶名不存在"的 JS 腳本</li>
+</ol>
+
+<figure>
+<img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login1.png" alt="login1.png">
+
+</figure>
+<ol class="org-ol">
+<li>再輸入我正確的學號，仍保持密碼和驗證碼都爲空，嘗試登錄彈出"密碼錯誤"的 JS 腳本</li>
+</ol>
+
+<figure>
+<img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login2.png" alt="login2.png">
+
+</figure>
+<ol class="org-ol">
+<li>輸入正確的學號和密碼，並保持驗證碼爲空，嘗試登錄彈出"請輸入驗證碼"的 JS 腳本</li>
+</ol>
+
+<figure>
+<img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login3.png" alt="login3.png">
+
+</figure>
+<ol class="org-ol">
+<li>輸入正確的學號和密碼，但是輸入錯誤的驗證碼，嘗試登錄彈出"驗證碼錯誤"的 JS 腳本</li>
+</ol>
+
+<figure>
+<img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login4.png" alt="login4.png">
+
+</figure>
+
+<p>
+通過以上流程，可以總結得以下兩條有價值的信息：
+</p>
+<ol class="org-ol">
+<li>當你輸入的用戶名不存在時，不管密碼和驗證碼輸的啥，總是會提示"用戶名不存在"；
+當你輸入的用戶名存在，並且密碼爲空時，會提示"密碼錯誤"。</li>
+<li>當你輸入的用戶名存在，但是密碼錯誤時，不管驗證碼輸的啥，總會提示"密碼錯誤"；
+當輸入的密碼正確並且驗證碼爲空時，會提示"請輸入驗證碼"。</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org444dee0" class="outline-2">
+<h2 id="漏洞利用"><span class="section-number-2">3</span> 漏洞利用</h2>
+<div class="outline-text-2" id="text-漏洞利用">
+<p>
+通過上面的兩條信息可以至少做到兩件事情 ### 枚舉用戶名目前所有在讀研究生的入學時
+間大部分爲 2013-2017年，學號的前四位爲入學年份，中間三位與所在的專業有關，最後三
+位爲流水號。對所有形如2013XXXXXX 的學號進行嘗試登錄，根據信息 1，能夠枚舉出所有
+13年入學的學生學號。
+</p>
+</div>
+
+<div id="outline-container-orgf60b25a" class="outline-3">
+<h3 id="暴破"><span class="section-number-3">3.1</span> 暴破</h3>
+<div class="outline-text-3" id="text-暴破">
+<p>
+利用上一步得到的用戶名列表，再配合字典就可以進行在線的密碼暴破，這種破解方法一般
+來說是非常低效的，嚴重依賴於網絡狀況和服務器的機能。嘗試發現在單線程的情況下，每
+秒只能對服務器進行1k 次左右的訪問。也就是說如果使用 16 位的數字加字母作爲密碼，
+最多需要2.5 百萬億年的時間才能成功破解。看起來是非常安全吧。然而實際情況又是什麼
+樣呢？教務網的初始密碼爲身份證號中的生日，一般來說我們在第一次登錄時都會改密碼，
+但還總會有人抱着僥倖的心理用初始密碼，這就爲暴破帶來了捷徑。以生日作爲密碼具有非
+常明顯的結構，如 2017 年入學學生的生日大多在1994-1996 之間，利用下面簡單的字典生
+成器可得到 1994-1996年所有的日期列表：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #ff8700;">big_month_</span> = <span style="color: #cc0000; font-weight: bold;">[</span>1, 3, 5, 7, 8, 10, 12<span style="color: #cc0000; font-weight: bold;">]</span>
+<span style="color: #ff8700;">small_month_</span> = <span style="color: #cc0000; font-weight: bold;">[</span>4, 6, 9, 11<span style="color: #cc0000; font-weight: bold;">]</span>
+
+
+<span style="color: #00af00;">def</span> <span style="color: #ef2929;">gen_</span><span style="color: #cc0000; font-weight: bold;">(</span>begin, end<span style="color: #cc0000; font-weight: bold;">)</span>:
+    <span style="color: #ff8700;">password_</span> = <span style="color: #cc0000; font-weight: bold;">[]</span>
+    <span style="color: #00af00;">for</span> year <span style="color: #00af00;">in</span> <span style="color: #b218b2;">range</span><span style="color: #cc0000; font-weight: bold;">(</span>begin, end + 1<span style="color: #cc0000; font-weight: bold;">)</span>:
+        <span style="color: #00af00;">for</span> month <span style="color: #00af00;">in</span> <span style="color: #b218b2;">range</span><span style="color: #cc0000; font-weight: bold;">(</span>1, 13<span style="color: #cc0000; font-weight: bold;">)</span>:
+            <span style="color: #00af00;">if</span> month <span style="color: #00af00;">in</span> big_month_:
+                <span style="color: #ff8700;">month_len</span> = 31
+            <span style="color: #00af00;">elif</span> month <span style="color: #00af00;">in</span> small_month_:
+                <span style="color: #ff8700;">month_len</span> = 30
+            <span style="color: #00af00;">elif</span> month == 2:
+                <span style="color: #00af00;">if</span> year % 4 != 0 <span style="color: #00af00;">or</span> <span style="color: #cc0000; font-weight: bold;">(</span>year % 100 == 0 <span style="color: #00af00;">and</span> year % 400 != 0<span style="color: #cc0000; font-weight: bold;">)</span>:
+                    <span style="color: #ff8700;">month_len</span> = 28
+                <span style="color: #00af00;">else</span>:
+                    <span style="color: #ff8700;">month_len</span> = 29
+            <span style="color: #00af00;">else</span>:
+                <span style="color: #ff8700;">month_len</span> = 31
+
+            <span style="color: #00af00;">for</span> day <span style="color: #00af00;">in</span> <span style="color: #b218b2;">range</span><span style="color: #cc0000; font-weight: bold;">(</span>1, month_len + 1<span style="color: #cc0000; font-weight: bold;">)</span>:
+                password_.append<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #b218b2;">str</span><span style="color: #1f5bff; font-weight: bold;">(</span>year<span style="color: #1f5bff; font-weight: bold;">)</span> + <span style="color: #b218b2;">str</span><span style="color: #1f5bff; font-weight: bold;">(</span>month<span style="color: #1f5bff; font-weight: bold;">)</span>.zfill<span style="color: #1f5bff; font-weight: bold;">(</span>2<span style="color: #1f5bff; font-weight: bold;">)</span> + <span style="color: #b218b2;">str</span><span style="color: #1f5bff; font-weight: bold;">(</span>day<span style="color: #1f5bff; font-weight: bold;">)</span>.zfill<span style="color: #1f5bff; font-weight: bold;">(</span>2<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+
+    <span style="color: #00af00;">with</span> <span style="color: #b218b2;">open</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">'password.dict'</span>, <span style="color: #ff1f8b;">'w'</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #00af00;">as</span> fr:
+        <span style="color: #00af00;">for</span> password <span style="color: #00af00;">in</span> password_:
+            fr.write<span style="color: #cc0000; font-weight: bold;">(</span>password<span style="color: #cc0000; font-weight: bold;">)</span>
+            fr.write<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">'\n'</span><span style="color: #cc0000; font-weight: bold;">)</span>
+
+
+<span style="color: #00af00;">def</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span>:
+    gen_<span style="color: #cc0000; font-weight: bold;">(</span>1994, 1996<span style="color: #cc0000; font-weight: bold;">)</span>
+</pre>
+</div>
+
+<p>
+利用得到的用戶名列表和密碼字典就可以對所有未修改的用戶密碼進行暴破。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org48f2a27" class="outline-2">
+<h2 id="總結"><span class="section-number-2">4</span> 總結</h2>
+<div class="outline-text-2" id="text-總結">
+<p>
+最後結果怎麼樣？使用 100 個線程，並設置單個線程的訪問頻率爲 1次/秒進行暴破，10
+分鐘破解出了接近 40個用戶密碼！並且平均每四個人裏就有一個人沒有修改密碼！可能很
+多人會覺得教務網密碼不涉及錢財也就不那麼在意。但其實教務網上有詳細的個人資料，包
+括你的姓名、照片和家庭住址。另外還有你的課表，你某時某刻會在哪個教室出現都會被人
+知道啊！所以，弱密碼的危害顯而易見，很多的信息泄漏也都是由弱密碼引起的。給自己換
+個複雜點的密碼吧，畢竟密碼這種東西一寸長一寸強。現在也快到年底了，騙子也要賺錢備
+年貨了，希望大家能夠保護好自己的信息，不要給騙子可乘之機。最後討伐一下這個軟件提
+供商，一個商業化的系統裏面竟然有如此明顯的邏輯漏洞，只希望快點被修復吧。
+<img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/source_code.png" alt="source_code.png">
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="author-info">
+      <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
+      <div id="date">Date: May, 18, 2020</div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
+      </div><div id="copyright">
+    <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
+</div>
+</div>
+</body>
+</html>

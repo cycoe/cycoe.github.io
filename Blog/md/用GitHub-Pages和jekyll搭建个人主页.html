@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2020-05-18 Mon 20:39 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>&lrm;</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Cycoe">
+<link rel="stylesheet" type="text/css" href="/static/css/default.css" />
+<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+<script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<header>
+  <nav>Cycoe@Home</nav>
+    <ul class="menu">
+        <li><a href="/">Index</a></li>
+        <li><a href="/Photo/index.html">Photo</a></li>
+        <li><a href="/about.html">About</a></li>
+    </ul>
+</header>
+</div>
+<div id="content">
+<nav id="table-of-contents">
+<h2> <a href="javascript:window.scrollTo(0,0)"
+        style="color: black !important; border-bottom: none !important;"
+        class="tooltip"
+        title="Go to the top of the page">
+       Ξ
+     </a> </h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#搭建步驟">1. 搭建步驟</a></li>
+<li><a href="#注意事項">2. 注意事項</a></li>
+<li><a href="#進階配置">3. 進階配置</a></li>
+</ul>
+</div>
+</nav>
+<p>
+閒來無事，打算搭建個人主頁。查閱了各種資料，發現目前最省錢省力的方法就是在
+GitHub Pages 上利用 jekyll 靜態網頁生成器搭建。 對於 Web
+開發小白來說，自己寫網頁代碼不太現實。 好在GitHub
+上有許多其他大神製作好的 jekyll 模板，直接 fork
+過來修改一下就可以使用，其餘的精力都可以用在文章內容本身上。
+</p>
+
+<div class="HTML">
+<p>
+&lt;!&#x2013;more&#x2013;&gt;
+</p>
+
+</div>
+
+<div id="outline-container-org2fd2bfb" class="outline-2">
+<h2 id="搭建步驟"><span class="section-number-2">1</span> 搭建步驟</h2>
+<div class="outline-text-2" id="text-搭建步驟">
+<ol class="org-ol">
+<li>在 GitHub 上找到自己喜歡的 jekyll 模板， fork
+到自己的倉庫下，然後點擊 Setting 修改倉庫名稱爲 <code>username.github.io</code></li>
+
+<li>將 fork 後的項目 clone 至本地</li>
+
+<li>打開 <code>_config.yml</code> 文件修改其中的信息，包括網站名稱、用戶信息等</li>
+
+<li>將 html 或 MarkDown 格式的文章和博客添加到 <code>_posts</code> 文件夾</li>
+
+<li><p>
+使用以下命令即可提交更新並推送更新至遠端倉庫
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">git add .
+git commit -am <span style="color: #ff1f8b;">"post update"</span>
+git push
+</pre>
+</div></li>
+
+<li>完成以上步驟後，你就應該可以通過 <code>username.github.io</code> 訪問你的主頁了
+:clap: ！</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org3ffdc05" class="outline-2">
+<h2 id="注意事項"><span class="section-number-2">2</span> 注意事項</h2>
+<div class="outline-text-2" id="text-注意事項">
+<pre class="example">
+comments_provider: duoshuo
+duoshuo_username: cycoe
+disqus_username: cycoe
+lazy_load_duoshuo: true
+</pre>
+
+<p>
+<b>此處的usrname一定要填自己申請的賬號名</b>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0ee8947" class="outline-2">
+<h2 id="進階配置"><span class="section-number-2">3</span> 進階配置</h2>
+<div class="outline-text-2" id="text-進階配置">
+<ol class="org-ol">
+<li>申請域名</li>
+</ol>
+
+<p>
+本博客使用的主題爲 <i>mzlogin</i> 的
+<a href="https://github.com/mzlogin/mzlogin.github.io">碼志</a> 主題
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="author-info">
+      <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
+      <div id="date">Date: May, 18, 2020</div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
+      </div><div id="copyright">
+    <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
+</div>
+</div>
+</body>
+</html>

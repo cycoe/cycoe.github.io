@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2020-05-18 Mon 20:38 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>&lrm;</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Cycoe">
+<link rel="stylesheet" type="text/css" href="/static/css/default.css" />
+<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+<script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<header>
+  <nav>Cycoe@Home</nav>
+    <ul class="menu">
+        <li><a href="/">Index</a></li>
+        <li><a href="/Photo/index.html">Photo</a></li>
+        <li><a href="/about.html">About</a></li>
+    </ul>
+</header>
+</div>
+<div id="content">
+<nav id="table-of-contents">
+<h2> <a href="javascript:window.scrollTo(0,0)"
+        style="color: black !important; border-bottom: none !important;"
+        class="tooltip"
+        title="Go to the top of the page">
+       Ξ
+     </a> </h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#matplotlib-编程风格">1. matplotlib 编程风格</a></li>
+<li><a href="#first-blood-第一张图">2. First Blood 第一张图</a>
+<ul>
+<li><a href="#添加标题title和轴标签axis-label">2.1. 添加标题（title）和轴标签（axis label）</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+
+<figure>
+<object type="image/svg+xml" data="https://matplotlib.org/_static/logo2_compressed.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+
+<figcaption><span class="figure-number">Figure 1: </span>matplotlib</figcaption>
+</figure>
+
+<blockquote>
+<p>
+Matplotlib is a Python 2D plotting library which produces publication
+quality figures in a variety of hardcopy formats and interactive
+environments across platforms. Matplotlib can be used in Python
+scripts, the Python and IPython shells, the Jupyter notebook, web
+application servers, and four graphical user interface toolkits.
+</p>
+</blockquote>
+
+<p>
+<a href="https://matplotlib.org">matplotlib</a> 是 Python
+中常用的一个绘图库，与百度开源的
+<a href="https://www.echartsjs.com/en/index.html">echarts</a> 和基于 matplotlib
+的 <a href="http://seaborn.pydata.org/">seaborn</a> 不同，matplotlib
+是更底层的绘图库。这意味着 matplotlib
+能够对绘图风格进行更精细的控制，也意味着它默认的风格比其他库更丑。。。
+</p>
+
+<div class="HTML">
+<p>
+&lt;!&#x2013;more&#x2013;&gt;
+</p>
+
+</div>
+
+<p>
+其实我做这个系列的原因是，在某一天我提交了我的论文给我们老板，结果我里面的图被嫌弃做的太丑。。。好吧，果然
+matplotlib
+默认的样式还是入不了老板的法眼。那么就需要对样式进行修改，不求好看，只求向
+Origin 做的图靠拢。也就是说这个系列不会系统地对 matplotlib
+库进行介绍，而是针对使用 matplotlib
+进行科学绘图过程中可能遇到的问题进行总结。
+</p>
+
+<div id="outline-container-org9ce8f72" class="outline-2">
+<h2 id="matplotlib-编程风格"><span class="section-number-2">1</span> matplotlib 编程风格</h2>
+<div class="outline-text-2" id="text-matplotlib-编程风格">
+<p>
+matplotlib 有两种明确的编程风格，一种是类似于 matlab 的命令式风格，如
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #00af00;">from</span> matplotlib <span style="color: #00af00;">import</span> pyplot <span style="color: #00af00;">as</span> plt
+<span style="color: #00af00;">import</span> numpy <span style="color: #00af00;">as</span> np
+
+<span style="color: #ff8700;">x</span> = np.linspace<span style="color: #cc0000; font-weight: bold;">(</span>0, 10, 100<span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #ff8700;">y</span> = np.sin<span style="color: #cc0000; font-weight: bold;">(</span>x<span style="color: #cc0000; font-weight: bold;">)</span>
+plt.plot<span style="color: #cc0000; font-weight: bold;">(</span>x, y<span style="color: #cc0000; font-weight: bold;">)</span>
+plt.xlim<span style="color: #cc0000; font-weight: bold;">(</span>0, 10<span style="color: #cc0000; font-weight: bold;">)</span>
+plt.legend<span style="color: #cc0000; font-weight: bold;">()</span>
+plt.show<span style="color: #cc0000; font-weight: bold;">()</span>
+</pre>
+</div>
+
+<p>
+一种是与 Python 原生风格更接近的面向对象编程风格
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #00af00;">from</span> matplotlib <span style="color: #00af00;">import</span> pyplot <span style="color: #00af00;">as</span> plt
+<span style="color: #00af00;">import</span> numpy <span style="color: #00af00;">as</span> np
+
+<span style="color: #ff8700;">x</span> = np.linspace<span style="color: #cc0000; font-weight: bold;">(</span>0, 10, 100<span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #ff8700;">y</span> = np.sin<span style="color: #cc0000; font-weight: bold;">(</span>x<span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #ff8700;">fig</span> = plt.figure<span style="color: #cc0000; font-weight: bold;">()</span>
+<span style="color: #ff8700;">ax</span> = fig.add_subplot<span style="color: #cc0000; font-weight: bold;">(</span>111<span style="color: #cc0000; font-weight: bold;">)</span>
+ax.plot<span style="color: #cc0000; font-weight: bold;">(</span>x, y<span style="color: #cc0000; font-weight: bold;">)</span>
+ax.set_xlim<span style="color: #cc0000; font-weight: bold;">(</span>0, 10<span style="color: #cc0000; font-weight: bold;">)</span>
+ax.legend<span style="color: #cc0000; font-weight: bold;">()</span>
+plt.show<span style="color: #cc0000; font-weight: bold;">()</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2d8f769" class="outline-2">
+<h2 id="first-blood-第一张图"><span class="section-number-2">2</span> First Blood 第一张图</h2>
+<div class="outline-text-2" id="text-first-blood-第一张图">
+<p>
+使用 matplotlib 绘图非常的简单，只需要三行代码。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#20174; matplotlib &#20013;&#24341;&#20837; pyplot</span>
+<span style="color: #00af00;">from</span> matplotlib <span style="color: #00af00;">import</span> pyplot <span style="color: #00af00;">as</span> plt
+
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#32472;&#21046;&#25240;&#32447;&#22270;</span>
+plt.plot<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #1f5bff; font-weight: bold;">[</span>1, 2<span style="color: #1f5bff; font-weight: bold;">]</span>, <span style="color: #1f5bff; font-weight: bold;">[</span>1, 2<span style="color: #1f5bff; font-weight: bold;">]</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#26174;&#31034;&#22270;&#20687;</span>
+plt.show<span style="color: #cc0000; font-weight: bold;">()</span>
+</pre>
+</div>
+
+<p>
+{% asset<sub>img</sub> first<sub>blood.png</sub> 第一张图 %}
+</p>
+
+<p>
+如果采用面向对象的写法则为
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#20174; matplotlib &#20013;&#24341;&#20837; pyplot</span>
+<span style="color: #00af00;">from</span> matplotlib <span style="color: #00af00;">import</span> pyplot <span style="color: #00af00;">as</span> plt
+
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#29983;&#25104; figure &#23545;&#35937;&#65292;figure &#23601;&#26159;&#19968;&#24352;&#22270;</span>
+<span style="color: #ff8700;">fig</span> = plt.figure<span style="color: #cc0000; font-weight: bold;">()</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#28155;&#21152;&#23376;&#22270; ax</span>
+<span style="color: #ff8700;">ax</span> = fig.add_subplot<span style="color: #cc0000; font-weight: bold;">(</span>111<span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#32472;&#21046;&#25240;&#32447;&#22270;</span>
+ax.plot<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #1f5bff; font-weight: bold;">[</span>1, 2<span style="color: #1f5bff; font-weight: bold;">]</span>, <span style="color: #1f5bff; font-weight: bold;">[</span>1, 2<span style="color: #1f5bff; font-weight: bold;">]</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#26174;&#31034;&#22270;&#20687;</span>
+plt.show<span style="color: #cc0000; font-weight: bold;">()</span>
+</pre>
+</div>
+
+<p>
+当然，这样的图要是放在论文里，一定会被骂得狗血淋头，我们还需要对它进行细致的调整。
+</p>
+</div>
+
+<div id="outline-container-orgab814ca" class="outline-3">
+<h3 id="添加标题title和轴标签axis-label"><span class="section-number-3">2.1</span> 添加标题（title）和轴标签（axis label）</h3>
+<div class="outline-text-3" id="text-添加标题title和轴标签axis-label">
+<p>
+在一张数据图中，除数据外最重要的就是标题与轴标签了。可添加以下代码实现：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622;&#23376;&#22270;&#26631;&#39064;</span>
+ax.set_title<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">"My First Plot"</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622; x &#36724;&#26631;&#31614;</span>
+ax.set_xlabel<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">'x'</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622; y &#36724;&#26631;&#31614;</span>
+ax.set_ylabel<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">'y'</span><span style="color: #cc0000; font-weight: bold;">)</span>
+</pre>
+</div>
+
+<p>
+注意使用 ax
+对象所做的所有设置都只对当前子图有效，设置总标题需要使用如下设置：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">fig.suptitle<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Total Title"</span><span style="color: #cc0000; font-weight: bold;">)</span>
+</pre>
+</div>
+
+<p>
+{% asset<sub>img</sub> first<sub>completed</sub><sub>figure.png</sub> 第一张完整图 %}
+</p>
+
+<p>
+这样，我们就得到了第一张包含数据、标题、轴标签的完整的图！
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="author-info">
+      <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
+      <div id="date">Date: May, 18, 2020</div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
+      </div><div id="copyright">
+    <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
+</div>
+</div>
+</body>
+</html>

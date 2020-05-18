@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2020-05-18 Mon 20:39 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[python機器學習-1] K 近鄰算法實現驗證碼識別</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Cycoe">
+<link rel="stylesheet" type="text/css" href="/static/css/default.css" />
+<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+<script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<header>
+  <nav>Cycoe@Home</nav>
+    <ul class="menu">
+        <li><a href="/">Index</a></li>
+        <li><a href="/Photo/index.html">Photo</a></li>
+        <li><a href="/about.html">About</a></li>
+    </ul>
+</header>
+</div>
+<div id="content">
+<header>
+<h1 class="title">[python機器學習-1] K 近鄰算法實現驗證碼識別</h1>
+</header><nav id="table-of-contents">
+<h2> <a href="javascript:window.scrollTo(0,0)"
+        style="color: black !important; border-bottom: none !important;"
+        class="tooltip"
+        title="Go to the top of the page">
+       Ξ
+     </a> </h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#分類">1. 分類</a></li>
+<li><a href="#核心思想">2. 核心思想</a></li>
+<li><a href="#代碼">3. 代碼</a>
+<ul>
+<li><a href="#分類函數">3.1. 分類函數</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<blockquote>
+<p>
+A computer program is said to learn from experience E with respect to some
+class of tasks T and performance measure P, if its performance at tasks in T,
+as measured by P, improves with experience E.
+</p>
+</blockquote>
+
+
+<figure>
+<img src="http://p1.bpimg.com/587851/b8e80b83eb2b7e31.jpg" alt="b8e80b83eb2b7e31.jpg">
+
+<figcaption><span class="figure-number">Figure 1: </span>image1</figcaption>
+</figure>
+
+<p>
+機器學習在最近幾年有越來越火熱的趨勢。正巧打算做一個爬取教務網成績的爬蟲，碰到驗
+證碼識別的問題。於是通過各方瞭解後買了《機器學習實戰》這本書，開坑機器學習。機器
+學習的內容其實很廣，涉及的知識也非常的雜，包括概率論、統計學、逼近論、凸分析、算
+法複雜度理論和編程等等。因爲不是本科涉及的內容，只能一點一點的補。
+</p>
+
+<div class="HTML">
+<p>
+&lt;!&#x2013;more&#x2013;&gt;
+</p>
+
+</div>
+
+<div id="outline-container-org8e729e6" class="outline-2">
+<h2 id="分類"><span class="section-number-2">1</span> 分類</h2>
+<div class="outline-text-2" id="text-分類">
+<p>
+機器學習分爲監督學習和無監督學習兩種，監督學習是指算法知道要預測的目標，即目標變
+量的分類信息；而無監督學習時，數據沒有類別信息，也不會給定目標值。
+</p>
+
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">監督學習</th>
+<th scope="col" class="org-left">無監督學習</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">k-近鄰算法</td>
+<td class="org-left">K-均值</td>
+</tr>
+
+<tr>
+<td class="org-left">樸素貝葉斯算法</td>
+<td class="org-left">DBSCAN</td>
+</tr>
+
+<tr>
+<td class="org-left">支持向量機</td>
+<td class="org-left">\</td>
+</tr>
+
+<tr>
+<td class="org-left">決策樹</td>
+<td class="org-left">\</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org3e16bd1" class="outline-2">
+<h2 id="核心思想"><span class="section-number-2">2</span> 核心思想</h2>
+<div class="outline-text-2" id="text-核心思想">
+<p>
+k-近鄰算法的原理很簡單，即選取 m 個已分類的樣本作爲訓練集，每個樣本擁有 n 個特徵。
+待測試樣本與每個訓練樣本求歐式距離，對得到的距離順序排序。根據預設的 k 值（k 一
+般取一個比較小的數）取出前 k 個距離。最後統計每個類別出現的次數，取出現次數最多
+的類別作爲待測樣本的類別標籤。
+</p>
+
+<p>
+此處說明 KNN 算法的兩個特徵：
+</p>
+<ul class="org-ul">
+<li>各個特徵等權重，不考慮各個特徵對類別的貢獻大小</li>
+<li>最終的分類方法其實是投票表決的方法</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org404f1e5" class="outline-2">
+<h2 id="代碼"><span class="section-number-2">3</span> 代碼</h2>
+<div class="outline-text-2" id="text-代碼">
+<p>
+爲了提高代碼的運行效率及編碼效率，import 了 <code>Numpy</code> 庫，具體的函數看<a href="https://docs.scipy.org/doc/">官方文檔</a> ，或者
+<a href="http://cycoe.win/wiki/Numpy/">Numpy 教程</a> 。
+</p>
+</div>
+
+<div id="outline-container-orgbf45c3a" class="outline-3">
+<h3 id="分類函數"><span class="section-number-3">3.1</span> 分類函數</h3>
+<div class="outline-text-3" id="text-分類函數">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #00af00;">def</span> <span style="color: #ef2929;">classify0</span><span style="color: #cc0000; font-weight: bold;">(</span>inX, dataSet, labels, k<span style="color: #cc0000; font-weight: bold;">)</span>: <span style="color: #b2b2b2; font-style: italic;">#</span><span style="color: #b2b2b2; font-style: italic;">&#36664;&#20837;(&#24453;&#28204;&#27171;&#26412;&#21521;&#37327;&#65292;&#35347;&#32244;&#27171;&#26412;&#30697;&#38499;&#65292;&#27161;&#31844;&#21521;&#37327;&#65292;k)</span>
+    <span style="color: #ff8700;">dataSetSize</span> = dataSet.shape<span style="color: #cc0000; font-weight: bold;">[</span>0<span style="color: #cc0000; font-weight: bold;">]</span> <span style="color: #b2b2b2; font-style: italic;">#</span><span style="color: #b2b2b2; font-style: italic;">shape&#20989;&#25976;&#29992;&#20358;&#35712;&#21462;&#30697;&#38499;&#30340;&#32173;&#30340;&#38263;&#24230;&#65292;&#36820;&#22238;&#20540;&#29234;(4L,2L)</span>
+    <span style="color: #ff8700;">diffMat</span> = tile<span style="color: #cc0000; font-weight: bold;">(</span>inX, <span style="color: #1f5bff; font-weight: bold;">(</span>dataSetSize, 1<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span> - dataSet <span style="color: #b2b2b2; font-style: italic;">#</span><span style="color: #b2b2b2; font-style: italic;">tile&#20989;&#25976;&#29992;&#20358;&#37325;&#35079; A=[1,2] tile(A,(2,3)) -&gt; [[1,2,1,2&#65292;1,2], [1,2,1,2,1,2]]</span>
+    <span style="color: #ff8700;">sqDiffMat</span> = diffMat**2
+    <span style="color: #ff8700;">sqDistances</span> = sqDiffMat.<span style="color: #b218b2;">sum</span><span style="color: #cc0000; font-weight: bold;">(</span>axis=1<span style="color: #cc0000; font-weight: bold;">)</span>
+    <span style="color: #ff8700;">distances</span> = sqDistances**0.5
+
+    <span style="color: #ff8700;">sortedDistIndicies</span> = distances.argsort<span style="color: #cc0000; font-weight: bold;">()</span>
+    <span style="color: #ff8700;">classCount</span> = <span style="color: #cc0000; font-weight: bold;">{}</span>
+    <span style="color: #00af00;">for</span> i <span style="color: #00af00;">in</span> <span style="color: #b218b2;">range</span><span style="color: #cc0000; font-weight: bold;">(</span>k<span style="color: #cc0000; font-weight: bold;">)</span>:
+        <span style="color: #ff8700;">votedLabel</span> = labels<span style="color: #cc0000; font-weight: bold;">[</span>sortedDistIndicies<span style="color: #1f5bff; font-weight: bold;">[</span>i<span style="color: #1f5bff; font-weight: bold;">]</span><span style="color: #cc0000; font-weight: bold;">]</span>
+        <span style="color: #ff8700;">classCount</span><span style="color: #cc0000; font-weight: bold;">[</span>votedLabel<span style="color: #cc0000; font-weight: bold;">]</span> = classCount.get<span style="color: #cc0000; font-weight: bold;">(</span>votedLabel, 0<span style="color: #cc0000; font-weight: bold;">)</span> + 1 <span style="color: #b2b2b2; font-style: italic;">#</span><span style="color: #b2b2b2; font-style: italic;">dict.get(key, default_value)&#20989;&#25976;&#29992;&#20358;&#21462;&#37749;&#23565;&#25033;&#30340;&#20540;&#65292;&#33509;&#37749;&#19981;&#23384;&#22312;&#21063;&#20540;&#29234;defalut_vlaue</span>
+    <span style="color: #ff8700;">sortedClassCount</span> = <span style="color: #b218b2;">sorted</span><span style="color: #cc0000; font-weight: bold;">(</span>classCount.items<span style="color: #1f5bff; font-weight: bold;">()</span>, key=operator.itemgetter<span style="color: #1f5bff; font-weight: bold;">(</span>1<span style="color: #1f5bff; font-weight: bold;">)</span>, reverse=<span style="color: #1f5bff;">True</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #b2b2b2; font-style: italic;">#</span><span style="color: #b2b2b2; font-style: italic;">operator.itemgetter(1)&#34920;&#31034;&#26681;&#25818;&#22810;&#32026;&#21015;&#34920;&#30340;&#31532;&#20108;&#20491;&#20803;&#32032;&#36914;&#34892;&#25490;&#24207;</span>
+    <span style="color: #00af00;">return</span> sortedClassCount<span style="color: #cc0000; font-weight: bold;">[</span>0<span style="color: #cc0000; font-weight: bold;">][</span>0<span style="color: #cc0000; font-weight: bold;">]</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="author-info">
+      <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
+      <div id="date">Date: May, 18, 2020</div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
+      </div><div id="copyright">
+    <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
+</div>
+</div>
+</body>
+</html>

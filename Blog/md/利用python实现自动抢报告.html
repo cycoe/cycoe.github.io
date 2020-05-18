@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2020-05-18 Mon 20:38 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>&lrm;</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Cycoe">
+<link rel="stylesheet" type="text/css" href="/static/css/default.css" />
+<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+<script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<header>
+  <nav>Cycoe@Home</nav>
+    <ul class="menu">
+        <li><a href="/">Index</a></li>
+        <li><a href="/Photo/index.html">Photo</a></li>
+        <li><a href="/about.html">About</a></li>
+    </ul>
+</header>
+</div>
+<div id="content">
+<nav id="table-of-contents">
+<h2> <a href="javascript:window.scrollTo(0,0)"
+        style="color: black !important; border-bottom: none !important;"
+        class="tooltip"
+        title="Go to the top of the page">
+       Ξ
+     </a> </h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#聲明">1. <b>聲明</b></a></li>
+<li><a href="#問題分解">2. 問題分解</a></li>
+<li><a href="#框架設計">3. 框架設計</a></li>
+<li><a href="#逐步解決">4. 逐步解決</a></li>
+<li><a href="#暗坑總結">5. 暗坑總結</a></li>
+</ul>
+</div>
+</nav>
+<blockquote>
+<p>
+上了研究生才知道北化的研究生每年需要聽 15
+個報告，而且最重要的是這些報告都是算分數的，而且更重要的是你的分數是和最後的獎學金評定掛鉤的。這也就決定了大家爲了那麼點報告分數擠教務網都擠破了頭（北化的服務器大家都懂），雖然場面不如開學搶課那麼火爆，卻需要長時間掛着教務網瘋狂刷新，爲了交換個講座也需要大半夜起來，生怕被別人截胡。爲了解放生產力，同時熟悉爬蟲技術、神經網絡技術、裝飾器等進階內容，寫了這個爬蟲來練練手。
+</p>
+</blockquote>
+
+
+<figure>
+<img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/ui.png" alt="ui.png">
+
+<figcaption><span class="figure-number">Figure 1: </span>ui</figcaption>
+</figure>
+
+<div class="HTML">
+<p>
+&lt;!&#x2013;more&#x2013;&gt;
+</p>
+
+</div>
+
+<div id="outline-container-org6fad72f" class="outline-2">
+<h2 id="聲明"><span class="section-number-2">1</span> <b>聲明</b></h2>
+<div class="outline-text-2" id="text-聲明">
+<p>
+<b>該爬蟲是本人(cycoe)練習 python
+編程技巧和神經網絡所編寫，使用造成的任何責任與本人無關</b>
+</p>
+
+<p>
+<a href="https://github.com/cycoe/class_robber">項目地址</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4f4fe6a" class="outline-2">
+<h2 id="問題分解"><span class="section-number-2">2</span> 問題分解</h2>
+<div class="outline-text-2" id="text-問題分解">
+<p>
+想要順利的拿到搶講座的 session，需要如下的步驟： 1.
+處理登陸問題，包括處理驗證碼、頁面表單和 cookies 2. 獲取報告列表 3.
+獲取搶報告的地址 4. 提交表單數據
+</p>
+</div>
+</div>
+
+<div id="outline-container-org479d0aa" class="outline-2">
+<h2 id="框架設計"><span class="section-number-2">3</span> 框架設計</h2>
+<div class="outline-text-2" id="text-框架設計">
+<p>
+好的框架應具有良好的可維護性和擴展性，目前正朝着這個方向努力 1.
+採用交互式的命令行設計，分離 login, robSpeech 等方法 2. 將 login,
+robSpeech, robClass 等方法封裝成 Robber 對象 3. 將底層的 requests 封裝成
+Spider 對象
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgdaec427" class="outline-2">
+<h2 id="逐步解決"><span class="section-number-2">4</span> 逐步解決</h2>
+<div class="outline-text-2" id="text-逐步解決">
+<ol class="org-ol">
+<li><p>
+通過 firefox 或 chrome 的 debug 模式可以查看在訪問網頁時的 request 和
+response。仿照瀏覽器在訪問教務網時提交的 headers 構造如下字典
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #00af00;">class</span> <span style="color: #18b2b2;">Spider</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #b218b2;">object</span><span style="color: #cc0000; font-weight: bold;">)</span>:
+    @<span style="color: #b218b2;">staticmethod</span>
+    <span style="color: #00af00;">def</span> <span style="color: #ef2929;">formatHeaders</span><span style="color: #cc0000; font-weight: bold;">(</span>referer=<span style="color: #1f5bff;">None</span>, contentLength=<span style="color: #1f5bff;">None</span>, originHost=<span style="color: #1f5bff;">None</span><span style="color: #cc0000; font-weight: bold;">)</span>:
+        <span style="color: #cc0000;">"""</span>
+<span style="color: #cc0000;">        &#23553;&#35037;&#35531;&#27714;&#30340; headers</span>
+
+<span style="color: #cc0000;">        :param referer: &#36339;&#36681;&#27161;&#35352;&#65292;&#21578;&#35380; web &#26381;&#21209;&#22120;&#33258;&#24049;&#26159;&#24478;&#21738;&#20491;&#38913;&#38754;&#36339;&#36681;&#36942;&#20358;&#30340;</span>
+<span style="color: #cc0000;">        :param contentLength: &#20316;&#29992;&#26410;&#30693;</span>
+<span style="color: #cc0000;">        :param originHost: &#21407;&#22987;&#20027;&#27231;&#22320;&#22336;</span>
+<span style="color: #cc0000;">        :returns: headers &#23383;&#20856;</span>
+<span style="color: #cc0000;">        """</span>
+        <span style="color: #ff8700;">headers</span> = <span style="color: #cc0000; font-weight: bold;">{</span>
+            <span style="color: #ff1f8b;">'Accept'</span>: <span style="color: #ff1f8b;">'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'</span>,
+            <span style="color: #ff1f8b;">'Accept-Encoding'</span>: <span style="color: #ff1f8b;">'gzip, deflate'</span>,
+            <span style="color: #ff1f8b;">'Accept-Language'</span>: <span style="color: #ff1f8b;">'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7'</span>,
+            <span style="color: #ff1f8b;">'Cache-Control'</span>: <span style="color: #ff1f8b;">'max-age=0'</span>,
+            <span style="color: #ff1f8b;">'Connection'</span>: <span style="color: #ff1f8b;">'keep-alive'</span>,
+            <span style="color: #ff1f8b;">'Content-Type'</span>: <span style="color: #ff1f8b;">'application/x-www-form-urlencoded'</span>,
+            <span style="color: #ff1f8b;">'DNT'</span>: <span style="color: #ff1f8b;">'1'</span>,
+            <span style="color: #ff1f8b;">'Host'</span>: <span style="color: #ff1f8b;">'graduate.buct.edu.cn:8080'</span>,
+            <span style="color: #ff1f8b;">'Upgrade-Insecure-Requests'</span>: <span style="color: #ff1f8b;">'1'</span>,
+            <span style="color: #ff1f8b;">'User-Agent'</span>: <span style="color: #ff1f8b;">'Mozilla/5.0 (X11;Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36'</span>,
+            <span style="color: #ff1f8b;">'Referer'</span>: referer,
+            <span style="color: #ff1f8b;">'Content-Length'</span>: contentLength,
+            <span style="color: #ff1f8b;">'Origin'</span>: originHost,
+        <span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div></li>
+
+<li><p>
+封裝 request 請求需要的 prepareBody
+對象，=response = session.send(prepareBody)=，response
+就是我們拿到的服務器的響應對象，可通過 <code>response.text</code>
+得到網頁內容，=response.status<sub>code</sub>= 得到狀態碼，=response.url=
+得到響應的地址。 ```python def prepare(self, referer=None,
+originHost=None, method='GET', url=None, data=None, params=None): """
+生成用於請求的 prepare
+</p>
+
+<pre class="example">
+:param referer: 跳轉標記，告訴 web 服務器自己是從哪個頁面跳轉過來的
+:param originHost: 原始主機地址
+:param method: 請求方法 in ['GET', 'POST']
+:param url: 請求的 url 地址
+:param data: 封裝的 post 數據
+:param params: post 參數
+:return: prepare 對象
+"""
+headers = self.formatHeaders(referer=referer, originHost=originHost)
+req = Request(method, url, headers=headers, data=data, params=params)
+return self.session.prepare_request(req)
+</pre>
+
+<p>
+prepareBody = prepare(referer=None, originHost=None, method='GET',
+url=UrlBean.jwglLoginUrl, data=None, params=None) response =
+session.send(prepareBody) ```
+</p></li>
+
+<li><p>
+請求登錄網址，提交表單數據。根據 response
+返回的響應體內容判斷是否登陸成功 ```python def getVIEWSTATE(self):
+""" 正則獲取頁面的 _<sub>VIEWSTATE</sub>
+</p>
+
+<pre class="example">
+:returns: 頁面的 __VIEWSTATE
+"""
+VIEWSTATE = re.findall('&lt;.*name="__VIEWSTATE".*value="(.*)?".*/&gt;', self.response.text)
+if len(VIEWSTATE) &gt; 0:
+    return VIEWSTATE
+else:
+    return None
+</pre>
+
+<p>
+def getEVENTVALIDATION(self): """ 正則獲取頁面的 _<sub>EVENTVALIDATION</sub>
+</p>
+
+<pre class="example">
+:returns: 頁面的 __EVENTVALIDATION
+"""
+EVENTVALIDATION = re.findall('&lt;.*name="__EVENTVALIDATION".*value="(.*)?".*/&gt;', self.response.text)
+if len(EVENTVALIDATION) &gt; 0:
+    return EVENTVALIDATION
+else:
+    return None
+</pre>
+
+<p>
+def login(self): """ 登錄教務網 """
+</p>
+
+<pre class="example">
+# 在登錄前請求一次登錄頁面，獲取網頁的隱藏表單數據
+prepareBody = self.prepare(referer=None,
+                           originHost=None,
+                           method='GET',
+                           url=UrlBean.jwglLoginUrl,
+                           data=None,
+                           params=None)
+
+# 登陸主循環
+while True:
+    self.response = self.session.send(prepareBody)
+    self.VIEWSTATE = self.getVIEWSTATE()
+    self.EVENTVALIDATION = self.getEVENTVALIDATION()
+    if self.VIEWSTATE is not None and self.EVENTVALIDATION is not None:
+        break
+    Logger.log("Retrying fetching login page viewState...", level=Logger.warning)
+
+reInput = True      # 是否需要重新輸入用戶名和密碼
+while True:
+    # 輸入用戶名和密碼
+    if reInput:
+        if Config.checkUserFile():
+            Config.readUserInfo()
+        else:
+            Config.userName = input("&gt; UserName: ")
+            Config.password = input("&gt; Password: ")
+        reInput = False
+
+    prepareBody = self.prepare(referer=UrlBean.jwglLoginUrl,
+                               originHost=None,
+                               method='GET',
+                               url=UrlBean.verifyCodeUrl,
+                               data=None,
+                               params=None)
+
+    while True:
+        codeImg = self.session.send(prepareBody)  # 獲取驗證碼圖片
+        if codeImg.status_code == 200:
+            break
+        else:
+            Logger.log("retrying fetching vertify code...", level=Logger.warning)
+
+    with open('check.gif', 'wb') as fr:  # 保存驗證碼圖片
+        for chunk in codeImg:
+            fr.write(chunk)
+
+    print_vertify_code()
+    verCode = input("input verify code:")
+    # verCode = self.classifier.recognizer("check.gif")  # 識別驗證碼
+
+    # 構造登陸表單
+    postData = {
+        '__VIEWSTATE': self.VIEWSTATE,
+        '__EVENTVALIDATION': self.EVENTVALIDATION,
+        '_ctl0:txtusername': Config.userName,
+        '_ctl0:txtpassword': Config.password,
+        '_ctl0:txtyzm': verCode,
+        '_ctl0:ImageButton1.x': '43',
+        '_ctl0:ImageButton1.y': '21',
+    }
+    prepareBody = self.prepare(referer=UrlBean.jwglLoginUrl,
+                               originHost=UrlBean.jwglOriginUrl,
+                               method='POST',
+                               url=UrlBean.jwglLoginUrl,
+                               data=postData,
+                               params=None)
+
+    # 獲取登陸 response
+    while True:
+        self.response = self.session.send(prepareBody)
+        if self.response.status_code == 200:
+            break
+
+    # 根據返回的 html 判斷是否登錄成功
+    if re.search('用戶名不存在', self.response.text):
+        Logger.log('No such a user!', ['Cleaning password file'], level=Logger.error)
+        print(OutputFormater.table([['No such a user!'], ['Cleaning password file']], padding=2))
+        Config.cleanUserInfo()
+        reInput = True
+
+    elif re.search('密碼錯誤', self.response.text):
+        Logger.log('Wrong password!', ['Cleaning password file'], level=Logger.error)
+        print(OutputFormater.table([['Wrong password!'], ['Cleaning password file']], padding=2))
+        Config.cleanUserInfo()
+        reInput = True
+
+    elif re.search('請輸入驗證碼', self.response.text):
+        Logger.log('Please input vertify code!', ['Retrying...'], level=Logger.error)
+        print(OutputFormater.table([['Please input vertify code!'], ['Retrying...']], padding=2))
+
+    elif re.search('驗證碼錯誤', self.response.text):
+        Logger.log('Wrong vertify code!', ['Retrying...'], level=Logger.error)
+        print(OutputFormater.table([['Wrong vertify code!'], ['Retrying...']], padding=2))
+
+    else:
+        Logger.log('Login successfully!', ['UserName: ' + Config.userName, 'Password: ' + Config.password], level=Logger.warning)
+        print(OutputFormater.table([['Login successfully!']], padding=2))
+        Config.dumpUserInfo()
+        break
+</pre>
+
+<p>
+```
+</p></li>
+
+<li>拿到已登陸的 session
+後，搶課和搶報告都是非常方便的，只要按照瀏覽器提交的數據構造 headers
+和表單數據後就可以獲得正常的 response</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgdcd5a0d" class="outline-2">
+<h2 id="暗坑總結"><span class="section-number-2">5</span> 暗坑總結</h2>
+<div class="outline-text-2" id="text-暗坑總結">
+<ol class="org-ol">
+<li>剛開始抓到的網頁內容中文都是亂碼，後來 google 解決，發現是 python
+的編碼和 asp 框架的編碼問題造成的，python 中的編碼問題真的是讓人頭大</li>
+<li>由於網站的防爬蟲設計，會在 html
+源碼中插入很多隱藏的表單數據，如此處的 <code>__VIEWSTATE</code> 和
+=_<sub>EVENTVALIDATION</sub>=，這兩個是非常重要的參數。否則無法成功登陸</li>
+<li>兩次訪問之間要有一定的時間間隔，如此處用了一個隨機函數的閉包來獲得隨機時間的間隔</li>
+<li>使用裝飾器解決了在訪問搶課網頁前判斷登錄的問題</li>
+<li>接下來將循環封裝成函數，加入最大循環次數和超時</li>
+<li>完善邊界檢查和異常處理</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="author-info">
+      <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
+      <div id="date">Date: May, 18, 2020</div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
+      </div><div id="copyright">
+    <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
+</div>
+</div>
+</body>
+</html>

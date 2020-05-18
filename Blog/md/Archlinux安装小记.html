@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2020-05-18 Mon 20:38 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>&lrm;</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Cycoe">
+<link rel="stylesheet" type="text/css" href="/static/css/default.css" />
+<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+<script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<header>
+  <nav>Cycoe@Home</nav>
+    <ul class="menu">
+        <li><a href="/">Index</a></li>
+        <li><a href="/Photo/index.html">Photo</a></li>
+        <li><a href="/about.html">About</a></li>
+    </ul>
+</header>
+</div>
+<div id="content">
+<nav id="table-of-contents">
+<h2> <a href="javascript:window.scrollTo(0,0)"
+        style="color: black !important; border-bottom: none !important;"
+        class="tooltip"
+        title="Go to the top of the page">
+       Ξ
+     </a> </h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#準備工作">1. 準備工作</a></li>
+<li><a href="#分區">2. 分區</a></li>
+<li><a href="#掛載">3. 掛載</a></li>
+<li><a href="#安裝">4. 安裝</a></li>
+<li><a href="#配置">5. 配置</a></li>
+</ul>
+</div>
+</nav>
+<p>
+针对 Archlinux 安装的前期准备工作做一个记录。
+</p>
+
+<div class="HTML">
+<p>
+&lt;!&#x2013;more&#x2013;&gt;
+</p>
+
+</div>
+
+<div id="outline-container-org283334b" class="outline-2">
+<h2 id="準備工作"><span class="section-number-2">1</span> 準備工作</h2>
+<div class="outline-text-2" id="text-準備工作">
+<ol class="org-ol">
+<li>ethernet 用戶無需對網絡連接做過多設置，wifi 用戶可使用 wifi-menu
+工具進行無線網連接</li>
+<li>對 <code>/etc/pacman.d/mirrorlist</code> 文件中的源進行排序</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgbddbd4c" class="outline-2">
+<h2 id="分區"><span class="section-number-2">2</span> 分區</h2>
+<div class="outline-text-2" id="text-分區">
+<ol class="org-ol">
+<li>利用 cfdisk 或 fdisk 工具進行分區</li>
+<li>使用 <code>mkfs.ext4 /dev/sdxY</code> 進行分區的格式化，btrfs 分區運行
+<code>mkfs.btrfs -f /dev/sdxY</code></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org101ec57" class="outline-2">
+<h2 id="掛載"><span class="section-number-2">3</span> 掛載</h2>
+<div class="outline-text-2" id="text-掛載">
+<p>
+按順序執行如下命令
+</p>
+
+<pre class="example">
+mount /dev/sdxY /mnt    # 掛載根分區
+
+mkdir /mnt/home
+mkdir /mnt/boot
+mkdir /mnt/boot/grub
+mkdir /mnt/boot/efi
+
+mount /dev/sdxY /mnt/home
+mount /dev/sdxY /mnt/boot/efi
+mount /dev/sdxY /mnt/boot/grub
+</pre>
+
+<p>
+若根分區爲 btrfs 格式，則需要先使用如下命令掛載根分區
+</p>
+
+<pre class="example">
+mount /dev/sdxY /mnt        #掛載根分區
+cd /mnt
+btrfs subvolume create @    #創建名爲 @ 的子卷
+cd ~
+umount /mnt
+mount /dev/sdxY /mnt -o subvol=@,compress=lzo
+</pre>
+
+<p>
+分區掛載完畢後可運行 <code>lsblk</code> 查看掛載信息
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1120448" class="outline-2">
+<h2 id="安裝"><span class="section-number-2">4</span> 安裝</h2>
+<div class="outline-text-2" id="text-安裝">
+<p>
+運行自動化安裝工具 <code>pacstrap -i /mnt base</code> - 需要 gcc
+等開發工具的用戶需要裝上 base-devel 包 - btrfs 分區需要 btrfs-progs 包 -
+wifi 用戶需要同時安裝 dialog wpa<sub>supplicant</sub> 來使用 wifi-menu -
+引導管理器可選擇 grub，efi 主板用戶需加上 efibootmgr，多系統檢測需要
+os-prober
+示例：=pacstrap -i /mnt base base-devel btrfs-progs dialog wpa<sub>supplicant</sub> grub efibootmgr os-prober=
+</p>
+
+<p>
+運行 <code>genfstab -U /mnt</code> 查看掛載信息是否正確，檢查無誤後運行
+<code>genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</code> 將掛載信息寫入 fstab
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgac572ed" class="outline-2">
+<h2 id="配置"><span class="section-number-2">5</span> 配置</h2>
+<div class="outline-text-2" id="text-配置">
+<ul class="org-ul">
+<li>使用 archlinux 自帶的 <code>arch-chroot /mnt</code> 接管新系統</li>
+<li><code>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code> # 設置時區</li>
+<li><code>bash     # nano /etc/locale.gen     en_US.UTF-8 UTF-8     zh_CN.UTF-8 UTF-8     zh_TW.UTF-8 UTF-8</code></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="author-info">
+      <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
+      <div id="date">Date: May, 18, 2020</div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
+      </div><div id="copyright">
+    <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
+</div>
+</div>
+</body>
+</html>

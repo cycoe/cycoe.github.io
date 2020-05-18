@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2020-05-18 Mon 20:38 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>&lrm;</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Cycoe">
+<link rel="stylesheet" type="text/css" href="/static/css/default.css" />
+<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+<script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/main.js"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<header>
+  <nav>Cycoe@Home</nav>
+    <ul class="menu">
+        <li><a href="/">Index</a></li>
+        <li><a href="/Photo/index.html">Photo</a></li>
+        <li><a href="/about.html">About</a></li>
+    </ul>
+</header>
+</div>
+<div id="content">
+<nav id="table-of-contents">
+<h2> <a href="javascript:window.scrollTo(0,0)"
+        style="color: black !important; border-bottom: none !important;"
+        class="tooltip"
+        title="Go to the top of the page">
+       Ξ
+     </a> </h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#素数prime">1. 素数（Prime）</a>
+<ul>
+<li><a href="#的特殊性">1.1. 1 的特殊性</a></li>
+</ul>
+</li>
+<li><a href="#寻找素数">2. 寻找素数</a></li>
+<li><a href="#质因式分解">3. 质因式分解</a></li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-org3b0f5ad" class="outline-2">
+<h2 id="素数prime"><span class="section-number-2">1</span> 素数（Prime）</h2>
+<div class="outline-text-2" id="text-素数prime">
+<p>
+对于一个自然数 $n&isin;\mathbb{N}$，若其只能被 \(1\)
+和它本身整除（即只有两个因子），则被称为素数；若其有多于两个因子，则被称为合数。素数是不能够进行质因式分解的最小单元，因此合数具有唯一的质因式分解（质因子不可再分）。
+</p>
+
+<div class="HTML">
+<p>
+&lt;!&#x2013;more&#x2013;&gt;
+</p>
+
+</div>
+</div>
+
+<div id="outline-container-org597c239" class="outline-3">
+<h3 id="的特殊性"><span class="section-number-3">1.1</span> 1 的特殊性</h3>
+<div class="outline-text-3" id="text-的特殊性">
+<p>
+1 能够被 \(1\) 及其自身整除，但为了体系的自洽，不认为 \(1\)
+是素数。有如下两个原因： 1. 若 \(1\)
+是素数，则任意自然数的质因式分解将不是唯一的。$6=2&times; 3=1&times; 2&times; 3$。
+</p>
+<ol class="org-ol">
+<li>任意素数 \(p\) 可被分解为 $p=1&times; p$，若 \(1\) 为素数，则 \(p\)</li>
+</ol>
+<p>
+为合数，与 \(p\) 为素数相矛盾。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8168122" class="outline-2">
+<h2 id="寻找素数"><span class="section-number-2">2</span> 寻找素数</h2>
+<div class="outline-text-2" id="text-寻找素数">
+<p>
+针对素数，我们希望研究： - 对于任意
+$n&isin; \mathbb{N}$，判断其是否为素数； - 对于任意
+$n&isin; \mathbb{N}$，找到所有小于 \(n\) 的素数，或等价于求小于 \(n\)
+的素数的个数； - 对于任意 $n&isin; \mathbb{N}$，求其质因式分解。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org974890f" class="outline-2">
+<h2 id="质因式分解"><span class="section-number-2">3</span> 质因式分解</h2>
+<div class="outline-text-2" id="text-质因式分解">
+<p>
+前几天，看杂志时发现一个有趣的问题，"对任意一个自然数
+$n$，如何求其所有因子的和"。这个问题本身并不困难，但从中可以继续思考质数的相关规律。
+</p>
+
+<p>
+既然是要求因子的和，那么我们首先需要用数学语言将因子表示出来。在此之前，我们需要先将这个自然数表示出来。
+</p>
+
+<p>
+设 \(n\) 有 \(m+1\) 个质因子
+$p<sub>0</sub> &lt; p<sub>1</sub> &lt; &ctdot; &lt; p<sub>m</sub>$，则存在如下唯一的质因式分解 \[
+    n = p_0^{a_0} \times p_1^{a_1} \times \cdots \times p_m^{a_m}
+\]
+</p>
+
+<p>
+则 \(n\) 的因子 \(f\) 满足 \[
+    f = p_0^{b_0} \times p_1^{b_1} \times \cdots \times p_m^{b_m}
+\] 其中 \[
+    \left\{\begin{array}{c}
+        0 \leq b_0 \leq a_0\\
+        0 \leq b_1 \leq a_1\\
+        \vdots\\
+        0 \leq b_m \leq a_m
+    \end{array}\right.,\
+    且\ b_0, b_1, \cdots, b_m \in \mathbb{N}
+\]
+</p>
+
+<p>
+记所有质因子之和为 $S(n)$，即为所有满足上式的 \(f\) 之和 $$
+</p>
+\begin{split}
+    S(n) &= (p_0^0+p_0^1+\cdots+p_0^{a^0})\times (p_1^0+p_1^1+\cdots+p_1^{a^1})\times \cdots \times (p_m^0+p_m^1+\cdots+p_m^{a^m})\\
+    &= \dfrac{p_0^{a_0+1}-1}{p_0-1}\times \dfrac{p_1^{a_1+1}-1}{p_1-1}\times \cdots \times\dfrac{p_m^{a_m+1}-1}{p_m-1}\\
+    &= \prod\limits_{i=0}^m \dfrac{p_i^{a_i+1}-1}{p_i-1}
+\end{split}
+<p>
+$$
+</p>
+
+<p>
+至此，我们已经得到已知自然数 \(n\) 所有因子和 \(S(n)\)
+的表达式。接下来验证一下，\(24\) 的所有因子有
+$1, 2, 3, 4, 6, 8, 12, 24$，求和得 $S<sub>1</sub>(24)=60$。\(24\) 的质因式分解为
+$24=2<sup>3&times;3</sup><sup>1</sup>$，则
+$S<sub>2</sub>(24)=(2<sup>0</sup>+2<sup>1</sup>+2<sup>2</sup>+2<sup>3</sup>)&times;(3<sup>0</sup>+3<sup>1</sup>)=60$。答案正确！
+</p>
+
+<p>
+首先来解决第一个问题。使用计算机进行计算发现，前 \(2^k\) 个质数的
+\(\Pi_p(2^k)\) 与 \(k\) 呈近似线性关系 \[
+    \Pi_p(2^k) = ak + b
+\]
+</p>
+
+<p>
+另外 \(2^k\) 以内的质数的分式乘积 \(\Pi_p(\eta)\) 也与 \(k\) 呈近似线性关系。
+</p>
+
+<p>
+设 \(\Pi(n)\) 为前 \(n\) 个自然数的类似分式积表达式 \[
+    \Pi(n) = \dfrac21 \times \dfrac32 \times \cdots \times \dfrac{n}{n-1} = n
+\] 则前 \(n\) 个质数的 \(\Pi(n)\) 与 \(n\) 呈线性关系。
+</p>
+
+<p>
+一个为质数， 一个为自然数，其中必然蕴含着质数分布的某种真理。
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="author-info">
+      <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
+      <div id="date">Date: May, 18, 2020</div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
+      </div><div id="copyright">
+    <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
+</div>
+</div>
+</body>
+</html>
