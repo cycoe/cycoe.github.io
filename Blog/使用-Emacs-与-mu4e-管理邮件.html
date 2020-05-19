@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-19 Tue 14:50 -->
+<!-- 2020-05-19 Tue 15:43 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>使用 Emacs 与 mu4e 管理邮件</title>
@@ -14,23 +14,21 @@
 </head>
 <body>
 <div id="preamble" class="status">
-<header>
-  <nav>Cycoe@Home</nav>
-    <ul class="menu">
-        <li><a href="/">Index</a></li>
-        <li><a href="/Photo/index.html">Photo</a></li>
-        <li><a href="/about.html">About</a></li>
-    </ul>
-    <!-- The Modal -->
-    <div id="img-modal" class="modal">
-      <!-- The Close Button -->
-      <span class="close">&times;</span>
-      <!-- Modal Content (The Image) -->
-      <img class="modal-content" id="modal-img">
-      <!-- Modal Caption (Image Text) -->
-      <div id="caption"></div>
-    </div>
-</header>
+<ul class="menu">
+  <li id="home">Cycoe@Home</li>
+  <li><a href="/">Index</a></li>
+  <li><a href="/Photo/index.html">Photo</a></li>
+  <li><a href="/about.html">About</a></li>
+</ul>
+<!-- The Modal -->
+<div id="img-modal" class="modal">
+  <!-- The Close Button -->
+  <span class="close">&times;</span>
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content" id="modal-img">
+  <!-- Modal Caption (Image Text) -->
+  <div id="caption"></div>
+</div>
 </div>
 <div id="content">
 <header>
@@ -49,14 +47,14 @@
 <ul>
 <li><a href="#org1619bd5">1.1. offlineimap 配置</a>
 <ul>
-<li><a href="#org0108ab9">1.1.1. 安装</a></li>
-<li><a href="#org2bb0a1a">1.1.2. 配置</a></li>
+<li><a href="#org76e5ddf">1.1.1. 安装</a></li>
+<li><a href="#org5bdd7c1">1.1.2. 配置</a></li>
 </ul>
 </li>
 <li><a href="#org06d77ff">1.2. isync 配置</a>
 <ul>
-<li><a href="#org11211e4">1.2.1. 安装</a></li>
-<li><a href="#org5bdd7c1">1.2.2. 配置</a></li>
+<li><a href="#org529d3eb">1.2.1. 安装</a></li>
+<li><a href="#org6a433f4">1.2.2. 配置</a></li>
 </ul>
 </li>
 <li><a href="#orge2cab26">1.3. Unsafe login</a></li>
@@ -64,7 +62,7 @@
 </li>
 <li><a href="#orgc716561">2. mu 邮件管理器</a>
 <ul>
-<li><a href="#org76e5ddf">2.1. 安装</a></li>
+<li><a href="#orgbf92e09">2.1. 安装</a></li>
 <li><a href="#org2f5e2d9">2.2. 配置 mu</a></li>
 </ul>
 </li>
@@ -101,8 +99,8 @@ offlineimap 是一个由 Python 写成的 IMAP 同步工具，主要的缺点是
 并且同步速度不如 isync，因此仅作记录。
 </p>
 </div>
-<div id="outline-container-org0108ab9" class="outline-4">
-<h4 id="org0108ab9"><span class="section-number-4">1.1.1</span> 安装</h4>
+<div id="outline-container-org76e5ddf" class="outline-4">
+<h4 id="org76e5ddf"><span class="section-number-4">1.1.1</span> 安装</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 在 Archlinux 中，可以直接从 community 仓库中安装。
@@ -113,8 +111,8 @@ offlineimap 是一个由 Python 写成的 IMAP 同步工具，主要的缺点是
 </div>
 </div>
 </div>
-<div id="outline-container-org2bb0a1a" class="outline-4">
-<h4 id="org2bb0a1a"><span class="section-number-4">1.1.2</span> 配置</h4>
+<div id="outline-container-org5bdd7c1" class="outline-4">
+<h4 id="org5bdd7c1"><span class="section-number-4">1.1.2</span> 配置</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 安装完成，要进行配置，需要创建一个 ~/.offlineimaprc 文件进行配置。详细的配置过程如下： 
@@ -170,7 +168,7 @@ offlineimap 是一个由 Python 写成的 IMAP 同步工具，主要的缺点是
 </pre>
 </div>
 <p>
-至此，通过 <code class="src src-sh">offlineimap -a Netease</code> 就可以同步指定的账户。
+至此，通过 <code>offlineimap -a Netease</code> 就可以同步指定的账户。
 </p>
 </div>
 </div>
@@ -183,8 +181,8 @@ isync 是一个由 C++ 写成的 IMAP 同步工具，经测试同步速度要比
 是同步出来的邮件数量比 offlineimap 更多不知道是怎么回事，目前主要使用这个。
 </p>
 </div>
-<div id="outline-container-org11211e4" class="outline-4">
-<h4 id="org11211e4"><span class="section-number-4">1.2.1</span> 安装</h4>
+<div id="outline-container-org529d3eb" class="outline-4">
+<h4 id="org529d3eb"><span class="section-number-4">1.2.1</span> 安装</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 在 Archlinux 中，可以直接从 community 仓库中安装。
@@ -195,8 +193,8 @@ isync 是一个由 C++ 写成的 IMAP 同步工具，经测试同步速度要比
 </div>
 </div>
 </div>
-<div id="outline-container-org5bdd7c1" class="outline-4">
-<h4 id="org5bdd7c1"><span class="section-number-4">1.2.2</span> 配置</h4>
+<div id="outline-container-org6a433f4" class="outline-4">
+<h4 id="org6a433f4"><span class="section-number-4">1.2.2</span> 配置</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 isync 的配置方式与 offlineimap 类似，将如下配置放在 '~/.mbsyncrc' 中，并运行
@@ -296,8 +294,8 @@ SyncState *
 <h2 id="orgc716561"><span class="section-number-2">2</span> mu 邮件管理器</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org76e5ddf" class="outline-3">
-<h3 id="org76e5ddf"><span class="section-number-3">2.1</span> 安装</h3>
+<div id="outline-container-orgbf92e09" class="outline-3">
+<h3 id="orgbf92e09"><span class="section-number-3">2.1</span> 安装</h3>
 <div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#20811;&#38534; mu &#20179;&#24211;</span>
