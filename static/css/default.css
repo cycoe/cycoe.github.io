@@ -611,7 +611,8 @@ div #copyright img:first-child {
 @media (min-width: 768px) {
     /* Increase body padding and font-sizes */
     content {
-        padding: 40px;
+        padding: 20px;
+        width: 90%;
         font-size: 18px;
         line-height: 1.75;
     }
@@ -625,7 +626,8 @@ div #copyright img:first-child {
 
 @media (min-width: 1024px) {
     content {
-        padding: 40px;
+      width: 90%;
+      padding: 40px;
     }
 }
 

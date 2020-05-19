@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-19 Tue 14:49 -->
+<!-- 2020-05-19 Tue 16:34 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Linux 下常用軟件和配置記錄</title>
@@ -14,23 +14,21 @@
 </head>
 <body>
 <div id="preamble" class="status">
-<header>
-  <nav>Cycoe@Home</nav>
-    <ul class="menu">
-        <li><a href="/">Index</a></li>
-        <li><a href="/Photo/index.html">Photo</a></li>
-        <li><a href="/about.html">About</a></li>
-    </ul>
-    <!-- The Modal -->
-    <div id="img-modal" class="modal">
-      <!-- The Close Button -->
-      <span class="close">&times;</span>
-      <!-- Modal Content (The Image) -->
-      <img class="modal-content" id="modal-img">
-      <!-- Modal Caption (Image Text) -->
-      <div id="caption"></div>
-    </div>
-</header>
+<ul class="menu">
+  <li id="home">Cycoe@Home</li>
+  <li><a href="/">Index</a></li>
+  <li><a href="/Photo/index.html">Photo</a></li>
+  <li><a href="/about.html">About</a></li>
+</ul>
+<!-- The Modal -->
+<div id="img-modal" class="modal">
+  <!-- The Close Button -->
+  <span class="close">&times;</span>
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content" id="modal-img">
+  <!-- Modal Caption (Image Text) -->
+  <div id="caption"></div>
+</div>
 </div>
 <div id="content">
 <header>
@@ -75,7 +73,7 @@
 <li><a href="#zathura">3.8. zathura</a></li>
 <li><a href="#ranger">3.9. ranger</a>
 <ul>
-<li><a href="#orgfb72148">3.9.1. 初次使用 通过运行</a></li>
+<li><a href="#orge67a3a8">3.9.1. 初次使用 通过运行</a></li>
 <li><a href="#文件预览">3.9.2. 文件预览</a></li>
 <li><a href="#批量重命名">3.9.3. 批量重命名</a></li>
 </ul>
@@ -93,7 +91,7 @@ Linux 系統的配置及常用軟件的介紹。
 
 <!-- more -->
 
-<div id="outline-container-org130e25c" class="outline-2">
+<div id="outline-container-org269358f" class="outline-2">
 <h2 id="硬件相关配置"><span class="section-number-2">1</span> 硬件相关配置</h2>
 <div class="outline-text-2" id="text-硬件相关配置">
 <p>
@@ -104,7 +102,7 @@ Linux 系統的配置及常用軟件的介紹。
 </p>
 </div>
 
-<div id="outline-container-org6bd9b97" class="outline-3">
+<div id="outline-container-org5dc1ecf" class="outline-3">
 <h3 id="apu-核显"><span class="section-number-3">1.1</span> APU 核显</h3>
 <div class="outline-text-3" id="text-apu-核显">
 <p>
@@ -153,7 +151,7 @@ EndSection
 </div>
 </div>
 
-<div id="outline-container-org11077d6" class="outline-3">
+<div id="outline-container-org0604c5a" class="outline-3">
 <h3 id="亮度配置"><span class="section-number-3">1.2</span> 亮度配置</h3>
 <div class="outline-text-3" id="text-亮度配置">
 <p>
@@ -165,12 +163,12 @@ Intel 核显与 AMD 核显调节亮度的方法不太相同，具体步骤参考
 </div>
 </div>
 
-<div id="outline-container-org8a0a893" class="outline-2">
+<div id="outline-container-org88ce5ca" class="outline-2">
 <h2 id="archlinux-配置"><span class="section-number-2">2</span> Archlinux 配置</h2>
 <div class="outline-text-2" id="text-archlinux-配置">
 </div>
 
-<div id="outline-container-org4e19ae6" class="outline-3">
+<div id="outline-container-org74f789d" class="outline-3">
 <h3 id="讓-qt5-程序使用原生-gtk-主題"><span class="section-number-3">2.1</span> 讓 Qt5 程序使用原生 GTK+ 主題</h3>
 <div class="outline-text-3" id="text-讓-qt5-程序使用原生-gtk-主題">
 <p>
@@ -199,7 +197,7 @@ GTK2 即可。+
 </p>
 </div>
 
-<div id="outline-container-org0a27428" class="outline-4">
+<div id="outline-container-org8dddae8" class="outline-4">
 <h4 id="更新"><span class="section-number-4">2.1.1</span> 2019-08-11 更新</h4>
 <div class="outline-text-4" id="text-更新">
 <p>
@@ -211,7 +209,7 @@ pacman -S kvantum-qt5</code> 安装完成后，在 qt5ct 中将 Kvantum 设置�
 </div>
 </div>
 
-<div id="outline-container-org6bbe037" class="outline-3">
+<div id="outline-container-org923860f" class="outline-3">
 <h3 id="variety-无法设置壁紙"><span class="section-number-3">2.2</span> variety 无法设置壁紙</h3>
 <div class="outline-text-3" id="text-variety-无法设置壁紙">
 <p>
@@ -232,7 +230,7 @@ pacman -S kvantum-qt5</code> 安装完成后，在 qt5ct 中将 Kvantum 设置�
 </div>
 </div>
 
-<div id="outline-container-org8800334" class="outline-3">
+<div id="outline-container-org220ce9a" class="outline-3">
 <h3 id="dunst-无法显示通知"><span class="section-number-3">2.3</span> dunst 无法显示通知</h3>
 <div class="outline-text-3" id="text-dunst-无法显示通知">
 <p>
@@ -248,7 +246,7 @@ systemctl --user import-environment DISPLAY
 </div>
 </div>
 
-<div id="outline-container-org6a48692" class="outline-3">
+<div id="outline-container-orgd42fd77" class="outline-3">
 <h3 id="小鹤双拼"><span class="section-number-3">2.4</span> 小鹤双拼</h3>
 <div class="outline-text-3" id="text-小鹤双拼">
 <p>
@@ -300,7 +298,7 @@ sudo cp default.yaml /usr/share/rime-data/default.yaml
 </div>
 </div>
 
-<div id="outline-container-org4c87049" class="outline-2">
+<div id="outline-container-org06885b8" class="outline-2">
 <h2 id="常用软件"><span class="section-number-2">3</span> 常用软件</h2>
 <div class="outline-text-2" id="text-常用软件">
 <p>
@@ -311,7 +309,7 @@ sudo cp default.yaml /usr/share/rime-data/default.yaml
 </p>
 </div>
 
-<div id="outline-container-orgd2b0345" class="outline-3">
+<div id="outline-container-orgd19031d" class="outline-3">
 <h3 id="dia"><span class="section-number-3">3.1</span> Dia</h3>
 <div class="outline-text-3" id="text-dia">
 <p>
@@ -320,7 +318,7 @@ sudo cp default.yaml /usr/share/rime-data/default.yaml
 </div>
 </div>
 
-<div id="outline-container-org93935c7" class="outline-3">
+<div id="outline-container-org8d8ccd3" class="outline-3">
 <h3 id="ncdu"><span class="section-number-3">3.2</span> ncdu</h3>
 <div class="outline-text-3" id="text-ncdu">
 <p>
@@ -332,7 +330,7 @@ ncdu (NCurses Disk Usage) 是一個基於 NCurses 系統的磁盤用量分析命
 </div>
 </div>
 
-<div id="outline-container-org38a5879" class="outline-3">
+<div id="outline-container-org907ceaa" class="outline-3">
 <h3 id="xreader"><span class="section-number-3">3.3</span> xreader</h3>
 <div class="outline-text-3" id="text-xreader">
 <p>
@@ -343,7 +341,7 @@ pdf 文檔閱讀器，X-Apps 計劃中的一員（這個計劃好像只有個閱
 </div>
 </div>
 
-<div id="outline-container-org14dffe6" class="outline-3">
+<div id="outline-container-orga160e7f" class="outline-3">
 <h3 id="pcmanfm"><span class="section-number-3">3.4</span> pcmanfm</h3>
 <div class="outline-text-3" id="text-pcmanfm">
 <p>
@@ -354,7 +352,7 @@ LXDE 桌面環境默認文件管理器，實話說比 Gnome 的鸚鵡螺好用�
 </div>
 </div>
 
-<div id="outline-container-orga0ea7a9" class="outline-3">
+<div id="outline-container-org871718c" class="outline-3">
 <h3 id="lxappearance"><span class="section-number-3">3.5</span> lxappearance</h3>
 <div class="outline-text-3" id="text-lxappearance">
 <p>
@@ -364,7 +362,7 @@ GTK+ 界面主題設置工具，又是 LXDE 的一員。LXDE 自帶的幾款軟�
 </div>
 </div>
 
-<div id="outline-container-orgaa932f6" class="outline-3">
+<div id="outline-container-orgce176ab" class="outline-3">
 <h3 id="gpickview"><span class="section-number-3">3.6</span> gpickview</h3>
 <div class="outline-text-3" id="text-gpickview">
 <p>
@@ -373,7 +371,7 @@ LXDE 默認的圖片查看器，體積小巧，沒有太多花哨功能。
 </div>
 </div>
 
-<div id="outline-container-orga9a141d" class="outline-3">
+<div id="outline-container-org98a723b" class="outline-3">
 <h3 id="sxiv"><span class="section-number-3">3.7</span> sxiv</h3>
 <div class="outline-text-3" id="text-sxiv">
 <p>
@@ -382,7 +380,7 @@ Simple X11 Image Viewer
 </div>
 </div>
 
-<div id="outline-container-orga98aff2" class="outline-3">
+<div id="outline-container-org00054d7" class="outline-3">
 <h3 id="zathura"><span class="section-number-3">3.8</span> zathura</h3>
 <div class="outline-text-3" id="text-zathura">
 <p>
@@ -391,7 +389,7 @@ Suckless pdf 阅读器
 </div>
 </div>
 
-<div id="outline-container-orgc64d946" class="outline-3">
+<div id="outline-container-org6c8e9f4" class="outline-3">
 <h3 id="ranger"><span class="section-number-3">3.9</span> ranger</h3>
 <div class="outline-text-3" id="text-ranger">
 <p>
@@ -400,8 +398,8 @@ python 写成的基于命令行的文件管理器，有与 Vim 类似的键位�
 </p>
 </div>
 
-<div id="outline-container-orgfb72148" class="outline-4">
-<h4 id="orgfb72148"><span class="section-number-4">3.9.1</span> 初次使用 通过运行</h4>
+<div id="outline-container-orge67a3a8" class="outline-4">
+<h4 id="orge67a3a8"><span class="section-number-4">3.9.1</span> 初次使用 通过运行</h4>
 <div class="outline-text-4" id="text-3-9-1">
 <p>
 <code>ranger --copy-config=all</code> 拷贝所有配置文件到用户家目录。包含以下文件
@@ -418,7 +416,7 @@ scope.sh <span style="color: #b2b2b2; font-style: italic;"># </span><span style=
 </div>
 </div>
 
-<div id="outline-container-orgc4dfc29" class="outline-4">
+<div id="outline-container-org400ca41" class="outline-4">
 <h4 id="文件预览"><span class="section-number-4">3.9.2</span> 文件预览</h4>
 <div class="outline-text-4" id="text-文件预览">
 <p>
@@ -477,7 +475,7 @@ rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)
 </div>
 </div>
 
-<div id="outline-container-orgf2d19a3" class="outline-4">
+<div id="outline-container-org7900f6e" class="outline-4">
 <h4 id="批量重命名"><span class="section-number-4">3.9.3</span> 批量重命名</h4>
 <div class="outline-text-4" id="text-批量重命名">
 <p>
