@@ -52,6 +52,20 @@ $(document).ready(() => {
             modal.style.display = "none";
         }
     })
+
+    window.onscroll = function() {stickNavBar()};
+
+    var navBar = document.getElementById('top-nav');
+
+    var sticky = navBar.offsetTop;
+
+    function stickNavBar() {
+        if (window.pageYOffset >= sticky) {
+            navBar.classList.add("sticky")
+        } else {
+            navBar.classList.remove("sticky");
+        }
+    }
 })
 
 function browserRedirect() {
@@ -71,3 +85,4 @@ function browserRedirect() {
         return 'PC';
     }
 }
+

@@ -76,7 +76,7 @@ a.site-name {
 a.site-name:hover {
   background-color: transparent;
   text-decoration: none;
-  color: green;
+  color: #7e4fa0;
 }
 
 a.site-name:before {
@@ -88,7 +88,7 @@ a.site-name:after {
 }
 
 a.site-name span.at-home {
-  color: green;
+  color: #7e4fa0;
 }
 
 div.banner {
@@ -103,34 +103,40 @@ div.banner {
   text-align: center;
 }
 
-div.top-nav {
-  position: relative;
-  top: 0px;
+div#top-nav {
   width: 100%;
   padding: 0;
   font-size: 22px;
   background-color: #555;
+  z-index: 202;
 }
 
-a.photo-entry, a.about-entry {
+div.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+div#top-nav a {
   float: left;
   display: block;
-  color: white;
   padding: 5px 10px 5px 10px;
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
 }
 
-a.photo-entry:before, a.about-entry:before {
+div#top-nav a:hover {
+  background-color: #111;
+  text-decoration: none;
+}
+
+div#top-nav a:before {
   content: none;
 }
 
-a.photo-entry:after, a.about-entry:after {
+div#top-nav a:after {
   content: none;
-}
-
-ul.menu {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
 }
 
 .taglist {
@@ -592,7 +598,7 @@ div #author, div #date, div #generator {
 div #copyright {
     display: block;
     border-top: 1.5px solid #acacac;
-    margin: 30px 0 0;
+    margin: 30px 0 10px 0;
     padding-top: 10px;
     vertical-align: middle;
     text-align: center;
@@ -632,7 +638,7 @@ div #copyright img:first-child {
     /* Increase body padding and font-sizes */
     #content {
         padding: 40px;
-        font-size: 18px;
+        font-size: 16px;
         line-height: 1.75;
     }
     h1:before, h2:before, h3:before {
@@ -643,9 +649,10 @@ div #copyright img:first-child {
     }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1200px) {
     #content {
         padding: 40px;
+        font-size: 18px;
     }
     a.site-name {
       display: block;
