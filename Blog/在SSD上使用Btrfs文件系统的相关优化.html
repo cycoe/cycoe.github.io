@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-19 Tue 16:47 -->
+<!-- 2020-05-19 Tue 20:22 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>在 SSD 上使用 Btrfs 文件系統的相關優化</title>
@@ -14,12 +14,18 @@
 </head>
 <body>
 <div id="preamble" class="status">
-<ul class="menu">
-  <nav class="home">Cycoe@Home</nav>
-  <li><a href="/">Index</a></li>
-  <li><a href="/Photo/index.html">Photo</a></li>
-  <li><a href="/about.html">About</a></li>
-</ul>
+<div class="top-container">
+  <a class="site-name" href="/">
+    Cycoe
+    <span class="at-home">@Home</span>
+  </a>
+  <div class="banner">Keep It Simple Stupid</div>
+</div>
+<div class="top-nav" style="overflow:auto">
+  <a class="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
+  <a class="about-entry" href="/about.html" title="About Me">About</a>
+</div>
+
 <!-- The Modal -->
 <div id="img-modal" class="modal">
   <!-- The Close Button -->
@@ -58,7 +64,7 @@
 </nav>
 <!-- more -->
 
-<div id="outline-container-org0ddd918" class="outline-2">
+<div id="outline-container-org0c59ff4" class="outline-2">
 <h2 id="優化掛載參數"><span class="section-number-2">1</span> 優化掛載參數</h2>
 <div class="outline-text-2" id="text-優化掛載參數">
 <p>
@@ -72,7 +78,7 @@
 </div>
 </div>
 
-<div id="outline-container-org8bc9360" class="outline-3">
+<div id="outline-container-org1a05bac" class="outline-3">
 <h3 id="ssd"><span class="section-number-3">1.1</span> ssd</h3>
 <div class="outline-text-3" id="text-ssd">
 <p>
@@ -82,7 +88,7 @@ TRIM/discard。
 </div>
 </div>
 
-<div id="outline-container-org5949be4" class="outline-3">
+<div id="outline-container-org13aa8f3" class="outline-3">
 <h3 id="discard"><span class="section-number-3">1.2</span> discard</h3>
 <div class="outline-text-3" id="text-discard">
 <p>
@@ -107,7 +113,7 @@ SSD
 </div>
 </div>
 
-<div id="outline-container-orge809948" class="outline-3">
+<div id="outline-container-org7097f5a" class="outline-3">
 <h3 id="noatime"><span class="section-number-3">1.3</span> noatime</h3>
 <div class="outline-text-3" id="text-noatime">
 <p>
@@ -117,7 +123,7 @@ SSD
 </div>
 </div>
 
-<div id="outline-container-orgcf0eb33" class="outline-3">
+<div id="outline-container-org81f5852" class="outline-3">
 <h3 id="compress"><span class="section-number-3">1.4</span> compress</h3>
 <div class="outline-text-3" id="text-compress">
 <p>
@@ -137,7 +143,7 @@ lzo 速度更快，zlib 壓縮率更高。注意確認 SSD 主控是否是非壓
 </div>
 </div>
 
-<div id="outline-container-org111ae74" class="outline-3">
+<div id="outline-container-org7cd3a6e" class="outline-3">
 <h3 id="寫緩存"><span class="section-number-3">1.5</span> 寫緩存</h3>
 <div class="outline-text-3" id="text-寫緩存">
 <p>
@@ -150,7 +156,7 @@ Write Cache，但在突然斷電的情況下可能造成數據丟失。
 </div>
 </div>
 
-<div id="outline-container-org0b127c1" class="outline-2">
+<div id="outline-container-org827bf41" class="outline-2">
 <h2 id="io-調度"><span class="section-number-2">2</span> I/O 調度</h2>
 <div class="outline-text-2" id="text-io-調度">
 <p>

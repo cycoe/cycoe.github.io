@@ -1,19 +1,9 @@
 #content {
     background: #fff;
-    max-width: 800px;
+    max-width: 900px;
     position: relative;
     margin: 5px auto;
-}
-#header {
-    float: right;
-    margin-left: 1em;
-    margin-bottom: 1em
-}
-
-nav{
-    text-transform: uppercase;
-    font-size: 30px;
-    text-decoration: none;
+    padding: 0px 40px 0px 40px;
 }
 
 /******************************************************
@@ -52,7 +42,6 @@ html {
     font-size: 62.5%;
 }
 body {
-    padding: 40px;
     font-family: Menlo, Monaco, monospace;
     font-size: 14px;
     line-height: 1.5;
@@ -63,8 +52,73 @@ p {
     margin: 10px 0px 10px 0px;
 }
 
-.headline {
-    display: flex;
+/* Top Banner */
+div.top-container {
+  position: relative;
+  padding: 20px 16px 0 16px;
+  height: 68px;
+  line-height: 50px;
+  letter-spacing: 3px;
+}
+
+a.site-name {
+  display: block;
+  position: absolute;
+  top: 17px;
+  text-transform: uppercase;
+  font-size: 30px;
+  text-decoration: none;
+  margin: auto;
+  transition: 0.3s;
+}
+
+a.site-name:hover {
+  background-color: transparent;
+  text-decoration: none;
+  color: green;
+}
+
+a.site-name:before {
+  content: none;
+}
+
+a.site-name:after {
+  content: none;
+}
+
+a.site-name span.at-home {
+  color: green;
+}
+
+div.banner {
+  float: right;
+  text-transform: uppercase;
+  font-size: 18px;
+  letter-spacing: 4px;
+}
+
+div.top-nav {
+  position: relative;
+  top: 0px;
+  width: 100%;
+  padding: 0;
+  font-size: 22px;
+  background-color: #555;
+}
+
+a.photo-entry, a.about-entry {
+  float: left;
+  display: block;
+  color: white;
+  padding: 5px 10px 5px 10px;
+}
+
+a.photo-entry:before, a.about-entry:before {
+  content: none;
+}
+
+a.photo-entry:after, a.about-entry:after {
+  content: none;
 }
 
 ul.menu {
@@ -570,7 +624,7 @@ div #copyright img:first-child {
 
 @media (min-width: 768px) {
     /* Increase body padding and font-sizes */
-    body {
+    #content {
         padding: 40px;
         font-size: 18px;
         line-height: 1.75;
@@ -584,7 +638,7 @@ div #copyright img:first-child {
 }
 
 @media (min-width: 1024px) {
-    body {
+    #content {
         padding: 40px;
     }
     .modal-content {

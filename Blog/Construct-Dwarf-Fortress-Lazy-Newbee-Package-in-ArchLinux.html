@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-19 Tue 16:48 -->
+<!-- 2020-05-19 Tue 20:23 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Construct Dwarf Fortress Lazy Newbee Package in ArchLinux</title>
@@ -14,12 +14,18 @@
 </head>
 <body>
 <div id="preamble" class="status">
-<ul class="menu">
-  <nav class="home">Cycoe@Home</nav>
-  <li><a href="/">Index</a></li>
-  <li><a href="/Photo/index.html">Photo</a></li>
-  <li><a href="/about.html">About</a></li>
-</ul>
+<div class="top-container">
+  <a class="site-name" href="/">
+    Cycoe
+    <span class="at-home">@Home</span>
+  </a>
+  <div class="banner">Keep It Simple Stupid</div>
+</div>
+<div class="top-nav" style="overflow:auto">
+  <a class="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
+  <a class="about-entry" href="/about.html" title="About Me">About</a>
+</div>
+
 <!-- The Modal -->
 <div id="img-modal" class="modal">
   <!-- The Close Button -->
@@ -62,7 +68,7 @@
 </div>
 </nav>
 
-<div id="outline-container-org3a2db00" class="outline-2">
+<div id="outline-container-orgdb89f47" class="outline-2">
 <h2 id="included-with-this-package"><span class="section-number-2">1</span> Included With This Package</h2>
 <div class="outline-text-2" id="text-included-with-this-package">
 <p>
@@ -113,12 +119,12 @@ archlinux 上，我们无法通过 aur 简单地安装懒人包，因此我们�
 </div>
 </div>
 
-<div id="outline-container-org41ddaf3" class="outline-2">
+<div id="outline-container-orgf9409af" class="outline-2">
 <h2 id="utilities"><span class="section-number-2">2</span> Utilities</h2>
 <div class="outline-text-2" id="text-utilities">
 </div>
 
-<div id="outline-container-orgc949280" class="outline-3">
+<div id="outline-container-org28962a5" class="outline-3">
 <h3 id="dfhack-linux-v0.44.09-r1-gcc-5.4.0"><span class="section-number-3">2.1</span> <a href="http://www.bay12forums.com/smf/index.php?topic=139553.0">DFHack Linux V0.44.09-r1 (gcc 5.4.0)</a></h3>
 <div class="outline-text-3" id="text-dfhack-linux-v0.44.09-r1-gcc-5.4.0">
 <p>
@@ -172,7 +178,7 @@ Then run <code>makepkg</code> to download lacking files.
 </div>
 </div>
 
-<div id="outline-container-orgf14490a" class="outline-3">
+<div id="outline-container-org9c48931" class="outline-3">
 <h3 id="twbt-6.41"><span class="section-number-3">2.2</span> <a href="http://www.bay12forums.com/smf/index.php?topic=138754.0">TWBT 6.41</a></h3>
 <div class="outline-text-3" id="text-twbt-6.41">
 <p>
@@ -207,7 +213,7 @@ To make a long story short, TWBT can greately improve the graphics.
 </div>
 </div>
 
-<div id="outline-container-org74973d1" class="outline-3">
+<div id="outline-container-orgd638131" class="outline-3">
 <h3 id="dwarf-therapist-v39.3.1-compiled-with-qt5.5.1"><span class="section-number-3">2.3</span> <a href="https://github.com/Dwarf-Therapist/Dwarf-Therapist">Dwarf Therapist v39.3.1</a> (<b>compiled with qt5.5.1</b>)</h3>
 <div class="outline-text-3" id="text-dwarf-therapist-v39.3.1-compiled-with-qt5.5.1">
 <p>
@@ -224,7 +230,7 @@ informations organized in table.
 </div>
 </div>
 
-<div id="outline-container-org8f8a1e0" class="outline-3">
+<div id="outline-container-orgbfc9d18" class="outline-3">
 <h3 id="soundsense-r2016-1"><span class="section-number-3">2.4</span> <a href="http://df.zweistein.cz/soundsense/">Soundsense r2016-1</a></h3>
 <div class="outline-text-3" id="text-soundsense-r2016-1">
 <p>
@@ -234,7 +240,7 @@ sounds by parsing event changes in <code>~/.dwarffortress/gamelog.txt</code>.
 </div>
 </div>
 
-<div id="outline-container-org670b5b0" class="outline-3">
+<div id="outline-container-org6cf8a40" class="outline-3">
 <h3 id="soundcense-gtk-1.4.2-requires-mono-go-here-for-install-instructions"><span class="section-number-3">2.5</span> <a href="http://www.bay12forums.com/smf/index.php?topic=159567.0">SoundCenSe GTK 1.4.2</a> (<b>Requires Mono, go <a href="http://www.mono-project.com/download/#download-lin">HERE</a> for install instructions</b>)</h3>
 <div class="outline-text-3" id="text-soundcense-gtk-1.4.2-requires-mono-go-here-for-install-instructions">
 <p>
@@ -243,7 +249,7 @@ Maybe a fork of Soundsense written by c# and GTK2, by I never run successfully.
 </div>
 </div>
 
-<div id="outline-container-orgf3c98ad" class="outline-3">
+<div id="outline-container-org085325a" class="outline-3">
 <h3 id="qfconvert-2.04-see-.lnpaboutqfconvert.md-for-usage-instructions"><span class="section-number-3">2.6</span> <a href="http://www.joelpt.net/quickfort/">qfconvert 2.04</a> (<b>See ./LNP/about/qfconvert.md for usage instructions</b>)</h3>
 <div class="outline-text-3" id="text-qfconvert-2.04-see-.lnpaboutqfconvert.md-for-usage-instructions">
 <p>
@@ -253,7 +259,7 @@ Quickfort 2 is a utility for Dwarf Fortress that helps you build fortresses from
 </div>
 </div>
 
-<div id="outline-container-org4044472" class="outline-3">
+<div id="outline-container-org4bcc26c" class="outline-3">
 <h3 id="df-announcement-filter-1.01-requires-java"><span class="section-number-3">2.7</span> <a href="http://www.bay12forums.com/smf/index.php?topic=130030.0">DF Announcement Filter 1.01</a> (<b>Requires Java</b>)</h3>
 <div class="outline-text-3" id="text-df-announcement-filter-1.01-requires-java">
 <p>
@@ -265,7 +271,7 @@ announcements show up in the feed rather than checking the reports screen.
 </div>
 </div>
 
-<div id="outline-container-orgf55e4ac" class="outline-3">
+<div id="outline-container-org938dd71" class="outline-3">
 <h3 id="legends-browser-1.17.1-requires-java-8"><span class="section-number-3">2.8</span> <a href="http://www.bay12forums.com/smf/index.php?topic=155307.0">Legends Browser 1.17.1</a> (<b>Requires Java 8</b>)</h3>
 <div class="outline-text-3" id="text-legends-browser-1.17.1-requires-java-8">
 <p>
@@ -278,7 +284,7 @@ a xml file in legend mode.
 </div>
 </div>
 
-<div id="outline-container-org264773f" class="outline-3">
+<div id="outline-container-orgadd46ff" class="outline-3">
 <h3 id="armok-vision-0.19.1"><span class="section-number-3">2.9</span> <a href="http://www.bay12forums.com/smf/index.php?topic=146473.0">Armok Vision 0.19.1</a></h3>
 <div class="outline-text-3" id="text-armok-vision-0.19.1">
 <p>
@@ -289,7 +295,7 @@ stonesense, but can run independent with df.
 </div>
 </div>
 
-<div id="outline-container-org944018a" class="outline-2">
+<div id="outline-container-org71cd2cd" class="outline-2">
 <h2 id="graphics"><span class="section-number-2">3</span> Graphics</h2>
 <div class="outline-text-2" id="text-graphics">
 <p>
