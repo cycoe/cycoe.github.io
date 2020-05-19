@@ -5,7 +5,6 @@
 let ISHOME = false,
     ISPC = false,
     ISMB = false,
-    isZoom = false,
     isCard = false,
     cent = '',
     topBtn = '';
@@ -28,28 +27,30 @@ $(document).ready(() => {
         console.log(str)
         $('<span class="code-type-flag">' + str + '</span>').prependTo($(this))
     })
+
     // Image zoom.
     // ---------------------------------
     $('img').each(function(idx, ele) {
-        $(this).click(function() {
+        var modal = document.getElementById('img-modal');
+        var modalImg = document.getElementById('modal-img');
 
-            if(!isZoom) {
-                $('html').append(
-                    `
-                    <div class='img-wrapper animated pulse faster'>
-                        <img class='img-zoom' src=${ele.src} />
-                    </div>
-                    `
-                )
+        // $(this).click(function() {
+        //     modal.style.display = "block";
+        //     modalImg.src = ele.src;
+        // })
 
-                $('.img-wrapper').click(function() {
-                    $('.img-wrapper').remove()
-                    isZoom = false
-                })
+        ele.onclick = function () {
+            modal.style.display = "block";
+            modalImg.src = ele.src;
+        }
 
-                isZoom = true
-            }
-        })
+        // Get the <span> element that closes the modal
+        var closeBtn = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on <span> (x), close the modal
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
     })
 })
 

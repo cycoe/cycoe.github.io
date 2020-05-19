@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-18 Mon 18:50 -->
+<!-- 2020-05-19 Tue 14:50 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gnuplot 绘图第五弹-多子图绘制</title>
@@ -21,24 +21,34 @@
         <li><a href="/Photo/index.html">Photo</a></li>
         <li><a href="/about.html">About</a></li>
     </ul>
+    <!-- The Modal -->
+    <div id="img-modal" class="modal">
+      <!-- The Close Button -->
+      <span class="close">&times;</span>
+      <!-- Modal Content (The Image) -->
+      <img class="modal-content" id="modal-img">
+      <!-- Modal Caption (Image Text) -->
+      <div id="caption"></div>
+    </div>
 </header>
 </div>
 <div id="content">
 <header>
 <h1 class="title">Gnuplot 绘图第五弹-多子图绘制</h1>
 </header><nav id="table-of-contents">
-<h2> <a href="javascript:window.scrollTo(0,0)"
-        style="color: black !important; border-bottom: none !important;"
-        class="tooltip"
-        title="Go to the top of the page">
-       Ξ
-     </a> </h2>
+<h2><div id="toc-symbol">Ξ</div>
+    <div id="go-top"><a href="javascript:window.scrollTo(0,0)"
+    style="color: black !important; border-bottom: none !important;"
+    class="tooltip"
+    title="Go to the top of the page">
+    <span class="top">&uarr;</span>
+    </a></div></h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgb3e9aa9">1. 安排子图阵列</a></li>
-<li><a href="#orgd81331d">2. 手动摆放位置</a></li>
-<li><a href="#org04e48c9">3. 内嵌子图</a></li>
-<li><a href="#org67611c8">4. 多子图中的标签与箭头</a></li>
+<li><a href="#org2b56ee7">1. 安排子图阵列</a></li>
+<li><a href="#org67c649a">2. 手动摆放位置</a></li>
+<li><a href="#orgf3a3f09">3. 内嵌子图</a></li>
+<li><a href="#orgb3f6fdb">4. 多子图中的标签与箭头</a></li>
 </ul>
 </div>
 </nav>
@@ -48,8 +58,8 @@
 
 <!-- more -->
 
-<div id="outline-container-orgb3e9aa9" class="outline-2">
-<h2 id="orgb3e9aa9"><span class="section-number-2">1</span> 安排子图阵列</h2>
+<div id="outline-container-org2b56ee7" class="outline-2">
+<h2 id="org2b56ee7"><span class="section-number-2">1</span> 安排子图阵列</h2>
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> multiplot layout 2, 2
@@ -71,8 +81,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgd81331d" class="outline-2">
-<h2 id="orgd81331d"><span class="section-number-2">2</span> 手动摆放位置</h2>
+<div id="outline-container-org67c649a" class="outline-2">
+<h2 id="org67c649a"><span class="section-number-2">2</span> 手动摆放位置</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> multiplot
@@ -104,8 +114,8 @@
 </div>
 </div>
 
-<div id="outline-container-org04e48c9" class="outline-2">
-<h2 id="org04e48c9"><span class="section-number-2">3</span> 内嵌子图</h2>
+<div id="outline-container-orgf3a3f09" class="outline-2">
+<h2 id="orgf3a3f09"><span class="section-number-2">3</span> 内嵌子图</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> multiplot
@@ -147,8 +157,8 @@
 </div>
 </div>
 
-<div id="outline-container-org67611c8" class="outline-2">
-<h2 id="org67611c8"><span class="section-number-2">4</span> 多子图中的标签与箭头</h2>
+<div id="outline-container-orgb3f6fdb" class="outline-2">
+<h2 id="orgb3f6fdb"><span class="section-number-2">4</span> 多子图中的标签与箭头</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> xrange [<span style="color: #1f5bff;">-pi:pi</span>]
@@ -185,7 +195,7 @@
 <div id="postamble" class="status">
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
-      <div id="date">Date: May, 18, 2020</div>
+      <div id="date">Date: May, 19, 2020</div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。

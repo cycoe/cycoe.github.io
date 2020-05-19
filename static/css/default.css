@@ -36,7 +36,6 @@ nav{
 */
 
 
-
 /* Body resets
    -------------------------------------------------- */
 
@@ -169,7 +168,9 @@ pre:hover {
   position: absolute;
   top: 0;
   right: 0;
-  padding: 10px 15px 10px 15px
+  padding: 10px 15px 10px 15px;
+  animation-name: fade-in;
+  animation-duration: 0.6s;
   /* z-index: -1; */
 }
 pre:hover .code-type-flag {
@@ -195,43 +196,106 @@ img {
     margin-right: auto;
     max-width: 90%;
     /* border-radius: 5px; */
+    animation-name: fade-in;
+    animation-duration: 1s;
+    transition: 0.3s;
+    cursor: pointer;
 }
+
+img:hover {
+  opacity: 0.7;
+}
+
+/* caption of the figures */
 figcaption {
   margin-top: 5px;
   text-align: center;
 }
-.img-wrapper {
-  position: fixed;
-  width: 100%;
-  height: 100%;
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 201; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
   top: 0;
-  text-align: center;
-  background-color: rgba(0, 0, 0, 0.8);
-  overflow: auto;
-}
-.img-zoom {
-  width: 98%;
-  margin-top: 1%;
-  background-color: #fff;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
 }
 
+/* Modal Content (Image) */
+img.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  cursor: initial;
+}
+img.modal-content:hover {
+  opacity: 1;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption {
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+/* The Close Button */
+span.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+span.close:hover, span.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Style for links */
 a {
     font-weight: inherit;
     line-height: inherit;
     color: #000;
-    text-decoration: none;
+    text-decoration: underline;
 }
-sup a:before {
+a:before {
+    color: #ccc;
     content: "[";
 }
-sup a:after {
+a:after {
+    color: #ccc;
     content: "]";
 }
 a:hover {
     text-decoration: underline;
+    background-color: lightblue;
 }
+
 table {
-    background: #ffff87;
+    background: #ffffa7;
     border-top: hidden;
     border-bottom: hidden;
     border-radius: 5px;
@@ -383,11 +447,12 @@ table th.right, table td.right {
 #table-of-contents {
     position: fixed;
     right: 0em;
-    top: 0em;
-    border: 1px dashed #b2aaaa;
-    background: rgba(248,245,236,.6);
-    -webkit-box-shadow: 0 0 1em #777777;
-    -moz-box-shadow: 0 0 1em #777777;
+    top: 70%;
+    border: 1.5px dashed #b2aaaa;
+    border-radius: 5px;
+    background: rgba(253,253,231,.7);
+    -webkit-box-shadow: 0 0 1em #b9b9b9;
+    -moz-box-shadow: 0 0 1em #b9b9b9;
     -webkit-border-bottom-left-radius: 5px;
     -moz-border-radius-bottomleft: 5px;
     text-align: right;
@@ -396,18 +461,26 @@ table th.right, table td.right {
     overflow: auto;
     z-index: 200;
 }
+
 #table-of-contents h2 {
     max-width: 20em;
     font-size: 18px;
     font-weight: normal;
-    padding-left: 0.5em;
-    padding-top: 0.05em;
-    padding-bottom: 0.05em;
+    margin: 0.5em;
+}
+
+#table-of-contents h2 #go-top {
+  font-weight: bold;
+  display: none;
+  text-align: center;
+}
+
+#table-of-contents:hover #go-top {
+  display: block;
 }
 
 #table-of-contents ul {
-    margin-left: 14pt;
-    margin-bottom: 10pt;
+    margin: 1em 0.5em 0.5em 0.5em;
     padding: 0
 }
 
@@ -431,6 +504,8 @@ table th.right, table td.right {
     display: block;
     padding: 0.5em;
     margin-top: -1.5em;
+    animation-name: fade-in;
+    animation-duration: 0.6s;
 }
 
 /* Author information in postamble */
@@ -466,6 +541,22 @@ div #copyright img:first-child {
     vertical-align: middle;
 }
 
+/* Animations */
+@keyframes fade-in {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@keyframes fade-out {
+  0% {opacity:1;}
+  100% {opacity:0;}
+}
+
+@keyframes zoom {
+  from {transform:scale(0.5)}
+  to {transform:scale(1)}
+}
+
 /* Responsive
    -------------------------------------------------- */
 
@@ -478,6 +569,9 @@ div #copyright img:first-child {
     }
     h1:before, h2:before, h3:before {
         display: inline;
+    }
+    .modal-content {
+      width: 100%;
     }
 }
 

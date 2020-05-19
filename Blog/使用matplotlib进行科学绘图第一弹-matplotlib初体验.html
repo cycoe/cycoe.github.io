@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-19 Tue 10:46 -->
+<!-- 2020-05-19 Tue 14:50 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>使用 matplotlib 进行科学绘图第一弹-matplotlib 初体验</title>
@@ -21,18 +21,28 @@
         <li><a href="/Photo/index.html">Photo</a></li>
         <li><a href="/about.html">About</a></li>
     </ul>
+    <!-- The Modal -->
+    <div id="img-modal" class="modal">
+      <!-- The Close Button -->
+      <span class="close">&times;</span>
+      <!-- Modal Content (The Image) -->
+      <img class="modal-content" id="modal-img">
+      <!-- Modal Caption (Image Text) -->
+      <div id="caption"></div>
+    </div>
 </header>
 </div>
 <div id="content">
 <header>
 <h1 class="title">使用 matplotlib 进行科学绘图第一弹-matplotlib 初体验</h1>
 </header><nav id="table-of-contents">
-<h2> <a href="javascript:window.scrollTo(0,0)"
-        style="color: black !important; border-bottom: none !important;"
-        class="tooltip"
-        title="Go to the top of the page">
-       Ξ
-     </a> </h2>
+<h2><div id="toc-symbol">Ξ</div>
+    <div id="go-top"><a href="javascript:window.scrollTo(0,0)"
+    style="color: black !important; border-bottom: none !important;"
+    class="tooltip"
+    title="Go to the top of the page">
+    <span class="top">&uarr;</span>
+    </a></div></h2>
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#matplotlib-编程风格">1. matplotlib 编程风格</a></li>
@@ -80,7 +90,7 @@ matplotlib 库进行介绍，而是针对使用 matplotlib 进行科学绘图过
 进行总结。
 </p>
 
-<div id="outline-container-org345091f" class="outline-2">
+<div id="outline-container-orgbcf532f" class="outline-2">
 <h2 id="matplotlib-编程风格"><span class="section-number-2">1</span> matplotlib 编程风格</h2>
 <div class="outline-text-2" id="text-matplotlib-编程风格">
 <p>
@@ -121,7 +131,7 @@ plt.show<span style="color: #cc0000; font-weight: bold;">()</span>
 </div>
 </div>
 
-<div id="outline-container-orga74d1fc" class="outline-2">
+<div id="outline-container-org17fb317" class="outline-2">
 <h2 id="first-blood-第一张图"><span class="section-number-2">2</span> First Blood 第一张图</h2>
 <div class="outline-text-2" id="text-first-blood-第一张图">
 <p>
@@ -170,7 +180,7 @@ plt.show<span style="color: #cc0000; font-weight: bold;">()</span>
 </p>
 </div>
 
-<div id="outline-container-org4a6d041" class="outline-3">
+<div id="outline-container-org2882ddd" class="outline-3">
 <h3 id="添加标题title和轴标签axis-label"><span class="section-number-3">2.1</span> 添加标题（title）和轴标签（axis label）</h3>
 <div class="outline-text-3" id="text-添加标题title和轴标签axis-label">
 <p>

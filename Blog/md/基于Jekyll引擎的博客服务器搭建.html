@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-18 Mon 20:38 -->
+<!-- 2020-05-19 Tue 14:49 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>&lrm;</title>
@@ -21,16 +21,26 @@
         <li><a href="/Photo/index.html">Photo</a></li>
         <li><a href="/about.html">About</a></li>
     </ul>
+    <!-- The Modal -->
+    <div id="img-modal" class="modal">
+      <!-- The Close Button -->
+      <span class="close">&times;</span>
+      <!-- Modal Content (The Image) -->
+      <img class="modal-content" id="modal-img">
+      <!-- Modal Caption (Image Text) -->
+      <div id="caption"></div>
+    </div>
 </header>
 </div>
 <div id="content">
 <nav id="table-of-contents">
-<h2> <a href="javascript:window.scrollTo(0,0)"
-        style="color: black !important; border-bottom: none !important;"
-        class="tooltip"
-        title="Go to the top of the page">
-       Ξ
-     </a> </h2>
+<h2><div id="toc-symbol">Ξ</div>
+    <div id="go-top"><a href="javascript:window.scrollTo(0,0)"
+    style="color: black !important; border-bottom: none !important;"
+    class="tooltip"
+    title="Go to the top of the page">
+    <span class="top">&uarr;</span>
+    </a></div></h2>
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#爲什麼要搭建自己的博客服務器">1. 爲什麼要搭建自己的博客服務器</a></li>
@@ -57,7 +67,7 @@ Transform your plain text into static websites and blogs.
 
 </div>
 
-<div id="outline-container-org09cb37d" class="outline-2">
+<div id="outline-container-org19293f9" class="outline-2">
 <h2 id="爲什麼要搭建自己的博客服務器"><span class="section-number-2">1</span> 爲什麼要搭建自己的博客服務器</h2>
 <div class="outline-text-2" id="text-爲什麼要搭建自己的博客服務器">
 <p>
@@ -72,12 +82,12 @@ Transform your plain text into static websites and blogs.
 </div>
 </div>
 
-<div id="outline-container-org3a1cac5" class="outline-2">
+<div id="outline-container-org2deefce" class="outline-2">
 <h2 id="環境搭建"><span class="section-number-2">2</span> 環境搭建</h2>
 <div class="outline-text-2" id="text-環境搭建">
 </div>
 
-<div id="outline-container-orgb5497fc" class="outline-3">
+<div id="outline-container-orga748eaf" class="outline-3">
 <h3 id="安裝-rubyurl2"><span class="section-number-3">2.1</span> 安裝 <a href="https://ruby-china.org/">Ruby</a></h3>
 <div class="outline-text-3" id="text-安裝-rubyurl2">
 <p>
@@ -110,7 +120,7 @@ bash<br>
 </div>
 </div>
 
-<div id="outline-container-org6c626bc" class="outline-3">
+<div id="outline-container-org6d9cf25" class="outline-3">
 <h3 id="安裝-jekyllurl3"><span class="section-number-3">2.2</span> 安裝 <a href="http://jekyllrb.com/">Jekyll</a></h3>
 <div class="outline-text-3" id="text-安裝-jekyllurl3">
 <blockquote>
@@ -152,7 +162,7 @@ bundle install
 </div>
 </div>
 
-<div id="outline-container-org2769f6b" class="outline-3">
+<div id="outline-container-org860e4b8" class="outline-3">
 <h3 id="運行-jekll"><span class="section-number-3">2.3</span> 運行 Jekll</h3>
 <div class="outline-text-3" id="text-運行-jekll">
 <ul class="org-ul">
@@ -169,7 +179,7 @@ bundle install
 <div id="postamble" class="status">
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
-      <div id="date">Date: May, 18, 2020</div>
+      <div id="date">Date: May, 19, 2020</div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。

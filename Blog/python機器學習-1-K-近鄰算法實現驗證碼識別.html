@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-18 Mon 20:39 -->
+<!-- 2020-05-19 Tue 14:50 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>[python機器學習-1] K 近鄰算法實現驗證碼識別</title>
@@ -21,18 +21,28 @@
         <li><a href="/Photo/index.html">Photo</a></li>
         <li><a href="/about.html">About</a></li>
     </ul>
+    <!-- The Modal -->
+    <div id="img-modal" class="modal">
+      <!-- The Close Button -->
+      <span class="close">&times;</span>
+      <!-- Modal Content (The Image) -->
+      <img class="modal-content" id="modal-img">
+      <!-- Modal Caption (Image Text) -->
+      <div id="caption"></div>
+    </div>
 </header>
 </div>
 <div id="content">
 <header>
 <h1 class="title">[python機器學習-1] K 近鄰算法實現驗證碼識別</h1>
 </header><nav id="table-of-contents">
-<h2> <a href="javascript:window.scrollTo(0,0)"
-        style="color: black !important; border-bottom: none !important;"
-        class="tooltip"
-        title="Go to the top of the page">
-       Ξ
-     </a> </h2>
+<h2><div id="toc-symbol">Ξ</div>
+    <div id="go-top"><a href="javascript:window.scrollTo(0,0)"
+    style="color: black !important; border-bottom: none !important;"
+    class="tooltip"
+    title="Go to the top of the page">
+    <span class="top">&uarr;</span>
+    </a></div></h2>
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#分類">1. 分類</a></li>
@@ -74,7 +84,7 @@ as measured by P, improves with experience E.
 
 </div>
 
-<div id="outline-container-org8e729e6" class="outline-2">
+<div id="outline-container-org4066c79" class="outline-2">
 <h2 id="分類"><span class="section-number-2">1</span> 分類</h2>
 <div class="outline-text-2" id="text-分類">
 <p>
@@ -121,7 +131,7 @@ as measured by P, improves with experience E.
 </div>
 </div>
 
-<div id="outline-container-org3e16bd1" class="outline-2">
+<div id="outline-container-org0d0e81d" class="outline-2">
 <h2 id="核心思想"><span class="section-number-2">2</span> 核心思想</h2>
 <div class="outline-text-2" id="text-核心思想">
 <p>
@@ -141,7 +151,7 @@ k-近鄰算法的原理很簡單，即選取 m 個已分類的樣本作爲訓練
 </div>
 </div>
 
-<div id="outline-container-org404f1e5" class="outline-2">
+<div id="outline-container-org8f25230" class="outline-2">
 <h2 id="代碼"><span class="section-number-2">3</span> 代碼</h2>
 <div class="outline-text-2" id="text-代碼">
 <p>
@@ -150,7 +160,7 @@ k-近鄰算法的原理很簡單，即選取 m 個已分類的樣本作爲訓練
 </p>
 </div>
 
-<div id="outline-container-orgbf45c3a" class="outline-3">
+<div id="outline-container-org0e6610b" class="outline-3">
 <h3 id="分類函數"><span class="section-number-3">3.1</span> 分類函數</h3>
 <div class="outline-text-3" id="text-分類函數">
 <div class="org-src-container">
@@ -177,7 +187,7 @@ k-近鄰算法的原理很簡單，即選取 m 個已分類的樣本作爲訓練
 <div id="postamble" class="status">
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
-      <div id="date">Date: May, 18, 2020</div>
+      <div id="date">Date: May, 19, 2020</div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-18 Mon 21:10 -->
+<!-- 2020-05-19 Tue 14:50 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>fcitx 输入法配置</title>
@@ -21,18 +21,28 @@
         <li><a href="/Photo/index.html">Photo</a></li>
         <li><a href="/about.html">About</a></li>
     </ul>
+    <!-- The Modal -->
+    <div id="img-modal" class="modal">
+      <!-- The Close Button -->
+      <span class="close">&times;</span>
+      <!-- Modal Content (The Image) -->
+      <img class="modal-content" id="modal-img">
+      <!-- Modal Caption (Image Text) -->
+      <div id="caption"></div>
+    </div>
 </header>
 </div>
 <div id="content">
 <header>
 <h1 class="title">fcitx 输入法配置</h1>
 </header><nav id="table-of-contents">
-<h2> <a href="javascript:window.scrollTo(0,0)"
-        style="color: black !important; border-bottom: none !important;"
-        class="tooltip"
-        title="Go to the top of the page">
-       Ξ
-     </a> </h2>
+<h2><div id="toc-symbol">Ξ</div>
+    <div id="go-top"><a href="javascript:window.scrollTo(0,0)"
+    style="color: black !important; border-bottom: none !important;"
+    class="tooltip"
+    title="Go to the top of the page">
+    <span class="top">&uarr;</span>
+    </a></div></h2>
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#安装">1. 安装</a></li>
@@ -53,7 +63,7 @@ fcitx 的安装非常简单，但是想让她在非桌面环境下正常运行�
 
 <!-- more -->
 
-<div id="outline-container-orgb3d7753" class="outline-2">
+<div id="outline-container-org159d595" class="outline-2">
 <h2 id="安装"><span class="section-number-2">1</span> 安装</h2>
 <div class="outline-text-2" id="text-安装">
 <p>
@@ -73,7 +83,7 @@ fcitx 的安装非常简单，但是想让她在非桌面环境下正常运行�
 </div>
 </div>
 
-<div id="outline-container-org6c28063" class="outline-2">
+<div id="outline-container-org8425d8e" class="outline-2">
 <h2 id="配置环境变量"><span class="section-number-2">2</span> 配置环境变量</h2>
 <div class="outline-text-2" id="text-配置环境变量">
 <p>
@@ -97,7 +107,7 @@ fcitx 的安装非常简单，但是想让她在非桌面环境下正常运行�
 </div>
 </div>
 
-<div id="outline-container-org2f4e753" class="outline-2">
+<div id="outline-container-orga5e8925" class="outline-2">
 <h2 id="fcitx-无法在-emacs-中使用"><span class="section-number-2">3</span> fcitx 无法在 Emacs 中使用</h2>
 <div class="outline-text-2" id="text-fcitx-无法在-emacs-中使用">
 <p>
@@ -117,7 +127,7 @@ fcitx 的安装非常简单，但是想让她在非桌面环境下正常运行�
 <div id="postamble" class="status">
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
-      <div id="date">Date: May, 18, 2020</div>
+      <div id="date">Date: May, 19, 2020</div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
