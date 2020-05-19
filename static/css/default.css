@@ -63,12 +63,13 @@ div.top-container {
 
 a.site-name {
   display: block;
-  position: absolute;
-  top: 17px;
+  position: relative;
+  top: 0;
   text-transform: uppercase;
   font-size: 30px;
+  width: 100%;
   text-decoration: none;
-  margin: auto;
+  text-align: center;
   transition: 0.3s;
 }
 
@@ -91,10 +92,15 @@ a.site-name span.at-home {
 }
 
 div.banner {
+  display: block;
   float: right;
   text-transform: uppercase;
   font-size: 18px;
   letter-spacing: 4px;
+  width: 100%;
+  margin: auto;
+  transition: 0.3s;
+  text-align: center;
 }
 
 div.top-nav {
@@ -640,6 +646,17 @@ div #copyright img:first-child {
 @media (min-width: 1024px) {
     #content {
         padding: 40px;
+    }
+    a.site-name {
+      display: block;
+      position: absolute;
+      top: 17px;
+      width: auto;
+      text-align: left;
+    }
+    div.banner {
+      float: right;
+      width: auto;
     }
     .modal-content {
       width: 100%;
