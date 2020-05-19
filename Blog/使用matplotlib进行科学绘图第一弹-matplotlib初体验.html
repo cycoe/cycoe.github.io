@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-19 Tue 10:35 -->
+<!-- 2020-05-19 Tue 10:46 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>使用 matplotlib 进行科学绘图第一弹-matplotlib 初体验</title>
@@ -63,31 +63,24 @@ application servers, and four graphical user interface toolkits.
 </blockquote>
 
 <p>
-<a href="https://matplotlib.org">matplotlib</a> 是 Python
-中常用的一个绘图库，与百度开源的
-<a href="https://www.echartsjs.com/en/index.html">echarts</a> 和基于 matplotlib
-的 <a href="http://seaborn.pydata.org/">seaborn</a> 不同，matplotlib
-是更底层的绘图库。这意味着 matplotlib
-能够对绘图风格进行更精细的控制，也意味着它默认的风格比其他库更丑。。。
+<a href="https://matplotlib.org">matplotlib</a> 是 Python 中常用的一个绘图库，与百度开源
+的<a href="https://www.echartsjs.com/en/index.html">echarts</a> 和基于 matplotlib 的
+<a href="http://seaborn.pydata.org/">seaborn</a> 不同，matplotlib 是更底层的绘图库。这意
+味着 matplotlib 能够对绘图风格进行更精细的控制，也意味着它默认的风格比其他库更
+丑。。。
 </p>
 
-<div class="HTML">
-<p>
-&lt;!&#x2013;more&#x2013;&gt;
-</p>
-
-</div>
+<!-- more -->
 
 <p>
-其实我做这个系列的原因是，在某一天我提交了我的论文给我们老板，结果我里面的图被嫌弃做的太丑。。。好吧，果然
-matplotlib
-默认的样式还是入不了老板的法眼。那么就需要对样式进行修改，不求好看，只求向
-Origin 做的图靠拢。也就是说这个系列不会系统地对 matplotlib
-库进行介绍，而是针对使用 matplotlib
-进行科学绘图过程中可能遇到的问题进行总结。
+其实我做这个系列的原因是，在某一天我提交了我的论文给我们老板，结果我里面的图被嫌
+弃做的太丑。。。好吧，果然 matplotlib 默认的样式还是入不了老板的法眼。那么就需要
+对样式进行修改，不求好看，只求向 Origin 做的图靠拢。也就是说这个系列不会系统地对
+matplotlib 库进行介绍，而是针对使用 matplotlib 进行科学绘图过程中可能遇到的问题
+进行总结。
 </p>
 
-<div id="outline-container-org9ce8f72" class="outline-2">
+<div id="outline-container-org345091f" class="outline-2">
 <h2 id="matplotlib-编程风格"><span class="section-number-2">1</span> matplotlib 编程风格</h2>
 <div class="outline-text-2" id="text-matplotlib-编程风格">
 <p>
@@ -128,7 +121,7 @@ plt.show<span style="color: #cc0000; font-weight: bold;">()</span>
 </div>
 </div>
 
-<div id="outline-container-org2d8f769" class="outline-2">
+<div id="outline-container-orga74d1fc" class="outline-2">
 <h2 id="first-blood-第一张图"><span class="section-number-2">2</span> First Blood 第一张图</h2>
 <div class="outline-text-2" id="text-first-blood-第一张图">
 <p>
@@ -146,9 +139,12 @@ plt.show<span style="color: #cc0000; font-weight: bold;">()</span>
 </pre>
 </div>
 
-<p>
-{% asset<sub>img</sub> first<sub>blood.png</sub> 第一张图 %}
-</p>
+
+<figure>
+<img src="使用matplotlib进行科学绘图第一弹-matplotlib初体验/first_blood.png" alt="first_blood.png">
+
+<figcaption><span class="figure-number">Figure 2: </span>第一张图</figcaption>
+</figure>
 
 <p>
 如果采用面向对象的写法则为
@@ -174,7 +170,7 @@ plt.show<span style="color: #cc0000; font-weight: bold;">()</span>
 </p>
 </div>
 
-<div id="outline-container-orgab814ca" class="outline-3">
+<div id="outline-container-org4a6d041" class="outline-3">
 <h3 id="添加标题title和轴标签axis-label"><span class="section-number-3">2.1</span> 添加标题（title）和轴标签（axis label）</h3>
 <div class="outline-text-3" id="text-添加标题title和轴标签axis-label">
 <p>
@@ -192,8 +188,7 @@ ax.set_ylabel<span style="color: #cc0000; font-weight: bold;">(</span><span styl
 </div>
 
 <p>
-注意使用 ax
-对象所做的所有设置都只对当前子图有效，设置总标题需要使用如下设置：
+注意使用 ax 对象所做的所有设置都只对当前子图有效，设置总标题需要使用如下设置：
 </p>
 
 <div class="org-src-container">
@@ -201,9 +196,12 @@ ax.set_ylabel<span style="color: #cc0000; font-weight: bold;">(</span><span styl
 </pre>
 </div>
 
-<p>
-{% asset<sub>img</sub> first<sub>completed</sub><sub>figure.png</sub> 第一张完整图 %}
-</p>
+
+<figure>
+<img src="使用matplotlib进行科学绘图第一弹-matplotlib初体验/first_completed_figure.png" alt="first_completed_figure.png">
+
+<figcaption><span class="figure-number">Figure 3: </span>第一张完整图</figcaption>
+</figure>
 
 <p>
 这样，我们就得到了第一张包含数据、标题、轴标签的完整的图！
