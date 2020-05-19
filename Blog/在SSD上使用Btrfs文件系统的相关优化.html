@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-19 Tue 16:34 -->
+<!-- 2020-05-19 Tue 16:47 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>在 SSD 上使用 Btrfs 文件系統的相關優化</title>
@@ -15,7 +15,7 @@
 <body>
 <div id="preamble" class="status">
 <ul class="menu">
-  <li id="home">Cycoe@Home</li>
+  <nav class="home">Cycoe@Home</nav>
   <li><a href="/">Index</a></li>
   <li><a href="/Photo/index.html">Photo</a></li>
   <li><a href="/about.html">About</a></li>
@@ -58,7 +58,7 @@
 </nav>
 <!-- more -->
 
-<div id="outline-container-orgbd92ba2" class="outline-2">
+<div id="outline-container-org0ddd918" class="outline-2">
 <h2 id="優化掛載參數"><span class="section-number-2">1</span> 優化掛載參數</h2>
 <div class="outline-text-2" id="text-優化掛載參數">
 <p>
@@ -72,7 +72,7 @@
 </div>
 </div>
 
-<div id="outline-container-org35fa084" class="outline-3">
+<div id="outline-container-org8bc9360" class="outline-3">
 <h3 id="ssd"><span class="section-number-3">1.1</span> ssd</h3>
 <div class="outline-text-3" id="text-ssd">
 <p>
@@ -82,7 +82,7 @@ TRIM/discard。
 </div>
 </div>
 
-<div id="outline-container-org96e6e84" class="outline-3">
+<div id="outline-container-org5949be4" class="outline-3">
 <h3 id="discard"><span class="section-number-3">1.2</span> discard</h3>
 <div class="outline-text-3" id="text-discard">
 <p>
@@ -107,7 +107,7 @@ SSD
 </div>
 </div>
 
-<div id="outline-container-org07cffe5" class="outline-3">
+<div id="outline-container-orge809948" class="outline-3">
 <h3 id="noatime"><span class="section-number-3">1.3</span> noatime</h3>
 <div class="outline-text-3" id="text-noatime">
 <p>
@@ -117,7 +117,7 @@ SSD
 </div>
 </div>
 
-<div id="outline-container-org7761870" class="outline-3">
+<div id="outline-container-orgcf0eb33" class="outline-3">
 <h3 id="compress"><span class="section-number-3">1.4</span> compress</h3>
 <div class="outline-text-3" id="text-compress">
 <p>
@@ -137,7 +137,7 @@ lzo 速度更快，zlib 壓縮率更高。注意確認 SSD 主控是否是非壓
 </div>
 </div>
 
-<div id="outline-container-org25905a9" class="outline-3">
+<div id="outline-container-org111ae74" class="outline-3">
 <h3 id="寫緩存"><span class="section-number-3">1.5</span> 寫緩存</h3>
 <div class="outline-text-3" id="text-寫緩存">
 <p>
@@ -150,7 +150,7 @@ Write Cache，但在突然斷電的情況下可能造成數據丟失。
 </div>
 </div>
 
-<div id="outline-container-org1f63f7c" class="outline-2">
+<div id="outline-container-org0b127c1" class="outline-2">
 <h2 id="io-調度"><span class="section-number-2">2</span> I/O 調度</h2>
 <div class="outline-text-2" id="text-io-調度">
 <p>

@@ -1,3 +1,21 @@
+#content {
+    background: #fff;
+    max-width: 800px;
+    position: relative;
+    margin: 5px auto;
+}
+#header {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em
+}
+
+nav{
+    text-transform: uppercase;
+    font-size: 30px;
+    text-decoration: none;
+}
+
 /******************************************************
  * I copied these styles from markdotto.com, who is
  * the creator of bootstrap, and I also did some
@@ -30,28 +48,17 @@ html, body {
     margin: 0;
     padding: 0;
 }
-
 html {
     font-size: 62.5%;
 }
-
 body {
-    padding: 0px;
+    padding: 40px;
     font-family: Menlo, Monaco, monospace;
-    font-size: 18px;
+    font-size: 14px;
     line-height: 1.5;
     color: #333;
     background-color: #fff;
 }
-
-#content {
-    background: #fff;
-    width: 80%;
-    max-width: 800px;
-    position: relative;
-    margin: 5px auto 5px auto;
-}
-
 p {
     margin: 10px 0px 10px 0px;
 }
@@ -60,50 +67,10 @@ p {
     display: flex;
 }
 
-/* Navigation bar */
 ul.menu {
-  /* disable the list marker */
   list-style-type: none;
-  display: flex;
   margin: 0;
-  -webkit-box-shadow: 0 0 0.5em #666;
-  -moz-box-shadow: 0 0 0.5em #666;
-  background-color: #666;
-  font-size: 24px;
-}
-
-li#home {
-    text-transform: uppercase;
-    font-size: 30px;
-    color: #ddd;
-    margin-right: 10px;
-    padding: 5px 10px 5px 10px;
-    text-decoration: none;
-}
-
-ul.menu li {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0px 10px 0px 10px;
-}
-
-ul.menu li a {
-  display: block;
-  text-decoration: none;
-  color: #fff;
-}
-
-ul.menu li a:hover{
-  text-decoration: underline;
-  background-color: transparent;
-}
-
-ul.menu li a:before {
-  content: none;
-}
-ul.menu li a:after {
-  content: none;
+  padding: 0;
 }
 
 .taglist {
@@ -113,7 +80,6 @@ ul.menu li a:after {
 .post-title {
     flex-grow: 1;
 }
-
 h1.title{
   display: block;
   border-bottom: solid 1.5px #acacac;
@@ -197,7 +163,7 @@ pre {
     /* white-space: pre-wrap; */
     /* word-break: break-all; */
     /* word-wrap: break-word; */
-    overflow: hidden;
+    overflow: auto;
     position: relative;
 }
 pre:hover {
@@ -487,7 +453,7 @@ table th.right, table td.right {
 #table-of-contents {
     position: fixed;
     right: 0em;
-    top: 30%;
+    top: 0em;
     border: 1.5px dashed #b2aaaa;
     border-radius: 5px;
     background: rgba(253,253,231,.7);
@@ -495,8 +461,6 @@ table th.right, table td.right {
     -moz-box-shadow: 0 0 1em #b9b9b9;
     -webkit-border-bottom-left-radius: 10px;
     -moz-border-radius-bottomleft: 10px;
-    -webkit-border-top-left-radius: 10px;
-    -moz-border-radius-topleft: 10px;
     text-align: right;
     /* ensure doesn't flow off the screen when expanded */
     max-height: 80%;
@@ -560,7 +524,6 @@ div #author-info {
   margin-top: 50px;
   padding: 5px 15px 5px 15px;
   border-radius: 5px;
-  text-align: center;
 }
 
 div #author, div #date, div #generator {
@@ -572,7 +535,7 @@ div #author, div #date, div #generator {
 div #copyright {
     display: block;
     border-top: 1.5px solid #acacac;
-    margin: 30px 0 30px 0;
+    margin: 30px 0 0;
     padding-top: 10px;
     vertical-align: middle;
     text-align: center;
@@ -610,9 +573,8 @@ div #copyright img:first-child {
 
 @media (min-width: 768px) {
     /* Increase body padding and font-sizes */
-    content {
-        padding: 20px;
-        width: 90%;
+    body {
+        padding: 40px;
         font-size: 18px;
         line-height: 1.75;
     }
@@ -625,9 +587,11 @@ div #copyright img:first-child {
 }
 
 @media (min-width: 1024px) {
-    content {
-      width: 90%;
-      padding: 40px;
+    body {
+        padding: 40px;
+    }
+    .modal-content {
+      width: 100%;
     }
 }
 
