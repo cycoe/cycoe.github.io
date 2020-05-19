@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-19 Tue 16:47 -->
+<!-- 2020-05-19 Tue 17:54 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Spawn your blog site with hexo</title>
@@ -362,20 +362,22 @@ npm install hexo-renderer-kramed --save
 到 <code>node_modules\kramed\lib\rules\inline.js</code> ，修改 11 行的 escape 變量的值。
 </p>
 
-<pre class="example">
-//  escape: /^\\([\\`*{}\[\]()#$+\-.!_&gt;])/,
-escape: /^\\([`*\[\]()#$+\-.!_&gt;])/,
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #b2b2b2; font-style: italic;">//  </span><span style="color: #b2b2b2; font-style: italic;">escape: /^\\([\\`*{}\[\]()#$+\-.!_&gt;])/,</span>
+escape: <span style="color: #ff1f8b;">/^\\([`*\[\]()#$+\-.!_&gt;])/</span>,
 </pre>
+</div>
 
 <p>
 這一步是在原基礎上取消了對 <code>\, {, }</code> 的轉義(escape)。同時把第 20 行的 <code>em</code> 變量
 也要做相應的修改。
 </p>
 
-<pre class="example">
-//  em: /^\b_((?:__|[\s\S])+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,
-em: /^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #b2b2b2; font-style: italic;">//  </span><span style="color: #b2b2b2; font-style: italic;">em: /^\b_((?:__|[\s\S])+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,</span>
+em: <span style="color: #ff1f8b;">/^\*((?:\*\*|[\s\S])+?)\*(?!\*)/</span>,
 </pre>
+</div>
 
 <p>
 然後運行 <code>hexo clean</code> 清除構建，再 generate 即可解決問題。
@@ -391,35 +393,37 @@ em: /^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,
 true，表示針對每頁單獨決定是否開啓 mathjax 支持。
 </p>
 
-<pre class="example">
-math:
-  enable: true
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #ff8700;">math</span>:
+  <span style="color: #ff8700;">enable</span>: <span style="color: #1f5bff;">true</span>
 
-  # Default(true) will load mathjax/katex script on demand
-  # That is it only render those page who has 'mathjax: true' in Front Matter.
-  # If you set it to false, it will load mathjax/katex srcipt EVERY PAGE.
-  per_page: true
+  <span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Default(true) will load mathjax/katex script on demand</span>
+  <span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">That is it only render those page who has 'mathjax: true' in Front Matter.</span>
+  <span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">If you set it to false, it will load mathjax/katex srcipt EVERY PAGE.</span>
+  <span style="color: #ff8700;">per_page</span>: <span style="color: #1f5bff;">true</span>
 
-  # hexo-renderer-pandoc (or hexo-renderer-kramed) required for full MathJax support.
-  mathjax:
-    enable: true
-    # See: https://mhchem.github.io/MathJax-mhchem/
-    mhchem: false
+  <span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">hexo-renderer-pandoc (or hexo-renderer-kramed) required for full MathJax support.</span>
+  <span style="color: #ff8700;">mathjax</span>:
+    <span style="color: #ff8700;">enable</span>: <span style="color: #1f5bff;">true</span>
+    <span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">See: https://mhchem.github.io/MathJax-mhchem/</span>
+    <span style="color: #ff8700;">mhchem</span>: <span style="color: #1f5bff;">false</span>
 </pre>
+</div>
 
 <p>
 因爲 per<sub>page</sub> 設爲 true，因此需要在文章的 Front-matter 裏打開 mathjax 開關。
 </p>
 
-<pre class="example">
----
-title: Spawn your blog site with hexo
-date: 2018-04-14 13:50:18
-categories: linux
-tag: hexo
-mathjax: true
----
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #b2b2b2; font-style: italic;">---</span>
+<span style="color: #ff8700;">title</span>: Spawn your blog site with hexo
+<span style="color: #ff8700;">date</span>: 2018-04-14 13:50:18
+<span style="color: #ff8700;">categories</span>: linux
+<span style="color: #ff8700;">tag</span>: hexo
+<span style="color: #ff8700;">mathjax</span>: <span style="color: #1f5bff;">true</span>
+<span style="color: #b2b2b2; font-style: italic;">---</span>
 </pre>
+</div>
 </div>
 </div>
 </div>
