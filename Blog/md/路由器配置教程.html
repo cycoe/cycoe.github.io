@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-19 Tue 22:40 -->
+<!-- 2020-05-20 Wed 15:19 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>&lrm;</title>
@@ -14,13 +14,24 @@
 </head>
 <body>
 <div id="preamble" class="status">
-<div class="top-container">
-  <a class="site-name" href="/">Cycoe<span class="at-home">@Home</span></a>
-  <div class="banner">Keep It Simple Stupid</div>
+<div id="top-container">
+  <a id="site-name" href="/">Cycoe<span id="at-home">@Home</span></a>
+  <div id="banner">Keep It Simple Stupid</div>
 </div>
-<div id="top-nav" style="overflow:auto">
-  <a class="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
-  <a class="about-entry" href="/about.html" title="About Me">About</a>
+<div id="top-nav">
+  <div id="nav-wrapper">
+    <div id="nav-left-wrapper">
+      <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
+      <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
+      <div id="nav-title-wrapper">
+        <span id="nav-title">No Title</span>
+        <span id="nav-date">May, 20, 2020</span>
+      </div>
+    </div>
+    <div class="nav-btn" id="toc-wrapper">
+      <span class="vertical-align">TOC</span>
+    </div>
+  </div>
 </div>
 
 <!-- The Modal -->
@@ -28,7 +39,7 @@
   <!-- The Close Button -->
   <span class="close">&times;</span>
   <!-- Modal Content (The Image) -->
-  <img class="modal-content" id="modal-img">
+  <img class="modal-content" id="img-wrapper">
   <!-- Modal Caption (Image Text) -->
   <div id="caption"></div>
 </div>
@@ -54,7 +65,7 @@
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgb3b477f" class="outline-2">
+<div id="outline-container-org0c8fceb" class="outline-2">
 <h2 id="初次使用"><span class="section-number-2">1</span> 初次使用</h2>
 <div class="outline-text-2" id="text-初次使用">
 <p>
@@ -91,7 +102,7 @@ Wi-Fi 名）及密码等根据需要进行配置即可</li>
 </div>
 </div>
 
-<div id="outline-container-orga9d8f2e" class="outline-2">
+<div id="outline-container-orgd567f1c" class="outline-2">
 <h2 id="高级配置"><span class="section-number-2">2</span> 高级配置</h2>
 <div class="outline-text-2" id="text-高级配置">
 <p>
@@ -99,7 +110,7 @@ Wi-Fi 名）及密码等根据需要进行配置即可</li>
 </p>
 </div>
 
-<div id="outline-container-org382ae60" class="outline-3">
+<div id="outline-container-orgf335c4b" class="outline-3">
 <h3 id="静态-ip-地址绑定"><span class="section-number-3">2.1</span> 静态 IP 地址绑定</h3>
 <div class="outline-text-3" id="text-静态-ip-地址绑定">
 <p>
@@ -123,7 +134,7 @@ IP 地址，而静态 IP
 </div>
 </div>
 
-<div id="outline-container-orgab6efab" class="outline-3">
+<div id="outline-container-orga7133c5" class="outline-3">
 <h3 id="路由器桥接"><span class="section-number-3">2.2</span> 路由器桥接</h3>
 <div class="outline-text-3" id="text-路由器桥接">
 </div>
@@ -133,7 +144,7 @@ IP 地址，而静态 IP
 <div id="postamble" class="status">
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
-      <div id="date">Date: May, 19, 2020</div>
+      <div id="date">Date: May, 20, 2020</div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。

@@ -53,17 +53,24 @@ $(document).ready(() => {
         }
     })
 
+    document.getElementById('toc-wrapper').appendChild(document.getElementById('table-of-contents'))
+
     window.onscroll = function() {stickNavBar()};
 
     var navBar = document.getElementById('top-nav');
-
+    var navWrapper = document.getElementById('nav-wrapper');
+    var navTitleWrapper = document.getElementById('nav-title-wrapper');
     var sticky = navBar.offsetTop;
 
     function stickNavBar() {
         if (window.pageYOffset >= sticky) {
             navBar.classList.add("sticky")
+            navWrapper.classList.add("sticky")
+            navTitleWrapper.classList.add("sticky")
         } else {
             navBar.classList.remove("sticky");
+            navWrapper.classList.remove("sticky")
+            navTitleWrapper.classList.remove("sticky")
         }
     }
 })

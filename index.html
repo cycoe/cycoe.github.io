@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-19 Tue 22:41 -->
+<!-- 2020-05-20 Wed 15:19 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Blog Posts</title>
@@ -14,13 +14,24 @@
 </head>
 <body>
 <div id="preamble" class="status">
-<div class="top-container">
-  <a class="site-name" href="/">Cycoe<span class="at-home">@Home</span></a>
-  <div class="banner">Keep It Simple Stupid</div>
+<div id="top-container">
+  <a id="site-name" href="/">Cycoe<span id="at-home">@Home</span></a>
+  <div id="banner">Keep It Simple Stupid</div>
 </div>
-<div id="top-nav" style="overflow:auto">
-  <a class="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
-  <a class="about-entry" href="/about.html" title="About Me">About</a>
+<div id="top-nav">
+  <div id="nav-wrapper">
+    <div id="nav-left-wrapper">
+      <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
+      <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
+      <div id="nav-title-wrapper">
+        <span id="nav-title">Blog Posts</span>
+        <span id="nav-date">May, 20, 2020</span>
+      </div>
+    </div>
+    <div class="nav-btn" id="toc-wrapper">
+      <span class="vertical-align">TOC</span>
+    </div>
+  </div>
 </div>
 
 <!-- The Modal -->
@@ -28,7 +39,7 @@
   <!-- The Close Button -->
   <span class="close">&times;</span>
   <!-- Modal Content (The Image) -->
-  <img class="modal-content" id="modal-img">
+  <img class="modal-content" id="img-wrapper">
   <!-- Modal Caption (Image Text) -->
   <div id="caption"></div>
 </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-19 Tue 22:41 -->
+<!-- 2020-05-20 Wed 15:19 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gnuplot 绘图第七弹-Gnuplot 式编程与数据处理</title>
@@ -14,13 +14,24 @@
 </head>
 <body>
 <div id="preamble" class="status">
-<div class="top-container">
-  <a class="site-name" href="/">Cycoe<span class="at-home">@Home</span></a>
-  <div class="banner">Keep It Simple Stupid</div>
+<div id="top-container">
+  <a id="site-name" href="/">Cycoe<span id="at-home">@Home</span></a>
+  <div id="banner">Keep It Simple Stupid</div>
 </div>
-<div id="top-nav" style="overflow:auto">
-  <a class="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
-  <a class="about-entry" href="/about.html" title="About Me">About</a>
+<div id="top-nav">
+  <div id="nav-wrapper">
+    <div id="nav-left-wrapper">
+      <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
+      <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
+      <div id="nav-title-wrapper">
+        <span id="nav-title">Gnuplot 绘图第七弹-Gnuplot 式编程与数据处理</span>
+        <span id="nav-date">May, 20, 2020</span>
+      </div>
+    </div>
+    <div class="nav-btn" id="toc-wrapper">
+      <span class="vertical-align">TOC</span>
+    </div>
+  </div>
 </div>
 
 <!-- The Modal -->
@@ -28,7 +39,7 @@
   <!-- The Close Button -->
   <span class="close">&times;</span>
   <!-- Modal Content (The Image) -->
-  <img class="modal-content" id="modal-img">
+  <img class="modal-content" id="img-wrapper">
   <!-- Modal Caption (Image Text) -->
   <div id="caption"></div>
 </div>
@@ -46,10 +57,10 @@
     </a></div></h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orge0a1e9a">1. <code>for</code> 循环</a></li>
-<li><a href="#org6d8eaed">2. <code>a:b:c</code> 三目运算符</a></li>
-<li><a href="#orga843c15">3. 平滑曲线</a></li>
-<li><a href="#org241f2e9">4. 拟合曲线</a></li>
+<li><a href="#orgd588eeb">1. <code>for</code> 循环</a></li>
+<li><a href="#org1f22566">2. <code>a:b:c</code> 三目运算符</a></li>
+<li><a href="#org2c3c9dc">3. 平滑曲线</a></li>
+<li><a href="#org49e1ddf">4. 拟合曲线</a></li>
 </ul>
 </div>
 </nav>
@@ -59,8 +70,8 @@
 
 <!-- more -->
 
-<div id="outline-container-orge0a1e9a" class="outline-2">
-<h2 id="orge0a1e9a"><span class="section-number-2">1</span> <code>for</code> 循环</h2>
+<div id="outline-container-orgd588eeb" class="outline-2">
+<h2 id="orgd588eeb"><span class="section-number-2">1</span> <code>for</code> 循环</h2>
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> term pngcairo mono dashed enhanced
@@ -78,8 +89,8 @@
 </div>
 </div>
 
-<div id="outline-container-org6d8eaed" class="outline-2">
-<h2 id="org6d8eaed"><span class="section-number-2">2</span> <code>a:b:c</code> 三目运算符</h2>
+<div id="outline-container-org1f22566" class="outline-2">
+<h2 id="org1f22566"><span class="section-number-2">2</span> <code>a:b:c</code> 三目运算符</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> samples 2000
@@ -97,8 +108,8 @@
 </div>
 </div>
 
-<div id="outline-container-orga843c15" class="outline-2">
-<h2 id="orga843c15"><span class="section-number-2">3</span> 平滑曲线</h2>
+<div id="outline-container-org2c3c9dc" class="outline-2">
+<h2 id="org2c3c9dc"><span class="section-number-2">3</span> 平滑曲线</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> samples 500
@@ -122,8 +133,8 @@
 </div>
 </div>
 
-<div id="outline-container-org241f2e9" class="outline-2">
-<h2 id="org241f2e9"><span class="section-number-2">4</span> 拟合曲线</h2>
+<div id="outline-container-org49e1ddf" class="outline-2">
+<h2 id="org49e1ddf"><span class="section-number-2">4</span> 拟合曲线</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> key right top box
@@ -148,7 +159,7 @@
 <div id="postamble" class="status">
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
-      <div id="date">Date: May, 19, 2020</div>
+      <div id="date">Date: May, 20, 2020</div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。

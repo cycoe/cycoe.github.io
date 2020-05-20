@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-19 Tue 22:41 -->
+<!-- 2020-05-20 Wed 15:19 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>使用 Emacs 与 Org mode 进行 GTD 管理</title>
@@ -14,13 +14,24 @@
 </head>
 <body>
 <div id="preamble" class="status">
-<div class="top-container">
-  <a class="site-name" href="/">Cycoe<span class="at-home">@Home</span></a>
-  <div class="banner">Keep It Simple Stupid</div>
+<div id="top-container">
+  <a id="site-name" href="/">Cycoe<span id="at-home">@Home</span></a>
+  <div id="banner">Keep It Simple Stupid</div>
 </div>
-<div id="top-nav" style="overflow:auto">
-  <a class="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
-  <a class="about-entry" href="/about.html" title="About Me">About</a>
+<div id="top-nav">
+  <div id="nav-wrapper">
+    <div id="nav-left-wrapper">
+      <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
+      <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
+      <div id="nav-title-wrapper">
+        <span id="nav-title">使用 Emacs 与 Org mode 进行 GTD 管理</span>
+        <span id="nav-date">May, 20, 2020</span>
+      </div>
+    </div>
+    <div class="nav-btn" id="toc-wrapper">
+      <span class="vertical-align">TOC</span>
+    </div>
+  </div>
 </div>
 
 <!-- The Modal -->
@@ -28,7 +39,7 @@
   <!-- The Close Button -->
   <span class="close">&times;</span>
   <!-- Modal Content (The Image) -->
-  <img class="modal-content" id="modal-img">
+  <img class="modal-content" id="img-wrapper">
   <!-- Modal Caption (Image Text) -->
   <div id="caption"></div>
 </div>
@@ -46,13 +57,13 @@
     </a></div></h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org9511955">1. 基本想法</a></li>
-<li><a href="#org46ba638">2. 整体流程</a></li>
-<li><a href="#org572fefc">3. 任务拆分</a></li>
-<li><a href="#org914af78">4. 为任务添加更多属性</a></li>
-<li><a href="#orgad3a8a0">5. 查看任务概览</a></li>
-<li><a href="#org76f6884">6. 任务完成</a></li>
-<li><a href="#org162f1c3">7. 任务回顾</a></li>
+<li><a href="#org34e6fd1">1. 基本想法</a></li>
+<li><a href="#orge436fac">2. 整体流程</a></li>
+<li><a href="#org0b95dc7">3. 任务拆分</a></li>
+<li><a href="#orgf7c811d">4. 为任务添加更多属性</a></li>
+<li><a href="#orgd87c7cf">5. 查看任务概览</a></li>
+<li><a href="#org59d3f0f">6. 任务完成</a></li>
+<li><a href="#orgca6ae6a">7. 任务回顾</a></li>
 </ul>
 </div>
 </nav>
@@ -71,8 +82,8 @@
 
 <!-- more -->
 
-<div id="outline-container-org9511955" class="outline-2">
-<h2 id="org9511955"><span class="section-number-2">1</span> 基本想法</h2>
+<div id="outline-container-org34e6fd1" class="outline-2">
+<h2 id="org34e6fd1"><span class="section-number-2">1</span> 基本想法</h2>
 <div class="outline-text-2" id="text-1">
 <ol class="org-ol">
 <li>从空间尺度上，不同项目隶属于不同的 Org 文件，而不同的 Org 文件加入到不同的
@@ -85,8 +96,8 @@ agenda 中，实现基于项目的管理方式。</li>
 </div>
 </div>
 
-<div id="outline-container-org46ba638" class="outline-2">
-<h2 id="org46ba638"><span class="section-number-2">2</span> 整体流程</h2>
+<div id="outline-container-orge436fac" class="outline-2">
+<h2 id="orge436fac"><span class="section-number-2">2</span> 整体流程</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 参照 <i>皮波迪</i> 的博客 <a href="https://www.cnblogs.com/quantumman/p/10808174.html">以 Emacs Org mode 为核心的任务管理方案</a>，设计适合自己的工作流。
@@ -114,8 +125,8 @@ agenda 中，实现基于项目的管理方式。</li>
 </div>
 </div>
 
-<div id="outline-container-org572fefc" class="outline-2">
-<h2 id="org572fefc"><span class="section-number-2">3</span> 任务拆分</h2>
+<div id="outline-container-org0b95dc7" class="outline-2">
+<h2 id="org0b95dc7"><span class="section-number-2">3</span> 任务拆分</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 对于耗时较长的非周期任务，需要拆分成更小的任务来进行处理。大型的任务可以作为单独
@@ -143,8 +154,8 @@ agenda 上方显示的标题， <code>"~/export/learn-org.html"</code> 为导出
 </div>
 </div>
 
-<div id="outline-container-org914af78" class="outline-2">
-<h2 id="org914af78"><span class="section-number-2">4</span> 为任务添加更多属性</h2>
+<div id="outline-container-orgf7c811d" class="outline-2">
+<h2 id="orgf7c811d"><span class="section-number-2">4</span> 为任务添加更多属性</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 标签是一种非线性的组织方式，Org mode 中的每一个 headline 都支持标签。在 headline
@@ -158,8 +169,8 @@ agenda 上方显示的标题， <code>"~/export/learn-org.html"</code> 为导出
 </div>
 </div>
 
-<div id="outline-container-orgad3a8a0" class="outline-2">
-<h2 id="orgad3a8a0"><span class="section-number-2">5</span> 查看任务概览</h2>
+<div id="outline-container-orgd87c7cf" class="outline-2">
+<h2 id="orgd87c7cf"><span class="section-number-2">5</span> 查看任务概览</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以列视图的模式显示出来。
@@ -182,8 +193,8 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
 </div>
 </div>
 
-<div id="outline-container-org76f6884" class="outline-2">
-<h2 id="org76f6884"><span class="section-number-2">6</span> 任务完成</h2>
+<div id="outline-container-org59d3f0f" class="outline-2">
+<h2 id="org59d3f0f"><span class="section-number-2">6</span> 任务完成</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">setq</span>
@@ -195,8 +206,8 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
 </div>
 </div>
 
-<div id="outline-container-org162f1c3" class="outline-2">
-<h2 id="org162f1c3"><span class="section-number-2">7</span> 任务回顾</h2>
+<div id="outline-container-orgca6ae6a" class="outline-2">
+<h2 id="orgca6ae6a"><span class="section-number-2">7</span> 任务回顾</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 <code>&lt;C-c C-x C-d&gt;</code> 查看各个任务的耗时与总和。
@@ -208,7 +219,7 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
 <div id="postamble" class="status">
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
-      <div id="date">Date: May, 19, 2020</div>
+      <div id="date">Date: May, 20, 2020</div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
