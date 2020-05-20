@@ -638,7 +638,7 @@ table th.right, table td.right {
 #table-of-contents h2 {
   display: none;
   max-width: 20em;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: normal;
   margin: 1em;
 }

@@ -63,6 +63,8 @@ $(document).ready(() => {
     var preamble = document.getElementById('preamble');
     var sticky = navBar.offsetTop;
 
+    stickNavBar();
+
     function stickNavBar() {
         if (window.pageYOffset >= sticky) {
             navBar.classList.add("sticky");
