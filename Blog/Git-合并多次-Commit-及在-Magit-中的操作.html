@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-20 Wed 15:19 -->
+<!-- 2020-05-20 Wed 22:54 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Git 合并多次 Commit 及在 Magit 中的操作</title>
@@ -18,8 +18,16 @@
   <a id="site-name" href="/">Cycoe<span id="at-home">@Home</span></a>
   <div id="banner">Keep It Simple Stupid</div>
 </div>
+
 <div id="top-nav">
   <div id="nav-wrapper">
+    <div class="nav-btn" id="toc-wrapper">
+      <span class="vertical-align">Ξ</span>
+      <div id="go-top">
+        <a href="javascript:window.scrollTo(0,0)" style="color: black !important; border-bottom: none !important;" class="tooltip" title="Go to the top of the page">
+        <span class="top">&uarr;</span>
+        </a></div>
+    </div>
     <div id="nav-left-wrapper">
       <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
       <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
@@ -27,9 +35,6 @@
         <span id="nav-title">Git 合并多次 Commit 及在 Magit 中的操作</span>
         <span id="nav-date">May, 20, 2020</span>
       </div>
-    </div>
-    <div class="nav-btn" id="toc-wrapper">
-      <span class="vertical-align">TOC</span>
     </div>
   </div>
 </div>
@@ -48,18 +53,12 @@
 <header>
 <h1 class="title">Git 合并多次 Commit 及在 Magit 中的操作</h1>
 </header><nav id="table-of-contents">
-<h2><div id="toc-symbol">Ξ</div>
-    <div id="go-top"><a href="javascript:window.scrollTo(0,0)"
-    style="color: black !important; border-bottom: none !important;"
-    class="tooltip"
-    title="Go to the top of the page">
-    <span class="top">&uarr;</span>
-    </a></div></h2>
+<h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org9d468c2">1. 查看 Git 记录</a></li>
-<li><a href="#org41260e9">2. 合并记录</a></li>
-<li><a href="#orgb9e8ecc">3. 使用 Magit 合并记录</a></li>
+<li><a href="#org58019e3">1. 查看 Git 记录</a></li>
+<li><a href="#org95c9530">2. 合并记录</a></li>
+<li><a href="#org4863336">3. 使用 Magit 合并记录</a></li>
 </ul>
 </div>
 </nav>
@@ -72,8 +71,8 @@
 
 <!-- more -->
 
-<div id="outline-container-org9d468c2" class="outline-2">
-<h2 id="org9d468c2"><span class="section-number-2">1</span> 查看 Git 记录</h2>
+<div id="outline-container-org58019e3" class="outline-2">
+<h2 id="org58019e3"><span class="section-number-2">1</span> 查看 Git 记录</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 使用 <code>git log</code> 可以查看最近的提交记录，可以看到我最近提交了三个具有同样信息的
@@ -87,8 +86,8 @@ Commit。
 </figure>
 </div>
 </div>
-<div id="outline-container-org41260e9" class="outline-2">
-<h2 id="org41260e9"><span class="section-number-2">2</span> 合并记录</h2>
+<div id="outline-container-org95c9530" class="outline-2">
+<h2 id="org95c9530"><span class="section-number-2">2</span> 合并记录</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 执行 <code>git rebase -i HEAD~3</code> 对最近的三个 Commit 进行合并，其实此处的真实含义是以当
@@ -126,8 +125,8 @@ rebase --continue</code> 重新回到当前的过程。
 </div>
 </div>
 
-<div id="outline-container-orgb9e8ecc" class="outline-2">
-<h2 id="orgb9e8ecc"><span class="section-number-2">3</span> 使用 Magit 合并记录</h2>
+<div id="outline-container-org4863336" class="outline-2">
+<h2 id="org4863336"><span class="section-number-2">3</span> 使用 Magit 合并记录</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 使用 Magit 进行记录合并与 Git 命令行是相似的。将光标放在要作为基的 Commit 上，并

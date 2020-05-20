@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-20 Wed 15:19 -->
+<!-- 2020-05-20 Wed 22:54 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>&lrm;</title>
@@ -18,8 +18,16 @@
   <a id="site-name" href="/">Cycoe<span id="at-home">@Home</span></a>
   <div id="banner">Keep It Simple Stupid</div>
 </div>
+
 <div id="top-nav">
   <div id="nav-wrapper">
+    <div class="nav-btn" id="toc-wrapper">
+      <span class="vertical-align">Ξ</span>
+      <div id="go-top">
+        <a href="javascript:window.scrollTo(0,0)" style="color: black !important; border-bottom: none !important;" class="tooltip" title="Go to the top of the page">
+        <span class="top">&uarr;</span>
+        </a></div>
+    </div>
     <div id="nav-left-wrapper">
       <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
       <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
@@ -27,9 +35,6 @@
         <span id="nav-title">No Title</span>
         <span id="nav-date">May, 20, 2020</span>
       </div>
-    </div>
-    <div class="nav-btn" id="toc-wrapper">
-      <span class="vertical-align">TOC</span>
     </div>
   </div>
 </div>
@@ -46,13 +51,7 @@
 </div>
 <div id="content">
 <nav id="table-of-contents">
-<h2><div id="toc-symbol">Ξ</div>
-    <div id="go-top"><a href="javascript:window.scrollTo(0,0)"
-    style="color: black !important; border-bottom: none !important;"
-    class="tooltip"
-    title="Go to the top of the page">
-    <span class="top">&uarr;</span>
-    </a></div></h2>
+<h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#ssh-协议与应用">1. SSH 协议与应用</a></li>
@@ -118,7 +117,7 @@ IP，这样就可以直接从学校的内网连接到计算平台，是最完美
 SSH 连接计算平台与连接局域网内的主机无异。
 </p>
 
-<div id="outline-container-org7242fc2" class="outline-2">
+<div id="outline-container-orgd0594ba" class="outline-2">
 <h2 id="ssh-协议与应用"><span class="section-number-2">1</span> SSH 协议与应用</h2>
 <div class="outline-text-2" id="text-ssh-协议与应用">
 <blockquote>
@@ -147,7 +146,7 @@ Daemon）和客户端工具(SSH Client)。主机可以通过 SSH 客户端连接
 </div>
 </div>
 
-<div id="outline-container-org6bbc241" class="outline-2">
+<div id="outline-container-orga2bb95b" class="outline-2">
 <h2 id="网络拓扑分析"><span class="section-number-2">2</span> 网络拓扑分析</h2>
 <div class="outline-text-2" id="text-网络拓扑分析">
 <p>
@@ -216,7 +215,7 @@ topology.png 网络拓扑结构 %}
 </div>
 </div>
 
-<div id="outline-container-orgcf0e27a" class="outline-2">
+<div id="outline-container-orgdf5fd94" class="outline-2">
 <h2 id="解决方法"><span class="section-number-2">3</span> 解决方法</h2>
 <div class="outline-text-2" id="text-解决方法">
 <p>
@@ -225,7 +224,7 @@ topology.png 网络拓扑结构 %}
 </p>
 </div>
 
-<div id="outline-container-orgca2899f" class="outline-3">
+<div id="outline-container-org7782c0f" class="outline-3">
 <h3 id="准备工作"><span class="section-number-3">3.1</span> 准备工作</h3>
 <div class="outline-text-3" id="text-准备工作">
 <p>
@@ -257,7 +256,7 @@ ssh -fCNL
 </div>
 </div>
 
-<div id="outline-container-org9d0a436" class="outline-3">
+<div id="outline-container-org25d862f" class="outline-3">
 <h3 id="反向代理"><span class="section-number-3">3.2</span> 反向代理</h3>
 <div class="outline-text-3" id="text-反向代理">
 <p>
@@ -290,7 +289,7 @@ ssh -fCNL
 </div>
 </div>
 
-<div id="outline-container-org9a83800" class="outline-3">
+<div id="outline-container-orgc769fa8" class="outline-3">
 <h3 id="正向代理"><span class="section-number-3">3.3</span> 正向代理</h3>
 <div class="outline-text-3" id="text-正向代理">
 <p>
@@ -339,7 +338,7 @@ ssh -fCNL
 </div>
 </div>
 
-<div id="outline-container-orge5bd362" class="outline-3">
+<div id="outline-container-orgc1e2d10" class="outline-3">
 <h3 id="展现奇迹的时候到了"><span class="section-number-3">3.4</span> 展现奇迹的时候到了</h3>
 <div class="outline-text-3" id="text-展现奇迹的时候到了">
 <p>
@@ -358,7 +357,7 @@ ssh -fCNL
 </div>
 </div>
 
-<div id="outline-container-orgced5d79" class="outline-3">
+<div id="outline-container-org96e3d06" class="outline-3">
 <h3 id="这种反向代理是不稳定的"><span class="section-number-3">3.5</span> 这种反向代理是不稳定的</h3>
 <div class="outline-text-3" id="text-这种反向代理是不稳定的">
 <p>
@@ -368,7 +367,7 @@ ssh 反向代理隧道的方法。
 </p>
 </div>
 
-<div id="outline-container-orge4abd8b" class="outline-4">
+<div id="outline-container-org656ba1a" class="outline-4">
 <h4 id="配置-ssh-key-实现免密登陆"><span class="section-number-4">3.5.1</span> 配置 ssh key 实现免密登陆</h4>
 <div class="outline-text-4" id="text-配置-ssh-key-实现免密登陆">
 <p>
@@ -404,7 +403,7 @@ ssh 反向代理隧道的方法。
 </div>
 </div>
 
-<div id="outline-container-org48ef62a" class="outline-4">
+<div id="outline-container-orgc378740" class="outline-4">
 <h4 id="用-autossh-建立稳定隧道"><span class="section-number-4">3.5.2</span> 用 autossh 建立稳定隧道</h4>
 <div class="outline-text-4" id="text-用-autossh-建立稳定隧道">
 <p>
@@ -445,7 +444,7 @@ autossh 命令的参数与 ssh 一致，不同的是我们需要指出的
 </div>
 </div>
 
-<div id="outline-container-orgfeed27a" class="outline-4">
+<div id="outline-container-org1d60023" class="outline-4">
 <h4 id="配置自动启动"><span class="section-number-4">3.5.3</span> 配置自动启动</h4>
 <div class="outline-text-4" id="text-配置自动启动">
 <p>
@@ -483,12 +482,12 @@ autossh 命令的参数与 ssh 一致，不同的是我们需要指出的
 </div>
 </div>
 
-<div id="outline-container-org740dcfe" class="outline-3">
+<div id="outline-container-org6c73b41" class="outline-3">
 <h3 id="进一步优化"><span class="section-number-3">3.6</span> 进一步优化</h3>
 <div class="outline-text-3" id="text-进一步优化">
 </div>
 
-<div id="outline-container-org093c122" class="outline-4">
+<div id="outline-container-org143aafc" class="outline-4">
 <h4 id="保持活连接"><span class="section-number-4">3.6.1</span> 保持活连接</h4>
 <div class="outline-text-4" id="text-保持活连接">
 <p>
@@ -511,7 +510,7 @@ ClientAliveCountMax 3
 </div>
 </div>
 
-<div id="outline-container-orgeae2289" class="outline-4">
+<div id="outline-container-orgb63a75b" class="outline-4">
 <h4 id="windows-ssh-client-连接提示错误"><span class="section-number-4">3.6.2</span> Windows SSH Client 连接提示错误</h4>
 <div class="outline-text-4" id="text-windows-ssh-client-连接提示错误">
 <p>
@@ -536,7 +535,7 @@ KexAlgorithms diffie-hellman-group1-sha1,diffie-hellman-group14-sha1,diffie-hell
 </div>
 </div>
 
-<div id="outline-container-org342c99e" class="outline-2">
+<div id="outline-container-org92f9528" class="outline-2">
 <h2 id="参考文献"><span class="section-number-2">4</span> 参考文献</h2>
 <div class="outline-text-2" id="text-参考文献">
 <p>

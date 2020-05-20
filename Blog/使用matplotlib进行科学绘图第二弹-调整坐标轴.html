@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-20 Wed 15:19 -->
+<!-- 2020-05-20 Wed 22:54 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>使用 matplotlib 进行科学绘图第二弹-调整坐标轴</title>
@@ -40,8 +40,16 @@
   <a id="site-name" href="/">Cycoe<span id="at-home">@Home</span></a>
   <div id="banner">Keep It Simple Stupid</div>
 </div>
+
 <div id="top-nav">
   <div id="nav-wrapper">
+    <div class="nav-btn" id="toc-wrapper">
+      <span class="vertical-align">Ξ</span>
+      <div id="go-top">
+        <a href="javascript:window.scrollTo(0,0)" style="color: black !important; border-bottom: none !important;" class="tooltip" title="Go to the top of the page">
+        <span class="top">&uarr;</span>
+        </a></div>
+    </div>
     <div id="nav-left-wrapper">
       <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
       <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
@@ -49,9 +57,6 @@
         <span id="nav-title">使用 matplotlib 进行科学绘图第二弹-调整坐标轴</span>
         <span id="nav-date">May, 20, 2020</span>
       </div>
-    </div>
-    <div class="nav-btn" id="toc-wrapper">
-      <span class="vertical-align">TOC</span>
     </div>
   </div>
 </div>
@@ -70,13 +75,7 @@
 <header>
 <h1 class="title">使用 matplotlib 进行科学绘图第二弹-调整坐标轴</h1>
 </header><nav id="table-of-contents">
-<h2><div id="toc-symbol">Ξ</div>
-    <div id="go-top"><a href="javascript:window.scrollTo(0,0)"
-    style="color: black !important; border-bottom: none !important;"
-    class="tooltip"
-    title="Go to the top of the page">
-    <span class="top">&uarr;</span>
-    </a></div></h2>
+<h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#设置轴标签">1. 设置轴标签</a></li>
@@ -103,7 +102,7 @@ Sorry, your browser does not support SVG.</object>
 
 <!-- more -->
 
-<div id="outline-container-orgea8c843" class="outline-2">
+<div id="outline-container-org8f53a4f" class="outline-2">
 <h2 id="设置轴标签"><span class="section-number-2">1</span> 设置轴标签</h2>
 <div class="outline-text-2" id="text-设置轴标签">
 <p>
@@ -159,7 +158,7 @@ plt.show<span style="color: #cc0000; font-weight: bold;">()</span>
 </div>
 </div>
 
-<div id="outline-container-orgf0c6ee5" class="outline-2">
+<div id="outline-container-org7c80cff" class="outline-2">
 <h2 id="设置坐标轴上下限"><span class="section-number-2">2</span> 设置坐标轴上下限</h2>
 <div class="outline-text-2" id="text-设置坐标轴上下限">
 <p>
@@ -183,7 +182,7 @@ ax.set_xlim<span style="color: #cc0000; font-weight: bold;">(</span>xlim<span st
 </div>
 </div>
 
-<div id="outline-container-orgb974a9d" class="outline-2">
+<div id="outline-container-org388b3c7" class="outline-2">
 <h2 id="设置坐标轴缩放类型"><span class="section-number-2">3</span> 设置坐标轴缩放类型</h2>
 <div class="outline-text-2" id="text-设置坐标轴缩放类型">
 <p>
@@ -205,7 +204,7 @@ ax.set_xlim<span style="color: #cc0000; font-weight: bold;">(</span>xlim<span st
 </div>
 </div>
 
-<div id="outline-container-orgd11567d" class="outline-2">
+<div id="outline-container-org7416ca9" class="outline-2">
 <h2 id="设置刻度"><span class="section-number-2">4</span> 设置刻度</h2>
 <div class="outline-text-2" id="text-设置刻度">
 <p>
@@ -310,7 +309,7 @@ ax.xaxis.set_major_locator<span style="color: #cc0000; font-weight: bold;">(</sp
 </div>
 </div>
 
-<div id="outline-container-org0dcfc1e" class="outline-2">
+<div id="outline-container-orgba29c28" class="outline-2">
 <h2 id="设置刻度标签"><span class="section-number-2">5</span> 设置刻度标签</h2>
 <div class="outline-text-2" id="text-设置刻度标签">
 <p>
@@ -335,7 +334,7 @@ ax.set_xticklabels<span style="color: #cc0000; font-weight: bold;">(</span><span
 </div>
 </div>
 
-<div id="outline-container-orgf4b4e30" class="outline-2">
+<div id="outline-container-org757babe" class="outline-2">
 <h2 id="设置副刻度minor-ticks"><span class="section-number-2">6</span> 设置副刻度（Minor Ticks）</h2>
 <div class="outline-text-2" id="text-设置副刻度minor-ticks">
 <p>
@@ -362,7 +361,7 @@ ax.xaxis.set_minor_locator<span style="color: #cc0000; font-weight: bold;">(</sp
 </div>
 </div>
 
-<div id="outline-container-orga162646" class="outline-2">
+<div id="outline-container-org18c1b60" class="outline-2">
 <h2 id="刻度方向"><span class="section-number-2">7</span> 刻度方向</h2>
 <div class="outline-text-2" id="text-刻度方向">
 <p>

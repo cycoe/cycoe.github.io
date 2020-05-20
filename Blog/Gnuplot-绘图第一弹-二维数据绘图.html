@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-20 Wed 15:19 -->
+<!-- 2020-05-20 Wed 22:54 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gnuplot 绘图第一弹-二维数据绘图</title>
@@ -18,8 +18,16 @@
   <a id="site-name" href="/">Cycoe<span id="at-home">@Home</span></a>
   <div id="banner">Keep It Simple Stupid</div>
 </div>
+
 <div id="top-nav">
   <div id="nav-wrapper">
+    <div class="nav-btn" id="toc-wrapper">
+      <span class="vertical-align">Ξ</span>
+      <div id="go-top">
+        <a href="javascript:window.scrollTo(0,0)" style="color: black !important; border-bottom: none !important;" class="tooltip" title="Go to the top of the page">
+        <span class="top">&uarr;</span>
+        </a></div>
+    </div>
     <div id="nav-left-wrapper">
       <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
       <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
@@ -27,9 +35,6 @@
         <span id="nav-title">Gnuplot 绘图第一弹-二维数据绘图</span>
         <span id="nav-date">May, 20, 2020</span>
       </div>
-    </div>
-    <div class="nav-btn" id="toc-wrapper">
-      <span class="vertical-align">TOC</span>
     </div>
   </div>
 </div>
@@ -48,18 +53,12 @@
 <header>
 <h1 class="title">Gnuplot 绘图第一弹-二维数据绘图</h1>
 </header><nav id="table-of-contents">
-<h2><div id="toc-symbol">Ξ</div>
-    <div id="go-top"><a href="javascript:window.scrollTo(0,0)"
-    style="color: black !important; border-bottom: none !important;"
-    class="tooltip"
-    title="Go to the top of the page">
-    <span class="top">&uarr;</span>
-    </a></div></h2>
+<h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org08ce968">1. 调色板</a></li>
-<li><a href="#org9ac2ede">2. Hello World</a></li>
-<li><a href="#org5bb2777">3. 绘制曲线的同时指定坐标范围</a></li>
+<li><a href="#orgcba9a5b">1. 调色板</a></li>
+<li><a href="#orgad0d28c">2. Hello World</a></li>
+<li><a href="#org36a54b5">3. 绘制曲线的同时指定坐标范围</a></li>
 </ul>
 </div>
 </nav>
@@ -77,8 +76,8 @@ like Octave. Gnuplot has been supported and under active development since 1986.
 
 <!-- more -->
 
-<div id="outline-container-org08ce968" class="outline-2">
-<h2 id="org08ce968"><span class="section-number-2">1</span> 调色板</h2>
+<div id="outline-container-orgcba9a5b" class="outline-2">
+<h2 id="orgcba9a5b"><span class="section-number-2">1</span> 调色板</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 在 Gnuplot 的交互式命令行中使用 <code>test</code> 命令可以调出调色板，查看 Gnuplot 支持的样式
@@ -118,8 +117,8 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 </div>
 
-<div id="outline-container-org9ac2ede" class="outline-2">
-<h2 id="org9ac2ede"><span class="section-number-2">2</span> Hello World</h2>
+<div id="outline-container-orgad0d28c" class="outline-2">
+<h2 id="orgad0d28c"><span class="section-number-2">2</span> Hello World</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #1f5bff;">reset</span>
@@ -135,8 +134,8 @@ Gnuplot Term</code> 变量为 <code>pngcairo</code> 来得更好的绘制效果�
 </div>
 </div>
 
-<div id="outline-container-org5bb2777" class="outline-2">
-<h2 id="org5bb2777"><span class="section-number-2">3</span> 绘制曲线的同时指定坐标范围</h2>
+<div id="outline-container-org36a54b5" class="outline-2">
+<h2 id="org36a54b5"><span class="section-number-2">3</span> 绘制曲线的同时指定坐标范围</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-gnuplot"><span style="color: #00af00;">plot</span> [][<span style="color: #1f5bff;">-3:1.5</span>] (<span style="color: #ef2929;">sin</span>(1/x) - <span style="color: #ef2929;">cos</span>(x))*<span style="color: #ef2929;">erfc</span>(x)

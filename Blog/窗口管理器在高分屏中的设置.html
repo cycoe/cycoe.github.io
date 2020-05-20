@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-20 Wed 15:19 -->
+<!-- 2020-05-20 Wed 22:54 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>窗口管理器在高分屏中的设置</title>
@@ -18,8 +18,16 @@
   <a id="site-name" href="/">Cycoe<span id="at-home">@Home</span></a>
   <div id="banner">Keep It Simple Stupid</div>
 </div>
+
 <div id="top-nav">
   <div id="nav-wrapper">
+    <div class="nav-btn" id="toc-wrapper">
+      <span class="vertical-align">Ξ</span>
+      <div id="go-top">
+        <a href="javascript:window.scrollTo(0,0)" style="color: black !important; border-bottom: none !important;" class="tooltip" title="Go to the top of the page">
+        <span class="top">&uarr;</span>
+        </a></div>
+    </div>
     <div id="nav-left-wrapper">
       <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
       <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
@@ -27,9 +35,6 @@
         <span id="nav-title">窗口管理器在高分屏中的设置</span>
         <span id="nav-date">May, 20, 2020</span>
       </div>
-    </div>
-    <div class="nav-btn" id="toc-wrapper">
-      <span class="vertical-align">TOC</span>
     </div>
   </div>
 </div>
@@ -48,13 +53,7 @@
 <header>
 <h1 class="title">窗口管理器在高分屏中的设置</h1>
 </header><nav id="table-of-contents">
-<h2><div id="toc-symbol">Ξ</div>
-    <div id="go-top"><a href="javascript:window.scrollTo(0,0)"
-    style="color: black !important; border-bottom: none !important;"
-    class="tooltip"
-    title="Go to the top of the page">
-    <span class="top">&uarr;</span>
-    </a></div></h2>
+<h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#降低分辨率">1. 降低分辨率</a></li>
@@ -79,7 +78,7 @@
 置中一般都自带缩放设置。
 </p>
 
-<div id="outline-container-orgde81b8c" class="outline-2">
+<div id="outline-container-org7dcd04f" class="outline-2">
 <h2 id="降低分辨率"><span class="section-number-2">1</span> 降低分辨率</h2>
 <div class="outline-text-2" id="text-降低分辨率">
 <p>
@@ -89,7 +88,7 @@
 </div>
 </div>
 
-<div id="outline-container-org239c6bf" class="outline-2">
+<div id="outline-container-org8c682fe" class="outline-2">
 <h2 id="调整-scale"><span class="section-number-2">2</span> 调整 Scale</h2>
 <div class="outline-text-2" id="text-调整-scale">
 <p>
@@ -99,7 +98,7 @@
 </div>
 </div>
 
-<div id="outline-container-org02d85e2" class="outline-2">
+<div id="outline-container-org36e3c24" class="outline-2">
 <h2 id="通过-xrandr-设置-dpi"><span class="section-number-2">3</span> 通过 xrandr 设置 DPI</h2>
 <div class="outline-text-2" id="text-通过-xrandr-设置-dpi">
 <p>
@@ -122,7 +121,7 @@ xrandr 设置 DPI，在 <code>.xinitrc</code> 或 <code>.xprofile</code> 中加�
 </div>
 </div>
 
-<div id="outline-container-org9047281" class="outline-2">
+<div id="outline-container-org06e90f1" class="outline-2">
 <h2 id="通过-xft-设置-dpi"><span class="section-number-2">4</span> 通过 xft 设置 DPI</h2>
 <div class="outline-text-2" id="text-通过-xft-设置-dpi">
 <p>

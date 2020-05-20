@@ -32,16 +32,11 @@ $(document).ready(() => {
     // ---------------------------------
     $('img').each(function(idx, ele) {
         var modal = document.getElementById('img-modal');
-        var modalImg = document.getElementById('modal-img');
-
-        // $(this).click(function() {
-        //     modal.style.display = "block";
-        //     modalImg.src = ele.src;
-        // })
+        var imgWrapper = document.getElementById('img-wrapper');
 
         ele.onclick = function () {
             modal.style.display = "block";
-            modalImg.src = ele.src;
+            imgWrapper.src = ele.src;
         }
 
         // Get the <span> element that closes the modal
@@ -53,24 +48,36 @@ $(document).ready(() => {
         }
     })
 
-    document.getElementById('toc-wrapper').appendChild(document.getElementById('table-of-contents'))
+    var toc = document.getElementById('table-of-contents');
+    if (toc != null) {
+        document.getElementById('toc-wrapper').appendChild(toc);
+    }
 
     window.onscroll = function() {stickNavBar()};
 
     var navBar = document.getElementById('top-nav');
     var navWrapper = document.getElementById('nav-wrapper');
     var navTitleWrapper = document.getElementById('nav-title-wrapper');
+    var navPhoto = document.getElementById('photo-entry');
+    var navAbout = document.getElementById('about-entry');
+    var preamble = document.getElementById('preamble');
     var sticky = navBar.offsetTop;
 
     function stickNavBar() {
         if (window.pageYOffset >= sticky) {
-            navBar.classList.add("sticky")
-            navWrapper.classList.add("sticky")
-            navTitleWrapper.classList.add("sticky")
+            navBar.classList.add("sticky");
+            navWrapper.classList.add("sticky");
+            navTitleWrapper.classList.add("sticky");
+            navPhoto.classList.add("sticky");
+            navAbout.classList.add("sticky");
+            preamble.classList.add("sticky");
         } else {
             navBar.classList.remove("sticky");
-            navWrapper.classList.remove("sticky")
-            navTitleWrapper.classList.remove("sticky")
+            navWrapper.classList.remove("sticky");
+            navTitleWrapper.classList.remove("sticky");
+            navPhoto.classList.remove("sticky");
+            navAbout.classList.remove("sticky");
+            preamble.classList.remove("sticky");
         }
     }
 })

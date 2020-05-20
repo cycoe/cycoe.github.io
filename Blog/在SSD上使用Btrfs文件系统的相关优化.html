@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-20 Wed 15:19 -->
+<!-- 2020-05-20 Wed 22:54 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>在 SSD 上使用 Btrfs 文件系統的相關優化</title>
@@ -18,8 +18,16 @@
   <a id="site-name" href="/">Cycoe<span id="at-home">@Home</span></a>
   <div id="banner">Keep It Simple Stupid</div>
 </div>
+
 <div id="top-nav">
   <div id="nav-wrapper">
+    <div class="nav-btn" id="toc-wrapper">
+      <span class="vertical-align">Ξ</span>
+      <div id="go-top">
+        <a href="javascript:window.scrollTo(0,0)" style="color: black !important; border-bottom: none !important;" class="tooltip" title="Go to the top of the page">
+        <span class="top">&uarr;</span>
+        </a></div>
+    </div>
     <div id="nav-left-wrapper">
       <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
       <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
@@ -27,9 +35,6 @@
         <span id="nav-title">在 SSD 上使用 Btrfs 文件系統的相關優化</span>
         <span id="nav-date">May, 20, 2020</span>
       </div>
-    </div>
-    <div class="nav-btn" id="toc-wrapper">
-      <span class="vertical-align">TOC</span>
     </div>
   </div>
 </div>
@@ -48,13 +53,7 @@
 <header>
 <h1 class="title">在 SSD 上使用 Btrfs 文件系統的相關優化</h1>
 </header><nav id="table-of-contents">
-<h2><div id="toc-symbol">Ξ</div>
-    <div id="go-top"><a href="javascript:window.scrollTo(0,0)"
-    style="color: black !important; border-bottom: none !important;"
-    class="tooltip"
-    title="Go to the top of the page">
-    <span class="top">&uarr;</span>
-    </a></div></h2>
+<h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#優化掛載參數">1. 優化掛載參數</a>
@@ -72,7 +71,7 @@
 </nav>
 <!-- more -->
 
-<div id="outline-container-org418f362" class="outline-2">
+<div id="outline-container-org3e1020d" class="outline-2">
 <h2 id="優化掛載參數"><span class="section-number-2">1</span> 優化掛載參數</h2>
 <div class="outline-text-2" id="text-優化掛載參數">
 <p>
@@ -86,7 +85,7 @@
 </div>
 </div>
 
-<div id="outline-container-org41e05b3" class="outline-3">
+<div id="outline-container-orgf7c5658" class="outline-3">
 <h3 id="ssd"><span class="section-number-3">1.1</span> ssd</h3>
 <div class="outline-text-3" id="text-ssd">
 <p>
@@ -96,7 +95,7 @@ TRIM/discard。
 </div>
 </div>
 
-<div id="outline-container-orgc0129ce" class="outline-3">
+<div id="outline-container-org4af3809" class="outline-3">
 <h3 id="discard"><span class="section-number-3">1.2</span> discard</h3>
 <div class="outline-text-3" id="text-discard">
 <p>
@@ -121,7 +120,7 @@ SSD
 </div>
 </div>
 
-<div id="outline-container-org118597f" class="outline-3">
+<div id="outline-container-orgc9cd79f" class="outline-3">
 <h3 id="noatime"><span class="section-number-3">1.3</span> noatime</h3>
 <div class="outline-text-3" id="text-noatime">
 <p>
@@ -131,7 +130,7 @@ SSD
 </div>
 </div>
 
-<div id="outline-container-org52a0d89" class="outline-3">
+<div id="outline-container-orgc59ab12" class="outline-3">
 <h3 id="compress"><span class="section-number-3">1.4</span> compress</h3>
 <div class="outline-text-3" id="text-compress">
 <p>
@@ -151,7 +150,7 @@ lzo 速度更快，zlib 壓縮率更高。注意確認 SSD 主控是否是非壓
 </div>
 </div>
 
-<div id="outline-container-org2dac892" class="outline-3">
+<div id="outline-container-org50e8c66" class="outline-3">
 <h3 id="寫緩存"><span class="section-number-3">1.5</span> 寫緩存</h3>
 <div class="outline-text-3" id="text-寫緩存">
 <p>
@@ -164,7 +163,7 @@ Write Cache，但在突然斷電的情況下可能造成數據丟失。
 </div>
 </div>
 
-<div id="outline-container-orga0a1b8c" class="outline-2">
+<div id="outline-container-orgfb02db3" class="outline-2">
 <h2 id="io-調度"><span class="section-number-2">2</span> I/O 調度</h2>
 <div class="outline-text-2" id="text-io-調度">
 <p>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-20 Wed 15:19 -->
+<!-- 2020-05-20 Wed 22:54 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>使用 Emacs 与 mu4e 管理邮件</title>
@@ -18,8 +18,16 @@
   <a id="site-name" href="/">Cycoe<span id="at-home">@Home</span></a>
   <div id="banner">Keep It Simple Stupid</div>
 </div>
+
 <div id="top-nav">
   <div id="nav-wrapper">
+    <div class="nav-btn" id="toc-wrapper">
+      <span class="vertical-align">Ξ</span>
+      <div id="go-top">
+        <a href="javascript:window.scrollTo(0,0)" style="color: black !important; border-bottom: none !important;" class="tooltip" title="Go to the top of the page">
+        <span class="top">&uarr;</span>
+        </a></div>
+    </div>
     <div id="nav-left-wrapper">
       <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
       <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
@@ -27,9 +35,6 @@
         <span id="nav-title">使用 Emacs 与 mu4e 管理邮件</span>
         <span id="nav-date">May, 20, 2020</span>
       </div>
-    </div>
-    <div class="nav-btn" id="toc-wrapper">
-      <span class="vertical-align">TOC</span>
     </div>
   </div>
 </div>
@@ -48,42 +53,36 @@
 <header>
 <h1 class="title">使用 Emacs 与 mu4e 管理邮件</h1>
 </header><nav id="table-of-contents">
-<h2><div id="toc-symbol">Ξ</div>
-    <div id="go-top"><a href="javascript:window.scrollTo(0,0)"
-    style="color: black !important; border-bottom: none !important;"
-    class="tooltip"
-    title="Go to the top of the page">
-    <span class="top">&uarr;</span>
-    </a></div></h2>
+<h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org8ee3be5">1. 邮件同步</a>
+<li><a href="#org0bea141">1. 邮件同步</a>
 <ul>
-<li><a href="#org4a6e127">1.1. offlineimap 配置</a>
+<li><a href="#org98f40eb">1.1. offlineimap 配置</a>
 <ul>
-<li><a href="#orged9d561">1.1.1. 安装</a></li>
-<li><a href="#orgd9c2f6e">1.1.2. 配置</a></li>
+<li><a href="#org8ed6af9">1.1.1. 安装</a></li>
+<li><a href="#org096f9eb">1.1.2. 配置</a></li>
 </ul>
 </li>
-<li><a href="#org7dc19aa">1.2. isync 配置</a>
+<li><a href="#org2706965">1.2. isync 配置</a>
 <ul>
-<li><a href="#orge496b6b">1.2.1. 安装</a></li>
-<li><a href="#org9d31325">1.2.2. 配置</a></li>
+<li><a href="#org5b4ae22">1.2.1. 安装</a></li>
+<li><a href="#orgeebefba">1.2.2. 配置</a></li>
 </ul>
 </li>
-<li><a href="#orgfb1133b">1.3. Unsafe login</a></li>
+<li><a href="#orga90d1e9">1.3. Unsafe login</a></li>
 </ul>
 </li>
-<li><a href="#orgbfdc226">2. mu 邮件管理器</a>
+<li><a href="#org9062353">2. mu 邮件管理器</a>
 <ul>
-<li><a href="#orgf0fd733">2.1. 安装</a></li>
-<li><a href="#org80414f4">2.2. 配置 mu</a></li>
+<li><a href="#org65e4617">2.1. 安装</a></li>
+<li><a href="#org8479685">2.2. 配置 mu</a></li>
 </ul>
 </li>
-<li><a href="#org0a95890">3. mu4e 多账户设置</a></li>
-<li><a href="#orga2765b3">4. 配置 smtp 发送邮件</a></li>
-<li><a href="#org71966d6">5. 使用 Org mode 编辑新邮件</a></li>
-<li><a href="#orgb1e4289">6. 将邮件加入 TODO 列表中</a></li>
+<li><a href="#orgd7f2093">3. mu4e 多账户设置</a></li>
+<li><a href="#org0bb9741">4. 配置 smtp 发送邮件</a></li>
+<li><a href="#org434f3cc">5. 使用 Org mode 编辑新邮件</a></li>
+<li><a href="#org73d8279">6. 将邮件加入 TODO 列表中</a></li>
 </ul>
 </div>
 </nav>
@@ -97,24 +96,24 @@
 
 <!-- more -->
 
-<div id="outline-container-org8ee3be5" class="outline-2">
-<h2 id="org8ee3be5"><span class="section-number-2">1</span> 邮件同步</h2>
+<div id="outline-container-org0bea141" class="outline-2">
+<h2 id="org0bea141"><span class="section-number-2">1</span> 邮件同步</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 查看其他的博客，发现同步博客最常用的协议是 IMAP。Linux 下支持 IMAP 协议并且下载
 下来的目录结构是 MailDir 结构的工具主要有两个，offlineimap 和 isync。
 </p>
 </div>
-<div id="outline-container-org4a6e127" class="outline-3">
-<h3 id="org4a6e127"><span class="section-number-3">1.1</span> offlineimap 配置</h3>
+<div id="outline-container-org98f40eb" class="outline-3">
+<h3 id="org98f40eb"><span class="section-number-3">1.1</span> offlineimap 配置</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 offlineimap 是一个由 Python 写成的 IMAP 同步工具，主要的缺点是依赖 Python2 的库，
 并且同步速度不如 isync，因此仅作记录。
 </p>
 </div>
-<div id="outline-container-orged9d561" class="outline-4">
-<h4 id="orged9d561"><span class="section-number-4">1.1.1</span> 安装</h4>
+<div id="outline-container-org8ed6af9" class="outline-4">
+<h4 id="org8ed6af9"><span class="section-number-4">1.1.1</span> 安装</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 在 Archlinux 中，可以直接从 community 仓库中安装。
@@ -125,8 +124,8 @@ offlineimap 是一个由 Python 写成的 IMAP 同步工具，主要的缺点是
 </div>
 </div>
 </div>
-<div id="outline-container-orgd9c2f6e" class="outline-4">
-<h4 id="orgd9c2f6e"><span class="section-number-4">1.1.2</span> 配置</h4>
+<div id="outline-container-org096f9eb" class="outline-4">
+<h4 id="org096f9eb"><span class="section-number-4">1.1.2</span> 配置</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 安装完成，要进行配置，需要创建一个 ~/.offlineimaprc 文件进行配置。详细的配置过程如下： 
@@ -187,16 +186,16 @@ offlineimap 是一个由 Python 写成的 IMAP 同步工具，主要的缺点是
 </div>
 </div>
 </div>
-<div id="outline-container-org7dc19aa" class="outline-3">
-<h3 id="org7dc19aa"><span class="section-number-3">1.2</span> isync 配置</h3>
+<div id="outline-container-org2706965" class="outline-3">
+<h3 id="org2706965"><span class="section-number-3">1.2</span> isync 配置</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 isync 是一个由 C++ 写成的 IMAP 同步工具，经测试同步速度要比 offlineimap 更快，但
 是同步出来的邮件数量比 offlineimap 更多不知道是怎么回事，目前主要使用这个。
 </p>
 </div>
-<div id="outline-container-orge496b6b" class="outline-4">
-<h4 id="orge496b6b"><span class="section-number-4">1.2.1</span> 安装</h4>
+<div id="outline-container-org5b4ae22" class="outline-4">
+<h4 id="org5b4ae22"><span class="section-number-4">1.2.1</span> 安装</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 在 Archlinux 中，可以直接从 community 仓库中安装。
@@ -207,8 +206,8 @@ isync 是一个由 C++ 写成的 IMAP 同步工具，经测试同步速度要比
 </div>
 </div>
 </div>
-<div id="outline-container-org9d31325" class="outline-4">
-<h4 id="org9d31325"><span class="section-number-4">1.2.2</span> 配置</h4>
+<div id="outline-container-orgeebefba" class="outline-4">
+<h4 id="orgeebefba"><span class="section-number-4">1.2.2</span> 配置</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 isync 的配置方式与 offlineimap 类似，将如下配置放在 '~/.mbsyncrc' 中，并运行
@@ -293,8 +292,8 @@ SyncState *
 </div>
 </div>
 </div>
-<div id="outline-container-orgfb1133b" class="outline-3">
-<h3 id="orgfb1133b"><span class="section-number-3">1.3</span> Unsafe login</h3>
+<div id="outline-container-orga90d1e9" class="outline-3">
+<h3 id="orga90d1e9"><span class="section-number-3">1.3</span> Unsafe login</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 使用第三方 IMAP 服务同步 163 邮箱时，会提示 Unsafe login 错误，可以通过 <a href="http://config.mail.163.com/settings/imap/index.jsp?uid=xxxxxx@163.com">网易邮箱
@@ -304,12 +303,12 @@ SyncState *
 </div>
 </div>
 
-<div id="outline-container-orgbfdc226" class="outline-2">
-<h2 id="orgbfdc226"><span class="section-number-2">2</span> mu 邮件管理器</h2>
+<div id="outline-container-org9062353" class="outline-2">
+<h2 id="org9062353"><span class="section-number-2">2</span> mu 邮件管理器</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgf0fd733" class="outline-3">
-<h3 id="orgf0fd733"><span class="section-number-3">2.1</span> 安装</h3>
+<div id="outline-container-org65e4617" class="outline-3">
+<h3 id="org65e4617"><span class="section-number-3">2.1</span> 安装</h3>
 <div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#20811;&#38534; mu &#20179;&#24211;</span>
@@ -324,8 +323,8 @@ make -j 4 &amp;&amp; sudo make install
 </div>
 </div>
 </div>
-<div id="outline-container-org80414f4" class="outline-3">
-<h3 id="org80414f4"><span class="section-number-3">2.2</span> 配置 mu</h3>
+<div id="outline-container-org8479685" class="outline-3">
+<h3 id="org8479685"><span class="section-number-3">2.2</span> 配置 mu</h3>
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#21021;&#22987;&#21270; mu &#30417;&#27979;&#30340;&#37038;&#31665;&#25991;&#20214;&#22841;</span>
@@ -337,8 +336,8 @@ mu index
 </div>
 </div>
 </div>
-<div id="outline-container-org0a95890" class="outline-2">
-<h2 id="org0a95890"><span class="section-number-2">3</span> mu4e 多账户设置</h2>
+<div id="outline-container-orgd7f2093" class="outline-2">
+<h2 id="orgd7f2093"><span class="section-number-2">3</span> mu4e 多账户设置</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 mu4e (mu for emacs) 是 mu 在 emacs 中实现的一个邮件管理模块。后端调用 mu 进行邮
@@ -517,8 +516,8 @@ mu4e (mu for emacs) 是 mu 在 emacs 中实现的一个邮件管理模块。后�
 </div>
 </div>
 </div>
-<div id="outline-container-orga2765b3" class="outline-2">
-<h2 id="orga2765b3"><span class="section-number-2">4</span> 配置 smtp 发送邮件</h2>
+<div id="outline-container-org0bb9741" class="outline-2">
+<h2 id="org0bb9741"><span class="section-number-2">4</span> 配置 smtp 发送邮件</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 emcas 可以使用 smtpmail 发送邮件，会自动读取 <code>~/.authinfo</code> 文件中的账户和密码，因
@@ -531,8 +530,8 @@ machine smtp.qq.com login myqqmail@qq.com password xxxxxxxxxx
 </div>
 </div>
 </div>
-<div id="outline-container-org71966d6" class="outline-2">
-<h2 id="org71966d6"><span class="section-number-2">5</span> 使用 Org mode 编辑新邮件</h2>
+<div id="outline-container-org434f3cc" class="outline-2">
+<h2 id="org434f3cc"><span class="section-number-2">5</span> 使用 Org mode 编辑新邮件</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 使用 Emacs 管理邮件的一大优势就是可以借助强大的 Org-mode 来写邮件，并自动导出为
@@ -564,8 +563,8 @@ HTML 邮件。生成的邮件为 multipart 的邮件，也就是说同时有 pla
 </div>
 </div>
 </div>
-<div id="outline-container-orgb1e4289" class="outline-2">
-<h2 id="orgb1e4289"><span class="section-number-2">6</span> 将邮件加入 TODO 列表中</h2>
+<div id="outline-container-org73d8279" class="outline-2">
+<h2 id="org73d8279"><span class="section-number-2">6</span> 将邮件加入 TODO 列表中</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 如果想要将某封邮件加入代办事项用于记录，可以将如下代码加入 <code>init-mu4e.el</code> 中
