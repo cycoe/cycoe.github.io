@@ -264,18 +264,19 @@ p {
   display: flex;
   margin: 5px 0 5px 0;
   padding: 0px 5px 0 5px;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   width: 100%;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
 .archive-title {
   display: block;
   font-size: 18px;
   font-weight: bold;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  /* white-space: nowrap; */
+  /* overflow: hidden; */
+  /* text-overflow: ellipsis; */
+  flex-grow: 100;
 }
 
 .archive-title a {
@@ -287,8 +288,9 @@ p {
 }
 
 .archive-date {
-  display: none;
+  display: flex;
   align-items: center;
+  width: auto;
 }
 
 .timestamp {
