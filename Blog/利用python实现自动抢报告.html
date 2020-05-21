@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2020-05-21 Thu 16:29 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>利用 python 實現自動搶報告</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Cycoe">
+<link rel="stylesheet" type="text/css" href="/static/css/default.css" />
+<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+<script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div id="top-container">
+  <a id="site-name" href="/">Cycoe<span id="at-home">@Home</span></a>
+  <div id="banner">Keep It Simple Stupid</div>
+</div>
+
+<div id="top-nav">
+  <div id="nav-wrapper">
+    <div class="nav-btn" id="toc-wrapper">
+      <span class="vertical-align">Ξ</span>
+      <div id="go-top">
+        <a href="javascript:window.scrollTo(0,0)" style="color: black !important; border-bottom: none !important;" class="tooltip" title="Go to the top of the page">
+        <span class="top">&uarr;</span>
+        </a></div>
+    </div>
+    <div id="nav-left-wrapper">
+      <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
+      <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
+      <div id="nav-title-wrapper">
+        <span id="nav-title">利用 python 實現自動搶報告</span>
+        <span id="nav-date"><2017-10-28 Sat></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div id="img-modal" class="modal">
+  <!-- The Close Button -->
+  <span class="close">&times;</span>
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content" id="img-wrapper">
+  <!-- Modal Caption (Image Text) -->
+  <div id="caption"></div>
+</div>
+</div>
+<div id="content">
+<header>
+<h1 class="title">利用 python 實現自動搶報告</h1>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#聲明">1. <b>聲明</b></a></li>
+<li><a href="#問題分解">2. 問題分解</a></li>
+<li><a href="#框架設計">3. 框架設計</a></li>
+<li><a href="#逐步解決">4. 逐步解決</a>
+<ul>
+<li><a href="#orgb09e3cc">4.1. 构造 Headers</a></li>
+<li><a href="#org0af442e">4.2. 构造请求对象</a></li>
+<li><a href="#org7de93b0">4.3. 請求登錄</a></li>
+<li><a href="#orgdc7e4ae">4.4. 拿到 session</a></li>
+</ul>
+</li>
+<li><a href="#暗坑總結">5. 暗坑總結</a></li>
+</ul>
+</div>
+</nav>
+<p>
+上了研究生才知道北化的研究生每年需要聽 15 個報告，而且最重要的是這些報告都是算分
+數的，而且更重要的是你的分數是和最後的獎學金評定掛鉤的。這也就決定了大家爲了那麼
+點報告分數擠教務網都擠破了頭（北化的服務器大家都懂），雖然場面不如開學搶課那麼火
+爆，卻需要長時間掛着教務網瘋狂刷新，爲了交換個講座也需要大半夜起來，生怕被別人截
+胡。爲了解放生產力，同時熟悉爬蟲技術、神經網絡技術、裝飾器等進階內容，寫了這個爬
+蟲來練練手。
+</p>
+
+<!-- more -->
+
+<div id="outline-container-org3cc6c10" class="outline-2">
+<h2 id="聲明"><span class="section-number-2">1</span> <b>聲明</b></h2>
+<div class="outline-text-2" id="text-聲明">
+<p>
+<b>該爬蟲是本人 (Cycoe) 練習 python 編程技巧和神經網絡所編寫，使用造成的任何責任與
+本人無關</b>
+</p>
+
+<p>
+<a href="https://github.com/cycoe/class_robber">項目地址</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org611798d" class="outline-2">
+<h2 id="問題分解"><span class="section-number-2">2</span> 問題分解</h2>
+<div class="outline-text-2" id="text-問題分解">
+<p>
+想要順利的拿到搶講座的 session，需要如下的步驟：
+</p>
+<ol class="org-ol">
+<li>處理登陸問題，包括處理驗證碼、頁面表單和 cookies</li>
+<li>獲取報告列表</li>
+<li>獲取搶報告的地址</li>
+<li>提交表單數據</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org76ed217" class="outline-2">
+<h2 id="框架設計"><span class="section-number-2">3</span> 框架設計</h2>
+<div class="outline-text-2" id="text-框架設計">
+<p>
+好的框架應具有良好的可維護性和擴展性，目前正朝着這個方向努力
+</p>
+<ol class="org-ol">
+<li>採用交互式的命令行設計，分離 login, robSpeech 等方法</li>
+<li>將 login, robSpeech, robClass 等方法封裝成 Robber 對象</li>
+<li>將底層的 requests 封裝成Spider 對象</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgfe6a6d3" class="outline-2">
+<h2 id="逐步解決"><span class="section-number-2">4</span> 逐步解決</h2>
+<div class="outline-text-2" id="text-逐步解決">
+</div>
+
+<div id="outline-container-orgb09e3cc" class="outline-3">
+<h3 id="orgb09e3cc"><span class="section-number-3">4.1</span> 构造 Headers</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+通過 firefox 或 chrome 的 debug 模式可以查看在訪問網頁時的 request 和 response。
+仿照瀏覽器在訪問教務網時提交的 headers 構造如下字典
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #00af00;">class</span> <span style="color: #18b2b2;">Spider</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #b218b2;">object</span><span style="color: #cc0000; font-weight: bold;">)</span>:
+    @<span style="color: #b218b2;">staticmethod</span>
+    <span style="color: #00af00;">def</span> <span style="color: #ef2929;">formatHeaders</span><span style="color: #cc0000; font-weight: bold;">(</span>referer=<span style="color: #1f5bff;">None</span>, contentLength=<span style="color: #1f5bff;">None</span>, originHost=<span style="color: #1f5bff;">None</span><span style="color: #cc0000; font-weight: bold;">)</span>:
+        <span style="color: #cc0000;">"""</span>
+<span style="color: #cc0000;">        &#23553;&#35037;&#35531;&#27714;&#30340; headers</span>
+
+<span style="color: #cc0000;">        :param referer: &#36339;&#36681;&#27161;&#35352;&#65292;&#21578;&#35380; web &#26381;&#21209;&#22120;&#33258;&#24049;&#26159;&#24478;&#21738;&#20491;&#38913;&#38754;&#36339;&#36681;&#36942;&#20358;&#30340;</span>
+<span style="color: #cc0000;">        :param contentLength: &#20316;&#29992;&#26410;&#30693;</span>
+<span style="color: #cc0000;">        :param originHost: &#21407;&#22987;&#20027;&#27231;&#22320;&#22336;</span>
+<span style="color: #cc0000;">        :returns: headers &#23383;&#20856;</span>
+<span style="color: #cc0000;">        """</span>
+        <span style="color: #ff8700;">headers</span> = <span style="color: #cc0000; font-weight: bold;">{</span>
+            <span style="color: #ff1f8b;">'Accept'</span>: <span style="color: #ff1f8b;">'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'</span>,
+            <span style="color: #ff1f8b;">'Accept-Encoding'</span>: <span style="color: #ff1f8b;">'gzip, deflate'</span>,
+            <span style="color: #ff1f8b;">'Accept-Language'</span>: <span style="color: #ff1f8b;">'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7'</span>,
+            <span style="color: #ff1f8b;">'Cache-Control'</span>: <span style="color: #ff1f8b;">'max-age=0'</span>,
+            <span style="color: #ff1f8b;">'Connection'</span>: <span style="color: #ff1f8b;">'keep-alive'</span>,
+            <span style="color: #ff1f8b;">'Content-Type'</span>: <span style="color: #ff1f8b;">'application/x-www-form-urlencoded'</span>,
+            <span style="color: #ff1f8b;">'DNT'</span>: <span style="color: #ff1f8b;">'1'</span>,
+            <span style="color: #ff1f8b;">'Host'</span>: <span style="color: #ff1f8b;">'graduate.buct.edu.cn:8080'</span>,
+            <span style="color: #ff1f8b;">'Upgrade-Insecure-Requests'</span>: <span style="color: #ff1f8b;">'1'</span>,
+            <span style="color: #ff1f8b;">'User-Agent'</span>: <span style="color: #ff1f8b;">'Mozilla/5.0 (X11;Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36'</span>,
+            <span style="color: #ff1f8b;">'Referer'</span>: referer,
+            <span style="color: #ff1f8b;">'Content-Length'</span>: contentLength,
+            <span style="color: #ff1f8b;">'Origin'</span>: originHost,
+        <span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0af442e" class="outline-3">
+<h3 id="org0af442e"><span class="section-number-3">4.2</span> 构造请求对象</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+封裝 request 請求需要的 prepareBody 對象， <code>response = session.send(prepareBody)</code>
+，response 就是我們拿到的服務器的響應對象，可通過 <code>response.text</code> 得到網頁內容，
+<code>response.status_code</code> 得到狀態碼， <code>response.url</code> 得到響應的地址。 
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #00af00;">def</span> <span style="color: #ef2929;">prepare</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">self</span>, referer=<span style="color: #1f5bff;">None</span>, originHost=<span style="color: #1f5bff;">None</span>, method=<span style="color: #ff1f8b;">'GET'</span>,
+            url=<span style="color: #1f5bff;">None</span>, data=<span style="color: #1f5bff;">None</span>, params=<span style="color: #1f5bff;">None</span><span style="color: #cc0000; font-weight: bold;">)</span>:
+    <span style="color: #cc0000;">""" &#29983;&#25104;&#29992;&#26044;&#35531;&#27714;&#30340; prepare</span>
+<span style="color: #cc0000;">    :param referer: &#36339;&#36681;&#27161;&#35352;&#65292;&#21578;&#35380; web &#26381;&#21209;&#22120;&#33258;&#24049;&#26159;&#24478;&#21738;&#20491;&#38913;&#38754;&#36339;&#36681;&#36942;&#20358;&#30340;</span>
+<span style="color: #cc0000;">    :param originHost: &#21407;&#22987;&#20027;&#27231;&#22320;&#22336;</span>
+<span style="color: #cc0000;">    :param method: &#35531;&#27714;&#26041;&#27861; in ['GET', 'POST']</span>
+<span style="color: #cc0000;">    :param url: &#35531;&#27714;&#30340; url &#22320;&#22336;</span>
+<span style="color: #cc0000;">    :param data: &#23553;&#35037;&#30340; post &#25976;&#25818;</span>
+<span style="color: #cc0000;">    :param params: post &#21443;&#25976;</span>
+<span style="color: #cc0000;">    :return: prepare &#23565;&#35937;</span>
+<span style="color: #cc0000;">    """</span>
+    <span style="color: #ff8700;">headers</span> = <span style="color: #00af00;">self</span>.formatHeaders<span style="color: #cc0000; font-weight: bold;">(</span>referer=referer, originHost=originHost<span style="color: #cc0000; font-weight: bold;">)</span>
+    <span style="color: #ff8700;">req</span> = Request<span style="color: #cc0000; font-weight: bold;">(</span>method, url, headers=headers, data=data, params=params<span style="color: #cc0000; font-weight: bold;">)</span>
+    <span style="color: #00af00;">return</span> <span style="color: #00af00;">self</span>.session.prepare_request<span style="color: #cc0000; font-weight: bold;">(</span>req<span style="color: #cc0000; font-weight: bold;">)</span>
+
+<span style="color: #ff8700;">prepareBody</span> = prepare<span style="color: #cc0000; font-weight: bold;">(</span>
+    referer=<span style="color: #1f5bff;">None</span>, originHost=<span style="color: #1f5bff;">None</span>, method=<span style="color: #ff1f8b;">'GET'</span>,
+    url=UrlBean.jwglLoginUrl, data=<span style="color: #1f5bff;">None</span>, params=<span style="color: #1f5bff;">None</span>
+<span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #ff8700;">response</span> = session.send<span style="color: #cc0000; font-weight: bold;">(</span>prepareBody<span style="color: #cc0000; font-weight: bold;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7de93b0" class="outline-3">
+<h3 id="org7de93b0"><span class="section-number-3">4.3</span> 請求登錄</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+請求登錄網址，提交表單數據。根據 response 返回的響應體內容判斷是否登陸成功。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #00af00;">def</span> <span style="color: #ef2929;">getVIEWSTATE</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">self</span><span style="color: #cc0000; font-weight: bold;">)</span>:
+   <span style="color: #cc0000;">""" &#27491;&#21063;&#29554;&#21462;&#38913;&#38754;&#30340; __VIEWSTATE</span>
+
+<span style="color: #cc0000;">   :returns: &#38913;&#38754;&#30340; __VIEWSTATE</span>
+<span style="color: #cc0000;">   """</span>
+   <span style="color: #ff8700;">VIEWSTATE</span> = re.findall<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">'&lt;.*name="__VIEWSTATE".*value="(.*)?".*/&gt;'</span>, <span style="color: #00af00;">self</span>.response.text<span style="color: #cc0000; font-weight: bold;">)</span>
+   <span style="color: #00af00;">if</span> <span style="color: #b218b2;">len</span><span style="color: #cc0000; font-weight: bold;">(</span>VIEWSTATE<span style="color: #cc0000; font-weight: bold;">)</span> &gt; 0:
+       <span style="color: #00af00;">return</span> VIEWSTATE
+   <span style="color: #00af00;">else</span>:
+       <span style="color: #00af00;">return</span> <span style="color: #1f5bff;">None</span>
+
+
+<span style="color: #00af00;">def</span> <span style="color: #ef2929;">getEVENTVALIDATION</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">self</span><span style="color: #cc0000; font-weight: bold;">)</span>:
+   <span style="color: #cc0000;">""" &#27491;&#21063;&#29554;&#21462;&#38913;&#38754;&#30340; __EVENTVALIDATION</span>
+
+<span style="color: #cc0000;">   :returns: &#38913;&#38754;&#30340; __EVENTVALIDATION</span>
+<span style="color: #cc0000;">   """</span>
+   <span style="color: #ff8700;">EVENTVALIDATION</span> = re.findall<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">'&lt;.*name="__EVENTVALIDATION".*value="(.*)?".*/&gt;'</span>, <span style="color: #00af00;">self</span>.response.text<span style="color: #cc0000; font-weight: bold;">)</span>
+   <span style="color: #00af00;">if</span> <span style="color: #b218b2;">len</span><span style="color: #cc0000; font-weight: bold;">(</span>EVENTVALIDATION<span style="color: #cc0000; font-weight: bold;">)</span> &gt; 0:
+       <span style="color: #00af00;">return</span> EVENTVALIDATION
+   <span style="color: #00af00;">else</span>:
+       <span style="color: #00af00;">return</span> <span style="color: #1f5bff;">None</span>
+
+<span style="color: #00af00;">def</span> <span style="color: #ef2929;">login</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">self</span><span style="color: #cc0000; font-weight: bold;">)</span>:
+    <span style="color: #cc0000;">""" &#30331;&#37636;&#25945;&#21209;&#32178; """</span>
+
+    <span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#22312;&#30331;&#37636;&#21069;&#35531;&#27714;&#19968;&#27425;&#30331;&#37636;&#38913;&#38754;&#65292;&#29554;&#21462;&#32178;&#38913;&#30340;&#38577;&#34255;&#34920;&#21934;&#25976;&#25818;</span>
+    <span style="color: #ff8700;">prepareBody</span> = <span style="color: #00af00;">self</span>.prepare<span style="color: #cc0000; font-weight: bold;">(</span>referer=<span style="color: #1f5bff;">None</span>,
+                                originHost=<span style="color: #1f5bff;">None</span>,
+                                method=<span style="color: #ff1f8b;">'GET'</span>,
+                                url=UrlBean.jwglLoginUrl,
+                                data=<span style="color: #1f5bff;">None</span>,
+                                params=<span style="color: #1f5bff;">None</span><span style="color: #cc0000; font-weight: bold;">)</span>
+
+    <span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#30331;&#38520;&#20027;&#24490;&#29872;</span>
+    <span style="color: #00af00;">while</span> <span style="color: #1f5bff;">True</span>:
+        <span style="color: #00af00;">self</span>.response = <span style="color: #00af00;">self</span>.session.send<span style="color: #cc0000; font-weight: bold;">(</span>prepareBody<span style="color: #cc0000; font-weight: bold;">)</span>
+        <span style="color: #00af00;">self</span>.VIEWSTATE = <span style="color: #00af00;">self</span>.getVIEWSTATE<span style="color: #cc0000; font-weight: bold;">()</span>
+        <span style="color: #00af00;">self</span>.EVENTVALIDATION = <span style="color: #00af00;">self</span>.getEVENTVALIDATION<span style="color: #cc0000; font-weight: bold;">()</span>
+        <span style="color: #00af00;">if</span> <span style="color: #00af00;">self</span>.VIEWSTATE <span style="color: #00af00;">is</span> <span style="color: #00af00;">not</span> <span style="color: #1f5bff;">None</span> <span style="color: #00af00;">and</span> <span style="color: #00af00;">self</span>.EVENTVALIDATION <span style="color: #00af00;">is</span> <span style="color: #00af00;">not</span> <span style="color: #1f5bff;">None</span>:
+            <span style="color: #00af00;">break</span>
+        Logger.log<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Retrying fetching login page viewState..."</span>, level=Logger.warning<span style="color: #cc0000; font-weight: bold;">)</span>
+
+    <span style="color: #ff8700;">reInput</span> = <span style="color: #1f5bff;">True</span>      <span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#26159;&#21542;&#38656;&#35201;&#37325;&#26032;&#36664;&#20837;&#29992;&#25142;&#21517;&#21644;&#23494;&#30908;</span>
+    <span style="color: #00af00;">while</span> <span style="color: #1f5bff;">True</span>:
+        <span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#36664;&#20837;&#29992;&#25142;&#21517;&#21644;&#23494;&#30908;</span>
+        <span style="color: #00af00;">if</span> reInput:
+            <span style="color: #00af00;">if</span> Config.checkUserFile<span style="color: #cc0000; font-weight: bold;">()</span>:
+                Config.readUserInfo<span style="color: #cc0000; font-weight: bold;">()</span>
+            <span style="color: #00af00;">else</span>:
+                <span style="color: #ff8700;">Config.userName</span> = <span style="color: #b218b2;">input</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">"&gt; UserName: "</span><span style="color: #cc0000; font-weight: bold;">)</span>
+                <span style="color: #ff8700;">Config.password</span> = <span style="color: #b218b2;">input</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">"&gt; Password: "</span><span style="color: #cc0000; font-weight: bold;">)</span>
+            <span style="color: #ff8700;">reInput</span> = <span style="color: #1f5bff;">False</span>
+
+        <span style="color: #ff8700;">prepareBody</span> = <span style="color: #00af00;">self</span>.prepare<span style="color: #cc0000; font-weight: bold;">(</span>referer=UrlBean.jwglLoginUrl,
+                                    originHost=<span style="color: #1f5bff;">None</span>,
+                                    method=<span style="color: #ff1f8b;">'GET'</span>,
+                                    url=UrlBean.verifyCodeUrl,
+                                    data=<span style="color: #1f5bff;">None</span>,
+                                    params=<span style="color: #1f5bff;">None</span><span style="color: #cc0000; font-weight: bold;">)</span>
+
+        <span style="color: #00af00;">while</span> <span style="color: #1f5bff;">True</span>:
+            <span style="color: #ff8700;">codeImg</span> = <span style="color: #00af00;">self</span>.session.send<span style="color: #cc0000; font-weight: bold;">(</span>prepareBody<span style="color: #cc0000; font-weight: bold;">)</span>  <span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#29554;&#21462;&#39511;&#35657;&#30908;&#22294;&#29255;</span>
+            <span style="color: #00af00;">if</span> codeImg.status_code == 200:
+                <span style="color: #00af00;">break</span>
+            <span style="color: #00af00;">else</span>:
+                Logger.log<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">"retrying fetching vertify code..."</span>, level=Logger.warning<span style="color: #cc0000; font-weight: bold;">)</span>
+
+        <span style="color: #00af00;">with</span> <span style="color: #b218b2;">open</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">'check.gif'</span>, <span style="color: #ff1f8b;">'wb'</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #00af00;">as</span> fr:  <span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#20445;&#23384;&#39511;&#35657;&#30908;&#22294;&#29255;</span>
+            <span style="color: #00af00;">for</span> chunk <span style="color: #00af00;">in</span> codeImg:
+                fr.write<span style="color: #cc0000; font-weight: bold;">(</span>chunk<span style="color: #cc0000; font-weight: bold;">)</span>
+
+        print_vertify_code<span style="color: #cc0000; font-weight: bold;">()</span>
+        <span style="color: #ff8700;">verCode</span> = <span style="color: #b218b2;">input</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">"input verify code:"</span><span style="color: #cc0000; font-weight: bold;">)</span>
+        <span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">verCode = self.classifier.recognizer("check.gif")  # &#35672;&#21029;&#39511;&#35657;&#30908;</span>
+
+        <span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#27083;&#36896;&#30331;&#38520;&#34920;&#21934;</span>
+        <span style="color: #ff8700;">postData</span> = <span style="color: #cc0000; font-weight: bold;">{</span>
+            <span style="color: #ff1f8b;">'__VIEWSTATE'</span>: <span style="color: #00af00;">self</span>.VIEWSTATE,
+            <span style="color: #ff1f8b;">'__EVENTVALIDATION'</span>: <span style="color: #00af00;">self</span>.EVENTVALIDATION,
+            <span style="color: #ff1f8b;">'_ctl0:txtusername'</span>: Config.userName,
+            <span style="color: #ff1f8b;">'_ctl0:txtpassword'</span>: Config.password,
+            <span style="color: #ff1f8b;">'_ctl0:txtyzm'</span>: verCode,
+            <span style="color: #ff1f8b;">'_ctl0:ImageButton1.x'</span>: <span style="color: #ff1f8b;">'43'</span>,
+            <span style="color: #ff1f8b;">'_ctl0:ImageButton1.y'</span>: <span style="color: #ff1f8b;">'21'</span>,
+        <span style="color: #cc0000; font-weight: bold;">}</span>
+        <span style="color: #ff8700;">prepareBody</span> = <span style="color: #00af00;">self</span>.prepare<span style="color: #cc0000; font-weight: bold;">(</span>referer=UrlBean.jwglLoginUrl,
+                                    originHost=UrlBean.jwglOriginUrl,
+                                    method=<span style="color: #ff1f8b;">'POST'</span>,
+                                    url=UrlBean.jwglLoginUrl,
+                                    data=postData,
+                                    params=<span style="color: #1f5bff;">None</span><span style="color: #cc0000; font-weight: bold;">)</span>
+
+        <span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#29554;&#21462;&#30331;&#38520; response</span>
+        <span style="color: #00af00;">while</span> <span style="color: #1f5bff;">True</span>:
+            <span style="color: #00af00;">self</span>.response = <span style="color: #00af00;">self</span>.session.send<span style="color: #cc0000; font-weight: bold;">(</span>prepareBody<span style="color: #cc0000; font-weight: bold;">)</span>
+            <span style="color: #00af00;">if</span> <span style="color: #00af00;">self</span>.response.status_code == 200:
+                <span style="color: #00af00;">break</span>
+
+        <span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#26681;&#25818;&#36820;&#22238;&#30340; html &#21028;&#26039;&#26159;&#21542;&#30331;&#37636;&#25104;&#21151;</span>
+        <span style="color: #00af00;">if</span> re.search<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">'&#29992;&#25142;&#21517;&#19981;&#23384;&#22312;'</span>, <span style="color: #00af00;">self</span>.response.text<span style="color: #cc0000; font-weight: bold;">)</span>:
+            Logger.log<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">'No such a user!'</span>, <span style="color: #1f5bff; font-weight: bold;">[</span><span style="color: #ff1f8b;">'Cleaning password file'</span><span style="color: #1f5bff; font-weight: bold;">]</span>, level=Logger.error<span style="color: #cc0000; font-weight: bold;">)</span>
+            <span style="color: #00af00;">print</span><span style="color: #cc0000; font-weight: bold;">(</span>OutputFormater.table<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00; font-weight: bold;">[</span><span style="color: #ff4ea3; font-weight: bold;">[</span><span style="color: #ff1f8b;">'No such a user!'</span><span style="color: #ff4ea3; font-weight: bold;">]</span>, <span style="color: #ff4ea3; font-weight: bold;">[</span><span style="color: #ff1f8b;">'Cleaning password file'</span><span style="color: #ff4ea3; font-weight: bold;">]</span><span style="color: #00af00; font-weight: bold;">]</span>, padding=2<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+            Config.cleanUserInfo<span style="color: #cc0000; font-weight: bold;">()</span>
+            <span style="color: #ff8700;">reInput</span> = <span style="color: #1f5bff;">True</span>
+
+        <span style="color: #00af00;">elif</span> re.search<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">'&#23494;&#30908;&#37679;&#35492;'</span>, <span style="color: #00af00;">self</span>.response.text<span style="color: #cc0000; font-weight: bold;">)</span>:
+            Logger.log<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">'Wrong password!'</span>, <span style="color: #1f5bff; font-weight: bold;">[</span><span style="color: #ff1f8b;">'Cleaning password file'</span><span style="color: #1f5bff; font-weight: bold;">]</span>, level=Logger.error<span style="color: #cc0000; font-weight: bold;">)</span>
+            <span style="color: #00af00;">print</span><span style="color: #cc0000; font-weight: bold;">(</span>OutputFormater.table<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00; font-weight: bold;">[</span><span style="color: #ff4ea3; font-weight: bold;">[</span><span style="color: #ff1f8b;">'Wrong password!'</span><span style="color: #ff4ea3; font-weight: bold;">]</span>, <span style="color: #ff4ea3; font-weight: bold;">[</span><span style="color: #ff1f8b;">'Cleaning password file'</span><span style="color: #ff4ea3; font-weight: bold;">]</span><span style="color: #00af00; font-weight: bold;">]</span>, padding=2<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+            Config.cleanUserInfo<span style="color: #cc0000; font-weight: bold;">()</span>
+            <span style="color: #ff8700;">reInput</span> = <span style="color: #1f5bff;">True</span>
+
+        <span style="color: #00af00;">elif</span> re.search<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">'&#35531;&#36664;&#20837;&#39511;&#35657;&#30908;'</span>, <span style="color: #00af00;">self</span>.response.text<span style="color: #cc0000; font-weight: bold;">)</span>:
+            Logger.log<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">'Please input vertify code!'</span>, <span style="color: #1f5bff; font-weight: bold;">[</span><span style="color: #ff1f8b;">'Retrying...'</span><span style="color: #1f5bff; font-weight: bold;">]</span>, level=Logger.error<span style="color: #cc0000; font-weight: bold;">)</span>
+            <span style="color: #00af00;">print</span><span style="color: #cc0000; font-weight: bold;">(</span>OutputFormater.table<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00; font-weight: bold;">[</span><span style="color: #ff4ea3; font-weight: bold;">[</span><span style="color: #ff1f8b;">'Please input vertify code!'</span><span style="color: #ff4ea3; font-weight: bold;">]</span>, <span style="color: #ff4ea3; font-weight: bold;">[</span><span style="color: #ff1f8b;">'Retrying...'</span><span style="color: #ff4ea3; font-weight: bold;">]</span><span style="color: #00af00; font-weight: bold;">]</span>, padding=2<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+
+        <span style="color: #00af00;">elif</span> re.search<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">'&#39511;&#35657;&#30908;&#37679;&#35492;'</span>, <span style="color: #00af00;">self</span>.response.text<span style="color: #cc0000; font-weight: bold;">)</span>:
+            Logger.log<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">'Wrong vertify code!'</span>, <span style="color: #1f5bff; font-weight: bold;">[</span><span style="color: #ff1f8b;">'Retrying...'</span><span style="color: #1f5bff; font-weight: bold;">]</span>, level=Logger.error<span style="color: #cc0000; font-weight: bold;">)</span>
+            <span style="color: #00af00;">print</span><span style="color: #cc0000; font-weight: bold;">(</span>OutputFormater.table<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00; font-weight: bold;">[</span><span style="color: #ff4ea3; font-weight: bold;">[</span><span style="color: #ff1f8b;">'Wrong vertify code!'</span><span style="color: #ff4ea3; font-weight: bold;">]</span>, <span style="color: #ff4ea3; font-weight: bold;">[</span><span style="color: #ff1f8b;">'Retrying...'</span><span style="color: #ff4ea3; font-weight: bold;">]</span><span style="color: #00af00; font-weight: bold;">]</span>, padding=2<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+
+        <span style="color: #00af00;">else</span>:
+            Logger.log<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">'Login successfully!'</span>, <span style="color: #1f5bff; font-weight: bold;">[</span><span style="color: #ff1f8b;">'UserName: '</span> + Config.userName, <span style="color: #ff1f8b;">'Password: '</span> + Config.password<span style="color: #1f5bff; font-weight: bold;">]</span>, level=Logger.warning<span style="color: #cc0000; font-weight: bold;">)</span>
+            <span style="color: #00af00;">print</span><span style="color: #cc0000; font-weight: bold;">(</span>OutputFormater.table<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00; font-weight: bold;">[</span><span style="color: #ff4ea3; font-weight: bold;">[</span><span style="color: #ff1f8b;">'Login successfully!'</span><span style="color: #ff4ea3; font-weight: bold;">]</span><span style="color: #00af00; font-weight: bold;">]</span>, padding=2<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+            Config.dumpUserInfo<span style="color: #cc0000; font-weight: bold;">()</span>
+            <span style="color: #00af00;">break</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdc7e4ae" class="outline-3">
+<h3 id="orgdc7e4ae"><span class="section-number-3">4.4</span> 拿到 session</h3>
+<div class="outline-text-3" id="text-4-4">
+<p>
+拿到已登陸的 session 後，搶課和搶報告都是非常方便的，只要按照瀏覽器提交的數據構
+造 headers 和表單數據後就可以獲得正常的 response
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org531865a" class="outline-2">
+<h2 id="暗坑總結"><span class="section-number-2">5</span> 暗坑總結</h2>
+<div class="outline-text-2" id="text-暗坑總結">
+<ol class="org-ol">
+<li>剛開始抓到的網頁內容中文都是亂碼，後來 google 解決，發現是 python 的編碼和
+asp 框架的編碼問題造成的，python 中的編碼問題真的是讓人頭大</li>
+<li>由於網站的防爬蟲設計，會在 html 源碼中插入很多隱藏的表單數據，如此處的
+<code>__VIEWSTATE</code> 和 <code>__EVENTVALIDATION</code> ，這兩個是非常重要的參數。否則無法成功登陸</li>
+<li>兩次訪問之間要有一定的時間間隔，如此處用了一個隨機函數的閉包來獲得隨機時間的
+間隔</li>
+<li>使用裝飾器解決了在訪問搶課網頁前判斷登錄的問題</li>
+<li>接下來將循環封裝成函數，加入最大循環次數和超時</li>
+<li>完善邊界檢查和異常處理</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="author-info">
+      <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
+      <div id="date">Date: <2017-10-28 Sat></div>
+      <div id="modified">Last modified: <2020-05-21 Thu 16:29></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
+      </div><div id="copyright">
+    <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
+</div>
+</div>
+</body>
+</html>

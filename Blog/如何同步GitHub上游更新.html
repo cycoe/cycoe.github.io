@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-20 Wed 22:54 -->
+<!-- 2020-05-21 Thu 16:29 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>&lrm;</title>
+<title>如何同步 GitHub 上游更新</title>
 <meta name="generator" content="Org mode">
 <meta name="author" content="Cycoe">
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
@@ -32,8 +32,8 @@
       <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
       <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
       <div id="nav-title-wrapper">
-        <span id="nav-title">No Title</span>
-        <span id="nav-date">May, 20, 2020</span>
+        <span id="nav-title">如何同步 GitHub 上游更新</span>
+        <span id="nav-date"><2017-03-11 Sat></span>
       </div>
     </div>
   </div>
@@ -50,39 +50,46 @@
 </div>
 </div>
 <div id="content">
-<p>
-在 GitHub 上進行項目的團隊協作，一般都是 fork
-組織倉庫到自己的賬號下，提交補丁後再提交 Pull
-Request。上游倉庫一直保持更新。 由於最近在做
-<a href="https://github.com/LCTT/TranslateProject.git">LCTT</a>
-項目，經常需要同步上游其他人的翻譯，下面就以
-<a href="https://github.com/LCTT/TranslateProject.git">LCTT</a>
-項目爲例，記錄一下 GitHub 上 fork 倉庫同步上游更新的操作。
+<header>
+<h1 class="title">如何同步 GitHub 上游更新</h1>
+</header><p>
+在 GitHub 上進行項目的團隊協作，一般都是 fork 組織倉庫到自己的賬號下，提交補丁後
+再提交 Pull Request。上游倉庫一直保持更新。 由於最近在做 <a href="https://github.com/LCTT/TranslateProject.git">LCTT</a> 項目，經常需要同步
+上游其他人的翻譯，下面就以 <a href="https://github.com/LCTT/TranslateProject.git">LCTT</a> 項目爲例，記錄一下 GitHub 上 fork 倉庫同步上游更
+新的操作。
 </p>
 
-<div class="HTML">
-<p>
-&lt;!&#x2013;more&#x2013;&gt;
-</p>
-
-</div>
+<!-- more -->
 
 <ol class="org-ol">
 <li><p>
 使用 <code>git remote -v</code> 查看當前的遠程倉庫別名，輸出如下：
-<code>LCTT    https://github.com/LCTT/TranslateProject.git (fetch)     LCTT    https://github.com/LCTT/TranslateProject.git (push)     origin  git@github.com:cycoe/TranslateProject.git (fetch)     origin  git@github.com:cycoe/TranslateProject.git (push)</code>
 </p>
 
+<pre class="example">
+LCTT    https://github.com/LCTT/TranslateProject.git (fetch)
+LCTT    https://github.com/LCTT/TranslateProject.git (push)
+origin  git@github.com:cycoe/TranslateProject.git (fetch)
+origin  git@github.com:cycoe/TranslateProject.git (push)
+</pre>
+
 <p>
-其中 <code>origin</code> 是自己賬號下的對應遠端倉庫地址別名， <code>LCTT</code>
-是設定好的上游倉庫地址的別名。此處 LCTT
-項目已經幫我們設置好了就不需要另外設置。<br>
-如果沒有設置上游倉庫地址，可通過
-<code>git remote add 上游倉庫別名 上游倉庫地址</code> 命令來設置上游倉庫的別名。
+其中 <code>origin</code> 是自己賬號下的對應遠端倉庫地址別名， <code>LCTT</code> 是設定好的上游倉庫地址
+的別名。此處 LCTT 項目已經幫我們設置好了就不需要另外設置。如果沒有設置上游倉
+庫地址，可通過 <code>git remote add 上游倉庫別名 上游倉庫地址</code> 命令來設置上游倉庫的
+別名。
 </p></li>
 
-<li>同步上游倉庫更新到本地，併合並更新到本地倉庫 master 分支
-<code>bash     git fetch LCTT          #從上游倉庫抓取更新     git checkout master     #切換到 master 分支     git merge LCTT/master   #合併上游更新到 master 分支</code></li>
+<li><p>
+同步上游倉庫更新到本地，併合並更新到本地倉庫 master 分支
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">git fetch LCTT          <span style="color: #b2b2b2; font-style: italic;">#</span><span style="color: #b2b2b2; font-style: italic;">&#24478;&#19978;&#28216;&#20489;&#24235;&#25235;&#21462;&#26356;&#26032;</span>
+git checkout master     <span style="color: #b2b2b2; font-style: italic;">#</span><span style="color: #b2b2b2; font-style: italic;">&#20999;&#25563;&#21040; master &#20998;&#25903;</span>
+git merge LCTT/master   <span style="color: #b2b2b2; font-style: italic;">#</span><span style="color: #b2b2b2; font-style: italic;">&#21512;&#20341;&#19978;&#28216;&#26356;&#26032;&#21040; master &#20998;&#25903;</span>
+</pre>
+</div></li>
 
 <li><code>git push</code> 命令推送本地倉庫到 fork 倉庫</li>
 </ol>
@@ -90,7 +97,8 @@ Request。上游倉庫一直保持更新。 由於最近在做
 <div id="postamble" class="status">
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
-      <div id="date">Date: May, 20, 2020</div>
+      <div id="date">Date: <2017-03-11 Sat></div>
+      <div id="modified">Last modified: <2020-05-21 Thu 16:29></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-20 Wed 22:54 -->
+<!-- 2020-05-21 Thu 16:28 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>&lrm;</title>
+<title>路由器配置教程</title>
 <meta name="generator" content="Org mode">
 <meta name="author" content="Cycoe">
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
@@ -32,8 +32,8 @@
       <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
       <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
       <div id="nav-title-wrapper">
-        <span id="nav-title">No Title</span>
-        <span id="nav-date">May, 20, 2020</span>
+        <span id="nav-title">路由器配置教程</span>
+        <span id="nav-date"><2019-04-30 Tue 21:19></span>
       </div>
     </div>
   </div>
@@ -50,7 +50,9 @@
 </div>
 </div>
 <div id="content">
-<nav id="table-of-contents">
+<header>
+<h1 class="title">路由器配置教程</h1>
+</header><nav id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
@@ -64,22 +66,23 @@
 </ul>
 </div>
 </nav>
-<div id="outline-container-org97f1269" class="outline-2">
+
+<div id="outline-container-orgdbeff72" class="outline-2">
 <h2 id="初次使用"><span class="section-number-2">1</span> 初次使用</h2>
 <div class="outline-text-2" id="text-初次使用">
 <p>
-拿到新的路由器之后，首先检查外包装是否有破损、路由器是否有划痕、插头是否有使用痕迹、插上电源后指示灯是否正常亮起，以此初步判断路由器是否是全新的，在某东平台上买电子产品要尤其注意。。。
+拿到新的路由器之后，首先检查外包装是否有破损、路由器是否有划痕、插头是否有使用痕
+迹、插上电源后指示灯是否正常亮起，以此初步判断路由器是否是全新的，在某东平台上买
+电子产品要尤其注意。。。
 </p>
 
-<div class="HTML">
-<p>
-&lt;!&#x2013;more&#x2013;&gt;
-</p>
-
-</div>
+<!-- more -->
 
 <p>
-好吧扯远了。。。路由器其实可以算作是一台独立的微型计算机，运行着定制的操作系统（针对路由器我们叫固件）。但路由器又与我们平常见到的电脑不同，因为它没有标准输入输出设备，也就是键盘鼠标和显示器。那我们要怎么对路由器进行控制呢，其实有很多种方式，但无论的使用哪种方式，我们都需要首先连接上路由器。
+好吧扯远了。。。路由器其实可以算作是一台独立的微型计算机，运行着定制的操作系统
+（针对路由器我们叫固件）。但路由器又与我们平常见到的电脑不同，因为它没有标准输入
+输出设备，也就是键盘鼠标和显示器。那我们要怎么对路由器进行控制呢，其实有很多种方
+式，但无论的使用哪种方式，我们都需要首先连接上路由器。
 </p>
 
 <ol class="org-ol">
@@ -87,53 +90,51 @@
 <li>连接路由器的方式有两种-&#x2013;&#x2014;有线和无线连接。任选其一即可。
 
 <ol class="org-ol">
-<li>有线连接：使用网线一头连接路由器的 LAN（Local Area
-Network）口，一头连接电脑的网线口</li>
+<li>有线连接：使用网线一头连接路由器的 LAN（Local Area Network）口，一头连接电
+脑的网线口</li>
 <li>无线连接：打开 Wi-Fi 并连接路由器，一般初始名字为 "TP-LINK<sub>XXX</sub>"</li>
 </ol></li>
 
-<li>在浏览器中输入 <code>192.168.1.1</code> 打开路由器管理界面（也可能是其他 IP
-地址，一般在路由器底部的标签上可以看到）</li>
-<li>这个时候，根据配置向导对路由器进行配置即可。需要注意的是对于校园网，在
-WAN 口连接方式中，选择"动态IP"选项。其他的 SSID 名（也就是平常说的
-Wi-Fi 名）及密码等根据需要进行配置即可</li>
+<li>在浏览器中输入 <code>192.168.1.1</code> 打开路由器管理界面（也可能是其他 IP 地址，一般在路
+由器底部的标签上可以看到）</li>
+<li>这个时候，根据配置向导对路由器进行配置即可。需要注意的是对于校园网，在 WAN 口
+连接方式中，选择 <code>动态 IP</code> 选项。其他的 SSID 名（也就是平常说的 Wi-Fi 名）及
+密码等根据需要进行配置即可</li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-orgdafbd42" class="outline-2">
+<div id="outline-container-orge77f775" class="outline-2">
 <h2 id="高级配置"><span class="section-number-2">2</span> 高级配置</h2>
 <div class="outline-text-2" id="text-高级配置">
 <p>
-在路由器管理页面中，我们可以看到非常多的配置选项。虽然平常在家庭使用中我们只会用到其中的几个选项，但对于实验室这样一个需要对几十台设备进行管理的场景，里面的一些选项就会非常有用了。
+在路由器管理页面中，我们可以看到非常多的配置选项。虽然平常在家庭使用中我们只会用
+到其中的几个选项，但对于实验室这样一个需要对几十台设备进行管理的场景，里面的一些
+选项就会非常有用了。
 </p>
 </div>
 
-<div id="outline-container-orgeeb778e" class="outline-3">
+<div id="outline-container-org896e6c0" class="outline-3">
 <h3 id="静态-ip-地址绑定"><span class="section-number-3">2.1</span> 静态 IP 地址绑定</h3>
 <div class="outline-text-3" id="text-静态-ip-地址绑定">
 <p>
-这是我最常用到的一个功能，通俗的讲就是将一个设备的 IP
-的地址固定下来。一个设备在通过路由器连入互联网时，路由器会通过
-DHCP（Dynamic Host Configuration Protocol
-动态主机设置协议）服务为每个设备随机分配 IP
-地址，并且每过一段时间就会改变。那么我们想在局域网中找到另一台设备就需要通过
-IP 地址，而静态 IP
-地址绑定就是要告诉路由器，我想为一台特定设备分配一个固定的 IP
-地址，那么我以后就可以通过这个固定的 IP 地址来找到这台设备。
+这是我最常用到的一个功能，通俗的讲就是将一个设备的 IP 的地址固定下来。一个设备在
+通过路由器连入互联网时，路由器会通过 DHCP（Dynamic Host Configuration Protocol
+动态主机设置协议）服务为每个设备随机分配 IP 地址，并且每过一段时间就会改变。那么
+我们想在局域网中找到另一台设备就需要通过 IP 地址，而静态 IP 地址绑定就是要告诉路
+由器，我想为一台特定设备分配一个固定的 IP 地址，那么我以后就可以通过这个固定的
+IP 地址来找到这台设备。
 </p>
 
 <p>
-现在的路由器几乎都有这个功能，一般是在基本设置-LAN
-设置-静态地址分配中进行设置。其中"MAC
-地址"是设备的硬件地址，是一串唯一的 12
-位的十六进制数，在设备出厂时就确定好了。可通过我写的小程序获得。"IP
-地址"是你希望该设备使用的 IP 地址。
+现在的路由器几乎都有这个功能，一般是在 <i>基本设置-LAN 设置-静态地址分配</i> 中进行设置。
+其中 <code>MAC 地址</code> 是设备的硬件地址，是一串唯一的 12 位的十六进制数，在设备出厂时就确
+定好了。可通过我写的小程序获得。 <code>IP 地址</code> 是你希望该设备使用的 IP 地址。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org223fd56" class="outline-3">
+<div id="outline-container-org486eadd" class="outline-3">
 <h3 id="路由器桥接"><span class="section-number-3">2.2</span> 路由器桥接</h3>
 <div class="outline-text-3" id="text-路由器桥接">
 </div>
@@ -143,7 +144,8 @@ IP 地址，而静态 IP
 <div id="postamble" class="status">
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
-      <div id="date">Date: May, 20, 2020</div>
+      <div id="date">Date: <2019-04-30 Tue 21:19></div>
+      <div id="modified">Last modified: <2020-05-21 Thu 16:28></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。

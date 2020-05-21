@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-20 Wed 22:54 -->
+<!-- 2020-05-21 Thu 16:29 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>&lrm;</title>
+<title>反向 SSH 实现内网穿透</title>
 <meta name="generator" content="Org mode">
 <meta name="author" content="Cycoe">
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
@@ -32,8 +32,8 @@
       <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
       <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
       <div id="nav-title-wrapper">
-        <span id="nav-title">No Title</span>
-        <span id="nav-date">May, 20, 2020</span>
+        <span id="nav-title">反向 SSH 实现内网穿透</span>
+        <span id="nav-date"><2019-04-30 Tue 23:42></span>
       </div>
     </div>
   </div>
@@ -50,7 +50,9 @@
 </div>
 </div>
 <div id="content">
-<nav id="table-of-contents">
+<header>
+<h1 class="title">反向 SSH 实现内网穿透</h1>
+</header><nav id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
@@ -82,83 +84,79 @@
 </div>
 </nav>
 <p>
-最近实验室又配置了一台新的计算平台，噪声堪比飞机起飞，再加上本校区不允许实验过夜，只能将其安置在学校外面。但从学校到计算平台车程
-40Km，每次都过去做计算显然不现实，如果能从学校直接远程连接是最好的。
+最近实验室又配置了一台新的计算平台，噪声堪比飞机起飞，再加上本校区不允许实验过夜，
+只能将其安置在学校外面。但从学校到计算平台车程 40 Km，每次都过去做计算显然不现实，
+如果能从学校直接远程连接是最好的。
 </p>
 
-<div class="HTML">
-<p>
-&lt;!&#x2013;more&#x2013;&gt;
-</p>
-
-</div>
+<!-- more -->
 
 <p>
-通过相关资料的查询及对专业人士的请教，找到如下几种解决方法: 1.
-联系网络运营商将动态 IP 转为静态的公网
-IP，这样就可以直接从学校的内网连接到计算平台，是最完美的解决方案。但是查询资费后发现，价钱不那么完美，一个月
-6000 块大洋怎么负担得起啊！ 2. 主机 A 使用 TeamViewer
-连接至计算平台局域网下的另一台主机 B，再控制 B 使用 SSH
-连接至计算平台。这种方法包含几个明显的弊端： 1.
-操作麻烦，需要经过两层的文件传输及控制； 2. 虽然 TeamViewer
-有个人的免费使用许可，但最近审查日益严格，经常使用几分钟就被强制下线；
+通过相关资料的查询及对专业人士的请教，找到如下几种解决方法:
 </p>
 <ol class="org-ol">
-<li>TeamViewer 基于 GUI 远程控制，对网络要求很高； 4.</li>
-</ol>
-<p>
-最重要的一点，一个好的解决方案应该形成一个"黑箱"，而不应该把内部细节暴露给用户；
-</p>
+<li>联系网络运营商将动态 IP 转为静态的公网IP，这样就可以直接从学校的内网连接到计
+算平台，是最完美的解决方案。但是查询资费后发现，价钱不那么完美，一个月6000 块
+大洋怎么负担得起啊！</li>
+<li>主机 A 使用 TeamViewer 连接至计算平台局域网下的另一台主机 B，再控制 B 使用
+SSH连接至计算平台。这种方法包含几个明显的弊端：
 <ol class="org-ol">
-<li>从计算平台使用反向 SSH</li>
+<li>操作麻烦，需要经过两层的文件传输及控制；</li>
+<li>虽然 TeamViewer有个人的免费使用许可，但最近审查日益严格，经常使用几分钟就
+被强制下线；</li>
+<li>TeamViewer 基于 GUI 远程控制，对网络要求很高；</li>
+<li>最重要的一点，一个好的解决方案应该形成一个"黑箱"，而不应该把内部细节暴露
+给用户；</li>
+</ol></li>
+<li>从计算平台使用反向 SSH 连接到云服务器，从而建立起从云服务器到计算平台的隧道连
+接。这种方法传输的速度上限在于云服务器的带宽，最大的优点在于实现了一个“鸭子类
+型”，使用 SSH 连接计算平台与连接局域网内的主机无异。</li>
 </ol>
-<p>
-连接到云服务器，从而建立起从云服务器到计算平台的隧道连接。这种方法传输的速度上限在于云服务器的带宽，最大的优点在于实现了一个"鸭子类型"，使用
-SSH 连接计算平台与连接局域网内的主机无异。
-</p>
 
-<div id="outline-container-orgd0594ba" class="outline-2">
+<div id="outline-container-org8c7f2d9" class="outline-2">
 <h2 id="ssh-协议与应用"><span class="section-number-2">1</span> SSH 协议与应用</h2>
 <div class="outline-text-2" id="text-ssh-协议与应用">
 <blockquote>
 <p>
-SSH 为 Secure Shell 的缩写，由 IETF 的网络小组（Network Working
-Group）所制定；SSH 为建立在应用层基础上的安全协议。SSH
-是目前较可靠，专为远程登录会话和其他网络服务提供安全性的协议。利用 SSH
-协议可以有效防止远程管理过程中的信息泄露问题。SSH 最初是 UNIX
-系统上的一个程序，后来又迅速扩展到其他操作平台。SSH
-在正确使用时可弥补网络中的漏洞。SSH 客户端适用于多种平台。几乎所有
-UNIX 平台&#x2014;包括 HP-UX、Linux、AIX、Solaris、Digital
-UNIX、Irix，以及其他平台，都可运行 SSH。
+SSH 为 Secure Shell 的缩写，由 IETF 的网络小组（Network Working Group）所制定；
+SSH 为建立在应用层基础上的安全协议。SSH是目前较可靠，专为远程登录会话和其他网
+络服务提供安全性的协议。利用 SSH 协议可以有效防止远程管理过程中的信息泄露问题。
+SSH 最初是 UNIX系统上的一个程序，后来又迅速扩展到其他操作平台。SSH 在正确使用
+时可弥补网络中的漏洞。SSH 客户端适用于多种平台。几乎所有 UNIX 平台&#x2014;包括
+HP-UX、Linux、AIX、Solaris、Digital UNIX、Irix，以及其他平台，都可运行 SSH。
 </p>
 </blockquote>
 
 <p>
-以上对 SSH
-的解释来自<a href="https://baike.baidu.com/item/ssh/10407?fr=aladdin">百度百科</a>，别问我为什么不用
-Wikipedia。从中我们看到，SSH
-是建立在应用层基础上的一种安全协议，可以用来进行远程控制，或在计算机之间传送文件，比传统的
-telnet 或 ftp 协议要更安全。Linux 下最常使用的就是 OpenSSH。OpenSSH 是
-SSH 协议的免费开源实现，提供了服务端后台程序（SSH
-Daemon）和客户端工具(SSH Client)。主机可以通过 SSH 客户端连接运行了 SSH
-服务端的主机。
+以上对 SSH 的解释来自<a href="https://baike.baidu.com/item/ssh/10407?fr=aladdin">百度百科</a>，别问我为什么不用 Wikipedia。从中我们看到，SSH 是
+建立在应用层基础上的一种安全协议，可以用来进行远程控制，或在计算机之间传送文件，
+比传统的 telnet 或 ftp 协议要更安全。Linux 下最常使用的就是 OpenSSH。OpenSSH 是
+SSH 协议的免费开源实现，提供了服务端后台程序（SSH Daemon）和客户端工具(SSH
+Client)。主机可以通过 SSH 客户端连接运行了 SSH 服务端的主机。
 </p>
 </div>
 </div>
 
-<div id="outline-container-orga2bb95b" class="outline-2">
+<div id="outline-container-org3c02eb9" class="outline-2">
 <h2 id="网络拓扑分析"><span class="section-number-2">2</span> 网络拓扑分析</h2>
 <div class="outline-text-2" id="text-网络拓扑分析">
 <p>
-互联网是一张巨大的网，其中所有的主机都由有线或无线的方式相连，但并不代表任意两台主机都能互相可见。网络是有方向的，与其说是网我觉得更像一棵树。网络在向下进行传输时，会经过
-NAT（Network Address Translation
-网络地址转换），因此外网的主机无法直接访问内网的主机。
+互联网是一张巨大的网，其中所有的主机都由有线或无线的方式相连，但并不代表任意两台
+主机都能互相可见。网络是有方向的，与其说是网我觉得更像一棵树。网络在向下进行传输
+时，会经过NAT（Network Address Translation网络地址转换），因此外网的主机无法直接
+访问内网的主机。
 </p>
 
 <p>
-在我们本次遇到的问题中，网络连接可表示为如下的拓扑结构。 {% asset<sub>img</sub>
-topology.png 网络拓扑结构 %}
+在我们本次遇到的问题中，网络连接可表示为如下的拓扑结构。
 </p>
+
+
+<figure>
+<img src="反向SSH实现内网穿透/topology.png" alt="topology.png">
+
+<figcaption><span class="figure-number">Figure 1: </span>网络拓扑分析</figcaption>
+</figure>
 
 <p>
 各个主机的 IP 地址如下表所示
@@ -209,22 +207,22 @@ topology.png 网络拓扑结构 %}
 </table>
 
 <p>
-其中 A、B 能够访问 O，但 O 不能访问 A、B，并且 A、B
-之间不能直接互相访问。我们最后要实现的目标就是使用 B 访问 A。
+其中 A、B 能够访问 O，但 O 不能访问 A、B，并且 A、B 之间不能直接互相访问。我们最
+后要实现的目标就是使用 B 访问 A。
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgdf5fd94" class="outline-2">
+<div id="outline-container-org6932e8c" class="outline-2">
 <h2 id="解决方法"><span class="section-number-2">3</span> 解决方法</h2>
 <div class="outline-text-2" id="text-解决方法">
 <p>
-通俗地说：就是在主机 A 上做到 O 的反向代理；然后在 O
-上做正向的代理实现本地端口的转发。
+通俗地说：就是在主机 A 上做到 O 的反向代理；然后在 O 上做正向的代理实现本地端口
+的转发。
 </p>
 </div>
 
-<div id="outline-container-org7782c0f" class="outline-3">
+<div id="outline-container-orga7e743f" class="outline-3">
 <h3 id="准备工作"><span class="section-number-3">3.1</span> 准备工作</h3>
 <div class="outline-text-3" id="text-准备工作">
 <p>
@@ -235,15 +233,17 @@ A、B、O 上都要安装 SSH Client，A、O 上需要安装 SSH Daemon。
 需要用到的 ssh 参数
 </p>
 
-<pre class="example">
-反向代理
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#21453;&#21521;&#20195;&#29702;</span>
 ssh -fCNR
 </pre>
+</div>
 
-<pre class="example">
-正向代理
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#27491;&#21521;&#20195;&#29702;</span>
 ssh -fCNL
 </pre>
+</div>
 
 <pre class="example">
 -f 后台执行 ssh 指令
@@ -256,7 +256,7 @@ ssh -fCNL
 </div>
 </div>
 
-<div id="outline-container-org25d862f" class="outline-3">
+<div id="outline-container-org484d6a3" class="outline-3">
 <h3 id="反向代理"><span class="section-number-3">3.2</span> 反向代理</h3>
 <div class="outline-text-3" id="text-反向代理">
 <p>
@@ -269,8 +269,7 @@ ssh -fCNL
 </div>
 
 <p>
-在这里我使用了 O 主机的 3333 端口，以及 A 主机的 22
-端口，按照以上命令即为
+在这里我使用了 O 主机的 3333 端口，以及 A 主机的 22 端口，按照以上命令即为
 </p>
 
 <div class="org-src-container">
@@ -279,8 +278,8 @@ ssh -fCNL
 </div>
 
 <p>
-此时我们就将 O 的 3333 端口映射到了 A 的 22 端口，也就是说访问 O 的 3333
-端口与访问 A 的 22 端口效果相同。
+此时我们就将 O 的 3333 端口映射到了 A 的 22 端口，也就是说访问 O 的 3333 端口与
+访问 A 的 22 端口效果相同。
 </p>
 
 <p>
@@ -289,12 +288,12 @@ ssh -fCNL
 </div>
 </div>
 
-<div id="outline-container-orgc769fa8" class="outline-3">
+<div id="outline-container-org4de031a" class="outline-3">
 <h3 id="正向代理"><span class="section-number-3">3.3</span> 正向代理</h3>
 <div class="outline-text-3" id="text-正向代理">
 <p>
-接下来在 O 主机上操作。完成上一步的反向代理后，在主机 O
-上运行如下命令应该就可以登陆 A 主机。
+接下来在 O 主机上操作。完成上一步的反向代理后，在主机 O 上运行如下命令应该就可以
+登陆 A 主机。
 </p>
 
 <div class="org-src-container">
@@ -303,15 +302,13 @@ ssh -fCNL
 </div>
 
 <p>
-该命令的含义为，使用 cal 用户登陆本机的 3333 端口。上面已经说过，访问 O
-的 3333 端口与访问 A 的 22 端口效果相同，那么我们就成功从 O 主机登陆了 A
-主机。
+该命令的含义为，使用 cal 用户登陆本机的 3333 端口。上面已经说过，访问 O 的 3333
+端口与访问 A 的 22 端口效果相同，那么我们就成功从 O 主机登陆了 A 主机。
 </p>
 
 <p>
-但此时我们仍只能从 O 主机本机上登陆 A
-主机，无法从其他主机登陆，因此需要再对 3333
-端口进行一次端口转发，使其他主机可以访问。具体命令为
+但此时我们仍只能从 O 主机本机上登陆 A 主机，无法从其他主机登陆，因此需要再对
+3333 端口进行一次端口转发，使其他主机可以访问。具体命令为
 </p>
 
 <div class="org-src-container">
@@ -320,8 +317,7 @@ ssh -fCNL
 </div>
 
 <p>
-此处我们想要将 3333 端口转发到 2222 端口，因此转发端口为
-2222，被转发端口为 3333。
+此处我们想要将 3333 端口转发到 2222 端口，因此转发端口为 2222，被转发端口为 3333。
 </p>
 
 <div class="org-src-container">
@@ -330,20 +326,19 @@ ssh -fCNL
 </div>
 
 <p>
-此处 <code>*</code> 表示允许任意其他主机访问，本机的用户名可省略。使用
-<code>ps aux | grep 2222</code> 命令来查看正向代理是否运行成功。此处 2222
-端口为本地转发端口，负责与外网进行通信，并将数据转发到 3333
-端口，实现了可以从其他主机访问的功能。
+此处 <code>*</code> 表示允许任意其他主机访问，本机的用户名可省略。使用 <code>ps aux | grep 2222</code> 命
+令来查看正向代理是否运行成功。此处 2222 端口为本地转发端口，负责与外网进行通信，
+并将数据转发到 3333 端口，实现了可以从其他主机访问的功能。
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgc1e2d10" class="outline-3">
+<div id="outline-container-org0f4684c" class="outline-3">
 <h3 id="展现奇迹的时候到了"><span class="section-number-3">3.4</span> 展现奇迹的时候到了</h3>
 <div class="outline-text-3" id="text-展现奇迹的时候到了">
 <p>
-到次为至，我们已经配置好了 AO
-主机，那么我们可以从任意可联网的设备登录到计算平台中去啦。指令为
+到次为至，我们已经配置好了 A O 主机，那么我们可以从任意可联网的设备登录到计算平
+台中去啦。指令为
 </p>
 
 <div class="org-src-container">
@@ -357,27 +352,25 @@ ssh -fCNL
 </div>
 </div>
 
-<div id="outline-container-org96e3d06" class="outline-3">
+<div id="outline-container-orgd7e00fa" class="outline-3">
 <h3 id="这种反向代理是不稳定的"><span class="section-number-3">3.5</span> 这种反向代理是不稳定的</h3>
 <div class="outline-text-3" id="text-这种反向代理是不稳定的">
 <p>
-不幸的是这种 ssh
-连接会因为超时和网络堵塞等原因而关闭，那么从的外网连通内网的通道就无法维持了，为此我们需要维持稳定
-ssh 反向代理隧道的方法。
+不幸的是这种 ssh 连接会因为超时和网络堵塞等原因而关闭，那么从的外网连通内网的通
+道就无法维持了，为此我们需要维持稳定 ssh 反向代理隧道的方法。
 </p>
 </div>
 
-<div id="outline-container-org656ba1a" class="outline-4">
+<div id="outline-container-org5754946" class="outline-4">
 <h4 id="配置-ssh-key-实现免密登陆"><span class="section-number-4">3.5.1</span> 配置 ssh key 实现免密登陆</h4>
 <div class="outline-text-4" id="text-配置-ssh-key-实现免密登陆">
 <p>
-在使用 ssh
-进行连接时，每次都需要输入密码，一方面不安全，另一方面也为我们接下来使用的自动化工具带来了阻碍。
+在使用 ssh 进行连接时，每次都需要输入密码，一方面不安全，另一方面也为我们接下来
+使用的自动化工具带来了阻碍。
 </p>
 
 <p>
-首先登陆 A
-主机，并运行如下命令生成公钥私钥对。中间的配置过程一路回车即可。
+首先登陆 A 主机，并运行如下命令生成公钥私钥对。中间的配置过程一路回车即可。
 </p>
 
 <div class="org-src-container">
@@ -386,8 +379,7 @@ ssh 反向代理隧道的方法。
 </div>
 
 <p>
-此时就在 A 主机的 <code>~/.ssh/</code>
-目录下生成了公钥与私钥对，接下来我们需要将公钥传到 O
+此时就在 A 主机的 <code>~/.ssh/</code> 目录下生成了公钥与私钥对，接下来我们需要将公钥传到 O
 主机上作为我们登陆的一个比对凭证
 </p>
 
@@ -397,19 +389,18 @@ ssh 反向代理隧道的方法。
 </div>
 
 <p>
-此时，我们再使用 <code>ssh server@123.123.123.123</code> 登陆路 O
-主机就不再需要密码了。
+此时，我们再使用 <code>ssh server@123.123.123.123</code> 登陆路 O 主机就不再需要密码了。
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgc378740" class="outline-4">
+<div id="outline-container-org359d411" class="outline-4">
 <h4 id="用-autossh-建立稳定隧道"><span class="section-number-4">3.5.2</span> 用 autossh 建立稳定隧道</h4>
 <div class="outline-text-4" id="text-用-autossh-建立稳定隧道">
 <p>
-从 A 主机到 O
-主机的反向代理连接是不稳定的，也就是说，我们需要一个工具来时刻监听着这个连接。一但断开，再次自动重新建立连接即可。幸运的是，已经有人写出了这个工具，那就是
-autossh！感谢开源！
+从 A 主机到 O 主机的反向代理连接是不稳定的，也就是说，我们需要一个工具来时刻监听
+着这个连接。一但断开，再次自动重新建立连接即可。幸运的是，已经有人写出了这个工具，
+那就是 autossh！感谢开源！
 </p>
 
 <p>
@@ -437,19 +428,19 @@ sudo make install
 </div>
 
 <p>
-autossh 命令的参数与 ssh 一致，不同的是我们需要指出的
-=-M``=参数，这个参数指定一个端口，这个端口是外网的 O 主机用来接收内网 A
-主机的信息，如果隧道不正常而返回给 A 主机让它实现重新连接。
+autossh 命令的参数与 ssh 一致，不同的是我们需要指出的 <code>-M</code> 参数，这个参数指定一个
+端口，这个端口是外网的 O 主机用来接收内网 A 主机的信息，如果隧道不正常而返回给 A
+主机让它实现重新连接。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org1d60023" class="outline-4">
+<div id="outline-container-orgafd216e" class="outline-4">
 <h4 id="配置自动启动"><span class="section-number-4">3.5.3</span> 配置自动启动</h4>
 <div class="outline-text-4" id="text-配置自动启动">
 <p>
-我们需要将 autossh
-命令配置在开机自动启动脚本中，免去了每次开机都需要重新运行脚本的麻烦。
+我们需要将 autossh 命令配置在开机自动启动脚本中，免去了每次开机都需要重新运行脚
+本的麻烦。
 </p>
 
 <p>
@@ -462,8 +453,8 @@ autossh 命令的参数与 ssh 一致，不同的是我们需要指出的
 </div>
 
 <p>
-此命令表示，以 cal 用户运行 autossh 命令，这样我们就能够使用 cal
-用户反向连接到 A 主机。
+此命令表示，以 cal 用户运行 autossh 命令，这样我们就能够使用 cal 用户反向连接到
+A 主机。
 </p>
 
 <p>
@@ -482,18 +473,18 @@ autossh 命令的参数与 ssh 一致，不同的是我们需要指出的
 </div>
 </div>
 
-<div id="outline-container-org6c73b41" class="outline-3">
+<div id="outline-container-orga48a03e" class="outline-3">
 <h3 id="进一步优化"><span class="section-number-3">3.6</span> 进一步优化</h3>
 <div class="outline-text-3" id="text-进一步优化">
 </div>
 
-<div id="outline-container-org143aafc" class="outline-4">
+<div id="outline-container-orge002d28" class="outline-4">
 <h4 id="保持活连接"><span class="section-number-4">3.6.1</span> 保持活连接</h4>
 <div class="outline-text-4" id="text-保持活连接">
 <p>
-在测试中发现，如果一个连接长时间空置，那么就会冻结。反向代理连接也是一样，此时便只能通过重启
-A 主机使连接重置。为保持一个活连接（Keep
-alive），需要服务端或客户端定时发送心跳包来确保连接活跃，此处我们选择配置服务端的心跳。
+在测试中发现，如果一个连接长时间空置，那么就会冻结。反向代理连接也是一样，此时便
+只能通过重启 A 主机使连接重置。为保持一个活连接（Keep alive），需要服务端或客户
+端定时发送心跳包来确保连接活跃，此处我们选择配置服务端的心跳。
 </p>
 
 <p>
@@ -501,7 +492,7 @@ alive），需要服务端或客户端定时发送心跳包来确保连接活跃
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">server &#27599;&#38548; 60 &#31186;&#21457;&#36865;&#19968;&#27425;&#35831;&#27714;&#32473; client&#65292;&#28982;&#21518; client &#21709;&#24212;&#65292;&#20174;&#32780;&#20445;&#25345;&#36830;&#25509;</span>
+<pre class="src src-conf"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">server &#27599;&#38548; 60 &#31186;&#21457;&#36865;&#19968;&#27425;&#35831;&#27714;&#32473; client&#65292;&#28982;&#21518; client &#21709;&#24212;&#65292;&#20174;&#32780;&#20445;&#25345;&#36830;&#25509;</span>
 ClientAliveInterval 60
 <span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">server &#21457;&#20986;&#35831;&#27714;&#21518;&#65292;&#23458;&#25143;&#31471;&#27809;&#26377;&#21709;&#24212;&#24471;&#27425;&#25968;&#36798;&#21040; 3&#65292;&#23601;&#33258;&#21160;&#26029;&#24320;&#36830;&#25509;&#65292;&#27491;&#24120;&#24773;&#20917;&#19979;&#65292;client &#19981;&#20250;&#19981;&#21709;&#24212;</span>
 ClientAliveCountMax 3
@@ -510,13 +501,13 @@ ClientAliveCountMax 3
 </div>
 </div>
 
-<div id="outline-container-orgb63a75b" class="outline-4">
+<div id="outline-container-org08844f4" class="outline-4">
 <h4 id="windows-ssh-client-连接提示错误"><span class="section-number-4">3.6.2</span> Windows SSH Client 连接提示错误</h4>
 <div class="outline-text-4" id="text-windows-ssh-client-连接提示错误">
 <p>
-使用 Windows 的 SSH Client 连接 Linux 运行的 SSH 服务端时，会提示"ssh
-algorithm negotiation failed"错误，导致此问题的原因是 ssh
-升级后，为了安全，默认不再采用原来一些加密算法，我们手工添加进去即可。
+使用 Windows 的 SSH Client 连接 Linux 运行的 SSH 服务端时，会提示 "ssh algorithm
+negotiation failed" 错误，导致此问题的原因是 ssh升级后，为了安全，默认不再采用原
+来一些加密算法，我们手工添加进去即可。
 </p>
 
 <p>
@@ -524,7 +515,7 @@ algorithm negotiation failed"错误，导致此问题的原因是 ssh
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">add crypt format for window ssh client</span>
+<pre class="src src-conf"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">add crypt format for window ssh client</span>
 Ciphers aes128-cbc,aes192-cbc,aes256-cbc,aes128-ctr,aes192-ctr,aes256-ctr,3des-cbc,arcfour128,arcfour256,arcfour,blowfish-cbc,cast128-cbc
 MACs hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-sha1-96,hmac-md5-96
 KexAlgorithms diffie-hellman-group1-sha1,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group-exchange-sha256,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group1-sha1,curve25519-sha256@libssh.org
@@ -535,7 +526,7 @@ KexAlgorithms diffie-hellman-group1-sha1,diffie-hellman-group14-sha1,diffie-hell
 </div>
 </div>
 
-<div id="outline-container-org92f9528" class="outline-2">
+<div id="outline-container-org08927b8" class="outline-2">
 <h2 id="参考文献"><span class="section-number-2">4</span> 参考文献</h2>
 <div class="outline-text-2" id="text-参考文献">
 <p>
@@ -549,7 +540,8 @@ KexAlgorithms diffie-hellman-group1-sha1,diffie-hellman-group14-sha1,diffie-hell
 <div id="postamble" class="status">
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
-      <div id="date">Date: May, 20, 2020</div>
+      <div id="date">Date: <2019-04-30 Tue 23:42></div>
+      <div id="modified">Last modified: <2020-05-21 Thu 16:29></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。

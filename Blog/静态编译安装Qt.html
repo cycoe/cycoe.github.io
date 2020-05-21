@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-20 Wed 22:54 -->
+<!-- 2020-05-21 Thu 16:29 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>&lrm;</title>
+<title>靜態編譯安裝 Qt</title>
 <meta name="generator" content="Org mode">
 <meta name="author" content="Cycoe">
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
@@ -32,8 +32,8 @@
       <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
       <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
       <div id="nav-title-wrapper">
-        <span id="nav-title">No Title</span>
-        <span id="nav-date">May, 20, 2020</span>
+        <span id="nav-title">靜態編譯安裝 Qt</span>
+        <span id="nav-date"><2017-04-11 Tue></span>
       </div>
     </div>
   </div>
@@ -50,7 +50,9 @@
 </div>
 </div>
 <div id="content">
-<nav id="table-of-contents">
+<header>
+<h1 class="title">靜態編譯安裝 Qt</h1>
+</header><nav id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
@@ -61,39 +63,32 @@
 </div>
 </nav>
 <p>
-由於 pyqt 寫的程序打包過程中依賴庫的問題，打算用 c++ 版的 Qt
-重寫程序。但若用系統自帶的共享鏈接庫進行編譯，程序同樣無法在其他機器上運行。因此，此時需要自己手動靜態編譯
-Qt，使用靜態鏈接庫編譯的程序會自動將依賴的庫加到最終編譯出的機器碼中。
+由於 pyqt 寫的程序打包過程中依賴庫的問題，打算用 c++ 版的 Qt 重寫程序。但若用系
+統自帶的共享鏈接庫進行編譯，程序同樣無法在其他機器上運行。因此，此時需要自己手動
+靜態編譯 Qt，使用靜態鏈接庫編譯的程序會自動將依賴的庫加到最終編譯出的機器碼中。
 </p>
 
-<div class="HTML">
-<p>
-&lt;!&#x2013;more&#x2013;&gt;
-</p>
+<!-- more -->
 
-</div>
-
-<div id="outline-container-org8c18794" class="outline-2">
+<div id="outline-container-org25dab11" class="outline-2">
 <h2 id="安裝依賴項"><span class="section-number-2">1</span> 安裝依賴項</h2>
 <div class="outline-text-2" id="text-安裝依賴項">
 <ul class="org-ul">
-<li>Qt 的界面顯示依賴 <code>freetype</code> 和
-=fontconfig=，這兩個一定要裝上，否則編譯不成功。</li>
-<li>安裝完畢後創建 <code>freetype</code> 的軟鏈接到標準的安裝位置：
-<code>ln -s /usr/include/freetype2/freetype /usr/include/freetype</code></li>
+<li>Qt 的界面顯示依賴 <code>freetype</code> 和 <code>fontconfig</code> ，這兩個一定要裝上，否則編譯不成功。</li>
+<li>安裝完畢後創建 <code>freetype</code> 的軟鏈接到標準的安裝位置： <code>ln -s
+  /usr/include/freetype2/freetype /usr/include/freetype</code></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orga1bd820" class="outline-2">
+<div id="outline-container-orgdd90913" class="outline-2">
 <h2 id="編譯"><span class="section-number-2">2</span> 編譯</h2>
 <div class="outline-text-2" id="text-編譯">
 <ol class="org-ol">
-<li><a href="http://download.qt.io/official_releases/qt/">下載</a>最新的 Qt
-everywhere 壓縮包</li>
-<li>解壓壓縮包，=cd= 進壓縮包目錄</li>
-<li>運行以下命令對 <code>makefile</code> 進行配置
-<code>shell     ./configure -confirm-license -opensource -static -fontconfig -release -no-qml-debug -qt-xcb -nomake tests -nomake examples -skip qtwebkit -prefix /usr/include/Qt-5.8.0-static</code>
+<li><a href="http://download.qt.io/official_releases/qt/">下載</a>最新的 Qt everywhere 壓縮包</li>
+<li>解壓壓縮包， <code>cd</code> 進壓縮包目錄</li>
+<li>運行以下命令對 <code>makefile</code> 進行配置 <code>shell ./configure -confirm-license -opensource -static -fontconfig -release -no-qml-debug -qt-xcb -nomake tests
+   -nomake examples -skip qtwebkit -prefix /usr/include/Qt-5.8.0-static</code>
 
 <ul class="org-ul">
 <li><code>-static</code> -&gt; 選擇靜態編譯模式</li>
@@ -101,19 +96,19 @@ everywhere 壓縮包</li>
 <li><code>-prefix</code> -&gt; 指定安裝位置</li>
 </ul></li>
 
-<li>運行 <code>make -j 3</code> 採用 3 線程編譯</li>
+<li>運行 <code>make -j 4</code> 採用 4 線程編譯</li>
 <li>最後 <code>sudo make install</code> 安裝 Qt</li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-org4957a46" class="outline-2">
+<div id="outline-container-org1cda3cb" class="outline-2">
 <h2 id="配置-qt-creator"><span class="section-number-2">3</span> 配置 Qt Creator</h2>
 <div class="outline-text-2" id="text-配置-qt-creator">
 <ol class="org-ol">
 <li>安裝 Qt Creator</li>
-<li>打開 Qt Creator -&gt; tools -&gt; options -&gt; build，根據安裝路徑配置 Qt
-version 和 Kit</li>
+<li>打開 Qt Creator -&gt; tools -&gt; options -&gt; build，根據安裝路徑配置 Qt version 和
+Kit</li>
 </ol>
 </div>
 </div>
@@ -121,7 +116,8 @@ version 和 Kit</li>
 <div id="postamble" class="status">
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
-      <div id="date">Date: May, 20, 2020</div>
+      <div id="date">Date: <2017-04-11 Tue></div>
+      <div id="modified">Last modified: <2020-05-21 Thu 16:29></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
