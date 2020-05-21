@@ -262,6 +262,8 @@ p {
 .archive-item {
   border-radius: 5px;
   display: flex;
+  margin: 5px 0 5px 0;
+  padding: 0px 5px 0 5px;
   flex-wrap: nowrap;
   width: 100%;
   justify-content: space-between;
@@ -285,7 +287,7 @@ p {
 }
 
 .archive-date {
-  display: flex;
+  display: none;
   align-items: center;
 }
 
@@ -830,6 +832,9 @@ table th.right, table td.right {
   }
   img {
     max-width: 90%;
+  }
+  .archive-date {
+    display: flex;
   }
 }
 
