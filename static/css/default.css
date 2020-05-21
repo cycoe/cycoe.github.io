@@ -70,7 +70,7 @@ p {
   display: block;
   margin: 0 auto 0 auto;
   padding-left: 6px;
-  width: 100%;
+  width: auto;
   border-radius: 5px;
   text-transform: uppercase;
   text-decoration: none;
@@ -142,8 +142,8 @@ p {
   /* flex-wrap: wrap; */
   font-size: 22px;
   height: 50px;
-  background-color: #f7f7ff;
-  border: 2px solid #d7d7ff;
+  background-color: #d7e7ff;
+  border: 2px solid #b7c7ff;
   border-radius: 10px;
   -webkit-box-shadow: 0 0 0em #888;
   -moz-box-shadow: 0 0 0em #888;
@@ -178,7 +178,7 @@ p {
 }
 
 .nav-btn:hover {
-  background-color: #d7d7ff;
+  background-color: #b7c7ff;
   text-decoration: none;
 }
 
@@ -256,7 +256,42 @@ p {
 .vertical-align {
   display: flex;
   align-items: center;
-  height: 40px;
+  height: 36px;
+}
+
+.archive-item {
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.archive-title {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.archive-title a {
+  text-decoration: none;
+}
+
+.archive-title a:before, .archive-title a:after {
+  content: none;
+}
+
+.archive-date {
+  display: flex;
+  align-items: center;
+}
+
+.timestamp {
+  color: #999;
+  white-space: nowrap;
 }
 
 .taglist {
@@ -343,10 +378,10 @@ pre {
   display: block;
   margin: 0 0 14px;
   padding: 10px 15px 10px 15px;
-  border: 2px solid #d7d7ff;
+  border: 2px solid #b7c7ff;
   border-radius: 5px;
   line-height: 24px;
-  background-color: #f7f7ff;
+  background-color: #d7e7ff;
   /* Break lines rather than scrollbar */
   /* white-space: pre-wrap; */
   /* word-break: break-all; */
@@ -365,7 +400,7 @@ pre:hover {
   right: 0;
   margin: 8px 13px 0;
   padding: 0px 5px 0px 5px;
-  border: 2px solid #d7d7ff;
+  border: 2px solid #b7c7ff;
   border-radius: 5px;
   animation-name: fade-in;
   animation-duration: 0.6s;
@@ -378,7 +413,7 @@ pre:hover .code-type-flag {
 
 blockquote {
   background: #f9f9f9;
-  padding: 10px 20px 10px 20px;
+  padding: 10px 10px 10px 10px;
   margin: 0 10px 20px 10px;
   color: #999;
   border-left: 8px solid #e5e5e5;
@@ -393,7 +428,7 @@ img {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  max-width: 90%;
+  max-width: 100%;
   animation-name: fade-in;
   animation-duration: 1s;
   transition: 0.3s;
@@ -493,10 +528,11 @@ a:hover {
 }
 
 table {
-  background: #ffffa7;
+  background: #e7ffd7;
   border-top: hidden;
   border-bottom: hidden;
   border-radius: 5px;
+  border: 2px solid #c7ffb7;
   display: table;
   line-height: 2;
   font-size: 90%;
@@ -708,8 +744,8 @@ table th.right, table td.right {
   margin: 0 40px 0 40px;
   padding: 5px 15px 5px 15px;
   border-radius: 5px;
-  border: 2px solid #ffd7d7;
-  background-color: #fff7f7;
+  border: 2px solid #ffc7b7;
+  background-color: #ffe7d7;
   font-size: 16px;
   line-height: 2;
 }
@@ -791,6 +827,9 @@ table th.right, table td.right {
   }
   .modal-content {
     width: 100%;
+  }
+  img {
+    max-width: 90%;
   }
 }
 

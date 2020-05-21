@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-21 Thu 16:29 -->
+<!-- 2020-05-21 Thu 20:09 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>利用 Python 完成自动化群发邮件</title>
@@ -22,7 +22,7 @@
 <div id="top-nav">
   <div id="nav-wrapper">
     <div class="nav-btn" id="toc-wrapper">
-      <span class="vertical-align">Ξ</span>
+      <span class="vertical-align"> Ξ </span>
       <div id="go-top">
         <a href="javascript:window.scrollTo(0,0)" style="color: black !important; border-bottom: none !important;" class="tooltip" title="Go to the top of the page">
         <span class="top">&uarr;</span>
@@ -33,7 +33,7 @@
       <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
       <div id="nav-title-wrapper">
         <span id="nav-title">利用 Python 完成自动化群发邮件</span>
-        <span id="nav-date"><2020-03-30 Mon 13:22></span>
+        <span id="nav-date">Written @<2020-03-30 Mon 13:22></span>
       </div>
     </div>
   </div>
@@ -56,9 +56,9 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org3e704be">1. 生成通讯录</a></li>
-<li><a href="#org60429a2">2. 定义邮件内容</a></li>
-<li><a href="#orga236866">3. 发送邮件</a></li>
+<li><a href="#org8fa98d3">1. 生成通讯录</a></li>
+<li><a href="#org4b0dd70">2. 定义邮件内容</a></li>
+<li><a href="#orga9b01fe">3. 发送邮件</a></li>
 </ul>
 </div>
 </nav>
@@ -73,8 +73,8 @@
 Python 中已经实现了 <code>stmp</code> 的相关接口在 <code>smtplib</code> 模块中，邮件结构相关的接口在 <code>email</code> 模块中。
 </p>
 
-<div id="outline-container-org3e704be" class="outline-2">
-<h2 id="org3e704be"><span class="section-number-2">1</span> 生成通讯录</h2>
+<div id="outline-container-org8fa98d3" class="outline-2">
+<h2 id="org8fa98d3"><span class="section-number-2">1</span> 生成通讯录</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 在批量发送邮件之前，一定要有一份结构化的通讯录，不管是用 list 也好，用 dict 存储也好。此处，我是使用 <code>xlrd</code> 模块从 Excel 表格中读取数据，并将其存储在 dict 中。对于邮件来说，收件人的名字可能会出现重名，但邮件地址应该是唯一的，因此选用邮件地址作为字典的键。
@@ -114,8 +114,8 @@ Python 中已经实现了 <code>stmp</code> 的相关接口在 <code>smtplib</co
 </p>
 </div>
 </div>
-<div id="outline-container-org60429a2" class="outline-2">
-<h2 id="org60429a2"><span class="section-number-2">2</span> 定义邮件内容</h2>
+<div id="outline-container-org4b0dd70" class="outline-2">
+<h2 id="org4b0dd70"><span class="section-number-2">2</span> 定义邮件内容</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 第一步是生成邮件对象，代码示例如下：
@@ -169,8 +169,8 @@ Python 中已经实现了 <code>stmp</code> 的相关接口在 <code>smtplib</co
 </div>
 </div>
 </div>
-<div id="outline-container-orga236866" class="outline-2">
-<h2 id="orga236866"><span class="section-number-2">3</span> 发送邮件</h2>
+<div id="outline-container-orga9b01fe" class="outline-2">
+<h2 id="orga9b01fe"><span class="section-number-2">3</span> 发送邮件</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Python 中使用 <code>smtplib</code> 来处理 smtp 协议，示例代码如下：
@@ -225,8 +225,8 @@ Python 中使用 <code>smtplib</code> 来处理 smtp 协议，示例代码如下
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-03-30 Mon 13:22></div>
-      <div id="modified">Last modified: <2020-05-21 Thu 16:29></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
+      <div id="built">Built: <2020-05-21 Thu 20:09></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
