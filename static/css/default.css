@@ -42,11 +42,10 @@ body {
 }
 
 #content {
-  background: #fff;
   max-width: 900px;
-  position: relative;
   margin: 5px auto;
   padding: 0px 40px 0px 40px;
+  overflow: hidden;
 }
 
 #preamble.sticky + #content {
@@ -69,11 +68,13 @@ p {
 
 #site-name {
   display: block;
+  margin: 0 auto 0 auto;
+  width: 100%;
+  border-radius: 5px;
   text-transform: uppercase;
+  text-decoration: none;
   font-weight: bold;
   font-size: 30px;
-  width: 100%;
-  text-decoration: none;
   text-align: center;
   transition: 0.3s;
 }
@@ -81,7 +82,8 @@ p {
 #site-name:hover {
   background-color: transparent;
   text-decoration: none;
-  color: #7e4fa0;
+  color: #fff;
+  background-color: #7e4fa0;
 }
 
 #site-name:before {
@@ -93,7 +95,10 @@ p {
 }
 
 #at-home {
-  color: #7e4fa0;
+  padding: 0 3px 0 6px;
+  color: #fff;
+  background-color: #7e4fa0;
+  border-radius: 5px;
 }
 
 #banner {
@@ -113,6 +118,7 @@ p {
   max-width: 900px;
   margin: 20px auto 0 auto;
   padding: 0px 40px 0 40px;
+  transition: 0.6s;
   z-index: 197;
 }
 
@@ -228,6 +234,7 @@ p {
   right: 0;
   flex-direction: column;
   height: auto;
+  max-height: 70vh;
   text-align: center;
   -webkit-box-shadow: 0 0 0em #b9b9b9;
   -moz-box-shadow: 0 0 0em #b9b9b9;
@@ -320,6 +327,7 @@ ul, ol {
 }
 code, pre {
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-weight: normal;
 }
 code {
   color: #d14;
@@ -361,8 +369,8 @@ pre:hover .code-type-flag {
 
 blockquote {
   background: #f9f9f9;
-  padding: 0 5px 0 20px;
-  margin: 0 30px 20px -22.5px;
+  padding: 10px 20px 10px 20px;
+  margin: 0 30px 20px 30px;
   color: #999;
   border-left: 8px solid #e5e5e5;
 }
@@ -377,7 +385,6 @@ img {
   margin-left: auto;
   margin-right: auto;
   max-width: 90%;
-  /* border-radius: 5px; */
   animation-name: fade-in;
   animation-duration: 1s;
   transition: 0.3s;
@@ -633,6 +640,8 @@ table th.right, table td.right {
   max-height: 50%;
   overflow: auto;
   z-index: 199;
+  animation-name: fade-in;
+  animation-duration: 0.6s;
 }
 
 #table-of-contents h2 {
@@ -680,33 +689,33 @@ table th.right, table td.right {
   text-align: left;
 }
 
-/* Author information in postamble */
-div #author-info {
-  background-color: #eee;
-  margin-top: 50px;
-  padding: 5px 15px 5px 15px;
-  border-radius: 5px;
+#postamble {
+  max-width: 900px;
+  margin: 50px auto 0 auto;
 }
 
-div #author, div #date, div #generator {
-  margin-top: 5px;
-  margin-bottom: 5px;
+/* Author information in postamble */
+#author-info {
+  margin: 0 40px 0 40px;
+  padding: 5px 15px 5px 15px;
+  border-radius: 5px;
+  background-color: #eee;
+  font-size: 16px;
+  line-height: 2;
 }
 
 /* copyright */
-div #copyright {
-  display: block;
+#copyright {
   border-top: 1.5px solid #acacac;
-  margin: 30px 0 10px 0;
+  margin: 30px 40px 20px 40px;
   padding-top: 10px;
-  vertical-align: middle;
   text-align: center;
   font-size: 14px;
-  color: #999;
+  color: #666;
 }
 
 /* Set the style for cc icon in copyright */
-div #copyright img:first-child {
+#copyright img:first-child {
   border: none;
   margin-left: 0px;
   margin-right: 5px;
