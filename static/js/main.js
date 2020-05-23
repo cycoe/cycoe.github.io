@@ -56,13 +56,20 @@ $(document).ready(() => {
 
     // Listen to scroll action, the handle with the navigation bar.
     // ---------------------------------
+    // Get the offset of navigation bar
     var navBar = document.getElementById('top-nav');
-    var stickyOffset = navBar.offsetTop;
-    var eleToSticky = ['nav-wrapper', 'nav-title-wrapper',
-                       'photo-entry', 'about-entry', 'preamble'];
+    var navBarOffset = navBar.offsetTop;
+    // Get the offset of content
+    var content = document.getElementById('content');
+    var contentOffset = content.offsetTop;
 
-    function stickNavBar() {
-        if (window.pageYOffset >= stickyOffset) {
+    // Elements to add to sticky class
+    var eleToSticky = ['nav-wrapper',  'preamble'];
+    // Elements to add to title-action class
+    var eleToTitle = ['nav-title-wrapper', 'photo-entry', 'about-entry'];
+
+    function handleNavBar() {
+        if (window.pageYOffset >= navBarOffset) {
             navBar.classList.add("sticky");
             eleToSticky.map(function(ele) {
                 document.getElementById(ele).classList.add('sticky');
@@ -73,10 +80,19 @@ $(document).ready(() => {
                 document.getElementById(ele).classList.remove('sticky');
             });
         }
+        if (window.pageYOffset >= contentOffset) {
+            eleToTitle.map(function(ele) {
+                document.getElementById(ele).classList.add('title-action');
+            });
+        } else {
+            eleToTitle.map(function(ele) {
+                document.getElementById(ele).classList.remove('title-action');
+            });
+        }
     }
-    stickNavBar();
-    window.onscroll = function() {stickNavBar();};
-
+    
+    handleNavBar();
+    window.onscroll = function() {handleNavBar();};
 });
 
 function browserRedirect() {
