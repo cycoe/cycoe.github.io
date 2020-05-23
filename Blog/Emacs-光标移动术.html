@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2020-05-23 Sat 18:40 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emacs 光标移动术</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Cycoe">
+<link rel="stylesheet" type="text/css" href="/static/css/default.css" />
+<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+<script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div id="top-container">
+  <a id="site-name" href="/">Cycoe<span id="at-home">@Home</span></a>
+  <div id="banner">Keep It Simple Stupid</div>
+</div>
+
+<div id="top-nav">
+  <div id="nav-wrapper">
+    <div class="nav-btn" id="toc-wrapper">
+      <span class="vertical-align">Ξ</span>
+      <div id="go-top">
+        <a href="javascript:window.scrollTo(0,0)" style="color: black !important; border-bottom: none !important;" class="tooltip" title="Go to the top of the page">
+        <span class="top">&uarr;</span>
+        </a></div>
+    </div>
+    <div id="nav-left-wrapper">
+      <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
+      <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
+      <div id="nav-title-wrapper">
+        <span id="nav-title">Emacs 光标移动术</span>
+        <span id="nav-date">Written @<2020-05-23 Sat 14:10></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div id="img-modal" class="modal">
+  <!-- The Close Button -->
+  <span class="close">&times;</span>
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content" id="img-wrapper">
+  <!-- Modal Caption (Image Text) -->
+  <div id="caption"></div>
+</div>
+</div>
+<div id="content">
+<header>
+<h1 class="title">Emacs 光标移动术</h1>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org2e2df60">1. 基本移动操作</a></li>
+</ul>
+</div>
+</nav>
+<blockquote>
+<p>
+<a href="https://www.gnu.org/software/emacs/">Emacs</a> <i>ˈiːmæks</i> or EMACS (Editor
+MACroS) is a family of text editors that are characterized by their
+extensibility. The manual for the most widely used variant, GNU Emacs, describes
+it as "the extensible, customizable, self-documenting, real-time display
+editor". Development of the first Emacs began in the mid-1970s, and work on its
+direct descendant, GNU Emacs, continues actively as of 2020.
+</p>
+</blockquote>
+
+
+<figure>
+<img src="https://www.gnu.org/software/emacs/images/emacs.png" alt="emacs.png">
+
+<figcaption><span class="figure-number">Figure 1: </span>Emacs Icon</figcaption>
+</figure>
+
+<!-- more -->
+
+<p>
+从开始用 Emacs 到现在也有大半年了，但一直还用的 Vim 的那一套光标操作。Vim 那一套
+操作非常好用，尤其是 Text objects 这个概念，对于文本编辑效率具有质的提升。但无奈
+毕竟不是原生支持，与许多插件整合的并不好，在 mini buffer 中也无法使用。还是学会
+Emacs 原生的操作方式更好，本文将记录常用的 Emacs 光标移动操作。
+</p>
+
+<div id="outline-container-org2e2df60" class="outline-2">
+<h2 id="org2e2df60"><span class="section-number-2">1</span> 基本移动操作</h2>
+<div class="outline-text-2" id="text-1">
+<table>
+<caption class="t-above"><span class="table-number">Table 1:</span> 基本移动操作</caption>
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">快捷键</th>
+<th scope="col" class="org-left">功能描述</th>
+<th scope="col" class="org-left">助记</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-f</td>
+<td class="org-left">向前一个字符</td>
+<td class="org-left">forward</td>
+</tr>
+
+<tr>
+<td class="org-left">C-b</td>
+<td class="org-left">向后一个字符</td>
+<td class="org-left">backward</td>
+</tr>
+
+<tr>
+<td class="org-left">C-n</td>
+<td class="org-left">移动到下一行</td>
+<td class="org-left">next</td>
+</tr>
+
+<tr>
+<td class="org-left">C-p</td>
+<td class="org-left">移动到上一行</td>
+<td class="org-left">previous</td>
+</tr>
+
+<tr>
+<td class="org-left">M-f</td>
+<td class="org-left">向前一个单词</td>
+<td class="org-left">forward</td>
+</tr>
+
+<tr>
+<td class="org-left">M-b</td>
+<td class="org-left">向后一个单词</td>
+<td class="org-left">backward</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="author-info">
+      <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
+      <div id="date">Date: <2020-05-23 Sat 14:10></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
+      <div id="built">Built: <2020-05-23 Sat 18:40></div>
+      </div><div id="copyright">
+    <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
+</div>
+</div>
+</body>
+</html>

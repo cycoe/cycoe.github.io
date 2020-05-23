@@ -63,6 +63,7 @@ $(document).ready(() => {
     var content = document.getElementById('content');
     var contentOffset = content.offsetTop;
 
+    // TODO: Get all element for once
     // Elements to add to sticky class
     var eleToSticky = ['nav-wrapper',  'preamble'];
     // Elements to add to title-action class
