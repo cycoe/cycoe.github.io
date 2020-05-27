@@ -91,7 +91,7 @@ $(document).ready(() => {
             });
         }
     }
-    
+
     handleNavBar();
     window.onscroll = function() {handleNavBar();};
 });

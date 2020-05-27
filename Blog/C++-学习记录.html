@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2020-05-27 Wed 22:34 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C++ 学习记录</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Cycoe">
+<link rel="stylesheet" type="text/css" href="/static/css/default.css" />
+<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+<script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div id="top-container">
+  <a id="site-name" href="/">Cycoe<span id="at-home">@Home</span></a>
+  <div id="banner">Keep It Simple Stupid</div>
+</div>
+
+<div id="top-nav">
+  <div id="nav-wrapper">
+    <div class="nav-btn" id="toc-wrapper">
+      <span class="vertical-align">Ξ</span>
+      <div id="go-top">
+        <a href="javascript:window.scrollTo(0,0)" style="color: black !important; border-bottom: none !important;" class="tooltip" title="Go to the top of the page">
+        <span class="top">&uarr;</span>
+        </a></div>
+    </div>
+    <div id="nav-left-wrapper">
+      <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
+      <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
+      <div id="nav-title-wrapper">
+        <span id="nav-title">C++ 学习记录</span>
+        <span id="nav-date">Written @<2020-05-27 Wed 21:31></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div id="img-modal" class="modal">
+  <!-- The Close Button -->
+  <span class="close">&times;</span>
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content" id="img-wrapper">
+  <!-- Modal Caption (Image Text) -->
+  <div id="caption"></div>
+</div>
+</div>
+<div id="content">
+<header>
+<h1 class="title">C++ 学习记录</h1>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orge4e320f">1. 引言</a>
+<ul>
+<li><a href="#org75de683">1.1. 基本的输入输出</a></li>
+<li><a href="#org5bffcd2">1.2. 使用循环读取标准输入</a></li>
+</ul>
+</li>
+<li><a href="#orgd098938">2. 变量和基本类型</a>
+<ul>
+<li><a href="#org9aba813">2.1. 可以用先定义的变量去初始化后定义的变量</a></li>
+<li><a href="#org7923d91">2.2. 列表初始化</a></li>
+<li><a href="#org6617f03">2.3. 默认初始化</a></li>
+<li><a href="#orgf2add80">2.4. 声明与定义</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<p>
+最近开始看 <i>C++ Primer</i> 这本书，记录一下学习过程中遇到的知识点，主要是与纯 C 代码
+不同的地方。
+</p>
+
+<!-- more -->
+
+<div id="outline-container-orge4e320f" class="outline-2">
+<h2 id="orge4e320f"><span class="section-number-2">1</span> 引言</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org75de683" class="outline-3">
+<h3 id="org75de683"><span class="section-number-3">1.1</span> 基本的输入输出</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+基本的输入输出使用 <code>iostream</code> 对象，其中 <code>cin</code> 是输入流对象， <code>cout</code> 是输出流对象，
+<code>std</code> 是变量的命名空间。
+</p>
+
+<table id="org4ce2742">
+
+
+<colgroup>
+<col  class="org-right">
+
+<col  class="org-right">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">5</td>
+<td class="org-right">6</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">argc</span>, <span style="color: #18b2b2;">char</span> *<span style="color: #ff8700;">argv</span><span style="color: #1f5bff; font-weight: bold;">[]</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&lt;&lt; &#36816;&#31639;&#31526;&#20250;&#36820;&#22238;&#24038;&#20391;&#30340; iostream &#23545;&#35937;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">std::endl &#20250; flush stream buffer</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Enter two numbers:"</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">v1</span> = 0, <span style="color: #ff8700;">v2</span> = 0;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#31561;&#20215;&#20110; std::cin &gt;&gt; v1; std::cin &gt;&gt; v2;</span>
+  <span style="color: #1f5bff;">std</span>::cin &gt;&gt; v1 &gt;&gt; v2;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20026;&#26041;&#20415;&#28436;&#31034;&#65292;&#20351;&#29992; table: input-1 &#20013;&#30340;&#25968;&#25454;&#20316;&#20026;&#36755;&#20837;&#25968;&#25454;</span>
+  v1 = input<span style="color: #1f5bff; font-weight: bold;">[</span>0<span style="color: #1f5bff; font-weight: bold;">][</span>0<span style="color: #1f5bff; font-weight: bold;">]</span>;
+  v2 = input<span style="color: #1f5bff; font-weight: bold;">[</span>0<span style="color: #1f5bff; font-weight: bold;">][</span>1<span style="color: #1f5bff; font-weight: bold;">]</span>;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"The sum of "</span> &lt;&lt; v1 &lt;&lt; <span style="color: #ff1f8b;">" and "</span> &lt;&lt; v2
+            &lt;&lt; <span style="color: #ff1f8b;">" is "</span> &lt;&lt; v1 + v2 &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #00af00;">return</span> 0;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5bffcd2" class="outline-3">
+<h3 id="org5bffcd2"><span class="section-number-3">1.2</span> 使用循环读取标准输入</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">argc</span>, <span style="color: #18b2b2;">char</span> *<span style="color: #ff8700;">argv</span><span style="color: #1f5bff; font-weight: bold;">[]</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">sum</span> = 0, <span style="color: #ff8700;">val</span> = 0;
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#37325;&#22797;&#35835;&#21462;&#21040; EOF &#26102;&#32467;&#26463;&#65292;&#22312; UNIX &#31995;&#32479;&#20013;&#20351;&#29992; Ctrl-D</span>
+  <span style="color: #00af00;">while</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::cin &gt;&gt; val<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    sum += val;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Sum is: "</span>
+            &lt;&lt; sum &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #00af00;">return</span> 0;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd098938" class="outline-2">
+<h2 id="orgd098938"><span class="section-number-2">2</span> 变量和基本类型</h2>
+<div class="outline-text-2" id="text-2">
+
+<figure>
+<img src="./C++-学习记录/Screenshot_20200527_215053_QbzyBU.png" alt="Screenshot_20200527_215053_QbzyBU.png">
+
+<figcaption><span class="figure-number">Figure 1: </span>指定字面值的类型</figcaption>
+</figure>
+</div>
+
+<div id="outline-container-org9aba813" class="outline-3">
+<h3 id="org9aba813"><span class="section-number-3">2.1</span> 可以用先定义的变量去初始化后定义的变量</h3>
+<div class="outline-text-3" id="text-2-1">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #18b2b2;">double</span> <span style="color: #ff8700;">price</span> = 109.99, <span style="color: #ff8700;">discount</span> = price * 0.16;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org7923d91" class="outline-3">
+<h3 id="org7923d91"><span class="section-number-3">2.2</span> 列表初始化</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+以下的 4 条初始化语句都是合法的
+</p>
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">units_sold</span> = 0;
+<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">units_sold</span> = <span style="color: #cc0000; font-weight: bold;">{</span>0<span style="color: #cc0000; font-weight: bold;">}</span>;
+<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">units_sold</span><span style="color: #cc0000; font-weight: bold;">{</span>0<span style="color: #cc0000; font-weight: bold;">}</span>;
+<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">units_sold</span><span style="color: #cc0000; font-weight: bold;">(</span>0<span style="color: #cc0000; font-weight: bold;">)</span>;
+</pre>
+</div>
+
+<p>
+如果我们使用列表初始化且初始值存在丢失信息的风险时，编译器将报错
+</p>
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #18b2b2;">long</span> <span style="color: #18b2b2;">double</span> <span style="color: #ff8700;">ld</span> = 3.1415926536;
+<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">a</span><span style="color: #cc0000; font-weight: bold;">{</span>ld<span style="color: #cc0000; font-weight: bold;">}</span>, b = <span style="color: #cc0000; font-weight: bold;">{</span>ld<span style="color: #cc0000; font-weight: bold;">}</span>;  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#38169;&#35823;&#65306;&#36716;&#25442;&#26410;&#25191;&#34892;&#65292;&#22240;&#20026;&#23384;&#22312;&#20002;&#22833;&#20449;&#24687;&#30340;&#39118;&#38505;</span>
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">c</span><span style="color: #cc0000; font-weight: bold;">(</span>ld<span style="color: #cc0000; font-weight: bold;">)</span>, <span style="color: #ff8700;">d</span> = ld;    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27491;&#30830;&#65306;&#36716;&#25442;&#25191;&#34892;&#65292;&#19988;&#30830;&#23454;&#20002;&#22833;&#20102;&#37096;&#20998;&#20540;</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6617f03" class="outline-3">
+<h3 id="org6617f03"><span class="section-number-3">2.3</span> 默认初始化</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+在未显式初始化时，全局的变量会被初始化为 0 ，函数内部的变量不初始化
+</p>
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">global_str</span>;
+<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">global_int</span>;
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">argc</span>, <span style="color: #18b2b2;">char</span> *<span style="color: #ff8700;">argv</span><span style="color: #1f5bff; font-weight: bold;">[]</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">local_int</span>;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">local_str</span>;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Global string is: "</span> &lt;&lt; global_str &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Global int is: "</span>    &lt;&lt; global_int &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Local string is: "</span>  &lt;&lt; local_str  &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Local int is: "</span>     &lt;&lt; local_int  &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #00af00;">return</span> 0;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf2add80" class="outline-3">
+<h3 id="orgf2add80"><span class="section-number-3">2.4</span> 声明与定义</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+声明用来创建一个符号，定义用来创建实体、分配内存甚至初始化。如果只是想声明变量需
+要使用 <code>extern</code> 关键字，声明变量一般使用在分离式编译中。如果有一个变量我们希望在多
+个文件中使用，我们只能在一个文件中进行定义，在其它文件中进行声明。此时 <code>extern</code> 关
+键字会告诉编译器这个变量只是在此处声明，定义需要去其它文件中找，此时该变量也就是
+一个全局变量，如果试图在函数体内部初始化一个 <code>extern</code> 标记的变量，将引发错误。
+</p>
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">extern</span> <span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">i</span>;              <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#22768;&#26126; i &#32780;&#38750;&#23450;&#20041; i</span>
+<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">j</span>;                     <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#22768;&#26126;&#24182;&#23450;&#20041; j</span>
+<span style="color: #00af00;">extern</span> <span style="color: #18b2b2;">double</span> <span style="color: #ff8700;">pi</span> = 3.1416; <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#26174;&#24335;&#21021;&#22987;&#21270;&#37117;&#20250;&#25104;&#20026;&#23450;&#20041;</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="author-info">
+      <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
+      <div id="date">Date: <2020-05-27 Wed 21:31></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
+      <div id="built">Built: <2020-05-27 Wed 22:34></div>
+      </div><div id="copyright">
+    <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
+</div>
+</div>
+</body>
+</html>
