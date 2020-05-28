@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-28 Thu 11:22 -->
+<!-- 2020-05-28 Thu 14:20 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>C++ 学习记录</title>
@@ -69,6 +69,24 @@
 <li><a href="#org6617f03">2.3. 默认初始化</a></li>
 <li><a href="#orgf2add80">2.4. 声明与定义</a></li>
 <li><a href="#orge575617">2.5. 变量标识符</a></li>
+<li><a href="#org701f796">2.6. 引用</a></li>
+<li><a href="#org3397aeb">2.7. 空指针</a></li>
+<li><a href="#org20d7287">2.8. <code>void*</code> 指针</a></li>
+<li><a href="#org3d0e929">2.9. <code>const</code> 常量限定符</a></li>
+<li><a href="#org78fe6c7">2.10. 命名空间的 <code>using</code> 声明</a></li>
+</ul>
+</li>
+<li><a href="#org7277f79">3. 字符串、向量和数组</a>
+<ul>
+<li><a href="#org2c59a7f">3.1. 标准库 <code>string</code></a>
+<ul>
+<li><a href="#org34367a7">3.1.1. 定义和初始化</a></li>
+<li><a href="#org39c112e">3.1.2. 读写 string 对象</a></li>
+<li><a href="#org24765a7">3.1.3. 使用 <code>getline</code> 读取一整行</a></li>
+<li><a href="#org7ff70f2">3.1.4. <code>empty</code> 和 <code>size</code></a></li>
+<li><a href="#orgf7bd48a">3.1.5. 比较 string 对象</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -225,7 +243,7 @@ The sum of 5 and 6 is 11
 Global string is: 
 Global int is: 0
 Local string is: 
-Local int is: 22059
+Local int is: 21998
 </pre>
 </div>
 </div>
@@ -270,6 +288,234 @@ Local int is: 22059
 </div>
 </div>
 </div>
+
+<div id="outline-container-org701f796" class="outline-3">
+<h3 id="org701f796"><span class="section-number-3">2.6</span> 引用</h3>
+<div class="outline-text-3" id="text-2-6">
+<p>
+引用（reference）是为对象起了另外一个名字。如果学过 Python 中的引用，这里应该比
+较好理解，引用以及原始对象都指向内存中的同一区域。但引用本身不是一个对象，因此不
+能定义引用的引用，也不能定义指向引用的指针。
+</p>
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">iVal</span> = 1024;
+<span style="color: #18b2b2;">int</span> &amp;<span style="color: #ff8700;">refVal</span> = ival;      <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">refVal &#25351;&#21521; iVal</span>
+<span style="color: #18b2b2;">int</span> &amp;<span style="color: #ff8700;">refVal2</span>;            <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#25253;&#38169;&#65306;&#24341;&#29992;&#24517;&#39035;&#34987;&#21021;&#22987;&#21270;</span>
+<span style="color: #18b2b2;">int</span> &amp;<span style="color: #ff8700;">refVal3</span> = refVal;   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#25253;&#38169;&#65306;&#19981;&#33021;&#23450;&#20041;&#24341;&#29992;&#30340;&#24341;&#29992;</span>
+<span style="color: #18b2b2;">int</span> *<span style="color: #ff8700;">val_ptr</span> = &amp;refVal;  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#25253;&#38169;&#65306;&#19981;&#33021;&#23450;&#20041;&#24341;&#29992;&#30340;&#25351;&#38024;</span>
+</pre>
+</div>
+
+<p>
+以下为一个示例
+</p>
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">i</span>, &amp;<span style="color: #ff8700;">ri</span> = i;
+i = 5; ri = 10;
+<span style="color: #1f5bff;">std</span>::cout &lt;&lt; i &lt;&lt; <span style="color: #ff1f8b;">" "</span> &lt;&lt; ri &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+</pre>
+</div>
+
+<pre class="example">
+10 10
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org3397aeb" class="outline-3">
+<h3 id="org3397aeb"><span class="section-number-3">2.7</span> 空指针</h3>
+<div class="outline-text-3" id="text-2-7">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">cstdlib</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #18b2b2;">int</span> *<span style="color: #ff8700;">p1</span> = <span style="color: #1f5bff;">nullptr</span>;         <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#31561;&#20215;&#20110; int *p1 = 0;</span>
+<span style="color: #18b2b2;">int</span> *<span style="color: #ff8700;">p2</span> = 0;               <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#30452;&#25509;&#23558; p2 &#21021;&#22987;&#21270;&#20026;&#23383;&#38754;&#24120;&#37327; 0</span>
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">C &#35821;&#35328;&#30340;&#20889;&#27861;&#65292;&#38656;&#35201;&#39318;&#20808; #include &lt;cstdlib&gt;</span>
+<span style="color: #18b2b2;">int</span> *<span style="color: #ff8700;">p3</span> = <span style="color: #1f5bff;">NULL</span>;            <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#31561;&#20215;&#20110; int *p3 = 0;</span>
+
+<span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"p1 is "</span> &lt;&lt; p1 &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"p2 is "</span> &lt;&lt; p2 &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"p3 is "</span> &lt;&lt; p3 &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+</pre>
+</div>
+
+<pre class="example">
+p1 is 0
+p2 is 0
+p3 is 0
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org20d7287" class="outline-3">
+<h3 id="org20d7287"><span class="section-number-3">2.8</span> <code>void*</code> 指针</h3>
+<div class="outline-text-3" id="text-2-8">
+<p>
+<code>void*</code> 指针是一类特殊的指针类型，只记录对象的地址而不记录对象的内存空间大小
+</p>
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #18b2b2;">double</span> <span style="color: #ff8700;">obj</span> = 3.14, *<span style="color: #ff8700;">pd</span> = &amp;obj;
+<span style="color: #18b2b2;">void</span> *<span style="color: #ff8700;">pv</span> = &amp;obj;
+pv = pd;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3d0e929" class="outline-3">
+<h3 id="org3d0e929"><span class="section-number-3">2.9</span> <code>const</code> 常量限定符</h3>
+</div>
+<div id="outline-container-org78fe6c7" class="outline-3">
+<h3 id="org78fe6c7"><span class="section-number-3">2.10</span> 命名空间的 <code>using</code> 声明</h3>
+<div class="outline-text-3" id="text-2-10">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">cin</span>; <span style="color: #00af00;">using</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">endl</span>;
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">i</span>;
+cin &gt;&gt; i;                 <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27491;&#30830;&#65306;cin &#21644; std::cin &#21547;&#20041;&#30456;&#21516;</span>
+cout &lt;&lt; i;                <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#38169;&#35823;&#65306;&#27809;&#26377;&#23545;&#24212;&#30340; using &#22768;&#26126;&#65292;&#24517;&#39035;&#20351;&#29992;&#23436;&#25972;&#30340;&#21517;&#23383;</span>
+<span style="color: #1f5bff;">std</span>::cout &lt;&lt; i &lt;&lt; endl&gt;;  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27491;&#30830;&#65306;&#26174;&#24335;&#22320;&#20174; std &#20013;&#20351;&#29992; cout</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org7277f79" class="outline-2">
+<h2 id="org7277f79"><span class="section-number-2">3</span> 字符串、向量和数组</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org2c59a7f" class="outline-3">
+<h3 id="org2c59a7f"><span class="section-number-3">3.1</span> 标准库 <code>string</code></h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+引入头文件与声明命名空间
+</p>
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">string</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #00af00;">using</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span>;
+</pre>
+</div>
+</div>
+<div id="outline-container-org34367a7" class="outline-4">
+<h4 id="org34367a7"><span class="section-number-4">3.1.1</span> 定义和初始化</h4>
+<div class="outline-text-4" id="text-3-1-1">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span>;
+
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s1</span>;            <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#40664;&#35748;&#21021;&#22987;&#21270;&#65292;s1 &#26159;&#19968;&#20010;&#31354;&#23383;&#31526;&#20018;</span>
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s2</span> = s1;       <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">s2 &#26159; s1 &#30340;&#21103;&#26412;</span>
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s3</span> = <span style="color: #ff1f8b;">"hello"</span>;  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">s3 &#26159;&#23383;&#31526;&#20018;&#23383;&#38754;&#20540;&#30340;&#21103;&#26412;</span>
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s4</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">"hello"</span><span style="color: #cc0000; font-weight: bold;">)</span>;   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">s4 &#30340;&#20869;&#23481;&#20026; "hello"</span>
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s5</span><span style="color: #cc0000; font-weight: bold;">(</span>10, <span style="color: #ff1f8b;">'c'</span><span style="color: #cc0000; font-weight: bold;">)</span>;   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">s5 &#30340;&#20869;&#23481;&#20026; "cccccccccc"</span>
+</pre>
+</div>
+
+<p>
+s2, s3 的初始化方法为拷贝初始化，s4, s5 的初始化方法为直接初始化。
+</p>
+</div>
+</div>
+<div id="outline-container-org39c112e" class="outline-4">
+<h4 id="org39c112e"><span class="section-number-4">3.1.2</span> 读写 string 对象</h4>
+<div class="outline-text-4" id="text-3-1-2">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s</span>;            <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#22768;&#26126;&#19968;&#20010;&#31354;&#23383;&#31526;&#20018;</span>
+
+cin &gt;&gt; s;
+s = <span style="color: #ff1f8b;">"Hello"</span>;
+cout &lt;&lt; s &lt;&lt; endl;
+</pre>
+</div>
+
+<pre class="example">
+Hello
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org24765a7" class="outline-4">
+<h4 id="org24765a7"><span class="section-number-4">3.1.3</span> 使用 <code>getline</code> 读取一整行</h4>
+<div class="outline-text-4" id="text-3-1-3">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">line</span>;
+
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">getline &#27599;&#27425;&#35835;&#21462;&#21040;&#25442;&#34892;&#31526;&#65288;&#21253;&#25324;&#25442;&#34892;&#31526;&#65289;&#65292;&#23384;&#20837; string &#23545;&#35937;&#20013;&#65288;&#19981;&#21253;&#25324;&#25442;&#34892;&#31526;&#65289;</span>
+<span style="color: #00af00;">while</span> <span style="color: #cc0000; font-weight: bold;">(</span>getline<span style="color: #1f5bff; font-weight: bold;">(</span>cin, line<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+  cout &lt;&lt; line &lt;&lt; endl;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7ff70f2" class="outline-4">
+<h4 id="org7ff70f2"><span class="section-number-4">3.1.4</span> <code>empty</code> 和 <code>size</code></h4>
+<div class="outline-text-4" id="text-3-1-4">
+<table id="orga8ee06c">
+<caption class="t-above"><span class="table-number">Table 1:</span> 多行文本</caption>
+
+<colgroup>
+<col  class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">First line.</td>
+</tr>
+
+<tr>
+<td class="org-left">Second line.</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">This is a long line.</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+使用上表中的数据演示 string 对象 <code>empty</code> 和 <code>size</code> 方法的使用
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
+
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s</span>;
+<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">row</span>;
+
+<span style="color: #00af00;">for</span> <span style="color: #cc0000; font-weight: bold;">(</span>row = 0; row &lt; lines_rows; row++<span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  s = lines<span style="color: #1f5bff; font-weight: bold;">[</span>row<span style="color: #1f5bff; font-weight: bold;">][</span>0<span style="color: #1f5bff; font-weight: bold;">]</span>;
+  <span style="color: #00af00;">if</span> <span style="color: #1f5bff; font-weight: bold;">(</span>s.empty<span style="color: #00af00; font-weight: bold;">()</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    cout &lt;&lt; <span style="color: #ff1f8b;">"Line "</span> &lt;&lt; row + 1 &lt;&lt; <span style="color: #ff1f8b;">" is empty"</span> &lt;&lt; endl;
+  <span style="color: #1f5bff; font-weight: bold;">}</span> <span style="color: #00af00;">else</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    cout &lt;&lt; <span style="color: #ff1f8b;">"Line "</span> &lt;&lt; row + 1 &lt;&lt; <span style="color: #ff1f8b;">"'s length is "</span> &lt;&lt; s.size<span style="color: #00af00; font-weight: bold;">()</span> &lt;&lt; endl;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+Line 1's length is 11
+Line 2's length is 12
+Line 3 is empty
+Line 4's length is 20
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgf7bd48a" class="outline-4">
+<h4 id="orgf7bd48a"><span class="section-number-4">3.1.5</span> 比较 string 对象</h4>
+<div class="outline-text-4" id="text-3-1-5">
+<p>
+类似于 C 中的 <code>strcmp</code> 函数
+</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
@@ -277,7 +523,7 @@ Local int is: 22059
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-05-27 Wed 21:31></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
-      <div id="built">Built: <2020-05-28 Thu 11:22></div>
+      <div id="built">Built: <2020-05-28 Thu 14:20></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
