@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2020-05-28 Thu 11:22 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Org mode 中的代码块</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Cycoe">
+<link rel="stylesheet" type="text/css" href="/static/css/default.css" />
+<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+<script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div id="top-container">
+  <a id="site-name" href="/">Cycoe<span id="at-home">@Home</span></a>
+  <div id="banner">Keep It Simple Stupid</div>
+</div>
+
+<div id="top-nav">
+  <div id="nav-wrapper">
+    <div class="nav-btn" id="toc-wrapper">
+      <span class="vertical-align">Ξ</span>
+      <div id="go-top">
+        <a href="javascript:window.scrollTo(0,0)" style="color: black !important; border-bottom: none !important;" class="tooltip" title="Go to the top of the page">
+        <span class="top">&uarr;</span>
+        </a></div>
+    </div>
+    <div id="nav-left-wrapper">
+      <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
+      <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
+      <div id="nav-title-wrapper">
+        <span id="nav-title">Org mode 中的代码块</span>
+        <span id="nav-date">Written @<2020-05-28 Thu 10:45></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div id="img-modal" class="modal">
+  <!-- The Close Button -->
+  <span class="close">&times;</span>
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content" id="img-wrapper">
+  <!-- Modal Caption (Image Text) -->
+  <div id="caption"></div>
+</div>
+</div>
+<div id="content">
+<header>
+<h1 class="title">Org mode 中的代码块</h1>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org4097a61">1. 插入代码块</a></li>
+<li><a href="#org0c6cf9d">2. 设置 Headers 参数</a>
+<ul>
+<li><a href="#orgc374dda">2.1. 全局 Headers</a></li>
+<li><a href="#orgddd8e20">2.2. 文件级 Headers</a></li>
+<li><a href="#org9f01fe5">2.3. 代码块级 Headers</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<p>
+Org mode 是 Emacs 中的一个大杀器，也是我从 Vim 转向 Emacs 的最重要的原因。与
+Markdown 相比， Org mode 有一个非常强大的功能叫作 Babel ，不仅能直接在 Org 文件
+中直接运行各种代码块，还能打通各个代码块之间的数据交换，甚至借用绘图库直接对数据
+进行可视化，比 Python Jupyter Book 还好用得多。
+</p>
+
+
+<figure>
+<img src="./Org-mode-中的代码块/orgmode.png" alt="orgmode.png">
+
+<figcaption><span class="figure-number">Figure 1: </span>Org mode</figcaption>
+</figure>
+
+<!-- more -->
+
+<div id="outline-container-org4097a61" class="outline-2">
+<h2 id="org4097a61"><span class="section-number-2">1</span> 插入代码块</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+在 Org mode 中插入代码块非常简单，只需要用如下的环境将代码包裹起来
+</p>
+<div class="org-src-container">
+<pre class="src src-org"><span style="color: #005f87; background-color: #afd7ff;">#+begin_src python</span>
+<span style="color: #005f87; background-color: #d7d7ff;">   </span><span style="color: #00af00; background-color: #d7d7ff;">print</span><span style="color: #cc0000; background-color: #d7d7ff; font-weight: bold;">(</span><span style="color: #ff1f8b; background-color: #d7d7ff;">"Hello, world!"</span><span style="color: #cc0000; background-color: #d7d7ff; font-weight: bold;">)</span>
+<span style="color: #dadada; background-color: #eeeeee;">#+end_src</span>
+</pre>
+</div>
+
+<p>
+<code>#+begin_src</code> 后面指定代码块中的语言
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0c6cf9d" class="outline-2">
+<h2 id="org0c6cf9d"><span class="section-number-2">2</span> 设置 Headers 参数</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Org mode 中有三个级别的 Headers 参数，分别为全局、文件级、代码块级，三个级别的作
+用范围越来越小但优先级越来越高
+</p>
+</div>
+<div id="outline-container-orgc374dda" class="outline-3">
+<h3 id="orgc374dda"><span class="section-number-3">2.1</span> 全局 Headers</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+在配置文件中设置参数
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ef2929;">add-to-list</span> '<span style="color: #ff8700;">org-babel-default-header-args:gnuplot</span>
+      '<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00; font-weight: bold;">(</span><span style="color: #b218b2;">:results</span> . <span style="color: #ff1f8b;">"file"</span><span style="color: #00af00; font-weight: bold;">)</span>
+        <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #b218b2;">:exports</span> . <span style="color: #ff1f8b;">"both"</span><span style="color: #00af00; font-weight: bold;">)</span>
+        <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #b218b2;">:cache</span> . <span style="color: #ff1f8b;">"yes"</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span>
+      'org-babel-default-header-args:C++
+      '<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00; font-weight: bold;">(</span><span style="color: #b218b2;">:results</span> . <span style="color: #ff1f8b;">"output"</span><span style="color: #00af00; font-weight: bold;">)</span>
+        <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #b218b2;">:exports</span> . <span style="color: #ff1f8b;">"both"</span><span style="color: #00af00; font-weight: bold;">)</span>
+        <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #b218b2;">:cache</span> . <span style="color: #ff1f8b;">"yes"</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgddd8e20" class="outline-3">
+<h3 id="orgddd8e20"><span class="section-number-3">2.2</span> 文件级 Headers</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+在文件的任意位置加入
+</p>
+<div class="org-src-container">
+<pre class="src src-org"><span style="color: #b2b2b2; font-style: italic;">#+PROPERTY: header-args :exports both</span>
+</pre>
+</div>
+<p>
+<b>需注意：</b> 若将该参数加到文件最开始的位置，则对全头生效；若加到某个标题下，则只对
+该标题以及其子标题生效。
+</p>
+</div>
+</div>
+<div id="outline-container-org9f01fe5" class="outline-3">
+<h3 id="org9f01fe5"><span class="section-number-3">2.3</span> 代码块级 Headers</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+直接修改单个代码块的 Headers 参数
+</p>
+<div class="org-src-container">
+<pre class="src src-org"><span style="color: #005f87; background-color: #afd7ff;">#+begin_src python :exports both</span>
+<span style="color: #005f87; background-color: #d7d7ff;">   </span><span style="color: #00af00; background-color: #d7d7ff;">print</span><span style="color: #cc0000; background-color: #d7d7ff; font-weight: bold;">(</span><span style="color: #ff1f8b; background-color: #d7d7ff;">"Hello, world!"</span><span style="color: #cc0000; background-color: #d7d7ff; font-weight: bold;">)</span>
+<span style="color: #dadada; background-color: #eeeeee;">#+end_src</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="author-info">
+      <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
+      <div id="date">Date: <2020-05-28 Thu 10:45></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
+      <div id="built">Built: <2020-05-28 Thu 11:22></div>
+      </div><div id="copyright">
+    <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
+</div>
+</div>
+</body>
+</html>
