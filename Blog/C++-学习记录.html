@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-06-04 Thu 14:55 -->
+<!-- 2020-06-05 Fri 17:54 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>C++ 学习记录</title>
@@ -80,7 +80,7 @@
 <ul>
 <li><a href="#org2c59a7f">3.1. 标准库 <code>string</code></a>
 <ul>
-<li><a href="#org2c01ccd">3.1.1. 定义和初始化</a></li>
+<li><a href="#orgaa83e56">3.1.1. 定义和初始化</a></li>
 <li><a href="#org297551f">3.1.2. 为 string 对象赋值</a></li>
 <li><a href="#org39c112e">3.1.3. 读写 string 对象</a></li>
 <li><a href="#org24765a7">3.1.4. 使用 <code>getline</code> 读取一整行</a></li>
@@ -95,7 +95,7 @@
 </li>
 <li><a href="#org474d727">3.2. 标准库类型 <code>vector</code></a>
 <ul>
-<li><a href="#org41eb682">3.2.1. 定义和初始化</a></li>
+<li><a href="#org43ab621">3.2.1. 定义和初始化</a></li>
 <li><a href="#org4384cac">3.2.2. 向 vector 对象中添加元素</a></li>
 <li><a href="#org901e6bc">3.2.3. 其它 vector 操作</a></li>
 <li><a href="#org63a922f">3.2.4. 用数组初始化 vector 对象</a></li>
@@ -155,6 +155,28 @@
 <li><a href="#orgddb3cd2">6.2. 函数重载</a>
 <ul>
 <li><a href="#orgd98e03d">6.2.1. <code>const_cast</code> 与重载</a></li>
+<li><a href="#orgf2b4647">6.2.2. 调用重载的函数</a></li>
+<li><a href="#org6210b58">6.2.3. 重载与作用域</a></li>
+</ul>
+</li>
+<li><a href="#org8112c7b">6.3. 默认实参</a>
+<ul>
+<li><a href="#org285fe17">6.3.1. 使用默认实参调用函数</a></li>
+<li><a href="#orgfab5f0c">6.3.2. 默认实参声明</a></li>
+<li><a href="#org7b7c5bf">6.3.3. 默认实参初始值</a></li>
+</ul>
+</li>
+<li><a href="#orgb349c94">6.4. 内联函数和 <code>constexpr</code> 函数</a></li>
+<li><a href="#orgcd196a0">6.5. <span class="todo TODO">TODO</span> 函数匹配</a></li>
+</ul>
+</li>
+<li><a href="#org3a682b6">7. 类</a>
+<ul>
+<li><a href="#org369d18f">7.1. 定义抽象数据类型</a>
+<ul>
+<li><a href="#orgba0ef5c">7.1.1. 使用 <code>Sales_data</code> 类的接口</a></li>
+<li><a href="#org9f994a5">7.1.2. 改进 <code>Sales_data</code> 类</a></li>
+<li><a href="#org93e253e">7.1.3. 定义类相关的非成员函数</a></li>
 </ul>
 </li>
 </ul>
@@ -313,7 +335,7 @@ The sum of 5 and 6 is 11
 Global string is: 
 Global int is: 0
 Local string is: 
-Local int is: 21848
+Local int is: 22036
 </pre>
 </div>
 </div>
@@ -466,8 +488,8 @@ cout &lt;&lt; i;                <span style="color: #b2b2b2; font-style: italic;
 </pre>
 </div>
 </div>
-<div id="outline-container-org2c01ccd" class="outline-4">
-<h4 id="org2c01ccd"><span class="section-number-4">3.1.1</span> 定义和初始化</h4>
+<div id="outline-container-orgaa83e56" class="outline-4">
+<h4 id="orgaa83e56"><span class="section-number-4">3.1.1</span> 定义和初始化</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span>;
@@ -787,8 +809,8 @@ Hello, world!
 </pre>
 </div>
 </div>
-<div id="outline-container-org41eb682" class="outline-4">
-<h4 id="org41eb682"><span class="section-number-4">3.2.1</span> 定义和初始化</h4>
+<div id="outline-container-org43ab621" class="outline-4">
+<h4 id="org43ab621"><span class="section-number-4">3.2.1</span> 定义和初始化</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">vector</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
@@ -1943,6 +1965,351 @@ The shorter string is: Evil C++.
 </pre>
 </div>
 </div>
+<div id="outline-container-orgf2b4647" class="outline-4">
+<h4 id="orgf2b4647"><span class="section-number-4">6.2.2</span> 调用重载的函数</h4>
+<div class="outline-text-4" id="text-6-2-2">
+<p>
+把函数调用与一组重载函数中的某一个关联起来的过程叫做函数匹配，也叫做重载确定。
+</p>
+
+<p>
+调用重载函数时有三种可能的结果
+</p>
+<ul class="org-ul">
+<li>编译器找到一个与实参最佳匹配的函数，并生成调用函数的代码</li>
+<li>找不到任何一个函数与调用的实参匹配，此时编译器发出 <code>无匹配</code> 的错误信息</li>
+<li>有多于一个函数可以匹配，但都不是明显的最佳匹配，此时也将发生错误称为 <code>二义性调用</code></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6210b58" class="outline-4">
+<h4 id="org6210b58"><span class="section-number-4">6.2.3</span> 重载与作用域</h4>
+<div class="outline-text-4" id="text-6-2-3">
+<p>
+重载发生在同一作用域，不同作用域的同名函数会发生掩盖（Mask）
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
+
+<span style="color: #18b2b2;">string</span> <span style="color: #ef2929;">read</span><span style="color: #cc0000; font-weight: bold;">()</span>;
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">print</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">const</span> <span style="color: #18b2b2;">string</span> &amp;<span style="color: #cc0000; font-weight: bold;">)</span>;
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">print</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">double</span><span style="color: #cc0000; font-weight: bold;">)</span>;     <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#22312;&#21516;&#19968;&#20316;&#29992;&#22495;&#20013;&#37325;&#36733; print &#20989;&#25968;</span>
+
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">foo</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">ival</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">bool</span> <span style="color: #ff8700;">read</span> = <span style="color: #1f5bff;">false</span>;    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#26032;&#20316;&#29992;&#22495;&#65292;&#38544;&#34255;&#20102;&#22806;&#23618;&#30340; read</span>
+  <span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s</span> = read<span style="color: #1f5bff; font-weight: bold;">()</span>;    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#38169;&#35823;&#65306;&#27492;&#20316;&#29992;&#22495;&#20013; read &#26159;&#19968;&#20010;&#24067;&#23572;&#20540;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#19981;&#22909;&#30340;&#20064;&#24815;&#65306;&#36890;&#24120;&#26469;&#35828;&#65292;&#22312;&#23616;&#37096;&#20316;&#29992;&#22495;&#20013;&#22768;&#26126;&#20989;&#25968;&#19981;&#26159;&#19968;&#20010;&#22909;&#20064;&#24815;</span>
+  <span style="color: #18b2b2;">void</span> <span style="color: #ff8700;">print</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span><span style="color: #1f5bff; font-weight: bold;">)</span>;      <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#26032;&#20316;&#29992;&#22495;&#65292;&#38544;&#34255;&#20102;&#20043;&#21069;&#30340; print</span>
+  print<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Value: "</span><span style="color: #1f5bff; font-weight: bold;">)</span>;     <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#38169;&#35823;&#65306;void print(const string &amp;) &#34987;&#38544;&#34255;&#20102;</span>
+  print<span style="color: #1f5bff; font-weight: bold;">(</span>ival<span style="color: #1f5bff; font-weight: bold;">)</span>;          <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27491;&#30830;&#65306;&#24403;&#21069; print(int) &#21487;&#35265;</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org8112c7b" class="outline-3">
+<h3 id="org8112c7b"><span class="section-number-3">6.3</span> 默认实参</h3>
+<div class="outline-text-3" id="text-6-3">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">typedef</span> <span style="color: #1f5bff;">string</span>::<span style="color: #18b2b2;">size_type</span> <span style="color: #18b2b2;">sz</span>;
+<span style="color: #18b2b2;">string</span> <span style="color: #ef2929;">screen</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">sz</span> <span style="color: #ff8700;">h</span>= 24, <span style="color: #18b2b2;">sz</span> <span style="color: #ff8700;">w</span> = 80, <span style="color: #18b2b2;">char</span> <span style="color: #ff8700;">background</span> = <span style="color: #ff1f8b;">'+'</span><span style="color: #cc0000; font-weight: bold;">)</span>;
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org285fe17" class="outline-4">
+<h4 id="org285fe17"><span class="section-number-4">6.3.1</span> 使用默认实参调用函数</h4>
+<div class="outline-text-4" id="text-6-3-1">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">sstream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">string</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
+<span style="color: #00af00;">typedef</span> <span style="color: #1f5bff;">string</span>::<span style="color: #18b2b2;">size_type</span> <span style="color: #18b2b2;">sz</span>;
+
+<span style="color: #18b2b2;">string</span> <span style="color: #ef2929;">screen</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">sz</span> <span style="color: #ff8700;">h</span>= 24, <span style="color: #18b2b2;">sz</span> <span style="color: #ff8700;">w</span> = 80, <span style="color: #18b2b2;">char</span> <span style="color: #ff8700;">background</span> = <span style="color: #ff1f8b;">'+'</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">ostringstream</span> <span style="color: #ff8700;">ostr</span>;
+  ostr &lt;&lt; <span style="color: #ff1f8b;">"Height is "</span> &lt;&lt; h &lt;&lt; <span style="color: #ff1f8b;">", width is "</span> &lt;&lt; w &lt;&lt; <span style="color: #ff1f8b;">", background is "</span> &lt;&lt; background;
+  <span style="color: #00af00;">return</span> ostr.str<span style="color: #1f5bff; font-weight: bold;">()</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  cout &lt;&lt; screen<span style="color: #1f5bff; font-weight: bold;">()</span> &lt;&lt; endl;              <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#31561;&#20215;&#20110; screen(24, 80, '+')</span>
+  cout &lt;&lt; screen<span style="color: #1f5bff; font-weight: bold;">(</span>66<span style="color: #1f5bff; font-weight: bold;">)</span> &lt;&lt; endl;            <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#31561;&#20215;&#20110; screen(66, 80, '+')</span>
+  cout &lt;&lt; screen<span style="color: #1f5bff; font-weight: bold;">(</span>66, 256<span style="color: #1f5bff; font-weight: bold;">)</span> &lt;&lt; endl;       <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#31561;&#20215;&#20110; screen(66, 256, '+')</span>
+  cout &lt;&lt; screen<span style="color: #1f5bff; font-weight: bold;">(</span>66, 256, <span style="color: #ff1f8b;">'#'</span><span style="color: #1f5bff; font-weight: bold;">)</span> &lt;&lt; endl;  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#31561;&#20215;&#20110; screen(66, 256, '#')</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+Height is 24, width is 80, background is +
+Height is 66, width is 80, background is +
+Height is 66, width is 256, background is +
+Height is 66, width is 256, background is #
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgfab5f0c" class="outline-4">
+<h4 id="orgfab5f0c"><span class="section-number-4">6.3.2</span> 默认实参声明</h4>
+<div class="outline-text-4" id="text-6-3-2">
+<p>
+函数一般只声明一次，但多次声明同一个函数也是合法的。有一点需要注意，在给定的作用
+域中一个形参只能被赋予一次默认实参，函数的后续声明只能为之前那些没有默认值的形参
+添加实参，并且该形参右侧的所有形参必须都有默认值。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #18b2b2;">string</span> <span style="color: #ef2929;">screen</span><span style="color: #cc0000; font-weight: bold;">(</span>sz, sz, <span style="color: #18b2b2;">char</span> = <span style="color: #ff1f8b;">'+'</span><span style="color: #cc0000; font-weight: bold;">)</span>;
+<span style="color: #18b2b2;">string</span> <span style="color: #ef2929;">screen</span><span style="color: #cc0000; font-weight: bold;">(</span>sz, sz, <span style="color: #18b2b2;">char</span> = <span style="color: #ff1f8b;">'*'</span><span style="color: #cc0000; font-weight: bold;">)</span>;      <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#38169;&#35823;&#65306;&#37325;&#22797;&#22768;&#26126;</span>
+<span style="color: #18b2b2;">string</span> <span style="color: #ef2929;">screen</span><span style="color: #cc0000; font-weight: bold;">(</span>sz, sz = 80, <span style="color: #18b2b2;">char</span> = <span style="color: #ff1f8b;">'+'</span><span style="color: #cc0000; font-weight: bold;">)</span>; <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27491;&#30830;&#65306;&#28155;&#21152;&#40664;&#35748;&#23454;&#21442;</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7b7c5bf" class="outline-4">
+<h4 id="org7b7c5bf"><span class="section-number-4">6.3.3</span> 默认实参初始值</h4>
+<div class="outline-text-4" id="text-6-3-3">
+<p>
+局部变量不能作为默认实参，除此之外，只要表达式的类型能转换成形参所需的类型即可
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">w, def &#21644; h &#30340;&#22768;&#26126;&#24517;&#39035;&#20986;&#29616;&#22312;&#20989;&#25968;&#20043;&#22806;</span>
+<span style="color: #18b2b2;">sz</span> <span style="color: #ff8700;">w</span> = 80;
+<span style="color: #18b2b2;">char</span> <span style="color: #ff8700;">def</span> = <span style="color: #ff1f8b;">'+'</span>;
+<span style="color: #18b2b2;">sz</span> <span style="color: #ef2929;">h</span><span style="color: #cc0000; font-weight: bold;">()</span>;
+<span style="color: #18b2b2;">string</span> <span style="color: #ef2929;">screen</span><span style="color: #cc0000; font-weight: bold;">(</span>sz = h<span style="color: #1f5bff; font-weight: bold;">()</span>, sz = w, <span style="color: #18b2b2;">char</span> = def<span style="color: #cc0000; font-weight: bold;">)</span>;
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">window</span> = screen<span style="color: #cc0000; font-weight: bold;">()</span>;  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#35843;&#29992; screen(h(), 80, '+')</span>
+
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#29992;&#20316;&#40664;&#35748;&#23454;&#21442;&#30340;&#21517;&#23383;&#22312;&#20989;&#25968;&#22768;&#26126;&#25152;&#22312;&#30340;&#20316;&#29992;&#22495;&#20869;&#35299;&#26512;&#65292;&#32780;&#36825;&#20123;&#21517;&#23383;&#30340;&#27714;&#20540;&#36807;&#31243;&#21457;&#29983;&#22312;&#20989;</span>
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#25968;&#35843;&#29992;&#26102;</span>
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">foo</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  def = <span style="color: #ff1f8b;">'*'</span>;              <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#25913;&#21464;&#20102;&#40664;&#35748;&#23454;&#21442;&#24477;</span>
+  <span style="color: #18b2b2;">sz</span> <span style="color: #ff8700;">w</span> = 100;             <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#38544;&#34255;&#20102;&#22806;&#23618;&#23450;&#20041;&#30340; w&#65292;&#20294;&#26159;&#27809;&#26377;&#25913;&#21464;&#40664;&#35748;&#20540;</span>
+  window = screen<span style="color: #1f5bff; font-weight: bold;">()</span>;      <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#35843;&#29992; screen(h(), 80, '*')</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb349c94" class="outline-3">
+<h3 id="orgb349c94"><span class="section-number-3">6.4</span> 内联函数和 <code>constexpr</code> 函数</h3>
+<div class="outline-text-3" id="text-6-4">
+<p>
+函数入栈出栈有额外开销，使用 <code>inline</code> 关键字可以使函数在调用处展开。内联只是向编译
+器发出一个请求，行为取决于编译器本身。内联函数和 <code>constexpr</code> 函数通常定义在头文件
+中。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">inline</span> <span style="color: #00af00;">const</span> <span style="color: #18b2b2;">string</span> &amp;
+<span style="color: #ef2929;">shorterString</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">const</span> <span style="color: #18b2b2;">string</span> &amp;<span style="color: #ff8700;">s1</span>, <span style="color: #00af00;">const</span> <span style="color: #18b2b2;">string</span> &amp;<span style="color: #ff8700;">s2</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">return</span> s1.size<span style="color: #1f5bff; font-weight: bold;">()</span> &lt;= s2.size<span style="color: #1f5bff; font-weight: bold;">()</span>? s1: s2;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<p>
+<code>constexpr</code> 函数是指能用于常量表达式的函数，函数的返回值和所有形参都必须是字面值类
+型，函数体中必须有且只有一条 return 语句
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">constexpr</span> <span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">new_sz</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> 42; <span style="color: #cc0000; font-weight: bold;">}</span>
+<span style="color: #00af00;">constexpr</span> <span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">foo</span> = new_sz<span style="color: #cc0000; font-weight: bold;">()</span>;  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27491;&#30830;&#65306;foo &#26159;&#19968;&#20010;&#24120;&#37327;&#34920;&#36798;&#24335;</span>
+</pre>
+</div>
+
+<p>
+在执行初始化过程中，编译器把对 <code>constexpr</code> 函数的调用替换成其结果值，为能在编译过
+程中随时展开， <code>constexpr</code> 函数被隐式地指定为内联函数。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#22914;&#26524; arg &#26159;&#24120;&#37327;&#34920;&#36798;&#24335;&#65292;&#21017; scale(arg) &#20063;&#26159;&#24120;&#37327;&#34920;&#36798;&#24335;</span>
+<span style="color: #00af00;">constexpr</span> <span style="color: #18b2b2;">size_t</span> <span style="color: #ef2929;">scale</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">cnt</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> new_sz<span style="color: #1f5bff; font-weight: bold;">()</span> * cnt; <span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#24403; scale &#30340;&#23454;&#21442;&#26159;&#24120;&#37327;&#34920;&#36798;&#24335;&#26102;&#65292;&#23427;&#30340;&#36820;&#22238;&#20540;&#20063;&#26159;&#24120;&#37327;&#34920;&#36798;&#24335;&#65292;&#21453;&#20043;&#21017;&#19981;&#28982;</span>
+<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">arr</span><span style="color: #cc0000; font-weight: bold;">[</span>scale<span style="color: #1f5bff; font-weight: bold;">(</span>2<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">]</span>;   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27491;&#30830;&#65306;scale(2) &#26159;&#24120;&#37327;&#34920;&#36798;&#24335;</span>
+<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">i</span> = 2;           <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">i &#19981;&#26159;&#24120;&#37327;&#34920;&#36798;&#24335;</span>
+<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">arr2</span><span style="color: #cc0000; font-weight: bold;">[</span>scale<span style="color: #1f5bff; font-weight: bold;">(</span>i<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">]</span>;  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#38169;&#35823;&#65306;scale(i) &#19981;&#26159;&#24120;&#37327;&#34920;&#36798;&#24335;</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcd196a0" class="outline-3">
+<h3 id="orgcd196a0"><span class="section-number-3">6.5</span> <span class="todo TODO">TODO</span> 函数匹配</h3>
+<div class="outline-text-3" id="text-6-5">
+<p>
+该部分内容还未总结
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org3a682b6" class="outline-2">
+<h2 id="org3a682b6"><span class="section-number-2">7</span> 类</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+类的基本思想是数据抽象和封装。数据抽象是一种依赖于接口和实现分离的编程技术。类的
+接口包括用户所能执行的操作；类的实现则包括类的数据成员、负责接口实现的函数体以及
+定义类所需的各种私有函数
+</p>
+</div>
+
+<div id="outline-container-org369d18f" class="outline-3">
+<h3 id="org369d18f"><span class="section-number-3">7.1</span> 定义抽象数据类型</h3>
+<div class="outline-text-3" id="text-7-1">
+</div>
+<div id="outline-container-orgba0ef5c" class="outline-4">
+<h4 id="orgba0ef5c"><span class="section-number-4">7.1.1</span> 使用 <code>Sales_data</code> 类的接口</h4>
+<div class="outline-text-4" id="text-7-1-1">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #18b2b2;">Sales_data</span> <span style="color: #ff8700;">total</span>;                      <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20445;&#23384;&#24403;&#21069;&#27714;&#21644;&#32467;&#26524;&#30340;&#21464;&#37327;</span>
+<span style="color: #00af00;">if</span> <span style="color: #cc0000; font-weight: bold;">(</span>read<span style="color: #1f5bff; font-weight: bold;">(</span>cin, total<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>                <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#35835;&#20837;&#19968;&#31508;&#20132;&#26131;</span>
+  <span style="color: #18b2b2;">Sales_data</span> <span style="color: #ff8700;">trans</span>;                    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20445;&#23384;&#19979;&#19968;&#26465;&#20132;&#26131;&#25968;&#25454;&#30340;&#21464;&#37327;</span>
+  <span style="color: #00af00;">while</span> <span style="color: #1f5bff; font-weight: bold;">(</span>read<span style="color: #00af00; font-weight: bold;">(</span>cin, trans<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>           <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#35835;&#20837;&#21097;&#20313;&#30340;&#20132;&#26131;</span>
+    <span style="color: #00af00;">if</span> <span style="color: #00af00; font-weight: bold;">(</span>total.isbn<span style="color: #ff4ea3; font-weight: bold;">()</span> == trans.isbn<span style="color: #ff4ea3; font-weight: bold;">()</span><span style="color: #00af00; font-weight: bold;">)</span>  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#26816;&#26597; isbn</span>
+      total.combine<span style="color: #00af00; font-weight: bold;">(</span>trans<span style="color: #00af00; font-weight: bold;">)</span>;            <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#21512;&#24182;&#20837; total</span>
+    <span style="color: #00af00;">else</span> <span style="color: #00af00; font-weight: bold;">{</span>
+      print<span style="color: #ff4ea3; font-weight: bold;">(</span>cout, total<span style="color: #ff4ea3; font-weight: bold;">)</span> &lt;&lt; endl;      <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#36755;&#20986;&#32467;&#26524;</span>
+      total = trans;                   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#22788;&#29702;&#19979;&#19968;&#26412;&#20070;</span>
+    <span style="color: #00af00; font-weight: bold;">}</span>
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  print<span style="color: #1f5bff; font-weight: bold;">(</span>cout, total<span style="color: #1f5bff; font-weight: bold;">)</span> &lt;&lt; endl;          <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#36755;&#20986;&#26368;&#21518;&#19968;&#26465;&#20132;&#26131;</span>
+ <span style="color: #cc0000; font-weight: bold;">}</span> <span style="color: #00af00;">else</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  cerr &lt;&lt; <span style="color: #ff1f8b;">"No data!"</span> &lt;&lt; endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9f994a5" class="outline-4">
+<h4 id="org9f994a5"><span class="section-number-4">7.1.2</span> 改进 <code>Sales_data</code> 类</h4>
+<div class="outline-text-4" id="text-7-1-2">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">string</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #00af00;">struct</span> <span style="color: #18b2b2;">Sales_data</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">Sales_data &#30340;&#25104;&#21592;&#20989;&#25968;&#65306;&#36820;&#22238; book_no</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23450;&#20041;&#22312;&#31867;&#20869;&#37096;&#30340;&#20989;&#25968;&#26159;&#38544;&#24335;&#30340; inline &#20989;&#25968;</span>
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ef2929;">isbn</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #00af00;">const</span> <span style="color: #1f5bff; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> book_no; <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">Sales_data &#30340;&#25104;&#21592;&#20989;&#25968;&#65306;&#21512;&#24182;&#25968;&#25454;</span>
+  <span style="color: #18b2b2;">Sales_data</span>&amp; <span style="color: #ef2929;">combine</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">const</span> <span style="color: #18b2b2;">Sales_data</span>&amp;<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #18b2b2;">double</span> <span style="color: #ef2929;">avg_price</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #00af00;">const</span>;
+
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">book_no</span>;
+  <span style="color: #18b2b2;">unsigned</span> <span style="color: #ff8700;">units_sold</span> = 0;
+  <span style="color: #18b2b2;">double</span> <span style="color: #ff8700;">revenue</span> = 0.0;
+<span style="color: #cc0000; font-weight: bold;">}</span>;
+
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">Sales_data &#30340;&#38750;&#25104;&#21592;&#25509;&#21475;&#20989;&#25968;</span>
+<span style="color: #18b2b2;">Sales_data</span> <span style="color: #ef2929;">add</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">const</span> <span style="color: #18b2b2;">Sales_data</span>&amp;, <span style="color: #00af00;">const</span> <span style="color: #18b2b2;">Sales_data</span>&amp;<span style="color: #cc0000; font-weight: bold;">)</span>;
+<span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span> &amp;<span style="color: #ef2929;">print</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span>&amp;, <span style="color: #00af00;">const</span> <span style="color: #18b2b2;">Sales_data</span>&amp;<span style="color: #cc0000; font-weight: bold;">)</span>;
+<span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">istream</span> &amp;<span style="color: #ef2929;">read</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">istream</span>&amp;, <span style="color: #18b2b2;">Sales_data</span>&amp;<span style="color: #cc0000; font-weight: bold;">)</span>;
+</pre>
+</div>
+
+<p>
+在 C++ 中对于成员函数的调用，可以认为编译器将该调用重写为了
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20266;&#20195;&#30721;</span>
+<span style="color: #1f5bff;">Sales_data</span>::isbn<span style="color: #cc0000; font-weight: bold;">(</span>&amp;total<span style="color: #cc0000; font-weight: bold;">)</span>;
+</pre>
+</div>
+
+<p>
+调用 <code>isbn</code> 方法时传入了 <code>total</code> 的地址，与 Python 的对象方法的机制一致。在 Python
+中使用对象的成员变量使用 <code>self</code> ，在 C++ 中可以使用 <code>this</code> 隐式指针，不同之处在于
+<code>this</code> 指针在形参中无需写出，在使用变量时可写可不写。因此 <code>isbn</code> 方法也可写为
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ef2929;">isbn</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #00af00;">const</span> <span style="color: #cc0000; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> <span style="color: #00af00;">this</span>-&gt;book_no; <span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<p>
+另一个特殊之处是 <code>isbn</code> 方法声明中的 <code>const</code> ，此处的 <code>const</code> 其实修饰的是 <code>isbn</code> 的
+<code>this</code> 指针。默认情况下， <code>this</code> 的类型为 <code>Sales_data *const</code> 是一个指针常量，在 <code>isbn</code>
+方法中，我们并不会通过 <code>this</code> 指针对对象的成员进行修改，因此将 <code>this</code> 声明为 <code>const
+Sales_data *const</code> 可提高适用范围，因此上述声明可以想象为
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20266;&#20195;&#30721;</span>
+<span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #1f5bff;">Sales_data</span>::<span style="color: #ef2929;">isbn</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">const</span> <span style="color: #18b2b2;">Sales_data</span> *<span style="color: #00af00;">const</span> <span style="color: #00af00;">this</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> <span style="color: #00af00;">this</span>-&gt;book_no; <span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+
+<p>
+下一步我们可以在类的外部定义成员函数，返回类型、参数列表和函数名都要与类内声明一
+致
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27492;&#22788; :: &#35828;&#26126; avg_price &#26159;&#22768;&#26126;&#22312;&#31867; Sales_data &#30340;&#20316;&#29992;&#22495;&#20869;</span>
+<span style="color: #18b2b2;">double</span> <span style="color: #1f5bff;">Sales_data</span>::<span style="color: #ef2929;">avg_price</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #00af00;">const</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">return</span> units_sold? revenue / units_sold: 0;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<p>
+在学习运算符重载之前，我们处理两个 <code>Sales_data</code> 对象相加定义了一个 <code>combine</code> 函数。
+我们希望该函数能将调用函数的对象与作为参数传入的对象相加并返回前面的对象，因此此
+处返回 <code>this</code> 对象
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #18b2b2;">Sales_data</span> &amp;<span style="color: #1f5bff;">Sales_data</span>::<span style="color: #ef2929;">combine</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">const</span> <span style="color: #18b2b2;">Sales_data</span> &amp;<span style="color: #ff8700;">rhs</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  units_sold += rhs.units_sold;
+  revenue += rhs.revenue;
+  <span style="color: #00af00;">return</span> *<span style="color: #00af00;">this</span>;            <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#36820;&#22238;&#35843;&#29992;&#35813;&#20989;&#25968;&#30340;&#23545;&#35937;</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org93e253e" class="outline-4">
+<h4 id="org93e253e"><span class="section-number-4">7.1.3</span> 定义类相关的非成员函数</h4>
+<div class="outline-text-4" id="text-7-1-3">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#36755;&#20837;&#30340;&#20132;&#26131;&#20449;&#24687;&#21253;&#25324; ISBN&#12289;&#21806;&#20986;&#24635;&#25968;&#21644;&#21806;&#20986;&#20215;&#26684;</span>
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27492;&#22788; iostream &#23545;&#35937;&#20351;&#29992;&#30340;&#37117;&#26159;&#24341;&#29992;&#65292;&#22240;&#20026; iostream &#23545;&#35937;&#23646;&#20110;&#19981;&#33021;&#25335;&#36125;&#30340;&#23545;&#35937;</span>
+<span style="color: #18b2b2;">istream</span> &amp;<span style="color: #ef2929;">read</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">istream</span> &amp;<span style="color: #ff8700;">is</span>, <span style="color: #18b2b2;">Sales_data</span> &amp;<span style="color: #ff8700;">item</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">double</span> <span style="color: #ff8700;">price</span> = 0;
+  is &gt;&gt; item.book_no &gt;&gt; item.units_sold &gt;&gt; price;
+  item.revenue = price * item.units_sold;
+  <span style="color: #00af00;">return</span> is;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">ostream</span> &amp;<span style="color: #ef2929;">print</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">ostream</span> &amp;<span style="color: #ff8700;">os</span>, <span style="color: #00af00;">const</span> <span style="color: #18b2b2;">Sales_data</span> &amp;<span style="color: #ff8700;">item</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  os &lt;&lt; item.isbn<span style="color: #1f5bff; font-weight: bold;">()</span> &lt;&lt; <span style="color: #ff1f8b;">" "</span> &lt;&lt; item.units_sold &lt;&lt; <span style="color: #ff1f8b;">" "</span>
+     &lt;&lt; item.revenue &lt;&lt; <span style="color: #ff1f8b;">" "</span> &lt;&lt; item.avg_price<span style="color: #1f5bff; font-weight: bold;">()</span>;
+  <span style="color: #00af00;">return</span> os;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">Sales_data</span> <span style="color: #ef2929;">add</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">const</span> <span style="color: #18b2b2;">Sales_data</span> &amp;<span style="color: #ff8700;">lhs</span>, <span style="color: #00af00;">const</span> <span style="color: #18b2b2;">Sales_data</span> &amp;<span style="color: #ff8700;">rhs</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#25335;&#36125; lhs &#30340;&#21103;&#26412;</span>
+  <span style="color: #18b2b2;">Sales_data</span> <span style="color: #ff8700;">sum</span> = lhs;
+  sum.combine<span style="color: #1f5bff; font-weight: bold;">(</span>rhs<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #00af00;">return</span> sum;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1951,7 +2318,7 @@ The shorter string is: Evil C++.
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-05-27 Wed 21:31></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
-      <div id="built">Built: <2020-06-04 Thu 14:55></div>
+      <div id="built">Built: <2020-06-05 Fri 17:54></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
