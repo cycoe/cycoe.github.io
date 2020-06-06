@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-06-06 Sat 23:58 -->
+<!-- 2020-06-07 Sun 00:02 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>C++ 学习记录</title>
+<title>与 C++ 的第一类接触</title>
 <meta name="generator" content="Org mode">
 <meta name="author" content="Cycoe">
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
@@ -32,7 +32,7 @@
       <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
       <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
       <div id="nav-title-wrapper">
-        <span id="nav-title">C++ 学习记录</span>
+        <span id="nav-title">与 C++ 的第一类接触</span>
         <span id="nav-date">Written @<2020-05-27 Wed 21:31></span>
       </div>
     </div>
@@ -51,139 +51,139 @@
 </div>
 <div id="content">
 <header>
-<h1 class="title">C++ 学习记录</h1>
+<h1 class="title">与 C++ 的第一类接触</h1>
 </header><nav id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orge4e320f">1. 引言</a>
+<li><a href="#org93c0b4d">1. 引言</a>
 <ul>
-<li><a href="#org75de683">1.1. 基本的输入输出</a></li>
-<li><a href="#org5bffcd2">1.2. 使用循环读取标准输入</a></li>
+<li><a href="#org65651e6">1.1. 基本的输入输出</a></li>
+<li><a href="#org6b614cb">1.2. 使用循环读取标准输入</a></li>
 </ul>
 </li>
-<li><a href="#orgd098938">2. 变量和基本类型</a>
+<li><a href="#orga952bb9">2. 变量和基本类型</a>
 <ul>
-<li><a href="#org9aba813">2.1. 可以用先定义的变量去初始化后定义的变量</a></li>
-<li><a href="#org7923d91">2.2. 列表初始化</a></li>
-<li><a href="#org6617f03">2.3. 默认初始化</a></li>
-<li><a href="#orgf2add80">2.4. 声明与定义</a></li>
-<li><a href="#orge575617">2.5. 变量标识符</a></li>
-<li><a href="#org701f796">2.6. 引用</a></li>
-<li><a href="#org3397aeb">2.7. 空指针</a></li>
-<li><a href="#org20d7287">2.8. <code>void*</code> 指针</a></li>
-<li><a href="#org3d0e929">2.9. <code>const</code> 常量限定符</a></li>
-<li><a href="#org78fe6c7">2.10. 命名空间的 <code>using</code> 声明</a></li>
+<li><a href="#org7efe20a">2.1. 可以用先定义的变量去初始化后定义的变量</a></li>
+<li><a href="#orgecc7ff5">2.2. 列表初始化</a></li>
+<li><a href="#org6461f73">2.3. 默认初始化</a></li>
+<li><a href="#org38331f5">2.4. 声明与定义</a></li>
+<li><a href="#org80f2c4b">2.5. 变量标识符</a></li>
+<li><a href="#org5b0e878">2.6. 引用</a></li>
+<li><a href="#org0df3463">2.7. 空指针</a></li>
+<li><a href="#orgab10d25">2.8. <code>void*</code> 指针</a></li>
+<li><a href="#org4ca440d">2.9. <code>const</code> 常量限定符</a></li>
+<li><a href="#orgfce063f">2.10. 命名空间的 <code>using</code> 声明</a></li>
 </ul>
 </li>
-<li><a href="#org7277f79">3. 字符串、向量和数组</a>
+<li><a href="#org0a002c5">3. 字符串、向量和数组</a>
 <ul>
-<li><a href="#org2c59a7f">3.1. 标准库 <code>string</code></a>
+<li><a href="#org45d5483">3.1. 标准库 <code>string</code></a>
 <ul>
-<li><a href="#org43ab621">3.1.1. 定义和初始化</a></li>
-<li><a href="#org297551f">3.1.2. 为 string 对象赋值</a></li>
-<li><a href="#org39c112e">3.1.3. 读写 string 对象</a></li>
-<li><a href="#org24765a7">3.1.4. 使用 <code>getline</code> 读取一整行</a></li>
-<li><a href="#org7ff70f2">3.1.5. <code>empty</code> 和 <code>size</code></a></li>
-<li><a href="#orgf7bd48a">3.1.6. 比较 string 对象</a></li>
-<li><a href="#org8b627a8">3.1.7. string 对象相加</a></li>
-<li><a href="#orgac80e85">3.1.8. 字面值与 string 对象相加</a></li>
-<li><a href="#org2f46349">3.1.9. 处理 string 对象中的字符</a></li>
-<li><a href="#orgcdb986f">3.1.10. 使用字符串数组初始化 string 对象</a></li>
-<li><a href="#org17ff35a">3.1.11. 从 string 对象中获取 C 风格的字符串数组指针</a></li>
+<li><a href="#org0f94346">3.1.1. 定义和初始化</a></li>
+<li><a href="#org455bc17">3.1.2. 为 string 对象赋值</a></li>
+<li><a href="#orge7e72f4">3.1.3. 读写 string 对象</a></li>
+<li><a href="#org44af7b5">3.1.4. 使用 <code>getline</code> 读取一整行</a></li>
+<li><a href="#orga2752ab">3.1.5. <code>empty</code> 和 <code>size</code></a></li>
+<li><a href="#orga68e102">3.1.6. 比较 string 对象</a></li>
+<li><a href="#org0ffdeb7">3.1.7. string 对象相加</a></li>
+<li><a href="#org385bcb3">3.1.8. 字面值与 string 对象相加</a></li>
+<li><a href="#orgc93abd3">3.1.9. 处理 string 对象中的字符</a></li>
+<li><a href="#org3daef82">3.1.10. 使用字符串数组初始化 string 对象</a></li>
+<li><a href="#orgbe54c31">3.1.11. 从 string 对象中获取 C 风格的字符串数组指针</a></li>
 </ul>
 </li>
-<li><a href="#org474d727">3.2. 标准库类型 <code>vector</code></a>
+<li><a href="#org9cd5bb2">3.2. 标准库类型 <code>vector</code></a>
 <ul>
-<li><a href="#orgdaf5abb">3.2.1. 定义和初始化</a></li>
-<li><a href="#org4384cac">3.2.2. 向 vector 对象中添加元素</a></li>
-<li><a href="#org901e6bc">3.2.3. 其它 vector 操作</a></li>
-<li><a href="#org63a922f">3.2.4. 用数组初始化 vector 对象</a></li>
+<li><a href="#orgebe629f">3.2.1. 定义和初始化</a></li>
+<li><a href="#org12e77a7">3.2.2. 向 vector 对象中添加元素</a></li>
+<li><a href="#orga4571a8">3.2.3. 其它 vector 操作</a></li>
+<li><a href="#org872cfb5">3.2.4. 用数组初始化 vector 对象</a></li>
 </ul>
 </li>
-<li><a href="#org6594666">3.3. 迭代器</a>
+<li><a href="#orge0f0b1f">3.3. 迭代器</a>
 <ul>
-<li><a href="#org539ef46">3.3.1. 迭代器运算</a></li>
-<li><a href="#org08d8b94">3.3.2. <code>begin</code> 和 <code>end</code> 运算符</a></li>
-<li><a href="#org8d4db0d">3.3.3. 迭代器算数运算</a></li>
+<li><a href="#org385b70a">3.3.1. 迭代器运算</a></li>
+<li><a href="#orgd8c8280">3.3.2. <code>begin</code> 和 <code>end</code> 运算符</a></li>
+<li><a href="#org2342ffe">3.3.3. 迭代器算数运算</a></li>
 </ul>
 </li>
-<li><a href="#org7de1ac1">3.4. 数组</a>
+<li><a href="#orgcd83887">3.4. 数组</a>
 <ul>
-<li><a href="#orge7d95b7">3.4.1. 范围 for 语句</a></li>
-<li><a href="#org513b305">3.4.2. 数组中的自动类型推断</a></li>
-<li><a href="#org55a8ae9">3.4.3. 标准库函数 <code>begin</code> 和 <code>end</code></a></li>
-<li><a href="#org81be994">3.4.4. 指针的差值</a></li>
-<li><a href="#org2ecd485">3.4.5. 多维数组与下标</a></li>
-<li><a href="#orge29ac59">3.4.6. 多维数组与指针</a></li>
-<li><a href="#orga123122">3.4.7. 类型别名简化多维数组指针</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#org5c9a9da">4. 表达式</a>
-<ul>
-<li><a href="#org3d5a4e0">4.1. 优先使用递增递减运算符的后置版本</a></li>
-<li><a href="#org1ab175b">4.2. 运算对象可按任意顺序求值</a></li>
-<li><a href="#orge00dd90">4.3. 强制类型转换</a></li>
-</ul>
-</li>
-<li><a href="#orgc636e2a">5. 语句</a>
-<ul>
-<li><a href="#orgc70b7bd">5.1. try 语句块与异常处理</a>
-<ul>
-<li><a href="#org8051c38">5.1.1. throw 表达式</a></li>
-<li><a href="#orgd020a73">5.1.2. <code>try</code> 语句块</a></li>
-<li><a href="#org7e144d1">5.1.3. 异常类</a></li>
+<li><a href="#org46adc2f">3.4.1. 范围 for 语句</a></li>
+<li><a href="#orgebc441a">3.4.2. 数组中的自动类型推断</a></li>
+<li><a href="#org2a83ee3">3.4.3. 标准库函数 <code>begin</code> 和 <code>end</code></a></li>
+<li><a href="#org41db26c">3.4.4. 指针的差值</a></li>
+<li><a href="#orgbb96256">3.4.5. 多维数组与下标</a></li>
+<li><a href="#org53d7a5e">3.4.6. 多维数组与指针</a></li>
+<li><a href="#org2d51d50">3.4.7. 类型别名简化多维数组指针</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgc80e3b5">6. 函数</a>
+<li><a href="#orgf5aa759">4. 表达式</a>
 <ul>
-<li><a href="#orgb93af48">6.1. 参数传递</a>
-<ul>
-<li><a href="#org6c6d2b1">6.1.1. 值传递和引用传递</a></li>
-<li><a href="#org2c9d82b">6.1.2. const 形参和实参</a></li>
-<li><a href="#org7ed7f5f">6.1.3. 传递数组长度</a></li>
-<li><a href="#orge449699">6.1.4. 使用引用传递数组</a></li>
-<li><a href="#org4b50d02">6.1.5. 可变长参数列表</a></li>
-<li><a href="#org7fe0f05">6.1.6. 函数返回值</a></li>
-<li><a href="#org03c1d3b">6.1.7. 返回数组指针</a></li>
+<li><a href="#org9f524e7">4.1. 优先使用递增递减运算符的后置版本</a></li>
+<li><a href="#org9e7b687">4.2. 运算对象可按任意顺序求值</a></li>
+<li><a href="#orgc3ad58c">4.3. 强制类型转换</a></li>
 </ul>
 </li>
-<li><a href="#orgddb3cd2">6.2. 函数重载</a>
+<li><a href="#orgbbe1109">5. 语句</a>
 <ul>
-<li><a href="#orgd98e03d">6.2.1. <code>const_cast</code> 与重载</a></li>
-<li><a href="#orgf2b4647">6.2.2. 调用重载的函数</a></li>
-<li><a href="#org6210b58">6.2.3. 重载与作用域</a></li>
+<li><a href="#orgbf50691">5.1. try 语句块与异常处理</a>
+<ul>
+<li><a href="#org43bd9ea">5.1.1. throw 表达式</a></li>
+<li><a href="#orgffd7382">5.1.2. <code>try</code> 语句块</a></li>
+<li><a href="#orgec22492">5.1.3. 异常类</a></li>
 </ul>
 </li>
-<li><a href="#org8112c7b">6.3. 默认实参</a>
-<ul>
-<li><a href="#org285fe17">6.3.1. 使用默认实参调用函数</a></li>
-<li><a href="#orgfab5f0c">6.3.2. 默认实参声明</a></li>
-<li><a href="#org7b7c5bf">6.3.3. 默认实参初始值</a></li>
 </ul>
 </li>
-<li><a href="#orgb349c94">6.4. 内联函数和 <code>constexpr</code> 函数</a></li>
-<li><a href="#orgcd196a0">6.5. <span class="todo TODO">TODO</span> 函数匹配</a></li>
+<li><a href="#orgd607f7b">6. 函数</a>
+<ul>
+<li><a href="#orge5b9c5d">6.1. 参数传递</a>
+<ul>
+<li><a href="#org4d0aec0">6.1.1. 值传递和引用传递</a></li>
+<li><a href="#org02af77e">6.1.2. const 形参和实参</a></li>
+<li><a href="#orgf16616c">6.1.3. 传递数组长度</a></li>
+<li><a href="#orgff8d8e7">6.1.4. 使用引用传递数组</a></li>
+<li><a href="#orgd266c04">6.1.5. 可变长参数列表</a></li>
+<li><a href="#org77d9457">6.1.6. 函数返回值</a></li>
+<li><a href="#org9fb09b1">6.1.7. 返回数组指针</a></li>
 </ul>
 </li>
-<li><a href="#org3a682b6">7. 类</a>
+<li><a href="#orge7fb966">6.2. 函数重载</a>
 <ul>
-<li><a href="#org369d18f">7.1. 定义抽象数据类型</a>
-<ul>
-<li><a href="#orgba0ef5c">7.1.1. 使用 <code>Sales_data</code> 类的接口</a></li>
-<li><a href="#org9f994a5">7.1.2. 改进 <code>Sales_data</code> 类</a></li>
-<li><a href="#org93e253e">7.1.3. 定义类相关的非成员函数</a></li>
-<li><a href="#org62949a3">7.1.4. 构造函数</a></li>
-<li><a href="#org6c3643e">7.1.5. 拷贝、赋值和析构</a></li>
+<li><a href="#org241b003">6.2.1. <code>const_cast</code> 与重载</a></li>
+<li><a href="#orgaa9c79b">6.2.2. 调用重载的函数</a></li>
+<li><a href="#org1c0d2d6">6.2.3. 重载与作用域</a></li>
 </ul>
 </li>
-<li><a href="#org133839d">7.2. 访问控制卜与封装</a>
+<li><a href="#org9f3e710">6.3. 默认实参</a>
 <ul>
-<li><a href="#org5f4605d">7.2.1. 友元</a></li>
+<li><a href="#orgc71b657">6.3.1. 使用默认实参调用函数</a></li>
+<li><a href="#org504e4a1">6.3.2. 默认实参声明</a></li>
+<li><a href="#orgd090c24">6.3.3. 默认实参初始值</a></li>
+</ul>
+</li>
+<li><a href="#orgea5dbbb">6.4. 内联函数和 <code>constexpr</code> 函数</a></li>
+<li><a href="#orgb10d352">6.5. <span class="todo TODO">TODO</span> 函数匹配</a></li>
+</ul>
+</li>
+<li><a href="#org9f221b6">7. 类</a>
+<ul>
+<li><a href="#orgd84f798">7.1. 定义抽象数据类型</a>
+<ul>
+<li><a href="#orgec10260">7.1.1. 使用 <code>Sales_data</code> 类的接口</a></li>
+<li><a href="#org039d9e6">7.1.2. 改进 <code>Sales_data</code> 类</a></li>
+<li><a href="#org60c6577">7.1.3. 定义类相关的非成员函数</a></li>
+<li><a href="#org9e1093a">7.1.4. 构造函数</a></li>
+<li><a href="#orgad77641">7.1.5. 拷贝、赋值和析构</a></li>
+</ul>
+</li>
+<li><a href="#org27720f0">7.2. 访问控制卜与封装</a>
+<ul>
+<li><a href="#orgc6fbe03">7.2.1. 友元</a></li>
 </ul>
 </li>
 </ul>
@@ -192,25 +192,25 @@
 </div>
 </nav>
 <p>
-最近开始看 <i>C++ Primer</i> 这本书，记录一下学习过程中遇到的知识点，主要是与纯 C 代码
-不同的地方。
+最近开始看 <i>C++ Primer</i> 这本书，C++ 这种缝合怪学起来还是非常有满足感的。本文记录一
+下学习过程中遇到的知识点，因为之前有了 C 基础，因此主要记录与 C 代码不同的地方。
 </p>
 
 <!-- more -->
 
-<div id="outline-container-orge4e320f" class="outline-2">
-<h2 id="orge4e320f"><span class="section-number-2">1</span> 引言</h2>
+<div id="outline-container-org93c0b4d" class="outline-2">
+<h2 id="org93c0b4d"><span class="section-number-2">1</span> 引言</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org75de683" class="outline-3">
-<h3 id="org75de683"><span class="section-number-3">1.1</span> 基本的输入输出</h3>
+<div id="outline-container-org65651e6" class="outline-3">
+<h3 id="org65651e6"><span class="section-number-3">1.1</span> 基本的输入输出</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 基本的输入输出使用 <code>iostream</code> 对象，其中 <code>cin</code> 是输入流对象， <code>cout</code> 是输出流对象，
 <code>std</code> 是变量的命名空间。
 </p>
 
-<table id="org4ce2742">
+<table id="org9d143cf">
 
 
 <colgroup>
@@ -250,8 +250,8 @@ The sum of 5 and 6 is 11
 </div>
 </div>
 
-<div id="outline-container-org5bffcd2" class="outline-3">
-<h3 id="org5bffcd2"><span class="section-number-3">1.2</span> 使用循环读取标准输入</h3>
+<div id="outline-container-org6b614cb" class="outline-3">
+<h3 id="org6b614cb"><span class="section-number-3">1.2</span> 使用循环读取标准输入</h3>
 <div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">sum</span> = 0, <span style="color: #ff8700;">val</span> = 0;
@@ -269,8 +269,8 @@ The sum of 5 and 6 is 11
 </div>
 </div>
 
-<div id="outline-container-orgd098938" class="outline-2">
-<h2 id="orgd098938"><span class="section-number-2">2</span> 变量和基本类型</h2>
+<div id="outline-container-orga952bb9" class="outline-2">
+<h2 id="orga952bb9"><span class="section-number-2">2</span> 变量和基本类型</h2>
 <div class="outline-text-2" id="text-2">
 
 <figure>
@@ -280,8 +280,8 @@ The sum of 5 and 6 is 11
 </figure>
 </div>
 
-<div id="outline-container-org9aba813" class="outline-3">
-<h3 id="org9aba813"><span class="section-number-3">2.1</span> 可以用先定义的变量去初始化后定义的变量</h3>
+<div id="outline-container-org7efe20a" class="outline-3">
+<h3 id="org7efe20a"><span class="section-number-3">2.1</span> 可以用先定义的变量去初始化后定义的变量</h3>
 <div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #18b2b2;">double</span> <span style="color: #ff8700;">price</span> = 109.99, <span style="color: #ff8700;">discount</span> = price * 0.16;
@@ -289,8 +289,8 @@ The sum of 5 and 6 is 11
 </div>
 </div>
 </div>
-<div id="outline-container-org7923d91" class="outline-3">
-<h3 id="org7923d91"><span class="section-number-3">2.2</span> 列表初始化</h3>
+<div id="outline-container-orgecc7ff5" class="outline-3">
+<h3 id="orgecc7ff5"><span class="section-number-3">2.2</span> 列表初始化</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 以下的 4 条初始化语句都是合法的
@@ -315,8 +315,8 @@ The sum of 5 and 6 is 11
 </div>
 </div>
 
-<div id="outline-container-org6617f03" class="outline-3">
-<h3 id="org6617f03"><span class="section-number-3">2.3</span> 默认初始化</h3>
+<div id="outline-container-org6461f73" class="outline-3">
+<h3 id="org6461f73"><span class="section-number-3">2.3</span> 默认初始化</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 在未显式初始化时，全局的变量会被初始化为 0 ，函数内部的变量不初始化
@@ -342,13 +342,13 @@ The sum of 5 and 6 is 11
 Global string is: 
 Global int is: 0
 Local string is: 
-Local int is: 22023
+Local int is: 21999
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgf2add80" class="outline-3">
-<h3 id="orgf2add80"><span class="section-number-3">2.4</span> 声明与定义</h3>
+<div id="outline-container-org38331f5" class="outline-3">
+<h3 id="org38331f5"><span class="section-number-3">2.4</span> 声明与定义</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 声明用来创建一个符号，定义用来创建实体、分配内存甚至初始化。如果只是想声明变量需
@@ -366,8 +366,8 @@ Local int is: 22023
 </div>
 </div>
 
-<div id="outline-container-orge575617" class="outline-3">
-<h3 id="orge575617"><span class="section-number-3">2.5</span> 变量标识符</h3>
+<div id="outline-container-org80f2c4b" class="outline-3">
+<h3 id="org80f2c4b"><span class="section-number-3">2.5</span> 变量标识符</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 与 Python 不同，C++ 中的标识符不能以两个连续的下画线开头，也不能以下画线紧连大写
@@ -388,8 +388,8 @@ Local int is: 22023
 </div>
 </div>
 
-<div id="outline-container-org701f796" class="outline-3">
-<h3 id="org701f796"><span class="section-number-3">2.6</span> 引用</h3>
+<div id="outline-container-org5b0e878" class="outline-3">
+<h3 id="org5b0e878"><span class="section-number-3">2.6</span> 引用</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 引用（reference）是为对象起了另外一个名字。如果学过 Python 中的引用，这里应该比
@@ -421,8 +421,8 @@ i = 5; ri = 10;
 </div>
 </div>
 
-<div id="outline-container-org3397aeb" class="outline-3">
-<h3 id="org3397aeb"><span class="section-number-3">2.7</span> 空指针</h3>
+<div id="outline-container-org0df3463" class="outline-3">
+<h3 id="org0df3463"><span class="section-number-3">2.7</span> 空指针</h3>
 <div class="outline-text-3" id="text-2-7">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">cstdlib</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
@@ -446,8 +446,8 @@ p3 is 0
 </div>
 </div>
 
-<div id="outline-container-org20d7287" class="outline-3">
-<h3 id="org20d7287"><span class="section-number-3">2.8</span> <code>void*</code> 指针</h3>
+<div id="outline-container-orgab10d25" class="outline-3">
+<h3 id="orgab10d25"><span class="section-number-3">2.8</span> <code>void*</code> 指针</h3>
 <div class="outline-text-3" id="text-2-8">
 <p>
 <code>void*</code> 指针是一类特殊的指针类型，只记录对象的地址而不记录对象的内存空间大小
@@ -461,11 +461,11 @@ pv = pd;
 </div>
 </div>
 
-<div id="outline-container-org3d0e929" class="outline-3">
-<h3 id="org3d0e929"><span class="section-number-3">2.9</span> <code>const</code> 常量限定符</h3>
+<div id="outline-container-org4ca440d" class="outline-3">
+<h3 id="org4ca440d"><span class="section-number-3">2.9</span> <code>const</code> 常量限定符</h3>
 </div>
-<div id="outline-container-org78fe6c7" class="outline-3">
-<h3 id="org78fe6c7"><span class="section-number-3">2.10</span> 命名空间的 <code>using</code> 声明</h3>
+<div id="outline-container-orgfce063f" class="outline-3">
+<h3 id="orgfce063f"><span class="section-number-3">2.10</span> 命名空间的 <code>using</code> 声明</h3>
 <div class="outline-text-3" id="text-2-10">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">cin</span>; <span style="color: #00af00;">using</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">endl</span>;
@@ -479,12 +479,12 @@ cout &lt;&lt; i;                <span style="color: #b2b2b2; font-style: italic;
 </div>
 </div>
 </div>
-<div id="outline-container-org7277f79" class="outline-2">
-<h2 id="org7277f79"><span class="section-number-2">3</span> 字符串、向量和数组</h2>
+<div id="outline-container-org0a002c5" class="outline-2">
+<h2 id="org0a002c5"><span class="section-number-2">3</span> 字符串、向量和数组</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org2c59a7f" class="outline-3">
-<h3 id="org2c59a7f"><span class="section-number-3">3.1</span> 标准库 <code>string</code></h3>
+<div id="outline-container-org45d5483" class="outline-3">
+<h3 id="org45d5483"><span class="section-number-3">3.1</span> 标准库 <code>string</code></h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 引入头文件与声明命名空间
@@ -495,8 +495,8 @@ cout &lt;&lt; i;                <span style="color: #b2b2b2; font-style: italic;
 </pre>
 </div>
 </div>
-<div id="outline-container-org43ab621" class="outline-4">
-<h4 id="org43ab621"><span class="section-number-4">3.1.1</span> 定义和初始化</h4>
+<div id="outline-container-org0f94346" class="outline-4">
+<h4 id="org0f94346"><span class="section-number-4">3.1.1</span> 定义和初始化</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span>;
@@ -514,8 +514,8 @@ s2, s3 的初始化方法为拷贝初始化，s4, s5 的初始化方法为直接
 </p>
 </div>
 </div>
-<div id="outline-container-org297551f" class="outline-4">
-<h4 id="org297551f"><span class="section-number-4">3.1.2</span> 为 string 对象赋值</h4>
+<div id="outline-container-org455bc17" class="outline-4">
+<h4 id="org455bc17"><span class="section-number-4">3.1.2</span> 为 string 对象赋值</h4>
 <div class="outline-text-4" id="text-3-1-2">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
@@ -536,8 +536,8 @@ s2 is: Hello
 </div>
 </div>
 
-<div id="outline-container-org39c112e" class="outline-4">
-<h4 id="org39c112e"><span class="section-number-4">3.1.3</span> 读写 string 对象</h4>
+<div id="outline-container-orge7e72f4" class="outline-4">
+<h4 id="orge7e72f4"><span class="section-number-4">3.1.3</span> 读写 string 对象</h4>
 <div class="outline-text-4" id="text-3-1-3">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
@@ -555,8 +555,8 @@ Hello
 </div>
 </div>
 
-<div id="outline-container-org24765a7" class="outline-4">
-<h4 id="org24765a7"><span class="section-number-4">3.1.4</span> 使用 <code>getline</code> 读取一整行</h4>
+<div id="outline-container-org44af7b5" class="outline-4">
+<h4 id="org44af7b5"><span class="section-number-4">3.1.4</span> 使用 <code>getline</code> 读取一整行</h4>
 <div class="outline-text-4" id="text-3-1-4">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
@@ -570,10 +570,10 @@ Hello
 </div>
 </div>
 
-<div id="outline-container-org7ff70f2" class="outline-4">
-<h4 id="org7ff70f2"><span class="section-number-4">3.1.5</span> <code>empty</code> 和 <code>size</code></h4>
+<div id="outline-container-orga2752ab" class="outline-4">
+<h4 id="orga2752ab"><span class="section-number-4">3.1.5</span> <code>empty</code> 和 <code>size</code></h4>
 <div class="outline-text-4" id="text-3-1-5">
-<table id="orga8ee06c">
+<table id="org6ca9924">
 <caption class="t-above"><span class="table-number">Table 1:</span> 多行文本</caption>
 
 <colgroup>
@@ -628,8 +628,8 @@ Line 4's length is 20
 </div>
 </div>
 
-<div id="outline-container-orgf7bd48a" class="outline-4">
-<h4 id="orgf7bd48a"><span class="section-number-4">3.1.6</span> 比较 string 对象</h4>
+<div id="outline-container-orga68e102" class="outline-4">
+<h4 id="orga68e102"><span class="section-number-4">3.1.6</span> 比较 string 对象</h4>
 <div class="outline-text-4" id="text-3-1-6">
 <p>
 类似于 C 中的 <code>strcmp</code> 函数，依次比较各字符的字典序
@@ -653,8 +653,8 @@ s2 is bigger than s1.
 </div>
 </div>
 
-<div id="outline-container-org8b627a8" class="outline-4">
-<h4 id="org8b627a8"><span class="section-number-4">3.1.7</span> string 对象相加</h4>
+<div id="outline-container-org0ffdeb7" class="outline-4">
+<h4 id="org0ffdeb7"><span class="section-number-4">3.1.7</span> string 对象相加</h4>
 <div class="outline-text-4" id="text-3-1-7">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
@@ -674,8 +674,8 @@ Hello, world.
 </div>
 </div>
 
-<div id="outline-container-orgac80e85" class="outline-4">
-<h4 id="orgac80e85"><span class="section-number-4">3.1.8</span> 字面值与 string 对象相加</h4>
+<div id="outline-container-org385bcb3" class="outline-4">
+<h4 id="org385bcb3"><span class="section-number-4">3.1.8</span> 字面值与 string 对象相加</h4>
 <div class="outline-text-4" id="text-3-1-8">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
@@ -693,8 +693,8 @@ hello, world!
 </div>
 </div>
 
-<div id="outline-container-org2f46349" class="outline-4">
-<h4 id="org2f46349"><span class="section-number-4">3.1.9</span> 处理 string 对象中的字符</h4>
+<div id="outline-container-orgc93abd3" class="outline-4">
+<h4 id="orgc93abd3"><span class="section-number-4">3.1.9</span> 处理 string 对象中的字符</h4>
 <div class="outline-text-4" id="text-3-1-9">
 <p>
 用基于范围的 for 语句遍历 string 对象中的字符
@@ -765,8 +765,8 @@ SHOW ME THE CODE!
 </div>
 </div>
 
-<div id="outline-container-orgcdb986f" class="outline-4">
-<h4 id="orgcdb986f"><span class="section-number-4">3.1.10</span> 使用字符串数组初始化 string 对象</h4>
+<div id="outline-container-org3daef82" class="outline-4">
+<h4 id="org3daef82"><span class="section-number-4">3.1.10</span> 使用字符串数组初始化 string 对象</h4>
 <div class="outline-text-4" id="text-3-1-10">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
@@ -783,8 +783,8 @@ Hello, world!
 </div>
 </div>
 
-<div id="outline-container-org17ff35a" class="outline-4">
-<h4 id="org17ff35a"><span class="section-number-4">3.1.11</span> 从 string 对象中获取 C 风格的字符串数组指针</h4>
+<div id="outline-container-orgbe54c31" class="outline-4">
+<h4 id="orgbe54c31"><span class="section-number-4">3.1.11</span> 从 string 对象中获取 C 风格的字符串数组指针</h4>
 <div class="outline-text-4" id="text-3-1-11">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
@@ -804,8 +804,8 @@ Hello, world!
 </div>
 </div>
 
-<div id="outline-container-org474d727" class="outline-3">
-<h3 id="org474d727"><span class="section-number-3">3.2</span> 标准库类型 <code>vector</code></h3>
+<div id="outline-container-org9cd5bb2" class="outline-3">
+<h3 id="org9cd5bb2"><span class="section-number-3">3.2</span> 标准库类型 <code>vector</code></h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 引入头文件与声明命名空间， <code>vector</code> 是一个类模板
@@ -816,8 +816,8 @@ Hello, world!
 </pre>
 </div>
 </div>
-<div id="outline-container-orgdaf5abb" class="outline-4">
-<h4 id="orgdaf5abb"><span class="section-number-4">3.2.1</span> 定义和初始化</h4>
+<div id="outline-container-orgebe629f" class="outline-4">
+<h4 id="orgebe629f"><span class="section-number-4">3.2.1</span> 定义和初始化</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">vector</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
@@ -863,8 +863,8 @@ Hello, world!
 </div>
 </div>
 
-<div id="outline-container-org4384cac" class="outline-4">
-<h4 id="org4384cac"><span class="section-number-4">3.2.2</span> 向 vector 对象中添加元素</h4>
+<div id="outline-container-org12e77a7" class="outline-4">
+<h4 id="org12e77a7"><span class="section-number-4">3.2.2</span> 向 vector 对象中添加元素</h4>
 <div class="outline-text-4" id="text-3-2-2">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
@@ -886,14 +886,14 @@ Hello, world!
 </div>
 </div>
 
-<div id="outline-container-org901e6bc" class="outline-4">
-<h4 id="org901e6bc"><span class="section-number-4">3.2.3</span> 其它 vector 操作</h4>
+<div id="outline-container-orga4571a8" class="outline-4">
+<h4 id="orga4571a8"><span class="section-number-4">3.2.3</span> 其它 vector 操作</h4>
 <div class="outline-text-4" id="text-3-2-3">
 <p>
 vector 对象的其它操作与 string 对象类似
 </p>
 
-<table id="org7879a20">
+<table id="orgd8e4f72">
 <caption class="t-above"><span class="table-number">Table 2:</span> 一些单词</caption>
 
 <colgroup>
@@ -944,8 +944,8 @@ STUPID
 </div>
 </div>
 
-<div id="outline-container-org63a922f" class="outline-4">
-<h4 id="org63a922f"><span class="section-number-4">3.2.4</span> 用数组初始化 vector 对象</h4>
+<div id="outline-container-org872cfb5" class="outline-4">
+<h4 id="org872cfb5"><span class="section-number-4">3.2.4</span> 用数组初始化 vector 对象</h4>
 <div class="outline-text-4" id="text-3-2-4">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
@@ -974,8 +974,8 @@ cout &lt;&lt; endl;
 </div>
 </div>
 
-<div id="outline-container-org6594666" class="outline-3">
-<h3 id="org6594666"><span class="section-number-3">3.3</span> 迭代器</h3>
+<div id="outline-container-orge0f0b1f" class="outline-3">
+<h3 id="orge0f0b1f"><span class="section-number-3">3.3</span> 迭代器</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 C++ 中的迭代器与 Python 中的含义有一些区别，Python 中的迭代器指的是可迭代的容器，
@@ -1005,8 +1005,8 @@ C++ 中的迭代器与 Python 中的含义有一些区别，Python 中的迭代�
 </div>
 </div>
 
-<div id="outline-container-org539ef46" class="outline-4">
-<h4 id="org539ef46"><span class="section-number-4">3.3.1</span> 迭代器运算</h4>
+<div id="outline-container-org385b70a" class="outline-4">
+<h4 id="org385b70a"><span class="section-number-4">3.3.1</span> 迭代器运算</h4>
 <div class="outline-text-4" id="text-3-3-1">
 <div class="org-src-container">
 <pre class="src src-C++">*iter;            <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#36820;&#22238; iter &#25152;&#25351;&#20803;&#32032;&#30340;&#24341;&#29992;</span>
@@ -1045,8 +1045,8 @@ KEEP IT SIMPLE STUPID
 </div>
 </div>
 
-<div id="outline-container-org08d8b94" class="outline-4">
-<h4 id="org08d8b94"><span class="section-number-4">3.3.2</span> <code>begin</code> 和 <code>end</code> 运算符</h4>
+<div id="outline-container-orgd8c8280" class="outline-4">
+<h4 id="orgd8c8280"><span class="section-number-4">3.3.2</span> <code>begin</code> 和 <code>end</code> 运算符</h4>
 <div class="outline-text-4" id="text-3-3-2">
 <p>
 默认情况下 begin 和 end 返回的迭代器具体类型由容器的类型决定
@@ -1072,8 +1072,8 @@ C++ 11 标准引入了两个新函数 <code>cbegin</code> 和 <code>cend</code> 
 </div>
 </div>
 
-<div id="outline-container-org8d4db0d" class="outline-4">
-<h4 id="org8d4db0d"><span class="section-number-4">3.3.3</span> 迭代器算数运算</h4>
+<div id="outline-container-org2342ffe" class="outline-4">
+<h4 id="org2342ffe"><span class="section-number-4">3.3.3</span> 迭代器算数运算</h4>
 <div class="outline-text-4" id="text-3-3-3">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
@@ -1092,8 +1092,8 @@ End - begin is: 10
 </div>
 </div>
 </div>
-<div id="outline-container-org7de1ac1" class="outline-3">
-<h3 id="org7de1ac1"><span class="section-number-3">3.4</span> 数组</h3>
+<div id="outline-container-orgcd83887" class="outline-3">
+<h3 id="orgcd83887"><span class="section-number-3">3.4</span> 数组</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 C++ 中的数组与 C 中基本一致，也同时支持指针和下标索引操作。定义数组时必须指针数
@@ -1109,8 +1109,8 @@ C++ 中的数组与 C 中基本一致，也同时支持指针和下标索引操�
 </div>
 </div>
 
-<div id="outline-container-orge7d95b7" class="outline-4">
-<h4 id="orge7d95b7"><span class="section-number-4">3.4.1</span> 范围 for 语句</h4>
+<div id="outline-container-org46adc2f" class="outline-4">
+<h4 id="org46adc2f"><span class="section-number-4">3.4.1</span> 范围 for 语句</h4>
 <div class="outline-text-4" id="text-3-4-1">
 <p>
 数组也可以使用范围 for 语句
@@ -1132,8 +1132,8 @@ cout &lt;&lt; endl;
 </div>
 </div>
 
-<div id="outline-container-org513b305" class="outline-4">
-<h4 id="org513b305"><span class="section-number-4">3.4.2</span> 数组中的自动类型推断</h4>
+<div id="outline-container-orgebc441a" class="outline-4">
+<h4 id="orgebc441a"><span class="section-number-4">3.4.2</span> 数组中的自动类型推断</h4>
 <div class="outline-text-4" id="text-3-4-2">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">a1</span><span style="color: #cc0000; font-weight: bold;">[]</span> =  <span style="color: #cc0000; font-weight: bold;">{</span>0, 1, 2, 3, 4<span style="color: #cc0000; font-weight: bold;">}</span>;
@@ -1147,8 +1147,8 @@ a3<span style="color: #cc0000; font-weight: bold;">[</span>0<span style="color: 
 </div>
 </div>
 
-<div id="outline-container-org55a8ae9" class="outline-4">
-<h4 id="org55a8ae9"><span class="section-number-4">3.4.3</span> 标准库函数 <code>begin</code> 和 <code>end</code></h4>
+<div id="outline-container-org2a83ee3" class="outline-4">
+<h4 id="org2a83ee3"><span class="section-number-4">3.4.3</span> 标准库函数 <code>begin</code> 和 <code>end</code></h4>
 <div class="outline-text-4" id="text-3-4-3">
 <p>
 C++ 11 新标准引入了 <code>begin</code> 和 <code>end</code> 函数，定义在 <code>iterator</code> 头文件中
@@ -1175,8 +1175,8 @@ Last elements is: 4
 </div>
 </div>
 
-<div id="outline-container-org81be994" class="outline-4">
-<h4 id="org81be994"><span class="section-number-4">3.4.4</span> 指针的差值</h4>
+<div id="outline-container-org41db26c" class="outline-4">
+<h4 id="org41db26c"><span class="section-number-4">3.4.4</span> 指针的差值</h4>
 <div class="outline-text-4" id="text-3-4-4">
 <p>
 指针的差值与迭代器类似，同样只能对同种类型的指针作差，更近一步，参与运算的两个指
@@ -1185,8 +1185,8 @@ Last elements is: 4
 </p>
 </div>
 </div>
-<div id="outline-container-org2ecd485" class="outline-4">
-<h4 id="org2ecd485"><span class="section-number-4">3.4.5</span> 多维数组与下标</h4>
+<div id="outline-container-orgbb96256" class="outline-4">
+<h4 id="orgbb96256"><span class="section-number-4">3.4.5</span> 多维数组与下标</h4>
 <div class="outline-text-4" id="text-3-4-5">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
@@ -1217,8 +1217,8 @@ Last elements is: 4
 </div>
 </div>
 
-<div id="outline-container-orge29ac59" class="outline-4">
-<h4 id="orge29ac59"><span class="section-number-4">3.4.6</span> 多维数组与指针</h4>
+<div id="outline-container-org53d7a5e" class="outline-4">
+<h4 id="org53d7a5e"><span class="section-number-4">3.4.6</span> 多维数组与指针</h4>
 <div class="outline-text-4" id="text-3-4-6">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
@@ -1252,8 +1252,8 @@ p = &amp;ia<span style="color: #cc0000; font-weight: bold;">[</span>2<span style
 </div>
 </div>
 
-<div id="outline-container-orga123122" class="outline-4">
-<h4 id="orga123122"><span class="section-number-4">3.4.7</span> 类型别名简化多维数组指针</h4>
+<div id="outline-container-org2d51d50" class="outline-4">
+<h4 id="org2d51d50"><span class="section-number-4">3.4.7</span> 类型别名简化多维数组指针</h4>
 <div class="outline-text-4" id="text-3-4-7">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
@@ -1270,12 +1270,12 @@ p = &amp;ia<span style="color: #cc0000; font-weight: bold;">[</span>2<span style
 </div>
 </div>
 </div>
-<div id="outline-container-org5c9a9da" class="outline-2">
-<h2 id="org5c9a9da"><span class="section-number-2">4</span> 表达式</h2>
+<div id="outline-container-orgf5aa759" class="outline-2">
+<h2 id="orgf5aa759"><span class="section-number-2">4</span> 表达式</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org3d5a4e0" class="outline-3">
-<h3 id="org3d5a4e0"><span class="section-number-3">4.1</span> 优先使用递增递减运算符的后置版本</h3>
+<div id="outline-container-org9f524e7" class="outline-3">
+<h3 id="org9f524e7"><span class="section-number-3">4.1</span> 优先使用递增递减运算符的后置版本</h3>
 <div class="outline-text-3" id="text-4-1">
 
 <figure>
@@ -1284,8 +1284,8 @@ p = &amp;ia<span style="color: #cc0000; font-weight: bold;">[</span>2<span style
 </figure>
 </div>
 </div>
-<div id="outline-container-org1ab175b" class="outline-3">
-<h3 id="org1ab175b"><span class="section-number-3">4.2</span> 运算对象可按任意顺序求值</h3>
+<div id="outline-container-org9e7b687" class="outline-3">
+<h3 id="org9e7b687"><span class="section-number-3">4.2</span> 运算对象可按任意顺序求值</h3>
 <div class="outline-text-3" id="text-4-2">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #00af00;">while</span> <span style="color: #cc0000; font-weight: bold;">(</span>beg != s.end<span style="color: #1f5bff; font-weight: bold;">()</span> &amp;&amp; <span style="color: #cc0000;">!</span>isspace<span style="color: #1f5bff; font-weight: bold;">(</span>*beg<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
@@ -1297,8 +1297,8 @@ p = &amp;ia<span style="color: #cc0000; font-weight: bold;">[</span>2<span style
 </div>
 </div>
 
-<div id="outline-container-orge00dd90" class="outline-3">
-<h3 id="orge00dd90"><span class="section-number-3">4.3</span> 强制类型转换</h3>
+<div id="outline-container-orgc3ad58c" class="outline-3">
+<h3 id="orgc3ad58c"><span class="section-number-3">4.3</span> 强制类型转换</h3>
 <div class="outline-text-3" id="text-4-3">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">cast-name&lt;type&gt;(expression)</span>
@@ -1315,12 +1315,12 @@ p = &amp;ia<span style="color: #cc0000; font-weight: bold;">[</span>2<span style
 </div>
 </div>
 </div>
-<div id="outline-container-orgc636e2a" class="outline-2">
-<h2 id="orgc636e2a"><span class="section-number-2">5</span> 语句</h2>
+<div id="outline-container-orgbbe1109" class="outline-2">
+<h2 id="orgbbe1109"><span class="section-number-2">5</span> 语句</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-orgc70b7bd" class="outline-3">
-<h3 id="orgc70b7bd"><span class="section-number-3">5.1</span> try 语句块与异常处理</h3>
+<div id="outline-container-orgbf50691" class="outline-3">
+<h3 id="orgbf50691"><span class="section-number-3">5.1</span> try 语句块与异常处理</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 在 C++ 中，异常处理包括：
@@ -1332,8 +1332,8 @@ p = &amp;ia<span style="color: #cc0000; font-weight: bold;">[</span>2<span style
 </ul>
 </div>
 
-<div id="outline-container-org8051c38" class="outline-4">
-<h4 id="org8051c38"><span class="section-number-4">5.1.1</span> throw 表达式</h4>
+<div id="outline-container-org43bd9ea" class="outline-4">
+<h4 id="org43bd9ea"><span class="section-number-4">5.1.1</span> throw 表达式</h4>
 <div class="outline-text-4" id="text-5-1-1">
 <p>
 如下代码片断的功能为检查两个 <code>Sales_item</code> 对象是否具有相同的 <code>ISBN</code> ，是的话输出两个
@@ -1371,8 +1371,8 @@ cout &lt;&lt; item1 + item2 &lt;&lt; endl;
 </div>
 </div>
 
-<div id="outline-container-orgd020a73" class="outline-4">
-<h4 id="orgd020a73"><span class="section-number-4">5.1.2</span> <code>try</code> 语句块</h4>
+<div id="outline-container-orgffd7382" class="outline-4">
+<h4 id="orgffd7382"><span class="section-number-4">5.1.2</span> <code>try</code> 语句块</h4>
 <div class="outline-text-4" id="text-5-1-2">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #00af00;">try</span> <span style="color: #cc0000; font-weight: bold;">{</span>
@@ -1409,8 +1409,8 @@ cout &lt;&lt; item1 + item2 &lt;&lt; endl;
 </div>
 </div>
 
-<div id="outline-container-org7e144d1" class="outline-4">
-<h4 id="org7e144d1"><span class="section-number-4">5.1.3</span> 异常类</h4>
+<div id="outline-container-orgec22492" class="outline-4">
+<h4 id="orgec22492"><span class="section-number-4">5.1.3</span> 异常类</h4>
 <div class="outline-text-4" id="text-5-1-3">
 <p>
 <code>&lt;stdexcept&gt;</code> 中定义了一些异常类
@@ -1426,16 +1426,16 @@ cout &lt;&lt; item1 + item2 &lt;&lt; endl;
 </div>
 </div>
 </div>
-<div id="outline-container-orgc80e3b5" class="outline-2">
-<h2 id="orgc80e3b5"><span class="section-number-2">6</span> 函数</h2>
+<div id="outline-container-orgd607f7b" class="outline-2">
+<h2 id="orgd607f7b"><span class="section-number-2">6</span> 函数</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-orgb93af48" class="outline-3">
-<h3 id="orgb93af48"><span class="section-number-3">6.1</span> 参数传递</h3>
+<div id="outline-container-orge5b9c5d" class="outline-3">
+<h3 id="orge5b9c5d"><span class="section-number-3">6.1</span> 参数传递</h3>
 <div class="outline-text-3" id="text-6-1">
 </div>
-<div id="outline-container-org6c6d2b1" class="outline-4">
-<h4 id="org6c6d2b1"><span class="section-number-4">6.1.1</span> 值传递和引用传递</h4>
+<div id="outline-container-org4d0aec0" class="outline-4">
+<h4 id="org4d0aec0"><span class="section-number-4">6.1.1</span> 值传递和引用传递</h4>
 <div class="outline-text-4" id="text-6-1-1">
 <p>
 当形参是引用类型时，对应的实参是被引用传递，函数是被传引用调用；当实参的值被拷贝
@@ -1466,8 +1466,8 @@ i is 6
 </div>
 </div>
 
-<div id="outline-container-org2c9d82b" class="outline-4">
-<h4 id="org2c9d82b"><span class="section-number-4">6.1.2</span> const 形参和实参</h4>
+<div id="outline-container-org02af77e" class="outline-4">
+<h4 id="org02af77e"><span class="section-number-4">6.1.2</span> const 形参和实参</h4>
 <div class="outline-text-4" id="text-6-1-2">
 <p>
 和其它初始化过程一样，当用实参初始化形参时会忽略掉顶层 const，换句话说，形参的顶
@@ -1583,8 +1583,8 @@ Not find capital letters in hello, c++!
 </div>
 </div>
 
-<div id="outline-container-org7ed7f5f" class="outline-4">
-<h4 id="org7ed7f5f"><span class="section-number-4">6.1.3</span> 传递数组长度</h4>
+<div id="outline-container-orgf16616c" class="outline-4">
+<h4 id="orgf16616c"><span class="section-number-4">6.1.3</span> 传递数组长度</h4>
 <div class="outline-text-4" id="text-6-1-3">
 <p>
 数组无法以值传递的方式使用数组参数，因此实际传递的是首元素的指针
@@ -1629,8 +1629,8 @@ Not find capital letters in hello, c++!
 </div>
 </div>
 </div>
-<div id="outline-container-orge449699" class="outline-4">
-<h4 id="orge449699"><span class="section-number-4">6.1.4</span> 使用引用传递数组</h4>
+<div id="outline-container-orgff8d8e7" class="outline-4">
+<h4 id="orgff8d8e7"><span class="section-number-4">6.1.4</span> 使用引用传递数组</h4>
 <div class="outline-text-4" id="text-6-1-4">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
@@ -1655,8 +1655,8 @@ Not find capital letters in hello, c++!
 </div>
 </div>
 
-<div id="outline-container-org4b50d02" class="outline-4">
-<h4 id="org4b50d02"><span class="section-number-4">6.1.5</span> 可变长参数列表</h4>
+<div id="outline-container-orgd266c04" class="outline-4">
+<h4 id="orgd266c04"><span class="section-number-4">6.1.5</span> 可变长参数列表</h4>
 <div class="outline-text-4" id="text-6-1-5">
 <p>
 C++ 11 新标准提供了两种主要的方法
@@ -1717,8 +1717,8 @@ Success: Hello world, hello C++!
 </div>
 </div>
 </div>
-<div id="outline-container-org7fe0f05" class="outline-4">
-<h4 id="org7fe0f05"><span class="section-number-4">6.1.6</span> 函数返回值</h4>
+<div id="outline-container-org77d9457" class="outline-4">
+<h4 id="org77d9457"><span class="section-number-4">6.1.6</span> 函数返回值</h4>
 <div class="outline-text-4" id="text-6-1-6">
 <p>
 返回值与与形参传递的方式完全一样，但一定注意变量的生命周期。 <b>不要返回局部对象的
@@ -1801,8 +1801,8 @@ String  is  Something
 </pre>
 </div>
 </div>
-<div id="outline-container-org03c1d3b" class="outline-4">
-<h4 id="org03c1d3b"><span class="section-number-4">6.1.7</span> 返回数组指针</h4>
+<div id="outline-container-org9fb09b1" class="outline-4">
+<h4 id="org9fb09b1"><span class="section-number-4">6.1.7</span> 返回数组指针</h4>
 <div class="outline-text-4" id="text-6-1-7">
 <p>
 返回指向长度为 10 的 int 型数组的指针
@@ -1864,8 +1864,8 @@ String  is  Something
 </div>
 </div>
 
-<div id="outline-container-orgddb3cd2" class="outline-3">
-<h3 id="orgddb3cd2"><span class="section-number-3">6.2</span> 函数重载</h3>
+<div id="outline-container-orge7fb966" class="outline-3">
+<h3 id="orge7fb966"><span class="section-number-3">6.2</span> 函数重载</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 如果同一作用域内的几个函数名字相同但形参列表不同，我们称之为重载（overloaded）函
@@ -1931,8 +1931,8 @@ print<span style="color: #cc0000; font-weight: bold;">(</span>begin<span style="
 </p>
 </div>
 
-<div id="outline-container-orgd98e03d" class="outline-4">
-<h4 id="orgd98e03d"><span class="section-number-4">6.2.1</span> <code>const_cast</code> 与重载</h4>
+<div id="outline-container-org241b003" class="outline-4">
+<h4 id="org241b003"><span class="section-number-4">6.2.1</span> <code>const_cast</code> 与重载</h4>
 <div class="outline-text-4" id="text-6-2-1">
 <p>
 <code>const_cast</code> 在重载函数的情景中很有用
@@ -1972,8 +1972,8 @@ The shorter string is: Evil C++.
 </pre>
 </div>
 </div>
-<div id="outline-container-orgf2b4647" class="outline-4">
-<h4 id="orgf2b4647"><span class="section-number-4">6.2.2</span> 调用重载的函数</h4>
+<div id="outline-container-orgaa9c79b" class="outline-4">
+<h4 id="orgaa9c79b"><span class="section-number-4">6.2.2</span> 调用重载的函数</h4>
 <div class="outline-text-4" id="text-6-2-2">
 <p>
 把函数调用与一组重载函数中的某一个关联起来的过程叫做函数匹配，也叫做重载确定。
@@ -1989,8 +1989,8 @@ The shorter string is: Evil C++.
 </ul>
 </div>
 </div>
-<div id="outline-container-org6210b58" class="outline-4">
-<h4 id="org6210b58"><span class="section-number-4">6.2.3</span> 重载与作用域</h4>
+<div id="outline-container-org1c0d2d6" class="outline-4">
+<h4 id="org1c0d2d6"><span class="section-number-4">6.2.3</span> 重载与作用域</h4>
 <div class="outline-text-4" id="text-6-2-3">
 <p>
 重载发生在同一作用域，不同作用域的同名函数会发生掩盖（Mask）
@@ -2016,8 +2016,8 @@ The shorter string is: Evil C++.
 </div>
 </div>
 </div>
-<div id="outline-container-org8112c7b" class="outline-3">
-<h3 id="org8112c7b"><span class="section-number-3">6.3</span> 默认实参</h3>
+<div id="outline-container-org9f3e710" class="outline-3">
+<h3 id="org9f3e710"><span class="section-number-3">6.3</span> 默认实参</h3>
 <div class="outline-text-3" id="text-6-3">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #00af00;">typedef</span> <span style="color: #1f5bff;">string</span>::<span style="color: #18b2b2;">size_type</span> <span style="color: #18b2b2;">sz</span>;
@@ -2026,8 +2026,8 @@ The shorter string is: Evil C++.
 </div>
 </div>
 
-<div id="outline-container-org285fe17" class="outline-4">
-<h4 id="org285fe17"><span class="section-number-4">6.3.1</span> 使用默认实参调用函数</h4>
+<div id="outline-container-orgc71b657" class="outline-4">
+<h4 id="orgc71b657"><span class="section-number-4">6.3.1</span> 使用默认实参调用函数</h4>
 <div class="outline-text-4" id="text-6-3-1">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
@@ -2061,8 +2061,8 @@ Height is 66, width is 256, background is #
 </div>
 </div>
 
-<div id="outline-container-orgfab5f0c" class="outline-4">
-<h4 id="orgfab5f0c"><span class="section-number-4">6.3.2</span> 默认实参声明</h4>
+<div id="outline-container-org504e4a1" class="outline-4">
+<h4 id="org504e4a1"><span class="section-number-4">6.3.2</span> 默认实参声明</h4>
 <div class="outline-text-4" id="text-6-3-2">
 <p>
 函数一般只声明一次，但多次声明同一个函数也是合法的。有一点需要注意，在给定的作用
@@ -2079,8 +2079,8 @@ Height is 66, width is 256, background is #
 </div>
 </div>
 
-<div id="outline-container-org7b7c5bf" class="outline-4">
-<h4 id="org7b7c5bf"><span class="section-number-4">6.3.3</span> 默认实参初始值</h4>
+<div id="outline-container-orgd090c24" class="outline-4">
+<h4 id="orgd090c24"><span class="section-number-4">6.3.3</span> 默认实参初始值</h4>
 <div class="outline-text-4" id="text-6-3-3">
 <p>
 局部变量不能作为默认实参，除此之外，只要表达式的类型能转换成形参所需的类型即可
@@ -2106,8 +2106,8 @@ Height is 66, width is 256, background is #
 </div>
 </div>
 </div>
-<div id="outline-container-orgb349c94" class="outline-3">
-<h3 id="orgb349c94"><span class="section-number-3">6.4</span> 内联函数和 <code>constexpr</code> 函数</h3>
+<div id="outline-container-orgea5dbbb" class="outline-3">
+<h3 id="orgea5dbbb"><span class="section-number-3">6.4</span> 内联函数和 <code>constexpr</code> 函数</h3>
 <div class="outline-text-3" id="text-6-4">
 <p>
 函数入栈出栈有额外开销，使用 <code>inline</code> 关键字可以使函数在调用处展开。内联只是向编译
@@ -2151,8 +2151,8 @@ Height is 66, width is 256, background is #
 </div>
 </div>
 </div>
-<div id="outline-container-orgcd196a0" class="outline-3">
-<h3 id="orgcd196a0"><span class="section-number-3">6.5</span> <span class="todo TODO">TODO</span> 函数匹配</h3>
+<div id="outline-container-orgb10d352" class="outline-3">
+<h3 id="orgb10d352"><span class="section-number-3">6.5</span> <span class="todo TODO">TODO</span> 函数匹配</h3>
 <div class="outline-text-3" id="text-6-5">
 <p>
 该部分内容还未总结
@@ -2160,8 +2160,8 @@ Height is 66, width is 256, background is #
 </div>
 </div>
 </div>
-<div id="outline-container-org3a682b6" class="outline-2">
-<h2 id="org3a682b6"><span class="section-number-2">7</span> 类</h2>
+<div id="outline-container-org9f221b6" class="outline-2">
+<h2 id="org9f221b6"><span class="section-number-2">7</span> 类</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 类的基本思想是数据抽象和封装。数据抽象是一种依赖于接口和实现分离的编程技术。类的
@@ -2170,12 +2170,12 @@ Height is 66, width is 256, background is #
 </p>
 </div>
 
-<div id="outline-container-org369d18f" class="outline-3">
-<h3 id="org369d18f"><span class="section-number-3">7.1</span> 定义抽象数据类型</h3>
+<div id="outline-container-orgd84f798" class="outline-3">
+<h3 id="orgd84f798"><span class="section-number-3">7.1</span> 定义抽象数据类型</h3>
 <div class="outline-text-3" id="text-7-1">
 </div>
-<div id="outline-container-orgba0ef5c" class="outline-4">
-<h4 id="orgba0ef5c"><span class="section-number-4">7.1.1</span> 使用 <code>Sales_data</code> 类的接口</h4>
+<div id="outline-container-orgec10260" class="outline-4">
+<h4 id="orgec10260"><span class="section-number-4">7.1.1</span> 使用 <code>Sales_data</code> 类的接口</h4>
 <div class="outline-text-4" id="text-7-1-1">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #18b2b2;">Sales_data</span> <span style="color: #ff8700;">total</span>;                      <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20445;&#23384;&#24403;&#21069;&#27714;&#21644;&#32467;&#26524;&#30340;&#21464;&#37327;</span>
@@ -2198,8 +2198,8 @@ Height is 66, width is 256, background is #
 </div>
 </div>
 
-<div id="outline-container-org9f994a5" class="outline-4">
-<h4 id="org9f994a5"><span class="section-number-4">7.1.2</span> 改进 <code>Sales_data</code> 类</h4>
+<div id="outline-container-org039d9e6" class="outline-4">
+<h4 id="org039d9e6"><span class="section-number-4">7.1.2</span> 改进 <code>Sales_data</code> 类</h4>
 <div class="outline-text-4" id="text-7-1-2">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">string</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
@@ -2288,8 +2288,8 @@ Sales_data *const</code> 可提高适用范围，因此上述声明可以想象�
 </div>
 </div>
 </div>
-<div id="outline-container-org93e253e" class="outline-4">
-<h4 id="org93e253e"><span class="section-number-4">7.1.3</span> 定义类相关的非成员函数</h4>
+<div id="outline-container-org60c6577" class="outline-4">
+<h4 id="org60c6577"><span class="section-number-4">7.1.3</span> 定义类相关的非成员函数</h4>
 <div class="outline-text-4" id="text-7-1-3">
 <p>
 此处定义了一些类的辅助函数，它们与类密切相关。从操作上来说这些函数属于类的接口的
@@ -2323,8 +2323,8 @@ Sales_data *const</code> 可提高适用范围，因此上述声明可以想象�
 </div>
 </div>
 
-<div id="outline-container-org62949a3" class="outline-4">
-<h4 id="org62949a3"><span class="section-number-4">7.1.4</span> 构造函数</h4>
+<div id="outline-container-org9e1093a" class="outline-4">
+<h4 id="org9e1093a"><span class="section-number-4">7.1.4</span> 构造函数</h4>
 <div class="outline-text-4" id="text-7-1-4">
 <p>
 类通过一个或几个特殊的成员函数来控制对象的初始化过程，这些函数被称为构造函数。无
@@ -2388,8 +2388,8 @@ Sales_data *const</code> 可提高适用范围，因此上述声明可以想象�
 </div>
 </div>
 
-<div id="outline-container-org6c3643e" class="outline-4">
-<h4 id="org6c3643e"><span class="section-number-4">7.1.5</span> 拷贝、赋值和析构</h4>
+<div id="outline-container-orgad77641" class="outline-4">
+<h4 id="orgad77641"><span class="section-number-4">7.1.5</span> 拷贝、赋值和析构</h4>
 <div class="outline-text-4" id="text-7-1-5">
 <p>
 与构造函数类似，拷贝对象的函数也会自动合成。一般来说，编译器生成的版本将对对象的
@@ -2412,8 +2412,8 @@ total.revenue = trans.revenue;
 </div>
 </div>
 
-<div id="outline-container-org133839d" class="outline-3">
-<h3 id="org133839d"><span class="section-number-3">7.2</span> 访问控制卜与封装</h3>
+<div id="outline-container-org27720f0" class="outline-3">
+<h3 id="org27720f0"><span class="section-number-3">7.2</span> 访问控制卜与封装</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 <b>访问说明符</b>
@@ -2456,8 +2456,8 @@ total.revenue = trans.revenue;
 </p>
 </div>
 
-<div id="outline-container-org5f4605d" class="outline-4">
-<h4 id="org5f4605d"><span class="section-number-4">7.2.1</span> 友元</h4>
+<div id="outline-container-orgc6fbe03" class="outline-4">
+<h4 id="orgc6fbe03"><span class="section-number-4">7.2.1</span> 友元</h4>
 <div class="outline-text-4" id="text-7-2-1">
 <p>
 其它函数和类无法直接访问 <code>Sales_data</code> 类中的 <code>private</code> 成员，但也有一种方法可以使其
@@ -2537,7 +2537,7 @@ Revenue is 325
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-05-27 Wed 21:31></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
-      <div id="built">Built: <2020-06-06 Sat 23:58></div>
+      <div id="built">Built: <2020-06-07 Sun 00:02></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
