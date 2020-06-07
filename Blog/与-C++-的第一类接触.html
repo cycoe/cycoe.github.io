@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-06-07 Sun 00:02 -->
+<!-- 2020-06-07 Sun 23:17 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>与 C++ 的第一类接触</title>
@@ -80,7 +80,7 @@
 <ul>
 <li><a href="#org45d5483">3.1. 标准库 <code>string</code></a>
 <ul>
-<li><a href="#org0f94346">3.1.1. 定义和初始化</a></li>
+<li><a href="#orgebe629f">3.1.1. 定义和初始化</a></li>
 <li><a href="#org455bc17">3.1.2. 为 string 对象赋值</a></li>
 <li><a href="#orge7e72f4">3.1.3. 读写 string 对象</a></li>
 <li><a href="#org44af7b5">3.1.4. 使用 <code>getline</code> 读取一整行</a></li>
@@ -95,7 +95,7 @@
 </li>
 <li><a href="#org9cd5bb2">3.2. 标准库类型 <code>vector</code></a>
 <ul>
-<li><a href="#orgebe629f">3.2.1. 定义和初始化</a></li>
+<li><a href="#org0e00a29">3.2.1. 定义和初始化</a></li>
 <li><a href="#org12e77a7">3.2.2. 向 vector 对象中添加元素</a></li>
 <li><a href="#orga4571a8">3.2.3. 其它 vector 操作</a></li>
 <li><a href="#org872cfb5">3.2.4. 用数组初始化 vector 对象</a></li>
@@ -181,9 +181,16 @@
 <li><a href="#orgad77641">7.1.5. 拷贝、赋值和析构</a></li>
 </ul>
 </li>
-<li><a href="#org27720f0">7.2. 访问控制卜与封装</a>
+<li><a href="#org37aa083">7.2. 访问控制与封装</a>
 <ul>
-<li><a href="#orgc6fbe03">7.2.1. 友元</a></li>
+<li><a href="#org3a0891d">7.2.1. 访问说明符</a></li>
+<li><a href="#orgc6fbe03">7.2.2. 友元</a></li>
+</ul>
+</li>
+<li><a href="#org5e4d0c9">7.3. 类的其它特性</a>
+<ul>
+<li><a href="#org0be4ab1">7.3.1. 类成员再探</a></li>
+<li><a href="#org3664589">7.3.2. 返回 <code>*this</code> 的成员函数</a></li>
 </ul>
 </li>
 </ul>
@@ -342,7 +349,7 @@ The sum of 5 and 6 is 11
 Global string is: 
 Global int is: 0
 Local string is: 
-Local int is: 21999
+Local int is: 21864
 </pre>
 </div>
 </div>
@@ -495,8 +502,8 @@ cout &lt;&lt; i;                <span style="color: #b2b2b2; font-style: italic;
 </pre>
 </div>
 </div>
-<div id="outline-container-org0f94346" class="outline-4">
-<h4 id="org0f94346"><span class="section-number-4">3.1.1</span> 定义和初始化</h4>
+<div id="outline-container-orgebe629f" class="outline-4">
+<h4 id="orgebe629f"><span class="section-number-4">3.1.1</span> 定义和初始化</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span>;
@@ -816,8 +823,8 @@ Hello, world!
 </pre>
 </div>
 </div>
-<div id="outline-container-orgebe629f" class="outline-4">
-<h4 id="orgebe629f"><span class="section-number-4">3.2.1</span> 定义和初始化</h4>
+<div id="outline-container-org0e00a29" class="outline-4">
+<h4 id="org0e00a29"><span class="section-number-4">3.2.1</span> 定义和初始化</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">vector</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
@@ -2412,9 +2419,13 @@ total.revenue = trans.revenue;
 </div>
 </div>
 
-<div id="outline-container-org27720f0" class="outline-3">
-<h3 id="org27720f0"><span class="section-number-3">7.2</span> 访问控制卜与封装</h3>
+<div id="outline-container-org37aa083" class="outline-3">
+<h3 id="org37aa083"><span class="section-number-3">7.2</span> 访问控制与封装</h3>
 <div class="outline-text-3" id="text-7-2">
+</div>
+<div id="outline-container-org3a0891d" class="outline-4">
+<h4 id="org3a0891d"><span class="section-number-4">7.2.1</span> 访问说明符</h4>
+<div class="outline-text-4" id="text-7-2-1">
 <p>
 <b>访问说明符</b>
 </p>
@@ -2455,10 +2466,11 @@ total.revenue = trans.revenue;
 是 <code>private</code> 的，而 <code>struct</code> 定义的类中第一个访问说明符之前的成员默认是 <code>public</code> 的
 </p>
 </div>
+</div>
 
 <div id="outline-container-orgc6fbe03" class="outline-4">
-<h4 id="orgc6fbe03"><span class="section-number-4">7.2.1</span> 友元</h4>
-<div class="outline-text-4" id="text-7-2-1">
+<h4 id="orgc6fbe03"><span class="section-number-4">7.2.2</span> 友元</h4>
+<div class="outline-text-4" id="text-7-2-2">
 <p>
 其它函数和类无法直接访问 <code>Sales_data</code> 类中的 <code>private</code> 成员，但也有一种方法可以使其
 它函数访问 <code>Sales_data</code> 类中成员，那就是使该函数成为 <code>Sales_data</code> 类的友元函数
@@ -2530,6 +2542,232 @@ Revenue is 325
 </div>
 </div>
 </div>
+<div id="outline-container-org5e4d0c9" class="outline-3">
+<h3 id="org5e4d0c9"><span class="section-number-3">7.3</span> 类的其它特性</h3>
+<div class="outline-text-3" id="text-7-3">
+</div>
+<div id="outline-container-org0be4ab1" class="outline-4">
+<h4 id="org0be4ab1"><span class="section-number-4">7.3.1</span> 类成员再探</h4>
+<div class="outline-text-4" id="text-7-3-1">
+<p>
+我们以一个粒子类进行展示
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">class</span> <span style="color: #18b2b2;">Particle</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #00af00;">public</span>:
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#31867;&#22411;&#25104;&#21592;&#65292;&#23450;&#20041;&#31867;&#20869;&#21035;&#21517;&#65292;&#24182;&#19988;&#24517;&#39035;&#20986;&#29616;&#22312;&#20351;&#29992;&#22788;&#20043;&#21069;</span>
+  <span style="color: #00af00;">typedef</span> <span style="color: #18b2b2;">float</span> <span style="color: #18b2b2;">pos</span>;
+<span style="color: #00af00;">private</span>:
+  <span style="color: #18b2b2;">pos</span> <span style="color: #ff8700;">x</span> = 0.0;
+  <span style="color: #18b2b2;">pos</span> <span style="color: #ff8700;">y</span> = 0.0;
+  <span style="color: #18b2b2;">pos</span> <span style="color: #ff8700;">z</span> = 0.0;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">name</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>;
+</pre>
+</div>
+
+<p>
+接下来为类增加接口成员函数，注意何时成员函数会被内联
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">class</span> <span style="color: #18b2b2;">Particle</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #00af00;">public</span>:
+  <span style="color: #00af00;">typedef</span> <span style="color: #18b2b2;">float</span> <span style="color: #18b2b2;">pos</span>;
+  <span style="color: #ef2929;">Particle</span><span style="color: #1f5bff; font-weight: bold;">()</span> = <span style="color: #00af00;">default</span>;              <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#22240;&#33258;&#23450;&#20041;&#20102;&#26500;&#36896;&#20989;&#25968;&#65292;&#40664;&#35748;&#26500;&#36896;&#20989;&#25968;&#30340;&#22768;&#26126;&#26159;&#24517;&#39035;&#30340;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">x, y, z &#34987;&#31867;&#20869;&#21021;&#22987;&#20540;&#21021;&#22987;&#21270;&#20026; 0</span>
+  <span style="color: #ef2929;">Particle</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">t</span>, <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">n</span><span style="color: #1f5bff; font-weight: bold;">)</span>:
+    type<span style="color: #1f5bff; font-weight: bold;">(</span>t<span style="color: #1f5bff; font-weight: bold;">)</span>, name<span style="color: #1f5bff; font-weight: bold;">(</span>n<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span> <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #00af00;">const</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> &amp;<span style="color: #ef2929;">get_type</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #00af00;">const</span> <span style="color: #1f5bff; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> type; <span style="color: #1f5bff; font-weight: bold;">}</span> <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#38544;&#24335;&#20869;&#32852;</span>
+  <span style="color: #00af00;">inline</span> <span style="color: #00af00;">const</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> &amp;<span style="color: #ef2929;">get_name</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #00af00;">const</span>;          <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#26174;&#24335;&#20869;&#32852;</span>
+  <span style="color: #18b2b2;">Particle</span> &amp;<span style="color: #ef2929;">move</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">pos</span> <span style="color: #ff8700;">x</span>, <span style="color: #18b2b2;">pos</span> <span style="color: #ff8700;">y</span>, <span style="color: #18b2b2;">pos</span> <span style="color: #ff8700;">z</span><span style="color: #1f5bff; font-weight: bold;">)</span>;                 <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#33021;&#22312;&#20043;&#21518;&#34987;&#35774;&#20026;&#20869;&#32852;</span>
+<span style="color: #00af00;">private</span>:
+  <span style="color: #18b2b2;">pos</span> <span style="color: #ff8700;">x</span> = 0.0;        <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#31890;&#23376;&#20301;&#32622;</span>
+  <span style="color: #18b2b2;">pos</span> <span style="color: #ff8700;">y</span> = 0.0;
+  <span style="color: #18b2b2;">pos</span> <span style="color: #ff8700;">z</span> = 0.0;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">type</span>;   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#31890;&#23376;&#31867;&#22411;</span>
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">name</span>;   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#31890;&#23376;&#21517;&#23383;</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>;
+</pre>
+</div>
+
+<p>
+为成员函数添加实现
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">const</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> &amp;<span style="color: #ef2929;">get_name</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #00af00;">const</span> <span style="color: #cc0000; font-weight: bold;">{</span>   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#24050;&#22312;&#31867;&#30340;&#20869;&#37096;&#22768;&#26126;&#20026; inline</span>
+  <span style="color: #00af00;">return</span> name;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #00af00;">inline</span>                                  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#21487;&#22312;&#20989;&#25968;&#23450;&#20041;&#22788;&#25351;&#23450; inline</span>
+<span style="color: #18b2b2;">Particle</span> &amp;<span style="color: #ef2929;">move</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">pos</span> <span style="color: #ff8700;">x</span>, <span style="color: #18b2b2;">pos</span> <span style="color: #ff8700;">y</span>, <span style="color: #18b2b2;">pos</span> <span style="color: #ff8700;">z</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #00af00;">const</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">this</span>-&gt;x = x;
+  <span style="color: #00af00;">this</span>-&gt;y = y;
+  <span style="color: #00af00;">this</span>-&gt;z = z;
+  <span style="color: #00af00;">return</span> *<span style="color: #00af00;">this</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<p>
+使用 <code>mutable</code> 关键字声明一个可变数据成员
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">class</span> <span style="color: #18b2b2;">Particle</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #00af00;">public</span>:
+  <span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">count</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #00af00;">const</span>;
+  <span style="color: #18b2b2;">size_t</span> <span style="color: #ef2929;">get_count</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #1f5bff; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> access_ctr; <span style="color: #1f5bff; font-weight: bold;">}</span>
+ <span style="color: #00af00;">private</span>:
+  <span style="color: #00af00;">mutable</span> <span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">access_ctr</span> = 0;    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#21363;&#20351;&#22312; const &#23545;&#35937;&#20869;&#20063;&#33021;&#34987;&#20462;&#25913;</span>
+  <span style="color: #b2b2b2; font-style: italic;">/*</span>
+<span style="color: #b2b2b2; font-style: italic;">   * &#20854;&#23427;&#25104;&#21592;</span>
+<span style="color: #b2b2b2; font-style: italic;">   */</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>;
+
+<span style="color: #00af00;">inline</span> <span style="color: #18b2b2;">void</span> <span style="color: #1f5bff;">Particle</span>::<span style="color: #ef2929;">count</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #00af00;">const</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  ++<span style="color: #00af00;">this</span>-&gt;access_ctr;   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20445;&#23384;&#19968;&#20010;&#35745;&#25968;&#22120;&#65292;&#29992;&#20110;&#35760;&#24405;&#35843;&#29992;&#27425;&#25968;</span>
+                        <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27492;&#22788;&#30340;&#25351;&#38024;&#26159; const &#20462;&#39280;&#30340;&#20294;&#20173;&#21487;&#20197;&#20462;&#25913;&#25104;&#21592;&#21464;&#37327;</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">Particle</span> <span style="color: #ff8700;">p</span>;
+  p.count<span style="color: #1f5bff; font-weight: bold;">()</span>;
+  p.count<span style="color: #1f5bff; font-weight: bold;">()</span>;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Count is "</span> &lt;&lt; p.get_count<span style="color: #1f5bff; font-weight: bold;">()</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+Count is 2
+</pre>
+
+
+<p>
+接下来声明一个 <code>Box</code> 类用来装一组 <code>Particle</code> ，这个类包含一个 <code>Particle</code> 类型的 <code>vector</code>
+。默认情况下，我们希望 <code>Box</code> 类总是拥有一个默认初始化的 <code>Particle</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">class</span> <span style="color: #18b2b2;">Box</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #00af00;">private</span>:
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#40664;&#35748;&#24773;&#20917;&#19979;&#65292;&#19968;&#20010; Box &#21253;&#21547;&#19968;&#20010;&#21407;&#28857;&#22788;&#30340; Particle</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#31867;&#20869;&#21021;&#22987;&#21270;&#24517;&#39035;&#20351;&#29992; = &#30340;&#21021;&#22987;&#21270;&#24418;&#24335;&#25110;&#33457;&#25324;&#21495;</span>
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">vector</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span>Particle<span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">ps</span><span style="color: #1f5bff; font-weight: bold;">{</span>Particle<span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ff1f8b;">"A"</span>, <span style="color: #ff1f8b;">"zero"</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">}</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3664589" class="outline-4">
+<h4 id="org3664589"><span class="section-number-4">7.3.2</span> 返回 <code>*this</code> 的成员函数</h4>
+<div class="outline-text-4" id="text-7-3-2">
+<p>
+继续添加一些成员函数
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">string</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #00af00;">class</span> <span style="color: #18b2b2;">Particle</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #00af00;">public</span>:
+  <span style="color: #18b2b2;">Particle</span> &amp;<span style="color: #ef2929;">set_type</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">t</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #18b2b2;">Particle</span> &amp;<span style="color: #ef2929;">set_name</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">n</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">info &#20989;&#25968;&#24182;&#19981;&#25913;&#21464; Particle &#30340;&#25104;&#21592;&#65292;&#22768;&#26126;&#20026; const</span>
+  <span style="color: #00af00;">const</span> <span style="color: #18b2b2;">Particle</span> &amp;<span style="color: #ef2929;">info</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span> &amp;<span style="color: #ff8700;">os</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #00af00;">const</span>;
+<span style="color: #00af00;">private</span>:
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">type</span>;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">name</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>;
+<span style="color: #00af00;">inline</span> <span style="color: #18b2b2;">Particle</span> &amp;<span style="color: #1f5bff;">Particle</span>::<span style="color: #ef2929;">set_type</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">t</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  type = t;
+  <span style="color: #00af00;">return</span> *<span style="color: #00af00;">this</span>;    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23558; this &#23545;&#35937;&#20316;&#20026;&#24038;&#20540;&#36820;&#22238;</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>
+<span style="color: #00af00;">inline</span> <span style="color: #18b2b2;">Particle</span> &amp;<span style="color: #1f5bff;">Particle</span>::<span style="color: #ef2929;">set_name</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">n</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  name = n;
+  <span style="color: #00af00;">return</span> *<span style="color: #00af00;">this</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27880;&#24847;&#27492;&#22788;&#30340;&#20004;&#20010; const&#65292;&#22240;&#20026;&#20256;&#20837;&#30340; this &#23545;&#35937;&#26159; const &#30340;</span>
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#22240;&#27492;&#36820;&#22238;&#30340;&#23545;&#35937;&#20063;&#24212;&#35813;&#26159; const</span>
+<span style="color: #00af00;">inline</span> <span style="color: #00af00;">const</span> <span style="color: #18b2b2;">Particle</span> &amp;<span style="color: #1f5bff;">Particle</span>::<span style="color: #ef2929;">info</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span> &amp;<span style="color: #ff8700;">os</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #00af00;">const</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  os &lt;&lt; <span style="color: #ff1f8b;">"Particle "</span> &lt;&lt; name &lt;&lt; <span style="color: #ff1f8b;">" has type "</span> &lt;&lt; type &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #00af00;">return</span> *<span style="color: #00af00;">this</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">Particle</span> <span style="color: #ff8700;">p</span>;
+  p.set_type<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"A"</span><span style="color: #1f5bff; font-weight: bold;">)</span>.set_name<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"zero"</span><span style="color: #1f5bff; font-weight: bold;">)</span>.info<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::cout<span style="color: #1f5bff; font-weight: bold;">)</span>;     <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27492;&#26102;&#21487;&#20197;&#20351;&#29992;&#38142;&#24335;&#35843;&#29992;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20197;&#19979;&#35843;&#29992;&#26159;&#38169;&#35823;&#30340;&#65292;info &#36820;&#22238;&#20102; p &#30340; const &#24341;&#29992;&#65292;&#20316;&#20026; this &#25351;&#38024;&#24120;&#37327;&#23545;&#35937;&#20256;&#20837;&#20102;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">set_name&#65292;&#32780; set_name &#26399;&#26395;&#19968;&#20010;&#38750;&#24120;&#37327;&#23545;&#35937;&#30340;&#25351;&#38024;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">p.info(std::cout).set_name("one");</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+Particle zero has type A
+</pre>
+
+
+<p>
+一种解决办法是对 <code>info</code> 进行重载，并都调用名为 <code>do_info</code> 的私有方法
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">string</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #00af00;">class</span> <span style="color: #18b2b2;">Particle</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #00af00;">public</span>:
+  <span style="color: #ef2929;">Particle</span><span style="color: #1f5bff; font-weight: bold;">()</span> = <span style="color: #00af00;">default</span>;
+  <span style="color: #ef2929;">Particle</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">t</span>, <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">n</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    type = t;
+    name = n;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #18b2b2;">Particle</span> &amp;<span style="color: #ef2929;">set_type</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">t</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #18b2b2;">Particle</span> &amp;<span style="color: #ef2929;">set_name</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">n</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#37325;&#36733;&#30340;&#20004;&#20010; info &#26041;&#27861;</span>
+  <span style="color: #18b2b2;">Particle</span> &amp;<span style="color: #ef2929;">info</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span> &amp;<span style="color: #ff8700;">os</span><span style="color: #1f5bff; font-weight: bold;">)</span>
+  <span style="color: #1f5bff; font-weight: bold;">{</span> do_info<span style="color: #00af00; font-weight: bold;">(</span>os<span style="color: #00af00; font-weight: bold;">)</span>; <span style="color: #00af00;">return</span> *<span style="color: #00af00;">this</span>; <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #00af00;">const</span> <span style="color: #18b2b2;">Particle</span> &amp;<span style="color: #ef2929;">info</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span> &amp;<span style="color: #ff8700;">os</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #00af00;">const</span>
+  <span style="color: #1f5bff; font-weight: bold;">{</span> do_info<span style="color: #00af00; font-weight: bold;">(</span>os<span style="color: #00af00; font-weight: bold;">)</span>; <span style="color: #00af00;">return</span> *<span style="color: #00af00;">this</span>; <span style="color: #1f5bff; font-weight: bold;">}</span>
+<span style="color: #00af00;">private</span>:
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">type</span>;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">name</span>;
+  <span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">do_info</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span> &amp;<span style="color: #ff8700;">os</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #00af00;">const</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    os &lt;&lt; <span style="color: #ff1f8b;">"Particle "</span> &lt;&lt; name &lt;&lt; <span style="color: #ff1f8b;">" has type "</span> &lt;&lt; type &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>;
+<span style="color: #00af00;">inline</span> <span style="color: #18b2b2;">Particle</span> &amp;<span style="color: #1f5bff;">Particle</span>::<span style="color: #ef2929;">set_type</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">t</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  type = t;
+  <span style="color: #00af00;">return</span> *<span style="color: #00af00;">this</span>;    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23558; this &#23545;&#35937;&#20316;&#20026;&#24038;&#20540;&#36820;&#22238;</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>
+<span style="color: #00af00;">inline</span> <span style="color: #18b2b2;">Particle</span> &amp;<span style="color: #1f5bff;">Particle</span>::<span style="color: #ef2929;">set_name</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">n</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  name = n;
+  <span style="color: #00af00;">return</span> *<span style="color: #00af00;">this</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">Particle</span> <span style="color: #ff8700;">p</span>;
+  <span style="color: #00af00;">const</span> <span style="color: #18b2b2;">Particle</span> <span style="color: #ff8700;">cp</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"const"</span>, <span style="color: #ff1f8b;">"one"</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  p.set_type<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"normal"</span><span style="color: #1f5bff; font-weight: bold;">)</span>.set_name<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"zero"</span><span style="color: #1f5bff; font-weight: bold;">)</span>.info<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::cout<span style="color: #1f5bff; font-weight: bold;">)</span>; <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#35843;&#29992;&#38750;&#24120;&#37327;&#29256;&#26412;</span>
+  cp.info<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::cout<span style="color: #1f5bff; font-weight: bold;">)</span>;                                    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#35843;&#29992;&#24120;&#37327;&#29256;&#26412;</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+Particle zero has type normal
+Particle one has type const
+</pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
@@ -2537,7 +2775,7 @@ Revenue is 325
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-05-27 Wed 21:31></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
-      <div id="built">Built: <2020-06-07 Sun 00:02></div>
+      <div id="built">Built: <2020-06-07 Sun 23:17></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
