@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2020-06-09 Tue 17:22 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>与 C++ Templates 的第一类接触</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Cycoe">
+<link rel="stylesheet" type="text/css" href="/static/css/default.css" />
+<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+<script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div id="top-container">
+  <a id="site-name" href="/">Cycoe<span id="at-home">@Home</span></a>
+  <div id="banner">Keep It Simple Stupid</div>
+</div>
+
+<div id="top-nav">
+  <div id="nav-wrapper">
+    <div class="nav-btn" id="toc-wrapper">
+      <span class="vertical-align">Ξ</span>
+      <div id="go-top">
+        <a href="javascript:window.scrollTo(0,0)" style="color: black !important; border-bottom: none !important;" class="tooltip" title="Go to the top of the page">
+        <span class="top">&uarr;</span>
+        </a></div>
+    </div>
+    <div id="nav-left-wrapper">
+      <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
+      <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
+      <div id="nav-title-wrapper">
+        <span id="nav-title">与 C++ Templates 的第一类接触</span>
+        <span id="nav-date">Written @<2020-06-09 Tue 15:51></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div id="img-modal" class="modal">
+  <!-- The Close Button -->
+  <span class="close">&times;</span>
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content" id="img-wrapper">
+  <!-- Modal Caption (Image Text) -->
+  <div id="caption"></div>
+</div>
+</div>
+<div id="content">
+<header>
+<h1 class="title">与 C++ Templates 的第一类接触</h1>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org2db3dd2">1. 与 C++ Templates 的第一类接触</a>
+<ul>
+<li><a href="#org2d15127">1.1. Function Templates</a>
+<ul>
+<li><a href="#orgfb68e4c">1.1.1. A First Look at Function Templates</a></li>
+<li><a href="#orgc976821">1.1.2. Template Argument Deduction (模板参数推断)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-org2db3dd2" class="outline-2">
+<h2 id="org2db3dd2"><span class="section-number-2">1</span> 与 C++ Templates 的第一类接触</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org2d15127" class="outline-3">
+<h3 id="org2d15127"><span class="section-number-3">1.1</span> Function Templates</h3>
+<div class="outline-text-3" id="text-1-1">
+</div>
+<div id="outline-container-orgfb68e4c" class="outline-4">
+<h4 id="orgfb68e4c"><span class="section-number-4">1.1.1</span> A First Look at Function Templates</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+defining a simple function template
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">string</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #18b2b2;">T</span> <span style="color: #ef2929;">max</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">T</span> <span style="color: #ff8700;">a</span>, <span style="color: #18b2b2;">T</span> <span style="color: #ff8700;">b</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">We use copy rather than reference here</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">So T has to be copyable to return</span>
+  <span style="color: #00af00;">return</span> b &lt; a? a: b;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">i</span> = 42;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">Use :: to ensure find the max template in global namespace</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">rather than std::max</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"max(7, i) is "</span> &lt;&lt; ::max<span style="color: #1f5bff; font-weight: bold;">(</span>7, i<span style="color: #1f5bff; font-weight: bold;">)</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+
+  <span style="color: #18b2b2;">double</span> <span style="color: #ff8700;">f1</span> = 3.4;
+  <span style="color: #18b2b2;">double</span> <span style="color: #ff8700;">f2</span> = -6.7;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"max(f1, f2) is "</span> &lt;&lt; ::max<span style="color: #1f5bff; font-weight: bold;">(</span>f1, f2<span style="color: #1f5bff; font-weight: bold;">)</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s1</span> = <span style="color: #ff1f8b;">"hello"</span>;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s2</span> = <span style="color: #ff1f8b;">"world"</span>;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"max(s1, s2) is "</span> &lt;&lt; ::max<span style="color: #1f5bff; font-weight: bold;">(</span>s1, s2<span style="color: #1f5bff; font-weight: bold;">)</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+max(7, i) is 42
+max(f1, f2) is 3.4
+max(s1, s2) is world
+</pre>
+
+
+<p>
+The function template was called for three times, one for &lt;int, int&gt;, one for
+&lt;double, double&gt; and one for &lt;string, string&gt;. Compiler generated specific
+function for each type.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">max</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span>, <span style="color: #18b2b2;">int</span><span style="color: #cc0000; font-weight: bold;">)</span>;
+<span style="color: #18b2b2;">double</span> <span style="color: #ef2929;">max</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">double</span>, <span style="color: #18b2b2;">double</span><span style="color: #cc0000; font-weight: bold;">)</span>;
+<span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ef2929;">max</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span>, <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span><span style="color: #cc0000; font-weight: bold;">)</span>;
+</pre>
+</div>
+
+<p>
+<code>void</code> is a valid template argument
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+T <span style="color: #18b2b2;">foo</span><span style="color: #cc0000; font-weight: bold;">(</span>*<span style="color: #ff8700;">T</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span> <span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">void</span> *<span style="color: #ff8700;">vp</span> = <span style="color: #1f5bff;">nullptr</span>;
+  foo<span style="color: #1f5bff; font-weight: bold;">(</span>vp<span style="color: #1f5bff; font-weight: bold;">)</span>;              <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">OK: deduced void foo(void*)</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<p>
+There are two phases in template compilation
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">foo</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">T</span> <span style="color: #ff8700;">t</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  undeclared<span style="color: #1f5bff; font-weight: bold;">()</span>;   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">first phase: compile-time error if undeclared not found</span>
+  undeclared<span style="color: #1f5bff; font-weight: bold;">(</span>t<span style="color: #1f5bff; font-weight: bold;">)</span>;  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">second phase: compile-time error if undeclared(t) not found</span>
+  <span style="color: #00af00;">static_assert</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">sizeof</span><span style="color: #00af00; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span><span style="color: #00af00; font-weight: bold;">)</span> &gt; 10,  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">always fails if sizeof(int) &lt; 10</span>
+                <span style="color: #ff1f8b;">"int too small"</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #00af00;">static_assert</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">sizeof</span><span style="color: #00af00; font-weight: bold;">(</span>T<span style="color: #00af00; font-weight: bold;">)</span> &gt; 10,    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">fails if instantiated for T with size &lt;= 10</span>
+                <span style="color: #ff1f8b;">"T too small"</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<p>
+namely, if a expression can be determined without the exact type of <code>T</code> is in
+first phase, otherwise it's in second phase.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc976821" class="outline-4">
+<h4 id="orgc976821"><span class="section-number-4">1.1.2</span> Template Argument Deduction (模板参数推断)</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+if we call <code>::max</code> with <code>(1, 2)</code>, obviously the argument type is deduced as <code>int</code>. But
+sometimes argument deduction is difficult. <code>T</code> can be <b>part</b> of the type.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">When pass (1, 2), T is deduced to int and the full type id int const&amp;</span>
+<span style="color: #18b2b2;">T</span> <span style="color: #ef2929;">max</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">T</span> <span style="color: #00af00;">const</span> &amp;<span style="color: #ff8700;">a</span>, <span style="color: #18b2b2;">T</span> <span style="color: #00af00;">const</span> &amp;<span style="color: #ff8700;">b</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">return</span> b &lt; a? a: b;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #18b2b2;">T</span> <span style="color: #ef2929;">max</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">T</span> <span style="color: #ff8700;">a</span>, <span style="color: #18b2b2;">T</span> <span style="color: #ff8700;">b</span><span style="color: #cc0000; font-weight: bold;">)</span>;
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">i</span> = 17;
+<span style="color: #18b2b2;">int</span> <span style="color: #00af00;">const</span> <span style="color: #ff8700;">c</span> = 42;
+max<span style="color: #cc0000; font-weight: bold;">(</span>i, c<span style="color: #cc0000; font-weight: bold;">)</span>;    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">OK: T is deduced as int, because the const of c is ignored</span>
+max<span style="color: #cc0000; font-weight: bold;">(</span>c, c<span style="color: #cc0000; font-weight: bold;">)</span>;    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">OK: T is deduced as int</span>
+<span style="color: #18b2b2;">int</span> &amp;<span style="color: #ff8700;">ir</span> = ;
+max<span style="color: #cc0000; font-weight: bold;">(</span>i, ir<span style="color: #cc0000; font-weight: bold;">)</span>;   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">OK: T is deduced as int</span>
+<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">arr</span><span style="color: #cc0000; font-weight: bold;">[</span>4<span style="color: #cc0000; font-weight: bold;">]</span>;
+max<span style="color: #cc0000; font-weight: bold;">(</span>&amp;i, arr<span style="color: #cc0000; font-weight: bold;">)</span>; <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">OK: T is deduced as int*</span>
+
+max<span style="color: #cc0000; font-weight: bold;">(</span>4, 7.2<span style="color: #cc0000; font-weight: bold;">)</span>;  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">Error: T can be deduced as int or double</span>
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s</span>;
+max<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">"hi"</span>, s<span style="color: #cc0000; font-weight: bold;">)</span>; <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">Error: T can be deduced as char const[6] or std::string</span>
+</pre>
+</div>
+
+<p>
+There are three ways to handle such errors:
+</p>
+<ul class="org-ul">
+<li>Cast the argument so that they both match</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-C++">max<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">static_cast</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">double</span><span style="color: #1f5bff; font-weight: bold;">&gt;(</span>4<span style="color: #1f5bff; font-weight: bold;">)</span>, 7.2<span style="color: #cc0000; font-weight: bold;">)</span>;
+</pre>
+</div>
+<ul class="org-ul">
+<li>Specify explicitly the type of <code>T</code> to prevent compiler from type deduction</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-C++">max<span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">double</span><span style="color: #cc0000; font-weight: bold;">&gt;(</span>4, 7.2<span style="color: #cc0000; font-weight: bold;">)</span>;
+</pre>
+</div>
+<ul class="org-ul">
+<li>Specify that the parameters may have different types</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="author-info">
+      <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
+      <div id="date">Date: <2020-06-09 Tue 15:51></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
+      <div id="built">Built: <2020-06-09 Tue 17:22></div>
+      </div><div id="copyright">
+    <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
+</div>
+</div>
+</body>
+</html>
