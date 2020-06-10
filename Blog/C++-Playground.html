@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-06-10 Wed 16:59 -->
+<!-- 2020-06-11 Thu 00:15 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>C++ Playground</title>
@@ -59,6 +59,7 @@
 <li><a href="#org130e78e">1. 返回局部变量的引用</a></li>
 <li><a href="#org2999c4b">2. 引用传递</a></li>
 <li><a href="#orgcfc019d">3. 泛型数组模板</a></li>
+<li><a href="#orgc42a45c">4. 可变参数模板</a></li>
 </ul>
 </div>
 </nav>
@@ -347,13 +348,42 @@ arrint1 and arrint2 is not equal.
 </pre>
 </div>
 </div>
+
+<div id="outline-container-orgc42a45c" class="outline-2">
+<h2 id="orgc42a45c"><span class="section-number-2">4</span> 可变参数模板</h2>
+<div class="outline-text-2" id="text-4">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">print</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span> <span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span>, <span style="color: #00af00;">typename</span><span style="color: #ef2929;">...</span> <span style="color: #18b2b2;">Types</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">print</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">T</span> <span style="color: #ff8700;">firstArg</span>, <span style="color: #18b2b2;">Types</span><span style="color: #ef2929;">...</span> <span style="color: #ff8700;">args</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; firstArg &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  print<span style="color: #1f5bff; font-weight: bold;">(</span>args<span style="color: #ef2929;">...</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"world"</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  print<span style="color: #1f5bff; font-weight: bold;">(</span>7.5, <span style="color: #ff1f8b;">"hello"</span>, s<span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+7.5
+hello
+world
+</pre>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-06-10 Wed 10:34></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
-      <div id="built">Built: <2020-06-10 Wed 16:59></div>
+      <div id="built">Built: <2020-06-11 Thu 00:15></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
