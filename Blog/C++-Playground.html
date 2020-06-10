@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-06-10 Wed 10:56 -->
+<!-- 2020-06-10 Wed 13:53 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>C++ Playground</title>
@@ -58,6 +58,7 @@
 <ul>
 <li><a href="#org130e78e">1. 返回局部变量的引用</a></li>
 <li><a href="#org2999c4b">2. 引用传递</a></li>
+<li><a href="#orgcfc019d">3. 泛型数组模板</a></li>
 </ul>
 </div>
 </nav>
@@ -119,6 +120,187 @@
 20
 20
 </pre>
+
+
+<p>
+这也就解释了在重载 <code>&lt;&lt;</code> 运算符时传入 <code>ostream</code> 对象的引用再传出是可行的
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #00af00;">typedef</span> <span style="color: #00af00;">struct</span> <span style="color: #18b2b2;">Coor</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">float</span> <span style="color: #ff8700;">x</span>;
+  <span style="color: #18b2b2;">float</span> <span style="color: #ff8700;">y</span>;
+  <span style="color: #18b2b2;">float</span> <span style="color: #ff8700;">z</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span> <span style="color: #18b2b2;">Coor</span>;
+
+<span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span> &amp;<span style="color: #00af00;">operator</span><span style="color: #ef2929;">&lt;&lt;</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span> &amp;<span style="color: #ff8700;">os</span>, <span style="color: #18b2b2;">Coor</span> &amp;<span style="color: #ff8700;">coor</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"("</span> &lt;&lt; coor.x &lt;&lt; <span style="color: #ff1f8b;">", "</span> &lt;&lt; coor.y &lt;&lt; <span style="color: #ff1f8b;">", "</span> &lt;&lt; coor.z &lt;&lt; <span style="color: #ff1f8b;">")"</span>;
+  <span style="color: #00af00;">return</span> os;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">Coor</span> <span style="color: #ff8700;">coor</span> = <span style="color: #1f5bff; font-weight: bold;">{</span>0.0, 1.0, 2.0<span style="color: #1f5bff; font-weight: bold;">}</span>;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; coor &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+(0, 1, 2)
+</pre>
+
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #18b2b2;">int</span> &amp;<span style="color: #ef2929;">foo</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span> &amp;<span style="color: #ff8700;">i</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">return</span> ++i;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">i</span> = 10;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">foo &#36820;&#22238;&#20102; i &#30340;&#24341;&#29992;&#65292;&#24182;&#23558; i &#30340;&#20540;&#36171;&#20540;&#32473; j</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">i &#19982; j &#26159;&#20004;&#20010;&#19981;&#21516;&#30340;&#21464;&#37327;</span>
+  <span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">j</span> = foo<span style="color: #1f5bff; font-weight: bold;">(</span>i<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"i is "</span> &lt;&lt; i &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"j is "</span> &lt;&lt; j &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+i is 11
+j is 11
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgcfc019d" class="outline-2">
+<h2 id="orgcfc019d"><span class="section-number-2">3</span> 泛型数组模板</h2>
+<div class="outline-text-2" id="text-3">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">cassert</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">cstddef</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #00af00;">class</span> <span style="color: #18b2b2;">Array</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">template</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">Ty</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span>
+  <span style="color: #00af00;">friend</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span> &amp;<span style="color: #00af00;">operator</span><span style="color: #ef2929;">&lt;&lt;</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span> &amp;<span style="color: #ff8700;">os</span>, <span style="color: #18b2b2;">Array</span><span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">Ty</span><span style="color: #00af00; font-weight: bold;">&gt;</span> <span style="color: #00af00;">const</span> &amp;<span style="color: #ff8700;">rhs</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #00af00;">public</span>:
+  Array<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">size_t</span> <span style="color: #00af00;">const</span> <span style="color: #ff8700;">size</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  Array<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Array</span><span style="color: #00af00; font-weight: bold;">&lt;</span>T<span style="color: #00af00; font-weight: bold;">&gt;</span> <span style="color: #00af00;">const</span> &amp;<span style="color: #ff8700;">rhs</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  Array<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">T</span> <span style="color: #00af00;">const</span> *<span style="color: #ff8700;">rhs</span>, <span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">size</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  Array<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">T</span> <span style="color: #00af00;">const</span> *<span style="color: #ff8700;">beg</span>, <span style="color: #18b2b2;">T</span> <span style="color: #00af00;">const</span> *<span style="color: #ff8700;">end</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #18b2b2;">size_t</span> <span style="color: #ef2929;">size</span><span style="color: #1f5bff; font-weight: bold;">()</span>;
+  <span style="color: #18b2b2;">T</span> &amp;<span style="color: #00af00;">operator</span><span style="color: #1f5bff; font-weight: bold;">[]</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">size_t</span> <span style="color: #00af00;">const</span> <span style="color: #ff8700;">index</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #18b2b2;">Array</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> &amp;<span style="color: #00af00;">operator</span><span style="color: #ef2929;">=</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Array</span><span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #00af00; font-weight: bold;">&gt;</span> <span style="color: #00af00;">const</span> &amp;<span style="color: #ff8700;">rhs</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #18b2b2;">Array</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #00af00;">operator</span><span style="color: #ef2929;">+</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Array</span><span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #00af00; font-weight: bold;">&gt;</span> <span style="color: #00af00;">const</span> &amp;<span style="color: #ff8700;">rhs</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #00af00;">const</span>;
+<span style="color: #00af00;">private</span>:
+  <span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">sz</span>;
+  <span style="color: #18b2b2;">T</span> *<span style="color: #ff8700;">arr</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>;
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #1f5bff;">Array</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>::<span style="color: #ef2929;">Array</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">size_t</span> <span style="color: #00af00;">const</span> <span style="color: #ff8700;">size</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  sz = size;
+  arr = <span style="color: #00af00;">new</span> <span style="color: #18b2b2;">T</span><span style="color: #1f5bff; font-weight: bold;">[</span>sz<span style="color: #1f5bff; font-weight: bold;">]</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #1f5bff;">Array</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>::<span style="color: #ef2929;">Array</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">Array</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #00af00;">const</span> &amp;<span style="color: #ff8700;">rhs</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  sz = rhs.sz;
+  arr = <span style="color: #00af00;">new</span> <span style="color: #18b2b2;">T</span><span style="color: #1f5bff; font-weight: bold;">[</span>sz<span style="color: #1f5bff; font-weight: bold;">]</span>;
+  <span style="color: #00af00;">for</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">i</span> = 0; i &lt; sz; ++i<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    arr<span style="color: #00af00; font-weight: bold;">[</span>i<span style="color: #00af00; font-weight: bold;">]</span> = rhs.arr<span style="color: #00af00; font-weight: bold;">[</span>i<span style="color: #00af00; font-weight: bold;">]</span>;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #1f5bff;">Array</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>::<span style="color: #ef2929;">Array</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">T</span> <span style="color: #00af00;">const</span> *<span style="color: #ff8700;">rhs</span>, <span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">size</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  sz = size;
+  arr = <span style="color: #00af00;">new</span> <span style="color: #18b2b2;">T</span><span style="color: #1f5bff; font-weight: bold;">[</span>sz<span style="color: #1f5bff; font-weight: bold;">]</span>;
+  <span style="color: #00af00;">for</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">i</span> = 0; i &lt; sz; ++i<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    arr<span style="color: #00af00; font-weight: bold;">[</span>i<span style="color: #00af00; font-weight: bold;">]</span> = rhs<span style="color: #00af00; font-weight: bold;">[</span>i<span style="color: #00af00; font-weight: bold;">]</span>;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #1f5bff;">Array</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>::<span style="color: #ef2929;">Array</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">T</span> <span style="color: #00af00;">const</span> *<span style="color: #ff8700;">beg</span>, <span style="color: #18b2b2;">T</span> <span style="color: #00af00;">const</span> *<span style="color: #ff8700;">end</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  sz = end - beg;
+  arr = <span style="color: #00af00;">new</span> <span style="color: #18b2b2;">T</span><span style="color: #1f5bff; font-weight: bold;">[</span>sz<span style="color: #1f5bff; font-weight: bold;">]</span>;
+  <span style="color: #00af00;">for</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">i</span> = 0; i &lt; sz; ++i<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    arr<span style="color: #00af00; font-weight: bold;">[</span>i<span style="color: #00af00; font-weight: bold;">]</span> = beg<span style="color: #00af00; font-weight: bold;">[</span>i<span style="color: #00af00; font-weight: bold;">]</span>;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #00af00;">inline</span> <span style="color: #18b2b2;">size_t</span> <span style="color: #1f5bff;">Array</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>::<span style="color: #ef2929;">size</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">return</span> sz;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #18b2b2;">T</span> &amp;<span style="color: #1f5bff;">Array</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>::<span style="color: #00af00;">operator</span><span style="color: #cc0000; font-weight: bold;">[]</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">size_t</span> <span style="color: #00af00;">const</span> <span style="color: #ff8700;">index</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  assert<span style="color: #1f5bff; font-weight: bold;">(</span>index &gt;= 0 &amp;&amp; index &lt; sz<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #00af00;">return</span> arr<span style="color: #1f5bff; font-weight: bold;">[</span>index<span style="color: #1f5bff; font-weight: bold;">]</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span> &amp;<span style="color: #00af00;">operator</span><span style="color: #ef2929;">&lt;&lt;</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span> &amp;<span style="color: #ff8700;">os</span>, <span style="color: #18b2b2;">Array</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #00af00;">const</span> &amp;<span style="color: #ff8700;">rhs</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">for</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">i</span> = 0; i &lt; rhs.sz; ++i<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #1f5bff;">std</span>::cout &lt;&lt; rhs.arr<span style="color: #00af00; font-weight: bold;">[</span>i<span style="color: #00af00; font-weight: bold;">]</span> &lt;&lt; <span style="color: #ff1f8b;">", "</span>;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #00af00;">return</span> os;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #18b2b2;">Array</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span> &amp;<span style="color: #1f5bff;">Array</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>::<span style="color: #00af00;">operator</span><span style="color: #ef2929;">=</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">Array</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #00af00;">const</span> &amp;<span style="color: #ff8700;">rhs</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  assert<span style="color: #1f5bff; font-weight: bold;">(</span>sz == rhs.sz<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #00af00;">for</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">i</span> = 0; i &lt; sz; ++i<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    arr<span style="color: #00af00; font-weight: bold;">[</span>i<span style="color: #00af00; font-weight: bold;">]</span> = rhs.arr<span style="color: #00af00; font-weight: bold;">[</span>i<span style="color: #00af00; font-weight: bold;">]</span>;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #18b2b2;">Array</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span> <span style="color: #1f5bff;">Array</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>::<span style="color: #00af00;">operator</span><span style="color: #ef2929;">+</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">Array</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #00af00;">const</span> &amp;<span style="color: #ff8700;">rhs</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #00af00;">const</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">size</span> = sz + rhs.sz;
+  <span style="color: #18b2b2;">Array</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">tmp</span><span style="color: #1f5bff; font-weight: bold;">(</span>size<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #00af00;">for</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">i</span> = 0; i &lt; sz; ++i<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    tmp.arr<span style="color: #00af00; font-weight: bold;">[</span>i<span style="color: #00af00; font-weight: bold;">]</span> = arr<span style="color: #00af00; font-weight: bold;">[</span>i<span style="color: #00af00; font-weight: bold;">]</span>;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #00af00;">for</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">i</span> = sz; i &lt; size; ++i<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    tmp.arr<span style="color: #00af00; font-weight: bold;">[</span>i<span style="color: #00af00; font-weight: bold;">]</span> = rhs.arr<span style="color: #00af00; font-weight: bold;">[</span>i - sz<span style="color: #00af00; font-weight: bold;">]</span>;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #00af00;">return</span> tmp;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">Array</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::string<span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">arrstr1</span><span style="color: #1f5bff; font-weight: bold;">(</span>5<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #18b2b2;">Array</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::string<span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">arrstr2</span><span style="color: #1f5bff; font-weight: bold;">(</span>5<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  arrstr1<span style="color: #1f5bff; font-weight: bold;">[</span>0<span style="color: #1f5bff; font-weight: bold;">]</span> = <span style="color: #ff1f8b;">"Hello"</span>;
+  arrstr1<span style="color: #1f5bff; font-weight: bold;">[</span>1<span style="color: #1f5bff; font-weight: bold;">]</span> = <span style="color: #ff1f8b;">"world"</span>;
+  arrstr2 = arrstr1;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; arrstr2 &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+
+  <span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">ints</span><span style="color: #1f5bff; font-weight: bold;">[</span>5<span style="color: #1f5bff; font-weight: bold;">]</span> = <span style="color: #1f5bff; font-weight: bold;">{</span>1, 2, 3, 4, 5<span style="color: #1f5bff; font-weight: bold;">}</span>;
+  <span style="color: #18b2b2;">Array</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">int</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">arrint1</span><span style="color: #1f5bff; font-weight: bold;">(</span>ints, 5<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #18b2b2;">Array</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">int</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">arrint2</span><span style="color: #1f5bff; font-weight: bold;">(</span>ints, ints + 5<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; arrint1 &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; arrint2 &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #18b2b2;">Array</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">int</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">arrintsum</span> = arrint1 + arrint2;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; arrintsum &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+Hello, world, , , , 
+1, 2, 3, 4, 5, 
+1, 2, 3, 4, 5, 
+1, 2, 3, 4, 5, 1, 2, 3, 4, 5,
+</pre>
 </div>
 </div>
 </div>
@@ -127,7 +309,7 @@
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-06-10 Wed 10:34></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
-      <div id="built">Built: <2020-06-10 Wed 10:56></div>
+      <div id="built">Built: <2020-06-10 Wed 13:53></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
