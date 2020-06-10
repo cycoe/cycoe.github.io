@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-06-09 Tue 17:22 -->
+<!-- 2020-06-10 Wed 10:56 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>与 C++ Templates 的第一类接触</title>
@@ -62,8 +62,15 @@
 <ul>
 <li><a href="#orgfb68e4c">1.1.1. A First Look at Function Templates</a></li>
 <li><a href="#orgc976821">1.1.2. Template Argument Deduction (模板参数推断)</a></li>
+<li><a href="#org7feab0e">1.1.3. 多参数模板</a>
+<ul>
+<li><a href="#orgbbd5acf">1.1.3.1. 第一种解决方法是引入一个模板参数作为返回类型</a></li>
+<li><a href="#orge337ec6">1.1.3.2. 第二种解决方法是利用自动类型推断&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CPP14">CPP14</span></span></a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#org02e8074">1.2. 类模板</a></li>
 </ul>
 </li>
 </ul>
@@ -233,7 +240,177 @@ There are three ways to handle such errors:
 <ul class="org-ul">
 <li>Specify that the parameters may have different types</li>
 </ul>
+
+<p>
+同时注意一点，模板无法对函数中的默认参数进行类型推断，若想要实现对函数默认参数的
+推断，需要对同时声明模板参数中的默认类型
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">f</span><span style="color: #cc0000; font-weight: bold;">(</span>T = <span style="color: #ff1f8b;">""</span><span style="color: #cc0000; font-weight: bold;">)</span>;
+
+f<span style="color: #cc0000; font-weight: bold;">(</span>1<span style="color: #cc0000; font-weight: bold;">)</span>;  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27491;&#30830;&#65306;T &#34987;&#25512;&#26029;&#20026; int&#65292;&#23637;&#24320;&#20026; f&lt;int&gt;(1)</span>
+f<span style="color: #cc0000; font-weight: bold;">()</span>;   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#38169;&#35823;&#65306;&#26080;&#27861;&#25512;&#26029; T &#30340;&#31867;&#22411;</span>
+
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20026; T &#22768;&#26126;&#40664;&#35748;&#31867;&#22411;</span>
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span> = <span style="color: #1f5bff;">std</span>::string<span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">f</span><span style="color: #cc0000; font-weight: bold;">(</span>T = <span style="color: #ff1f8b;">""</span><span style="color: #cc0000; font-weight: bold;">)</span>;
+
+f<span style="color: #cc0000; font-weight: bold;">()</span>;   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27491;&#30830;&#65306;T &#34987;&#25512;&#26029;&#20026; std::string&#65292;&#23637;&#24320;&#20026; f&lt;std::string&gt;("")</span>
+</pre>
 </div>
+</div>
+</div>
+
+<div id="outline-container-org7feab0e" class="outline-4">
+<h4 id="org7feab0e"><span class="section-number-4">1.1.3</span> 多参数模板</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<p>
+上面我们定义的 <code>max</code> 函数模板只能用于比较两个同类型的对象，当我们希望比较不同类型
+的对象时我们就需要多参数模板
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T1</span>, <span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T2</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #18b2b2;">T1</span> <span style="color: #ef2929;">max</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">T1</span> <span style="color: #ff8700;">a</span>, <span style="color: #18b2b2;">T2</span> <span style="color: #ff8700;">b</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">return</span> b &lt; a ? a : b;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #00af00;">auto</span> <span style="color: #ff8700;">m</span> = ::max<span style="color: #cc0000; font-weight: bold;">(</span>4, 7.2<span style="color: #cc0000; font-weight: bold;">)</span>;   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#35843;&#29992;&#27491;&#30830;&#65306;&#36820;&#22238; 7</span>
+<span style="color: #00af00;">auto</span> <span style="color: #ff8700;">n</span> = ::max<span style="color: #cc0000; font-weight: bold;">(</span>7.2, 4<span style="color: #cc0000; font-weight: bold;">)</span>;   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#35843;&#29992;&#27491;&#30830;&#65306;&#36820;&#22238; 7.2</span>
+</pre>
+</div>
+
+<p>
+使用以上方法能够处理两个不同类型的值，但遇到了新问题。函数返回的类型依赖于第一个
+传入参数的类型，这就导致了 <code>::max(4, 7.2)</code> 返回 <code>7 -&gt; int</code> ， <code>::max(7.2, 4)</code> 返回 <code>7.2
+-&gt; double</code> ，不符合调用者的意图。
+</p>
+</div>
+
+<div id="outline-container-orgbbd5acf" class="outline-5">
+<h5 id="orgbbd5acf"><span class="section-number-5">1.1.3.1</span> 第一种解决方法是引入一个模板参数作为返回类型</h5>
+<div class="outline-text-5" id="text-1-1-3-1">
+<p>
+调用函数模板时可以不指明模板参数，此时会进行自动推断，但套用到返回值类型上就失效
+了。因为模板其实是自动化重载的过程，重载不考虑返回值类型，那么模板也就无法对返回
+值类型进行推导。即使定义如下模板：
+</p>
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T1</span>, <span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T2</span>, <span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">RT</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #18b2b2;">RT</span> <span style="color: #ef2929;">max</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">T1</span> <span style="color: #ff8700;">a</span>, <span style="color: #18b2b2;">T2</span> <span style="color: #ff8700;">b</span><span style="color: #cc0000; font-weight: bold;">)</span>;
+</pre>
+</div>
+
+<p>
+也无法通过 <code>auto m = max(4, 7.2);</code> 的方式对返回类型进行推导，只能通过显式指明模板
+参数来调用，非常不优雅
+</p>
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">auto</span> <span style="color: #ff8700;">m</span> = ::max<span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">int</span>, <span style="color: #18b2b2;">double</span>, <span style="color: #18b2b2;">double</span><span style="color: #cc0000; font-weight: bold;">&gt;(</span>4, 7.2<span style="color: #cc0000; font-weight: bold;">)</span>;
+</pre>
+</div>
+
+<p>
+当然也可将返回值类型放在最前面，同时只显式指明返回值类型，传入参数类型采用自动推
+断，但这么做也并不能从本质上降低问题的复杂度，与采用一个参数并显式指明类型无异
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge337ec6" class="outline-5">
+<h5 id="orge337ec6"><span class="section-number-5">1.1.3.2</span> 第二种解决方法是利用自动类型推断&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CPP14">CPP14</span></span></h5>
+<div class="outline-text-5" id="text-1-1-3-2">
+<p>
+使用 <code>auto</code> 关键字使编译器从返回语句中进行自动类型推导
+</p>
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T1</span>, <span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T2</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #00af00;">auto</span> <span style="color: #ef2929;">max</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">T1</span> <span style="color: #ff8700;">a</span>, <span style="color: #18b2b2;">T2</span> <span style="color: #ff8700;">b</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">return</span> b &lt; a ? a : b;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<p>
+也可以使用 <code>后置返回类型</code> 语法从 <code>?:</code> 表达式中自动推断
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org02e8074" class="outline-3">
+<h3 id="org02e8074"><span class="section-number-3">1.2</span> 类模板</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">string</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">vector</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">cassert</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #00af00;">class</span> <span style="color: #18b2b2;">Stack</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #00af00;">private</span>:
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">vector</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">elems</span>;
+<span style="color: #00af00;">public</span>:
+  <span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">push</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">T</span> <span style="color: #00af00;">const</span> &amp;<span style="color: #ff8700;">elem</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">pop</span><span style="color: #1f5bff; font-weight: bold;">()</span>;
+  <span style="color: #18b2b2;">T</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ef2929;">top</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #00af00;">const</span>;
+  <span style="color: #18b2b2;">bool</span> <span style="color: #ef2929;">empty</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #00af00;">const</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #00af00;">return</span> elems.empty<span style="color: #00af00; font-weight: bold;">()</span>;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #18b2b2;">Stack</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> &amp;<span style="color: #ef2929;">extend</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Stack</span><span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #00af00; font-weight: bold;">&gt;</span> <span style="color: #00af00;">const</span> &amp;<span style="color: #ff8700;">stk</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>;
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #18b2b2;">void</span> <span style="color: #1f5bff;">Stack</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>::<span style="color: #ef2929;">push</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">T</span> <span style="color: #00af00;">const</span> &amp;<span style="color: #ff8700;">elem</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  elems.push_back<span style="color: #1f5bff; font-weight: bold;">(</span>elem<span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #18b2b2;">void</span> <span style="color: #1f5bff;">Stack</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>::<span style="color: #ef2929;">pop</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  assert<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #cc0000;">!</span>elems.empty<span style="color: #00af00; font-weight: bold;">()</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  elems.pop_back<span style="color: #1f5bff; font-weight: bold;">()</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #18b2b2;">T</span> <span style="color: #00af00;">const</span> &amp;<span style="color: #1f5bff;">Stack</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>::<span style="color: #ef2929;">top</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #00af00;">const</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  assert<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #cc0000;">!</span>elems.empty<span style="color: #00af00; font-weight: bold;">()</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #00af00;">return</span> elems.back<span style="color: #1f5bff; font-weight: bold;">()</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #18b2b2;">Stack</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span> &amp;<span style="color: #1f5bff;">Stack</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>::<span style="color: #ef2929;">extend</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #00af00;">const</span> <span style="color: #18b2b2;">Stack</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> &amp;<span style="color: #ff8700;">stk</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">for</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">T</span> <span style="color: #00af00;">const</span> &amp;<span style="color: #ff8700;">ele</span> : stk.elems<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    elems.push_back<span style="color: #00af00; font-weight: bold;">(</span>ele<span style="color: #00af00; font-weight: bold;">)</span>;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #00af00;">return</span> *<span style="color: #00af00;">this</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">Stack</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">int</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">intStack</span>;
+  <span style="color: #18b2b2;">Stack</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::string<span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">stringStack</span>;
+  <span style="color: #18b2b2;">Stack</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::string<span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">stringStack2</span>;
+
+  intStack.push<span style="color: #1f5bff; font-weight: bold;">(</span>7<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; intStack.top<span style="color: #1f5bff; font-weight: bold;">()</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+
+  stringStack.push<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"hello, "</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; stringStack.top<span style="color: #1f5bff; font-weight: bold;">()</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  stringStack2.push<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"world!"</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; stringStack.extend<span style="color: #1f5bff; font-weight: bold;">(</span>stringStack2<span style="color: #1f5bff; font-weight: bold;">)</span>.top<span style="color: #1f5bff; font-weight: bold;">()</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+7
+hello, 
+world!
+</pre>
 </div>
 </div>
 </div>
@@ -243,7 +420,7 @@ There are three ways to handle such errors:
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-06-09 Tue 15:51></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
-      <div id="built">Built: <2020-06-09 Tue 17:22></div>
+      <div id="built">Built: <2020-06-10 Wed 10:56></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
