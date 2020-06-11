@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-06-11 Thu 00:15 -->
+<!-- 2020-06-11 Thu 21:26 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>与 C++ Templates 的第一类接触</title>
@@ -66,8 +66,11 @@
 <ul>
 <li><a href="#orgbbd5acf">1.1.3.1. 第一种解决方法是引入一个模板参数作为返回类型</a></li>
 <li><a href="#orge337ec6">1.1.3.2. 第二种解决方法是利用自动类型推断&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CPP14">CPP14</span></span></a></li>
+<li><a href="#org50ce0b0">1.1.3.3. 第三种解决方法是返回一个 <code>common_type</code>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CPP11">CPP11</span></span></a></li>
 </ul>
 </li>
+<li><a href="#orgc790a48">1.1.4. 默认模板参数</a></li>
+<li><a href="#org9684567">1.1.5. 函数模板重载</a></li>
 </ul>
 </li>
 <li><a href="#org02e8074">1.2. 类模板</a></li>
@@ -368,13 +371,161 @@ f<span style="color: #cc0000; font-weight: bold;">()</span>;   <span style="colo
 <pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">type_traits</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
 
 <span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T1</span>, <span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T2</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
-<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27492;&#22788;&#36824;&#19981;&#26126;&#30333;&#20026;&#20160;&#20040;&#35201;&#29992;&#21040; typename</span>
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #ff4b4b;">TODO</span><span style="color: #b2b2b2; font-style: italic;"> &#27492;&#22788;&#36824;&#19981;&#26126;&#30333;&#20026;&#20160;&#20040;&#35201;&#29992;&#21040; typename&#65292;&#20070;&#19978;&#35828; Because the member type is a</span>
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">type, you have to qualify the expression with typename to access it</span>
 <span style="color: #00af00;">auto</span> <span style="color: #ef2929;">max</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">T1</span> <span style="color: #ff8700;">a</span>, <span style="color: #18b2b2;">T2</span> <span style="color: #ff8700;">b</span><span style="color: #cc0000; font-weight: bold;">)</span> -&gt; <span style="color: #00af00;">typename</span> <span style="color: #1f5bff;">std</span>::<span style="color: #1f5bff;">decay</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">decltype</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">true</span>?a:b<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>::<span style="color: #18b2b2;">type</span> <span style="color: #cc0000; font-weight: bold;">{</span>
   <span style="color: #00af00;">return</span> b &lt; a ? a : b;
 <span style="color: #cc0000; font-weight: bold;">}</span>
 </pre>
 </div>
 </div>
+</div>
+
+<div id="outline-container-org50ce0b0" class="outline-5">
+<h5 id="org50ce0b0"><span class="section-number-5">1.1.3.3</span> 第三种解决方法是返回一个 <code>common_type</code>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CPP11">CPP11</span></span></h5>
+<div class="outline-text-5" id="text-1-1-3-3">
+<p>
+使用 <code>std::common_type&lt;&gt;::type</code> 生成两个不同类型的通用类型，从 C++11 开始可以使用
+<code>typename std::common_type&lt;T1, T2&gt;::type</code> ，从 C++14 开始可简化为
+<code>std::common_type_t&lt;T1, T2&gt;</code> ，同时注意， <code>std::common_type&lt;&gt;::type</code> 也会发生退化
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">type_traits</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20174; C++11 &#24320;&#22987;</span>
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T1</span>, <span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T2</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">std::common_type &#26159;&#19968;&#20010;&#31867;&#22411;&#33795;&#21462;</span>
+<span style="color: #00af00;">typename</span> <span style="color: #1f5bff;">std</span>::<span style="color: #1f5bff;">common_type</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T1</span>, <span style="color: #18b2b2;">T2</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>::<span style="color: #18b2b2;">type</span> <span style="color: #ef2929;">max</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">T1</span> <span style="color: #ff8700;">a</span>, <span style="color: #18b2b2;">T2</span> <span style="color: #ff8700;">b</span><span style="color: #cc0000; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">return</span> b &lt; a ? a : b;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20174; C++14 &#24320;&#22987;</span>
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T1</span>, <span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T2</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">common_type_t</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T1</span>, <span style="color: #18b2b2;">T2</span><span style="color: #cc0000; font-weight: bold;">&gt;</span> <span style="color: #ef2929;">max</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">T1</span> <span style="color: #ff8700;">a</span>, <span style="color: #18b2b2;">T2</span> <span style="color: #ff8700;">b</span><span style="color: #cc0000; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">return</span> b &lt; a ? a : b;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc790a48" class="outline-4">
+<h4 id="orgc790a48"><span class="section-number-4">1.1.4</span> 默认模板参数</h4>
+<div class="outline-text-4" id="text-1-1-4">
+<p>
+对于上面的例子，如果我们希望返回值通过自动推导得出，同时也提供手动指定返回类型的
+灵活性，我们就会用到默认模板参数
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">type_traits</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T1</span>, <span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T2</span>,
+         <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">1. &#27492;&#22788;&#21464;&#37327; a &#21644; b &#36824;&#26410;&#22768;&#26126;&#65292;&#21482;&#33021;&#30452;&#25509;&#20351;&#29992;&#23427;&#20204;&#30340;&#31867;&#22411;&#36827;&#34892;&#40664;&#35748;&#26500;&#36896;&#65292;</span>
+         <span style="color: #b2b2b2; font-style: italic;">//    </span><span style="color: #b2b2b2; font-style: italic;">&#22240;&#27492;&#35201;&#20445;&#35777; T1 &#21644; T2 &#26377;&#40664;&#35748;&#26500;&#36896;&#20989;&#25968;</span>
+         <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">2. std::decay_t&lt;&gt; &#22312; C++14 &#24341;&#20837;&#65292;C++11 &#20351;&#29992; std::decay&lt;&gt;::type</span>
+         <span style="color: #00af00;">typename</span>  <span style="color: #18b2b2;">RT</span> = <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">decay_t</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #00af00;">decltype</span><span style="color: #00af00; font-weight: bold;">(</span><span style="color: #1f5bff;">true</span>? T1<span style="color: #ff4ea3; font-weight: bold;">()</span> : T2<span style="color: #ff4ea3; font-weight: bold;">()</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #18b2b2;">RT</span> <span style="color: #ef2929;">max</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">T1</span> <span style="color: #ff8700;">a</span>, <span style="color: #18b2b2;">T2</span> <span style="color: #ff8700;">b</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">return</span> b &lt; a ? a : b;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<p>
+或者使用 <code>std::common_type</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">type_traits</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T1</span>, <span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T2</span>,
+         <span style="color: #00af00;">typename</span>  <span style="color: #18b2b2;">RT</span> = <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">common_type_t</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T1</span>, <span style="color: #18b2b2;">T2</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #18b2b2;">RT</span> <span style="color: #ef2929;">max</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">T1</span> <span style="color: #ff8700;">a</span>, <span style="color: #18b2b2;">T2</span> <span style="color: #ff8700;">b</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">return</span> b &lt; a ? a : b;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">auto</span> <span style="color: #ff8700;">a</span> = ::max<span style="color: #1f5bff; font-weight: bold;">(</span>4, 7.2<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #00af00;">auto</span> <span style="color: #ff8700;">b</span> = ::max<span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">double</span>, <span style="color: #18b2b2;">int</span>, <span style="color: #18b2b2;">long</span> <span style="color: #18b2b2;">double</span><span style="color: #1f5bff; font-weight: bold;">&gt;(</span>7.2, 4<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"a is "</span> &lt;&lt; a &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"b is "</span> &lt;&lt; b &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+a is 7.2
+b is 7.2
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org9684567" class="outline-4">
+<h4 id="org9684567"><span class="section-number-4">1.1.5</span> 函数模板重载</h4>
+<div class="outline-text-4" id="text-1-1-5">
+<p>
+函数模板本来就是一系列函数的重载，那么重载函数模板也合情合理
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20004;&#20010; int &#30340;&#26368;&#22823;&#20540;&#20989;&#25968;</span>
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">max</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">a</span>, <span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">b</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">return</span> b &lt; a ? a : b;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20219;&#24847;&#31867;&#22411;&#30340;&#26368;&#22823;&#20540;</span>
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #18b2b2;">T</span> <span style="color: #ef2929;">max</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">T</span> <span style="color: #ff8700;">a</span>, <span style="color: #18b2b2;">T</span> <span style="color: #ff8700;">b</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">return</span> b &lt; a ? a : b;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; ::max<span style="color: #1f5bff; font-weight: bold;">(</span>7, 42<span style="color: #1f5bff; font-weight: bold;">)</span>         &lt;&lt; <span style="color: #1f5bff;">std</span>::endl; <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#35843;&#29992;&#38750;&#27169;&#26495;&#20989;&#25968; max(int, int)</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; ::max<span style="color: #1f5bff; font-weight: bold;">(</span>7.0, 42.0<span style="color: #1f5bff; font-weight: bold;">)</span>     &lt;&lt; <span style="color: #1f5bff;">std</span>::endl; <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#35843;&#29992; max&lt;double&gt; &#26377;&#31867;&#22411;&#25512;&#26029;</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; ::max<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">'a'</span>, <span style="color: #ff1f8b;">'b'</span><span style="color: #1f5bff; font-weight: bold;">)</span>      &lt;&lt; <span style="color: #1f5bff;">std</span>::endl; <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#35843;&#29992; max&lt;char&gt; &#26377;&#31867;&#22411;&#25512;&#26029;</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; ::max<span style="color: #1f5bff; font-weight: bold;">&lt;&gt;(</span>7, 42<span style="color: #1f5bff; font-weight: bold;">)</span>       &lt;&lt; <span style="color: #1f5bff;">std</span>::endl; <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#35843;&#29992; max&lt;int&gt; &#24378;&#21046;&#20351;&#29992;&#27169;&#26495;&#65292;&#26377;&#31867;&#22411;&#25512;&#26029;</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; ::max<span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">double</span><span style="color: #1f5bff; font-weight: bold;">&gt;(</span>7, 42<span style="color: #1f5bff; font-weight: bold;">)</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl; <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#35843;&#29992; max&lt;double&gt; &#24050;&#26174;&#24335;&#25351;&#26126;&#31867;&#22411;&#65292;&#26080;&#31867;&#22411;&#25512;&#26029;</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; ::max<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">'a'</span>, 42.7<span style="color: #1f5bff; font-weight: bold;">)</span>     &lt;&lt; <span style="color: #1f5bff;">std</span>::endl; <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#35843;&#29992;&#38750;&#27169;&#26495;&#20989;&#25968; max(int, int)&#65292;</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+42
+42
+b
+42
+42
+97
+</pre>
+
+
+<p>
+模板函数重载的原则是，除非模板能生成更加合适的函数（参数更少地进行自动类型转换），
+否则选择非模板函数。对于最后一个例子，模板类型推断时不考虑自动类型转换，也就是说
+类型必须完美匹配才会使用模板函数，而该例子不符合，只能使用普通函数
+</p>
+
+<pre class="example">
+42
+42
+b
+42
+42
+97
+</pre>
 </div>
 </div>
 </div>
@@ -457,7 +608,7 @@ world!
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-06-09 Tue 15:51></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
-      <div id="built">Built: <2020-06-11 Thu 00:15></div>
+      <div id="built">Built: <2020-06-11 Thu 21:26></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
