@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-06-13 Sat 23:02 -->
+<!-- 2020-06-13 Sat 23:10 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>与 C++ Templates 的第一类接触</title>
@@ -1225,11 +1225,18 @@ Use the Stack template for pointers.
   <span style="color: #18b2b2;">C</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">int</span>*, <span style="color: #18b2b2;">float</span>*<span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">mp</span><span style="color: #1f5bff; font-weight: bold;">(</span>&amp;a, &amp;b<span style="color: #1f5bff; font-weight: bold;">)</span>;      <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">use C&lt;T1*, T2*&gt;</span>
 
   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20197;&#19979;&#30340;&#23454;&#20363;&#21270;&#22240;&#20026;&#26080;&#27861;&#23545;&#24212; **&#19968;&#20010;** &#26368;&#21305;&#37197;&#30340;&#27169;&#26495;&#22240;&#32780;&#26159;&#38169;&#35823;&#30340;</span>
-  <span style="color: #18b2b2;">C</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">int</span>, <span style="color: #18b2b2;">int</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">m</span>;     <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#38169;&#35823;&#65306;&#21305;&#37197; C&lt;T, T&gt; &#21644; C&lt;T, int&gt;</span>
-  <span style="color: #18b2b2;">C</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">int</span>*, <span style="color: #18b2b2;">int</span>*<span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">m</span>;   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#38169;&#35823;&#65306;&#21305;&#37197; C&lt;T, T&gt; &#21644; C&lt;T1*, T2*&gt;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">C&lt;int, int&gt; m;     // &#38169;&#35823;&#65306;&#21305;&#37197; C&lt;T, T&gt; &#21644; C&lt;T, int&gt;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">C&lt;int*, int*&gt; m;   // &#38169;&#35823;&#65306;&#21305;&#37197; C&lt;T, T&gt; &#21644; C&lt;T1*, T2*&gt;</span>
 <span style="color: #cc0000; font-weight: bold;">}</span>
 </pre>
 </div>
+
+<pre class="example">
+C&lt;T1, T2&gt;
+C&lt;T, T&gt;
+C&lt;T, int&gt;
+C&lt;T1*, T2*&gt;
+</pre>
 </div>
 </div>
 </div>
@@ -1240,7 +1247,7 @@ Use the Stack template for pointers.
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-06-09 Tue 15:51></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
-      <div id="built">Built: <2020-06-13 Sat 23:02></div>
+      <div id="built">Built: <2020-06-13 Sat 23:10></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
