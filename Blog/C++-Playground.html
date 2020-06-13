@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-06-11 Thu 00:15 -->
+<!-- 2020-06-13 Sat 23:02 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>C++ Playground</title>
@@ -60,6 +60,7 @@
 <li><a href="#org2999c4b">2. 引用传递</a></li>
 <li><a href="#orgcfc019d">3. 泛型数组模板</a></li>
 <li><a href="#orgc42a45c">4. 可变参数模板</a></li>
+<li><a href="#orge8728ba">5. <span class="todo TODO">TODO</span> 几种初始化方法的区别</a></li>
 </ul>
 </div>
 </nav>
@@ -377,13 +378,38 @@ world
 </pre>
 </div>
 </div>
+<div id="outline-container-orge8728ba" class="outline-2">
+<h2 id="orge8728ba"><span class="section-number-2">5</span> <span class="todo TODO">TODO</span> 几种初始化方法的区别</h2>
+<div class="outline-text-2" id="text-5">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">string</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #00af00;">class</span> <span style="color: #18b2b2;">C</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #00af00;">public</span>:
+  <span style="color: #ef2929;">C</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">s</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #00af00;">this</span>-&gt;s = s;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+<span style="color: #00af00;">private</span>:
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>;
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">C</span> <span style="color: #ff8700;">c1</span> = <span style="color: #ff1f8b;">"hello"</span>;    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#25335;&#36125;&#26500;&#36896;&#65292;&#35843;&#29992; C(C const&amp;)&#65292;&#31561;&#21495;&#21518;&#38754;&#38656;&#35201;&#30340;&#26159;&#31867;&#22411; C</span>
+  <span style="color: #18b2b2;">C</span> <span style="color: #ff8700;">c2</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"hello"</span><span style="color: #1f5bff; font-weight: bold;">)</span>;     <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#26681;&#25454;&#20256;&#20837;&#21442;&#25968;&#35843;&#29992;&#23545;&#24212;&#26500;&#36896;&#20989;&#25968;&#65292;&#27492;&#22788;&#35843;&#29992; C(std::string const &amp;)</span>
+  <span style="color: #18b2b2;">C</span> <span style="color: #ff8700;">c3</span><span style="color: #1f5bff; font-weight: bold;">{</span><span style="color: #ff1f8b;">"hello"</span><span style="color: #1f5bff; font-weight: bold;">}</span>;     <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20351;&#29992;&#21442;&#25968;&#21015;&#21021;&#22987;&#21270;&#65292;&#35843;&#29992; C(): s("hello")</span>
+  <span style="color: #18b2b2;">C</span> <span style="color: #ff8700;">c4</span> = <span style="color: #1f5bff; font-weight: bold;">{</span><span style="color: #ff1f8b;">"hello"</span><span style="color: #1f5bff; font-weight: bold;">}</span>;  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#36824;&#27809;&#25630;&#26126;&#30333;</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-06-10 Wed 10:34></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
-      <div id="built">Built: <2020-06-11 Thu 00:15></div>
+      <div id="built">Built: <2020-06-13 Sat 23:02></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
