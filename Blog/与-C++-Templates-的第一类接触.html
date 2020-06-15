@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-06-14 Sun 23:40 -->
+<!-- 2020-06-15 Mon 22:28 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>与 C++ Templates 的第一类接触</title>
@@ -56,57 +56,49 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org2db3dd2">1. 与 C++ Templates 的第一类接触</a>
+<li><a href="#org2d15127">1. Function Templates</a>
 <ul>
-<li><a href="#org2d15127">1.1. Function Templates</a>
+<li><a href="#orgfb68e4c">1.1. A First Look at Function Templates</a></li>
+<li><a href="#orgc976821">1.2. Template Argument Deduction (模板参数推断)</a></li>
+<li><a href="#org7feab0e">1.3. 多参数模板</a>
 <ul>
-<li><a href="#orgfb68e4c">1.1.1. A First Look at Function Templates</a></li>
-<li><a href="#orgc976821">1.1.2. Template Argument Deduction (模板参数推断)</a></li>
-<li><a href="#org7feab0e">1.1.3. 多参数模板</a>
-<ul>
-<li><a href="#orgbbd5acf">1.1.3.1. 第一种解决方法是引入一个模板参数作为返回类型</a></li>
-<li><a href="#orge337ec6">1.1.3.2. 第二种解决方法是利用自动类型推断&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CPP14">CPP14</span></span></a></li>
-<li><a href="#org50ce0b0">1.1.3.3. 第三种解决方法是返回一个 <code>common_type</code>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CPP11">CPP11</span></span></a></li>
+<li><a href="#orgbbd5acf">1.3.1. 第一种解决方法是引入一个模板参数作为返回类型</a></li>
+<li><a href="#orge337ec6">1.3.2. 第二种解决方法是利用自动类型推断&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CPP14">CPP14</span></span></a></li>
+<li><a href="#org50ce0b0">1.3.3. 第三种解决方法是返回一个 <code>common_type</code>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CPP11">CPP11</span></span></a></li>
 </ul>
 </li>
-<li><a href="#orgc790a48">1.1.4. 默认模板参数</a></li>
-<li><a href="#org9684567">1.1.5. 函数模板重载</a></li>
+<li><a href="#orgc790a48">1.4. 默认模板参数</a></li>
+<li><a href="#org9684567">1.5. 函数模板重载</a></li>
 </ul>
 </li>
-<li><a href="#org02e8074">1.2. 类模板</a>
+<li><a href="#org02e8074">2. 类模板</a>
 <ul>
-<li><a href="#org79edfd4">1.2.1. 实现 <code>Stack</code> 类模板</a></li>
-<li><a href="#orgd767254">1.2.2. 模板的非完整使用</a></li>
-<li><a href="#org4f50859">1.2.3. 类模板友元函数</a></li>
-<li><a href="#orgc25df84">1.2.4. 类模板特化</a></li>
-<li><a href="#org7df38e9">1.2.5. 偏特化（部分特化）</a></li>
+<li><a href="#org79edfd4">2.1. 实现 <code>Stack</code> 类模板</a></li>
+<li><a href="#orgd767254">2.2. 模板的非完整使用</a></li>
+<li><a href="#org4f50859">2.3. 类模板友元函数</a></li>
+<li><a href="#orgc25df84">2.4. 类模板特化</a></li>
+<li><a href="#org7df38e9">2.5. 偏特化（部分特化）</a></li>
 </ul>
 </li>
-<li><a href="#org4c793f2">1.3. 变参模板</a>
+<li><a href="#org033fb07">3. 变参模板</a>
 <ul>
-<li><a href="#orgcfc160a">1.3.1. <span class="todo TODO">TODO</span> 变参模板</a></li>
-<li><a href="#org9dc5ee0">1.3.2. <span class="todo TODO">TODO</span> 折叠表达式&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CPP17">CPP17</span></span></a></li>
-<li><a href="#org002aa1d">1.3.3. <span class="todo TODO">TODO</span> </a></li>
-<li><a href="#orgd899b2f">1.3.4. <span class="todo TODO">TODO</span> 变参类模板和变参表达式</a></li>
-</ul>
-</li>
+<li><a href="#org4c793f2">3.1. <span class="todo TODO">TODO</span> 变参模板</a></li>
+<li><a href="#org9dc5ee0">3.2. <span class="todo TODO">TODO</span> 折叠表达式&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CPP17">CPP17</span></span></a></li>
+<li><a href="#org002aa1d">3.3. <span class="todo TODO">TODO</span> </a></li>
+<li><a href="#orgd899b2f">3.4. <span class="todo TODO">TODO</span> 变参类模板和变参表达式</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-org2db3dd2" class="outline-2">
-<h2 id="org2db3dd2"><span class="section-number-2">1</span> 与 C++ Templates 的第一类接触</h2>
+<div id="outline-container-org2d15127" class="outline-2">
+<h2 id="org2d15127"><span class="section-number-2">1</span> Function Templates</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org2d15127" class="outline-3">
-<h3 id="org2d15127"><span class="section-number-3">1.1</span> Function Templates</h3>
+<div id="outline-container-orgfb68e4c" class="outline-3">
+<h3 id="orgfb68e4c"><span class="section-number-3">1.1</span> A First Look at Function Templates</h3>
 <div class="outline-text-3" id="text-1-1">
-</div>
-<div id="outline-container-orgfb68e4c" class="outline-4">
-<h4 id="orgfb68e4c"><span class="section-number-4">1.1.1</span> A First Look at Function Templates</h4>
-<div class="outline-text-4" id="text-1-1-1">
 <p>
 defining a simple function template
 </p>
@@ -202,9 +194,9 @@ first phase, otherwise it's in second phase.
 </div>
 </div>
 
-<div id="outline-container-orgc976821" class="outline-4">
-<h4 id="orgc976821"><span class="section-number-4">1.1.2</span> Template Argument Deduction (模板参数推断)</h4>
-<div class="outline-text-4" id="text-1-1-2">
+<div id="outline-container-orgc976821" class="outline-3">
+<h3 id="orgc976821"><span class="section-number-3">1.2</span> Template Argument Deduction (模板参数推断)</h3>
+<div class="outline-text-3" id="text-1-2">
 <p>
 if we call <code>::max</code> with <code>(1, 2)</code>, obviously the argument type is deduced as <code>int</code>. But
 sometimes argument deduction is difficult. <code>T</code> can be <b>part</b> of the type.
@@ -282,9 +274,9 @@ f<span style="color: #cc0000; font-weight: bold;">()</span>;   <span style="colo
 </div>
 </div>
 
-<div id="outline-container-org7feab0e" class="outline-4">
-<h4 id="org7feab0e"><span class="section-number-4">1.1.3</span> 多参数模板</h4>
-<div class="outline-text-4" id="text-1-1-3">
+<div id="outline-container-org7feab0e" class="outline-3">
+<h3 id="org7feab0e"><span class="section-number-3">1.3</span> 多参数模板</h3>
+<div class="outline-text-3" id="text-1-3">
 <p>
 上面我们定义的 <code>max</code> 函数模板只能用于比较两个同类型的对象，当我们希望比较不同类型
 的对象时我们就需要多参数模板
@@ -309,9 +301,9 @@ f<span style="color: #cc0000; font-weight: bold;">()</span>;   <span style="colo
 </p>
 </div>
 
-<div id="outline-container-orgbbd5acf" class="outline-5">
-<h5 id="orgbbd5acf"><span class="section-number-5">1.1.3.1</span> 第一种解决方法是引入一个模板参数作为返回类型</h5>
-<div class="outline-text-5" id="text-1-1-3-1">
+<div id="outline-container-orgbbd5acf" class="outline-4">
+<h4 id="orgbbd5acf"><span class="section-number-4">1.3.1</span> 第一种解决方法是引入一个模板参数作为返回类型</h4>
+<div class="outline-text-4" id="text-1-3-1">
 <p>
 调用函数模板时可以不指明模板参数，此时会进行自动推断，但套用到返回值类型上就失效
 了。因为模板其实是自动化重载的过程，重载不考虑返回值类型，那么模板也就无法对返回
@@ -339,9 +331,9 @@ f<span style="color: #cc0000; font-weight: bold;">()</span>;   <span style="colo
 </div>
 </div>
 
-<div id="outline-container-orge337ec6" class="outline-5">
-<h5 id="orge337ec6"><span class="section-number-5">1.1.3.2</span> 第二种解决方法是利用自动类型推断&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CPP14">CPP14</span></span></h5>
-<div class="outline-text-5" id="text-1-1-3-2">
+<div id="outline-container-orge337ec6" class="outline-4">
+<h4 id="orge337ec6"><span class="section-number-4">1.3.2</span> 第二种解决方法是利用自动类型推断&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CPP14">CPP14</span></span></h4>
+<div class="outline-text-4" id="text-1-3-2">
 <p>
 使用 <code>auto</code> 关键字使编译器从返回语句中进行自动类型推导，当然这个类型是从函数体的返
 回值类型推导出来的
@@ -397,9 +389,9 @@ f<span style="color: #cc0000; font-weight: bold;">()</span>;   <span style="colo
 </div>
 </div>
 
-<div id="outline-container-org50ce0b0" class="outline-5">
-<h5 id="org50ce0b0"><span class="section-number-5">1.1.3.3</span> 第三种解决方法是返回一个 <code>common_type</code>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CPP11">CPP11</span></span></h5>
-<div class="outline-text-5" id="text-1-1-3-3">
+<div id="outline-container-org50ce0b0" class="outline-4">
+<h4 id="org50ce0b0"><span class="section-number-4">1.3.3</span> 第三种解决方法是返回一个 <code>common_type</code>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CPP11">CPP11</span></span></h4>
+<div class="outline-text-4" id="text-1-3-3">
 <p>
 使用 <code>std::common_type&lt;&gt;::type</code> 生成两个不同类型的通用类型，从 C++11 开始可以使用
 <code>typename std::common_type&lt;T1, T2&gt;::type</code> ，从 C++14 开始可简化为
@@ -429,9 +421,9 @@ f<span style="color: #cc0000; font-weight: bold;">()</span>;   <span style="colo
 </div>
 </div>
 
-<div id="outline-container-orgc790a48" class="outline-4">
-<h4 id="orgc790a48"><span class="section-number-4">1.1.4</span> 默认模板参数</h4>
-<div class="outline-text-4" id="text-1-1-4">
+<div id="outline-container-orgc790a48" class="outline-3">
+<h3 id="orgc790a48"><span class="section-number-3">1.4</span> 默认模板参数</h3>
+<div class="outline-text-3" id="text-1-4">
 <p>
 对于上面的例子，如果我们希望返回值通过自动推导得出，同时也提供手动指定返回类型的
 灵活性，我们就会用到默认模板参数
@@ -483,9 +475,9 @@ b is 7.2
 </div>
 </div>
 
-<div id="outline-container-org9684567" class="outline-4">
-<h4 id="org9684567"><span class="section-number-4">1.1.5</span> 函数模板重载</h4>
-<div class="outline-text-4" id="text-1-1-5">
+<div id="outline-container-org9684567" class="outline-3">
+<h3 id="org9684567"><span class="section-number-3">1.5</span> 函数模板重载</h3>
+<div class="outline-text-3" id="text-1-5">
 <p>
 函数模板本来就是一系列函数的重载，那么重载函数模板也合情合理
 </p>
@@ -736,17 +728,17 @@ T max(T a, T b)
 </div>
 </div>
 
-<div id="outline-container-org02e8074" class="outline-3">
-<h3 id="org02e8074"><span class="section-number-3">1.2</span> 类模板</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-org02e8074" class="outline-2">
+<h2 id="org02e8074"><span class="section-number-2">2</span> 类模板</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 类模板最常见的用法是实现泛型容器类
 </p>
 </div>
 
-<div id="outline-container-org79edfd4" class="outline-4">
-<h4 id="org79edfd4"><span class="section-number-4">1.2.1</span> 实现 <code>Stack</code> 类模板</h4>
-<div class="outline-text-4" id="text-1-2-1">
+<div id="outline-container-org79edfd4" class="outline-3">
+<h3 id="org79edfd4"><span class="section-number-3">2.1</span> 实现 <code>Stack</code> 类模板</h3>
+<div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
 <span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">string</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
@@ -831,9 +823,9 @@ world!
 </div>
 </div>
 
-<div id="outline-container-orgd767254" class="outline-4">
-<h4 id="orgd767254"><span class="section-number-4">1.2.2</span> 模板的非完整使用</h4>
-<div class="outline-text-4" id="text-1-2-2">
+<div id="outline-container-orgd767254" class="outline-3">
+<h3 id="orgd767254"><span class="section-number-3">2.2</span> 模板的非完整使用</h3>
+<div class="outline-text-3" id="text-2-2">
 <p>
 模板参数类无需提供所有类模板成员函数中的所有实现，只需提供用到的实现即可保证编译
 通过
@@ -902,9 +894,9 @@ world!
 </div>
 </div>
 
-<div id="outline-container-org4f50859" class="outline-4">
-<h4 id="org4f50859"><span class="section-number-4">1.2.3</span> 类模板友元函数</h4>
-<div class="outline-text-4" id="text-1-2-3">
+<div id="outline-container-org4f50859" class="outline-3">
+<h3 id="org4f50859"><span class="section-number-3">2.3</span> 类模板友元函数</h3>
+<div class="outline-text-3" id="text-2-3">
 <p>
 相对于实现一个打印的成员函数，一种更通用的做法是重载 <code>&lt;&lt;</code> 运算符
 </p>
@@ -989,9 +981,9 @@ world!
 </div>
 </div>
 
-<div id="outline-container-orgc25df84" class="outline-4">
-<h4 id="orgc25df84"><span class="section-number-4">1.2.4</span> 类模板特化</h4>
-<div class="outline-text-4" id="text-1-2-4">
+<div id="outline-container-orgc25df84" class="outline-3">
+<h3 id="orgc25df84"><span class="section-number-3">2.4</span> 类模板特化</h3>
+<div class="outline-text-3" id="text-2-4">
 <p>
 将泛型特化为具体类型
 </p>
@@ -1078,9 +1070,9 @@ world
 </div>
 </div>
 
-<div id="outline-container-org7df38e9" class="outline-4">
-<h4 id="org7df38e9"><span class="section-number-4">1.2.5</span> 偏特化（部分特化）</h4>
-<div class="outline-text-4" id="text-1-2-5">
+<div id="outline-container-org7df38e9" class="outline-3">
+<h3 id="org7df38e9"><span class="section-number-3">2.5</span> 偏特化（部分特化）</h3>
+<div class="outline-text-3" id="text-2-5">
 <p>
 进行部分的特化，同时仍保留一定的泛型能力
 </p>
@@ -1248,16 +1240,16 @@ C&lt;T1*, T2*&gt;
 </div>
 </div>
 </div>
+<div id="outline-container-org033fb07" class="outline-2">
+<h2 id="org033fb07"><span class="section-number-2">3</span> 变参模板</h2>
+<div class="outline-text-2" id="text-3">
+</div>
 <div id="outline-container-org4c793f2" class="outline-3">
-<h3 id="org4c793f2"><span class="section-number-3">1.3</span> 变参模板</h3>
-<div class="outline-text-3" id="text-1-3">
+<h3 id="org4c793f2"><span class="section-number-3">3.1</span> <span class="todo TODO">TODO</span> 变参模板</h3>
 </div>
-<div id="outline-container-orgcfc160a" class="outline-4">
-<h4 id="orgcfc160a"><span class="section-number-4">1.3.1</span> <span class="todo TODO">TODO</span> 变参模板</h4>
-</div>
-<div id="outline-container-org9dc5ee0" class="outline-4">
-<h4 id="org9dc5ee0"><span class="section-number-4">1.3.2</span> <span class="todo TODO">TODO</span> 折叠表达式&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CPP17">CPP17</span></span></h4>
-<div class="outline-text-4" id="text-1-3-2">
+<div id="outline-container-org9dc5ee0" class="outline-3">
+<h3 id="org9dc5ee0"><span class="section-number-3">3.2</span> <span class="todo TODO">TODO</span> 折叠表达式&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CPP17">CPP17</span></span></h3>
+<div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 <pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
 
@@ -1331,12 +1323,12 @@ hello world hello C++
 </div>
 </div>
 
-<div id="outline-container-org002aa1d" class="outline-4">
-<h4 id="org002aa1d"><span class="section-number-4">1.3.3</span> <span class="todo TODO">TODO</span> </h4>
+<div id="outline-container-org002aa1d" class="outline-3">
+<h3 id="org002aa1d"><span class="section-number-3">3.3</span> <span class="todo TODO">TODO</span> </h3>
 </div>
-<div id="outline-container-orgd899b2f" class="outline-4">
-<h4 id="orgd899b2f"><span class="section-number-4">1.3.4</span> <span class="todo TODO">TODO</span> 变参类模板和变参表达式</h4>
-<div class="outline-text-4" id="text-1-3-4">
+<div id="outline-container-orgd899b2f" class="outline-3">
+<h3 id="orgd899b2f"><span class="section-number-3">3.4</span> <span class="todo TODO">TODO</span> 变参类模板和变参表达式</h3>
+<div class="outline-text-3" id="text-3-4">
 <p>
 变参切片
 </p>
@@ -1480,13 +1472,12 @@ All arguments are not same.
 </div>
 </div>
 </div>
-</div>
 <div id="postamble" class="status">
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-06-09 Tue 15:51></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
-      <div id="built">Built: <2020-06-14 Sun 23:40></div>
+      <div id="built">Built: <2020-06-15 Mon 22:28></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
