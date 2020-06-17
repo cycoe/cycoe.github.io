@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2020-06-17 Wed 17:38 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>与 C++ 的第一类接触-引言</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Cycoe">
+<link rel="stylesheet" type="text/css" href="/static/css/default.css" />
+<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+<script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div id="top-container">
+  <a id="site-name" href="/">Cycoe<span id="at-home">@Home</span></a>
+  <div id="banner">Keep It Simple Stupid</div>
+</div>
+
+<div id="top-nav">
+  <div id="nav-wrapper">
+    <div class="nav-btn" id="toc-wrapper">
+      <span class="vertical-align">Ξ</span>
+      <div id="go-top">
+        <a href="javascript:window.scrollTo(0,0)" style="color: black !important; border-bottom: none !important;" class="tooltip" title="Go to the top of the page">
+        <span class="top">&uarr;</span>
+        </a></div>
+    </div>
+    <div id="nav-left-wrapper">
+      <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
+      <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
+      <div id="nav-title-wrapper">
+        <span id="nav-title">与 C++ 的第一类接触-引言</span>
+        <span id="nav-date">Written @<2020-05-27 Wed 21:31></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div id="img-modal" class="modal">
+  <!-- The Close Button -->
+  <span class="close">&times;</span>
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content" id="img-wrapper">
+  <!-- Modal Caption (Image Text) -->
+  <div id="caption"></div>
+</div>
+</div>
+<div id="content">
+<header>
+<h1 class="title">与 C++ 的第一类接触-引言</h1>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org30b8051">1. 引言</a>
+<ul>
+<li><a href="#orgd5d7a65">1.1. 基本的输入输出</a></li>
+<li><a href="#orgdf9ba0a">1.2. 使用循环读取标准输入</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<p>
+最近开始看 <i>C++ Primer</i> 这本书，C++ 这种缝合怪学起来还是非常有满足感的。本文记录一
+下学习过程中遇到的知识点，因为之前有了 C 基础，因此主要记录与 C 代码不同的地方。
+</p>
+
+<!-- more -->
+
+<div id="outline-container-org30b8051" class="outline-2">
+<h2 id="org30b8051"><span class="section-number-2">1</span> 引言</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orgd5d7a65" class="outline-3">
+<h3 id="orgd5d7a65"><span class="section-number-3">1.1</span> 基本的输入输出</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+基本的输入输出使用 <code>iostream</code> 对象，其中 <code>cin</code> 是输入流对象， <code>cout</code> 是输出流对象，
+<code>std</code> 是变量的命名空间。
+</p>
+
+<table id="org290ff13">
+
+
+<colgroup>
+<col  class="org-right">
+
+<col  class="org-right">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">5</td>
+<td class="org-right">6</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">v1</span> = 0, <span style="color: #ff8700;">v2</span> = 0;
+
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&lt;&lt; &#36816;&#31639;&#31526;&#20250;&#36820;&#22238;&#24038;&#20391;&#30340; iostream &#23545;&#35937;</span>
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">std::endl &#20250; flush stream buffer</span>
+<span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Enter two numbers:"</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#31561;&#20215;&#20110; std::cin &gt;&gt; v1; std::cin &gt;&gt; v2;</span>
+<span style="color: #1f5bff;">std</span>::cin &gt;&gt; v1 &gt;&gt; v2;
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20026;&#26041;&#20415;&#28436;&#31034;&#65292;&#20351;&#29992; table: input-1 &#20013;&#30340;&#25968;&#25454;&#20316;&#20026;&#36755;&#20837;&#25968;&#25454;</span>
+v1 = input<span style="color: #cc0000; font-weight: bold;">[</span>0<span style="color: #cc0000; font-weight: bold;">][</span>0<span style="color: #cc0000; font-weight: bold;">]</span>;
+v2 = input<span style="color: #cc0000; font-weight: bold;">[</span>0<span style="color: #cc0000; font-weight: bold;">][</span>1<span style="color: #cc0000; font-weight: bold;">]</span>;
+<span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"The sum of "</span> &lt;&lt; v1 &lt;&lt; <span style="color: #ff1f8b;">" and "</span> &lt;&lt; v2
+&lt;&lt; <span style="color: #ff1f8b;">" is "</span> &lt;&lt; v1 + v2 &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+</pre>
+</div>
+
+<pre class="example">
+Enter two numbers:
+The sum of 5 and 6 is 11
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgdf9ba0a" class="outline-3">
+<h3 id="orgdf9ba0a"><span class="section-number-3">1.2</span> 使用循环读取标准输入</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">sum</span> = 0, <span style="color: #ff8700;">val</span> = 0;
+
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#37325;&#22797;&#35835;&#21462;&#21040; EOF &#26102;&#32467;&#26463;&#65292;&#22312; UNIX &#31995;&#32479;&#20013;&#20351;&#29992; Ctrl-D</span>
+<span style="color: #00af00;">while</span> <span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::cin &gt;&gt; val<span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  sum += val;
+ <span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Sum is: "</span>
+&lt;&lt; sum &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="author-info">
+      <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
+      <div id="date">Date: <2020-05-27 Wed 21:31></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
+      <div id="built">Built: <2020-06-17 Wed 17:38></div>
+      </div><div id="copyright">
+    <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
+</div>
+</div>
+</body>
+</html>

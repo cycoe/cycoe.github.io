@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2020-06-17 Wed 17:39 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>与 C++ 的第五类接触-语句</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Cycoe">
+<link rel="stylesheet" type="text/css" href="/static/css/default.css" />
+<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+<script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div id="top-container">
+  <a id="site-name" href="/">Cycoe<span id="at-home">@Home</span></a>
+  <div id="banner">Keep It Simple Stupid</div>
+</div>
+
+<div id="top-nav">
+  <div id="nav-wrapper">
+    <div class="nav-btn" id="toc-wrapper">
+      <span class="vertical-align">Ξ</span>
+      <div id="go-top">
+        <a href="javascript:window.scrollTo(0,0)" style="color: black !important; border-bottom: none !important;" class="tooltip" title="Go to the top of the page">
+        <span class="top">&uarr;</span>
+        </a></div>
+    </div>
+    <div id="nav-left-wrapper">
+      <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
+      <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
+      <div id="nav-title-wrapper">
+        <span id="nav-title">与 C++ 的第五类接触-语句</span>
+        <span id="nav-date">Written @<2020-06-02 Tue 23:12></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div id="img-modal" class="modal">
+  <!-- The Close Button -->
+  <span class="close">&times;</span>
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content" id="img-wrapper">
+  <!-- Modal Caption (Image Text) -->
+  <div id="caption"></div>
+</div>
+</div>
+<div id="content">
+<header>
+<h1 class="title">与 C++ 的第五类接触-语句</h1>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org5ce13b4">1. 语句</a>
+<ul>
+<li><a href="#orgeaa50f4">1.1. try 语句块与异常处理</a>
+<ul>
+<li><a href="#orge613eb8">1.1.1. throw 表达式</a></li>
+<li><a href="#orgdfdd252">1.1.2. <code>try</code> 语句块</a></li>
+<li><a href="#org722615b">1.1.3. 异常类</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<!-- more -->
+
+<div id="outline-container-org5ce13b4" class="outline-2">
+<h2 id="org5ce13b4"><span class="section-number-2">1</span> 语句</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orgeaa50f4" class="outline-3">
+<h3 id="orgeaa50f4"><span class="section-number-3">1.1</span> try 语句块与异常处理</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+在 C++ 中，异常处理包括：
+</p>
+<ul class="org-ul">
+<li><code>throw</code> 表达式，用于抛出异常</li>
+<li><code>try</code> 语句块，包含一个或多个 <code>catch</code> 子句</li>
+<li>一套 <code>异常类</code> ，用于在 <code>throw</code> 表达式和相关 <code>catch</code> 子句间传递异常的具体信息</li>
+</ul>
+</div>
+
+<div id="outline-container-orge613eb8" class="outline-4">
+<h4 id="orge613eb8"><span class="section-number-4">1.1.1</span> throw 表达式</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+如下代码片断的功能为检查两个 <code>Sales_item</code> 对象是否具有相同的 <code>ISBN</code> ，是的话输出两个
+对象的和，不是的话返回失败
+</p>
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #18b2b2;">Sales_item</span> <span style="color: #ff8700;">item1</span>, <span style="color: #ff8700;">item2</span>;
+cin &gt;&gt; item1 &gt;&gt; item2;
+
+<span style="color: #00af00;">if</span> <span style="color: #cc0000; font-weight: bold;">(</span>item1.isbn<span style="color: #1f5bff; font-weight: bold;">()</span> == item2.isbn<span style="color: #1f5bff; font-weight: bold;">()</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  cout &lt;&lt; item1 + item2 &lt;&lt; endl;
+  <span style="color: #00af00;">return</span> 0;
+ <span style="color: #cc0000; font-weight: bold;">}</span> <span style="color: #00af00;">else</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  cerr &lt;&lt; <span style="color: #ff1f8b;">"Data must refer to same ISBN"</span> &lt;&lt; endl;
+  <span style="color: #00af00;">return</span> -1;
+ <span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<p>
+但在实际的程序中，我们可以会想在其它位置处理错误，此时我们不再直接输出一条信息，
+而是抛出一个异常
+</p>
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#33509; ISBN &#19981;&#30456;&#21516;&#25243;&#20986;&#24322;&#24120;</span>
+<span style="color: #00af00;">if</span> <span style="color: #cc0000; font-weight: bold;">(</span>item1.isbn<span style="color: #1f5bff; font-weight: bold;">()</span> != item2.isbn<span style="color: #1f5bff; font-weight: bold;">()</span><span style="color: #cc0000; font-weight: bold;">)</span>
+  <span style="color: #00af00;">throw</span> runtime_error<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Data must refer to same ISBN"</span><span style="color: #cc0000; font-weight: bold;">)</span>;
+cout &lt;&lt; item1 + item2 &lt;&lt; endl;
+</pre>
+</div>
+
+<p>
+其中 <code>runtime_error</code> 是标准异常类型的一种，定义在 <code>stdexcept</code> 头文件中。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgdfdd252" class="outline-4">
+<h4 id="orgdfdd252"><span class="section-number-4">1.1.2</span> <code>try</code> 语句块</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">try</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  program-statements;
+ <span style="color: #cc0000; font-weight: bold;">}</span> <span style="color: #00af00;">catch</span> <span style="color: #cc0000; font-weight: bold;">(</span>exception-declaration<span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  handler-statements;
+ <span style="color: #cc0000; font-weight: bold;">}</span> <span style="color: #00af00;">catch</span> <span style="color: #cc0000; font-weight: bold;">(</span>exception-declaration<span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  handler-statements;
+ <span style="color: #cc0000; font-weight: bold;">}</span> <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">...</span>
+</pre>
+</div>
+
+<p>
+为代码加上错误处理
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">while</span> <span style="color: #cc0000; font-weight: bold;">(</span>cin &gt;&gt; item1 &gt;&gt; item2<span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">try</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27492;&#22788;&#28155;&#21152;&#20004;&#20010; Sales_item &#23545;&#35937;&#30340;&#20195;&#30721;</span>
+    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#22914;&#26524;&#22833;&#36133;&#25243;&#20986;&#19968;&#20010; runtime_error &#24322;&#24120;</span>
+  <span style="color: #1f5bff; font-weight: bold;">}</span> <span style="color: #00af00;">catch</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">runtime_error</span> <span style="color: #ff8700;">err</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#25552;&#37266;&#29992;&#25143;&#20004;&#20010; ISBN &#24517;&#39035;&#19968;&#33268;&#65292;&#35810;&#38382;&#26159;&#21542;&#37325;&#26032;&#36755;&#20837;</span>
+    cout &lt;&lt; err.what<span style="color: #00af00; font-weight: bold;">()</span>
+         &lt;&lt; <span style="color: #ff1f8b;">"\nTry Again?(y/n)"</span> &lt;&lt; endl;
+    <span style="color: #18b2b2;">char</span> <span style="color: #ff8700;">c</span>;
+    cin &gt;&gt; c;
+    <span style="color: #00af00;">if</span> <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #cc0000;">!</span>cin || c == <span style="color: #ff1f8b;">'n'</span><span style="color: #00af00; font-weight: bold;">)</span>
+      <span style="color: #00af00;">break</span>;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+ <span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org722615b" class="outline-4">
+<h4 id="org722615b"><span class="section-number-4">1.1.3</span> 异常类</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<p>
+<code>&lt;stdexcept&gt;</code> 中定义了一些异常类
+</p>
+
+
+<figure>
+<img src="./C++-学习记录/Screenshot_20200531_194606_v3CH8o.png" alt="Screenshot_20200531_194606_v3CH8o.png">
+
+<figcaption><span class="figure-number">Figure 1: </span>&lt;stdexcept&gt; 中定义的异常类</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="author-info">
+      <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
+      <div id="date">Date: <2020-06-02 Tue 23:12></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
+      <div id="built">Built: <2020-06-17 Wed 17:39></div>
+      </div><div id="copyright">
+    <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
+</div>
+</div>
+</body>
+</html>
