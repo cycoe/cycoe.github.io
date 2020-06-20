@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-06-17 Wed 17:58 -->
+<!-- 2020-06-20 Sat 21:47 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>与 C++ 的第七类接触-类</title>
@@ -79,6 +79,11 @@
 <li><a href="#orga3ff4de">1.3.2. 返回 <code>*this</code> 的成员函数</a></li>
 <li><a href="#org1547be8">1.3.3. 类类型</a></li>
 <li><a href="#org82e553b">1.3.4. 友元再探</a></li>
+</ul>
+</li>
+<li><a href="#org14cbe90">1.4. 类的作用域</a>
+<ul>
+<li><a href="#org5ff8c7d">1.4.1. 名字查找与类的作用域</a></li>
 </ul>
 </li>
 </ul>
@@ -541,7 +546,7 @@ Revenue is 325
 <span style="color: #00af00;">public</span>:
   <span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">count</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #00af00;">const</span>;
   <span style="color: #18b2b2;">size_t</span> <span style="color: #ef2929;">get_count</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #1f5bff; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> access_ctr; <span style="color: #1f5bff; font-weight: bold;">}</span>
- <span style="color: #00af00;">private</span>:
+<span style="color: #00af00;">private</span>:
   <span style="color: #00af00;">mutable</span> <span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">access_ctr</span> = 0;    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#21363;&#20351;&#22312; const &#23545;&#35937;&#20869;&#20063;&#33021;&#34987;&#20462;&#25913;</span>
   <span style="color: #b2b2b2; font-style: italic;">/*</span>
 <span style="color: #b2b2b2; font-style: italic;">   * &#20854;&#23427;&#25104;&#21592;</span>
@@ -846,7 +851,7 @@ Particle two has type B
 
 <p>
 也可以仅将成员函数作为友元，如为 <code>set_type</code> 提供 <code>Particle</code> 类的访问权限，但此时必须
-仔细地组织声明和定义的顺序
+仔细地组织声明和定义的顺序。
 </p>
 
 <div class="org-src-container">
@@ -941,7 +946,55 @@ Particle zero has type Huge
 Particle one has type Small
 Particle two has type Huge
 </pre>
+
+<p>
+类和非成员函数的声明不是必须在友元声明之前，当一个名字第一次出现在一个友元声明中
+时，我们默认该名字在当前作用域是可见的，这与调用函数不同
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #00af00;">struct</span> <span style="color: #18b2b2;">X</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">friend</span> <span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">f</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #1f5bff; font-weight: bold;">{</span> <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #ef2929;">X</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #1f5bff; font-weight: bold;">{</span> f<span style="color: #00af00; font-weight: bold;">()</span>; <span style="color: #1f5bff; font-weight: bold;">}</span>               <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#38169;&#35823;&#65306;f &#36824;&#26410;&#22768;&#26126;</span>
+  <span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">g</span><span style="color: #1f5bff; font-weight: bold;">()</span>;
+  <span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">h</span><span style="color: #1f5bff; font-weight: bold;">()</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>;
+
+<span style="color: #18b2b2;">void</span> <span style="color: #1f5bff;">X</span>::<span style="color: #ef2929;">g</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> f<span style="color: #1f5bff; font-weight: bold;">()</span>; <span style="color: #cc0000; font-weight: bold;">}</span>  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#38169;&#35823;&#65306;f &#36824;&#26410;&#22768;&#26126;</span>
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">f</span><span style="color: #cc0000; font-weight: bold;">()</span>;                    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#22768;&#26126; f()</span>
+<span style="color: #18b2b2;">void</span> <span style="color: #1f5bff;">X</span>::<span style="color: #ef2929;">h</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> f<span style="color: #1f5bff; font-weight: bold;">()</span>; <span style="color: #cc0000; font-weight: bold;">}</span>  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27491;&#30830;&#65306;&#27492;&#26102; f() &#24050;&#22768;&#26126;</span>
+</pre>
 </div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org14cbe90" class="outline-3">
+<h3 id="org14cbe90"><span class="section-number-3">1.4</span> 类的作用域</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+在定义类时，花括号内部为类内作用域。在类的作用域外部，只能通过对象、引用或指针使
+用成员访问运算符 <code>.</code> 或 <code>-&gt;</code> 来访问成员。当我们在类外部定义成员时，则需要同时提供类
+名和函数名。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#19968;&#26086;&#36935;&#21040;&#31867;&#21517;&#65292;&#23450;&#20041;&#30340;&#21097;&#20313;&#37096;&#20998;&#23601;&#22312;&#31867;&#30340;&#20316;&#29992;&#22495;&#20869;&#20102;</span>
+<span style="color: #00af00;">const</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span>&amp; <span style="color: #1f5bff;">Particle</span>::<span style="color: #ef2929;">get_type</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #00af00;">const</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27492;&#22788;&#22312;&#31867;&#30340;&#20316;&#29992;&#22495;&#20869;&#65292;&#22240;&#27492;&#30452;&#25509;&#20351;&#29992; type</span>
+  <span style="color: #00af00;">return</span> type;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20294;&#26159;&#24403;&#36820;&#22238;&#31867;&#22411;&#26159;&#31867;&#30340;&#25104;&#21592;&#31867;&#22411;&#26102;&#65292;&#38656;&#35201;&#25351;&#23450;&#31867;&#21517;&#65292;&#22240;&#20026;&#36820;&#22238;&#31867;&#22411;&#19981;&#22312;&#31867;&#30340;&#20316;&#29992;&#22495;&#20869;</span>
+<span style="color: #1f5bff;">Particle</span>::<span style="color: #18b2b2;">pos</span> <span style="color: #1f5bff;">Particle</span>::<span style="color: #ef2929;">get_x</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #00af00;">const</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">return</span> x;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org5ff8c7d" class="outline-4">
+<h4 id="org5ff8c7d"><span class="section-number-4">1.4.1</span> 名字查找与类的作用域</h4>
 </div>
 </div>
 </div>
@@ -951,7 +1004,7 @@ Particle two has type Huge
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-06-08 Mon 14:12></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
-      <div id="built">Built: <2020-06-17 Wed 17:58></div>
+      <div id="built">Built: <2020-06-20 Sat 21:47></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
