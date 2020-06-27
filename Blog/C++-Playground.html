@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-06-24 Wed 23:30 -->
+<!-- 2020-06-27 Sat 23:58 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>C++ Playground</title>
@@ -62,6 +62,9 @@
 <li><a href="#orgc42a45c">4. 可变参数模板</a></li>
 <li><a href="#orge8728ba">5. <span class="todo TODO">TODO</span> 几种初始化方法的区别</a></li>
 <li><a href="#orge0896ef">6. 实现 <code>for_each</code></a></li>
+<li><a href="#org6c1be8d">7. <code>std::vector</code> 内存分配策略</a></li>
+<li><a href="#org9c7d119">8. <code>std::string</code> 的一些操作</a></li>
+<li><a href="#org26872e7">9. 泛型算法</a></li>
 </ul>
 </div>
 </nav>
@@ -519,13 +522,247 @@ Integral of ln(x) in [1, 5] is 4.04638
 </pre>
 </div>
 </div>
+
+<div id="outline-container-org6c1be8d" class="outline-2">
+<h2 id="org6c1be8d"><span class="section-number-2">7</span> <code>std::vector</code> 内存分配策略</h2>
+<div class="outline-text-2" id="text-7">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">vector</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">vector</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">int</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">ivec</span>;
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#22312;&#28155;&#21152;&#20803;&#32032;&#20043;&#21069;&#30340;&#23481;&#37327;</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Capacity is "</span> &lt;&lt; ivec.capacity<span style="color: #1f5bff; font-weight: bold;">()</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#28155;&#21152; 24 &#20010;&#20803;&#32032;</span>
+  <span style="color: #00af00;">for</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #1f5bff;">vector</span><span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">int</span><span style="color: #00af00; font-weight: bold;">&gt;</span>::<span style="color: #18b2b2;">size_type</span> <span style="color: #ff8700;">pos</span> = 0; pos &lt; 24; ++pos<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    ivec.push_back<span style="color: #00af00; font-weight: bold;">(</span>pos<span style="color: #00af00; font-weight: bold;">)</span>;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">ivec &#22312;&#19981;&#35302;&#21457;&#37325;&#26032;&#20869;&#23384;&#20998;&#37197;&#20043;&#21069;&#21487;&#20445;&#23384;&#22810;&#23569;&#20010;&#20803;&#32032;</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Capacity is "</span> &lt;&lt; ivec.capacity<span style="color: #1f5bff; font-weight: bold;">()</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#23450;&#20445;&#30041; 24 &#20010;&#21487;&#29992;&#31354;&#38388;</span>
+  ivec.reserve<span style="color: #1f5bff; font-weight: bold;">(</span>24<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#24403;&#25351;&#23450;&#30340;&#20803;&#32032;&#20010;&#25968;&#23567;&#20110;&#23454;&#38469;&#30340;&#20010;&#25968;&#26102;&#65292;&#19981;&#20250;&#22238;&#25910;&#20869;&#23384;</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Capacity is "</span> &lt;&lt; ivec.capacity<span style="color: #1f5bff; font-weight: bold;">()</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#25351;&#23450;&#20445;&#30041; 48 &#20010;&#21487;&#29992;&#31354;&#38388;</span>
+  ivec.reserve<span style="color: #1f5bff; font-weight: bold;">(</span>48<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#24403;&#25351;&#23450;&#30340;&#20803;&#32032;&#20010;&#25968;&#22823;&#20110;&#23454;&#38469;&#30340;&#20010;&#25968;&#26102;&#65292;&#20250;&#25193;&#23637;&#20869;&#23384;</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Capacity is "</span> &lt;&lt; ivec.capacity<span style="color: #1f5bff; font-weight: bold;">()</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#25351;&#23450;&#22238;&#25910;&#22810;&#20313;&#20869;&#23384;&#65292;&#20855;&#20307;&#26159;&#21542;&#22238;&#25910;&#20915;&#23450;&#20110;&#32534;&#35793;&#22120;&#23454;&#29616;</span>
+  ivec.shrink_to_fit<span style="color: #1f5bff; font-weight: bold;">()</span>;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Capacity is "</span> &lt;&lt; ivec.capacity<span style="color: #1f5bff; font-weight: bold;">()</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">ivec &#30340;&#22823;&#23567;&#26159; 24 &#20010;&#23383;&#33410;&#65292;&#20445;&#23384;&#20102;&#19977;&#20010;&#25351;&#38024;&#65292;&#20998;&#21035;&#26159;&#21521;&#37327;&#22836;&#12289;&#21521;&#37327;&#23614;&#21518;&#12289;&#23481;&#37327;&#23614;&#21518;</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #00af00;">sizeof</span><span style="color: #1f5bff; font-weight: bold;">(</span>ivec<span style="color: #1f5bff; font-weight: bold;">)</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+Capacity is 0
+Capacity is 32
+Capacity is 32
+Capacity is 48
+Capacity is 24
+24
+</pre>
+</div>
+</div>
+<div id="outline-container-org9c7d119" class="outline-2">
+<h2 id="org9c7d119"><span class="section-number-2">8</span> <code>std::string</code> 的一些操作</h2>
+<div class="outline-text-2" id="text-8">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">string</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">vector</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
+
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">find_all</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">string</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">s</span>, <span style="color: #18b2b2;">string</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">pattern</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #1f5bff;">string</span>::<span style="color: #18b2b2;">size_type</span> <span style="color: #ff8700;">pos</span> = 0;
+  <span style="color: #00af00;">while</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00; font-weight: bold;">(</span>pos = s.find_first_of<span style="color: #ff4ea3; font-weight: bold;">(</span>pattern, pos<span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span> != <span style="color: #1f5bff;">string</span>::npos<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    cout &lt;&lt; <span style="color: #ff1f8b;">"Found index: "</span> &lt;&lt; pos
+         &lt;&lt; <span style="color: #ff1f8b;">", element is: "</span> &lt;&lt; s<span style="color: #00af00; font-weight: bold;">[</span>pos<span style="color: #00af00; font-weight: bold;">]</span> &lt;&lt; endl;
+    ++pos;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">RET</span>, <span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">Con</span>, <span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">Callable</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #18b2b2;">RET</span> <span style="color: #ef2929;">sum</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">Con</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">container</span>, <span style="color: #18b2b2;">Callable</span> <span style="color: #ff8700;">convert</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">RET</span> <span style="color: #ff8700;">ret</span><span style="color: #1f5bff; font-weight: bold;">{}</span>;
+  <span style="color: #00af00;">typename</span> <span style="color: #1f5bff;">Con</span>::<span style="color: #18b2b2;">const_iterator</span> <span style="color: #ff8700;">pos</span>;
+  <span style="color: #00af00;">typename</span> <span style="color: #1f5bff;">Con</span>::<span style="color: #18b2b2;">const_iterator</span> <span style="color: #ff8700;">end</span> = container.end<span style="color: #1f5bff; font-weight: bold;">()</span>;
+  <span style="color: #00af00;">for</span> <span style="color: #1f5bff; font-weight: bold;">(</span>pos = container.begin<span style="color: #00af00; font-weight: bold;">()</span>; pos != end; ++pos<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    ret += convert<span style="color: #00af00; font-weight: bold;">(</span>*pos<span style="color: #00af00; font-weight: bold;">)</span>;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #00af00;">return</span> ret;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s1</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Hello, world!"</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s2</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"world"</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">punct</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">",.!"</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+
+  find_all<span style="color: #1f5bff; font-weight: bold;">(</span>s1, punct<span style="color: #1f5bff; font-weight: bold;">)</span>;
+
+  <span style="color: #1f5bff;">string</span>::<span style="color: #18b2b2;">size_type</span> <span style="color: #ff8700;">pos</span> = 0;
+  <span style="color: #00af00;">if</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00; font-weight: bold;">(</span>pos = s1.find<span style="color: #ff4ea3; font-weight: bold;">(</span>s2<span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span> != <span style="color: #1f5bff;">string</span>::npos<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    cout &lt;&lt; <span style="color: #ff1f8b;">"Find "</span> &lt;&lt; s2 &lt;&lt; <span style="color: #ff1f8b;">" at index "</span> &lt;&lt; pos &lt;&lt; endl;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+
+  <span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s3</span>  = to_string<span style="color: #1f5bff; font-weight: bold;">(</span>123<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  cout &lt;&lt; s3 &lt;&lt; endl;
+  <span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">ival</span> = stoi<span style="color: #1f5bff; font-weight: bold;">(</span>s3<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  cout &lt;&lt; ival &lt;&lt; endl;
+  <span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s4</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"pi = 3.14159"</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #18b2b2;">double</span> <span style="color: #ff8700;">pi</span> = stod<span style="color: #1f5bff; font-weight: bold;">(</span>s4.substr<span style="color: #00af00; font-weight: bold;">(</span>s4.find_first_of<span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #ff1f8b;">"+-.1234567890"</span><span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  cout &lt;&lt; <span style="color: #ff1f8b;">"Pi is "</span> &lt;&lt; pi &lt;&lt; endl;
+
+  <span style="color: #18b2b2;">vector</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">string</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">string_with_digitals</span><span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #ff1f8b;">"3.14159"</span>,
+    <span style="color: #ff1f8b;">"2.71828"</span>,
+    <span style="color: #ff1f8b;">"1.41421"</span>
+  <span style="color: #1f5bff; font-weight: bold;">}</span>;
+  cout &lt;&lt; <span style="color: #ff1f8b;">"Sum of int is "</span> &lt;&lt; sum<span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">int</span><span style="color: #1f5bff; font-weight: bold;">&gt;(</span>string_with_digitals, <span style="color: #00af00; font-weight: bold;">[](</span><span style="color: #18b2b2;">string</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">s</span><span style="color: #00af00; font-weight: bold;">)</span> <span style="color: #00af00; font-weight: bold;">{</span>
+    <span style="color: #00af00;">return</span> stoi<span style="color: #ff4ea3; font-weight: bold;">(</span>s<span style="color: #ff4ea3; font-weight: bold;">)</span>;
+  <span style="color: #00af00; font-weight: bold;">}</span><span style="color: #1f5bff; font-weight: bold;">)</span> &lt;&lt; endl;
+  cout &lt;&lt; <span style="color: #ff1f8b;">"Sum of double is "</span> &lt;&lt; sum<span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">double</span><span style="color: #1f5bff; font-weight: bold;">&gt;(</span>string_with_digitals, <span style="color: #00af00; font-weight: bold;">[](</span><span style="color: #18b2b2;">string</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">s</span><span style="color: #00af00; font-weight: bold;">)</span> <span style="color: #00af00; font-weight: bold;">{</span>
+    <span style="color: #00af00;">return</span> stod<span style="color: #ff4ea3; font-weight: bold;">(</span>s<span style="color: #ff4ea3; font-weight: bold;">)</span>;
+  <span style="color: #00af00; font-weight: bold;">}</span><span style="color: #1f5bff; font-weight: bold;">)</span> &lt;&lt; endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+Found index: 5, element is: ,
+Found index: 12, element is: !
+Find world at index 7
+123
+123
+Pi is 3.14159
+Sum of int is 6
+Sum of double is 7.27408
+</pre>
+</div>
+</div>
+<div id="outline-container-org26872e7" class="outline-2">
+<h2 id="org26872e7"><span class="section-number-2">9</span> 泛型算法</h2>
+<div class="outline-text-2" id="text-9">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">algorithm</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">vector</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">list</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">vector</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">int</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">ivec</span><span style="color: #1f5bff; font-weight: bold;">{</span>1, 2, 3, 4, 5<span style="color: #1f5bff; font-weight: bold;">}</span>;
+  <span style="color: #18b2b2;">list</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">int</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">ilist</span><span style="color: #1f5bff; font-weight: bold;">{</span>1, 2, 3, 4, 5<span style="color: #1f5bff; font-weight: bold;">}</span>;
+  cout &lt;&lt; <span style="color: #ff1f8b;">"ivec and ilist is"</span>
+       &lt;&lt; <span style="color: #1f5bff; font-weight: bold;">(</span>equal<span style="color: #00af00; font-weight: bold;">(</span>ivec.cbegin<span style="color: #ff4ea3; font-weight: bold;">()</span>, ivec.cend<span style="color: #ff4ea3; font-weight: bold;">()</span>, ilist.cbegin<span style="color: #ff4ea3; font-weight: bold;">()</span><span style="color: #00af00; font-weight: bold;">)</span> ? <span style="color: #ff1f8b;">" "</span> : <span style="color: #ff1f8b;">" not "</span><span style="color: #1f5bff; font-weight: bold;">)</span>
+       &lt;&lt; <span style="color: #ff1f8b;">"same."</span> &lt;&lt; endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+ivec and ilist is same.
+</pre>
+
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">vector</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">numeric</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">vector</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">double</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">ivec</span><span style="color: #1f5bff; font-weight: bold;">{</span>1.2, 2.9, 3.4, 4.5, 5.5<span style="color: #1f5bff; font-weight: bold;">}</span>;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27880;&#24847;&#23545;&#20110;&#27867;&#22411;&#31639;&#27861;&#31532;&#19977;&#20010;&#21442;&#25968;&#38750;&#24120;&#37325;&#35201;&#65292;&#20915;&#23450;&#20102;&#36820;&#22238;&#20540;&#31867;&#22411;</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Sum is "</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::accumulate<span style="color: #1f5bff; font-weight: bold;">(</span>ivec.cbegin<span style="color: #00af00; font-weight: bold;">()</span>, ivec.cend<span style="color: #00af00; font-weight: bold;">()</span>, 0<span style="color: #1f5bff; font-weight: bold;">)</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Sum is "</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::accumulate<span style="color: #1f5bff; font-weight: bold;">(</span>ivec.cbegin<span style="color: #00af00; font-weight: bold;">()</span>, ivec.cend<span style="color: #00af00; font-weight: bold;">()</span>, .0<span style="color: #1f5bff; font-weight: bold;">)</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+Sum is 15
+Sum is 17.5
+</pre>
+
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">vector</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">algorithm</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">Iter</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">print_items</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">Iter</span> <span style="color: #ff8700;">__pos</span>, <span style="color: #18b2b2;">Iter</span> <span style="color: #00af00;">const</span> <span style="color: #ff8700;">__end</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">if</span> <span style="color: #1f5bff; font-weight: bold;">(</span>__pos == __end<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #00af00;">return</span>;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"["</span>;
+  <span style="color: #00af00;">for</span> <span style="color: #1f5bff; font-weight: bold;">(</span>; __pos != __end - 1; ++__pos<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #1f5bff;">std</span>::cout &lt;&lt; *__pos &lt;&lt; <span style="color: #ff1f8b;">"&#65292; "</span>;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; *__pos &lt;&lt; <span style="color: #ff1f8b;">"]"</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">vector</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">int</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">ivec</span><span style="color: #1f5bff; font-weight: bold;">{</span>0, 1, 2, 3, 0, 1, 2<span style="color: #1f5bff; font-weight: bold;">}</span>;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">vector</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">int</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">ivec_new</span>;
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23558; ivec &#20013;&#30340; 0 &#26367;&#25442;&#20026; 42 &#24182;&#20889;&#20837; ivec_new&#65292;&#27880;&#24847;&#27492;&#22788;&#30340; back_inserter &#29983;&#25104;&#20102;&#19968;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20010;&#25554;&#20837;&#36845;&#20195;&#22120;</span>
+  <span style="color: #1f5bff;">std</span>::replace_copy<span style="color: #1f5bff; font-weight: bold;">(</span>ivec.begin<span style="color: #00af00; font-weight: bold;">()</span>, ivec.end<span style="color: #00af00; font-weight: bold;">()</span>, <span style="color: #1f5bff;">std</span>::back_inserter<span style="color: #00af00; font-weight: bold;">(</span>ivec_new<span style="color: #00af00; font-weight: bold;">)</span>, 0, 42<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  print_items<span style="color: #1f5bff; font-weight: bold;">(</span>ivec_new.cbegin<span style="color: #00af00; font-weight: bold;">()</span>, ivec_new.cend<span style="color: #00af00; font-weight: bold;">()</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23558;&#22823;&#20110; 1 &#30340;&#20540;&#26367;&#25442;&#20026; 1&#65292;&#27880;&#24847;&#27492;&#22788;&#22240;&#20026; ivec_new &#20013;&#26412;&#26469;&#24050;&#32463;&#26377;&#30456;&#21516;&#25968;&#37327;&#30340;&#20540;&#65292;&#30452;&#25509;&#35206;&#30422;</span>
+  <span style="color: #1f5bff;">std</span>::replace_copy_if<span style="color: #1f5bff; font-weight: bold;">(</span>ivec.begin<span style="color: #00af00; font-weight: bold;">()</span>, ivec.end<span style="color: #00af00; font-weight: bold;">()</span>, ivec_new.begin<span style="color: #00af00; font-weight: bold;">()</span>,
+                       <span style="color: #00af00; font-weight: bold;">[](</span><span style="color: #18b2b2;">int</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">elem</span><span style="color: #00af00; font-weight: bold;">)</span> <span style="color: #00af00; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> elem &gt; 1; <span style="color: #00af00; font-weight: bold;">}</span>, 1<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  print_items<span style="color: #1f5bff; font-weight: bold;">(</span>ivec_new.cbegin<span style="color: #00af00; font-weight: bold;">()</span>, ivec_new.cend<span style="color: #00af00; font-weight: bold;">()</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#30452;&#25509;&#22312; ivec &#19978;&#20462;&#25913;</span>
+  <span style="color: #1f5bff;">std</span>::replace_if<span style="color: #1f5bff; font-weight: bold;">(</span>ivec.begin<span style="color: #00af00; font-weight: bold;">()</span>, ivec.end<span style="color: #00af00; font-weight: bold;">()</span>,
+                  <span style="color: #00af00; font-weight: bold;">[](</span><span style="color: #18b2b2;">int</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">elem</span><span style="color: #00af00; font-weight: bold;">)</span> <span style="color: #00af00; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> elem &gt; 1; <span style="color: #00af00; font-weight: bold;">}</span>, 1<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  print_items<span style="color: #1f5bff; font-weight: bold;">(</span>ivec.cbegin<span style="color: #00af00; font-weight: bold;">()</span>, ivec.cend<span style="color: #00af00; font-weight: bold;">()</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+
+  <span style="color: #1f5bff;">std</span>::fill<span style="color: #1f5bff; font-weight: bold;">(</span>ivec.begin<span style="color: #00af00; font-weight: bold;">()</span>, ivec.end<span style="color: #00af00; font-weight: bold;">()</span>, 0<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  print_items<span style="color: #1f5bff; font-weight: bold;">(</span>ivec.cbegin<span style="color: #00af00; font-weight: bold;">()</span>, ivec.cend<span style="color: #00af00; font-weight: bold;">()</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+
+  <span style="color: #00af00;">for</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">count</span> = 0; count &lt; 5; ++count<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    *<span style="color: #1f5bff;">std</span>::inserter<span style="color: #00af00; font-weight: bold;">(</span>ivec, ivec.begin<span style="color: #ff4ea3; font-weight: bold;">()</span> + 2<span style="color: #00af00; font-weight: bold;">)</span> = count + 1;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  print_items<span style="color: #1f5bff; font-weight: bold;">(</span>ivec.cbegin<span style="color: #00af00; font-weight: bold;">()</span>, ivec.cend<span style="color: #00af00; font-weight: bold;">()</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+
+  <span style="color: #00af00;">auto</span> <span style="color: #ff8700;">back_insertor</span> = <span style="color: #1f5bff;">std</span>::back_inserter<span style="color: #1f5bff; font-weight: bold;">(</span>ivec_new<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #00af00;">for</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">count</span> = 0; count &lt; 5; ++count<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    *back_insertor = count + 1;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  print_items<span style="color: #1f5bff; font-weight: bold;">(</span>ivec_new.cbegin<span style="color: #00af00; font-weight: bold;">()</span>, ivec_new.cend<span style="color: #00af00; font-weight: bold;">()</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+[42， 1， 2， 3， 42， 1， 2]
+[0， 1， 1， 1， 0， 1， 1]
+[0， 1， 1， 1， 0， 1， 1]
+[0， 0， 0， 0， 0， 0， 0]
+[0， 0， 5， 4， 3， 2， 1， 0， 0， 0， 0， 0]
+[0， 1， 1， 1， 0， 1， 1， 1， 2， 3， 4， 5]
+</pre>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-06-10 Wed 10:34></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
-      <div id="built">Built: <2020-06-24 Wed 23:30></div>
+      <div id="built">Built: <2020-06-27 Sat 23:58></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
