@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-06-29 Mon 20:58 -->
+<!-- 2020-07-01 Wed 23:14 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>C++ Playground</title>
@@ -69,6 +69,7 @@
 <li><a href="#org9675106">11. 关联容器</a></li>
 <li><a href="#org41e4f7b">12. <code>std::format</code></a></li>
 <li><a href="#orgad649d6">13. <code>range</code> 与 <code>view</code> 视图</a></li>
+<li><a href="#org772f49f">14. 动态内存</a></li>
 </ul>
 </div>
 </nav>
@@ -1309,6 +1310,149 @@ world occurs 2 times.
 (1, 3)
 (2, 4)
 </pre>
+
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">map</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">m &#20013;&#36827;&#34892;&#20102;&#20540;&#21021;&#22987;&#21270;&#65292;&#22240;&#27492; m &#20013;&#26377;&#20010; std::pair&lt;int, int&gt;(0, 0)</span>
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">map</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">int</span>, <span style="color: #18b2b2;">int</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">m</span>;
+  m<span style="color: #1f5bff; font-weight: bold;">[</span>0<span style="color: #1f5bff; font-weight: bold;">]</span> = 1;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; m.begin<span style="color: #1f5bff; font-weight: bold;">()</span>-&gt;first &lt;&lt; <span style="color: #ff1f8b;">", "</span> &lt;&lt; m.begin<span style="color: #1f5bff; font-weight: bold;">()</span>-&gt;second &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #00af00;">if</span><span style="color: #1f5bff; font-weight: bold;">(</span>m.find<span style="color: #00af00; font-weight: bold;">(</span>0<span style="color: #00af00; font-weight: bold;">)</span> != m.end<span style="color: #00af00; font-weight: bold;">()</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #00af00;">auto</span>&amp; <span style="color: #ff8700;">item</span> = *m.find<span style="color: #00af00; font-weight: bold;">(</span>0<span style="color: #00af00; font-weight: bold;">)</span>;
+    <span style="color: #1f5bff;">std</span>::cout &lt;&lt; item.first &lt;&lt; <span style="color: #ff1f8b;">", "</span> &lt;&lt; item.second &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+0, 1
+0, 1
+</pre>
+
+
+<p>
+从 <code>multimap</code> 中找出所有与 <code>key</code> 绑定的值
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">map</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">multimap</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::string, <span style="color: #1f5bff;">std</span>::string<span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">mm</span> = <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #00af00; font-weight: bold;">{</span><span style="color: #ff1f8b;">"duck"</span>, <span style="color: #ff1f8b;">"run"</span><span style="color: #00af00; font-weight: bold;">}</span>,
+    <span style="color: #00af00; font-weight: bold;">{</span><span style="color: #ff1f8b;">"dog"</span>, <span style="color: #ff1f8b;">"run"</span><span style="color: #00af00; font-weight: bold;">}</span>,
+    <span style="color: #00af00; font-weight: bold;">{</span><span style="color: #ff1f8b;">"duck"</span>, <span style="color: #ff1f8b;">"fly"</span><span style="color: #00af00; font-weight: bold;">}</span>
+  <span style="color: #1f5bff; font-weight: bold;">}</span>;
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#31532;&#19968;&#31181;&#26041;&#27861;&#26159;&#25163;&#21160;&#36941;&#21382; map</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"The first method to find duck."</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #00af00;">auto</span> <span style="color: #ff8700;">pos</span> = mm.begin<span style="color: #1f5bff; font-weight: bold;">()</span>;
+  <span style="color: #00af00;">while</span> <span style="color: #1f5bff; font-weight: bold;">(</span>pos != mm.end<span style="color: #00af00; font-weight: bold;">()</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #00af00;">if</span> <span style="color: #00af00; font-weight: bold;">(</span>pos-&gt;first == <span style="color: #ff1f8b;">"duck"</span><span style="color: #00af00; font-weight: bold;">)</span> <span style="color: #00af00; font-weight: bold;">{</span>
+      <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"duck can "</span> &lt;&lt; pos-&gt;second &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+    <span style="color: #00af00; font-weight: bold;">}</span>
+    ++pos;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#31532;&#20108;&#31181;&#26041;&#27861;&#26159;&#21033;&#29992; find &#21644; count</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"The second method to find duck."</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #00af00;">auto</span> <span style="color: #ff8700;">count</span> = mm.count<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"duck"</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #00af00;">auto</span> <span style="color: #ff8700;">entries</span> = mm.find<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"duck"</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #00af00;">while</span> <span style="color: #1f5bff; font-weight: bold;">(</span>count<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"duck can "</span> &lt;&lt; entries-&gt;second &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+    ++entries;
+    --count;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#31532;&#19977;&#31181;&#26041;&#27861;&#26159;&#21033;&#29992; lower_bound &#21644; upper_bound</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"The third method to find duck."</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #00af00;">for</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">auto</span> <span style="color: #ff8700;">beg</span> = mm.lower_bound<span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ff1f8b;">"duck"</span><span style="color: #00af00; font-weight: bold;">)</span>, <span style="color: #ff8700;">end</span> = mm.upper_bound<span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ff1f8b;">"duck"</span><span style="color: #00af00; font-weight: bold;">)</span>;
+       beg != end; ++beg<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"duck can "</span> &lt;&lt; beg-&gt;second &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#31532;&#22235;&#31181;&#26041;&#27861;&#26159;&#21033;&#29992; equal_range</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"The forth method to find duck."</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #00af00;">for</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">auto</span> <span style="color: #ff8700;">pos</span> = mm.equal_range<span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ff1f8b;">"duck"</span><span style="color: #00af00; font-weight: bold;">)</span>;
+       pos.first != pos.second; ++pos.first<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"duck can "</span> &lt;&lt; pos.first-&gt;second &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+The first method to find duck.
+duck can run
+duck can fly
+The second method to find duck.
+duck can run
+duck can fly
+The third method to find duck.
+duck can run
+duck can fly
+The forth method to find duck.
+duck can run
+duck can fly
+</pre>
+
+<p>
+将自定义的类型作为 <code>key</code> 时需要定义类型的哈希方法和 <code>==</code> 操作符
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">string</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">unordered_map</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">hash_map</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #00af00;">struct</span> <span style="color: #18b2b2;">Person</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #ef2929;">Person</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">__name</span>, <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">size_t</span> <span style="color: #00af00;">const</span> <span style="color: #ff8700;">__age</span><span style="color: #1f5bff; font-weight: bold;">)</span> :
+    name<span style="color: #1f5bff; font-weight: bold;">(</span>__name<span style="color: #1f5bff; font-weight: bold;">)</span>, age<span style="color: #1f5bff; font-weight: bold;">(</span>__age<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span> <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">name</span>;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">age</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>;
+
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#21704;&#24076;&#20989;&#25968;</span>
+<span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">size_t</span> <span style="color: #ef2929;">hasher</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">Person</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">__person</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">return</span> <span style="color: #1f5bff;">std</span>::hash<span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span><span style="color: #1f5bff; font-weight: bold;">&gt;()(</span>__person.name<span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">bool</span> <span style="color: #ef2929;">equal_person</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">Person</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">lhs</span>, <span style="color: #18b2b2;">Person</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">rhs</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">return</span> lhs.name == rhs.name;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23450;&#20041;&#31867;&#22411;&#21035;&#21517;&#65292;&#27604;&#19968;&#33324;&#30340; map &#22810;&#20004;&#20010;&#31867;&#22411;</span>
+  <span style="color: #00af00;">using</span> <span style="color: #18b2b2;">person_multimap</span> = <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">unordered_map</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">Person</span>,
+                                             <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span>,
+                                             <span style="color: #00af00;">decltype</span><span style="color: #00af00; font-weight: bold;">(</span>hasher<span style="color: #00af00; font-weight: bold;">)</span>*,
+                                             <span style="color: #00af00;">decltype</span><span style="color: #00af00; font-weight: bold;">(</span>equal_person<span style="color: #00af00; font-weight: bold;">)</span>*<span style="color: #1f5bff; font-weight: bold;">&gt;</span>;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23450;&#20041;&#30005;&#35805;&#34180;&#65292;24 &#26159;&#26742;&#30340;&#22823;&#23567;</span>
+  <span style="color: #18b2b2;">person_multimap</span> <span style="color: #ff8700;">book</span><span style="color: #1f5bff; font-weight: bold;">(</span>24, hasher, equal_person<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  book.insert<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::make_pair<span style="color: #00af00; font-weight: bold;">(</span>Person<span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Alisa"</span>, 25<span style="color: #ff4ea3; font-weight: bold;">)</span>, <span style="color: #ff1f8b;">"123-456-789"</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  book.insert<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::make_pair<span style="color: #00af00; font-weight: bold;">(</span>Person<span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Bob"</span>, 26<span style="color: #ff4ea3; font-weight: bold;">)</span>, <span style="color: #ff1f8b;">"324-783-192"</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  book.insert<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::make_pair<span style="color: #00af00; font-weight: bold;">(</span>Person<span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Tim"</span>, 23<span style="color: #ff4ea3; font-weight: bold;">)</span>, <span style="color: #ff1f8b;">"583-125-372"</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Alisa's telephone number is "</span>
+            &lt;&lt; book.find<span style="color: #1f5bff; font-weight: bold;">(</span>Person<span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Alisa"</span>, 25<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span>-&gt;second &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Bucket size of key Alisa is "</span>
+            &lt;&lt; book.bucket_size<span style="color: #1f5bff; font-weight: bold;">(</span>book.bucket<span style="color: #00af00; font-weight: bold;">(</span>Person<span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Alisa"</span>, 25<span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+Alisa's telephone number is 123-456-789
+Bucket size of key Alisa is 1
+</pre>
 </div>
 </div>
 
@@ -1404,6 +1548,349 @@ hello, world.
 <pre class="example">
 338350
 </pre>
+
+
+<p>
+<code>g++</code> 对 <code>C++20</code> 标准有了部分支持，需要指定 <code>-std=c++20</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">ranges</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">for</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">auto</span> <span style="color: #ff8700;">i</span> : <span style="color: #1f5bff;">views</span>::iota<span style="color: #00af00; font-weight: bold;">(</span>0, 10<span style="color: #00af00; font-weight: bold;">)</span>
+         | <span style="color: #1f5bff;">views</span>::filter<span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ff4ea3; font-weight: bold;">[](</span><span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">i</span><span style="color: #ff4ea3; font-weight: bold;">)</span> <span style="color: #ff4ea3; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> i % 2; <span style="color: #ff4ea3; font-weight: bold;">}</span><span style="color: #00af00; font-weight: bold;">)</span>
+         | <span style="color: #1f5bff;">views</span>::transform<span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ff4ea3; font-weight: bold;">[](</span><span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">i</span><span style="color: #ff4ea3; font-weight: bold;">)</span> <span style="color: #ff4ea3; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> i * i; <span style="color: #ff4ea3; font-weight: bold;">}</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span>
+    cout &lt;&lt; i &lt;&lt; <span style="color: #ff1f8b;">" "</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+1 9 25 49 81
+</pre>
+
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">ranges</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">memory</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">string</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">vector</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">ranges</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+
+<span style="color: #00af00;">template</span> <span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">input_range</span> <span style="color: #ff8700;">_Vp</span><span style="color: #00af00; font-weight: bold;">&gt;</span>
+<span style="color: #00af00;">class</span> <span style="color: #18b2b2;">cycle_view</span> : <span style="color: #00af00;">public</span> <span style="color: #18b2b2;">view_interface</span><span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">cycle_view</span><span style="color: #ff4ea3; font-weight: bold;">&lt;</span>_Vp<span style="color: #ff4ea3; font-weight: bold;">&gt;</span><span style="color: #00af00; font-weight: bold;">&gt;</span>
+<span style="color: #00af00; font-weight: bold;">{</span>
+<span style="color: #00af00;">private</span>:
+  <span style="color: #00af00;">struct</span> <span style="color: #18b2b2;">_Sentinel</span>;
+
+  <span style="color: #00af00;">struct</span> <span style="color: #18b2b2;">_Iterator</span>
+  <span style="color: #ff4ea3; font-weight: bold;">{</span>
+  <span style="color: #00af00;">private</span>:
+    <span style="color: #00af00;">friend</span> <span style="color: #18b2b2;">_Sentinel</span>;
+    <span style="color: #00af00;">using</span> <span style="color: #18b2b2;">_Vp_iter</span> = <span style="color: #18b2b2;">iterator_t</span><span style="color: #00d7af; font-weight: bold;">&lt;</span>_Vp<span style="color: #00d7af; font-weight: bold;">&gt;</span>;
+
+    <span style="color: #18b2b2;">_Vp_iter</span> <span style="color: #ff8700;">_M_current</span> = _Vp_iter<span style="color: #00d7af; font-weight: bold;">()</span>;
+    <span style="color: #18b2b2;">cycle_view</span>* <span style="color: #ff8700;">_M_parent</span> = <span style="color: #1f5bff;">nullptr</span>;
+  <span style="color: #00af00;">public</span>:
+    <span style="color: #00af00;">using</span> <span style="color: #18b2b2;">iterator_category</span> = <span style="color: #00af00;">typename</span> <span style="color: #1f5bff;">iterator_traits</span><span style="color: #00d7af; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">_Vp_iter</span><span style="color: #00d7af; font-weight: bold;">&gt;</span>::iterator_category;
+    <span style="color: #00af00;">using</span> <span style="color: #18b2b2;">value_type</span> = <span style="color: #18b2b2;">range_value_t</span><span style="color: #00d7af; font-weight: bold;">&lt;</span>_Vp<span style="color: #00d7af; font-weight: bold;">&gt;</span>;
+    <span style="color: #00af00;">using</span> <span style="color: #18b2b2;">difference_type</span> = <span style="color: #18b2b2;">range_difference_t</span><span style="color: #00d7af; font-weight: bold;">&lt;</span>_Vp<span style="color: #00d7af; font-weight: bold;">&gt;</span>;
+
+    <span style="color: #ef2929;">_Iterator</span><span style="color: #00d7af; font-weight: bold;">()</span> = <span style="color: #00af00;">default</span>;
+
+    <span style="color: #00af00;">constexpr</span> <span style="color: #ef2929;">_Iterator</span><span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #18b2b2;">cycle_view</span>&amp; <span style="color: #ff8700;">__parent</span>, <span style="color: #18b2b2;">_Vp_iter</span> <span style="color: #ff8700;">__current</span><span style="color: #00d7af; font-weight: bold;">)</span>
+      : _M_current<span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::move<span style="color: #ff8700; font-weight: bold;">(</span>__current<span style="color: #ff8700; font-weight: bold;">)</span><span style="color: #00d7af; font-weight: bold;">)</span>,
+        _M_parent<span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::__addressof<span style="color: #ff8700; font-weight: bold;">(</span>__parent<span style="color: #ff8700; font-weight: bold;">)</span><span style="color: #00d7af; font-weight: bold;">)</span> <span style="color: #00d7af; font-weight: bold;">{}</span>
+
+    <span style="color: #00af00;">constexpr</span> <span style="color: #18b2b2;">range_reference_t</span><span style="color: #00d7af; font-weight: bold;">&lt;</span>_Vp<span style="color: #00d7af; font-weight: bold;">&gt;</span> <span style="color: #00af00;">operator</span><span style="color: #ef2929;">*</span><span style="color: #00d7af; font-weight: bold;">()</span> <span style="color: #00af00;">const</span>
+    <span style="color: #00d7af; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> *_M_current; <span style="color: #00d7af; font-weight: bold;">}</span>
+
+    <span style="color: #00af00;">constexpr</span> <span style="color: #18b2b2;">_Vp_iter</span> <span style="color: #00af00;">operator</span><span style="color: #ef2929;">-&gt;</span><span style="color: #00d7af; font-weight: bold;">()</span> <span style="color: #00af00;">const</span>
+      <span style="color: #18b2b2;">requires</span> <span style="color: #1f5bff;">__detail</span>::<span style="color: #18b2b2;">__has_arrow</span><span style="color: #00d7af; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">_Vp_iter</span><span style="color: #00d7af; font-weight: bold;">&gt;</span> &amp;&amp; <span style="color: #18b2b2;">copyable</span><span style="color: #00d7af; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">_Vp_iter</span><span style="color: #00d7af; font-weight: bold;">&gt;</span>
+    <span style="color: #00d7af; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> _M_current; <span style="color: #00d7af; font-weight: bold;">}</span>
+
+    <span style="color: #00af00;">constexpr</span> <span style="color: #18b2b2;">_Iterator</span>&amp; <span style="color: #00af00;">operator</span><span style="color: #ef2929;">++</span><span style="color: #00d7af; font-weight: bold;">()</span>
+    <span style="color: #00d7af; font-weight: bold;">{</span>
+      ++_M_current;
+      <span style="color: #00af00;">if</span><span style="color: #ff8700; font-weight: bold;">(</span>_M_current == <span style="color: #1f5bff;">ranges</span>::end<span style="color: #b218b2; font-weight: bold;">(</span>_M_parent-&gt;_M_base<span style="color: #b218b2; font-weight: bold;">)</span><span style="color: #ff8700; font-weight: bold;">)</span>
+        _M_current = <span style="color: #1f5bff;">ranges</span>::begin<span style="color: #ff8700; font-weight: bold;">(</span>_M_parent-&gt;_M_base<span style="color: #ff8700; font-weight: bold;">)</span>;
+
+      <span style="color: #00af00;">return</span> *<span style="color: #00af00;">this</span>;
+    <span style="color: #00d7af; font-weight: bold;">}</span>
+
+    <span style="color: #00af00;">constexpr</span> <span style="color: #18b2b2;">void</span> <span style="color: #00af00;">operator</span><span style="color: #ef2929;">++</span><span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span><span style="color: #00d7af; font-weight: bold;">)</span>
+    <span style="color: #00d7af; font-weight: bold;">{</span>
+      ++*<span style="color: #00af00;">this</span>;
+    <span style="color: #00d7af; font-weight: bold;">}</span>
+
+    <span style="color: #00af00;">constexpr</span> <span style="color: #18b2b2;">_Iterator</span> <span style="color: #00af00;">operator</span><span style="color: #ef2929;">++</span><span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span><span style="color: #00d7af; font-weight: bold;">)</span> <span style="color: #18b2b2;">requires</span> <span style="color: #18b2b2;">forward_range</span><span style="color: #00d7af; font-weight: bold;">&lt;</span>_Vp<span style="color: #00d7af; font-weight: bold;">&gt;</span>
+    <span style="color: #00d7af; font-weight: bold;">{</span>
+      <span style="color: #00af00;">auto</span> <span style="color: #ff8700;">__tmp</span> = *<span style="color: #00af00;">this</span>;
+      ++*<span style="color: #00af00;">this</span>;
+      <span style="color: #00af00;">return</span> __tmp;
+    <span style="color: #00d7af; font-weight: bold;">}</span>
+
+    <span style="color: #00af00;">friend</span> <span style="color: #00af00;">constexpr</span> <span style="color: #18b2b2;">bool</span> <span style="color: #00af00;">operator</span><span style="color: #ef2929;">==</span><span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #00af00;">const</span> <span style="color: #18b2b2;">_Iterator</span>&amp; <span style="color: #ff8700;">__x</span>, <span style="color: #00af00;">const</span> <span style="color: #18b2b2;">_Iterator</span>&amp; <span style="color: #ff8700;">__y</span><span style="color: #00d7af; font-weight: bold;">)</span>
+      <span style="color: #18b2b2;">requires</span> <span style="color: #18b2b2;">equality_comparable</span><span style="color: #00d7af; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">_Vp_iter</span><span style="color: #00d7af; font-weight: bold;">&gt;</span>
+    <span style="color: #00d7af; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> __x._M_current == __y._M_current; <span style="color: #00d7af; font-weight: bold;">}</span>
+  <span style="color: #ff4ea3; font-weight: bold;">}</span>;
+
+  <span style="color: #00af00;">struct</span> <span style="color: #18b2b2;">_Sentinel</span>
+  <span style="color: #ff4ea3; font-weight: bold;">{</span>
+  <span style="color: #00af00;">private</span>:
+    <span style="color: #18b2b2;">sentinel_t</span><span style="color: #00d7af; font-weight: bold;">&lt;</span>_Vp<span style="color: #00d7af; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">_M_end</span> = sentinel_t<span style="color: #00d7af; font-weight: bold;">&lt;</span>_Vp<span style="color: #00d7af; font-weight: bold;">&gt;()</span>;
+
+    <span style="color: #00af00;">constexpr</span> <span style="color: #18b2b2;">bool</span> <span style="color: #ef2929;">__equal</span><span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #00af00;">const</span> <span style="color: #18b2b2;">_Iterator</span>&amp; <span style="color: #ff8700;">__i</span><span style="color: #00d7af; font-weight: bold;">)</span> <span style="color: #00af00;">const</span>
+    <span style="color: #00d7af; font-weight: bold;">{</span>
+      <span style="color: #00af00;">return</span> __i._M_current == _M_end;
+    <span style="color: #00d7af; font-weight: bold;">}</span>
+  <span style="color: #00af00;">public</span>:
+    <span style="color: #ef2929;">_Sentinel</span><span style="color: #00d7af; font-weight: bold;">()</span> = <span style="color: #00af00;">default</span>;
+
+    <span style="color: #00af00;">constexpr</span> <span style="color: #00af00;">explicit</span> <span style="color: #ef2929;">_Sentinel</span><span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #18b2b2;">cycle_view</span>&amp; <span style="color: #ff8700;">__parent</span><span style="color: #00d7af; font-weight: bold;">)</span> :
+      _M_end<span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #1f5bff;">ranges</span>::end<span style="color: #ff8700; font-weight: bold;">(</span>__parent._M_base<span style="color: #ff8700; font-weight: bold;">)</span><span style="color: #00d7af; font-weight: bold;">)</span> <span style="color: #00d7af; font-weight: bold;">{}</span>
+
+    <span style="color: #00af00;">friend</span> <span style="color: #00af00;">constexpr</span> <span style="color: #18b2b2;">bool</span> <span style="color: #00af00;">operator</span><span style="color: #ef2929;">==</span><span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #00af00;">const</span> <span style="color: #18b2b2;">_Iterator</span>&amp; <span style="color: #ff8700;">__x</span>, <span style="color: #00af00;">const</span> <span style="color: #18b2b2;">_Sentinel</span>&amp; <span style="color: #ff8700;">__y</span><span style="color: #00d7af; font-weight: bold;">)</span>
+    <span style="color: #00d7af; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> __y.__equal<span style="color: #ff8700; font-weight: bold;">(</span>__x<span style="color: #ff8700; font-weight: bold;">)</span>; <span style="color: #00d7af; font-weight: bold;">}</span>
+  <span style="color: #ff4ea3; font-weight: bold;">}</span>;
+
+  <span style="color: #18b2b2;">_Vp</span> <span style="color: #ff8700;">_M_base</span> = _Vp<span style="color: #ff4ea3; font-weight: bold;">()</span>;
+<span style="color: #00af00;">public</span>:
+    <span style="color: #ef2929;">cycle_view</span><span style="color: #ff4ea3; font-weight: bold;">()</span> = <span style="color: #00af00;">default</span>;
+
+    <span style="color: #00af00;">constexpr</span> <span style="color: #ef2929;">cycle_view</span><span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #18b2b2;">_Vp</span> <span style="color: #ff8700;">__base</span><span style="color: #ff4ea3; font-weight: bold;">)</span>: _M_base<span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::move<span style="color: #00d7af; font-weight: bold;">(</span>__base<span style="color: #00d7af; font-weight: bold;">)</span><span style="color: #ff4ea3; font-weight: bold;">)</span> <span style="color: #ff4ea3; font-weight: bold;">{}</span>
+
+    <span style="color: #00af00;">constexpr</span> <span style="color: #18b2b2;">_Iterator</span> <span style="color: #ef2929;">begin</span><span style="color: #ff4ea3; font-weight: bold;">()</span>
+    <span style="color: #ff4ea3; font-weight: bold;">{</span>
+        <span style="color: #00af00;">return</span> <span style="color: #00d7af; font-weight: bold;">{</span>*<span style="color: #00af00;">this</span>, <span style="color: #1f5bff;">ranges</span>::begin<span style="color: #ff8700; font-weight: bold;">(</span>_M_base<span style="color: #ff8700; font-weight: bold;">)</span><span style="color: #00d7af; font-weight: bold;">}</span>;
+    <span style="color: #ff4ea3; font-weight: bold;">}</span>
+
+    <span style="color: #00af00;">constexpr</span> <span style="color: #00af00;">auto</span> <span style="color: #ef2929;">end</span><span style="color: #ff4ea3; font-weight: bold;">()</span>
+    <span style="color: #ff4ea3; font-weight: bold;">{</span>
+      <span style="color: #00af00;">if</span> <span style="color: #00af00;">constexpr</span> <span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #18b2b2;">common_range</span><span style="color: #ff8700; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">_Vp</span><span style="color: #ff8700; font-weight: bold;">&gt;</span><span style="color: #00d7af; font-weight: bold;">)</span>
+        <span style="color: #00af00;">return</span> _Iterator<span style="color: #00d7af; font-weight: bold;">{</span>*<span style="color: #00af00;">this</span>, <span style="color: #1f5bff;">ranges</span>::end<span style="color: #ff8700; font-weight: bold;">(</span>_M_base<span style="color: #ff8700; font-weight: bold;">)</span><span style="color: #00d7af; font-weight: bold;">}</span>;
+      <span style="color: #00af00;">else</span>
+        <span style="color: #00af00;">return</span> _Sentinel<span style="color: #00d7af; font-weight: bold;">{</span>*<span style="color: #00af00;">this</span><span style="color: #00d7af; font-weight: bold;">}</span>;
+    <span style="color: #ff4ea3; font-weight: bold;">}</span>
+<span style="color: #00af00; font-weight: bold;">}</span>;
+
+<span style="color: #00af00;">template</span> <span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">input_range</span> <span style="color: #ff8700;">_Range</span><span style="color: #00af00; font-weight: bold;">&gt;</span>
+<span style="color: #ef2929;">cycle_view</span><span style="color: #00af00; font-weight: bold;">(</span><span style="color: #18b2b2;">_Range</span> &amp;&amp;<span style="color: #00af00; font-weight: bold;">)</span> -&gt; <span style="color: #18b2b2;">cycle_view</span><span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">views</span>::<span style="color: #18b2b2;">all_t</span><span style="color: #ff4ea3; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">_Range</span><span style="color: #ff4ea3; font-weight: bold;">&gt;</span><span style="color: #00af00; font-weight: bold;">&gt;</span>;
+
+<span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">views</span> <span style="color: #00af00; font-weight: bold;">{</span>
+  <span style="color: #00af00;">inline</span> <span style="color: #00af00;">constexpr</span> <span style="color: #1f5bff;">__adaptor</span>::<span style="color: #18b2b2;">_RangeAdaptorClosure</span> <span style="color: #ff8700;">cycle</span>
+  = <span style="color: #ff4ea3; font-weight: bold;">[]</span> <span style="color: #ff4ea3; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">viewable_range</span> <span style="color: #ff8700;">_Range</span><span style="color: #ff4ea3; font-weight: bold;">&gt;</span> <span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #18b2b2;">_Range</span>&amp;&amp; <span style="color: #ff8700;">__r</span><span style="color: #ff4ea3; font-weight: bold;">)</span>
+  <span style="color: #ff4ea3; font-weight: bold;">{</span>
+    <span style="color: #00af00;">return</span> cycle_view <span style="color: #00d7af; font-weight: bold;">{</span> <span style="color: #1f5bff;">std</span>::forward<span style="color: #ff8700; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">_Range</span><span style="color: #ff8700; font-weight: bold;">&gt;(</span>__r<span style="color: #ff8700; font-weight: bold;">)</span> <span style="color: #00d7af; font-weight: bold;">}</span>;
+  <span style="color: #ff4ea3; font-weight: bold;">}</span>;
+<span style="color: #00af00; font-weight: bold;">}</span> <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">namespace views</span>
+
+<span style="color: #00af00;">template</span> <span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">input_range</span> <span style="color: #ff8700;">_Vp1</span>, <span style="color: #18b2b2;">input_range</span> <span style="color: #ff8700;">_Vp2</span><span style="color: #00af00; font-weight: bold;">&gt;</span>
+<span style="color: #00af00;">class</span> <span style="color: #18b2b2;">zip_view</span> : <span style="color: #00af00;">public</span> <span style="color: #18b2b2;">view_interface</span><span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">zip_view</span><span style="color: #ff4ea3; font-weight: bold;">&lt;</span>_Vp1, _Vp2<span style="color: #ff4ea3; font-weight: bold;">&gt;</span><span style="color: #00af00; font-weight: bold;">&gt;</span>
+<span style="color: #00af00; font-weight: bold;">{</span>
+<span style="color: #00af00;">private</span>:
+  <span style="color: #00af00;">struct</span> <span style="color: #18b2b2;">_Sentinel</span>;
+
+  <span style="color: #00af00;">struct</span> <span style="color: #18b2b2;">_Iterator</span>
+  <span style="color: #ff4ea3; font-weight: bold;">{</span>
+  <span style="color: #00af00;">private</span>:
+    <span style="color: #00af00;">friend</span> <span style="color: #18b2b2;">zip_view</span>;
+    <span style="color: #00af00;">friend</span> <span style="color: #18b2b2;">_Sentinel</span>;
+    <span style="color: #00af00;">using</span> <span style="color: #18b2b2;">_Vp1_iter</span> = <span style="color: #18b2b2;">iterator_t</span><span style="color: #00d7af; font-weight: bold;">&lt;</span>_Vp1<span style="color: #00d7af; font-weight: bold;">&gt;</span>;
+    <span style="color: #00af00;">using</span> <span style="color: #18b2b2;">_Vp2_iter</span> = <span style="color: #18b2b2;">iterator_t</span><span style="color: #00d7af; font-weight: bold;">&lt;</span>_Vp2<span style="color: #00d7af; font-weight: bold;">&gt;</span>;
+
+    <span style="color: #18b2b2;">_Vp1_iter</span> <span style="color: #ff8700;">_M_current1</span> = _Vp1_iter<span style="color: #00d7af; font-weight: bold;">()</span>;
+    <span style="color: #18b2b2;">_Vp2_iter</span> <span style="color: #ff8700;">_M_current2</span> = _Vp2_iter<span style="color: #00d7af; font-weight: bold;">()</span>;
+    <span style="color: #18b2b2;">zip_view</span>* <span style="color: #ff8700;">_M_parent</span> = <span style="color: #1f5bff;">nullptr</span>;
+  <span style="color: #00af00;">public</span>:
+    <span style="color: #00af00;">using</span> <span style="color: #18b2b2;">iterator_category</span> = <span style="color: #00af00;">typename</span> <span style="color: #1f5bff;">iterator_traits</span><span style="color: #00d7af; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">_Vp1_iter</span><span style="color: #00d7af; font-weight: bold;">&gt;</span>::iterator_category;
+    <span style="color: #00af00;">using</span> <span style="color: #18b2b2;">value_type</span> = <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">pair</span><span style="color: #00d7af; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">range_value_t</span><span style="color: #ff8700; font-weight: bold;">&lt;</span>_Vp1<span style="color: #ff8700; font-weight: bold;">&gt;</span>, <span style="color: #18b2b2;">range_value_t</span><span style="color: #ff8700; font-weight: bold;">&lt;</span>_Vp2<span style="color: #ff8700; font-weight: bold;">&gt;</span><span style="color: #00d7af; font-weight: bold;">&gt;</span>;
+    <span style="color: #00af00;">using</span> <span style="color: #18b2b2;">difference_type</span> = <span style="color: #18b2b2;">range_difference_t</span><span style="color: #00d7af; font-weight: bold;">&lt;</span>_Vp1<span style="color: #00d7af; font-weight: bold;">&gt;</span>;
+
+    <span style="color: #ef2929;">_Iterator</span><span style="color: #00d7af; font-weight: bold;">()</span> = <span style="color: #00af00;">default</span>;
+
+    <span style="color: #00af00;">constexpr</span> <span style="color: #ef2929;">_Iterator</span><span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #18b2b2;">zip_view</span>&amp; <span style="color: #ff8700;">__parent</span>,
+      <span style="color: #18b2b2;">_Vp1_iter</span> <span style="color: #ff8700;">__current1</span>, <span style="color: #18b2b2;">_Vp2_iter</span> <span style="color: #ff8700;">__current2</span><span style="color: #00d7af; font-weight: bold;">)</span> :
+      _M_current1<span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::move<span style="color: #ff8700; font-weight: bold;">(</span>__current1<span style="color: #ff8700; font-weight: bold;">)</span><span style="color: #00d7af; font-weight: bold;">)</span>,
+      _M_current2<span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::move<span style="color: #ff8700; font-weight: bold;">(</span>__current2<span style="color: #ff8700; font-weight: bold;">)</span><span style="color: #00d7af; font-weight: bold;">)</span>,
+      _M_parent<span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::__addressof<span style="color: #ff8700; font-weight: bold;">(</span>__parent<span style="color: #ff8700; font-weight: bold;">)</span><span style="color: #00d7af; font-weight: bold;">)</span> <span style="color: #00d7af; font-weight: bold;">{}</span>
+
+    <span style="color: #00af00;">constexpr</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">pair</span><span style="color: #00d7af; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">range_reference_t</span><span style="color: #ff8700; font-weight: bold;">&lt;</span>_Vp1<span style="color: #ff8700; font-weight: bold;">&gt;</span>, <span style="color: #18b2b2;">range_reference_t</span><span style="color: #ff8700; font-weight: bold;">&lt;</span>_Vp2<span style="color: #ff8700; font-weight: bold;">&gt;</span><span style="color: #00d7af; font-weight: bold;">&gt;</span>
+    <span style="color: #00af00;">operator</span><span style="color: #ef2929;">*</span><span style="color: #00d7af; font-weight: bold;">()</span> <span style="color: #00af00;">const</span>
+    <span style="color: #00d7af; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> <span style="color: #1f5bff;">std</span>::make_pair<span style="color: #ff8700; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ref</span><span style="color: #b218b2; font-weight: bold;">(</span>*<span style="color: #ff8700;">_M_current1</span><span style="color: #b218b2; font-weight: bold;">)</span>, <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ref</span><span style="color: #b218b2; font-weight: bold;">(</span>*<span style="color: #ff8700;">_M_current2</span><span style="color: #b218b2; font-weight: bold;">)</span><span style="color: #ff8700; font-weight: bold;">)</span>; <span style="color: #00d7af; font-weight: bold;">}</span>
+
+    <span style="color: #00af00;">constexpr</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">pair</span><span style="color: #00d7af; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">_Vp1_iter</span>, <span style="color: #18b2b2;">_Vp2_iter</span><span style="color: #00d7af; font-weight: bold;">&gt;</span> <span style="color: #00af00;">operator</span><span style="color: #ef2929;">-&gt;</span><span style="color: #00d7af; font-weight: bold;">()</span> <span style="color: #00af00;">const</span>
+      <span style="color: #18b2b2;">requires</span> <span style="color: #1f5bff;">__detail</span>::<span style="color: #18b2b2;">__has_arrow</span><span style="color: #00d7af; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">_Vp1_iter</span><span style="color: #00d7af; font-weight: bold;">&gt;</span> &amp;&amp;
+          <span style="color: #1f5bff;">__detail</span>::<span style="color: #18b2b2;">__has_arrow</span><span style="color: #00d7af; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">_Vp2_iter</span><span style="color: #00d7af; font-weight: bold;">&gt;</span>
+    <span style="color: #00d7af; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> <span style="color: #1f5bff;">std</span>::make_pair<span style="color: #ff8700; font-weight: bold;">(</span>_M_current1, _M_current2<span style="color: #ff8700; font-weight: bold;">)</span>; <span style="color: #00d7af; font-weight: bold;">}</span>
+
+    <span style="color: #00af00;">constexpr</span> <span style="color: #18b2b2;">_Iterator</span>&amp; <span style="color: #00af00;">operator</span><span style="color: #ef2929;">++</span><span style="color: #00d7af; font-weight: bold;">()</span>
+    <span style="color: #00d7af; font-weight: bold;">{</span>
+      ++_M_current1;
+      ++_M_current2;
+      <span style="color: #b2b2b2; font-style: italic;">//</span><span style="color: #b2b2b2; font-style: italic;">if(_M_current1 == ranges::end(_M_parent-&gt;_M_base1)</span>
+      <span style="color: #b2b2b2; font-style: italic;">//  </span><span style="color: #b2b2b2; font-style: italic;">|| _M_current2 == ranges::end(_M_parent-&gt;_M_base2))</span>
+      <span style="color: #00af00;">return</span> *<span style="color: #00af00;">this</span>;
+    <span style="color: #00d7af; font-weight: bold;">}</span>
+
+    <span style="color: #00af00;">constexpr</span> <span style="color: #18b2b2;">void</span> <span style="color: #00af00;">operator</span><span style="color: #ef2929;">++</span><span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span><span style="color: #00d7af; font-weight: bold;">)</span>
+    <span style="color: #00d7af; font-weight: bold;">{</span> ++*<span style="color: #00af00;">this</span>; <span style="color: #00d7af; font-weight: bold;">}</span>
+
+    <span style="color: #00af00;">constexpr</span> <span style="color: #18b2b2;">_Iterator</span> <span style="color: #00af00;">operator</span><span style="color: #ef2929;">++</span><span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span><span style="color: #00d7af; font-weight: bold;">)</span> <span style="color: #18b2b2;">requires</span> <span style="color: #18b2b2;">forward_range</span><span style="color: #00d7af; font-weight: bold;">&lt;</span>_Vp1<span style="color: #00d7af; font-weight: bold;">&gt;</span> &amp;&amp; <span style="color: #18b2b2;">forward_range</span><span style="color: #00d7af; font-weight: bold;">&lt;</span>_Vp2<span style="color: #00d7af; font-weight: bold;">&gt;</span>
+    <span style="color: #00d7af; font-weight: bold;">{</span>
+      <span style="color: #00af00;">auto</span> <span style="color: #ff8700;">__tmp</span> = *<span style="color: #00af00;">this</span>;
+      ++*<span style="color: #00af00;">this</span>;
+      <span style="color: #00af00;">return</span> __tmp;
+    <span style="color: #00d7af; font-weight: bold;">}</span>
+
+    <span style="color: #00af00;">friend</span> <span style="color: #00af00;">constexpr</span> <span style="color: #18b2b2;">bool</span> <span style="color: #00af00;">operator</span><span style="color: #ef2929;">==</span><span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #00af00;">const</span> <span style="color: #18b2b2;">_Iterator</span>&amp; <span style="color: #ff8700;">__x</span>, <span style="color: #00af00;">const</span> <span style="color: #18b2b2;">_Iterator</span>&amp; <span style="color: #ff8700;">__y</span><span style="color: #00d7af; font-weight: bold;">)</span>
+      <span style="color: #18b2b2;">requires</span> <span style="color: #18b2b2;">equality_comparable</span><span style="color: #00d7af; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">_Vp1_iter</span><span style="color: #00d7af; font-weight: bold;">&gt;</span> &amp;&amp; <span style="color: #18b2b2;">equality_comparable</span><span style="color: #00d7af; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">_Vp2_iter</span><span style="color: #00d7af; font-weight: bold;">&gt;</span>
+    <span style="color: #00d7af; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> __x._M_current1 == __y._M_current1 &amp;&amp; __x._M_current2 == __y._M_current2; <span style="color: #00d7af; font-weight: bold;">}</span>
+  <span style="color: #ff4ea3; font-weight: bold;">}</span>;
+
+  <span style="color: #00af00;">struct</span> <span style="color: #18b2b2;">_Sentinel</span>
+  <span style="color: #ff4ea3; font-weight: bold;">{</span>
+  <span style="color: #00af00;">private</span>:
+    <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">pair</span><span style="color: #00d7af; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">sentinel_t</span><span style="color: #ff8700; font-weight: bold;">&lt;</span>_Vp1<span style="color: #ff8700; font-weight: bold;">&gt;</span>, <span style="color: #18b2b2;">sentinel_t</span><span style="color: #ff8700; font-weight: bold;">&lt;</span>_Vp2<span style="color: #ff8700; font-weight: bold;">&gt;</span><span style="color: #00d7af; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">_M_end</span> =
+      <span style="color: #1f5bff;">std</span>::make_pair<span style="color: #00d7af; font-weight: bold;">(</span>sentinel_t<span style="color: #ff8700; font-weight: bold;">&lt;</span>_Vp1<span style="color: #ff8700; font-weight: bold;">&gt;()</span>, sentinel_t<span style="color: #ff8700; font-weight: bold;">&lt;</span>_Vp2<span style="color: #ff8700; font-weight: bold;">&gt;()</span><span style="color: #00d7af; font-weight: bold;">)</span>;
+
+    <span style="color: #00af00;">constexpr</span> <span style="color: #18b2b2;">bool</span> <span style="color: #ef2929;">__equal</span><span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #00af00;">const</span> <span style="color: #18b2b2;">_Iterator</span>&amp; <span style="color: #ff8700;">__i</span><span style="color: #00d7af; font-weight: bold;">)</span> <span style="color: #00af00;">const</span>
+    <span style="color: #00d7af; font-weight: bold;">{</span>
+      <span style="color: #00af00;">return</span> __i._M_current1 == _M_end.first || __i._M_current2 == _M_end.second;
+    <span style="color: #00d7af; font-weight: bold;">}</span>
+  <span style="color: #00af00;">public</span>:
+    <span style="color: #ef2929;">_Sentinel</span><span style="color: #00d7af; font-weight: bold;">()</span> = <span style="color: #00af00;">default</span>;
+
+    <span style="color: #00af00;">constexpr</span> <span style="color: #00af00;">explicit</span> <span style="color: #ef2929;">_Sentinel</span><span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #18b2b2;">zip_view</span>&amp; <span style="color: #ff8700;">__parent</span><span style="color: #00d7af; font-weight: bold;">)</span>: _M_end<span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::make_pair<span style="color: #ff8700; font-weight: bold;">(</span>
+      <span style="color: #1f5bff;">ranges</span>::end<span style="color: #b218b2; font-weight: bold;">(</span>__parent._M_base1<span style="color: #b218b2; font-weight: bold;">)</span>, <span style="color: #1f5bff;">ranges</span>::end<span style="color: #b218b2; font-weight: bold;">(</span>__parent._M_base2<span style="color: #b218b2; font-weight: bold;">)</span><span style="color: #ff8700; font-weight: bold;">)</span><span style="color: #00d7af; font-weight: bold;">)</span> <span style="color: #00d7af; font-weight: bold;">{}</span>
+
+    <span style="color: #00af00;">friend</span> <span style="color: #00af00;">constexpr</span> <span style="color: #18b2b2;">bool</span> <span style="color: #00af00;">operator</span><span style="color: #ef2929;">==</span><span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #00af00;">const</span> <span style="color: #18b2b2;">_Iterator</span>&amp; <span style="color: #ff8700;">__x</span>, <span style="color: #00af00;">const</span> <span style="color: #18b2b2;">_Sentinel</span>&amp; <span style="color: #ff8700;">__y</span><span style="color: #00d7af; font-weight: bold;">)</span>
+    <span style="color: #00d7af; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> __y.__equal<span style="color: #ff8700; font-weight: bold;">(</span>__x<span style="color: #ff8700; font-weight: bold;">)</span>; <span style="color: #00d7af; font-weight: bold;">}</span>
+  <span style="color: #ff4ea3; font-weight: bold;">}</span>;
+
+  <span style="color: #18b2b2;">_Vp1</span> <span style="color: #ff8700;">_M_base1</span> = _Vp1<span style="color: #ff4ea3; font-weight: bold;">()</span>;
+  <span style="color: #18b2b2;">_Vp2</span> <span style="color: #ff8700;">_M_base2</span> = _Vp2<span style="color: #ff4ea3; font-weight: bold;">()</span>;
+<span style="color: #00af00;">public</span>:
+  <span style="color: #ef2929;">zip_view</span><span style="color: #ff4ea3; font-weight: bold;">()</span> = <span style="color: #00af00;">default</span>;
+
+  <span style="color: #00af00;">constexpr</span> <span style="color: #ef2929;">zip_view</span><span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #18b2b2;">_Vp1</span> <span style="color: #ff8700;">__base1</span>, <span style="color: #18b2b2;">_Vp2</span> <span style="color: #ff8700;">__base2</span><span style="color: #ff4ea3; font-weight: bold;">)</span>: _M_base1<span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::move<span style="color: #00d7af; font-weight: bold;">(</span>__base1<span style="color: #00d7af; font-weight: bold;">)</span><span style="color: #ff4ea3; font-weight: bold;">)</span>,
+    _M_base2<span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::move<span style="color: #00d7af; font-weight: bold;">(</span>__base2<span style="color: #00d7af; font-weight: bold;">)</span><span style="color: #ff4ea3; font-weight: bold;">)</span> <span style="color: #ff4ea3; font-weight: bold;">{}</span>
+
+  <span style="color: #00af00;">constexpr</span> <span style="color: #18b2b2;">_Iterator</span> <span style="color: #ef2929;">begin</span><span style="color: #ff4ea3; font-weight: bold;">()</span>
+  <span style="color: #ff4ea3; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> <span style="color: #00d7af; font-weight: bold;">{</span>*<span style="color: #00af00;">this</span>, <span style="color: #1f5bff;">ranges</span>::begin<span style="color: #ff8700; font-weight: bold;">(</span>_M_base1<span style="color: #ff8700; font-weight: bold;">)</span>, <span style="color: #1f5bff;">ranges</span>::begin<span style="color: #ff8700; font-weight: bold;">(</span>_M_base2<span style="color: #ff8700; font-weight: bold;">)</span><span style="color: #00d7af; font-weight: bold;">}</span>; <span style="color: #ff4ea3; font-weight: bold;">}</span>
+
+  <span style="color: #00af00;">constexpr</span> <span style="color: #00af00;">auto</span> <span style="color: #ef2929;">end</span><span style="color: #ff4ea3; font-weight: bold;">()</span>
+  <span style="color: #ff4ea3; font-weight: bold;">{</span>
+    <span style="color: #b2b2b2; font-style: italic;">//</span><span style="color: #b2b2b2; font-style: italic;">if constexpr (common_range&lt;_Vp1&gt; &amp;&amp; common_range&lt;_Vp2&gt;)</span>
+    <span style="color: #b2b2b2; font-style: italic;">//  </span><span style="color: #b2b2b2; font-style: italic;">return _Iterator{*this, ranges::end(_M_base1), ranges::end(_M_base2)};</span>
+    <span style="color: #b2b2b2; font-style: italic;">//</span><span style="color: #b2b2b2; font-style: italic;">else</span>
+      <span style="color: #00af00;">return</span> _Sentinel<span style="color: #00d7af; font-weight: bold;">{</span>*<span style="color: #00af00;">this</span><span style="color: #00d7af; font-weight: bold;">}</span>;
+  <span style="color: #ff4ea3; font-weight: bold;">}</span>
+<span style="color: #00af00; font-weight: bold;">}</span>;
+
+
+<span style="color: #00af00;">template</span> <span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">input_range</span> <span style="color: #ff8700;">_Vp1</span>, <span style="color: #18b2b2;">input_range</span> <span style="color: #ff8700;">_Vp2</span><span style="color: #00af00; font-weight: bold;">&gt;</span>
+<span style="color: #00af00;">inline</span> <span style="color: #00af00;">constexpr</span> <span style="color: #18b2b2;">bool</span> <span style="color: #18b2b2;">enable_borrowed_range</span><span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">zip_view</span><span style="color: #ff4ea3; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">_Vp1</span>, <span style="color: #18b2b2;">_Vp2</span><span style="color: #ff4ea3; font-weight: bold;">&gt;</span><span style="color: #00af00; font-weight: bold;">&gt;</span> = <span style="color: #1f5bff;">true</span>;
+
+<span style="color: #00af00;">template</span> <span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">input_range</span> <span style="color: #ff8700;">_Range1</span>, <span style="color: #18b2b2;">input_range</span> <span style="color: #ff8700;">_Range2</span><span style="color: #00af00; font-weight: bold;">&gt;</span>
+<span style="color: #ef2929;">zip_view</span><span style="color: #00af00; font-weight: bold;">(</span><span style="color: #18b2b2;">_Range1</span>&amp;&amp;, <span style="color: #18b2b2;">_Range2</span>&amp;&amp;<span style="color: #00af00; font-weight: bold;">)</span> -&gt; <span style="color: #18b2b2;">zip_view</span><span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">views</span>::<span style="color: #18b2b2;">all_t</span><span style="color: #ff4ea3; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">_Range1</span><span style="color: #ff4ea3; font-weight: bold;">&gt;</span>, <span style="color: #1f5bff;">views</span>::<span style="color: #18b2b2;">all_t</span><span style="color: #ff4ea3; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">_Range2</span><span style="color: #ff4ea3; font-weight: bold;">&gt;</span><span style="color: #00af00; font-weight: bold;">&gt;</span>;
+
+<span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">views</span> <span style="color: #00af00; font-weight: bold;">{</span>
+  <span style="color: #00af00;">inline</span> <span style="color: #00af00;">constexpr</span> <span style="color: #1f5bff;">__adaptor</span>::<span style="color: #18b2b2;">_RangeAdaptor</span> <span style="color: #ff8700;">zip</span>
+  = <span style="color: #ff4ea3; font-weight: bold;">[]</span> <span style="color: #ff4ea3; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">viewable_range</span> <span style="color: #ff8700;">_Range1</span>, <span style="color: #18b2b2;">viewable_range</span> <span style="color: #ff8700;">_Range2</span><span style="color: #ff4ea3; font-weight: bold;">&gt;</span> <span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #18b2b2;">_Range1</span>&amp;&amp; <span style="color: #ff8700;">__r1</span>, <span style="color: #ff8700;">_Range2</span>&amp;&amp; __r2<span style="color: #ff4ea3; font-weight: bold;">)</span>
+  <span style="color: #ff4ea3; font-weight: bold;">{</span>
+    <span style="color: #00af00;">return</span> zip_view <span style="color: #00d7af; font-weight: bold;">{</span> <span style="color: #1f5bff;">std</span>::forward<span style="color: #ff8700; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">_Range1</span><span style="color: #ff8700; font-weight: bold;">&gt;(</span>__r1<span style="color: #ff8700; font-weight: bold;">)</span>, <span style="color: #1f5bff;">std</span>::forward<span style="color: #ff8700; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">_Range2</span><span style="color: #ff8700; font-weight: bold;">&gt;(</span>__r2<span style="color: #ff8700; font-weight: bold;">)</span> <span style="color: #00d7af; font-weight: bold;">}</span>;
+  <span style="color: #ff4ea3; font-weight: bold;">}</span>;
+<span style="color: #00af00; font-weight: bold;">}</span> <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">namespace views</span>
+
+<span style="color: #1f5bff; font-weight: bold;">}</span> <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">namespace ranges</span>
+<span style="color: #cc0000; font-weight: bold;">}</span> <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">mamespace std</span>
+
+<span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
+
+<span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">vs</span> = <span style="color: #1f5bff;">std</span>::<span style="color: #1f5bff;">ranges</span>::views;
+<span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">rs</span> = <span style="color: #1f5bff;">std</span>::ranges;
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">vector</span> <span style="color: #ff8700;">v1</span> <span style="color: #1f5bff; font-weight: bold;">{</span><span style="color: #ff1f8b;">"&#30002;"</span>, <span style="color: #ff1f8b;">"&#20057;"</span>, <span style="color: #ff1f8b;">"&#19993;"</span>, <span style="color: #ff1f8b;">"&#19969;"</span>, <span style="color: #ff1f8b;">"&#25098;"</span>, <span style="color: #ff1f8b;">"&#24049;"</span>, <span style="color: #ff1f8b;">"&#24218;"</span>, <span style="color: #ff1f8b;">"&#36763;"</span>, <span style="color: #ff1f8b;">"&#22764;"</span>, <span style="color: #ff1f8b;">"&#30328;"</span><span style="color: #1f5bff; font-weight: bold;">}</span>;
+  <span style="color: #18b2b2;">vector</span> <span style="color: #ff8700;">v2</span> <span style="color: #1f5bff; font-weight: bold;">{</span><span style="color: #ff1f8b;">"&#23376;"</span>, <span style="color: #ff1f8b;">"&#19985;"</span>, <span style="color: #ff1f8b;">"&#23493;"</span>, <span style="color: #ff1f8b;">"&#21359;"</span>, <span style="color: #ff1f8b;">"&#36784;"</span>, <span style="color: #ff1f8b;">"&#24051;"</span>, <span style="color: #ff1f8b;">"&#21320;"</span>, <span style="color: #ff1f8b;">"&#26410;"</span>, <span style="color: #ff1f8b;">"&#30003;"</span>, <span style="color: #ff1f8b;">"&#37193;"</span>, <span style="color: #ff1f8b;">"&#25100;"</span>, <span style="color: #ff1f8b;">"&#20133;"</span><span style="color: #1f5bff; font-weight: bold;">}</span>;
+
+  <span style="color: #00af00;">auto</span> <span style="color: #ff8700;">a</span> = v1 | <span style="color: #1f5bff;">vs</span>::cycle;
+  <span style="color: #00af00;">auto</span> <span style="color: #ff8700;">b</span> = v2 | <span style="color: #1f5bff;">vs</span>::cycle;
+  <span style="color: #00af00;">auto</span> <span style="color: #ff8700;">c</span> = <span style="color: #1f5bff;">vs</span>::zip<span style="color: #1f5bff; font-weight: bold;">(</span>a, b<span style="color: #1f5bff; font-weight: bold;">)</span> | <span style="color: #1f5bff;">vs</span>::take<span style="color: #1f5bff; font-weight: bold;">(</span>60<span style="color: #1f5bff; font-weight: bold;">)</span>;
+
+  <span style="color: #00af00;">for</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">auto</span>&amp;&amp; <span style="color: #00af00; font-weight: bold;">[</span><span style="color: #1f5bff;">x</span>, <span style="color: #1f5bff;">y</span><span style="color: #00af00; font-weight: bold;">]</span>: c<span style="color: #1f5bff; font-weight: bold;">)</span>
+    cout&lt;&lt;x&lt;&lt;y&lt;&lt;<span style="color: #ff1f8b;">" "</span>;
+  cout&lt;&lt;<span style="color: #ff1f8b;">"\n"</span>;
+
+  <span style="color: #00af00;">return</span> 0;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+甲子 乙丑 丙寅 丁卯 戊辰 己巳 庚午 辛未 壬申 癸酉 甲戌 乙亥 丙子 丁丑 戊寅 己卯 庚辰 辛巳 壬午 癸未 甲申 乙酉 丙戌 丁亥 戊子 己丑 庚寅 辛卯 壬辰 癸巳 甲午 乙未 丙申 丁酉 戊戌 己亥 庚子 辛丑 壬寅 癸卯 甲辰 乙巳 丙午 丁未 戊申 己酉 庚戌 辛亥 壬子 癸丑 甲寅 乙卯 丙辰 丁巳 戊午 己未 庚申 辛酉 壬戌 癸亥
+</pre>
+</div>
+</div>
+<div id="outline-container-org772f49f" class="outline-2">
+<h2 id="org772f49f"><span class="section-number-2">14</span> 动态内存</h2>
+<div class="outline-text-2" id="text-14">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">memory</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">fmt/core.h</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #00af00;">struct</span> <span style="color: #18b2b2;">Point</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #ef2929;">Point</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">double</span> <span style="color: #ff8700;">__x</span>, <span style="color: #18b2b2;">double</span> <span style="color: #ff8700;">__y</span><span style="color: #1f5bff; font-weight: bold;">)</span> : x<span style="color: #1f5bff; font-weight: bold;">(</span>__x<span style="color: #1f5bff; font-weight: bold;">)</span>, y<span style="color: #1f5bff; font-weight: bold;">(</span>__y<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #1f5bff;">fmt</span>::format<span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Pointer({0}, {1}) is constructed.\n"</span>, x, y<span style="color: #00af00; font-weight: bold;">)</span>;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  ~<span style="color: #ef2929;">Point</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #1f5bff;">fmt</span>::format<span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Pointer({0}, {1}) is deconstructed.\n"</span>, x, y<span style="color: #00af00; font-weight: bold;">)</span>;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #00af00;">friend</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span>&amp; <span style="color: #00af00;">operator</span><span style="color: #ef2929;">&lt;&lt;</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span>&amp; <span style="color: #ff8700;">os</span>, <span style="color: #18b2b2;">Point</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">p</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #00af00;">return</span> <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #1f5bff;">fmt</span>::format<span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Pointer({0}, {1})"</span>, p.x, p.y<span style="color: #00af00; font-weight: bold;">)</span>;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #18b2b2;">double</span> <span style="color: #ff8700;">x</span> = 0.0l;
+  <span style="color: #18b2b2;">double</span> <span style="color: #ff8700;">y</span> = 0.0l;
+<span style="color: #cc0000; font-weight: bold;">}</span>;
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Make shared pointer p."</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">shared_ptr</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">Point</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">p</span> = <span style="color: #1f5bff;">std</span>::make_shared<span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">Point</span><span style="color: #1f5bff; font-weight: bold;">&gt;(</span>1.0, 2.0<span style="color: #1f5bff; font-weight: bold;">)</span>;
+
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Copy shared pointer q from p."</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">shared_ptr</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">Point</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">q</span><span style="color: #1f5bff; font-weight: bold;">(</span>p<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; *q &lt;&lt; <span style="color: #1f5bff;">fmt</span>::format<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">" has {0} references."</span>, q.use_count<span style="color: #00af00; font-weight: bold;">()</span><span style="color: #1f5bff; font-weight: bold;">)</span>
+            &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Construct a point with no name assigned."</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff;">std</span>::make_shared<span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">Point</span><span style="color: #1f5bff; font-weight: bold;">&gt;(</span>3.0, 4.0<span style="color: #1f5bff; font-weight: bold;">)</span>;
+
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Now all Points will be deconstructed."</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+Make shared pointer p.
+Pointer(1.0, 2.0) is constructed.
+Copy shared pointer q from p.
+Pointer(1.0, 2.0) has 2 references.
+Construct a point with no name assigned.
+Pointer(3.0, 4.0) is constructed.
+Pointer(3.0, 4.0) is deconstructed.
+Now all Points will be deconstructed.
+Pointer(1.0, 2.0) is deconstructed.
+</pre>
 </div>
 </div>
 </div>
@@ -1412,7 +1899,7 @@ hello, world.
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-06-10 Wed 10:34></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
-      <div id="built">Built: <2020-06-29 Mon 20:58></div>
+      <div id="built">Built: <2020-07-01 Wed 23:14></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
