@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-07-01 Wed 23:14 -->
+<!-- 2020-07-03 Fri 11:27 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>C++ Playground</title>
@@ -70,6 +70,8 @@
 <li><a href="#org41e4f7b">12. <code>std::format</code></a></li>
 <li><a href="#orgad649d6">13. <code>range</code> 与 <code>view</code> 视图</a></li>
 <li><a href="#org772f49f">14. 动态内存</a></li>
+<li><a href="#org8d4d08c">15. 单例模式</a></li>
+<li><a href="#org2b40fb2">16. 容器的常量性</a></li>
 </ul>
 </div>
 </nav>
@@ -1872,8 +1874,11 @@ hello, world.
   <span style="color: #1f5bff;">std</span>::cout &lt;&lt; *q &lt;&lt; <span style="color: #1f5bff;">fmt</span>::format<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">" has {0} references."</span>, q.use_count<span style="color: #00af00; font-weight: bold;">()</span><span style="color: #1f5bff; font-weight: bold;">)</span>
             &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
 
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Let p point to a new Point."</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  p.reset<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">new</span> <span style="color: #18b2b2;">Point</span><span style="color: #00af00; font-weight: bold;">(</span>3.0, 4.0<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+
   <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Construct a point with no name assigned."</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
-  <span style="color: #1f5bff;">std</span>::make_shared<span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">Point</span><span style="color: #1f5bff; font-weight: bold;">&gt;(</span>3.0, 4.0<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #1f5bff;">std</span>::make_shared<span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">Point</span><span style="color: #1f5bff; font-weight: bold;">&gt;(</span>5.0, 6.0<span style="color: #1f5bff; font-weight: bold;">)</span>;
 
   <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Now all Points will be deconstructed."</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
 <span style="color: #cc0000; font-weight: bold;">}</span>
@@ -1885,12 +1890,360 @@ Make shared pointer p.
 Pointer(1.0, 2.0) is constructed.
 Copy shared pointer q from p.
 Pointer(1.0, 2.0) has 2 references.
-Construct a point with no name assigned.
+Let p point to a new Point.
 Pointer(3.0, 4.0) is constructed.
-Pointer(3.0, 4.0) is deconstructed.
+Construct a point with no name assigned.
+Pointer(5.0, 6.0) is constructed.
+Pointer(5.0, 6.0) is deconstructed.
 Now all Points will be deconstructed.
 Pointer(1.0, 2.0) is deconstructed.
+Pointer(3.0, 4.0) is deconstructed.
 </pre>
+
+<p>
+利用 <code>shared_ptr</code> 实现对象共享底层数据
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">memory</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">vector</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">string</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">StrBlob &#30340;&#20195;&#29702;&#25351;&#38024;&#31867;</span>
+<span style="color: #00af00;">class</span> <span style="color: #18b2b2;">StrBlobProxy</span>;
+<span style="color: #00af00;">class</span> <span style="color: #18b2b2;">ConstStrBlobProxy</span>;
+
+<span style="color: #00af00;">class</span> <span style="color: #18b2b2;">StrBlob</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #00af00;">public</span>:
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#21451;&#20803;</span>
+  <span style="color: #00af00;">friend</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span>&amp; <span style="color: #00af00;">operator</span><span style="color: #ef2929;">&lt;&lt;</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span>&amp; <span style="color: #ff8700;">os</span>, <span style="color: #18b2b2;">StrBlob</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">rhs</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #00af00;">friend</span> <span style="color: #18b2b2;">StrBlobProxy</span>;
+  <span style="color: #00af00;">friend</span> <span style="color: #18b2b2;">ConstStrBlobProxy</span>;
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#31867;&#22411;&#21035;&#21517;</span>
+  <span style="color: #00af00;">using</span> <span style="color: #18b2b2;">size_type</span> = <span style="color: #1f5bff;">std</span>::<span style="color: #1f5bff;">vector</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::string<span style="color: #1f5bff; font-weight: bold;">&gt;</span>::size_type;
+  <span style="color: #00af00;">using</span> <span style="color: #18b2b2;">iterator</span> = StrBlobProxy;
+  <span style="color: #00af00;">using</span> <span style="color: #18b2b2;">const_iterator</span> = ConstStrBlobProxy;
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#26500;&#36896;&#20989;&#25968;</span>
+  <span style="color: #ef2929;">StrBlob</span><span style="color: #1f5bff; font-weight: bold;">()</span> : data<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::make_shared<span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">vector</span><span style="color: #ff4ea3; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::string<span style="color: #ff4ea3; font-weight: bold;">&gt;</span><span style="color: #00af00; font-weight: bold;">&gt;()</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span> <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #ef2929;">StrBlob</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">initializer_list</span><span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::string<span style="color: #00af00; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">il</span><span style="color: #1f5bff; font-weight: bold;">)</span> :
+    data<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::make_shared<span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">vector</span><span style="color: #ff4ea3; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::string<span style="color: #ff4ea3; font-weight: bold;">&gt;</span><span style="color: #00af00; font-weight: bold;">&gt;(</span>il<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span> <span style="color: #1f5bff; font-weight: bold;">}</span>
+
+  <span style="color: #18b2b2;">size_type</span> <span style="color: #ef2929;">size</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #00af00;">const</span> <span style="color: #1f5bff; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> data-&gt;size<span style="color: #00af00; font-weight: bold;">()</span>; <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #18b2b2;">bool</span> <span style="color: #ef2929;">empty</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #00af00;">const</span> <span style="color: #1f5bff; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> data-&gt;empty<span style="color: #00af00; font-weight: bold;">()</span>; <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">push_back</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">s</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span> data-&gt;push_back<span style="color: #00af00; font-weight: bold;">(</span>s<span style="color: #00af00; font-weight: bold;">)</span>; <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">pop_back</span><span style="color: #1f5bff; font-weight: bold;">()</span>;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span>&amp; <span style="color: #ef2929;">front</span><span style="color: #1f5bff; font-weight: bold;">()</span>;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span>&amp; <span style="color: #ef2929;">back</span><span style="color: #1f5bff; font-weight: bold;">()</span>;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ef2929;">front</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #00af00;">const</span>;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ef2929;">back</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #00af00;">const</span>;
+  <span style="color: #18b2b2;">iterator</span> <span style="color: #ef2929;">begin</span><span style="color: #1f5bff; font-weight: bold;">()</span>;
+  <span style="color: #18b2b2;">iterator</span> <span style="color: #ef2929;">end</span><span style="color: #1f5bff; font-weight: bold;">()</span>;
+  <span style="color: #18b2b2;">const_iterator</span> <span style="color: #ef2929;">begin</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #00af00;">const</span>;
+  <span style="color: #18b2b2;">const_iterator</span> <span style="color: #ef2929;">end</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #00af00;">const</span>;
+<span style="color: #00af00;">private</span>:
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">shared_ptr</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">vector</span><span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span><span style="color: #00af00; font-weight: bold;">&gt;</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">data</span>;
+  <span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">check</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">size_type</span> <span style="color: #ff8700;">i</span>, <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">msg</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #00af00;">const</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>;
+
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20195;&#29702;&#25351;&#38024;&#31867;</span>
+<span style="color: #00af00;">class</span> <span style="color: #18b2b2;">StrBlobProxy</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #00af00;">public</span>:
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#26500;&#36896;&#20989;&#25968;</span>
+  <span style="color: #ef2929;">StrBlobProxy</span><span style="color: #1f5bff; font-weight: bold;">()</span> : curr<span style="color: #1f5bff; font-weight: bold;">(</span>0<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span> <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #ef2929;">StrBlobProxy</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">StrBlobProxy</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">rhs</span><span style="color: #1f5bff; font-weight: bold;">)</span> :
+    wptr<span style="color: #1f5bff; font-weight: bold;">(</span>rhs.wptr.lock<span style="color: #00af00; font-weight: bold;">()</span><span style="color: #1f5bff; font-weight: bold;">)</span>, curr<span style="color: #1f5bff; font-weight: bold;">(</span>rhs.curr<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span> <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #ef2929;">StrBlobProxy</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">StrBlob</span>&amp; <span style="color: #ff8700;">__str_blob</span>, <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">__index</span> = 0<span style="color: #1f5bff; font-weight: bold;">)</span> :
+    wptr<span style="color: #1f5bff; font-weight: bold;">(</span>__str_blob.data<span style="color: #1f5bff; font-weight: bold;">)</span>, curr<span style="color: #1f5bff; font-weight: bold;">(</span>__index<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span> <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #ef2929;">StrBlobProxy</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">StrBlob</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">__str_blob</span>, <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">__index</span> = 0<span style="color: #1f5bff; font-weight: bold;">)</span> :
+    wptr<span style="color: #1f5bff; font-weight: bold;">(</span>__str_blob.data<span style="color: #1f5bff; font-weight: bold;">)</span>, curr<span style="color: #1f5bff; font-weight: bold;">(</span>__index<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span> <span style="color: #1f5bff; font-weight: bold;">}</span>
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#36816;&#31639;&#31526;&#37325;&#36733;</span>
+  <span style="color: #18b2b2;">StrBlobProxy</span>&amp; <span style="color: #00af00;">operator</span><span style="color: #ef2929;">++</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    ++curr;
+    <span style="color: #00af00;">return</span> *<span style="color: #00af00;">this</span>;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #18b2b2;">StrBlobProxy</span> <span style="color: #00af00;">operator</span><span style="color: #ef2929;">++</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #18b2b2;">StrBlobProxy</span> <span style="color: #ff8700;">tmp</span><span style="color: #00af00; font-weight: bold;">(</span>*<span style="color: #00af00;">this</span><span style="color: #00af00; font-weight: bold;">)</span>;
+    ++curr;
+    <span style="color: #00af00;">return</span> tmp;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #18b2b2;">StrBlobProxy</span>&amp; <span style="color: #00af00;">operator</span><span style="color: #ef2929;">--</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    --curr;
+    <span style="color: #00af00;">return</span> *<span style="color: #00af00;">this</span>;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #18b2b2;">StrBlobProxy</span> <span style="color: #00af00;">operator</span><span style="color: #ef2929;">--</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #18b2b2;">StrBlobProxy</span> <span style="color: #ff8700;">tmp</span><span style="color: #00af00; font-weight: bold;">(</span>*<span style="color: #00af00;">this</span><span style="color: #00af00; font-weight: bold;">)</span>;
+    --curr;
+    <span style="color: #00af00;">return</span> tmp;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #18b2b2;">StrBlobProxy</span> <span style="color: #00af00;">operator</span><span style="color: #ef2929;">+</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">offset</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #18b2b2;">StrBlobProxy</span> <span style="color: #ff8700;">tmp</span><span style="color: #00af00; font-weight: bold;">(</span>*<span style="color: #00af00;">this</span><span style="color: #00af00; font-weight: bold;">)</span>;
+    tmp.curr += offset;
+    <span style="color: #00af00;">return</span> tmp;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span>&amp; <span style="color: #00af00;">operator</span><span style="color: #ef2929;">*</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #00af00;">if</span> <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">shared_ptr</span><span style="color: #ff4ea3; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">vector</span><span style="color: #00d7af; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span><span style="color: #00d7af; font-weight: bold;">&gt;</span><span style="color: #ff4ea3; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">sptr</span>; <span style="color: #ff4ea3; font-weight: bold;">(</span>sptr = wptr.lock<span style="color: #00d7af; font-weight: bold;">()</span><span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span> <span style="color: #00af00; font-weight: bold;">{</span>
+      <span style="color: #00af00;">return</span> <span style="color: #ff4ea3; font-weight: bold;">(</span>*sptr<span style="color: #ff4ea3; font-weight: bold;">)[</span>curr<span style="color: #ff4ea3; font-weight: bold;">]</span>;
+    <span style="color: #00af00; font-weight: bold;">}</span> <span style="color: #00af00;">else</span> <span style="color: #00af00; font-weight: bold;">{</span>
+      <span style="color: #00af00;">throw</span>  <span style="color: #1f5bff;">std</span>::runtime_error<span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Unbound StrBlob pointer"</span><span style="color: #ff4ea3; font-weight: bold;">)</span>;
+    <span style="color: #00af00; font-weight: bold;">}</span>
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #18b2b2;">bool</span> <span style="color: #00af00;">operator</span><span style="color: #ef2929;">==</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">StrBlobProxy</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">rhs</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #00af00;">return</span> curr == rhs.curr;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #18b2b2;">bool</span> <span style="color: #00af00;">operator</span><span style="color: #ef2929;">!=</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">StrBlobProxy</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">rhs</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #00af00;">return</span> curr != rhs.curr;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+<span style="color: #00af00;">protected</span>:
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">shared_ptr</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">vector</span><span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span><span style="color: #00af00; font-weight: bold;">&gt;</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span>
+  <span style="color: #ef2929;">check</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">size_t</span>, <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #00af00;">const</span> &amp;<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #00af00;">const</span>;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">weak_ptr</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">vector</span><span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span><span style="color: #00af00; font-weight: bold;">&gt;</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">wptr</span>;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">curr</span>;     <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#22312;&#25968;&#32452;&#20013;&#30340;&#24403;&#21069;&#20301;&#32622;</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>;
+
+<span style="color: #b2b2b2; font-style: italic;">/// </span><span style="color: #b2b2b2; font-style: italic;">&#20174; StrBlobProxy &#27966;&#29983;&#20986;&#24120;&#37327;&#25351;&#38024;&#31867;</span>
+<span style="color: #00af00;">class</span> <span style="color: #18b2b2;">ConstStrBlobProxy</span> : <span style="color: #00af00;">public</span> <span style="color: #18b2b2;">StrBlobProxy</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #00af00;">public</span>:
+  <span style="color: #00af00;">using</span> <span style="color: #1f5bff;">StrBlobProxy</span>::<span style="color: #18b2b2;">StrBlobProxy</span>;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #00af00;">operator</span><span style="color: #ef2929;">*</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #00af00;">if</span> <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">shared_ptr</span><span style="color: #ff4ea3; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">vector</span><span style="color: #00d7af; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span><span style="color: #00d7af; font-weight: bold;">&gt;</span> <span style="color: #00af00;">const</span><span style="color: #ff4ea3; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">sptr</span>; <span style="color: #ff4ea3; font-weight: bold;">(</span>sptr = wptr.lock<span style="color: #00d7af; font-weight: bold;">()</span><span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #00af00; font-weight: bold;">)</span> <span style="color: #00af00; font-weight: bold;">{</span>
+      <span style="color: #00af00;">return</span> <span style="color: #ff4ea3; font-weight: bold;">(</span>*sptr<span style="color: #ff4ea3; font-weight: bold;">)[</span>curr<span style="color: #ff4ea3; font-weight: bold;">]</span>;
+    <span style="color: #00af00; font-weight: bold;">}</span> <span style="color: #00af00;">else</span> <span style="color: #00af00; font-weight: bold;">{</span>
+      <span style="color: #00af00;">throw</span>  <span style="color: #1f5bff;">std</span>::runtime_error<span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Unbound StrBlob pointer"</span><span style="color: #ff4ea3; font-weight: bold;">)</span>;
+    <span style="color: #00af00; font-weight: bold;">}</span>
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+<span style="color: #00af00;">private</span>:
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">weak_ptr</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">vector</span><span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span><span style="color: #00af00; font-weight: bold;">&gt;</span> <span style="color: #00af00;">const</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">wptr</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>;
+
+<span style="color: #18b2b2;">void</span> <span style="color: #1f5bff;">StrBlob</span>::<span style="color: #ef2929;">check</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">size_type</span> <span style="color: #ff8700;">i</span>, <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">msg</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #00af00;">const</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">if</span> <span style="color: #1f5bff; font-weight: bold;">(</span>i &gt;= data-&gt;size<span style="color: #00af00; font-weight: bold;">()</span><span style="color: #1f5bff; font-weight: bold;">)</span>
+    <span style="color: #00af00;">throw</span> <span style="color: #1f5bff;">std</span>::out_of_range<span style="color: #1f5bff; font-weight: bold;">(</span>msg<span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span>&amp; <span style="color: #1f5bff;">StrBlob</span>::<span style="color: #ef2929;">front</span><span style="color: #cc0000; font-weight: bold;">()</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  check<span style="color: #1f5bff; font-weight: bold;">(</span>0, <span style="color: #ff1f8b;">"front on empty StrBlob."</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #00af00;">return</span> data-&gt;front<span style="color: #1f5bff; font-weight: bold;">()</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span>&amp; <span style="color: #1f5bff;">StrBlob</span>::<span style="color: #ef2929;">back</span><span style="color: #cc0000; font-weight: bold;">()</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  check<span style="color: #1f5bff; font-weight: bold;">(</span>0, <span style="color: #ff1f8b;">"back on empty StrBlob."</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #00af00;">return</span> data-&gt;back<span style="color: #1f5bff; font-weight: bold;">()</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #1f5bff;">StrBlob</span>::<span style="color: #ef2929;">front</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #00af00;">const</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  check<span style="color: #1f5bff; font-weight: bold;">(</span>0, <span style="color: #ff1f8b;">"front on empty StrBlob."</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #00af00;">return</span> data-&gt;front<span style="color: #1f5bff; font-weight: bold;">()</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #1f5bff;">StrBlob</span>::<span style="color: #ef2929;">back</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #00af00;">const</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  check<span style="color: #1f5bff; font-weight: bold;">(</span>0, <span style="color: #ff1f8b;">"back on empty StrBlob."</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #00af00;">return</span> data-&gt;back<span style="color: #1f5bff; font-weight: bold;">()</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">void</span> <span style="color: #1f5bff;">StrBlob</span>::<span style="color: #ef2929;">pop_back</span><span style="color: #cc0000; font-weight: bold;">()</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  check<span style="color: #1f5bff; font-weight: bold;">(</span>0, <span style="color: #ff1f8b;">"pop_back on empty StrBlob."</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  data-&gt;pop_back<span style="color: #1f5bff; font-weight: bold;">()</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #1f5bff;">StrBlob</span>::<span style="color: #18b2b2;">iterator</span> <span style="color: #1f5bff;">StrBlob</span>::<span style="color: #ef2929;">begin</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">return</span> StrBlobProxy<span style="color: #1f5bff; font-weight: bold;">(</span>*<span style="color: #00af00;">this</span>, 0<span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #1f5bff;">StrBlob</span>::<span style="color: #18b2b2;">iterator</span> <span style="color: #1f5bff;">StrBlob</span>::<span style="color: #ef2929;">end</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">return</span> StrBlobProxy<span style="color: #1f5bff; font-weight: bold;">(</span>*<span style="color: #00af00;">this</span>, data-&gt;size<span style="color: #00af00; font-weight: bold;">()</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #1f5bff;">StrBlob</span>::<span style="color: #18b2b2;">const_iterator</span> <span style="color: #1f5bff;">StrBlob</span>::<span style="color: #ef2929;">begin</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #00af00;">const</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">return</span> ConstStrBlobProxy<span style="color: #1f5bff; font-weight: bold;">(</span>*<span style="color: #00af00;">this</span>, 0<span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #1f5bff;">StrBlob</span>::<span style="color: #18b2b2;">const_iterator</span> <span style="color: #1f5bff;">StrBlob</span>::<span style="color: #ef2929;">end</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #00af00;">const</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">return</span> ConstStrBlobProxy<span style="color: #1f5bff; font-weight: bold;">(</span>*<span style="color: #00af00;">this</span>, data-&gt;size<span style="color: #00af00; font-weight: bold;">()</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span>&amp; <span style="color: #00af00;">operator</span><span style="color: #ef2929;">&lt;&lt;</span> <span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span>&amp; <span style="color: #ff8700;">os</span>, <span style="color: #18b2b2;">StrBlob</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">rhs</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">if</span> <span style="color: #1f5bff; font-weight: bold;">(</span>rhs.data-&gt;empty<span style="color: #00af00; font-weight: bold;">()</span><span style="color: #1f5bff; font-weight: bold;">)</span>
+    <span style="color: #00af00;">return</span> os;
+
+  <span style="color: #1f5bff;">StrBlob</span>::<span style="color: #18b2b2;">iterator</span> <span style="color: #ff8700;">__pos</span> = rhs.begin<span style="color: #1f5bff; font-weight: bold;">()</span>;
+  <span style="color: #1f5bff;">StrBlob</span>::<span style="color: #18b2b2;">iterator</span> <span style="color: #00af00;">const</span> <span style="color: #ff8700;">__end</span> = rhs.end<span style="color: #1f5bff; font-weight: bold;">()</span>;
+
+  os &lt;&lt; <span style="color: #ff1f8b;">"["</span>;
+  <span style="color: #00af00;">for</span> <span style="color: #1f5bff; font-weight: bold;">(</span>; __pos + 1 != __end; ++__pos<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    os &lt;&lt; *__pos &lt;&lt; <span style="color: #ff1f8b;">"&#65292; "</span>;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #00af00;">return</span> os &lt;&lt; *__pos &lt;&lt; <span style="color: #ff1f8b;">"]"</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">b1 &#21644; b2 &#20849;&#20139;&#21516;&#26679;&#30340;&#24213;&#23618;&#25968;&#25454;</span>
+  <span style="color: #18b2b2;">StrBlob</span> <span style="color: #ff8700;">b1</span> = <span style="color: #1f5bff; font-weight: bold;">{</span><span style="color: #ff1f8b;">"hello"</span>, <span style="color: #ff1f8b;">"world"</span>, <span style="color: #ff1f8b;">"evil"</span><span style="color: #1f5bff; font-weight: bold;">}</span>;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; b1;
+  <span style="color: #18b2b2;">StrBlob</span> <span style="color: #ff8700;">b2</span> = b1;
+  b2.push_back<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"C++"</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; b1;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+[hello， world， evil]
+[hello， world， evil， C++]
+</pre>
+
+
+<p>
+在 <code>shared_ptr</code> 中使用自定义的 <code>delete</code> 操作
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">memory</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">string</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">fmt/core.h</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #00af00;">struct</span> <span style="color: #18b2b2;">Connection</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #ef2929;">Connection</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span>* <span style="color: #00af00;">const</span> <span style="color: #ff8700;">__descriptor</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #1f5bff;">fmt</span>::format<span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Connected to descriptor {0}."</span>, *__descriptor<span style="color: #00af00; font-weight: bold;">)</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+    descriptor = *__descriptor;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">descriptor</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>;
+
+<span style="color: #18b2b2;">Connection</span> <span style="color: #ef2929;">connect</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span>* <span style="color: #00af00;">const</span> <span style="color: #ff8700;">__descriptor</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">return</span> Connection<span style="color: #1f5bff; font-weight: bold;">(</span>__descriptor<span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">disconnect</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">Connection</span>* <span style="color: #ff8700;">con</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #1f5bff;">fmt</span>::format<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Disconnected from descriptor {0}."</span>, con-&gt;descriptor<span style="color: #1f5bff; font-weight: bold;">)</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">descriptor</span> = 1;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#24314;&#31435;&#19968;&#20010;&#36830;&#25509;&#65292;con &#20998;&#37197;&#22312;&#26632;&#20869;&#23384;&#19978;</span>
+  <span style="color: #18b2b2;">Connection</span> <span style="color: #ff8700;">con</span> = connect<span style="color: #1f5bff; font-weight: bold;">(</span>&amp;descriptor<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23558;&#36830;&#25509;&#32465;&#23450;&#21040;&#20849;&#20139;&#25351;&#38024;&#19978;&#65292;&#34429;&#28982;&#27492;&#22788; con &#19981;&#22312;&#20849;&#20139;&#20869;&#23384;&#19978;&#65292;&#25351;&#23450;&#20102;&#33258;&#23450;&#20041;&#30340;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">disconnect &#20989;&#25968;&#20445;&#35777;&#22312; p &#30340;&#29983;&#21629;&#21516;&#26399;&#32467;&#26463;&#26102;&#33021;&#22815;&#33258;&#21160; disconnect</span>
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">shared_ptr</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">Connection</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">p</span><span style="color: #1f5bff; font-weight: bold;">(</span>&amp;con, disconnect<span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+Connected to descriptor 1.
+Disconnected from descriptor 1.
+</pre>
+
+
+<p>
+<code>shared_ptr</code> 和 <code>weak_ptr</code> 的常量性
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">memory</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#22768;&#26126;&#25351;&#38024;&#24120;&#37327;</span>
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">shared_ptr</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">int</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #00af00;">const</span> <span style="color: #ff8700;">ip</span> = <span style="color: #1f5bff;">std</span>::make_shared<span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">int</span><span style="color: #1f5bff; font-weight: bold;">&gt;(</span>1<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  *ip = 2;                  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#21487;&#20197;&#25913;&#21464;&#25351;&#38024;&#25351;&#21521;&#30340;&#20540;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">ip.reset(new int(3));  // &#26080;&#27861;&#25913;&#21464;&#25351;&#38024;&#26412;&#36523;</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; *ip &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#22768;&#26126;&#25351;&#21521;&#24120;&#37327;&#30340;&#25351;&#38024;</span>
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">shared_ptr</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #00af00;">const</span> <span style="color: #18b2b2;">int</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">cip</span> = <span style="color: #1f5bff;">std</span>::make_shared<span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #00af00;">const</span> <span style="color: #18b2b2;">int</span><span style="color: #1f5bff; font-weight: bold;">&gt;(</span>1<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">*cip = 2;             // &#26080;&#27861;&#25913;&#21464;&#25351;&#38024;&#25351;&#21521;&#30340;&#20540;</span>
+  cip.reset<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">new</span> <span style="color: #18b2b2;">int</span><span style="color: #00af00; font-weight: bold;">(</span>3<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span>;   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#21487;&#20197;&#23558;&#25351;&#38024;&#25351;&#21521;&#26032;&#20540;</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; *cip &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+2
+3
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org8d4d08c" class="outline-2">
+<h2 id="org8d4d08c"><span class="section-number-2">15</span> 单例模式</h2>
+<div class="outline-text-2" id="text-15">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">thread</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#36890;&#36807;&#23616;&#37096;&#38745;&#24577;&#21464;&#37327;&#30340;&#29305;&#24615;&#20445;&#35777;&#20102;&#32447;&#31243;&#23433;&#20840;&#65307;</span>
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#19981;&#38656;&#35201;&#20351;&#29992;&#20849;&#20139;&#25351;&#38024;&#65292;&#20195;&#30721;&#31616;&#27905;&#65307;</span>
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27880;&#24847;&#22312;&#20351;&#29992;&#30340;&#26102;&#20505;&#38656;&#35201;&#22768;&#26126;&#21333;&#20363;&#30340;&#24341;&#29992; Single&amp; &#25165;&#33021;&#33719;&#21462;&#23545;&#35937;&#12290;</span>
+<span style="color: #00af00;">class</span> <span style="color: #18b2b2;">Singleton</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #00af00;">public</span>:
+  ~<span style="color: #ef2929;">Singleton</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Destructor called!"</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #ef2929;">Singleton</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Singleton</span> <span style="color: #00af00;">const</span>&amp;<span style="color: #1f5bff; font-weight: bold;">)</span> = <span style="color: #00af00;">delete</span>;
+  <span style="color: #18b2b2;">Singleton</span>&amp; <span style="color: #00af00;">operator</span><span style="color: #ef2929;">=</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Singleton</span> <span style="color: #00af00;">const</span>&amp;<span style="color: #1f5bff; font-weight: bold;">)</span> = <span style="color: #00af00;">delete</span>;
+  <span style="color: #00af00;">static</span> <span style="color: #18b2b2;">Singleton</span>&amp; <span style="color: #ef2929;">get_instance</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">If control enters the declaration concurrently while the variable is</span>
+    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">being initialized, the concurrent execution shall wait for completion of</span>
+    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">the initialization.</span>
+    <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Get instance.\n"</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::flush;
+    <span style="color: #00af00;">static</span> <span style="color: #18b2b2;">Singleton</span> <span style="color: #ff8700;">__instance</span>;
+    <span style="color: #00af00;">return</span> __instance;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+<span style="color: #00af00;">private</span>:
+  <span style="color: #ef2929;">Singleton</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Constructor called!"</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>;
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">thread</span> <span style="color: #ff8700;">t1</span><span style="color: #1f5bff; font-weight: bold;">(</span>&amp;<span style="color: #1f5bff;">Singleton</span>::get_instance<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">thread</span> <span style="color: #ff8700;">t2</span><span style="color: #1f5bff; font-weight: bold;">(</span>&amp;<span style="color: #1f5bff;">Singleton</span>::get_instance<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">thread</span> <span style="color: #ff8700;">t3</span><span style="color: #1f5bff; font-weight: bold;">(</span>&amp;<span style="color: #1f5bff;">Singleton</span>::get_instance<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  t1.join<span style="color: #1f5bff; font-weight: bold;">()</span>;
+  t2.join<span style="color: #1f5bff; font-weight: bold;">()</span>;
+  t3.join<span style="color: #1f5bff; font-weight: bold;">()</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+Get instance.
+Constructor called!
+Get instance.
+Get instance.
+Destructor called!
+</pre>
+</div>
+</div>
+<div id="outline-container-org2b40fb2" class="outline-2">
+<h2 id="org2b40fb2"><span class="section-number-2">16</span> 容器的常量性</h2>
+<div class="outline-text-2" id="text-16">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">vector</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">string</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">vector</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #1f5bff;">std</span>::string<span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #00af00;">const</span> <span style="color: #ff8700;">svec</span><span style="color: #1f5bff; font-weight: bold;">{</span><span style="color: #ff1f8b;">"hello"</span><span style="color: #1f5bff; font-weight: bold;">}</span>;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">*svec.back() = std::string("world");</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
 </div>
 </div>
 </div>
@@ -1899,7 +2252,7 @@ Pointer(1.0, 2.0) is deconstructed.
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-06-10 Wed 10:34></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
-      <div id="built">Built: <2020-07-01 Wed 23:14></div>
+      <div id="built">Built: <2020-07-03 Fri 11:27></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
