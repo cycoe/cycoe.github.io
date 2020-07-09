@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2020-07-09 Thu 22:22 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C++ 中的拷贝控制</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Cycoe">
+<link rel="stylesheet" type="text/css" href="/static/css/default.css" />
+<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+<script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div id="top-container">
+  <a id="site-name" href="/">Cycoe<span id="at-home">@Home</span></a>
+  <div id="banner">Keep It Simple Stupid</div>
+</div>
+
+<div id="top-nav">
+  <div id="nav-wrapper">
+    <div class="nav-btn" id="toc-wrapper">
+      <span class="vertical-align">Ξ</span>
+      <div id="go-top">
+        <a href="javascript:window.scrollTo(0,0)" style="color: black !important; border-bottom: none !important;" class="tooltip" title="Go to the top of the page">
+        <span class="top">&uarr;</span>
+        </a></div>
+    </div>
+    <div id="nav-left-wrapper">
+      <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
+      <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
+      <div id="nav-title-wrapper">
+        <span id="nav-title">C++ 中的拷贝控制</span>
+        <span id="nav-date">Written @<2020-07-09 Thu 15:07></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div id="img-modal" class="modal">
+  <!-- The Close Button -->
+  <span class="close">&times;</span>
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content" id="img-wrapper">
+  <!-- Modal Caption (Image Text) -->
+  <div id="caption"></div>
+</div>
+</div>
+<div id="content">
+<header>
+<h1 class="title">C++ 中的拷贝控制</h1>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org7ca5bc3">1. <code>Tag</code> 类的实现</a></li>
+<li><a href="#org06ae983">2. <code>Blog</code> 类的实现</a></li>
+<li><a href="#org446e4c5">3. 测试我们的 <code>Blog</code> 和 <code>Tag</code> 类</a></li>
+</ul>
+</div>
+</nav>
+<!-- more -->
+
+<p>
+一般来说进行资源管理的类都需要对拷贝过程进行控制，另外在类需要进行某些记录操作时
+也需要进行拷贝控制。以博客生成为例，一篇博客可能具有多个标签，而一个标签下面也会
+管理多篇博客。
+</p>
+
+<div id="outline-container-org7ca5bc3" class="outline-2">
+<h2 id="org7ca5bc3"><span class="section-number-2">1</span> <code>Tag</code> 类的实现</h2>
+<div class="outline-text-2" id="text-1">
+<div class="org-src-container">
+<pre class="src src-C++" id="org9ff0b7f"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">set</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">string</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #00af00;">class</span> <span style="color: #18b2b2;">Blog</span>;
+
+<span style="color: #00af00;">class</span> <span style="color: #18b2b2;">Tag</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">friend</span> <span style="color: #00af00;">class</span> <span style="color: #18b2b2;">Blog</span>;
+  <span style="color: #00af00;">friend</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span>&amp; <span style="color: #00af00;">operator</span><span style="color: #ef2929;">&lt;&lt;</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span>&amp; <span style="color: #ff8700;">os</span>, <span style="color: #18b2b2;">Tag</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">tag</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #00af00;">public</span>:
+  <span style="color: #ef2929;">Tag</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">__name</span> = <span style="color: #ff1f8b;">""</span><span style="color: #1f5bff; font-weight: bold;">)</span> : name<span style="color: #1f5bff; font-weight: bold;">(</span>__name<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span> <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">add</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Blog</span>*<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">remove</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Blog</span>*<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ef2929;">get_name</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #1f5bff; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> name; <span style="color: #1f5bff; font-weight: bold;">}</span>
+<span style="color: #00af00;">private</span>:
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">name</span>;       <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#26631;&#31614;&#30340;&#21517;&#23383;</span>
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">set</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">Blog</span>*<span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">blogs</span>;  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23646;&#20110;&#27492;&#26631;&#31614;&#30340; Blog</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>;
+
+<span style="color: #18b2b2;">void</span> <span style="color: #1f5bff;">Tag</span>::<span style="color: #ef2929;">add</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">Blog</span>* <span style="color: #ff8700;">blog</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  blogs.insert<span style="color: #1f5bff; font-weight: bold;">(</span>blog<span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">void</span> <span style="color: #1f5bff;">Tag</span>::<span style="color: #ef2929;">remove</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">Blog</span>* <span style="color: #ff8700;">blog</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  blogs.erase<span style="color: #1f5bff; font-weight: bold;">(</span>blog<span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org06ae983" class="outline-2">
+<h2 id="org06ae983"><span class="section-number-2">2</span> <code>Blog</code> 类的实现</h2>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
+<pre class="src src-C++" id="org515dfe4"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">string</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">set</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #00af00;">class</span> <span style="color: #18b2b2;">Tag</span>;
+
+<span style="color: #00af00;">class</span> <span style="color: #18b2b2;">Blog</span> <span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">friend</span> <span style="color: #00af00;">class</span> <span style="color: #18b2b2;">Tag</span>;
+  <span style="color: #00af00;">friend</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span>&amp; <span style="color: #00af00;">operator</span><span style="color: #ef2929;">&lt;&lt;</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span>&amp; <span style="color: #ff8700;">os</span>, <span style="color: #18b2b2;">Blog</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">blog</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #00af00;">public</span>:
+  <span style="color: #ef2929;">Blog</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">__content</span> = <span style="color: #ff1f8b;">""</span><span style="color: #1f5bff; font-weight: bold;">)</span> : content<span style="color: #1f5bff; font-weight: bold;">(</span>__content<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span> <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#25335;&#36125;&#25511;&#21046;&#25104;&#21592;&#20989;&#25968;</span>
+  <span style="color: #ef2929;">Blog</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Blog</span> <span style="color: #00af00;">const</span>&amp;<span style="color: #1f5bff; font-weight: bold;">)</span>;             <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#25335;&#36125;&#26500;&#36896;</span>
+  <span style="color: #18b2b2;">Blog</span>&amp; <span style="color: #00af00;">operator</span><span style="color: #ef2929;">=</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Blog</span> <span style="color: #00af00;">const</span>&amp;<span style="color: #1f5bff; font-weight: bold;">)</span>;  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#25335;&#36125;&#36171;&#20540;</span>
+  ~<span style="color: #ef2929;">Blog</span><span style="color: #1f5bff; font-weight: bold;">()</span>;                       <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#26512;&#26500;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20174;&#32473;&#23450;&#30340; Tag &#20013;&#28155;&#21152;&#25110;&#21024;&#38500;&#26412; Blog</span>
+  <span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">add_to</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Tag</span>&amp;<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">remove_from</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Tag</span>&amp;<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ef2929;">get_content</span><span style="color: #1f5bff; font-weight: bold;">()</span> <span style="color: #1f5bff; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> content; <span style="color: #1f5bff; font-weight: bold;">}</span>
+<span style="color: #00af00;">private</span>:
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">content</span>;           <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">Blog &#30340;&#20869;&#23481;</span>
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">set</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">Tag</span>*<span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">tags</span>;           <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#26412; Blog &#30340; tags&#65292;&#34987;&#38544;&#24335;&#21021;&#22987;&#21270;&#20026;&#31354;&#38598;&#21512;</span>
+  <span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">add_to_tags</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Blog</span> <span style="color: #00af00;">const</span>&amp;<span style="color: #1f5bff; font-weight: bold;">)</span>; <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23558;&#26412; Blog &#28155;&#21152;&#21040;&#21442;&#25968; Blog &#30340;&#25152;&#26377; Tag &#20013;</span>
+  <span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">remove_from_tags</span><span style="color: #1f5bff; font-weight: bold;">()</span>;       <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20174; tags &#20013;&#30340;&#27599;&#20010; Tag &#20013;&#21024;&#38500;&#26412; Blog</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>;
+
+<span style="color: #18b2b2;">void</span> <span style="color: #1f5bff;">Blog</span>::<span style="color: #ef2929;">add_to</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">Tag</span>&amp; <span style="color: #ff8700;">tag</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  tags.insert<span style="color: #1f5bff; font-weight: bold;">(</span>&amp;tag<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  tag.add<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">this</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">void</span> <span style="color: #1f5bff;">Blog</span>::<span style="color: #ef2929;">remove_from</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">Tag</span>&amp; <span style="color: #ff8700;">tag</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  tags.erase<span style="color: #1f5bff; font-weight: bold;">(</span>&amp;tag<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  tag.remove<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">this</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">void</span> <span style="color: #1f5bff;">Blog</span>::<span style="color: #ef2929;">add_to_tags</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">Blog</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">blog</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">for</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">auto</span> <span style="color: #ff8700;">tag</span> : blog.tags<span style="color: #1f5bff; font-weight: bold;">)</span>
+    tag-&gt;add<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">this</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">void</span> <span style="color: #1f5bff;">Blog</span>::<span style="color: #ef2929;">remove_from_tags</span><span style="color: #cc0000; font-weight: bold;">()</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">for</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">auto</span> <span style="color: #ff8700;">tag</span> : tags<span style="color: #1f5bff; font-weight: bold;">)</span>
+    tag-&gt;remove<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">this</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #1f5bff;">Blog</span>::<span style="color: #ef2929;">Blog</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">Blog</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">blog</span><span style="color: #cc0000; font-weight: bold;">)</span> : content<span style="color: #cc0000; font-weight: bold;">(</span>blog.content<span style="color: #cc0000; font-weight: bold;">)</span>, tags<span style="color: #cc0000; font-weight: bold;">(</span>blog.tags<span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  add_to_tags<span style="color: #1f5bff; font-weight: bold;">(</span>blog<span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #1f5bff;">Blog</span>::~<span style="color: #ef2929;">Blog</span><span style="color: #cc0000; font-weight: bold;">()</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  remove_from_tags<span style="color: #1f5bff; font-weight: bold;">()</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">Blog</span>&amp; <span style="color: #1f5bff;">Blog</span>::<span style="color: #00af00;">operator</span><span style="color: #ef2929;">=</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">Blog</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">blog</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20808;&#23558;&#26412; Blog &#20174;&#21407;&#26469;&#30340; tags &#20013;&#21024;&#38500;&#65292;&#20877;&#21152;&#20837;&#21040; blog &#21442;&#25968;&#30340; tags &#21015;&#34920;&#20013;&#65292;&#20174;&#32780;&#22788;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#29702;&#33258;&#36171;&#20540;&#24773;&#20917;</span>
+  remove_from_tags<span style="color: #1f5bff; font-weight: bold;">()</span>;
+  content = blog.content;
+  tags = blog.tags;
+  add_to_tags<span style="color: #1f5bff; font-weight: bold;">(</span>blog<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #00af00;">return</span> *<span style="color: #00af00;">this</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org446e4c5" class="outline-2">
+<h2 id="org446e4c5"><span class="section-number-2">3</span> 测试我们的 <code>Blog</code> 和 <code>Tag</code> 类</h2>
+<div class="outline-text-2" id="text-3">
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">fmt/core.h</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+&lt;&lt;Tag-<span style="color: #00af00;">class</span>&gt;&gt;
+&lt;&lt;Blog-<span style="color: #00af00;">class</span>&gt;&gt;
+
+<span style="color: #1f5bff;">std</span>::ostream&amp; <span style="color: #00af00;">operator</span>&lt;&lt;<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span>&amp; <span style="color: #ff8700;">os</span>, <span style="color: #ff8700;">Tag</span> <span style="color: #00af00;">const</span>&amp; tag<span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  os &lt;&lt; <span style="color: #1f5bff;">fmt</span>::format<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Tag({0}) has {1} blogs:\n"</span>, tag.name, tag.blogs.size<span style="color: #00af00; font-weight: bold;">()</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #1f5bff;">set</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">Blog</span>*<span style="color: #1f5bff; font-weight: bold;">&gt;</span>::<span style="color: #18b2b2;">size_type</span> <span style="color: #ff8700;">index</span> = 0;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #1f5bff;">set</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">Blog</span>*<span style="color: #1f5bff; font-weight: bold;">&gt;</span>::<span style="color: #18b2b2;">const_iterator</span> <span style="color: #ff8700;">iter</span> = tag.blogs.cbegin<span style="color: #1f5bff; font-weight: bold;">()</span>;
+  <span style="color: #00af00;">for</span> <span style="color: #1f5bff; font-weight: bold;">(</span>; index &lt; tag.blogs.size<span style="color: #00af00; font-weight: bold;">()</span>; ++index, ++iter<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span>
+    os &lt;&lt; <span style="color: #1f5bff;">fmt</span>::format<span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ff1f8b;">"[{0}] "</span>, index + 1<span style="color: #00af00; font-weight: bold;">)</span> &lt;&lt; <span style="color: #00af00; font-weight: bold;">(</span>*iter<span style="color: #00af00; font-weight: bold;">)</span>-&gt;get_content<span style="color: #00af00; font-weight: bold;">()</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #00af00;">return</span> os;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span>&amp; <span style="color: #00af00;">operator</span><span style="color: #ef2929;">&lt;&lt;</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span>&amp; <span style="color: #ff8700;">os</span>, <span style="color: #18b2b2;">Blog</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">blog</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  os &lt;&lt; <span style="color: #1f5bff;">fmt</span>::format<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Blog({0}) has {1} tags: "</span>, blog.content, blog.tags.size<span style="color: #00af00; font-weight: bold;">()</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #1f5bff;">set</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">Tag</span>*<span style="color: #1f5bff; font-weight: bold;">&gt;</span>::<span style="color: #18b2b2;">size_type</span> <span style="color: #ff8700;">index</span> = 0;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #1f5bff;">set</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">Tag</span>*<span style="color: #1f5bff; font-weight: bold;">&gt;</span>::<span style="color: #18b2b2;">const_iterator</span> <span style="color: #ff8700;">iter</span> = blog.tags.cbegin<span style="color: #1f5bff; font-weight: bold;">()</span>;
+  <span style="color: #00af00;">for</span> <span style="color: #1f5bff; font-weight: bold;">(</span>; index &lt; blog.tags.size<span style="color: #00af00; font-weight: bold;">()</span> - 1; ++index, ++iter<span style="color: #1f5bff; font-weight: bold;">)</span>
+    os &lt;&lt; <span style="color: #1f5bff; font-weight: bold;">(</span>*iter<span style="color: #1f5bff; font-weight: bold;">)</span>-&gt;get_name<span style="color: #1f5bff; font-weight: bold;">()</span> &lt;&lt; <span style="color: #ff1f8b;">", "</span>;
+  <span style="color: #00af00;">return</span> os &lt;&lt; <span style="color: #1f5bff; font-weight: bold;">(</span>*iter<span style="color: #1f5bff; font-weight: bold;">)</span>-&gt;get_name<span style="color: #1f5bff; font-weight: bold;">()</span> &lt;&lt; <span style="color: #ff1f8b;">"."</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">()</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">Tag</span> <span style="color: #ff8700;">python</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Python"</span><span style="color: #1f5bff; font-weight: bold;">)</span>, <span style="color: #ff8700;">cpp</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"C++"</span><span style="color: #1f5bff; font-weight: bold;">)</span>, <span style="color: #ff8700;">program</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Program languages"</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+
+  <span style="color: #18b2b2;">Blog</span> <span style="color: #ff8700;">b1</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Python is elegant."</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #18b2b2;">Blog</span> <span style="color: #ff8700;">b2</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Python is simple."</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #18b2b2;">Blog</span> <span style="color: #ff8700;">b3</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"C++ is evil."</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  b1.add_to<span style="color: #1f5bff; font-weight: bold;">(</span>python<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  b2.add_to<span style="color: #1f5bff; font-weight: bold;">(</span>python<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  b3.add_to<span style="color: #1f5bff; font-weight: bold;">(</span>cpp<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  b1.add_to<span style="color: #1f5bff; font-weight: bold;">(</span>program<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  b2.add_to<span style="color: #1f5bff; font-weight: bold;">(</span>program<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  b3.add_to<span style="color: #1f5bff; font-weight: bold;">(</span>program<span style="color: #1f5bff; font-weight: bold;">)</span>;
+
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; python &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; cpp &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; program &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20174; b3 &#25335;&#36125;&#26500;&#36896; b4</span>
+  <span style="color: #18b2b2;">Blog</span> <span style="color: #ff8700;">b4</span><span style="color: #1f5bff; font-weight: bold;">(</span>b3<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; cpp &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; b4 &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+
+  b4 = b1;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; cpp &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; python &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; b4 &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+Tag(Python) has 2 blogs:
+[1] Python is elegant.
+[2] Python is simple.
+
+Tag(C++) has 1 blogs:
+[1] C++ is evil.
+
+Tag(Program languages) has 3 blogs:
+[1] Python is elegant.
+[2] Python is simple.
+[3] C++ is evil.
+
+Tag(C++) has 2 blogs:
+[1] C++ is evil.
+[2] C++ is evil.
+
+Blog(C++ is evil.) has 2 tags: C++, Program languages.
+
+Tag(C++) has 1 blogs:
+[1] C++ is evil.
+
+Tag(Python) has 3 blogs:
+[1] Python is elegant.
+[2] Python is simple.
+[3] Python is elegant.
+
+Blog(Python is elegant.) has 2 tags: Python, Program languages.
+</pre>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="author-info">
+      <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
+      <div id="date">Date: <2020-07-09 Thu 15:07></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
+      <div id="built">Built: <2020-07-09 Thu 22:22></div>
+      </div><div id="copyright">
+    <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
+</div>
+</div>
+</body>
+</html>
