@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2020-08-16 Sun 16:59 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>移动语义与完美转发</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Cycoe">
+<link rel="stylesheet" type="text/css" href="/static/css/default.css" />
+<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+<script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div id="top-container">
+  <a id="site-name" href="/">Cycoe<span id="at-home">@Home</span></a>
+  <div id="banner">Keep It Simple Stupid</div>
+</div>
+
+<div id="top-nav">
+  <div id="nav-wrapper">
+    <div class="nav-btn" id="toc-wrapper">
+      <span class="vertical-align">Ξ</span>
+      <div id="go-top">
+        <a href="javascript:window.scrollTo(0,0)" style="color: black !important; border-bottom: none !important;" class="tooltip" title="Go to the top of the page">
+        <span class="top">&uarr;</span>
+        </a></div>
+    </div>
+    <div id="nav-left-wrapper">
+      <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
+      <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
+      <div id="nav-title-wrapper">
+        <span id="nav-title">移动语义与完美转发</span>
+        <span id="nav-date">Written @<2020-08-15 Sat 22:43></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div id="img-modal" class="modal">
+  <!-- The Close Button -->
+  <span class="close">&times;</span>
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content" id="img-wrapper">
+  <!-- Modal Caption (Image Text) -->
+  <div id="caption"></div>
+</div>
+</div>
+<div id="content">
+<header>
+<h1 class="title">移动语义与完美转发</h1>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org4e0d77f">1. 左值与右值</a></li>
+<li><a href="#orgec45983">2. 左值引用与右值引用</a></li>
+<li><a href="#org97cb27e">3. 移动构造与移动赋值</a></li>
+<li><a href="#org7a4020c">4. 引用折叠</a></li>
+<li><a href="#org620a1ac">5. 完美转发</a></li>
+<li><a href="#orgcb4d596">6. 利用完美转发实现委托机制</a></li>
+</ul>
+</div>
+</nav>
+<p>
+<code>C++11</code> 标准引入了 <code>右值引用</code> 、 <code>引用折叠</code> 、 <code>移动语义</code> 和 <code>完美转发</code> 等概念，我的理解是
+移动语义可通过移交资源管理权的方式避免无谓的拷贝从而提升性能，而完美转发用于通用
+模板中，将参数“原封不动”传递给函数。
+</p>
+
+<!-- more -->
+
+<div id="outline-container-org4e0d77f" class="outline-2">
+<h2 id="org4e0d77f"><span class="section-number-2">1</span> 左值与右值</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+其实从 C 中就有了左值与右值的概念，当时理解的是“在赋值等号左边的是左值，在右边的
+是右值”。现在看来，左值与右值更多是一种语义上的区分，因为 <code>const</code> 对象也不能出现在
+等号左边，但显然它是左值。具名对象一般都为左值，而函数返回的非引用临时变量一般为
+右值。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">add</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">a</span>, <span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">b</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> a + b; <span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">ret</span>;
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27809;&#38382;&#39064;&#65292;&#32473;&#24038;&#20540;&#36171;&#20540;</span>
+ret = add<span style="color: #cc0000; font-weight: bold;">(</span>1, 2<span style="color: #cc0000; font-weight: bold;">)</span>;
+
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#38169;&#35823;&#65281;&#26080;&#27861;&#32473;&#21491;&#20540;&#36171;&#20540;</span>
+add<span style="color: #cc0000; font-weight: bold;">(</span>1, 2<span style="color: #cc0000; font-weight: bold;">)</span> = ret;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgec45983" class="outline-2">
+<h2 id="orgec45983"><span class="section-number-2">2</span> 左值引用与右值引用</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<code>C++98</code> 中引入的左值引用就是给变量取一个别名，使用上和变量声明时的名字没有太大区别，
+而 <code>C++11</code> 引入的右值引用是用一个变量名绑定了一个右值（一般是一个将亡值）。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">add</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">a</span>, <span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">b</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #cc0000; font-weight: bold;">{</span> <span style="color: #00af00;">return</span> a + b; <span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">a</span> = 0;
+
+<span style="color: #18b2b2;">int</span>&amp; <span style="color: #ff8700;">lRefA</span> = a;        <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27491;&#30830;&#65306;&#23545;&#24038;&#20540;&#32465;&#23450;&#24038;&#20540;&#24341;&#29992;</span>
+<span style="color: #18b2b2;">int</span>&amp; <span style="color: #ff8700;">lRefN</span> = 0;        <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#38169;&#35823;&#65306;&#19981;&#33021;&#23545;&#21491;&#20540;&#32465;&#23450;&#24038;&#20540;&#24341;&#29992;&#65288;&#32534;&#35793;&#38169;&#35823;&#65289;</span>
+
+<span style="color: #18b2b2;">int</span>&amp;&amp; <span style="color: #ff8700;">rRefA</span> = a;       <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#38169;&#35823;&#65306;&#19981;&#33021;&#23545;&#24038;&#20540;&#32465;&#23450;&#21491;&#20540;&#24341;&#29992;&#65288;&#32534;&#35793;&#38169;&#35823;&#65289;</span>
+<span style="color: #18b2b2;">int</span>&amp;&amp; <span style="color: #ff8700;">rRefN</span> = 0;       <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27491;&#30830;&#65306;&#23545;&#21491;&#20540;&#32465;&#23450;&#21491;&#20540;&#24341;&#29992;</span>
+<span style="color: #18b2b2;">int</span>&amp;&amp; <span style="color: #ff8700;">ret</span> = add<span style="color: #cc0000; font-weight: bold;">(</span>1, 2<span style="color: #cc0000; font-weight: bold;">)</span>; <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27491;&#30830;&#65306;&#23545;&#21491;&#20540;&#32465;&#23450;&#21491;&#20540;&#24341;&#29992;&#65292;&#27492;&#26102;&#36820;&#22238;&#30340;&#20020;&#26102;&#21464;&#37327;&#30340;&#29983;&#21629;&#21608;&#26399;&#30001; ret &#31649;&#29702;</span>
+
+<span style="color: #b2b2b2; font-style: italic;">/* </span><span style="color: #b2b2b2; font-style: italic;">&#27880;&#24847;&#24120;&#37327;&#24038;&#20540;&#24341;&#29992;&#27604;&#36739;&#29305;&#27530;</span>
+<span style="color: #b2b2b2; font-style: italic;"> * &#26082;&#21487;&#20197;&#32465;&#23450;&#24038;&#20540;&#20063;&#21487;&#20197;&#32465;&#23450;&#21491;&#20540;</span>
+<span style="color: #b2b2b2; font-style: italic;"> */</span>
+<span style="color: #18b2b2;">int</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">cLRefA</span> = a; <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27491;&#30830;&#65306;&#24120;&#37327;&#24038;&#20540;&#24341;&#29992;&#21487;&#20197;&#32465;&#23450;&#24038;&#20540;</span>
+<span style="color: #18b2b2;">int</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">cLRefN</span> = 0; <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27491;&#30830;&#65306;&#24120;&#37327;&#24038;&#20540;&#24341;&#29992;&#21487;&#20197;&#32465;&#23450;&#21491;&#20540;</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org97cb27e" class="outline-2">
+<h2 id="org97cb27e"><span class="section-number-2">3</span> 移动构造与移动赋值</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+在接触移动语义之前，先简单地实现一个 <code>String</code> 类来说明移动语义的应用场景。移动语义
+的核心是移交资源的控制权，同样也是在 <code>C++ RAII</code> 体系之内。移动语义可通过移交资源来
+减少重新分配资源的开销从而提高性能
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">vector</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">cstring</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">algorithm</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #00af00;">class</span> <span style="color: #18b2b2;">String</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #00af00;">public</span>:
+  <span style="color: #00af00;">static</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">cpyCstrCnt</span>;
+  <span style="color: #00af00;">static</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">cpyAsgnCnt</span>;
+  <span style="color: #00af00;">static</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">movCstrCnt</span>;
+  <span style="color: #00af00;">static</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">dstrCnt</span>;
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#26500;&#36896;&#20989;&#25968;</span>
+  <span style="color: #ef2929;">String</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">char</span> <span style="color: #00af00;">const</span>* <span style="color: #ff8700;">cstr</span> = <span style="color: #1f5bff;">nullptr</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#25335;&#36125;&#26500;&#36896;&#20989;&#25968;</span>
+  <span style="color: #ef2929;">String</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">String</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">rhs</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#25335;&#36125;&#36171;&#20540;&#20989;&#25968;</span>
+  <span style="color: #18b2b2;">String</span>&amp; <span style="color: #00af00;">operator</span><span style="color: #ef2929;">=</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">String</span> <span style="color: #ff8700;">rhs</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#31227;&#21160;&#26500;&#36896;&#20989;&#25968;</span>
+  <span style="color: #ef2929;">String</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">String</span>&amp;&amp; <span style="color: #ff8700;">rhs</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#26512;&#26500;&#20989;&#25968;</span>
+  ~<span style="color: #ef2929;">String</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">void</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+
+<span style="color: #00af00;">private</span>:
+  <span style="color: #18b2b2;">char</span>* <span style="color: #ff8700;">str</span> = <span style="color: #1f5bff;">nullptr</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>;
+
+<span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">size_t</span> <span style="color: #1f5bff;">String</span>::<span style="color: #ff8700;">cpyCstrCnt</span> = 0;
+<span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">size_t</span> <span style="color: #1f5bff;">String</span>::<span style="color: #ff8700;">cpyAsgnCnt</span> = 0;
+<span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">size_t</span> <span style="color: #1f5bff;">String</span>::<span style="color: #ff8700;">movCstrCnt</span> = 0;
+<span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">size_t</span> <span style="color: #1f5bff;">String</span>::<span style="color: #ff8700;">dstrCnt</span> = 0;
+
+<span style="color: #1f5bff;">String</span>::<span style="color: #ef2929;">String</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">char</span> <span style="color: #00af00;">const</span>* <span style="color: #ff8700;">cstr</span><span style="color: #cc0000; font-weight: bold;">)</span> : str<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #1f5bff;">nullptr</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#22914;&#26524; cstr &#20026;&#31354;&#25110;&#20998;&#37197;&#20869;&#23384;&#22833;&#36133;&#65292;&#21017; str &#25351;&#21521; nullptr</span>
+  <span style="color: #00af00;">if</span> <span style="color: #1f5bff; font-weight: bold;">(</span>cstr == <span style="color: #1f5bff;">nullptr</span><span style="color: #1f5bff; font-weight: bold;">)</span>
+  <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #00af00;">return</span>;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+
+  str = <span style="color: #00af00;">new</span> <span style="color: #18b2b2;">char</span><span style="color: #1f5bff; font-weight: bold;">[</span>strlen<span style="color: #00af00; font-weight: bold;">(</span>cstr<span style="color: #00af00; font-weight: bold;">)</span> + 1<span style="color: #1f5bff; font-weight: bold;">]</span>;
+
+  <span style="color: #00af00;">if</span> <span style="color: #1f5bff; font-weight: bold;">(</span>str == <span style="color: #1f5bff;">nullptr</span><span style="color: #1f5bff; font-weight: bold;">)</span>
+  <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #00af00;">return</span>;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+
+  strncpy<span style="color: #1f5bff; font-weight: bold;">(</span>str, cstr, strlen<span style="color: #00af00; font-weight: bold;">(</span>cstr<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #1f5bff;">String</span>::<span style="color: #ef2929;">String</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">String</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">rhs</span><span style="color: #cc0000; font-weight: bold;">)</span> : String<span style="color: #cc0000; font-weight: bold;">(</span>rhs.str<span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  ++cpyCstrCnt;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">String</span>&amp; <span style="color: #1f5bff;">String</span>::<span style="color: #00af00;">operator</span><span style="color: #ef2929;">=</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">String</span> <span style="color: #ff8700;">rhs</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27492;&#22788;&#20351;&#29992;&#20102;&#21517;&#20026; copy and swap &#25110; move and swap &#30340;&#25216;&#24039;&#65292;&#21487;&#21516;&#26102;&#29992;&#20110;&#25335;&#36125;&#36171;&#20540;&#21644;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#31227;&#21160;&#36171;&#20540;&#65292;&#20855;&#26377;&#24322;&#24120;&#23433;&#20840;&#21644;&#33258;&#36171;&#20540;&#23433;&#20840;&#12290;&#24403;&#20256;&#20837;&#24038;&#20540;&#26102;&#20250;&#38544;&#24335;&#25335;&#36125;&#26500;&#36896;&#19968;&#20010;&#20020;&#26102;&#37327;&#65292;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#24403;&#20256;&#20837;&#21491;&#20540;&#26102;&#20250;&#38544;&#31227;&#21160;&#26500;&#36896;&#19968;&#20010;&#20020;&#26102;&#37327;</span>
+  <span style="color: #1f5bff;">std</span>::swap<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00;">this</span>-&gt;str, rhs.str<span style="color: #1f5bff; font-weight: bold;">)</span>;
+
+  ++cpyAsgnCnt;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #1f5bff;">String</span>::<span style="color: #ef2929;">String</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">String</span>&amp;&amp; <span style="color: #ff8700;">rhs</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  str = rhs.str;
+  rhs.str = <span style="color: #1f5bff;">nullptr</span>;
+  ++movCstrCnt;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #1f5bff;">String</span>::~<span style="color: #ef2929;">String</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">void</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">delete</span> <span style="color: #1f5bff; font-weight: bold;">[]</span>str;
+  ++dstrCnt;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">clearCnt</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">void</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #1f5bff;">String</span>::cpyCstrCnt = 0;
+  <span style="color: #1f5bff;">String</span>::cpyAsgnCnt = 0;
+  <span style="color: #1f5bff;">String</span>::movCstrCnt = 0;
+  <span style="color: #1f5bff;">String</span>::dstrCnt = 0;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">outputCnt</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">void</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Copy Construct: "</span> &lt;&lt; <span style="color: #1f5bff;">String</span>::cpyCstrCnt &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Copy Assignment: "</span> &lt;&lt; <span style="color: #1f5bff;">String</span>::cpyAsgnCnt &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Move Construct: "</span> &lt;&lt; <span style="color: #1f5bff;">String</span>::movCstrCnt &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Destruct: "</span> &lt;&lt; <span style="color: #1f5bff;">String</span>::dstrCnt &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">void</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">vector</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">String</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">svec</span>;
+  svec.reserve<span style="color: #1f5bff; font-weight: bold;">(</span>1000<span style="color: #1f5bff; font-weight: bold;">)</span>;
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">1. &#21521; push_back &#20256;&#20837;&#24038;&#20540;</span>
+  <span style="color: #18b2b2;">String</span> <span style="color: #ff8700;">s</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Hello, world!"</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">push_back &#25343;&#21040;&#30340;&#26159; s &#30340;&#24038;&#20540;&#24341;&#29992;&#65292;&#25968;&#32452;&#20013;&#30340; String &#20351;&#29992;&#25335;&#36125;&#26500;&#36896;&#29983;&#25104;</span>
+  <span style="color: #00af00;">for</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">i</span> = 0; i &lt; 1000; ++i<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span> svec.push_back<span style="color: #00af00; font-weight: bold;">(</span>s<span style="color: #00af00; font-weight: bold;">)</span>; <span style="color: #1f5bff; font-weight: bold;">}</span>
+
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"===== Construct String with left value ====="</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  outputCnt<span style="color: #1f5bff; font-weight: bold;">()</span>;
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#28165;&#29702;</span>
+  svec.clear<span style="color: #1f5bff; font-weight: bold;">()</span>;
+  clearCnt<span style="color: #1f5bff; font-weight: bold;">()</span>;
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">2. &#21521; push_back &#20256;&#20837;&#21491;&#20540;&#65292;&#27492;&#22788;&#20351;&#29992;&#20102;&#38544;&#24335;&#26500;&#36896;&#65292;push_back &#25343;&#21040;&#30340;&#26159;&#20020;&#26102;&#37327;&#30340;&#21491;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20540;&#24341;&#29992;&#65292;&#25968;&#32452;&#20013;&#20803;&#32032;&#20351;&#29992;&#31227;&#21160;&#26500;&#36896;&#29983;&#25104;</span>
+  <span style="color: #00af00;">for</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">i</span> = 0; i &lt; 1000; ++i<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span> svec.push_back<span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Hello, world!"</span><span style="color: #00af00; font-weight: bold;">)</span>; <span style="color: #1f5bff; font-weight: bold;">}</span>
+
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"===== Construct String with right value ====="</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  outputCnt<span style="color: #1f5bff; font-weight: bold;">()</span>;
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#28165;&#29702;</span>
+  svec.clear<span style="color: #1f5bff; font-weight: bold;">()</span>;
+  clearCnt<span style="color: #1f5bff; font-weight: bold;">()</span>;
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">3. &#20351;&#29992; std::move &#21578;&#35785;&#32534;&#35793;&#22120;&#23558;&#19968;&#20010;&#21464;&#37327;&#24403;&#20316;&#21491;&#20540;&#65288;&#20351;&#29992;&#31227;&#21160;&#35821;&#20041;&#65289;&#65292;&#23558;&#21407;&#21464;&#37327;&#30340;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#36164;&#28304;&#25511;&#21046;&#26435;&#31227;&#20132;&#32473;&#26032;&#21464;&#37327;&#65292;&#21516;&#26102;&#20316;&#20026;&#35843;&#29992;&#32773;&#35201;&#20445;&#35777;&#19981;&#20877;&#20351;&#29992;&#21407;&#21464;&#37327;</span>
+  svec.push_back<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::move<span style="color: #00af00; font-weight: bold;">(</span>s<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"===== Construct String with std::move ====="</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  outputCnt<span style="color: #1f5bff; font-weight: bold;">()</span>;
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#28165;&#29702;</span>
+  svec.clear<span style="color: #1f5bff; font-weight: bold;">()</span>;
+  clearCnt<span style="color: #1f5bff; font-weight: bold;">()</span>;
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">4. &#25335;&#36125;&#36171;&#20540;</span>
+  <span style="color: #18b2b2;">String</span> <span style="color: #ff8700;">a</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff1f8b;">"Hello, C++!"</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #18b2b2;">String</span> <span style="color: #ff8700;">b</span>;
+  b = a;
+
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"===== Copy Assignment ====="</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  outputCnt<span style="color: #1f5bff; font-weight: bold;">()</span>;
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#28165;&#29702;</span>
+  svec.clear<span style="color: #1f5bff; font-weight: bold;">()</span>;
+  clearCnt<span style="color: #1f5bff; font-weight: bold;">()</span>;
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">5. &#31227;&#21160;&#36171;&#20540;</span>
+  <span style="color: #18b2b2;">String</span> <span style="color: #ff8700;">c</span>;
+  c = <span style="color: #1f5bff;">std</span>::move<span style="color: #1f5bff; font-weight: bold;">(</span>b<span style="color: #1f5bff; font-weight: bold;">)</span>;
+
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"===== Move Assignment ====="</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  outputCnt<span style="color: #1f5bff; font-weight: bold;">()</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+===== Construct String with left value =====
+Copy Construct: 1000
+Copy Assignment: 0
+Move Construct: 0
+Destruct: 0
+===== Construct String with right value =====
+Copy Construct: 0
+Copy Assignment: 0
+Move Construct: 1000
+Destruct: 1000
+===== Construct String with std::move =====
+Copy Construct: 0
+Copy Assignment: 0
+Move Construct: 1
+Destruct: 0
+===== Copy Assignment =====
+Copy Construct: 1
+Copy Assignment: 1
+Move Construct: 0
+Destruct: 1
+===== Move Assignment =====
+Copy Construct: 0
+Copy Assignment: 1
+Move Construct: 1
+Destruct: 1
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org7a4020c" class="outline-2">
+<h2 id="org7a4020c"><span class="section-number-2">4</span> 引用折叠</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+引用折叠规则出现在函数泛型模板中，可总结为：
+</p>
+<ol class="org-ol">
+<li>右值引用叠加到右值引用仍为右值引用</li>
+<li>其它引用类型叠加为左值引用</li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #00af00;">template</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">f</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">T</span>&amp;&amp; <span style="color: #ff8700;">p</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #00af00;">if</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #1f5bff;">is_same</span><span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span>, <span style="color: #18b2b2;">int</span><span style="color: #00af00; font-weight: bold;">&gt;</span>::value<span style="color: #1f5bff; font-weight: bold;">)</span>
+    <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"int"</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #00af00;">else</span> <span style="color: #00af00;">if</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #1f5bff;">is_same</span><span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span>, <span style="color: #18b2b2;">int</span>&amp;<span style="color: #00af00; font-weight: bold;">&gt;</span>::value<span style="color: #1f5bff; font-weight: bold;">)</span>
+    <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"int&amp;"</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #00af00;">else</span> <span style="color: #00af00;">if</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::<span style="color: #1f5bff;">is_same</span><span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span>, <span style="color: #18b2b2;">int</span>&amp;&amp;<span style="color: #00af00; font-weight: bold;">&gt;</span>::value<span style="color: #1f5bff; font-weight: bold;">)</span>
+    <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"int&amp;&amp;"</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #00af00;">else</span>
+    <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Unknown type"</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">void</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">i</span> = 0;
+  <span style="color: #18b2b2;">int</span>&amp;&amp; <span style="color: #ff8700;">j</span> = 1;
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">i &#20026;&#24038;&#20540;&#65292;T &#34987;&#25512;&#26029;&#20026; int&amp; &#26102; T&amp;&amp; &#20026; int&amp;&amp;&amp;&#65292;&#25240;&#21472;&#20026; int&amp; &#28385;&#36275;&#26465;&#20214;</span>
+  f<span style="color: #1f5bff; font-weight: bold;">(</span>i<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">j &#26159;&#32465;&#23450;&#21040; 1 &#30340;&#21491;&#20540;&#24341;&#29992;&#65292;&#20294; j &#20316;&#20026;&#19968;&#20010;&#20855;&#21517;&#21464;&#37327;&#26412;&#36523;&#20026;&#24038;&#20540;&#65292;&#22240;&#27492; T &#34987;&#25512;&#26029;&#20026; int&amp;</span>
+  f<span style="color: #1f5bff; font-weight: bold;">(</span>j<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">1 &#20026;&#21491;&#20540;&#65292;&#22240;&#27492; T &#34987;&#25512;&#26029;&#20026; int &#26102; T&amp;&amp; &#20026; int&amp;&amp; &#28385;&#36275;&#26465;&#20214;</span>
+  f<span style="color: #1f5bff; font-weight: bold;">(</span>1<span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+int&amp;
+int&amp;
+int
+</pre>
+
+
+<p>
+<code>T&amp;&amp;</code> 表现出一种特性，能通过引用折叠规则保持传入参数的引用性质，因此也被称为通过引
+用，完美转发正基于此原理之上
+</p>
+</div>
+</div>
+
+<div id="outline-container-org620a1ac" class="outline-2">
+<h2 id="org620a1ac"><span class="section-number-2">5</span> 完美转发</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+转发就是通过一个函数将参数交由另一个函数进行处理，原参数可能是左值也可能是右值，
+同时也可能带有常量性，如果能够原封不动地将参数进行转发那么就是完美转发。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">handle</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span>&amp; <span style="color: #ff8700;">i</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Handle int&amp;"</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">handle</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span>&amp;&amp; <span style="color: #ff8700;">i</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Handle int&amp;&amp;"</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">forward</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">T</span>&amp;&amp; <span style="color: #ff8700;">i</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  handle<span style="color: #1f5bff; font-weight: bold;">(</span>i<span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">void</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">i</span> = 0;
+
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"===== Before forward ====="</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  handle<span style="color: #1f5bff; font-weight: bold;">(</span>i<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  handle<span style="color: #1f5bff; font-weight: bold;">(</span>0<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  handle<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::move<span style="color: #00af00; font-weight: bold;">(</span>i<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"===== After forward ====="</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  forward<span style="color: #1f5bff; font-weight: bold;">(</span>i<span style="color: #1f5bff; font-weight: bold;">)</span>;            <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">i &#26159;&#24038;&#20540;&#36716;&#21457;&#21518;&#20173;&#20026;&#24038;&#20540;&#24341;&#29992;</span>
+  forward<span style="color: #1f5bff; font-weight: bold;">(</span>0<span style="color: #1f5bff; font-weight: bold;">)</span>;            <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">0 &#26159;&#21491;&#20540;&#65292;forward &#20989;&#25968;&#20013;&#20351;&#29992; i &#32465;&#23450;&#20102; 0 &#30340;&#21491;&#20540;&#24341;&#29992;&#65292;</span>
+                         <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20294; i &#26412;&#36523;&#26159;&#24038;&#20540;&#65292;&#36716;&#21457;&#21518;&#24341;&#29992;&#31867;&#22411;&#38169;&#35823;</span>
+  forward<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::move<span style="color: #00af00; font-weight: bold;">(</span>i<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span>; <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#19982;&#19978;&#26465;&#21516;</span>
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+===== Before forward =====
+Handle int&amp;
+Handle int&amp;&amp;
+Handle int&amp;&amp;
+===== After forward =====
+Handle int&amp;
+Handle int&amp;
+Handle int&amp;
+</pre>
+
+
+<p>
+可以看到在经过转发之后参数的引用类型发生了变化，因此不是完美转发。 <code>C++11</code> 提供了
+<code>std::forward</code> 模板函数用于实现完美转发
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">handle</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span>&amp; <span style="color: #ff8700;">i</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Handle int&amp;"</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">handle</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span>&amp;&amp; <span style="color: #ff8700;">i</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Handle int&amp;&amp;"</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">handle</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">i</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Handle int const&amp;"</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">handle</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span> <span style="color: #00af00;">const</span>&amp;&amp; <span style="color: #ff8700;">i</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Handle int const&amp;&amp;"</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">forward</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">T</span>&amp;&amp; <span style="color: #ff8700;">i</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  handle<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::forward<span style="color: #00af00; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">T</span><span style="color: #00af00; font-weight: bold;">&gt;(</span>i<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">void</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">i</span> = 0;
+  <span style="color: #18b2b2;">int</span> <span style="color: #00af00;">const</span> <span style="color: #ff8700;">ci</span> = 1;
+
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"===== Before forward ====="</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  handle<span style="color: #1f5bff; font-weight: bold;">(</span>i<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  handle<span style="color: #1f5bff; font-weight: bold;">(</span>0<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  handle<span style="color: #1f5bff; font-weight: bold;">(</span>ci<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  handle<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::move<span style="color: #00af00; font-weight: bold;">(</span>ci<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"===== After forward ====="</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  forward<span style="color: #1f5bff; font-weight: bold;">(</span>i<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  forward<span style="color: #1f5bff; font-weight: bold;">(</span>0<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  forward<span style="color: #1f5bff; font-weight: bold;">(</span>ci<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  forward<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::move<span style="color: #00af00; font-weight: bold;">(</span>ci<span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+===== Before forward =====
+Handle int&amp;
+Handle int&amp;&amp;
+Handle int const&amp;
+Handle int const&amp;&amp;
+===== After forward =====
+Handle int&amp;
+Handle int&amp;&amp;
+Handle int const&amp;
+Handle int const&amp;&amp;
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgcb4d596" class="outline-2">
+<h2 id="orgcb4d596"><span class="section-number-2">6</span> 利用完美转发实现委托机制</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+完美转发看起来非常完美，那到底有什么用呢？完美转发在标准库中有很多应用，主要涉及
+模板和函数式编程，此处以构造一个委托类为例
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #ff1f8b;">iostream</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #00af00;">class</span> <span style="color: #18b2b2;">Delegate</span>;
+
+<span style="color: #00af00;">template</span><span style="color: #cc0000; font-weight: bold;">&lt;</span><span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">Return</span>, <span style="color: #00af00;">typename</span><span style="color: #ef2929;">...</span> <span style="color: #18b2b2;">Args</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #00af00;">class</span> <span style="color: #18b2b2;">Delegate</span><span style="color: #cc0000; font-weight: bold;">&lt;</span>Return<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Args</span><span style="color: #ef2929;">...</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">&gt;</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #00af00;">public</span>:
+  <span style="color: #00af00;">using</span> <span style="color: #18b2b2;">FuncType</span> = Return <span style="color: #1f5bff; font-weight: bold;">(</span>*<span style="color: #1f5bff; font-weight: bold;">)(</span><span style="color: #18b2b2;">Args</span><span style="color: #ef2929;">...</span><span style="color: #1f5bff; font-weight: bold;">)</span>;
+  <span style="color: #ef2929;">Delegate</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">FuncType</span> <span style="color: #ff8700;">func</span><span style="color: #1f5bff; font-weight: bold;">)</span> : __func<span style="color: #1f5bff; font-weight: bold;">(</span>func<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #1f5bff; font-weight: bold;">{</span> <span style="color: #1f5bff; font-weight: bold;">}</span>
+  <span style="color: #18b2b2;">Return</span> <span style="color: #00af00;">operator</span><span style="color: #1f5bff; font-weight: bold;">()</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Args</span><span style="color: #ef2929;">...</span> <span style="color: #ff8700;">args</span><span style="color: #1f5bff; font-weight: bold;">)</span>
+  <span style="color: #1f5bff; font-weight: bold;">{</span>
+    <span style="color: #00af00;">return</span> __func<span style="color: #00af00; font-weight: bold;">(</span><span style="color: #1f5bff;">std</span>::forward<span style="color: #ff4ea3; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">Args</span><span style="color: #ff4ea3; font-weight: bold;">&gt;(</span><span style="color: #ff8700;">args</span><span style="color: #ff4ea3; font-weight: bold;">)</span><span style="color: #ef2929;">...</span><span style="color: #00af00; font-weight: bold;">)</span>;
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+
+<span style="color: #00af00;">private</span>:
+  <span style="color: #18b2b2;">FuncType</span> <span style="color: #ff8700;">__func</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>;
+
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">add</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">a</span>, <span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">b</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"a + b = "</span> &lt;&lt; a + b &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">multiply</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">a</span>, <span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">b</span>, <span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">c</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"a * b * c = "</span> &lt;&lt; a * b * c &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #18b2b2;">void</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #cc0000; font-weight: bold;">{</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#22996;&#25176;&#20570;&#21152;&#27861;&#35745;&#31639;</span>
+  <span style="color: #18b2b2;">Delegate</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">void</span><span style="color: #00af00; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span>, <span style="color: #18b2b2;">int</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">delegateAdd</span><span style="color: #1f5bff; font-weight: bold;">(</span>add<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  delegateAdd<span style="color: #1f5bff; font-weight: bold;">(</span>1, 2<span style="color: #1f5bff; font-weight: bold;">)</span>;
+
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#22996;&#25176;&#20570;&#20056;&#27861;&#35745;&#31639;</span>
+  <span style="color: #18b2b2;">Delegate</span><span style="color: #1f5bff; font-weight: bold;">&lt;</span><span style="color: #18b2b2;">void</span><span style="color: #00af00; font-weight: bold;">(</span><span style="color: #18b2b2;">int</span>, <span style="color: #18b2b2;">int</span>, <span style="color: #18b2b2;">int</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">&gt;</span> <span style="color: #ff8700;">delegateMultiply</span><span style="color: #1f5bff; font-weight: bold;">(</span>multiply<span style="color: #1f5bff; font-weight: bold;">)</span>;
+  delegateMultiply<span style="color: #1f5bff; font-weight: bold;">(</span>1, 2, 3<span style="color: #1f5bff; font-weight: bold;">)</span>;
+<span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+
+<pre class="example">
+a + b = 3
+a * b * c = 6
+</pre>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="author-info">
+      <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
+      <div id="date">Date: <2020-08-15 Sat 22:43></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
+      <div id="built">Built: <2020-08-16 Sun 16:59></div>
+      </div><div id="copyright">
+    <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
+</div>
+</div>
+</body>
+</html>
