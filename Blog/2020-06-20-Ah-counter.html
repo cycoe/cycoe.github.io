@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-06-20 Sat 21:47 -->
+<!-- 2021-05-31 Mon 18:28 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>2020-06-20 Ah counter</title>
@@ -56,10 +56,10 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org9d2e025">1. <span class="done DONE">DONE</span> <span class="timestamp-wrapper"><span class="timestamp">&lt;2020-06-20 Sat&gt; </span></span> Ah Counter</a>
+<li><a href="#org33532f9">1. <span class="done DONE">DONE</span> <span class="timestamp-wrapper"><span class="timestamp">&lt;2020-06-20 Sat&gt; </span></span> Ah Counter</a>
 <ul>
-<li><a href="#org1e653e1">1.1. <span class="done DONE">DONE</span> Records</a></li>
-<li><a href="#org8c15fb4">1.2. <span class="done DONE">DONE</span> Report</a></li>
+<li><a href="#org77f2a95">1.1. <span class="done DONE">DONE</span> Records</a></li>
+<li><a href="#orgef566af">1.2. <span class="done DONE">DONE</span> Report</a></li>
 </ul>
 </li>
 </ul>
@@ -67,14 +67,14 @@
 </nav>
 <!-- more -->
 
-<div id="outline-container-org9d2e025" class="outline-2">
-<h2 id="org9d2e025"><span class="section-number-2">1</span> <span class="done DONE">DONE</span> <span class="timestamp-wrapper"><span class="timestamp">&lt;2020-06-20 Sat&gt; </span></span> Ah Counter</h2>
+<div id="outline-container-org33532f9" class="outline-2">
+<h2 id="org33532f9"><span class="section-number-2">1</span> <span class="done DONE">DONE</span> <span class="timestamp-wrapper"><span class="timestamp">&lt;2020-06-20 Sat&gt; </span></span> Ah Counter</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org1e653e1" class="outline-3">
-<h3 id="org1e653e1"><span class="section-number-3">1.1</span> <span class="done DONE">DONE</span> Records</h3>
+<div id="outline-container-org77f2a95" class="outline-3">
+<h3 id="org77f2a95"><span class="section-number-3">1.1</span> <span class="done DONE">DONE</span> Records</h3>
 <div class="outline-text-3" id="text-1-1">
-<table id="orgb718c42">
+<table id="org1a54ce0">
 
 
 <colgroup>
@@ -231,33 +231,27 @@
 </table>
 
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> term pngcairo size 1600, 1200 font <span style="color: #ff1f8b;">',32'</span>
-<span style="color: #ff8700;">firstcol=</span>2
-<span style="color: #ff8700;">cumulated(i)=</span>((i&gt;firstcol)?<span style="color: #ef2929;">column</span>(i)+cumulated(i-1):(i==firstcol)?<span style="color: #ef2929;">column</span>(i):1/0)
+<pre class="src src-gnuplot">set term pngcairo size 1600, 1200 font ',32'
+firstcol=2
+cumulated(i)=((i&gt;firstcol)?column(i)+cumulated(i-1):(i==firstcol)?column(i):1/0)
 
-<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Set the first line as headers</span>
-<span style="color: #1f5bff;">set</span> key autotitle <span style="color: #ef2929;">columnhead</span> tmargin center box horizontal
-<span style="color: #1f5bff;">set</span> style fill solid 1 border <span style="color: #18b2b2;">lt</span> -1
-<span style="color: #1f5bff;">set</span> style data <span style="color: #ef2929;">histograms</span>
-<span style="color: #1f5bff;">set</span> style histogram rowstacked
-<span style="color: #1f5bff;">set</span> xtics font <span style="color: #ff1f8b;">'-Bold'</span> rotate by -30 offset -2,0
-<span style="color: #1f5bff;">set</span> grid
+# Set the first line as headers
+set key autotitle columnhead tmargin center box horizontal
+set style fill solid 1 border lt -1
+set style data histograms
+set style histogram rowstacked
+set xtics font '-Bold' rotate by -30 offset -2,0
+set grid
 
-<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Set the first column as x axis ticks labels</span>
-<span style="color: #00af00;">plot</span> for [<span style="color: #1f5bff;">i=2:7</span>] data <span style="color: #18b2b2;">using</span> (<span style="color: #ef2929;">column</span>(i)):xticlabels(1)
+# Set the first column as x axis ticks labels
+plot for [i=2:7] data using (column(i)):xticlabels(1)
 </pre>
 </div>
-
-
-<figure>
-<img src="./Regular Meeting Roles/2020-06-20-ah-counting.png" alt="2020-06-20-ah-counting.png">
-
-</figure>
 </div>
 </div>
 
-<div id="outline-container-org8c15fb4" class="outline-3">
-<h3 id="org8c15fb4"><span class="section-number-3">1.2</span> <span class="done DONE">DONE</span> Report</h3>
+<div id="outline-container-orgef566af" class="outline-3">
+<h3 id="orgef566af"><span class="section-number-3">1.2</span> <span class="done DONE">DONE</span> Report</h3>
 <div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
 <li>We could see that all members had very good performance in this meeting, and
@@ -283,8 +277,8 @@ about the next sentence.</li>
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-06-20 Sat 21:45></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
-      <div id="built">Built: <2020-06-20 Sat 21:47></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</div>
+      <div id="built">Built: <2021-05-31 Mon 18:28></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

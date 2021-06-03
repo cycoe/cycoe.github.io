@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-21 Thu 20:09 -->
+<!-- 2021-05-31 Mon 18:29 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gnuplot 绘图第七弹-Gnuplot 式编程与数据处理</title>
@@ -22,7 +22,7 @@
 <div id="top-nav">
   <div id="nav-wrapper">
     <div class="nav-btn" id="toc-wrapper">
-      <span class="vertical-align"> Ξ </span>
+      <span class="vertical-align">Ξ</span>
       <div id="go-top">
         <a href="javascript:window.scrollTo(0,0)" style="color: black !important; border-bottom: none !important;" class="tooltip" title="Go to the top of the page">
         <span class="top">&uarr;</span>
@@ -56,10 +56,10 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org855cbad">1. <code>for</code> 循环</a></li>
-<li><a href="#orgbf2bdbc">2. <code>a:b:c</code> 三目运算符</a></li>
-<li><a href="#org6987706">3. 平滑曲线</a></li>
-<li><a href="#orgc8201d4">4. 拟合曲线</a></li>
+<li><a href="#org44b8359">1. <code>for</code> 循环</a></li>
+<li><a href="#org53eb234">2. <code>a:b:c</code> 三目运算符</a></li>
+<li><a href="#org95e2d44">3. 平滑曲线</a></li>
+<li><a href="#org29a50c7">4. 拟合曲线</a></li>
 </ul>
 </div>
 </nav>
@@ -69,86 +69,86 @@
 
 <!-- more -->
 
-<div id="outline-container-org855cbad" class="outline-2">
-<h2 id="org855cbad"><span class="section-number-2">1</span> <code>for</code> 循环</h2>
+<div id="outline-container-org44b8359" class="outline-2">
+<h2 id="org44b8359"><span class="section-number-2">1</span> <code>for</code> 循环</h2>
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> term pngcairo mono dashed enhanced
-<span style="color: #1f5bff;">set</span> rmargin at screen .8
-<span style="color: #1f5bff;">set</span> key right center at screen 1,.6
-<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">0:3</span>] for [<span style="color: #1f5bff;">n=1:10:2</span>] <span style="color: #ef2929;">besj0</span>(n*x) <span style="color: #18b2b2;">title</span> <span style="color: #ff1f8b;">"J_0("</span>.n.<span style="color: #ff1f8b;">"x)"</span>
+<pre class="src src-gnuplot">set term pngcairo mono dashed enhanced
+set rmargin at screen .8
+set key right center at screen 1,.6
+plot [0:3] for [n=1:10:2] besj0(n*x) title "J_0(".n."x)"
 </pre>
 </div>
 
 
-<figure>
+<figure id="orgfa4bafb">
 <img src="./Gnuplot-绘图第七弹-Gnuplot-式编程与数据处理/c7-for.png" alt="c7-for.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-orgbf2bdbc" class="outline-2">
-<h2 id="orgbf2bdbc"><span class="section-number-2">2</span> <code>a:b:c</code> 三目运算符</h2>
+<div id="outline-container-org53eb234" class="outline-2">
+<h2 id="org53eb234"><span class="section-number-2">2</span> <code>a:b:c</code> 三目运算符</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> samples 2000
-<span style="color: #ff8700;">f(x) =</span> x &lt; 0? <span style="color: #ef2929;">sin</span>(x) : NaN
-<span style="color: #ff8700;">g(x) =</span> x <span style="color: #ff8700;">&gt;=</span> 0? <span style="color: #ef2929;">exp</span>(-x/5.)*<span style="color: #ef2929;">sin</span>(x) : NaN
-<span style="color: #00af00;">plot</span> [<span style="color: #1f5bff;">-20:20</span>] f(x), g(x)
+<pre class="src src-gnuplot">set samples 2000
+f(x) = x &lt; 0? sin(x) : NaN
+g(x) = x &gt;= 0? exp(-x/5.)*sin(x) : NaN
+plot [-20:20] f(x), g(x)
 </pre>
 </div>
 
 
-<figure>
+<figure id="org4e8d23b">
 <img src="./Gnuplot-绘图第七弹-Gnuplot-式编程与数据处理/c7-multi-section.png" alt="c7-multi-section.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-org6987706" class="outline-2">
-<h2 id="org6987706"><span class="section-number-2">3</span> 平滑曲线</h2>
+<div id="outline-container-org95e2d44" class="outline-2">
+<h2 id="org95e2d44"><span class="section-number-2">3</span> 平滑曲线</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> samples 500
-<span style="color: #1f5bff;">set</span> key right top box
-<span style="color: #1f5bff;">set</span> xrange [<span style="color: #1f5bff;">0:2*pi</span>]
+<pre class="src src-gnuplot">set samples 500
+set key right top box
+set xrange [0:2*pi]
 
-<span style="color: #1f5bff;">set</span> table <span style="color: #ff1f8b;">'~/random.dat'</span>
-<span style="color: #00af00;">plot</span> <span style="color: #ef2929;">sin</span>(x) + 0.5 * <span style="color: #ef2929;">rand</span>(0)
-<span style="color: #1f5bff;">unset</span> table
+set table '~/random.dat'
+plot sin(x) + 0.5 * rand(0)
+unset table
 
-<span style="color: #00af00;">plot</span> <span style="color: #ff1f8b;">'~/random.dat'</span> w l <span style="color: #18b2b2;">lw</span> 0.5 <span style="color: #18b2b2;">title</span> <span style="color: #ff1f8b;">"Original"</span>,\
-     <span style="color: #ff1f8b;">''</span> <span style="color: #18b2b2;">smooth</span> bezier <span style="color: #18b2b2;">lw</span> 4 <span style="color: #18b2b2;">title</span> <span style="color: #ff1f8b;">"Bezier Smoothed"</span>
+plot '~/random.dat' w l lw 0.5 title "Original",\
+     '' smooth bezier lw 4 title "Bezier Smoothed"
 </pre>
 </div>
 
 
-<figure>
+<figure id="org414e55a">
 <img src="./Gnuplot-绘图第七弹-Gnuplot-式编程与数据处理/c7-smooth.png" alt="c7-smooth.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-orgc8201d4" class="outline-2">
-<h2 id="orgc8201d4"><span class="section-number-2">4</span> 拟合曲线</h2>
+<div id="outline-container-org29a50c7" class="outline-2">
+<h2 id="org29a50c7"><span class="section-number-2">4</span> 拟合曲线</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
-<pre class="src src-gnuplot"><span style="color: #1f5bff;">set</span> key right top box
-<span style="color: #1f5bff;">set</span> xrange [<span style="color: #1f5bff;">0:2*pi</span>]
+<pre class="src src-gnuplot">set key right top box
+set xrange [0:2*pi]
 
-<span style="color: #ff8700;">f(x) =</span> a * <span style="color: #ef2929;">sin</span>(b * x) + c
-<span style="color: #1f5bff;">fit</span> f(x) <span style="color: #ff1f8b;">'~/random.dat'</span> via a, b, c
+f(x) = a * sin(b * x) + c
+fit f(x) '~/random.dat' via a, b, c
 
-<span style="color: #00af00;">plot</span> <span style="color: #ff1f8b;">'~/random.dat'</span> w l <span style="color: #18b2b2;">lw</span> 0.5 <span style="color: #18b2b2;">title</span> <span style="color: #ff1f8b;">"Original"</span>,\
-     f(x) w l <span style="color: #18b2b2;">lw</span> 4 <span style="color: #18b2b2;">title</span> <span style="color: #ff1f8b;">"Fit by Gnuplot"</span>
+plot '~/random.dat' w l lw 0.5 title "Original",\
+     f(x) w l lw 4 title "Fit by Gnuplot"
 </pre>
 </div>
 
 
-<figure>
+<figure id="orga2c6ade">
 <img src="./Gnuplot-绘图第七弹-Gnuplot-式编程与数据处理/c7-fit.png" alt="c7-fit.png">
 
 </figure>
@@ -159,8 +159,8 @@
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-05-07 Thu 20:48></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
-      <div id="built">Built: <2020-05-21 Thu 20:09></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</div>
+      <div id="built">Built: <2021-05-31 Mon 18:29></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

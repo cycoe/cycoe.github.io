@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-21 Thu 20:10 -->
+<!-- 2021-05-31 Mon 18:29 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>使用 matplotlib 进行科学绘图第二弹-调整坐标轴</title>
@@ -44,7 +44,7 @@
 <div id="top-nav">
   <div id="nav-wrapper">
     <div class="nav-btn" id="toc-wrapper">
-      <span class="vertical-align"> Ξ </span>
+      <span class="vertical-align">Ξ</span>
       <div id="go-top">
         <a href="javascript:window.scrollTo(0,0)" style="color: black !important; border-bottom: none !important;" class="tooltip" title="Go to the top of the page">
         <span class="top">&uarr;</span>
@@ -89,7 +89,7 @@
 </div>
 </nav>
 
-<figure>
+<figure id="org641d579">
 <object type="image/svg+xml" data="https://matplotlib.org/_static/logo2_compressed.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 
@@ -102,7 +102,7 @@ Sorry, your browser does not support SVG.</object>
 
 <!-- more -->
 
-<div id="outline-container-org4b99bf9" class="outline-2">
+<div id="outline-container-设置轴标签" class="outline-2">
 <h2 id="设置轴标签"><span class="section-number-2">1</span> 设置轴标签</h2>
 <div class="outline-text-2" id="text-设置轴标签">
 <p>
@@ -110,8 +110,8 @@ Sorry, your browser does not support SVG.</object>
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python">ax.set_xlabel<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">'Axis Label for X'</span><span style="color: #cc0000; font-weight: bold;">)</span>
-ax.set_ylabel<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">'Axis Label for Y'</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<pre class="src src-python">ax.set_xlabel<span style="color: #51afef;">(</span><span style="color: #98be65;">'Axis Label for X'</span><span style="color: #51afef;">)</span>
+ax.set_ylabel<span style="color: #51afef;">(</span><span style="color: #98be65;">'Axis Label for Y'</span><span style="color: #51afef;">)</span>
 </pre>
 </div>
 
@@ -122,35 +122,35 @@ title 也可通过同样方式设置。
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#20174; matplotlib &#20013;&#24341;&#20837; pyplot</span>
-<span style="color: #00af00;">from</span> matplotlib <span style="color: #00af00;">import</span> pyplot <span style="color: #00af00;">as</span> plt
-<span style="color: #00af00;">import</span> numpy <span style="color: #00af00;">as</span> np
+<pre class="src src-python"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#20174; matplotlib &#20013;&#24341;&#20837; pyplot</span>
+<span style="color: #51afef;">from</span> matplotlib <span style="color: #51afef;">import</span> pyplot <span style="color: #51afef;">as</span> plt
+<span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
 
-<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">x &#30340;&#33539;&#22260;</span>
-<span style="color: #ff8700;">xlim</span> = <span style="color: #cc0000; font-weight: bold;">(</span>0, 10<span style="color: #cc0000; font-weight: bold;">)</span>
-<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#29983;&#25104; [0, 10] &#30340;&#31561;&#24046;&#26684;&#28857;&#20316;&#20026; x</span>
-<span style="color: #ff8700;">x</span> = np.linspace<span style="color: #cc0000; font-weight: bold;">(</span>*xlim, 1000<span style="color: #cc0000; font-weight: bold;">)</span>
-<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#29983;&#25104;&#23545;&#24212; y &#20540;</span>
-<span style="color: #ff8700;">y</span> = np.log<span style="color: #cc0000; font-weight: bold;">(</span>np.sin<span style="color: #1f5bff; font-weight: bold;">(</span>x<span style="color: #1f5bff; font-weight: bold;">)</span>**2 + 1<span style="color: #cc0000; font-weight: bold;">)</span>
-<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#29983;&#25104; figure &#23545;&#35937;</span>
-<span style="color: #ff8700;">fig</span> = plt.figure<span style="color: #cc0000; font-weight: bold;">()</span>
-<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#28155;&#21152;&#23376;&#22270; ax</span>
-<span style="color: #ff8700;">ax</span> = fig.add_subplot<span style="color: #cc0000; font-weight: bold;">(</span>111<span style="color: #cc0000; font-weight: bold;">)</span>
-<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#32472;&#21046;&#25240;&#32447;&#22270;</span>
-ax.plot<span style="color: #cc0000; font-weight: bold;">(</span>x, y<span style="color: #cc0000; font-weight: bold;">)</span>
-<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622;&#23376;&#22270;&#26631;&#39064;</span>
-ax.set_title<span style="color: #cc0000; font-weight: bold;">(</span>r<span style="color: #ff1f8b;">"Image of $f(x) = \log(\sin^2 x + 1)$"</span><span style="color: #cc0000; font-weight: bold;">)</span>
-<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622; x &#36724;&#26631;&#31614;</span>
-ax.set_xlabel<span style="color: #cc0000; font-weight: bold;">(</span>r<span style="color: #ff1f8b;">"x"</span><span style="color: #cc0000; font-weight: bold;">)</span>
-<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622; y &#36724;&#26631;&#31614;</span>
-ax.set_ylabel<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">"$f(x)$"</span><span style="color: #cc0000; font-weight: bold;">)</span>
-<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#26174;&#31034;&#22270;&#20687;</span>
-plt.show<span style="color: #cc0000; font-weight: bold;">()</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">x &#30340;&#33539;&#22260;</span>
+<span style="color: #dcaeea;">xlim</span> = <span style="color: #51afef;">(</span>0, 10<span style="color: #51afef;">)</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#29983;&#25104; [0, 10] &#30340;&#31561;&#24046;&#26684;&#28857;&#20316;&#20026; x</span>
+<span style="color: #dcaeea;">x</span> = np.linspace<span style="color: #51afef;">(</span>*xlim, 1000<span style="color: #51afef;">)</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#29983;&#25104;&#23545;&#24212; y &#20540;</span>
+<span style="color: #dcaeea;">y</span> = np.log<span style="color: #51afef;">(</span>np.sin<span style="color: #c678dd;">(</span>x<span style="color: #c678dd;">)</span>**2 + 1<span style="color: #51afef;">)</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#29983;&#25104; figure &#23545;&#35937;</span>
+<span style="color: #dcaeea;">fig</span> = plt.figure<span style="color: #51afef;">()</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#28155;&#21152;&#23376;&#22270; ax</span>
+<span style="color: #dcaeea;">ax</span> = fig.add_subplot<span style="color: #51afef;">(</span>111<span style="color: #51afef;">)</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#32472;&#21046;&#25240;&#32447;&#22270;</span>
+ax.plot<span style="color: #51afef;">(</span>x, y<span style="color: #51afef;">)</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#35774;&#32622;&#23376;&#22270;&#26631;&#39064;</span>
+ax.set_title<span style="color: #51afef;">(</span>r<span style="color: #98be65;">"Image of $f(x) = \log(\sin^2 x + 1)$"</span><span style="color: #51afef;">)</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#35774;&#32622; x &#36724;&#26631;&#31614;</span>
+ax.set_xlabel<span style="color: #51afef;">(</span>r<span style="color: #98be65;">"x"</span><span style="color: #51afef;">)</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#35774;&#32622; y &#36724;&#26631;&#31614;</span>
+ax.set_ylabel<span style="color: #51afef;">(</span><span style="color: #98be65;">"$f(x)$"</span><span style="color: #51afef;">)</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#26174;&#31034;&#22270;&#20687;</span>
+plt.show<span style="color: #51afef;">()</span>
 </pre>
 </div>
 
 
-<figure>
+<figure id="org8c806dd">
 <img src="使用matplotlib进行科学绘图第二弹-调整坐标轴/LaTeX.png" alt="LaTeX.png">
 
 <figcaption><span class="figure-number">Figure 2: </span>matplotlib 支持 LaTeX</figcaption>
@@ -158,7 +158,7 @@ plt.show<span style="color: #cc0000; font-weight: bold;">()</span>
 </div>
 </div>
 
-<div id="outline-container-org9169e9f" class="outline-2">
+<div id="outline-container-设置坐标轴上下限" class="outline-2">
 <h2 id="设置坐标轴上下限"><span class="section-number-2">2</span> 设置坐标轴上下限</h2>
 <div class="outline-text-2" id="text-设置坐标轴上下限">
 <p>
@@ -168,13 +168,13 @@ x 轴的范围也为 \([0, 10]\)，则可通过如下方法设置，y 轴同理�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #ff8700;">xlim</span> = <span style="color: #cc0000; font-weight: bold;">(</span>0, 10<span style="color: #cc0000; font-weight: bold;">)</span>
-ax.set_xlim<span style="color: #cc0000; font-weight: bold;">(</span>xlim<span style="color: #cc0000; font-weight: bold;">)</span>
+<pre class="src src-python"><span style="color: #dcaeea;">xlim</span> = <span style="color: #51afef;">(</span>0, 10<span style="color: #51afef;">)</span>
+ax.set_xlim<span style="color: #51afef;">(</span>xlim<span style="color: #51afef;">)</span>
 </pre>
 </div>
 
 
-<figure>
+<figure id="orge0b8475">
 <img src="使用matplotlib进行科学绘图第二弹-调整坐标轴/xlim.png" alt="xlim.png">
 
 <figcaption><span class="figure-number">Figure 3: </span>为 x 轴设置范围</figcaption>
@@ -182,7 +182,7 @@ ax.set_xlim<span style="color: #cc0000; font-weight: bold;">(</span>xlim<span st
 </div>
 </div>
 
-<div id="outline-container-org41d06d5" class="outline-2">
+<div id="outline-container-设置坐标轴缩放类型" class="outline-2">
 <h2 id="设置坐标轴缩放类型"><span class="section-number-2">3</span> 设置坐标轴缩放类型</h2>
 <div class="outline-text-2" id="text-设置坐标轴缩放类型">
 <p>
@@ -191,12 +191,12 @@ ax.set_xlim<span style="color: #cc0000; font-weight: bold;">(</span>xlim<span st
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python">ax.set_yscale<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ff1f8b;">'log'</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<pre class="src src-python">ax.set_yscale<span style="color: #51afef;">(</span><span style="color: #98be65;">'log'</span><span style="color: #51afef;">)</span>
 </pre>
 </div>
 
 
-<figure>
+<figure id="orgd4af0d1">
 <img src="使用matplotlib进行科学绘图第二弹-调整坐标轴/scale.png" alt="scale.png">
 
 <figcaption><span class="figure-number">Figure 4: </span>普通刻度与对数刻度的对比</figcaption>
@@ -204,7 +204,7 @@ ax.set_xlim<span style="color: #cc0000; font-weight: bold;">(</span>xlim<span st
 </div>
 </div>
 
-<div id="outline-container-orgda0a21f" class="outline-2">
+<div id="outline-container-设置刻度" class="outline-2">
 <h2 id="设置刻度"><span class="section-number-2">4</span> 设置刻度</h2>
 <div class="outline-text-2" id="text-设置刻度">
 <p>
@@ -213,8 +213,8 @@ ax.set_xlim<span style="color: #cc0000; font-weight: bold;">(</span>xlim<span st
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622; [0, 1..10] &#25968;&#32452;&#20316;&#20026;&#21051;&#24230;</span>
-ax.set_xticks<span style="color: #cc0000; font-weight: bold;">(</span>np.arange<span style="color: #1f5bff; font-weight: bold;">(</span>0, 11, 1<span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<pre class="src src-python"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#35774;&#32622; [0, 1..10] &#25968;&#32452;&#20316;&#20026;&#21051;&#24230;</span>
+ax.set_xticks<span style="color: #51afef;">(</span>np.arange<span style="color: #c678dd;">(</span>0, 11, 1<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
 </pre>
 </div>
 
@@ -223,18 +223,18 @@ ax.set_xticks<span style="color: #cc0000; font-weight: bold;">(</span>np.arange<
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#24341;&#20837; IndexLocator</span>
-<span style="color: #00af00;">from</span> matplotlib.ticker <span style="color: #00af00;">import</span> IndexLocator
+<pre class="src src-python"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#24341;&#20837; IndexLocator</span>
+<span style="color: #51afef;">from</span> matplotlib.ticker <span style="color: #51afef;">import</span> IndexLocator
 
-<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#23454;&#20363;&#21270; IndexLocator &#23545;&#35937;</span>
-<span style="color: #ff8700;">locator</span> = IndexLocator<span style="color: #cc0000; font-weight: bold;">(</span>offset=0, base=1<span style="color: #cc0000; font-weight: bold;">)</span>
-<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622;&#21103;&#21051;&#24230;&#23450;&#20301;&#22120;</span>
-ax.xaxis.set_major_locator<span style="color: #cc0000; font-weight: bold;">(</span>locator<span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#23454;&#20363;&#21270; IndexLocator &#23545;&#35937;</span>
+<span style="color: #dcaeea;">locator</span> = IndexLocator<span style="color: #51afef;">(</span>offset=0, base=1<span style="color: #51afef;">)</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#35774;&#32622;&#21103;&#21051;&#24230;&#23450;&#20301;&#22120;</span>
+ax.xaxis.set_major_locator<span style="color: #51afef;">(</span>locator<span style="color: #51afef;">)</span>
 </pre>
 </div>
 
 
-<figure>
+<figure id="org45d78ee">
 <img src="使用matplotlib进行科学绘图第二弹-调整坐标轴/ticks.png" alt="ticks.png">
 
 <figcaption><span class="figure-number">Figure 5: </span>自定义刻度</figcaption>
@@ -309,7 +309,7 @@ ax.xaxis.set_major_locator<span style="color: #cc0000; font-weight: bold;">(</sp
 </div>
 </div>
 
-<div id="outline-container-orge141e2e" class="outline-2">
+<div id="outline-container-设置刻度标签" class="outline-2">
 <h2 id="设置刻度标签"><span class="section-number-2">5</span> 设置刻度标签</h2>
 <div class="outline-text-2" id="text-设置刻度标签">
 <p>
@@ -318,15 +318,15 @@ ticklabels 的长度需要与 ticks 相同，并且是可索引对象。可以�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622; [0, pi, 2pi, 3pi] &#20316;&#20026;&#21051;&#24230;</span>
-ax.set_xticks<span style="color: #cc0000; font-weight: bold;">(</span>np.arange<span style="color: #1f5bff; font-weight: bold;">(</span>0, 4, 1<span style="color: #1f5bff; font-weight: bold;">)</span> * np.pi<span style="color: #cc0000; font-weight: bold;">)</span>
-<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622;&#21051;&#24230;&#26631;&#31614;</span>
-ax.set_xticklabels<span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #1f5bff; font-weight: bold;">[</span>r<span style="color: #ff1f8b;">'$0$'</span>, r<span style="color: #ff1f8b;">'$\pi$'</span>, r<span style="color: #ff1f8b;">'$2\pi$'</span>, r<span style="color: #ff1f8b;">'$3\pi$'</span><span style="color: #1f5bff; font-weight: bold;">]</span><span style="color: #cc0000; font-weight: bold;">)</span>
+<pre class="src src-python"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#35774;&#32622; [0, pi, 2pi, 3pi] &#20316;&#20026;&#21051;&#24230;</span>
+ax.set_xticks<span style="color: #51afef;">(</span>np.arange<span style="color: #c678dd;">(</span>0, 4, 1<span style="color: #c678dd;">)</span> * np.pi<span style="color: #51afef;">)</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#35774;&#32622;&#21051;&#24230;&#26631;&#31614;</span>
+ax.set_xticklabels<span style="color: #51afef;">(</span><span style="color: #c678dd;">[</span>r<span style="color: #98be65;">'$0$'</span>, r<span style="color: #98be65;">'$\pi$'</span>, r<span style="color: #98be65;">'$2\pi$'</span>, r<span style="color: #98be65;">'$3\pi$'</span><span style="color: #c678dd;">]</span><span style="color: #51afef;">)</span>
 </pre>
 </div>
 
 
-<figure>
+<figure id="orga300258">
 <img src="使用matplotlib进行科学绘图第二弹-调整坐标轴/ticklabels.png" alt="ticklabels.png">
 
 <figcaption><span class="figure-number">Figure 6: </span>自定义刻度标签</figcaption>
@@ -334,7 +334,7 @@ ax.set_xticklabels<span style="color: #cc0000; font-weight: bold;">(</span><span
 </div>
 </div>
 
-<div id="outline-container-org0491783" class="outline-2">
+<div id="outline-container-设置副刻度minor-ticks" class="outline-2">
 <h2 id="设置副刻度minor-ticks"><span class="section-number-2">6</span> 设置副刻度（Minor Ticks）</h2>
 <div class="outline-text-2" id="text-设置副刻度minor-ticks">
 <p>
@@ -342,18 +342,18 @@ ax.set_xticklabels<span style="color: #cc0000; font-weight: bold;">(</span><span
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#24341;&#20837; Multiplelocator</span>
-<span style="color: #00af00;">from</span> matplotlib.ticker <span style="color: #00af00;">import</span> MultipleLocator
+<pre class="src src-python"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#24341;&#20837; Multiplelocator</span>
+<span style="color: #51afef;">from</span> matplotlib.ticker <span style="color: #51afef;">import</span> MultipleLocator
 
-<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#23454;&#20363;&#21270; Multiplelocator &#23545;&#35937;&#65292;&#21051;&#24230;&#38388;&#36317;&#20026; np.pi / 3</span>
-<span style="color: #ff8700;">xminorLocator</span> = MultipleLocator<span style="color: #cc0000; font-weight: bold;">(</span>np.pi / 3<span style="color: #cc0000; font-weight: bold;">)</span>
-<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622;&#21103;&#21051;&#24230;&#23450;&#20301;&#22120;</span>
-ax.xaxis.set_minor_locator<span style="color: #cc0000; font-weight: bold;">(</span>xminorLocator<span style="color: #cc0000; font-weight: bold;">)</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#23454;&#20363;&#21270; Multiplelocator &#23545;&#35937;&#65292;&#21051;&#24230;&#38388;&#36317;&#20026; np.pi / 3</span>
+<span style="color: #dcaeea;">xminorLocator</span> = MultipleLocator<span style="color: #51afef;">(</span>np.pi / 3<span style="color: #51afef;">)</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#35774;&#32622;&#21103;&#21051;&#24230;&#23450;&#20301;&#22120;</span>
+ax.xaxis.set_minor_locator<span style="color: #51afef;">(</span>xminorLocator<span style="color: #51afef;">)</span>
 </pre>
 </div>
 
 
-<figure>
+<figure id="org61c70ef">
 <img src="使用matplotlib进行科学绘图第二弹-调整坐标轴/minor_ticks.png" alt="minor_ticks.png">
 
 <figcaption><span class="figure-number">Figure 7: </span>自定义副刻度</figcaption>
@@ -361,7 +361,7 @@ ax.xaxis.set_minor_locator<span style="color: #cc0000; font-weight: bold;">(</sp
 </div>
 </div>
 
-<div id="outline-container-orge5b03c2" class="outline-2">
+<div id="outline-container-刻度方向" class="outline-2">
 <h2 id="刻度方向"><span class="section-number-2">7</span> 刻度方向</h2>
 <div class="outline-text-2" id="text-刻度方向">
 <p>
@@ -369,12 +369,12 @@ ax.xaxis.set_minor_locator<span style="color: #cc0000; font-weight: bold;">(</sp
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622;&#21051;&#24230;&#26041;&#21521;&#26377;&#20004;&#31181;&#26041;&#24335;</span>
-<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#31532;&#19968;&#31181;&#26159;&#38754;&#21521;&#23545;&#35937;&#24335;&#65292;&#29616;&#22312;&#36824;&#27809;&#25972;&#26126;&#30333;</span>
+<pre class="src src-python"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#35774;&#32622;&#21051;&#24230;&#26041;&#21521;&#26377;&#20004;&#31181;&#26041;&#24335;</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#31532;&#19968;&#31181;&#26159;&#38754;&#21521;&#23545;&#35937;&#24335;&#65292;&#29616;&#22312;&#36824;&#27809;&#25972;&#26126;&#30333;</span>
 
-<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#31532;&#20108;&#31181;&#26159;&#21629;&#20196;&#24335;&#65292;&#35774;&#32622; xtick &#21644; ytick &#30340;&#26041;&#21521;&#65306;in&#12289;out&#12289;inout</span>
-<span style="color: #ff8700;">plt.rcParams</span><span style="color: #cc0000; font-weight: bold;">[</span><span style="color: #ff1f8b;">'xtick.direction'</span><span style="color: #cc0000; font-weight: bold;">]</span> = <span style="color: #ff1f8b;">'in'</span>
-<span style="color: #ff8700;">plt.rcParams</span><span style="color: #cc0000; font-weight: bold;">[</span><span style="color: #ff1f8b;">'ytick.direction'</span><span style="color: #cc0000; font-weight: bold;">]</span> = <span style="color: #ff1f8b;">'in'</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#31532;&#20108;&#31181;&#26159;&#21629;&#20196;&#24335;&#65292;&#35774;&#32622; xtick &#21644; ytick &#30340;&#26041;&#21521;&#65306;in&#12289;out&#12289;inout</span>
+plt.<span style="color: #dcaeea;">rcParams</span><span style="color: #51afef;">[</span><span style="color: #98be65;">'xtick.direction'</span><span style="color: #51afef;">]</span> = <span style="color: #98be65;">'in'</span>
+plt.<span style="color: #dcaeea;">rcParams</span><span style="color: #51afef;">[</span><span style="color: #98be65;">'ytick.direction'</span><span style="color: #51afef;">]</span> = <span style="color: #98be65;">'in'</span>
 </pre>
 </div>
 </div>
@@ -384,8 +384,8 @@ ax.xaxis.set_minor_locator<span style="color: #cc0000; font-weight: bold;">(</sp
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2019-12-06 Fri 14:57></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
-      <div id="built">Built: <2020-05-21 Thu 20:10></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</div>
+      <div id="built">Built: <2021-05-31 Mon 18:29></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

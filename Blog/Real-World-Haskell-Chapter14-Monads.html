@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2021-06-03 Thu 23:19 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Real World Haskell Chapter14 Monads</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Cycoe">
+<link rel="stylesheet" type="text/css" href="/static/css/default.css" />
+<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+<script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div id="top-container">
+  <a id="site-name" href="/">Cycoe<span id="at-home">@Home</span></a>
+  <div id="banner">Keep It Simple Stupid</div>
+</div>
+
+<div id="top-nav">
+  <div id="nav-wrapper">
+    <div class="nav-btn" id="toc-wrapper">
+      <span class="vertical-align">Ξ</span>
+      <div id="go-top">
+        <a href="javascript:window.scrollTo(0,0)" style="color: black !important; border-bottom: none !important;" class="tooltip" title="Go to the top of the page">
+        <span class="top">&uarr;</span>
+        </a></div>
+    </div>
+    <div id="nav-left-wrapper">
+      <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
+      <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
+      <div id="nav-title-wrapper">
+        <span id="nav-title">Real World Haskell Chapter14 Monads</span>
+        <span id="nav-date">Written @<2021-06-03 Thu 23:12></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div id="img-modal" class="modal">
+  <!-- The Close Button -->
+  <span class="close">&times;</span>
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content" id="img-wrapper">
+  <!-- Modal Caption (Image Text) -->
+  <div id="caption"></div>
+</div>
+</div>
+<div id="content">
+<header>
+<h1 class="title">Real World Haskell Chapter14 Monads</h1>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org7433270">1. Maybe 类型</a></li>
+<li><a href="#org66d0f49">2. Monad</a></li>
+<li><a href="#org67c81d4">3. 定义自己的 Monad</a></li>
+</ul>
+</div>
+</nav>
+<!-- more -->
+
+<div id="outline-container-org7433270" class="outline-2">
+<h2 id="org7433270"><span class="section-number-2">1</span> Maybe 类型</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<code>Maybe</code> 类型通常用来表示可能不会产生结果的运算
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #5B6268;">{- </span><span style="color: #5B6268;">Maybe &#31867;&#22411;&#30340;&#23450;&#20041;</span>
+<span style="color: #5B6268;">data Maybe a = Nothing</span>
+<span style="color: #5B6268;">             | Just a</span>
+<span style="color: #5B6268;">-}</span>
+
+<span style="color: #51afef;">import</span> <span style="color: #ECBE7B;">Data.List</span><span style="color: #51afef;">(</span>lookup<span style="color: #51afef;">)</span>
+
+<span style="color: #c678dd;">associateList</span> <span style="color: #dcaeea;">=</span> <span style="color: #51afef;">[</span><span style="color: #c678dd;">(</span>1, <span style="color: #98be65;">"One"</span><span style="color: #c678dd;">)</span>, <span style="color: #c678dd;">(</span>2, <span style="color: #98be65;">"Two"</span><span style="color: #c678dd;">)</span>, <span style="color: #c678dd;">(</span>3, <span style="color: #98be65;">"Three"</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">]</span>
+
+putStrLn <span style="color: #c678dd;">.</span> show <span style="color: #dcaeea;">$</span> lookup 2 associateList
+</pre>
+</div>
+
+<p>
+<code>lookup</code> 返回了一个被 <code>Maybe</code> 包裹的值，我们想要对 <code>lookup</code> 返回的结果做计算，就需要将
+包裹的值重新取出来，我们发现可以定义一个 <code>&gt;&gt;?</code> 函数用来处理这个过程并隐藏细节
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #51afef;">(</span><span style="color: #c678dd;">&gt;&gt;?</span><span style="color: #51afef;">)</span> <span style="color: #dcaeea;">::</span> <span style="color: #ECBE7B;">Maybe</span> a <span style="color: #dcaeea;">-&gt;</span> <span style="color: #51afef;">(</span>a <span style="color: #dcaeea;">-&gt;</span> <span style="color: #ECBE7B;">Maybe</span> b<span style="color: #51afef;">)</span> <span style="color: #dcaeea;">-&gt;</span> <span style="color: #ECBE7B;">Maybe</span> b
+<span style="color: #51afef;">(</span><span style="color: #c678dd;">&gt;&gt;?</span><span style="color: #51afef;">)</span> <span style="color: #ECBE7B;">Nothing</span> <span style="color: #51afef;">_</span> <span style="color: #dcaeea;">=</span> <span style="color: #ECBE7B;">Nothing</span>
+<span style="color: #51afef;">(</span><span style="color: #c678dd;">&gt;&gt;?</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">(</span><span style="color: #ECBE7B;">Just</span> v<span style="color: #51afef;">)</span> f <span style="color: #dcaeea;">=</span> f v
+
+<span style="color: #ECBE7B;">:</span>t <span style="color: #51afef;">(</span><span style="color: #dcaeea;">&gt;&gt;?</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<p>
+接下来我们就可以使用 <code>&gt;&gt;?</code> 来取出 <code>Maybe</code> 中包裹的值并打印了
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #c678dd;">lookup</span> 2 associateList <span style="color: #dcaeea;">&gt;&gt;?</span> putStrLn
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org66d0f49" class="outline-2">
+<h2 id="org66d0f49"><span class="section-number-2">2</span> Monad</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+此处我们发现可以使用 <code>Maybe</code> 类型绑定到一个函数 <code>f :: a -&gt; Maybe b</code> 上，这种操作称为 <code>绑定</code> 。在 Haskell 中我们使用一个类型类来表示可以绑定的类型范畴，称为 <code>Monad</code> 。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #5B6268;">{- </span><span style="color: #5B6268;">Monad type class</span>
+<span style="color: #5B6268;">class Monad m where</span>
+<span style="color: #5B6268;">    -- chain</span>
+<span style="color: #5B6268;">    (&gt;&gt;=)  :: m a -&gt; (a -&gt; m b) -&gt; m b</span>
+<span style="color: #5B6268;">    -- inject</span>
+<span style="color: #5B6268;">    return :: a -&gt; m a</span>
+<span style="color: #5B6268;">-}</span>
+</pre>
+</div>
+
+<p>
+有了 <code>&gt;&gt;=</code> 运算符，我们就可以实现一个安全的除法，来避免除零操作
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #c678dd;">safediv</span> <span style="color: #dcaeea;">::</span> <span style="color: #51afef;">(</span><span style="color: #ECBE7B;">Fractional</span> a, <span style="color: #ECBE7B;">Eq</span> a<span style="color: #51afef;">)</span> <span style="color: #dcaeea;">=&gt;</span> a <span style="color: #dcaeea;">-&gt;</span> a <span style="color: #dcaeea;">-&gt;</span> <span style="color: #ECBE7B;">Maybe</span> a
+<span style="color: #c678dd;">safediv</span> <span style="color: #51afef;">_</span> 0 <span style="color: #dcaeea;">=</span> <span style="color: #ECBE7B;">Nothing</span>
+<span style="color: #c678dd;">safediv</span> a b <span style="color: #dcaeea;">=</span> <span style="color: #ECBE7B;">Just</span> <span style="color: #51afef;">(</span>a <span style="color: #dcaeea;">/</span> b<span style="color: #51afef;">)</span>
+
+<span style="color: #c678dd;">safediv</span> 2 3 <span style="color: #dcaeea;">&gt;&gt;=</span> flip safediv 4 <span style="color: #dcaeea;">&gt;&gt;=</span> flip safediv 5 <span style="color: #dcaeea;">&gt;&gt;=</span> flip safediv 0
+</pre>
+</div>
+
+<p>
+另外就是需要实现 <code>return</code> 接口，此处的 <code>return</code> 与常见的编程语言中的 <code>return</code> 不同，它
+并不会导致函数返回，它的语义是将一个平凡值包装为 <code>Monad</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #c678dd;">add</span> <span style="color: #dcaeea;">::</span> <span style="color: #51afef;">(</span><span style="color: #ECBE7B;">Num</span> a<span style="color: #51afef;">)</span> <span style="color: #dcaeea;">=&gt;</span> <span style="color: #ECBE7B;">Maybe</span> a <span style="color: #dcaeea;">-&gt;</span> <span style="color: #ECBE7B;">Maybe</span> a <span style="color: #dcaeea;">-&gt;</span> <span style="color: #ECBE7B;">Maybe</span> a
+<span style="color: #c678dd;">add</span> a b <span style="color: #dcaeea;">=</span>
+  a <span style="color: #dcaeea;">&gt;&gt;=</span> <span style="color: #dcaeea;">\</span>x <span style="color: #dcaeea;">-&gt;</span>
+  b <span style="color: #dcaeea;">&gt;&gt;=</span> <span style="color: #dcaeea;">\</span>y <span style="color: #dcaeea;">-&gt;</span> return <span style="color: #51afef;">(</span>x <span style="color: #dcaeea;">+</span> y<span style="color: #51afef;">)</span>
+
+<span style="color: #c678dd;">add</span> <span style="color: #51afef;">(</span>safediv 2 3<span style="color: #51afef;">)</span> <span style="color: #51afef;">(</span>safediv 3 2<span style="color: #51afef;">)</span>
+<span style="color: #c678dd;">add</span> <span style="color: #51afef;">(</span>safediv 2 0<span style="color: #51afef;">)</span> <span style="color: #51afef;">(</span>safediv 3 2<span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<p>
+另一个 <code>Monad</code> 的非核心函数是 <code>&gt;&gt;</code> ，表示丢弃运算符左侧表达式的值，注意函数类型与 <code>&gt;&gt;=</code> 类型的区别
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #5B6268;">{-</span>
+<span style="color: #5B6268;">(&gt;&gt;):: (Monad m) =&gt; m a -&gt; m b -&gt; m b</span>
+<span style="color: #5B6268;">(&gt;&gt;) a f = a &gt;&gt;= \_ -&gt; f</span>
+<span style="color: #5B6268;">-}</span>
+
+<span style="color: #c678dd;">putStr</span> <span style="color: #98be65;">"Hello, "</span> <span style="color: #dcaeea;">&gt;&gt;</span> putStr <span style="color: #98be65;">"world!\n"</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org67c81d4" class="outline-2">
+<h2 id="org67c81d4"><span class="section-number-2">3</span> 定义自己的 Monad</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+此处以一个简单函数进行示例， <code>addparen</code> 函数期望一个将一个字符串两侧加上括号
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #c678dd;">addparen</span> <span style="color: #dcaeea;">::</span> <span style="color: #ECBE7B;">String</span> <span style="color: #dcaeea;">-&gt;</span> <span style="color: #ECBE7B;">String</span>
+<span style="color: #c678dd;">addparen</span> str <span style="color: #dcaeea;">=</span> <span style="color: #98be65;">"("</span> <span style="color: #dcaeea;">++</span> str <span style="color: #dcaeea;">++</span> <span style="color: #98be65;">")"</span>
+
+<span style="color: #c678dd;">addparen</span> <span style="color: #98be65;">"Hello"</span>
+</pre>
+</div>
+
+<p>
+假如我们不希望将 <code>addparen</code> 的运行结果暴露出来，并且能够对过往的调用结果进行记录，
+我们使用 <code>Logger</code> 类型将结果包装起来。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #c678dd;">addparenWithLog</span> <span style="color: #dcaeea;">::</span> <span style="color: #ECBE7B;">String</span> <span style="color: #dcaeea;">-&gt;</span> <span style="color: #ECBE7B;">Logger</span> <span style="color: #ECBE7B;">String</span>
+</pre>
+</div>
+
+<p>
+<code>Logger</code> 中的 <code>Log</code> 类型是字符串列表的别名
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">Log</span> <span style="color: #dcaeea;">=</span> <span style="color: #51afef;">[</span><span style="color: #ECBE7B;">String</span><span style="color: #51afef;">]</span>
+</pre>
+</div>
+
+<p>
+定义 <code>Logger</code> 和辅助函数
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #51afef;">data</span> <span style="color: #ECBE7B;">Logger</span> a
+  <span style="color: #dcaeea;">|</span> <span style="color: #ECBE7B;">Records</span> <span style="color: #51afef;">[</span><span style="color: #c678dd;">(</span>a, <span style="color: #ECBE7B;">Log</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">]</span>
+
+<span style="color: #c678dd;">record</span> <span style="color: #dcaeea;">::</span> <span style="color: #ECBE7B;">String</span> <span style="color: #dcaeea;">-</span> <span style="color: #dcaeea;">&gt;</span> <span style="color: #ECBE7B;">Logger</span> a <span style="color: #dcaeea;">-&gt;</span> <span style="color: #ECBE7B;">Logger</span> a
+<span style="color: #c678dd;">record</span> string <span style="color: #ECBE7B;">Content</span> a <span style="color: #dcaeea;">=</span> <span style="color: #ECBE7B;">Records</span> <span style="color: #51afef;">[</span><span style="color: #c678dd;">(</span>a, string<span style="color: #c678dd;">)</span><span style="color: #51afef;">]</span>
+<span style="color: #c678dd;">record</span> string <span style="color: #ECBE7B;">Records</span> r <span style="color: #dcaeea;">=</span> <span style="color: #51afef;">()</span>
+
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">&#36816;&#34892; Logger</span>
+<span style="color: #c678dd;">runLogger</span> <span style="color: #dcaeea;">::</span> <span style="color: #ECBE7B;">Logger</span> a <span style="color: #dcaeea;">-&gt;</span> <span style="color: #51afef;">(</span>a, <span style="color: #ECBE7B;">Log</span><span style="color: #51afef;">)</span>
+<span style="color: #c678dd;">runLogger</span> <span style="color: #ECBE7B;">Logger</span> x <span style="color: #dcaeea;">=</span> <span style="color: #51afef;">(</span>x, <span style="color: #51afef;">)</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="author-info">
+      <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
+      <div id="date">Date: <2021-06-03 Thu 23:12></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</div>
+      <div id="built">Built: <2021-06-03 Thu 23:19></div>
+      </div><div id="copyright">
+    <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
+</div>
+</div>
+</body>
+</html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-28 Thu 11:22 -->
+<!-- 2021-05-31 Mon 18:28 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Org mode 中的代码块</title>
@@ -56,12 +56,12 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org4097a61">1. 插入代码块</a></li>
-<li><a href="#org0c6cf9d">2. 设置 Headers 参数</a>
+<li><a href="#org7458ed8">1. 插入代码块</a></li>
+<li><a href="#orgf3c5801">2. 设置 Headers 参数</a>
 <ul>
-<li><a href="#orgc374dda">2.1. 全局 Headers</a></li>
-<li><a href="#orgddd8e20">2.2. 文件级 Headers</a></li>
-<li><a href="#org9f01fe5">2.3. 代码块级 Headers</a></li>
+<li><a href="#org499e907">2.1. 全局 Headers</a></li>
+<li><a href="#orgc8fc5c9">2.2. 文件级 Headers</a></li>
+<li><a href="#org0cbc3b9">2.3. 代码块级 Headers</a></li>
 </ul>
 </li>
 </ul>
@@ -75,7 +75,7 @@ Markdown 相比， Org mode 有一个非常强大的功能叫作 Babel ，不仅
 </p>
 
 
-<figure>
+<figure id="org30c935a">
 <img src="./Org-mode-中的代码块/orgmode.png" alt="orgmode.png">
 
 <figcaption><span class="figure-number">Figure 1: </span>Org mode</figcaption>
@@ -83,16 +83,16 @@ Markdown 相比， Org mode 有一个非常强大的功能叫作 Babel ，不仅
 
 <!-- more -->
 
-<div id="outline-container-org4097a61" class="outline-2">
-<h2 id="org4097a61"><span class="section-number-2">1</span> 插入代码块</h2>
+<div id="outline-container-org7458ed8" class="outline-2">
+<h2 id="org7458ed8"><span class="section-number-2">1</span> 插入代码块</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 在 Org mode 中插入代码块非常简单，只需要用如下的环境将代码包裹起来
 </p>
 <div class="org-src-container">
-<pre class="src src-org"><span style="color: #005f87; background-color: #afd7ff;">#+begin_src python</span>
-<span style="color: #005f87; background-color: #d7d7ff;">   </span><span style="color: #00af00; background-color: #d7d7ff;">print</span><span style="color: #cc0000; background-color: #d7d7ff; font-weight: bold;">(</span><span style="color: #ff1f8b; background-color: #d7d7ff;">"Hello, world!"</span><span style="color: #cc0000; background-color: #d7d7ff; font-weight: bold;">)</span>
-<span style="color: #dadada; background-color: #eeeeee;">#+end_src</span>
+<pre class="src src-org"><span style="color: #5B6268; background-color: #23272e;">#+begin_src python</span>
+<span style="background-color: #23272e;">   </span><span style="color: #51afef; background-color: #23272e;">print</span><span style="color: #51afef; background-color: #23272e;">(</span><span style="color: #98be65; background-color: #23272e;">"Hello, world!"</span><span style="color: #51afef; background-color: #23272e;">)</span>
+<span style="color: #5B6268; background-color: #23272e;">#+end_src</span>
 </pre>
 </div>
 
@@ -102,41 +102,41 @@ Markdown 相比， Org mode 有一个非常强大的功能叫作 Babel ，不仅
 </div>
 </div>
 
-<div id="outline-container-org0c6cf9d" class="outline-2">
-<h2 id="org0c6cf9d"><span class="section-number-2">2</span> 设置 Headers 参数</h2>
+<div id="outline-container-orgf3c5801" class="outline-2">
+<h2 id="orgf3c5801"><span class="section-number-2">2</span> 设置 Headers 参数</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Org mode 中有三个级别的 Headers 参数，分别为全局、文件级、代码块级，三个级别的作
 用范围越来越小但优先级越来越高
 </p>
 </div>
-<div id="outline-container-orgc374dda" class="outline-3">
-<h3 id="orgc374dda"><span class="section-number-3">2.1</span> 全局 Headers</h3>
+<div id="outline-container-org499e907" class="outline-3">
+<h3 id="org499e907"><span class="section-number-3">2.1</span> 全局 Headers</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 在配置文件中设置参数
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #ef2929;">add-to-list</span> '<span style="color: #ff8700;">org-babel-default-header-args:gnuplot</span>
-      '<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00; font-weight: bold;">(</span><span style="color: #b218b2;">:results</span> . <span style="color: #ff1f8b;">"file"</span><span style="color: #00af00; font-weight: bold;">)</span>
-        <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #b218b2;">:exports</span> . <span style="color: #ff1f8b;">"both"</span><span style="color: #00af00; font-weight: bold;">)</span>
-        <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #b218b2;">:cache</span> . <span style="color: #ff1f8b;">"yes"</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #51afef;">(</span><span style="color: #c678dd;">add-to-list</span> 'org-babel-default-header-args:gnuplot
+      '<span style="color: #c678dd;">(</span><span style="color: #98be65;">(</span><span style="color: #c678dd;">:results</span> . <span style="color: #98be65;">"file"</span><span style="color: #98be65;">)</span>
+        <span style="color: #98be65;">(</span><span style="color: #c678dd;">:exports</span> . <span style="color: #98be65;">"both"</span><span style="color: #98be65;">)</span>
+        <span style="color: #98be65;">(</span><span style="color: #c678dd;">:cache</span> . <span style="color: #98be65;">"yes"</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>
       'org-babel-default-header-args:C++
-      '<span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00; font-weight: bold;">(</span><span style="color: #b218b2;">:results</span> . <span style="color: #ff1f8b;">"output"</span><span style="color: #00af00; font-weight: bold;">)</span>
-        <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #b218b2;">:exports</span> . <span style="color: #ff1f8b;">"both"</span><span style="color: #00af00; font-weight: bold;">)</span>
-        <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #b218b2;">:cache</span> . <span style="color: #ff1f8b;">"yes"</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span><span style="color: #cc0000; font-weight: bold;">)</span>
+      '<span style="color: #c678dd;">(</span><span style="color: #98be65;">(</span><span style="color: #c678dd;">:results</span> . <span style="color: #98be65;">"output"</span><span style="color: #98be65;">)</span>
+        <span style="color: #98be65;">(</span><span style="color: #c678dd;">:exports</span> . <span style="color: #98be65;">"both"</span><span style="color: #98be65;">)</span>
+        <span style="color: #98be65;">(</span><span style="color: #c678dd;">:cache</span> . <span style="color: #98be65;">"yes"</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgddd8e20" class="outline-3">
-<h3 id="orgddd8e20"><span class="section-number-3">2.2</span> 文件级 Headers</h3>
+<div id="outline-container-orgc8fc5c9" class="outline-3">
+<h3 id="orgc8fc5c9"><span class="section-number-3">2.2</span> 文件级 Headers</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 在文件的任意位置加入
 </p>
 <div class="org-src-container">
-<pre class="src src-org"><span style="color: #b2b2b2; font-style: italic;">#+PROPERTY: header-args :exports both</span>
+<pre class="src src-org"><span style="color: #83898d;">#+PROPERTY: header-args :exports both</span>
 </pre>
 </div>
 <p>
@@ -145,16 +145,16 @@ Org mode 中有三个级别的 Headers 参数，分别为全局、文件级、�
 </p>
 </div>
 </div>
-<div id="outline-container-org9f01fe5" class="outline-3">
-<h3 id="org9f01fe5"><span class="section-number-3">2.3</span> 代码块级 Headers</h3>
+<div id="outline-container-org0cbc3b9" class="outline-3">
+<h3 id="org0cbc3b9"><span class="section-number-3">2.3</span> 代码块级 Headers</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 直接修改单个代码块的 Headers 参数
 </p>
 <div class="org-src-container">
-<pre class="src src-org"><span style="color: #005f87; background-color: #afd7ff;">#+begin_src python :exports both</span>
-<span style="color: #005f87; background-color: #d7d7ff;">   </span><span style="color: #00af00; background-color: #d7d7ff;">print</span><span style="color: #cc0000; background-color: #d7d7ff; font-weight: bold;">(</span><span style="color: #ff1f8b; background-color: #d7d7ff;">"Hello, world!"</span><span style="color: #cc0000; background-color: #d7d7ff; font-weight: bold;">)</span>
-<span style="color: #dadada; background-color: #eeeeee;">#+end_src</span>
+<pre class="src src-org"><span style="color: #5B6268; background-color: #23272e;">#+begin_src python :exports both</span>
+<span style="background-color: #23272e;">   </span><span style="color: #51afef; background-color: #23272e;">print</span><span style="color: #51afef; background-color: #23272e;">(</span><span style="color: #98be65; background-color: #23272e;">"Hello, world!"</span><span style="color: #51afef; background-color: #23272e;">)</span>
+<span style="color: #5B6268; background-color: #23272e;">#+end_src</span>
 </pre>
 </div>
 </div>
@@ -165,8 +165,8 @@ Org mode 中有三个级别的 Headers 参数，分别为全局、文件级、�
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-05-28 Thu 10:45></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.3)</div>
-      <div id="built">Built: <2020-05-28 Thu 11:22></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</div>
+      <div id="built">Built: <2021-05-31 Mon 18:28></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
