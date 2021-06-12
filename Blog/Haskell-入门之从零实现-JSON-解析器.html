@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2021-06-12 Sat 21:45 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Haskell 入门之从零实现 JSON 解析器</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Cycoe">
+<link rel="stylesheet" type="text/css" href="/static/css/default.css" />
+<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+<script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div id="top-container">
+  <a id="site-name" href="/">Cycoe<span id="at-home">@Home</span></a>
+  <div id="banner">Keep It Simple Stupid</div>
+</div>
+
+<div id="top-nav">
+  <div id="nav-wrapper">
+    <div class="nav-btn" id="toc-wrapper">
+      <span class="vertical-align">Ξ</span>
+      <div id="go-top">
+        <a href="javascript:window.scrollTo(0,0)" style="color: black !important; border-bottom: none !important;" class="tooltip" title="Go to the top of the page">
+        <span class="top">&uarr;</span>
+        </a></div>
+    </div>
+    <div id="nav-left-wrapper">
+      <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
+      <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
+      <div id="nav-title-wrapper">
+        <span id="nav-title">Haskell 入门之从零实现 JSON 解析器</span>
+        <span id="nav-date">Written @<2021-06-12 Sat 14:23></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div id="img-modal" class="modal">
+  <!-- The Close Button -->
+  <span class="close">&times;</span>
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content" id="img-wrapper">
+  <!-- Modal Caption (Image Text) -->
+  <div id="caption"></div>
+</div>
+</div>
+<div id="content">
+<header>
+<h1 class="title">Haskell 入门之从零实现 JSON 解析器</h1>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org39e8b30">1. Haskell 入门之从零实现 JSON 解析器</a>
+<ul>
+<li><a href="#org8beb9ac">1.1. 定义 JSON 数据类型</a></li>
+<li><a href="#org0cc063e">1.2. 定义 Parser 结构</a></li>
+<li><a href="#orgfcd6f46">1.3. 解析单个字符</a></li>
+<li><a href="#org9abd288">1.4. 解析字符串</a></li>
+<li><a href="#orgf61189a">1.5. jsonNull 解析器</a></li>
+<li><a href="#org12f00ff">1.6. jsonBool 解析器</a></li>
+<li><a href="#orgc0902c5">1.7. jsonNumber 解析器</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<p>
+学习 Haskell 也有将近两个月了，感觉自己一直对 <code>Functor</code> 、 <code>Monad</code> 、 <code>Applicative</code> 等
+概念似懂非懂。就像网上说的，不懂 <code>Monad</code> 还敢说自己入门了 Haskell ？最近正好在小破
+站上看到了一个用 Haskell 实现 JSON 解析器的视频，一边学习一边做一下记录吧。整个
+实现的思路是从实现一些简单的工具函数开始，逐步组合出强大的 Parser ，也足以一窥函
+数式编程思想的灵活与强大
+</p>
+
+<!-- more -->
+
+<div id="outline-container-org39e8b30" class="outline-2">
+<h2 id="org39e8b30"><span class="section-number-2">1</span> Haskell 入门之从零实现 JSON 解析器</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+注：因 <code>org-babel</code> 与 <code>ghci</code> 配合的问题，文中代码块中的函数定义都需要使用 <code>:{...:}</code> 结
+构进行包裹，在实际 haskell 源码中不需要
+</p>
+</div>
+
+<div id="outline-container-org8beb9ac" class="outline-3">
+<h3 id="org8beb9ac"><span class="section-number-3">1.1</span> 定义 JSON 数据类型</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+以上解释来自某度， JSON 对象包含六种构造函数，null、布尔、数字、字符串、数组、对
+象。我们定义一种新的数据结构 <code>JsonValue</code> ，并且包含这六种 constructor ，自动实现
+<code>Eq</code> 和 <code>Show</code> 类型的接口
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #00af00;">data</span> <span style="color: #18b2b2;">JsonValue</span>
+  <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">JsonNull</span>
+  <span style="color: #ff8700;">|</span> <span style="color: #18b2b2;">JsonBool</span> <span style="color: #18b2b2;">Bool</span>
+  <span style="color: #ff8700;">|</span> <span style="color: #18b2b2;">JsonNumber</span> <span style="color: #18b2b2;">Int</span>
+  <span style="color: #ff8700;">|</span> <span style="color: #18b2b2;">JsonString</span> <span style="color: #18b2b2;">String</span>
+  <span style="color: #ff8700;">|</span> <span style="color: #18b2b2;">JsonArray</span> <span style="color: #1f5bff; font-weight: bold;">[</span><span style="color: #18b2b2;">JsonValue</span><span style="color: #1f5bff; font-weight: bold;">]</span>
+  <span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">&#27492;&#22788;&#38190;&#19981;&#33021;&#20351;&#29992; JsonString &#65292;&#22240;&#20026; JsonString &#19981;&#26159;&#19968;&#31181;&#31867;&#22411;&#32780;&#26159; constructor</span>
+  <span style="color: #ff8700;">|</span> <span style="color: #18b2b2;">JsonObject</span> <span style="color: #1f5bff; font-weight: bold;">[</span><span style="color: #00af00; font-weight: bold;">(</span><span style="color: #18b2b2;">String</span>, <span style="color: #18b2b2;">JsonValue</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">]</span>
+  <span style="color: #00af00;">deriving</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Eq</span>, <span style="color: #18b2b2;">Show</span><span style="color: #1f5bff; font-weight: bold;">)</span>
+<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0cc063e" class="outline-3">
+<h3 id="org0cc063e"><span class="section-number-3">1.2</span> 定义 Parser 结构</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+<code>Parser</code> 的定义是整个代码实现中最重要的一部分。我们先对 <code>Parser</code> 的功能进行侧写。我
+们希望能向 Parser 中传入一个字符串，Parser 返回一个解析出的对象，因此将 Parser
+定义为一个泛型类型 <code>Parser a</code> ；我们希望 Parser 能直接返回一个剩余字符串和输出对象
+的元组，这样我们就可以方便的对剩余字符串进行处理；最后，Parser 解析可能是失败的，
+因此我们使用 <code>Maybe</code> 类型对结果进行包裹。最终我们的 Parser 定义如下，"Simple but
+powerful!"
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #00af00;">newtype</span> <span style="color: #18b2b2;">Parser</span> a <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">Parser</span>
+  <span style="color: #1f5bff; font-weight: bold;">{</span> <span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">Parser &#21253;&#35065;&#20102;&#19968;&#20010;&#20989;&#25968;</span>
+    runParser <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">String</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Maybe</span> <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #18b2b2;">String</span>, a<span style="color: #00af00; font-weight: bold;">)</span>
+  <span style="color: #1f5bff; font-weight: bold;">}</span>
+<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfcd6f46" class="outline-3">
+<h3 id="orgfcd6f46"><span class="section-number-3">1.3</span> 解析单个字符</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+没有什么是比解析单个字符更简单的事情了，我们希望一个 <code>Parser Char</code> 解析器可以对单
+个字符进行匹配。 <code>charP</code> 接受一个字符并构造一个 <code>Parser Char</code> 类型的解析器。这个解析
+器接受一个 <code>input :: String</code> ，如果 <code>input</code> 的第一个字母为 <code>c</code> 则返回 <code>Just (xs, c)</code> ，
+否则返回 <code>Nothing</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #ef2929;">charP</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Char</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #18b2b2;">Char</span>
+<span style="color: #ef2929;">charP</span> c <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #ff8700;">$</span> <span style="color: #ff8700;">\</span>input <span style="color: #ff8700;">-&gt;</span> <span style="color: #00af00;">case</span> input <span style="color: #00af00;">of</span>
+  <span style="color: #1f5bff; font-weight: bold;">(</span>x <span style="color: #18b2b2;">:</span> xs<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">|</span> c <span style="color: #ff8700;">==</span> x <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Just</span> <span style="color: #1f5bff; font-weight: bold;">(</span>xs, c<span style="color: #1f5bff; font-weight: bold;">)</span>
+  <span style="color: #00af00;">_</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Nothing</span>
+<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">charP 'a' &#26500;&#36896;&#20102;&#19968;&#20010;&#21305;&#37197; 'a' &#30340;&#35299;&#26512;&#22120;</span>
+<span style="color: #ef2929;">runParser</span> <span style="color: #cc0000; font-weight: bold;">(</span>charP <span style="color: #ff1f8b;">'a'</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #ff1f8b;">"abc"</span>
+</pre>
+</div>
+
+<pre class="example">
+Prelude Data.Char Control.Applicative GHC.Unicode&gt; Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just ("bc",'a')
+</pre>
+
+
+<p>
+看！ <code>charP 'a'</code> 构造的解析器消耗了字符 'a' 并返回了剩余字符串 <code>"bc"</code>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9abd288" class="outline-3">
+<h3 id="org9abd288"><span class="section-number-3">1.4</span> 解析字符串</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+现在来点高级的，构造一个字符串解析器 <code>Parser String</code> 。 <code>String</code> 类型其实就是 <code>[Char]</code>
+类型的一个别名，因此我们要构造的就是 <code>Parser [Char]</code>
+</p>
+
+<p>
+匹配字符串就是依次匹配多个字符，那我们是不是可以把 <code>charP</code> 依次作用在多个字符上？
+来试一试！
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #18b2b2;">:</span>t map charP <span style="color: #ff1f8b;">"hello"</span>
+</pre>
+</div>
+
+<pre class="example">
+map charP "hello" :: [Parser Char]
+</pre>
+
+
+<p>
+我们得到了一个字符解析器的列表，map 将一个函数依次作用到 <code>[Char]</code> 的每个元素上，我
+们接下来要做的就是将 <code>[Parser Char]</code> 转换为 <code>Parser [Char]</code>
+</p>
+
+<p>
+此处我们先要将 Parser 实例化为 <code>Functor</code> 和 <code>Applicative</code> 的实例
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #00af00;">import</span> <span style="color: #18b2b2;">Data.Char</span> <span style="color: #cc0000; font-weight: bold;">(</span>ord<span style="color: #cc0000; font-weight: bold;">)</span>
+
+<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #00af00;">instance</span> <span style="color: #18b2b2;">Functor</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #00af00;">where</span>
+  <span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">fmap &#23558;&#19968;&#20010;&#20989;&#25968;&#20316;&#29992;&#21040; Functor &#21253;&#35065;&#30340;&#20540;&#19978;&#65292; &lt;$&gt; &#26159; fmap &#30340;&#20013;&#32512;&#24418;&#24335;</span>
+  <span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">fmap :: (a -&gt; b) -&gt; Parser a -&gt; Parser b</span>
+  fmap f <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Parser</span> p<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #ff8700;">$</span> <span style="color: #ff8700;">\</span>input <span style="color: #ff8700;">-&gt;</span> <span style="color: #00af00;">do</span>
+    <span style="color: #1f5bff; font-weight: bold;">(</span>input', c<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;-</span> p input
+    <span style="color: #18b2b2;">Just</span> <span style="color: #1f5bff; font-weight: bold;">(</span>input', f c<span style="color: #1f5bff; font-weight: bold;">)</span>
+<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #18b2b2;">:</span>t ord <span style="color: #ff8700;">&lt;$&gt;</span> charP <span style="color: #ff1f8b;">'a'</span>
+</pre>
+</div>
+
+<pre class="example">
+Prelude Data.Char Control.Applicative GHC.Unicode&gt; Prelude Data.Char Control.Applicative GHC.Unicode| Prelude Data.Char Control.Applicative GHC.Unicode| Prelude Data.Char Control.Applicative GHC.Unicode| Prelude Data.Char Control.Applicative GHC.Unicode| Prelude Data.Char Control.Applicative GHC.Unicode| Prelude Data.Char Control.Applicative GHC.Unicode| Prelude Data.Char Control.Applicative GHC.Unicode| Prelude Data.Char Control.Applicative GHC.Unicode&gt; Prelude Data.Char Control.Applicative GHC.Unicode&gt; ord &lt;$&gt; charP 'a' :: Parser Int
+</pre>
+
+
+
+<p>
+<code>&lt;$&gt;</code> 将一个函数作用到 <code>Parser</code> 的包裹值上（此处为 Char），并返回一个 <code>Parser Int</code> 类
+型的解析器
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #00af00;">instance</span> <span style="color: #18b2b2;">Applicative</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #00af00;">where</span>
+  <span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">pure &#23558;&#19968;&#20010;&#26222;&#36890;&#20540;&#21253;&#35065;&#20026;&#19968;&#20010; Applicative &#65292;&#27492;&#22788;&#26500;&#36896;&#19968;&#20010;&#35299;&#26512;&#22120;&#65292;</span>
+  <span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">&#35813;&#35299;&#26512;&#22120;&#19981;&#28040;&#32791;&#20219;&#20309;&#36755;&#20837;&#65292;&#24182;&#36820;&#22238;&#19968;&#20010; Just (input, x)</span>
+  <span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">pure :: a -&gt; Parser a</span>
+  pure x <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #ff8700;">$</span> <span style="color: #ff8700;">\</span>input <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Just</span> <span style="color: #1f5bff; font-weight: bold;">(</span>input, x<span style="color: #1f5bff; font-weight: bold;">)</span>
+
+  <span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">&lt;*&gt; &#23558;&#19968;&#20010;&#30001; Parser &#21253;&#35065;&#30340;&#20989;&#25968;&#20316;&#29992;&#21040; Parser &#19978;&#65292;Parser f &#21644;</span>
+  <span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">Parser a &#20381;&#27425;&#28040;&#32791;&#36755;&#20837;&#65292;&#24182;&#36820;&#22238; f a</span>
+  <span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">(&lt;*&gt;) :: Parser (a -&gt; b) -&gt; Parser a -&gt; Parser b</span>
+  <span style="color: #18b2b2;">Parser</span> f <span style="color: #ff8700;">&lt;*&gt;</span> <span style="color: #18b2b2;">Parser</span> a <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #ff8700;">$</span> <span style="color: #ff8700;">\</span>input <span style="color: #ff8700;">-&gt;</span> <span style="color: #00af00;">do</span>
+    <span style="color: #1f5bff; font-weight: bold;">(</span>input', f'<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;-</span> f input
+    <span style="color: #1f5bff; font-weight: bold;">(</span>input'', a'<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;-</span> a input'
+    return <span style="color: #1f5bff; font-weight: bold;">(</span>input'', f' a'<span style="color: #1f5bff; font-weight: bold;">)</span>
+
+  <span style="color: #18b2b2;">Parser</span> a <span style="color: #ff8700;">&lt;*</span> <span style="color: #18b2b2;">Parser</span> b <span style="color: #ff8700;">=</span>
+    fst <span style="color: #ff8700;">&lt;$&gt;</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00; font-weight: bold;">(</span><span style="color: #18b2b2;">,</span><span style="color: #00af00; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;$&gt;</span> <span style="color: #18b2b2;">Parser</span> a <span style="color: #ff8700;">&lt;*&gt;</span> <span style="color: #18b2b2;">Parser</span> b<span style="color: #1f5bff; font-weight: bold;">)</span>
+  <span style="color: #18b2b2;">Parser</span> a <span style="color: #ff8700;">*&gt;</span> <span style="color: #18b2b2;">Parser</span> b <span style="color: #ff8700;">=</span>
+    snd <span style="color: #ff8700;">&lt;$&gt;</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00; font-weight: bold;">(</span><span style="color: #18b2b2;">,</span><span style="color: #00af00; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;$&gt;</span> <span style="color: #18b2b2;">Parser</span> a <span style="color: #ff8700;">&lt;*&gt;</span> <span style="color: #18b2b2;">Parser</span> b<span style="color: #1f5bff; font-weight: bold;">)</span>
+<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #ef2929;">runParser</span> <span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">,</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;$&gt;</span> charP <span style="color: #ff1f8b;">'h'</span> <span style="color: #ff8700;">&lt;*&gt;</span> charP <span style="color: #ff1f8b;">'e'</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #ff1f8b;">"hello"</span>
+</pre>
+</div>
+
+<pre class="example">
+Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just ("llo",('h','e'))
+</pre>
+
+
+<p>
+值得纪念的一刻，我们使用 <code>charP</code> 写出了我们第一个组合子！那么我们将这个链加长，并
+且使用 <code>(:)</code> 进行组合呢？
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #ef2929;">abcP</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #18b2b2;">String</span>
+<span style="color: #ef2929;">abcP</span> <span style="color: #ff8700;">=</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">:</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;$&gt;</span> charP <span style="color: #ff1f8b;">'a'</span> <span style="color: #ff8700;">&lt;*&gt;</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #18b2b2;">:</span><span style="color: #ff4ea3; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;$&gt;</span> charP <span style="color: #ff1f8b;">'b'</span><span style="color: #00af00; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;*&gt;</span> <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #18b2b2;">:</span><span style="color: #00d7af; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;$&gt;</span> charP <span style="color: #ff1f8b;">'c'</span><span style="color: #ff4ea3; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;*&gt;</span> pure <span style="color: #ff4ea3; font-weight: bold;">[]</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span>
+<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #ef2929;">runParser</span> abcP <span style="color: #ff1f8b;">"abcdef"</span>
+</pre>
+</div>
+
+<pre class="example">
+Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just ("def","abc")
+</pre>
+
+
+<p>
+Amazing! 我们成功使用 <code>&lt;$&gt;</code> 和 <code>&lt;*&gt;</code> 运算符组合出了字符串解析器，但是我们不能每次使
+用都定义一长串，函数式的精髓在于抽象，我们需要一个函数将这个组合过程进行抽象，这
+个函数就是 <code>SequenceA</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #ef2929;">sequenceA</span> <span style="color: #ff8700;">::</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Applicative</span> f<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">=&gt;</span> <span style="color: #1f5bff; font-weight: bold;">[</span>f a<span style="color: #1f5bff; font-weight: bold;">]</span> <span style="color: #ff8700;">-&gt;</span> f <span style="color: #1f5bff; font-weight: bold;">[</span>a<span style="color: #1f5bff; font-weight: bold;">]</span>
+<span style="color: #ef2929;">sequenceA</span> <span style="color: #1f5bff; font-weight: bold;">(</span>f <span style="color: #18b2b2;">:</span> fs<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">=</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">:</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;$&gt;</span> f <span style="color: #ff8700;">&lt;*&gt;</span> sequenceA fs
+<span style="color: #ef2929;">sequenceA</span> <span style="color: #00af00;">_</span>        <span style="color: #ff8700;">=</span> pure <span style="color: #1f5bff; font-weight: bold;">[]</span>
+<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #ef2929;">runParser</span> <span style="color: #cc0000; font-weight: bold;">(</span>sequenceA <span style="color: #ff8700;">$</span> charP <span style="color: #ff8700;">&lt;$&gt;</span> <span style="color: #ff1f8b;">"hello"</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #ff1f8b;">"hello, world!"</span>
+</pre>
+</div>
+
+<pre class="example">
+Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just (", world!","hello")
+</pre>
+
+
+<p>
+下面我们就可以定义 <code>stringP</code> ，传入一个待匹配的字符串，返回一个字符串解析器
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #ef2929;">stringP</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">String</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #18b2b2;">String</span>
+<span style="color: #ef2929;">stringP</span> s <span style="color: #ff8700;">=</span> sequenceA <span style="color: #ff8700;">$</span> charP <span style="color: #ff8700;">&lt;$&gt;</span> s
+<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #ef2929;">runParser</span> <span style="color: #cc0000; font-weight: bold;">(</span>stringP <span style="color: #ff1f8b;">"hello"</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #ff1f8b;">"hello, world!"</span>
+</pre>
+</div>
+
+<pre class="example">
+Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just (", world!","hello")
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgf61189a" class="outline-3">
+<h3 id="orgf61189a"><span class="section-number-3">1.5</span> jsonNull 解析器</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+有了以上的基础设备，我们就可以很容易地写出 <code>JsonNull</code> 类型构造器对应的解析器了，
+JSON 中使用 <code>null</code> 表示一个 <code>JsonNull</code> 类型的对象
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #ef2929;">jsonNull</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #18b2b2;">JsonValue</span>
+<span style="color: #ef2929;">jsonNull</span> <span style="color: #ff8700;">=</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff8700;">\</span><span style="color: #00af00;">_</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">JsonNull</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;$&gt;</span> stringP <span style="color: #ff1f8b;">"null"</span>
+<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #ef2929;">runParser</span> jsonNull <span style="color: #ff1f8b;">"null"</span>
+</pre>
+</div>
+
+<pre class="example">
+Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just ("",JsonNull)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org12f00ff" class="outline-3">
+<h3 id="org12f00ff"><span class="section-number-3">1.6</span> jsonBool 解析器</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+JsonBool 类型构造器对应的值有 <code>JsonBool True</code> 和 <code>JsonBool False</code> ，在 JSON 中表示方
+式分别为 <code>true</code> 和 <code>false</code> ，我们只需要匹配这两个字符串即可。但这时又有一个问题，我
+们只可能匹配上 true 和 false 中的一个，当一个匹配失败时才需要尝试另一个。为解决
+这个问题我们引入 <code>Alternative</code> 类型类
+</p>
+
+<p>
+<code>Alternative</code> 类型类需要实现 <code>&lt;|&gt;</code> 和 <code>empty</code> 接口，如 <code>Maybe</code> 就是 <code>Alternative</code> 类型类的
+一个实例
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #00af00;">import</span> <span style="color: #18b2b2;">Control.Applicative</span>
+
+<span style="color: #18b2b2;">Nothing</span> <span style="color: #ef2929;">&lt;|&gt;</span> <span style="color: #18b2b2;">Just</span> 4 <span style="color: #ff8700;">&lt;|&gt;</span> <span style="color: #18b2b2;">Just</span> 5
+</pre>
+</div>
+
+<pre class="example">
+Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just 4
+</pre>
+
+
+<p>
+<code>&lt;|&gt;</code> 返回第一个有效值，我们将 <code>Parser</code> 实现为 <code>Alternative</code> 的实例
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #00af00;">instance</span> <span style="color: #18b2b2;">Alternative</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #00af00;">where</span>
+  <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Parser</span> p1<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;|&gt;</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Parser</span> p2<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #ff8700;">$</span> <span style="color: #ff8700;">\</span>input <span style="color: #ff8700;">-&gt;</span>
+    p1 input <span style="color: #ff8700;">&lt;|&gt;</span> p2 input
+  empty <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #ff8700;">$</span> const <span style="color: #18b2b2;">Nothing</span>
+<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">&#20351;&#29992; &lt;|&gt; &#21305;&#37197; true &#25110; false</span>
+<span style="color: #ef2929;">runParser</span> <span style="color: #cc0000; font-weight: bold;">(</span>stringP <span style="color: #ff1f8b;">"true"</span> <span style="color: #ff8700;">&lt;|&gt;</span> stringP <span style="color: #ff1f8b;">"false"</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #ff1f8b;">"false"</span>
+</pre>
+</div>
+
+<pre class="example">
+Prelude Data.Char Control.Applicative GHC.Unicode&gt; Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just ("","false")
+</pre>
+
+
+<p>
+JsonBool 对应的解析器构造器可定义为
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #ef2929;">jsonBool</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #18b2b2;">JsonValue</span>
+<span style="color: #ef2929;">jsonBool</span> <span style="color: #ff8700;">=</span> construct <span style="color: #ff8700;">&lt;$&gt;</span> <span style="color: #1f5bff; font-weight: bold;">(</span>stringP <span style="color: #ff1f8b;">"true"</span> <span style="color: #ff8700;">&lt;|&gt;</span> stringP <span style="color: #ff1f8b;">"false"</span><span style="color: #1f5bff; font-weight: bold;">)</span>
+  <span style="color: #00af00;">where</span>
+    construct <span style="color: #ff1f8b;">"true"</span> <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">JsonBool</span> <span style="color: #18b2b2;">True</span>
+    construct <span style="color: #ff1f8b;">"false"</span> <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">JsonBool</span> <span style="color: #18b2b2;">False</span>
+    construct <span style="color: #00af00;">_</span> <span style="color: #ff8700;">=</span> undefined
+<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #ef2929;">runParser</span> jsonBool <span style="color: #ff1f8b;">"false, something"</span>
+</pre>
+</div>
+
+<pre class="example">
+Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just (", something",JsonBool False)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgc0902c5" class="outline-3">
+<h3 id="orgc0902c5"><span class="section-number-3">1.7</span> jsonNumber 解析器</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+数字是由一组连续的数字字符组成，因此我们需要读取一串连续的数字字符，并将其转为
+<code>Int</code> 格式，这里我们使用函数 <code>span</code> 构造一个 <code>spanP</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #00af00;">import</span> <span style="color: #18b2b2;">GHC.Unicode</span> <span style="color: #cc0000; font-weight: bold;">(</span>isDigit<span style="color: #cc0000; font-weight: bold;">)</span>
+
+<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #ef2929;">spanP</span> <span style="color: #ff8700;">::</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Char</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Bool</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #18b2b2;">String</span>
+<span style="color: #ef2929;">spanP</span> p <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #ff8700;">$</span> <span style="color: #ff8700;">\</span>input <span style="color: #ff8700;">-&gt;</span>
+  <span style="color: #00af00;">let</span> <span style="color: #1f5bff; font-weight: bold;">(</span>token, rest<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">=</span> span p input
+   <span style="color: #00af00;">in</span> <span style="color: #18b2b2;">Just</span> <span style="color: #1f5bff; font-weight: bold;">(</span>rest, token<span style="color: #1f5bff; font-weight: bold;">)</span>
+<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #ef2929;">runParser</span> <span style="color: #cc0000; font-weight: bold;">(</span>spanP isDigit<span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #ff1f8b;">"123abc"</span>
+</pre>
+</div>
+
+<pre class="example">
+Prelude Data.Char Control.Applicative GHC.Unicode&gt; Prelude Data.Char Control.Applicative GHC.Unicode| Prelude Data.Char Control.Applicative GHC.Unicode| Prelude Data.Char Control.Applicative GHC.Unicode| Prelude Data.Char Control.Applicative GHC.Unicode| Prelude Data.Char Control.Applicative GHC.Unicode| Prelude Data.Char Control.Applicative GHC.Unicode&gt; Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just ("abc","123")
+</pre>
+
+
+<p>
+使用 <code>isDigit</code> 作为谓词，将字符串开头的数字字符分割了出来，接下来只需要将数字字符
+串转化为 <code>Int</code> 即可
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #ef2929;">jsonNumber</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #18b2b2;">JsonValue</span>
+<span style="color: #ef2929;">jsonNumber</span> <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">JsonNumber</span> <span style="color: #ff8700;">.</span> read <span style="color: #ff8700;">&lt;$&gt;</span> spanP isDigit
+<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #ef2929;">runParser</span> jsonNumber <span style="color: #ff1f8b;">"123abc"</span>
+</pre>
+</div>
+
+<pre class="example">
+Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just ("abc",JsonNumber 123)
+</pre>
+
+
+<p>
+嗯。。看起来可以运行，但是传入非数字开头的字符串呢？
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #ef2929;">runParser</span> jsonNumber <span style="color: #ff1f8b;">"hello"</span>
+</pre>
+</div>
+
+<pre class="example">
+Just ("hello",JsonNumber *** Exception: Prelude.read: no parse
+</pre>
+
+
+<p>
+哈哈哈哈， <code>Int</code> 类型的 <code>read</code> 函数无法从空字符串读取一个值，我们需要一个函数来对
+Parser 的结果进行判空
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #ef2929;">notNullP</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #1f5bff; font-weight: bold;">[</span>a<span style="color: #1f5bff; font-weight: bold;">]</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #1f5bff; font-weight: bold;">[</span>a<span style="color: #1f5bff; font-weight: bold;">]</span>
+<span style="color: #ef2929;">notNullP</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Parser</span> p<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #ff8700;">$</span> <span style="color: #ff8700;">\</span>input <span style="color: #ff8700;">-&gt;</span> <span style="color: #00af00;">do</span>
+  <span style="color: #1f5bff; font-weight: bold;">(</span>input', x<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;-</span> p input
+  <span style="color: #00af00;">case</span> x <span style="color: #00af00;">of</span>
+    <span style="color: #1f5bff; font-weight: bold;">[]</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Nothing</span>
+    <span style="color: #00af00;">_</span> <span style="color: #ff8700;">-&gt;</span> return <span style="color: #1f5bff; font-weight: bold;">(</span>input', x<span style="color: #1f5bff; font-weight: bold;">)</span>
+<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #ef2929;">runParser</span> <span style="color: #cc0000; font-weight: bold;">(</span>notNullP <span style="color: #ff8700;">$</span> stringP <span style="color: #ff1f8b;">""</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #ff1f8b;">"hello"</span>
+</pre>
+</div>
+
+<pre class="example">
+Prelude Data.Char Control.Applicative GHC.Unicode&gt; Nothing
+</pre>
+
+
+<p>
+那么我们的 <code>jsonNumber</code> 可改写为
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
+<span style="color: #ef2929;">jsonNumber</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #18b2b2;">JsonValue</span>
+<span style="color: #ef2929;">jsonNumber</span> <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">JsonNumber</span> <span style="color: #ff8700;">.</span> read <span style="color: #ff8700;">&lt;$&gt;</span> notNullP <span style="color: #1f5bff; font-weight: bold;">(</span>spanP isDigit<span style="color: #1f5bff; font-weight: bold;">)</span>
+<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+
+<span style="color: #ef2929;">runParser</span> jsonNumber <span style="color: #ff1f8b;">"hello"</span>
+</pre>
+</div>
+
+<pre class="example">
+Prelude Data.Char Control.Applicative GHC.Unicode&gt; Nothing
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="author-info">
+      <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
+      <div id="date">Date: <2021-06-12 Sat 14:23></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</div>
+      <div id="built">Built: <2021-06-12 Sat 21:45></div>
+      </div><div id="copyright">
+    <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
+</div>
+</div>
+</body>
+</html>
