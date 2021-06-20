@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-06-12 Sat 21:45 -->
+<!-- 2021-06-12 Sat 21:55 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Haskell 入门之从零实现 JSON 解析器</title>
@@ -99,17 +99,17 @@
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
-<span style="color: #00af00;">data</span> <span style="color: #18b2b2;">JsonValue</span>
-  <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">JsonNull</span>
-  <span style="color: #ff8700;">|</span> <span style="color: #18b2b2;">JsonBool</span> <span style="color: #18b2b2;">Bool</span>
-  <span style="color: #ff8700;">|</span> <span style="color: #18b2b2;">JsonNumber</span> <span style="color: #18b2b2;">Int</span>
-  <span style="color: #ff8700;">|</span> <span style="color: #18b2b2;">JsonString</span> <span style="color: #18b2b2;">String</span>
-  <span style="color: #ff8700;">|</span> <span style="color: #18b2b2;">JsonArray</span> <span style="color: #1f5bff; font-weight: bold;">[</span><span style="color: #18b2b2;">JsonValue</span><span style="color: #1f5bff; font-weight: bold;">]</span>
-  <span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">&#27492;&#22788;&#38190;&#19981;&#33021;&#20351;&#29992; JsonString &#65292;&#22240;&#20026; JsonString &#19981;&#26159;&#19968;&#31181;&#31867;&#22411;&#32780;&#26159; constructor</span>
-  <span style="color: #ff8700;">|</span> <span style="color: #18b2b2;">JsonObject</span> <span style="color: #1f5bff; font-weight: bold;">[</span><span style="color: #00af00; font-weight: bold;">(</span><span style="color: #18b2b2;">String</span>, <span style="color: #18b2b2;">JsonValue</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">]</span>
-  <span style="color: #00af00;">deriving</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Eq</span>, <span style="color: #18b2b2;">Show</span><span style="color: #1f5bff; font-weight: bold;">)</span>
-<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+<pre class="src src-haskell"><span style="color: #ECBE7B;">:</span><span style="color: #51afef;">{</span>
+<span style="color: #51afef;">data</span> <span style="color: #ECBE7B;">JsonValue</span>
+  <span style="color: #dcaeea;">=</span> <span style="color: #ECBE7B;">JsonNull</span>
+  <span style="color: #dcaeea;">|</span> <span style="color: #ECBE7B;">JsonBool</span> <span style="color: #ECBE7B;">Bool</span>
+  <span style="color: #dcaeea;">|</span> <span style="color: #ECBE7B;">JsonNumber</span> <span style="color: #ECBE7B;">Int</span>
+  <span style="color: #dcaeea;">|</span> <span style="color: #ECBE7B;">JsonString</span> <span style="color: #ECBE7B;">String</span>
+  <span style="color: #dcaeea;">|</span> <span style="color: #ECBE7B;">JsonArray</span> <span style="color: #c678dd;">[</span><span style="color: #ECBE7B;">JsonValue</span><span style="color: #c678dd;">]</span>
+  <span style="color: #5B6268;">-- </span><span style="color: #5B6268;">&#27492;&#22788;&#38190;&#19981;&#33021;&#20351;&#29992; JsonString &#65292;&#22240;&#20026; JsonString &#19981;&#26159;&#19968;&#31181;&#31867;&#22411;&#32780;&#26159; constructor</span>
+  <span style="color: #dcaeea;">|</span> <span style="color: #ECBE7B;">JsonObject</span> <span style="color: #c678dd;">[</span><span style="color: #98be65;">(</span><span style="color: #ECBE7B;">String</span>, <span style="color: #ECBE7B;">JsonValue</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">]</span>
+  <span style="color: #51afef;">deriving</span> <span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">Eq</span>, <span style="color: #ECBE7B;">Show</span><span style="color: #c678dd;">)</span>
+<span style="color: #ECBE7B;">:</span><span style="color: #51afef;">}</span>
 </pre>
 </div>
 </div>
@@ -128,12 +128,12 @@ powerful!"
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
-<span style="color: #00af00;">newtype</span> <span style="color: #18b2b2;">Parser</span> a <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">Parser</span>
-  <span style="color: #1f5bff; font-weight: bold;">{</span> <span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">Parser &#21253;&#35065;&#20102;&#19968;&#20010;&#20989;&#25968;</span>
-    runParser <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">String</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Maybe</span> <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #18b2b2;">String</span>, a<span style="color: #00af00; font-weight: bold;">)</span>
-  <span style="color: #1f5bff; font-weight: bold;">}</span>
-<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+<pre class="src src-haskell"><span style="color: #ECBE7B;">:</span><span style="color: #51afef;">{</span>
+<span style="color: #51afef;">newtype</span> <span style="color: #ECBE7B;">Parser</span> a <span style="color: #dcaeea;">=</span> <span style="color: #ECBE7B;">Parser</span>
+  <span style="color: #c678dd;">{</span> <span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Parser &#21253;&#35065;&#20102;&#19968;&#20010;&#20989;&#25968;</span>
+    runParser <span style="color: #dcaeea;">::</span> <span style="color: #ECBE7B;">String</span> <span style="color: #dcaeea;">-&gt;</span> <span style="color: #ECBE7B;">Maybe</span> <span style="color: #98be65;">(</span><span style="color: #ECBE7B;">String</span>, a<span style="color: #98be65;">)</span>
+  <span style="color: #c678dd;">}</span>
+<span style="color: #ECBE7B;">:</span><span style="color: #51afef;">}</span>
 </pre>
 </div>
 </div>
@@ -150,20 +150,25 @@ powerful!"
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
-<span style="color: #ef2929;">charP</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Char</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #18b2b2;">Char</span>
-<span style="color: #ef2929;">charP</span> c <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #ff8700;">$</span> <span style="color: #ff8700;">\</span>input <span style="color: #ff8700;">-&gt;</span> <span style="color: #00af00;">case</span> input <span style="color: #00af00;">of</span>
-  <span style="color: #1f5bff; font-weight: bold;">(</span>x <span style="color: #18b2b2;">:</span> xs<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">|</span> c <span style="color: #ff8700;">==</span> x <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Just</span> <span style="color: #1f5bff; font-weight: bold;">(</span>xs, c<span style="color: #1f5bff; font-weight: bold;">)</span>
-  <span style="color: #00af00;">_</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Nothing</span>
-<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+<pre class="src src-haskell"><span style="color: #ECBE7B;">:</span><span style="color: #51afef;">{</span>
+<span style="color: #c678dd;">charP</span> <span style="color: #dcaeea;">::</span> <span style="color: #ECBE7B;">Char</span> <span style="color: #dcaeea;">-&gt;</span> <span style="color: #ECBE7B;">Parser</span> <span style="color: #ECBE7B;">Char</span>
+<span style="color: #c678dd;">charP</span> c <span style="color: #dcaeea;">=</span> <span style="color: #ECBE7B;">Parser</span> <span style="color: #dcaeea;">$</span> <span style="color: #dcaeea;">\</span>input <span style="color: #dcaeea;">-&gt;</span> <span style="color: #51afef;">case</span> input <span style="color: #51afef;">of</span>
+  <span style="color: #c678dd;">(</span>x <span style="color: #ECBE7B;">:</span> xs<span style="color: #c678dd;">)</span> <span style="color: #dcaeea;">|</span> c <span style="color: #dcaeea;">==</span> x <span style="color: #dcaeea;">-&gt;</span> <span style="color: #ECBE7B;">Just</span> <span style="color: #c678dd;">(</span>xs, c<span style="color: #c678dd;">)</span>
+  <span style="color: #51afef;">_</span> <span style="color: #dcaeea;">-&gt;</span> <span style="color: #ECBE7B;">Nothing</span>
+<span style="color: #ECBE7B;">:</span><span style="color: #51afef;">}</span>
 
-<span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">charP 'a' &#26500;&#36896;&#20102;&#19968;&#20010;&#21305;&#37197; 'a' &#30340;&#35299;&#26512;&#22120;</span>
-<span style="color: #ef2929;">runParser</span> <span style="color: #cc0000; font-weight: bold;">(</span>charP <span style="color: #ff1f8b;">'a'</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #ff1f8b;">"abc"</span>
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">charP 'a' &#26500;&#36896;&#20102;&#19968;&#20010;&#21305;&#37197; 'a' &#30340;&#35299;&#26512;&#22120;</span>
+<span style="color: #c678dd;">runParser</span> <span style="color: #51afef;">(</span>charP <span style="color: #98be65;">'a'</span><span style="color: #51afef;">)</span> <span style="color: #98be65;">"abc"</span>
 </pre>
 </div>
 
 <pre class="example">
-Prelude Data.Char Control.Applicative GHC.Unicode&gt; Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just ("bc",'a')
+Prelude&gt; Prelude&gt;
+&lt;interactive&gt;:10:1-9: error:
+    Variable not in scope: runParser :: t0 -&gt; [Char] -&gt; t
+
+&lt;interactive&gt;:10:12-16: error:
+    Variable not in scope: charP :: Char -&gt; t0
 </pre>
 
 
@@ -187,12 +192,13 @@ Prelude Data.Char Control.Applicative GHC.Unicode&gt; Prelude Data.Char Control.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #18b2b2;">:</span>t map charP <span style="color: #ff1f8b;">"hello"</span>
+<pre class="src src-haskell"><span style="color: #ECBE7B;">:</span>t map charP <span style="color: #98be65;">"hello"</span>
 </pre>
 </div>
 
 <pre class="example">
-map charP "hello" :: [Parser Char]
+&lt;interactive&gt;:1:5-9: error:
+    Variable not in scope: charP :: Char -&gt; b
 </pre>
 
 
@@ -206,23 +212,25 @@ map charP "hello" :: [Parser Char]
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #00af00;">import</span> <span style="color: #18b2b2;">Data.Char</span> <span style="color: #cc0000; font-weight: bold;">(</span>ord<span style="color: #cc0000; font-weight: bold;">)</span>
+<pre class="src src-haskell"><span style="color: #51afef;">import</span> <span style="color: #ECBE7B;">Data.Char</span> <span style="color: #51afef;">(</span>ord<span style="color: #51afef;">)</span>
 
-<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
-<span style="color: #00af00;">instance</span> <span style="color: #18b2b2;">Functor</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #00af00;">where</span>
-  <span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">fmap &#23558;&#19968;&#20010;&#20989;&#25968;&#20316;&#29992;&#21040; Functor &#21253;&#35065;&#30340;&#20540;&#19978;&#65292; &lt;$&gt; &#26159; fmap &#30340;&#20013;&#32512;&#24418;&#24335;</span>
-  <span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">fmap :: (a -&gt; b) -&gt; Parser a -&gt; Parser b</span>
-  fmap f <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Parser</span> p<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #ff8700;">$</span> <span style="color: #ff8700;">\</span>input <span style="color: #ff8700;">-&gt;</span> <span style="color: #00af00;">do</span>
-    <span style="color: #1f5bff; font-weight: bold;">(</span>input', c<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;-</span> p input
-    <span style="color: #18b2b2;">Just</span> <span style="color: #1f5bff; font-weight: bold;">(</span>input', f c<span style="color: #1f5bff; font-weight: bold;">)</span>
-<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+<span style="color: #ECBE7B;">:</span><span style="color: #51afef;">{</span>
+<span style="color: #51afef;">instance</span> <span style="color: #ECBE7B;">Functor</span> <span style="color: #ECBE7B;">Parser</span> <span style="color: #51afef;">where</span>
+  <span style="color: #5B6268;">-- </span><span style="color: #5B6268;">fmap &#23558;&#19968;&#20010;&#20989;&#25968;&#20316;&#29992;&#21040; Functor &#21253;&#35065;&#30340;&#20540;&#19978;&#65292; &lt;$&gt; &#26159; fmap &#30340;&#20013;&#32512;&#24418;&#24335;</span>
+  <span style="color: #5B6268;">-- </span><span style="color: #5B6268;">fmap :: (a -&gt; b) -&gt; Parser a -&gt; Parser b</span>
+  fmap f <span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">Parser</span> p<span style="color: #c678dd;">)</span> <span style="color: #dcaeea;">=</span> <span style="color: #ECBE7B;">Parser</span> <span style="color: #dcaeea;">$</span> <span style="color: #dcaeea;">\</span>input <span style="color: #dcaeea;">-&gt;</span> <span style="color: #51afef;">do</span>
+    <span style="color: #c678dd;">(</span>input', c<span style="color: #c678dd;">)</span> <span style="color: #dcaeea;">&lt;-</span> p input
+    <span style="color: #ECBE7B;">Just</span> <span style="color: #c678dd;">(</span>input', f c<span style="color: #c678dd;">)</span>
+<span style="color: #ECBE7B;">:</span><span style="color: #51afef;">}</span>
 
-<span style="color: #18b2b2;">:</span>t ord <span style="color: #ff8700;">&lt;$&gt;</span> charP <span style="color: #ff1f8b;">'a'</span>
+<span style="color: #ECBE7B;">:</span>t ord <span style="color: #dcaeea;">&lt;$&gt;</span> charP <span style="color: #98be65;">'a'</span>
 </pre>
 </div>
 
 <pre class="example">
-Prelude Data.Char Control.Applicative GHC.Unicode&gt; Prelude Data.Char Control.Applicative GHC.Unicode| Prelude Data.Char Control.Applicative GHC.Unicode| Prelude Data.Char Control.Applicative GHC.Unicode| Prelude Data.Char Control.Applicative GHC.Unicode| Prelude Data.Char Control.Applicative GHC.Unicode| Prelude Data.Char Control.Applicative GHC.Unicode| Prelude Data.Char Control.Applicative GHC.Unicode| Prelude Data.Char Control.Applicative GHC.Unicode&gt; Prelude Data.Char Control.Applicative GHC.Unicode&gt; ord &lt;$&gt; charP 'a' :: Parser Int
+Prelude Data.Char&gt;
+&lt;interactive&gt;:1:9-13: error:
+    Variable not in scope: charP :: Char -&gt; f Char
 </pre>
 
 
@@ -233,33 +241,41 @@ Prelude Data.Char Control.Applicative GHC.Unicode&gt; Prelude Data.Char Control.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
-<span style="color: #00af00;">instance</span> <span style="color: #18b2b2;">Applicative</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #00af00;">where</span>
-  <span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">pure &#23558;&#19968;&#20010;&#26222;&#36890;&#20540;&#21253;&#35065;&#20026;&#19968;&#20010; Applicative &#65292;&#27492;&#22788;&#26500;&#36896;&#19968;&#20010;&#35299;&#26512;&#22120;&#65292;</span>
-  <span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">&#35813;&#35299;&#26512;&#22120;&#19981;&#28040;&#32791;&#20219;&#20309;&#36755;&#20837;&#65292;&#24182;&#36820;&#22238;&#19968;&#20010; Just (input, x)</span>
-  <span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">pure :: a -&gt; Parser a</span>
-  pure x <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #ff8700;">$</span> <span style="color: #ff8700;">\</span>input <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Just</span> <span style="color: #1f5bff; font-weight: bold;">(</span>input, x<span style="color: #1f5bff; font-weight: bold;">)</span>
+<pre class="src src-haskell"><span style="color: #ECBE7B;">:</span><span style="color: #51afef;">{</span>
+<span style="color: #51afef;">instance</span> <span style="color: #ECBE7B;">Applicative</span> <span style="color: #ECBE7B;">Parser</span> <span style="color: #51afef;">where</span>
+  <span style="color: #5B6268;">-- </span><span style="color: #5B6268;">pure &#23558;&#19968;&#20010;&#26222;&#36890;&#20540;&#21253;&#35065;&#20026;&#19968;&#20010; Applicative &#65292;&#27492;&#22788;&#26500;&#36896;&#19968;&#20010;&#35299;&#26512;&#22120;&#65292;</span>
+  <span style="color: #5B6268;">-- </span><span style="color: #5B6268;">&#35813;&#35299;&#26512;&#22120;&#19981;&#28040;&#32791;&#20219;&#20309;&#36755;&#20837;&#65292;&#24182;&#36820;&#22238;&#19968;&#20010; Just (input, x)</span>
+  <span style="color: #5B6268;">-- </span><span style="color: #5B6268;">pure :: a -&gt; Parser a</span>
+  pure x <span style="color: #dcaeea;">=</span> <span style="color: #ECBE7B;">Parser</span> <span style="color: #dcaeea;">$</span> <span style="color: #dcaeea;">\</span>input <span style="color: #dcaeea;">-&gt;</span> <span style="color: #ECBE7B;">Just</span> <span style="color: #c678dd;">(</span>input, x<span style="color: #c678dd;">)</span>
 
-  <span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">&lt;*&gt; &#23558;&#19968;&#20010;&#30001; Parser &#21253;&#35065;&#30340;&#20989;&#25968;&#20316;&#29992;&#21040; Parser &#19978;&#65292;Parser f &#21644;</span>
-  <span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">Parser a &#20381;&#27425;&#28040;&#32791;&#36755;&#20837;&#65292;&#24182;&#36820;&#22238; f a</span>
-  <span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">(&lt;*&gt;) :: Parser (a -&gt; b) -&gt; Parser a -&gt; Parser b</span>
-  <span style="color: #18b2b2;">Parser</span> f <span style="color: #ff8700;">&lt;*&gt;</span> <span style="color: #18b2b2;">Parser</span> a <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #ff8700;">$</span> <span style="color: #ff8700;">\</span>input <span style="color: #ff8700;">-&gt;</span> <span style="color: #00af00;">do</span>
-    <span style="color: #1f5bff; font-weight: bold;">(</span>input', f'<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;-</span> f input
-    <span style="color: #1f5bff; font-weight: bold;">(</span>input'', a'<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;-</span> a input'
-    return <span style="color: #1f5bff; font-weight: bold;">(</span>input'', f' a'<span style="color: #1f5bff; font-weight: bold;">)</span>
+  <span style="color: #5B6268;">-- </span><span style="color: #5B6268;">&lt;*&gt; &#23558;&#19968;&#20010;&#30001; Parser &#21253;&#35065;&#30340;&#20989;&#25968;&#20316;&#29992;&#21040; Parser &#19978;&#65292;Parser f &#21644;</span>
+  <span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Parser a &#20381;&#27425;&#28040;&#32791;&#36755;&#20837;&#65292;&#24182;&#36820;&#22238; f a</span>
+  <span style="color: #5B6268;">-- </span><span style="color: #5B6268;">(&lt;*&gt;) :: Parser (a -&gt; b) -&gt; Parser a -&gt; Parser b</span>
+  <span style="color: #ECBE7B;">Parser</span> f <span style="color: #dcaeea;">&lt;*&gt;</span> <span style="color: #ECBE7B;">Parser</span> a <span style="color: #dcaeea;">=</span> <span style="color: #ECBE7B;">Parser</span> <span style="color: #dcaeea;">$</span> <span style="color: #dcaeea;">\</span>input <span style="color: #dcaeea;">-&gt;</span> <span style="color: #51afef;">do</span>
+    <span style="color: #c678dd;">(</span>input', f'<span style="color: #c678dd;">)</span> <span style="color: #dcaeea;">&lt;-</span> f input
+    <span style="color: #c678dd;">(</span>input'', a'<span style="color: #c678dd;">)</span> <span style="color: #dcaeea;">&lt;-</span> a input'
+    return <span style="color: #c678dd;">(</span>input'', f' a'<span style="color: #c678dd;">)</span>
 
-  <span style="color: #18b2b2;">Parser</span> a <span style="color: #ff8700;">&lt;*</span> <span style="color: #18b2b2;">Parser</span> b <span style="color: #ff8700;">=</span>
-    fst <span style="color: #ff8700;">&lt;$&gt;</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00; font-weight: bold;">(</span><span style="color: #18b2b2;">,</span><span style="color: #00af00; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;$&gt;</span> <span style="color: #18b2b2;">Parser</span> a <span style="color: #ff8700;">&lt;*&gt;</span> <span style="color: #18b2b2;">Parser</span> b<span style="color: #1f5bff; font-weight: bold;">)</span>
-  <span style="color: #18b2b2;">Parser</span> a <span style="color: #ff8700;">*&gt;</span> <span style="color: #18b2b2;">Parser</span> b <span style="color: #ff8700;">=</span>
-    snd <span style="color: #ff8700;">&lt;$&gt;</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00; font-weight: bold;">(</span><span style="color: #18b2b2;">,</span><span style="color: #00af00; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;$&gt;</span> <span style="color: #18b2b2;">Parser</span> a <span style="color: #ff8700;">&lt;*&gt;</span> <span style="color: #18b2b2;">Parser</span> b<span style="color: #1f5bff; font-weight: bold;">)</span>
-<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+  <span style="color: #ECBE7B;">Parser</span> a <span style="color: #dcaeea;">&lt;*</span> <span style="color: #ECBE7B;">Parser</span> b <span style="color: #dcaeea;">=</span>
+    fst <span style="color: #dcaeea;">&lt;$&gt;</span> <span style="color: #c678dd;">(</span><span style="color: #98be65;">(</span><span style="color: #ECBE7B;">,</span><span style="color: #98be65;">)</span> <span style="color: #dcaeea;">&lt;$&gt;</span> <span style="color: #ECBE7B;">Parser</span> a <span style="color: #dcaeea;">&lt;*&gt;</span> <span style="color: #ECBE7B;">Parser</span> b<span style="color: #c678dd;">)</span>
+  <span style="color: #ECBE7B;">Parser</span> a <span style="color: #dcaeea;">*&gt;</span> <span style="color: #ECBE7B;">Parser</span> b <span style="color: #dcaeea;">=</span>
+    snd <span style="color: #dcaeea;">&lt;$&gt;</span> <span style="color: #c678dd;">(</span><span style="color: #98be65;">(</span><span style="color: #ECBE7B;">,</span><span style="color: #98be65;">)</span> <span style="color: #dcaeea;">&lt;$&gt;</span> <span style="color: #ECBE7B;">Parser</span> a <span style="color: #dcaeea;">&lt;*&gt;</span> <span style="color: #ECBE7B;">Parser</span> b<span style="color: #c678dd;">)</span>
+<span style="color: #ECBE7B;">:</span><span style="color: #51afef;">}</span>
 
-<span style="color: #ef2929;">runParser</span> <span style="color: #cc0000; font-weight: bold;">(</span><span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">,</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;$&gt;</span> charP <span style="color: #ff1f8b;">'h'</span> <span style="color: #ff8700;">&lt;*&gt;</span> charP <span style="color: #ff1f8b;">'e'</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #ff1f8b;">"hello"</span>
+<span style="color: #c678dd;">runParser</span> <span style="color: #51afef;">(</span><span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">,</span><span style="color: #c678dd;">)</span> <span style="color: #dcaeea;">&lt;$&gt;</span> charP <span style="color: #98be65;">'h'</span> <span style="color: #dcaeea;">&lt;*&gt;</span> charP <span style="color: #98be65;">'e'</span><span style="color: #51afef;">)</span> <span style="color: #98be65;">"hello"</span>
 </pre>
 </div>
 
 <pre class="example">
-Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just ("llo",('h','e'))
+Prelude Data.Char&gt;
+&lt;interactive&gt;:48:1-9: error:
+    Variable not in scope: runParser :: f0 (a0, a1) -&gt; [Char] -&gt; t
+
+&lt;interactive&gt;:48:20-24: error:
+    Variable not in scope: charP :: Char -&gt; f0 a0
+
+&lt;interactive&gt;:48:34-38: error:
+    Variable not in scope: charP :: Char -&gt; f0 a1
 </pre>
 
 
@@ -269,17 +285,21 @@ Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just ("llo",('h','e'))
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
-<span style="color: #ef2929;">abcP</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #18b2b2;">String</span>
-<span style="color: #ef2929;">abcP</span> <span style="color: #ff8700;">=</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">:</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;$&gt;</span> charP <span style="color: #ff1f8b;">'a'</span> <span style="color: #ff8700;">&lt;*&gt;</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #18b2b2;">:</span><span style="color: #ff4ea3; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;$&gt;</span> charP <span style="color: #ff1f8b;">'b'</span><span style="color: #00af00; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;*&gt;</span> <span style="color: #00af00; font-weight: bold;">(</span><span style="color: #ff4ea3; font-weight: bold;">(</span><span style="color: #00d7af; font-weight: bold;">(</span><span style="color: #18b2b2;">:</span><span style="color: #00d7af; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;$&gt;</span> charP <span style="color: #ff1f8b;">'c'</span><span style="color: #ff4ea3; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;*&gt;</span> pure <span style="color: #ff4ea3; font-weight: bold;">[]</span><span style="color: #00af00; font-weight: bold;">)</span><span style="color: #1f5bff; font-weight: bold;">)</span>
-<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+<pre class="src src-haskell"><span style="color: #ECBE7B;">:</span><span style="color: #51afef;">{</span>
+<span style="color: #c678dd;">abcP</span> <span style="color: #dcaeea;">::</span> <span style="color: #ECBE7B;">Parser</span> <span style="color: #ECBE7B;">String</span>
+<span style="color: #c678dd;">abcP</span> <span style="color: #dcaeea;">=</span> <span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">:</span><span style="color: #c678dd;">)</span> <span style="color: #dcaeea;">&lt;$&gt;</span> charP <span style="color: #98be65;">'a'</span> <span style="color: #dcaeea;">&lt;*&gt;</span> <span style="color: #c678dd;">(</span><span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span><span style="color: #ECBE7B;">:</span><span style="color: #a9a1e1;">)</span> <span style="color: #dcaeea;">&lt;$&gt;</span> charP <span style="color: #98be65;">'b'</span><span style="color: #98be65;">)</span> <span style="color: #dcaeea;">&lt;*&gt;</span> <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span><span style="color: #4db5bd;">(</span><span style="color: #ECBE7B;">:</span><span style="color: #4db5bd;">)</span> <span style="color: #dcaeea;">&lt;$&gt;</span> charP <span style="color: #98be65;">'c'</span><span style="color: #a9a1e1;">)</span> <span style="color: #dcaeea;">&lt;*&gt;</span> pure <span style="color: #a9a1e1;">[]</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>
+<span style="color: #ECBE7B;">:</span><span style="color: #51afef;">}</span>
 
-<span style="color: #ef2929;">runParser</span> abcP <span style="color: #ff1f8b;">"abcdef"</span>
+<span style="color: #c678dd;">runParser</span> abcP <span style="color: #98be65;">"abcdef"</span>
 </pre>
 </div>
 
 <pre class="example">
-Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just ("def","abc")
+Prelude Data.Char&gt;
+&lt;interactive&gt;:55:1-9: error:
+    Variable not in scope: runParser :: t0 -&gt; [Char] -&gt; t
+
+&lt;interactive&gt;:55:11-14: error: Variable not in scope: abcP
 </pre>
 
 
@@ -290,18 +310,23 @@ Amazing! 我们成功使用 <code>&lt;$&gt;</code> 和 <code>&lt;*&gt;</code> �
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
-<span style="color: #ef2929;">sequenceA</span> <span style="color: #ff8700;">::</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Applicative</span> f<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">=&gt;</span> <span style="color: #1f5bff; font-weight: bold;">[</span>f a<span style="color: #1f5bff; font-weight: bold;">]</span> <span style="color: #ff8700;">-&gt;</span> f <span style="color: #1f5bff; font-weight: bold;">[</span>a<span style="color: #1f5bff; font-weight: bold;">]</span>
-<span style="color: #ef2929;">sequenceA</span> <span style="color: #1f5bff; font-weight: bold;">(</span>f <span style="color: #18b2b2;">:</span> fs<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">=</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">:</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;$&gt;</span> f <span style="color: #ff8700;">&lt;*&gt;</span> sequenceA fs
-<span style="color: #ef2929;">sequenceA</span> <span style="color: #00af00;">_</span>        <span style="color: #ff8700;">=</span> pure <span style="color: #1f5bff; font-weight: bold;">[]</span>
-<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+<pre class="src src-haskell"><span style="color: #ECBE7B;">:</span><span style="color: #51afef;">{</span>
+<span style="color: #c678dd;">sequenceA</span> <span style="color: #dcaeea;">::</span> <span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">Applicative</span> f<span style="color: #c678dd;">)</span> <span style="color: #dcaeea;">=&gt;</span> <span style="color: #c678dd;">[</span>f a<span style="color: #c678dd;">]</span> <span style="color: #dcaeea;">-&gt;</span> f <span style="color: #c678dd;">[</span>a<span style="color: #c678dd;">]</span>
+<span style="color: #c678dd;">sequenceA</span> <span style="color: #c678dd;">(</span>f <span style="color: #ECBE7B;">:</span> fs<span style="color: #c678dd;">)</span> <span style="color: #dcaeea;">=</span> <span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">:</span><span style="color: #c678dd;">)</span> <span style="color: #dcaeea;">&lt;$&gt;</span> f <span style="color: #dcaeea;">&lt;*&gt;</span> sequenceA fs
+<span style="color: #c678dd;">sequenceA</span> <span style="color: #51afef;">_</span>        <span style="color: #dcaeea;">=</span> pure <span style="color: #c678dd;">[]</span>
+<span style="color: #ECBE7B;">:</span><span style="color: #51afef;">}</span>
 
-<span style="color: #ef2929;">runParser</span> <span style="color: #cc0000; font-weight: bold;">(</span>sequenceA <span style="color: #ff8700;">$</span> charP <span style="color: #ff8700;">&lt;$&gt;</span> <span style="color: #ff1f8b;">"hello"</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #ff1f8b;">"hello, world!"</span>
+<span style="color: #c678dd;">runParser</span> <span style="color: #51afef;">(</span>sequenceA <span style="color: #dcaeea;">$</span> charP <span style="color: #dcaeea;">&lt;$&gt;</span> <span style="color: #98be65;">"hello"</span><span style="color: #51afef;">)</span> <span style="color: #98be65;">"hello, world!"</span>
 </pre>
 </div>
 
 <pre class="example">
-Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just (", world!","hello")
+Prelude Data.Char&gt;
+&lt;interactive&gt;:63:1-9: error:
+    Variable not in scope: runParser :: f0 [a0] -&gt; [Char] -&gt; t
+
+&lt;interactive&gt;:63:24-28: error:
+    Variable not in scope: charP :: Char -&gt; f0 a0
 </pre>
 
 
@@ -310,17 +335,22 @@ Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just (", world!","hello")
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
-<span style="color: #ef2929;">stringP</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">String</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #18b2b2;">String</span>
-<span style="color: #ef2929;">stringP</span> s <span style="color: #ff8700;">=</span> sequenceA <span style="color: #ff8700;">$</span> charP <span style="color: #ff8700;">&lt;$&gt;</span> s
-<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+<pre class="src src-haskell"><span style="color: #ECBE7B;">:</span><span style="color: #51afef;">{</span>
+<span style="color: #c678dd;">stringP</span> <span style="color: #dcaeea;">::</span> <span style="color: #ECBE7B;">String</span> <span style="color: #dcaeea;">-&gt;</span> <span style="color: #ECBE7B;">Parser</span> <span style="color: #ECBE7B;">String</span>
+<span style="color: #c678dd;">stringP</span> s <span style="color: #dcaeea;">=</span> sequenceA <span style="color: #dcaeea;">$</span> charP <span style="color: #dcaeea;">&lt;$&gt;</span> s
+<span style="color: #ECBE7B;">:</span><span style="color: #51afef;">}</span>
 
-<span style="color: #ef2929;">runParser</span> <span style="color: #cc0000; font-weight: bold;">(</span>stringP <span style="color: #ff1f8b;">"hello"</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #ff1f8b;">"hello, world!"</span>
+<span style="color: #c678dd;">runParser</span> <span style="color: #51afef;">(</span>stringP <span style="color: #98be65;">"hello"</span><span style="color: #51afef;">)</span> <span style="color: #98be65;">"hello, world!"</span>
 </pre>
 </div>
 
 <pre class="example">
-Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just (", world!","hello")
+Prelude Data.Char&gt;
+&lt;interactive&gt;:70:1-9: error:
+    Variable not in scope: runParser :: t0 -&gt; [Char] -&gt; t
+
+&lt;interactive&gt;:70:12-18: error:
+    Variable not in scope: stringP :: [Char] -&gt; t0
 </pre>
 </div>
 </div>
@@ -334,17 +364,21 @@ JSON 中使用 <code>null</code> 表示一个 <code>JsonNull</code> 类型的对
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
-<span style="color: #ef2929;">jsonNull</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #18b2b2;">JsonValue</span>
-<span style="color: #ef2929;">jsonNull</span> <span style="color: #ff8700;">=</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #ff8700;">\</span><span style="color: #00af00;">_</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">JsonNull</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;$&gt;</span> stringP <span style="color: #ff1f8b;">"null"</span>
-<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+<pre class="src src-haskell"><span style="color: #ECBE7B;">:</span><span style="color: #51afef;">{</span>
+<span style="color: #c678dd;">jsonNull</span> <span style="color: #dcaeea;">::</span> <span style="color: #ECBE7B;">Parser</span> <span style="color: #ECBE7B;">JsonValue</span>
+<span style="color: #c678dd;">jsonNull</span> <span style="color: #dcaeea;">=</span> <span style="color: #c678dd;">(</span><span style="color: #dcaeea;">\</span><span style="color: #51afef;">_</span> <span style="color: #dcaeea;">-&gt;</span> <span style="color: #ECBE7B;">JsonNull</span><span style="color: #c678dd;">)</span> <span style="color: #dcaeea;">&lt;$&gt;</span> stringP <span style="color: #98be65;">"null"</span>
+<span style="color: #ECBE7B;">:</span><span style="color: #51afef;">}</span>
 
-<span style="color: #ef2929;">runParser</span> jsonNull <span style="color: #ff1f8b;">"null"</span>
+<span style="color: #c678dd;">runParser</span> jsonNull <span style="color: #98be65;">"null"</span>
 </pre>
 </div>
 
 <pre class="example">
-Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just ("",JsonNull)
+Prelude Data.Char&gt;
+&lt;interactive&gt;:77:1-9: error:
+    Variable not in scope: runParser :: t0 -&gt; [Char] -&gt; t
+
+&lt;interactive&gt;:77:11-18: error: Variable not in scope: jsonNull
 </pre>
 </div>
 </div>
@@ -365,14 +399,14 @@ JsonBool 类型构造器对应的值有 <code>JsonBool True</code> 和 <code>Jso
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #00af00;">import</span> <span style="color: #18b2b2;">Control.Applicative</span>
+<pre class="src src-haskell"><span style="color: #51afef;">import</span> <span style="color: #ECBE7B;">Control.Applicative</span>
 
-<span style="color: #18b2b2;">Nothing</span> <span style="color: #ef2929;">&lt;|&gt;</span> <span style="color: #18b2b2;">Just</span> 4 <span style="color: #ff8700;">&lt;|&gt;</span> <span style="color: #18b2b2;">Just</span> 5
+<span style="color: #ECBE7B;">Nothing</span> <span style="color: #c678dd;">&lt;|&gt;</span> <span style="color: #ECBE7B;">Just</span> 4 <span style="color: #dcaeea;">&lt;|&gt;</span> <span style="color: #ECBE7B;">Just</span> 5
 </pre>
 </div>
 
 <pre class="example">
-Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just 4
+Prelude Data.Char Control.Applicative&gt; Just 4
 </pre>
 
 
@@ -381,20 +415,28 @@ Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just 4
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
-<span style="color: #00af00;">instance</span> <span style="color: #18b2b2;">Alternative</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #00af00;">where</span>
-  <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Parser</span> p1<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;|&gt;</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Parser</span> p2<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #ff8700;">$</span> <span style="color: #ff8700;">\</span>input <span style="color: #ff8700;">-&gt;</span>
-    p1 input <span style="color: #ff8700;">&lt;|&gt;</span> p2 input
-  empty <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #ff8700;">$</span> const <span style="color: #18b2b2;">Nothing</span>
-<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+<pre class="src src-haskell"><span style="color: #ECBE7B;">:</span><span style="color: #51afef;">{</span>
+<span style="color: #51afef;">instance</span> <span style="color: #ECBE7B;">Alternative</span> <span style="color: #ECBE7B;">Parser</span> <span style="color: #51afef;">where</span>
+  <span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">Parser</span> p1<span style="color: #c678dd;">)</span> <span style="color: #dcaeea;">&lt;|&gt;</span> <span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">Parser</span> p2<span style="color: #c678dd;">)</span> <span style="color: #dcaeea;">=</span> <span style="color: #ECBE7B;">Parser</span> <span style="color: #dcaeea;">$</span> <span style="color: #dcaeea;">\</span>input <span style="color: #dcaeea;">-&gt;</span>
+    p1 input <span style="color: #dcaeea;">&lt;|&gt;</span> p2 input
+  empty <span style="color: #dcaeea;">=</span> <span style="color: #ECBE7B;">Parser</span> <span style="color: #dcaeea;">$</span> const <span style="color: #ECBE7B;">Nothing</span>
+<span style="color: #ECBE7B;">:</span><span style="color: #51afef;">}</span>
 
-<span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">&#20351;&#29992; &lt;|&gt; &#21305;&#37197; true &#25110; false</span>
-<span style="color: #ef2929;">runParser</span> <span style="color: #cc0000; font-weight: bold;">(</span>stringP <span style="color: #ff1f8b;">"true"</span> <span style="color: #ff8700;">&lt;|&gt;</span> stringP <span style="color: #ff1f8b;">"false"</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #ff1f8b;">"false"</span>
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">&#20351;&#29992; &lt;|&gt; &#21305;&#37197; true &#25110; false</span>
+<span style="color: #c678dd;">runParser</span> <span style="color: #51afef;">(</span>stringP <span style="color: #98be65;">"true"</span> <span style="color: #dcaeea;">&lt;|&gt;</span> stringP <span style="color: #98be65;">"false"</span><span style="color: #51afef;">)</span> <span style="color: #98be65;">"false"</span>
 </pre>
 </div>
 
 <pre class="example">
-Prelude Data.Char Control.Applicative GHC.Unicode&gt; Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just ("","false")
+Prelude Data.Char Control.Applicative&gt; Prelude Data.Char Control.Applicative&gt;
+&lt;interactive&gt;:91:1-9: error:
+    Variable not in scope: runParser :: f0 a0 -&gt; [Char] -&gt; t
+
+&lt;interactive&gt;:91:12-18: error:
+    Variable not in scope: stringP :: [Char] -&gt; f0 a0
+
+&lt;interactive&gt;:91:31-37: error:
+    Variable not in scope: stringP :: [Char] -&gt; f0 a0
 </pre>
 
 
@@ -403,21 +445,25 @@ JsonBool 对应的解析器构造器可定义为
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
-<span style="color: #ef2929;">jsonBool</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #18b2b2;">JsonValue</span>
-<span style="color: #ef2929;">jsonBool</span> <span style="color: #ff8700;">=</span> construct <span style="color: #ff8700;">&lt;$&gt;</span> <span style="color: #1f5bff; font-weight: bold;">(</span>stringP <span style="color: #ff1f8b;">"true"</span> <span style="color: #ff8700;">&lt;|&gt;</span> stringP <span style="color: #ff1f8b;">"false"</span><span style="color: #1f5bff; font-weight: bold;">)</span>
-  <span style="color: #00af00;">where</span>
-    construct <span style="color: #ff1f8b;">"true"</span> <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">JsonBool</span> <span style="color: #18b2b2;">True</span>
-    construct <span style="color: #ff1f8b;">"false"</span> <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">JsonBool</span> <span style="color: #18b2b2;">False</span>
-    construct <span style="color: #00af00;">_</span> <span style="color: #ff8700;">=</span> undefined
-<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+<pre class="src src-haskell"><span style="color: #ECBE7B;">:</span><span style="color: #51afef;">{</span>
+<span style="color: #c678dd;">jsonBool</span> <span style="color: #dcaeea;">::</span> <span style="color: #ECBE7B;">Parser</span> <span style="color: #ECBE7B;">JsonValue</span>
+<span style="color: #c678dd;">jsonBool</span> <span style="color: #dcaeea;">=</span> construct <span style="color: #dcaeea;">&lt;$&gt;</span> <span style="color: #c678dd;">(</span>stringP <span style="color: #98be65;">"true"</span> <span style="color: #dcaeea;">&lt;|&gt;</span> stringP <span style="color: #98be65;">"false"</span><span style="color: #c678dd;">)</span>
+  <span style="color: #51afef;">where</span>
+    construct <span style="color: #98be65;">"true"</span> <span style="color: #dcaeea;">=</span> <span style="color: #ECBE7B;">JsonBool</span> <span style="color: #ECBE7B;">True</span>
+    construct <span style="color: #98be65;">"false"</span> <span style="color: #dcaeea;">=</span> <span style="color: #ECBE7B;">JsonBool</span> <span style="color: #ECBE7B;">False</span>
+    construct <span style="color: #51afef;">_</span> <span style="color: #dcaeea;">=</span> undefined
+<span style="color: #ECBE7B;">:</span><span style="color: #51afef;">}</span>
 
-<span style="color: #ef2929;">runParser</span> jsonBool <span style="color: #ff1f8b;">"false, something"</span>
+<span style="color: #c678dd;">runParser</span> jsonBool <span style="color: #98be65;">"false, something"</span>
 </pre>
 </div>
 
 <pre class="example">
-Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just (", something",JsonBool False)
+Prelude Data.Char Control.Applicative&gt;
+&lt;interactive&gt;:102:1-9: error:
+    Variable not in scope: runParser :: t0 -&gt; [Char] -&gt; t
+
+&lt;interactive&gt;:102:11-18: error: Variable not in scope: jsonBool
 </pre>
 </div>
 </div>
@@ -431,21 +477,27 @@ Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just (", something",JsonBo
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #00af00;">import</span> <span style="color: #18b2b2;">GHC.Unicode</span> <span style="color: #cc0000; font-weight: bold;">(</span>isDigit<span style="color: #cc0000; font-weight: bold;">)</span>
+<pre class="src src-haskell"><span style="color: #51afef;">import</span> <span style="color: #ECBE7B;">GHC.Unicode</span> <span style="color: #51afef;">(</span>isDigit<span style="color: #51afef;">)</span>
 
-<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
-<span style="color: #ef2929;">spanP</span> <span style="color: #ff8700;">::</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Char</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Bool</span><span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #18b2b2;">String</span>
-<span style="color: #ef2929;">spanP</span> p <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #ff8700;">$</span> <span style="color: #ff8700;">\</span>input <span style="color: #ff8700;">-&gt;</span>
-  <span style="color: #00af00;">let</span> <span style="color: #1f5bff; font-weight: bold;">(</span>token, rest<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">=</span> span p input
-   <span style="color: #00af00;">in</span> <span style="color: #18b2b2;">Just</span> <span style="color: #1f5bff; font-weight: bold;">(</span>rest, token<span style="color: #1f5bff; font-weight: bold;">)</span>
-<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+<span style="color: #ECBE7B;">:</span><span style="color: #51afef;">{</span>
+<span style="color: #c678dd;">spanP</span> <span style="color: #dcaeea;">::</span> <span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">Char</span> <span style="color: #dcaeea;">-&gt;</span> <span style="color: #ECBE7B;">Bool</span><span style="color: #c678dd;">)</span> <span style="color: #dcaeea;">-&gt;</span> <span style="color: #ECBE7B;">Parser</span> <span style="color: #ECBE7B;">String</span>
+<span style="color: #c678dd;">spanP</span> p <span style="color: #dcaeea;">=</span> <span style="color: #ECBE7B;">Parser</span> <span style="color: #dcaeea;">$</span> <span style="color: #dcaeea;">\</span>input <span style="color: #dcaeea;">-&gt;</span>
+  <span style="color: #51afef;">let</span> <span style="color: #c678dd;">(</span>token, rest<span style="color: #c678dd;">)</span> <span style="color: #dcaeea;">=</span> span p input
+   <span style="color: #51afef;">in</span> <span style="color: #ECBE7B;">Just</span> <span style="color: #c678dd;">(</span>rest, token<span style="color: #c678dd;">)</span>
+<span style="color: #ECBE7B;">:</span><span style="color: #51afef;">}</span>
 
-<span style="color: #ef2929;">runParser</span> <span style="color: #cc0000; font-weight: bold;">(</span>spanP isDigit<span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #ff1f8b;">"123abc"</span>
+<span style="color: #c678dd;">runParser</span> <span style="color: #51afef;">(</span>spanP isDigit<span style="color: #51afef;">)</span> <span style="color: #98be65;">"123abc"</span>
 </pre>
 </div>
 
 <pre class="example">
-Prelude Data.Char Control.Applicative GHC.Unicode&gt; Prelude Data.Char Control.Applicative GHC.Unicode| Prelude Data.Char Control.Applicative GHC.Unicode| Prelude Data.Char Control.Applicative GHC.Unicode| Prelude Data.Char Control.Applicative GHC.Unicode| Prelude Data.Char Control.Applicative GHC.Unicode| Prelude Data.Char Control.Applicative GHC.Unicode&gt; Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just ("abc","123")
+Prelude Data.Char Control.Applicative GHC.Unicode&gt;
+&lt;interactive&gt;:113:1-9: error:
+    Variable not in scope: runParser :: t0 -&gt; [Char] -&gt; t
+
+&lt;interactive&gt;:113:12-16: error:
+    • Variable not in scope: spanP :: (Char -&gt; Bool) -&gt; t0
+    • Perhaps you meant ‘span’ (imported from Prelude)
 </pre>
 
 
@@ -455,17 +507,21 @@ Prelude Data.Char Control.Applicative GHC.Unicode&gt; Prelude Data.Char Control.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
-<span style="color: #ef2929;">jsonNumber</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #18b2b2;">JsonValue</span>
-<span style="color: #ef2929;">jsonNumber</span> <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">JsonNumber</span> <span style="color: #ff8700;">.</span> read <span style="color: #ff8700;">&lt;$&gt;</span> spanP isDigit
-<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+<pre class="src src-haskell"><span style="color: #ECBE7B;">:</span><span style="color: #51afef;">{</span>
+<span style="color: #c678dd;">jsonNumber</span> <span style="color: #dcaeea;">::</span> <span style="color: #ECBE7B;">Parser</span> <span style="color: #ECBE7B;">JsonValue</span>
+<span style="color: #c678dd;">jsonNumber</span> <span style="color: #dcaeea;">=</span> <span style="color: #ECBE7B;">JsonNumber</span> <span style="color: #dcaeea;">.</span> read <span style="color: #dcaeea;">&lt;$&gt;</span> spanP isDigit
+<span style="color: #ECBE7B;">:</span><span style="color: #51afef;">}</span>
 
-<span style="color: #ef2929;">runParser</span> jsonNumber <span style="color: #ff1f8b;">"123abc"</span>
+<span style="color: #c678dd;">runParser</span> jsonNumber <span style="color: #98be65;">"123abc"</span>
 </pre>
 </div>
 
 <pre class="example">
-Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just ("abc",JsonNumber 123)
+Prelude Data.Char Control.Applicative GHC.Unicode&gt;
+&lt;interactive&gt;:120:1-9: error:
+    Variable not in scope: runParser :: t0 -&gt; [Char] -&gt; t
+
+&lt;interactive&gt;:120:11-20: error: Variable not in scope: jsonNumber
 </pre>
 
 
@@ -474,12 +530,15 @@ Prelude Data.Char Control.Applicative GHC.Unicode&gt; Just ("abc",JsonNumber 123
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #ef2929;">runParser</span> jsonNumber <span style="color: #ff1f8b;">"hello"</span>
+<pre class="src src-haskell"><span style="color: #c678dd;">runParser</span> jsonNumber <span style="color: #98be65;">"hello"</span>
 </pre>
 </div>
 
 <pre class="example">
-Just ("hello",JsonNumber *** Exception: Prelude.read: no parse
+&lt;interactive&gt;:122:1-9: error:
+    Variable not in scope: runParser :: t0 -&gt; [Char] -&gt; t
+
+&lt;interactive&gt;:122:11-20: error: Variable not in scope: jsonNumber
 </pre>
 
 
@@ -489,21 +548,29 @@ Parser 的结果进行判空
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
-<span style="color: #ef2929;">notNullP</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #1f5bff; font-weight: bold;">[</span>a<span style="color: #1f5bff; font-weight: bold;">]</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #1f5bff; font-weight: bold;">[</span>a<span style="color: #1f5bff; font-weight: bold;">]</span>
-<span style="color: #ef2929;">notNullP</span> <span style="color: #1f5bff; font-weight: bold;">(</span><span style="color: #18b2b2;">Parser</span> p<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #ff8700;">$</span> <span style="color: #ff8700;">\</span>input <span style="color: #ff8700;">-&gt;</span> <span style="color: #00af00;">do</span>
-  <span style="color: #1f5bff; font-weight: bold;">(</span>input', x<span style="color: #1f5bff; font-weight: bold;">)</span> <span style="color: #ff8700;">&lt;-</span> p input
-  <span style="color: #00af00;">case</span> x <span style="color: #00af00;">of</span>
-    <span style="color: #1f5bff; font-weight: bold;">[]</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Nothing</span>
-    <span style="color: #00af00;">_</span> <span style="color: #ff8700;">-&gt;</span> return <span style="color: #1f5bff; font-weight: bold;">(</span>input', x<span style="color: #1f5bff; font-weight: bold;">)</span>
-<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+<pre class="src src-haskell"><span style="color: #ECBE7B;">:</span><span style="color: #51afef;">{</span>
+<span style="color: #c678dd;">notNullP</span> <span style="color: #dcaeea;">::</span> <span style="color: #ECBE7B;">Parser</span> <span style="color: #c678dd;">[</span>a<span style="color: #c678dd;">]</span> <span style="color: #dcaeea;">-&gt;</span> <span style="color: #ECBE7B;">Parser</span> <span style="color: #c678dd;">[</span>a<span style="color: #c678dd;">]</span>
+<span style="color: #c678dd;">notNullP</span> <span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">Parser</span> p<span style="color: #c678dd;">)</span> <span style="color: #dcaeea;">=</span> <span style="color: #ECBE7B;">Parser</span> <span style="color: #dcaeea;">$</span> <span style="color: #dcaeea;">\</span>input <span style="color: #dcaeea;">-&gt;</span> <span style="color: #51afef;">do</span>
+  <span style="color: #c678dd;">(</span>input', x<span style="color: #c678dd;">)</span> <span style="color: #dcaeea;">&lt;-</span> p input
+  <span style="color: #51afef;">case</span> x <span style="color: #51afef;">of</span>
+    <span style="color: #c678dd;">[]</span> <span style="color: #dcaeea;">-&gt;</span> <span style="color: #ECBE7B;">Nothing</span>
+    <span style="color: #51afef;">_</span> <span style="color: #dcaeea;">-&gt;</span> return <span style="color: #c678dd;">(</span>input', x<span style="color: #c678dd;">)</span>
+<span style="color: #ECBE7B;">:</span><span style="color: #51afef;">}</span>
 
-<span style="color: #ef2929;">runParser</span> <span style="color: #cc0000; font-weight: bold;">(</span>notNullP <span style="color: #ff8700;">$</span> stringP <span style="color: #ff1f8b;">""</span><span style="color: #cc0000; font-weight: bold;">)</span> <span style="color: #ff1f8b;">"hello"</span>
+<span style="color: #c678dd;">runParser</span> <span style="color: #51afef;">(</span>notNullP <span style="color: #dcaeea;">$</span> stringP <span style="color: #98be65;">""</span><span style="color: #51afef;">)</span> <span style="color: #98be65;">"hello"</span>
 </pre>
 </div>
 
 <pre class="example">
-Prelude Data.Char Control.Applicative GHC.Unicode&gt; Nothing
+Prelude Data.Char Control.Applicative GHC.Unicode&gt;
+&lt;interactive&gt;:133:1-9: error:
+    Variable not in scope: runParser :: t0 -&gt; [Char] -&gt; t
+
+&lt;interactive&gt;:133:12-19: error:
+    Variable not in scope: notNullP :: t1 -&gt; t0
+
+&lt;interactive&gt;:133:23-29: error:
+    Variable not in scope: stringP :: [Char] -&gt; t1
 </pre>
 
 
@@ -512,17 +579,21 @@ Prelude Data.Char Control.Applicative GHC.Unicode&gt; Nothing
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">{</span>
-<span style="color: #ef2929;">jsonNumber</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Parser</span> <span style="color: #18b2b2;">JsonValue</span>
-<span style="color: #ef2929;">jsonNumber</span> <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">JsonNumber</span> <span style="color: #ff8700;">.</span> read <span style="color: #ff8700;">&lt;$&gt;</span> notNullP <span style="color: #1f5bff; font-weight: bold;">(</span>spanP isDigit<span style="color: #1f5bff; font-weight: bold;">)</span>
-<span style="color: #18b2b2;">:</span><span style="color: #cc0000; font-weight: bold;">}</span>
+<pre class="src src-haskell"><span style="color: #ECBE7B;">:</span><span style="color: #51afef;">{</span>
+<span style="color: #c678dd;">jsonNumber</span> <span style="color: #dcaeea;">::</span> <span style="color: #ECBE7B;">Parser</span> <span style="color: #ECBE7B;">JsonValue</span>
+<span style="color: #c678dd;">jsonNumber</span> <span style="color: #dcaeea;">=</span> <span style="color: #ECBE7B;">JsonNumber</span> <span style="color: #dcaeea;">.</span> read <span style="color: #dcaeea;">&lt;$&gt;</span> notNullP <span style="color: #c678dd;">(</span>spanP isDigit<span style="color: #c678dd;">)</span>
+<span style="color: #ECBE7B;">:</span><span style="color: #51afef;">}</span>
 
-<span style="color: #ef2929;">runParser</span> jsonNumber <span style="color: #ff1f8b;">"hello"</span>
+<span style="color: #c678dd;">runParser</span> jsonNumber <span style="color: #98be65;">"hello"</span>
 </pre>
 </div>
 
 <pre class="example">
-Prelude Data.Char Control.Applicative GHC.Unicode&gt; Nothing
+Prelude Data.Char Control.Applicative GHC.Unicode&gt;
+&lt;interactive&gt;:140:1-9: error:
+    Variable not in scope: runParser :: t0 -&gt; [Char] -&gt; t
+
+&lt;interactive&gt;:140:11-20: error: Variable not in scope: jsonNumber
 </pre>
 </div>
 </div>
@@ -533,7 +604,7 @@ Prelude Data.Char Control.Applicative GHC.Unicode&gt; Nothing
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2021-06-12 Sat 14:23></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</div>
-      <div id="built">Built: <2021-06-12 Sat 21:45></div>
+      <div id="built">Built: <2021-06-12 Sat 21:55></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
