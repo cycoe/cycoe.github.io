@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-31 Mon 18:29 -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2022-10-23 Sun 09:02 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>利用 Python 完成自动化群发邮件</title>
-<meta name="generator" content="Org mode">
-<meta name="author" content="Cycoe">
+<meta name="author" content="Cycoe" />
+<meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
 <script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
@@ -49,16 +49,16 @@
   <div id="caption"></div>
 </div>
 </div>
-<div id="content">
+<div id="content" class="content">
 <header>
 <h1 class="title">利用 Python 完成自动化群发邮件</h1>
-</header><nav id="table-of-contents">
+</header><nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org166d3b2">1. 生成通讯录</a></li>
-<li><a href="#orgd9c5483">2. 定义邮件内容</a></li>
-<li><a href="#org56642ca">3. 发送邮件</a></li>
+<li><a href="#org28d7483">1. 生成通讯录</a></li>
+<li><a href="#org4c70430">2. 定义邮件内容</a></li>
+<li><a href="#org0013490">3. 发送邮件</a></li>
 </ul>
 </div>
 </nav>
@@ -73,40 +73,40 @@
 Python 中已经实现了 <code>stmp</code> 的相关接口在 <code>smtplib</code> 模块中，邮件结构相关的接口在 <code>email</code> 模块中。
 </p>
 
-<div id="outline-container-org166d3b2" class="outline-2">
-<h2 id="org166d3b2"><span class="section-number-2">1</span> 生成通讯录</h2>
+<div id="outline-container-org28d7483" class="outline-2">
+<h2 id="org28d7483"><span class="section-number-2">1.</span> 生成通讯录</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 在批量发送邮件之前，一定要有一份结构化的通讯录，不管是用 list 也好，用 dict 存储也好。此处，我是使用 <code>xlrd</code> 模块从 Excel 表格中读取数据，并将其存储在 dict 中。对于邮件来说，收件人的名字可能会出现重名，但邮件地址应该是唯一的，因此选用邮件地址作为字典的键。
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #51afef;">def</span> <span style="color: #c678dd;">read_contacts</span><span style="color: #51afef;">(</span>contact_file<span style="color: #51afef;">)</span>:
-    <span style="color: #83898d;">""" &#35712;&#21462;&#32879;&#32363;&#20154;</span>
-<span style="color: #83898d;">    """</span>
-    <span style="color: #dcaeea;">contacts</span> = <span style="color: #51afef;">{}</span>
+<pre class="src src-python"><span style="color: #9d0006;">def</span> <span style="color: #b57614;">read_contacts</span>(contact_file):
+    <span style="color: #79740e;">""" &#35712;&#21462;&#32879;&#32363;&#20154;</span>
+<span style="color: #79740e;">    """</span>
+    <span style="color: #076678;">contacts</span> = {}
 
-    <span style="color: #dcaeea;">data</span> = xlrd.open_workbook<span style="color: #51afef;">(</span>contact_file<span style="color: #51afef;">)</span>
-    <span style="color: #dcaeea;">sheet</span> = data.sheet_by_index<span style="color: #51afef;">(</span>0<span style="color: #51afef;">)</span>
+    <span style="color: #076678;">data</span> = xlrd.open_workbook(contact_file)
+    <span style="color: #076678;">sheet</span> = data.sheet_by_index(0)
 
-    <span style="color: #51afef;">for</span> row <span style="color: #51afef;">in</span> <span style="color: #c678dd;">range</span><span style="color: #51afef;">(</span>sheet.nrows<span style="color: #51afef;">)</span>:
-        <span style="color: #dcaeea;">email</span> = sheet.cell<span style="color: #51afef;">(</span>row, 6<span style="color: #51afef;">)</span>.value.strip<span style="color: #51afef;">()</span>
-        <span style="color: #51afef;">if</span> email == <span style="color: #98be65;">''</span>:
-            <span style="color: #51afef;">continue</span>
+    <span style="color: #9d0006;">for</span> row <span style="color: #9d0006;">in</span> <span style="color: #af3a03;">range</span>(sheet.nrows):
+        <span style="color: #076678;">email</span> = sheet.cell(row, 6).value.strip()
+        <span style="color: #9d0006;">if</span> email == <span style="color: #79740e;">''</span>:
+            <span style="color: #9d0006;">continue</span>
 
-        <span style="color: #51afef;">if</span> email.find<span style="color: #51afef;">(</span><span style="color: #98be65;">'/'</span><span style="color: #51afef;">)</span>:
-            emails = email.split<span style="color: #51afef;">(</span><span style="color: #98be65;">'/'</span><span style="color: #51afef;">)</span>
-            <span style="color: #51afef;">for</span> email <span style="color: #51afef;">in</span> emails:
-                contacts<span style="color: #51afef;">[</span><span style="color: #dcaeea;">email</span><span style="color: #51afef;">]</span> = <span style="color: #51afef;">{}</span>
-                contacts<span style="color: #51afef;">[</span>email<span style="color: #51afef;">][</span><span style="color: #dcaeea;">ZH</span><span style="color: #51afef;">]</span> = sheet.cell<span style="color: #51afef;">(</span>row, 3<span style="color: #51afef;">)</span>.value.strip<span style="color: #51afef;">()</span>
-                contacts<span style="color: #51afef;">[</span>email<span style="color: #51afef;">][</span><span style="color: #dcaeea;">EN</span><span style="color: #51afef;">]</span> = sheet.cell<span style="color: #51afef;">(</span>row, 1<span style="color: #51afef;">)</span>.value.strip<span style="color: #51afef;">()</span>
-        <span style="color: #51afef;">else</span>:
-            contacts<span style="color: #51afef;">[</span><span style="color: #dcaeea;">email</span><span style="color: #51afef;">]</span> = <span style="color: #51afef;">{}</span>
-            contacts<span style="color: #51afef;">[</span>email<span style="color: #51afef;">][</span><span style="color: #dcaeea;">ZH</span><span style="color: #51afef;">]</span> = sheet.cell<span style="color: #51afef;">(</span>row, 3<span style="color: #51afef;">)</span>.value.strip<span style="color: #51afef;">()</span>
-            contacts<span style="color: #51afef;">[</span>email<span style="color: #51afef;">][</span><span style="color: #dcaeea;">EN</span><span style="color: #51afef;">]</span> = sheet.cell<span style="color: #51afef;">(</span>row, 1<span style="color: #51afef;">)</span>.value.strip<span style="color: #51afef;">()</span>
+        <span style="color: #9d0006;">if</span> email.find(<span style="color: #79740e;">'/'</span>):
+            emails = email.split(<span style="color: #79740e;">'/'</span>)
+            <span style="color: #9d0006;">for</span> email <span style="color: #9d0006;">in</span> emails:
+                contacts[<span style="color: #076678;">email</span>] = {}
+                contacts[email][<span style="color: #076678;">ZH</span>] = sheet.cell(row, 3).value.strip()
+                contacts[email][<span style="color: #076678;">EN</span>] = sheet.cell(row, 1).value.strip()
+        <span style="color: #9d0006;">else</span>:
+            contacts[<span style="color: #076678;">email</span>] = {}
+            contacts[email][<span style="color: #076678;">ZH</span>] = sheet.cell(row, 3).value.strip()
+            contacts[email][<span style="color: #076678;">EN</span>] = sheet.cell(row, 1).value.strip()
 
-    <span style="color: #51afef;">del</span> sheet
-    <span style="color: #51afef;">del</span> data
-    <span style="color: #51afef;">return</span> contacts
+    <span style="color: #9d0006;">del</span> sheet
+    <span style="color: #9d0006;">del</span> data
+    <span style="color: #9d0006;">return</span> contacts
 </pre>
 </div>
 <p>
@@ -114,105 +114,105 @@ Python 中已经实现了 <code>stmp</code> 的相关接口在 <code>smtplib</co
 </p>
 </div>
 </div>
-<div id="outline-container-orgd9c5483" class="outline-2">
-<h2 id="orgd9c5483"><span class="section-number-2">2</span> 定义邮件内容</h2>
+<div id="outline-container-org4c70430" class="outline-2">
+<h2 id="org4c70430"><span class="section-number-2">2.</span> 定义邮件内容</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 第一步是生成邮件对象，代码示例如下：
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #51afef;">from</span> email.header <span style="color: #51afef;">import</span> Header
-<span style="color: #51afef;">from</span> email.mime.multipart <span style="color: #51afef;">import</span> MIMEMultipart
-<span style="color: #51afef;">from</span> email.mime.image <span style="color: #51afef;">import</span> MIMEImage
-<span style="color: #51afef;">from</span> email.utils <span style="color: #51afef;">import</span> formataddr
+<pre class="src src-python"><span style="color: #9d0006;">from</span> email.header <span style="color: #9d0006;">import</span> Header
+<span style="color: #9d0006;">from</span> email.mime.multipart <span style="color: #9d0006;">import</span> MIMEMultipart
+<span style="color: #9d0006;">from</span> email.mime.image <span style="color: #9d0006;">import</span> MIMEImage
+<span style="color: #9d0006;">from</span> email.utils <span style="color: #9d0006;">import</span> formataddr
 
-<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#23450;&#20041;&#37038;&#20214;&#30340;&#20027;&#39064;&#19982;&#20869;&#23481;</span>
-<span style="color: #dcaeea;">SUBJECT</span> = <span style="color: #98be65;">'My best friend {:name}, I sincerely invite you to participate our anniversary activity'</span>
-<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#37038;&#20214;&#20869;&#23481;&#25903;&#25345; HTML</span>
-<span style="color: #dcaeea;">CONTENT</span> = <span style="color: #98be65;">"""</span>
-<span style="color: #98be65;">My best friend {:name},</span>
-<span style="color: #98be65;">&lt;p&gt;I sincerely invite you to participate our anniversary activity.&lt;/p&gt;</span>
-<span style="color: #98be65;">&lt;p&gt;Here is our post.&lt;/p&gt;</span>
-<span style="color: #98be65;">&lt;div&gt;</span>
-<span style="color: #98be65;">&lt;div align="center"&gt;&lt;img src="cid:post"&gt;&lt;/div&gt;</span>
-<span style="color: #98be65;">"""</span>
+<span style="color: #a89984;"># </span><span style="color: #a89984;">&#23450;&#20041;&#37038;&#20214;&#30340;&#20027;&#39064;&#19982;&#20869;&#23481;</span>
+<span style="color: #076678;">SUBJECT</span> = <span style="color: #79740e;">'My best friend {:name}, I sincerely invite you to participate our anniversary activity'</span>
+<span style="color: #a89984;"># </span><span style="color: #a89984;">&#37038;&#20214;&#20869;&#23481;&#25903;&#25345; HTML</span>
+<span style="color: #076678;">CONTENT</span> = <span style="color: #79740e;">"""</span>
+<span style="color: #79740e;">My best friend {:name},</span>
+<span style="color: #79740e;">&lt;p&gt;I sincerely invite you to participate our anniversary activity.&lt;/p&gt;</span>
+<span style="color: #79740e;">&lt;p&gt;Here is our post.&lt;/p&gt;</span>
+<span style="color: #79740e;">&lt;div&gt;</span>
+<span style="color: #79740e;">&lt;div align="center"&gt;&lt;img src="cid:post"&gt;&lt;/div&gt;</span>
+<span style="color: #79740e;">"""</span>
 
-<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#21457;&#20214;&#20154;&#30340;&#20449;&#24687;</span>
-<span style="color: #dcaeea;">SENDER_NAME</span> = <span style="color: #98be65;">'Cycoe'</span>
-<span style="color: #dcaeea;">SENDER_ADDR</span> = <span style="color: #98be65;">'cycoe@163.com'</span>
+<span style="color: #a89984;"># </span><span style="color: #a89984;">&#21457;&#20214;&#20154;&#30340;&#20449;&#24687;</span>
+<span style="color: #076678;">SENDER_NAME</span> = <span style="color: #79740e;">'Cycoe'</span>
+<span style="color: #076678;">SENDER_ADDR</span> = <span style="color: #79740e;">'cycoe@163.com'</span>
 
-<span style="color: #dcaeea;">contacts</span> = read_contacts<span style="color: #51afef;">(</span>PATH_OF_CONTACTS<span style="color: #51afef;">)</span>
+<span style="color: #076678;">contacts</span> = read_contacts(PATH_OF_CONTACTS)
 
-<span style="color: #51afef;">for</span> email <span style="color: #51afef;">in</span> contacts.keys<span style="color: #51afef;">()</span>:
-    <span style="color: #dcaeea;">name</span> = contacts<span style="color: #51afef;">[</span>email<span style="color: #51afef;">][</span>EN<span style="color: #51afef;">]</span>
-    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#29983;&#25104;&#37038;&#20214;&#23545;&#35937;</span>
-    <span style="color: #dcaeea;">message</span> = MIMEMultipart<span style="color: #51afef;">()</span>
-    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#35774;&#32622;&#20027;&#39064;&#12289;&#21457;&#20449;&#20154;&#12289;&#25910;&#20449;&#20154;</span>
-    <span style="color: #dcaeea;">message</span><span style="color: #51afef;">[</span><span style="color: #98be65;">'Subject'</span><span style="color: #51afef;">]</span> = Header<span style="color: #51afef;">(</span>SUBJECT.<span style="color: #c678dd;">format</span><span style="color: #c678dd;">(</span>name<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
-    <span style="color: #dcaeea;">message</span><span style="color: #51afef;">[</span><span style="color: #98be65;">'From'</span><span style="color: #51afef;">]</span> = formataddr<span style="color: #51afef;">(</span><span style="color: #c678dd;">(</span>SENDER_NAME, SENDER_ADDR<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
-    <span style="color: #dcaeea;">message</span><span style="color: #51afef;">[</span><span style="color: #98be65;">'To'</span><span style="color: #51afef;">]</span> = formataddr<span style="color: #51afef;">(</span><span style="color: #c678dd;">(</span>name, email<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
-    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#20869;&#23481;&#26377;&#28857;&#29305;&#27530;&#65292;&#23545;&#20110; MIMEMultipart &#31867;&#22411;&#30340;&#37038;&#20214;&#65292;</span>
-    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#20869;&#23481;&#26159;&#20316;&#20026; attachment &#28155;&#21152;&#21040; message &#20013;</span>
-    <span style="color: #dcaeea;">content</span> = MIMEText<span style="color: #51afef;">(</span>CONTENT.<span style="color: #c678dd;">format</span><span style="color: #c678dd;">(</span>name<span style="color: #c678dd;">)</span>, _subtype=<span style="color: #98be65;">'html'</span>, _charset=<span style="color: #98be65;">'utf-8'</span><span style="color: #51afef;">)</span>
-    message.attach<span style="color: #51afef;">(</span>content<span style="color: #51afef;">)</span>
+<span style="color: #9d0006;">for</span> email <span style="color: #9d0006;">in</span> contacts.keys():
+    <span style="color: #076678;">name</span> = contacts[email][EN]
+    <span style="color: #a89984;"># </span><span style="color: #a89984;">&#29983;&#25104;&#37038;&#20214;&#23545;&#35937;</span>
+    <span style="color: #076678;">message</span> = MIMEMultipart()
+    <span style="color: #a89984;"># </span><span style="color: #a89984;">&#35774;&#32622;&#20027;&#39064;&#12289;&#21457;&#20449;&#20154;&#12289;&#25910;&#20449;&#20154;</span>
+    <span style="color: #076678;">message</span>[<span style="color: #79740e;">'Subject'</span>] = Header(SUBJECT.<span style="color: #af3a03;">format</span>(name))
+    <span style="color: #076678;">message</span>[<span style="color: #79740e;">'From'</span>] = formataddr((SENDER_NAME, SENDER_ADDR))
+    <span style="color: #076678;">message</span>[<span style="color: #79740e;">'To'</span>] = formataddr((name, email))
+    <span style="color: #a89984;"># </span><span style="color: #a89984;">&#20869;&#23481;&#26377;&#28857;&#29305;&#27530;&#65292;&#23545;&#20110; MIMEMultipart &#31867;&#22411;&#30340;&#37038;&#20214;&#65292;</span>
+    <span style="color: #a89984;"># </span><span style="color: #a89984;">&#20869;&#23481;&#26159;&#20316;&#20026; attachment &#28155;&#21152;&#21040; message &#20013;</span>
+    <span style="color: #076678;">content</span> = MIMEText(CONTENT.<span style="color: #af3a03;">format</span>(name), _subtype=<span style="color: #79740e;">'html'</span>, _charset=<span style="color: #79740e;">'utf-8'</span>)
+    message.attach(content)
 
-    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#21152;&#36733;&#38468;&#20214;&#65292;POST_PATH &#26159;&#38468;&#20214;&#22312;&#26412;&#26426;&#19978;&#30340;&#36335;&#24452;</span>
-    <span style="color: #51afef;">with</span> <span style="color: #c678dd;">open</span><span style="color: #51afef;">(</span>POST_PATH, <span style="color: #98be65;">'rb'</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">as</span> fp:
-        <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#27492;&#22788;&#30340; filename &#21442;&#25968;&#26159;&#38468;&#20214;&#22312;&#37038;&#20214;&#20013;&#26174;&#31034;&#30340;&#21517;&#23383;</span>
-        post = MIMEImage<span style="color: #51afef;">(</span>fp.read<span style="color: #c678dd;">()</span>, _subtype=<span style="color: #98be65;">'png'</span>, filename=<span style="color: #98be65;">'post.png'</span><span style="color: #51afef;">)</span>
-        post.add_header<span style="color: #51afef;">(</span><span style="color: #98be65;">'Content-Disposition'</span>, <span style="color: #98be65;">'attachment'</span>, filename=<span style="color: #98be65;">'post.png'</span><span style="color: #51afef;">)</span>
-        <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#35813;&#25991;&#20214;&#22836;&#38750;&#24120;&#37325;&#35201;&#65292;Content-ID &#19968;&#23450;&#35201;&#23545;&#24212;&#19978;&#38754;&#20869;&#23481;&#20013;&#30340; cid</span>
-        <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#36825;&#26679;&#22270;&#29255;&#23601;&#20250;&#34987;&#24341;&#29992;&#21040;&#27491;&#25991;&#20013;</span>
-        post.add_header<span style="color: #51afef;">(</span><span style="color: #98be65;">'Content-ID'</span>, <span style="color: #98be65;">'&lt;post&gt;'</span><span style="color: #51afef;">)</span>
-        message.attach<span style="color: #51afef;">(</span>post<span style="color: #51afef;">)</span>
+    <span style="color: #a89984;"># </span><span style="color: #a89984;">&#21152;&#36733;&#38468;&#20214;&#65292;POST_PATH &#26159;&#38468;&#20214;&#22312;&#26412;&#26426;&#19978;&#30340;&#36335;&#24452;</span>
+    <span style="color: #9d0006;">with</span> <span style="color: #af3a03;">open</span>(POST_PATH, <span style="color: #79740e;">'rb'</span>) <span style="color: #9d0006;">as</span> fp:
+        <span style="color: #a89984;"># </span><span style="color: #a89984;">&#27492;&#22788;&#30340; filename &#21442;&#25968;&#26159;&#38468;&#20214;&#22312;&#37038;&#20214;&#20013;&#26174;&#31034;&#30340;&#21517;&#23383;</span>
+        post = MIMEImage(fp.read(), _subtype=<span style="color: #79740e;">'png'</span>, filename=<span style="color: #79740e;">'post.png'</span>)
+        post.add_header(<span style="color: #79740e;">'Content-Disposition'</span>, <span style="color: #79740e;">'attachment'</span>, filename=<span style="color: #79740e;">'post.png'</span>)
+        <span style="color: #a89984;"># </span><span style="color: #a89984;">&#35813;&#25991;&#20214;&#22836;&#38750;&#24120;&#37325;&#35201;&#65292;Content-ID &#19968;&#23450;&#35201;&#23545;&#24212;&#19978;&#38754;&#20869;&#23481;&#20013;&#30340; cid</span>
+        <span style="color: #a89984;"># </span><span style="color: #a89984;">&#36825;&#26679;&#22270;&#29255;&#23601;&#20250;&#34987;&#24341;&#29992;&#21040;&#27491;&#25991;&#20013;</span>
+        post.add_header(<span style="color: #79740e;">'Content-ID'</span>, <span style="color: #79740e;">'&lt;post&gt;'</span>)
+        message.attach(post)
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org56642ca" class="outline-2">
-<h2 id="org56642ca"><span class="section-number-2">3</span> 发送邮件</h2>
+<div id="outline-container-org0013490" class="outline-2">
+<h2 id="org0013490"><span class="section-number-2">3.</span> 发送邮件</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Python 中使用 <code>smtplib</code> 来处理 smtp 协议，示例代码如下：
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #51afef;">import</span> smtplib
+<pre class="src src-python"><span style="color: #9d0006;">import</span> smtplib
 
-<span style="color: #dcaeea;">HOST</span> = <span style="color: #98be65;">'smtp.163.com'</span>
-<span style="color: #dcaeea;">PORT</span> = 25
-<span style="color: #dcaeea;">SENDER_ADDR</span> = <span style="color: #98be65;">'cycoe@163.com'</span>
-<span style="color: #dcaeea;">PASSWORD</span> = <span style="color: #98be65;">'*********'</span>
+<span style="color: #076678;">HOST</span> = <span style="color: #79740e;">'smtp.163.com'</span>
+<span style="color: #076678;">PORT</span> = 25
+<span style="color: #076678;">SENDER_ADDR</span> = <span style="color: #79740e;">'cycoe@163.com'</span>
+<span style="color: #076678;">PASSWORD</span> = <span style="color: #79740e;">'*********'</span>
 
 
-<span style="color: #51afef;">def</span> <span style="color: #c678dd;">send_mail</span><span style="color: #51afef;">(</span>message, email<span style="color: #51afef;">)</span>:
-    <span style="color: #dcaeea;">server</span> = smtplib.SMTP<span style="color: #51afef;">()</span>
-    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#36830;&#25509;&#26381;&#21153;&#22120;</span>
-    <span style="color: #51afef;">try</span>:
-        server.connect<span style="color: #51afef;">(</span>HOST, PORT<span style="color: #51afef;">)</span>
-    <span style="color: #51afef;">except</span> smtplib.SMTPConnectError <span style="color: #51afef;">as</span> e:
-        <span style="color: #51afef;">print</span><span style="color: #51afef;">(</span>e<span style="color: #51afef;">)</span>
-        <span style="color: #51afef;">return</span> <span style="color: #a9a1e1;">False</span>
+<span style="color: #9d0006;">def</span> <span style="color: #b57614;">send_mail</span>(message, email):
+    <span style="color: #076678;">server</span> = smtplib.SMTP()
+    <span style="color: #a89984;"># </span><span style="color: #a89984;">&#36830;&#25509;&#26381;&#21153;&#22120;</span>
+    <span style="color: #9d0006;">try</span>:
+        server.connect(HOST, PORT)
+    <span style="color: #9d0006;">except</span> smtplib.SMTPConnectError <span style="color: #9d0006;">as</span> e:
+        <span style="color: #af3a03;">print</span>(e)
+        <span style="color: #9d0006;">return</span> <span style="color: #8f3f71;">False</span>
 
-    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#30331;&#38470;</span>
-    <span style="color: #51afef;">try</span>:
-        server.login<span style="color: #51afef;">(</span>SENDER, PASSWORD<span style="color: #51afef;">)</span>
-    <span style="color: #51afef;">except</span> smtplib.SMTPAuthenticationError <span style="color: #51afef;">as</span> e:
-        <span style="color: #51afef;">print</span><span style="color: #51afef;">(</span>e<span style="color: #51afef;">)</span>
-        <span style="color: #51afef;">return</span> <span style="color: #a9a1e1;">False</span>
+    <span style="color: #a89984;"># </span><span style="color: #a89984;">&#30331;&#38470;</span>
+    <span style="color: #9d0006;">try</span>:
+        server.login(SENDER, PASSWORD)
+    <span style="color: #9d0006;">except</span> smtplib.SMTPAuthenticationError <span style="color: #9d0006;">as</span> e:
+        <span style="color: #af3a03;">print</span>(e)
+        <span style="color: #9d0006;">return</span> <span style="color: #8f3f71;">False</span>
 
-    success = <span style="color: #a9a1e1;">False</span>
-    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#21457;&#36865;&#37038;&#20214;</span>
-    <span style="color: #51afef;">try</span>:
-        server.sendmail<span style="color: #51afef;">(</span>SENDER_ADDR, <span style="color: #c678dd;">[</span>email<span style="color: #c678dd;">]</span>, msg.as_string<span style="color: #c678dd;">()</span><span style="color: #51afef;">)</span>
-        <span style="color: #51afef;">print</span><span style="color: #51afef;">(</span><span style="color: #98be65;">'&#37109;&#20214;&#30332;&#36865;&#25104;&#21151;&#65281;'</span><span style="color: #51afef;">)</span>
-        success = <span style="color: #a9a1e1;">True</span>
-    <span style="color: #51afef;">except</span> smtplib.SMTPException <span style="color: #51afef;">as</span> e:
-        <span style="color: #51afef;">print</span><span style="color: #51afef;">(</span><span style="color: #98be65;">'&#37109;&#20214;&#30332;&#36865;&#22833;&#25943;&#65281;'</span><span style="color: #51afef;">)</span>
-    <span style="color: #51afef;">finally</span>:
-        <span style="color: #51afef;">del</span> message
-        server.<span style="color: #a9a1e1;">quit</span><span style="color: #51afef;">()</span>
+    success = <span style="color: #8f3f71;">False</span>
+    <span style="color: #a89984;"># </span><span style="color: #a89984;">&#21457;&#36865;&#37038;&#20214;</span>
+    <span style="color: #9d0006;">try</span>:
+        server.sendmail(SENDER_ADDR, [email], msg.as_string())
+        <span style="color: #af3a03;">print</span>(<span style="color: #79740e;">'&#37109;&#20214;&#30332;&#36865;&#25104;&#21151;&#65281;'</span>)
+        success = <span style="color: #8f3f71;">True</span>
+    <span style="color: #9d0006;">except</span> smtplib.SMTPException <span style="color: #9d0006;">as</span> e:
+        <span style="color: #af3a03;">print</span>(<span style="color: #79740e;">'&#37109;&#20214;&#30332;&#36865;&#22833;&#25943;&#65281;'</span>)
+    <span style="color: #9d0006;">finally</span>:
+        <span style="color: #9d0006;">del</span> message
+        server.<span style="color: #8f3f71;">quit</span>()
 
-    <span style="color: #51afef;">return</span> success
+    <span style="color: #9d0006;">return</span> success
 </pre>
 </div>
 <p>
@@ -225,8 +225,8 @@ Python 中使用 <code>smtplib</code> 来处理 smtp 协议，示例代码如下
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-03-30 Mon 13:22></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</div>
-      <div id="built">Built: <2021-05-31 Mon 18:29></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
+      <div id="built">Built: <2022-10-23 Sun 09:02></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-31 Mon 18:29 -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2022-10-23 Sun 09:02 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>与 C++ 的第二类接触-变量和基本类型</title>
-<meta name="generator" content="Org mode">
-<meta name="author" content="Cycoe">
+<meta name="author" content="Cycoe" />
+<meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
 <script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
@@ -49,62 +49,62 @@
   <div id="caption"></div>
 </div>
 </div>
-<div id="content">
+<div id="content" class="content">
 <header>
 <h1 class="title">与 C++ 的第二类接触-变量和基本类型</h1>
-</header><nav id="table-of-contents">
+</header><nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org98823c9">1. 变量和基本类型</a>
+<li><a href="#org28c7773">1. 变量和基本类型</a>
 <ul>
-<li><a href="#org3412461">1.1. 可以用先定义的变量去初始化后定义的变量</a></li>
-<li><a href="#orgf083ab3">1.2. 列表初始化</a></li>
-<li><a href="#org7a5f1f2">1.3. 默认初始化</a></li>
-<li><a href="#org6c0592f">1.4. 声明与定义</a></li>
-<li><a href="#org8c0b787">1.5. 变量标识符</a></li>
-<li><a href="#org4cd3aa3">1.6. 引用</a></li>
-<li><a href="#org3c2d96d">1.7. 空指针</a></li>
-<li><a href="#org0474ef3">1.8. <code>void*</code> 指针</a></li>
-<li><a href="#org7822efa">1.9. <code>const</code> 常量限定符</a></li>
-<li><a href="#org55ddc64">1.10. 命名空间的 <code>using</code> 声明</a></li>
+<li><a href="#org299eb69">1.1. 可以用先定义的变量去初始化后定义的变量</a></li>
+<li><a href="#org0550afe">1.2. 列表初始化</a></li>
+<li><a href="#orgb1c427b">1.3. 默认初始化</a></li>
+<li><a href="#org174c68d">1.4. 声明与定义</a></li>
+<li><a href="#org85f2f0a">1.5. 变量标识符</a></li>
+<li><a href="#orgfc946cc">1.6. 引用</a></li>
+<li><a href="#orgdc8a968">1.7. 空指针</a></li>
+<li><a href="#org1f9e836">1.8. <code>void*</code> 指针</a></li>
+<li><a href="#orgf62528d">1.9. <code>const</code> 常量限定符</a></li>
+<li><a href="#orge4b297c">1.10. 命名空间的 <code>using</code> 声明</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-org98823c9" class="outline-2">
-<h2 id="org98823c9"><span class="section-number-2">1</span> 变量和基本类型</h2>
+<div id="outline-container-org28c7773" class="outline-2">
+<h2 id="org28c7773"><span class="section-number-2">1.</span> 变量和基本类型</h2>
 <div class="outline-text-2" id="text-1">
 
-<figure id="org70a48b2">
+<figure id="org60797dd">
 <img src="./C++-学习记录/Screenshot_20200527_215053_QbzyBU.png" alt="Screenshot_20200527_215053_QbzyBU.png">
 
 <figcaption><span class="figure-number">Figure 1: </span>指定字面值的类型</figcaption>
 </figure>
 </div>
 
-<div id="outline-container-org3412461" class="outline-3">
-<h3 id="org3412461"><span class="section-number-3">1.1</span> 可以用先定义的变量去初始化后定义的变量</h3>
+<div id="outline-container-org299eb69" class="outline-3">
+<h3 id="org299eb69"><span class="section-number-3">1.1.</span> 可以用先定义的变量去初始化后定义的变量</h3>
 <div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #ECBE7B;">double</span> <span style="color: #dcaeea;">price</span> = 109.99, <span style="color: #dcaeea;">discount</span> = price * 0.16;
+<pre class="src src-C++"><span style="color: #8f3f71;">double</span> <span style="color: #076678;">price</span> = 109.99, <span style="color: #076678;">discount</span> = price * 0.16;
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgf083ab3" class="outline-3">
-<h3 id="orgf083ab3"><span class="section-number-3">1.2</span> 列表初始化</h3>
+<div id="outline-container-org0550afe" class="outline-3">
+<h3 id="org0550afe"><span class="section-number-3">1.2.</span> 列表初始化</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 以下的 4 条初始化语句都是合法的
 </p>
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">units_sold</span> = 0;
-<span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">units_sold</span> = <span style="color: #51afef;">{</span>0<span style="color: #51afef;">}</span>;
-<span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">units_sold</span><span style="color: #51afef;">{</span>0<span style="color: #51afef;">}</span>;
-<span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">units_sold</span><span style="color: #51afef;">(</span>0<span style="color: #51afef;">)</span>;
+<pre class="src src-C++"><span style="color: #8f3f71;">int</span> <span style="color: #076678;">units_sold</span> = 0;
+<span style="color: #8f3f71;">int</span> <span style="color: #076678;">units_sold</span> = {0};
+<span style="color: #8f3f71;">int</span> <span style="color: #076678;">units_sold</span>{0};
+<span style="color: #8f3f71;">int</span> <span style="color: #076678;">units_sold</span>(0);
 </pre>
 </div>
 
@@ -112,34 +112,34 @@
 如果我们使用列表初始化且初始值存在丢失信息的风险时，编译器将报错
 </p>
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #ECBE7B;">long</span> <span style="color: #ECBE7B;">double</span> <span style="color: #dcaeea;">ld</span> = 3.1415926536;
-<span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">a</span><span style="color: #51afef;">{</span>ld<span style="color: #51afef;">}</span>, <span style="color: #dcaeea;">b</span> = <span style="color: #51afef;">{</span>ld<span style="color: #51afef;">}</span>;  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#38169;&#35823;&#65306;&#36716;&#25442;&#26410;&#25191;&#34892;&#65292;&#22240;&#20026;&#23384;&#22312;&#20002;&#22833;&#20449;&#24687;&#30340;&#39118;&#38505;</span>
-<span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">c</span><span style="color: #51afef;">(</span>ld<span style="color: #51afef;">)</span>, <span style="color: #dcaeea;">d</span> = ld;    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#27491;&#30830;&#65306;&#36716;&#25442;&#25191;&#34892;&#65292;&#19988;&#30830;&#23454;&#20002;&#22833;&#20102;&#37096;&#20998;&#20540;</span>
+<pre class="src src-C++"><span style="color: #8f3f71;">long</span> <span style="color: #8f3f71;">double</span> <span style="color: #076678;">ld</span> = 3.1415926536;
+<span style="color: #8f3f71;">int</span> <span style="color: #076678;">a</span>{ld}, <span style="color: #076678;">b</span> = {ld};  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#38169;&#35823;&#65306;&#36716;&#25442;&#26410;&#25191;&#34892;&#65292;&#22240;&#20026;&#23384;&#22312;&#20002;&#22833;&#20449;&#24687;&#30340;&#39118;&#38505;</span>
+<span style="color: #8f3f71;">int</span> <span style="color: #b57614;">c</span>(ld), <span style="color: #076678;">d</span> = ld;    <span style="color: #a89984;">// </span><span style="color: #a89984;">&#27491;&#30830;&#65306;&#36716;&#25442;&#25191;&#34892;&#65292;&#19988;&#30830;&#23454;&#20002;&#22833;&#20102;&#37096;&#20998;&#20540;</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org7a5f1f2" class="outline-3">
-<h3 id="org7a5f1f2"><span class="section-number-3">1.3</span> 默认初始化</h3>
+<div id="outline-container-orgb1c427b" class="outline-3">
+<h3 id="orgb1c427b"><span class="section-number-3">1.3.</span> 默认初始化</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 在未显式初始化时，全局的变量会被初始化为 0 ，函数内部的变量不初始化
 </p>
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">string</span> <span style="color: #dcaeea;">global_str</span>;
-<span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">global_int</span>;
+<pre class="src src-C++"><span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">string</span> <span style="color: #076678;">global_str</span>;
+<span style="color: #8f3f71;">int</span> <span style="color: #076678;">global_int</span>;
 
-<span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">main</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">argc</span>, <span style="color: #ECBE7B;">char</span> *<span style="color: #dcaeea;">argv</span><span style="color: #c678dd;">[]</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">local_int</span>;
-  <span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">string</span> <span style="color: #dcaeea;">local_str</span>;
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Global string is: "</span> &lt;&lt; global_str &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Global int is: "</span>    &lt;&lt; global_int &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Local string is: "</span>  &lt;&lt; local_str  &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Local int is: "</span>     &lt;&lt; local_int  &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  <span style="color: #51afef;">return</span> 0;
-<span style="color: #51afef;">}</span>
+<span style="color: #8f3f71;">int</span> <span style="color: #b57614;">main</span>(<span style="color: #8f3f71;">int</span> <span style="color: #076678;">argc</span>, <span style="color: #8f3f71;">char</span> *<span style="color: #076678;">argv</span>[])
+{
+  <span style="color: #8f3f71;">int</span> <span style="color: #076678;">local_int</span>;
+  <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">string</span> <span style="color: #076678;">local_str</span>;
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Global string is: "</span> &lt;&lt; global_str &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Global int is: "</span>    &lt;&lt; global_int &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Local string is: "</span>  &lt;&lt; local_str  &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Local int is: "</span>     &lt;&lt; local_int  &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  <span style="color: #9d0006;">return</span> 0;
+}
 </pre>
 </div>
 
@@ -181,15 +181,15 @@
 <td class="org-left">Local</td>
 <td class="org-left">int</td>
 <td class="org-left">is:</td>
-<td class="org-right">22026</td>
+<td class="org-right">22083</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 
-<div id="outline-container-org6c0592f" class="outline-3">
-<h3 id="org6c0592f"><span class="section-number-3">1.4</span> 声明与定义</h3>
+<div id="outline-container-org174c68d" class="outline-3">
+<h3 id="org174c68d"><span class="section-number-3">1.4.</span> 声明与定义</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 声明用来创建一个符号，定义用来创建实体、分配内存甚至初始化。如果只是想声明变量需
@@ -199,16 +199,16 @@
 一个全局变量，如果试图在函数体内部初始化一个 <code>extern</code> 标记的变量，将引发错误。
 </p>
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #51afef;">extern</span> <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">i</span>;              <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#22768;&#26126; i &#32780;&#38750;&#23450;&#20041; i</span>
-<span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">j</span>;                     <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#22768;&#26126;&#24182;&#23450;&#20041; j</span>
-<span style="color: #51afef;">extern</span> <span style="color: #ECBE7B;">double</span> <span style="color: #dcaeea;">pi</span> = 3.1416; <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#26174;&#24335;&#21021;&#22987;&#21270;&#37117;&#20250;&#25104;&#20026;&#23450;&#20041;</span>
+<pre class="src src-C++"><span style="color: #9d0006;">extern</span> <span style="color: #8f3f71;">int</span> <span style="color: #076678;">i</span>;              <span style="color: #a89984;">// </span><span style="color: #a89984;">&#22768;&#26126; i &#32780;&#38750;&#23450;&#20041; i</span>
+<span style="color: #8f3f71;">int</span> <span style="color: #076678;">j</span>;                     <span style="color: #a89984;">// </span><span style="color: #a89984;">&#22768;&#26126;&#24182;&#23450;&#20041; j</span>
+<span style="color: #9d0006;">extern</span> <span style="color: #8f3f71;">double</span> <span style="color: #076678;">pi</span> = 3.1416; <span style="color: #a89984;">// </span><span style="color: #a89984;">&#26174;&#24335;&#21021;&#22987;&#21270;&#37117;&#20250;&#25104;&#20026;&#23450;&#20041;</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org8c0b787" class="outline-3">
-<h3 id="org8c0b787"><span class="section-number-3">1.5</span> 变量标识符</h3>
+<div id="outline-container-org85f2f0a" class="outline-3">
+<h3 id="org85f2f0a"><span class="section-number-3">1.5.</span> 变量标识符</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 与 Python 不同，C++ 中的标识符不能以两个连续的下画线开头，也不能以下画线紧连大写
@@ -216,21 +216,21 @@
 的
 </p>
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #ECBE7B;">float</span> <span style="color: #dcaeea;">_global_price</span>;
+<pre class="src src-C++"><span style="color: #8f3f71;">float</span> <span style="color: #076678;">_global_price</span>;
 
-<span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">main</span><span style="color: #51afef;">()</span> <span style="color: #51afef;">{</span>
-  <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">__num</span>;
-  <span style="color: #ECBE7B;">float</span> <span style="color: #dcaeea;">_Price</span>;
+<span style="color: #8f3f71;">int</span> <span style="color: #b57614;">main</span>() {
+  <span style="color: #8f3f71;">int</span> <span style="color: #076678;">__num</span>;
+  <span style="color: #8f3f71;">float</span> <span style="color: #076678;">_Price</span>;
 
-  <span style="color: #51afef;">return</span> 0;
-<span style="color: #51afef;">}</span>
+  <span style="color: #9d0006;">return</span> 0;
+}
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org4cd3aa3" class="outline-3">
-<h3 id="org4cd3aa3"><span class="section-number-3">1.6</span> 引用</h3>
+<div id="outline-container-orgfc946cc" class="outline-3">
+<h3 id="orgfc946cc"><span class="section-number-3">1.6.</span> 引用</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 引用（reference）是为对象起了另外一个名字。如果学过 Python 中的引用，这里应该比
@@ -238,11 +238,11 @@
 能定义引用的引用，也不能定义指向引用的指针。
 </p>
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">iVal</span> = 1024;
-<span style="color: #ECBE7B;">int</span> &amp;<span style="color: #dcaeea;">refVal</span> = ival;      <span style="color: #5B6268;">// </span><span style="color: #5B6268;">refVal &#25351;&#21521; iVal</span>
-<span style="color: #ECBE7B;">int</span> &amp;<span style="color: #dcaeea;">refVal2</span>;            <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#25253;&#38169;&#65306;&#24341;&#29992;&#24517;&#39035;&#34987;&#21021;&#22987;&#21270;</span>
-<span style="color: #ECBE7B;">int</span> &amp;<span style="color: #dcaeea;">refVal3</span> = refVal;   <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#25253;&#38169;&#65306;&#19981;&#33021;&#23450;&#20041;&#24341;&#29992;&#30340;&#24341;&#29992;</span>
-<span style="color: #ECBE7B;">int</span> *<span style="color: #dcaeea;">val_ptr</span> = &amp;refVal;  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#25253;&#38169;&#65306;&#19981;&#33021;&#23450;&#20041;&#24341;&#29992;&#30340;&#25351;&#38024;</span>
+<pre class="src src-C++"><span style="color: #8f3f71;">int</span> <span style="color: #076678;">iVal</span> = 1024;
+<span style="color: #8f3f71;">int</span> &amp;<span style="color: #076678;">refVal</span> = ival;      <span style="color: #a89984;">// </span><span style="color: #a89984;">refVal &#25351;&#21521; iVal</span>
+<span style="color: #8f3f71;">int</span> &amp;<span style="color: #076678;">refVal2</span>;            <span style="color: #a89984;">// </span><span style="color: #a89984;">&#25253;&#38169;&#65306;&#24341;&#29992;&#24517;&#39035;&#34987;&#21021;&#22987;&#21270;</span>
+<span style="color: #8f3f71;">int</span> &amp;<span style="color: #076678;">refVal3</span> = refVal;   <span style="color: #a89984;">// </span><span style="color: #a89984;">&#25253;&#38169;&#65306;&#19981;&#33021;&#23450;&#20041;&#24341;&#29992;&#30340;&#24341;&#29992;</span>
+<span style="color: #8f3f71;">int</span> *<span style="color: #076678;">val_ptr</span> = &amp;refVal;  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#25253;&#38169;&#65306;&#19981;&#33021;&#23450;&#20041;&#24341;&#29992;&#30340;&#25351;&#38024;</span>
 </pre>
 </div>
 
@@ -250,9 +250,9 @@
 以下为一个示例
 </p>
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">i</span>, &amp;<span style="color: #dcaeea;">ri</span> = i;
+<pre class="src src-C++"><span style="color: #8f3f71;">int</span> <span style="color: #076678;">i</span>, &amp;<span style="color: #076678;">ri</span> = i;
 i = 5; ri = 10;
-<span style="color: #a9a1e1;">std</span>::cout &lt;&lt; i &lt;&lt; <span style="color: #98be65;">" "</span> &lt;&lt; ri &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
+<span style="color: #8f3f71;">std</span>::cout &lt;&lt; i &lt;&lt; <span style="color: #79740e;">" "</span> &lt;&lt; ri &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
 </pre>
 </div>
 
@@ -262,84 +262,59 @@ i = 5; ri = 10;
 </div>
 </div>
 
-<div id="outline-container-org3c2d96d" class="outline-3">
-<h3 id="org3c2d96d"><span class="section-number-3">1.7</span> 空指针</h3>
+<div id="outline-container-orgdc8a968" class="outline-3">
+<h3 id="orgdc8a968"><span class="section-number-3">1.7.</span> 空指针</h3>
 <div class="outline-text-3" id="text-1-7">
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #51afef; font-weight: bold;">#include</span> <span style="color: #51afef;">&lt;</span><span style="color: #98be65;">cstdlib</span><span style="color: #51afef;">&gt;</span>
+<pre class="src src-C++"><span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;cstdlib&gt;</span>
 
-<span style="color: #ECBE7B;">int</span> *<span style="color: #dcaeea;">p1</span> = <span style="color: #a9a1e1;">nullptr</span>;         <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#31561;&#20215;&#20110; int *p1 = 0;</span>
-<span style="color: #ECBE7B;">int</span> *<span style="color: #dcaeea;">p2</span> = 0;               <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#30452;&#25509;&#23558; p2 &#21021;&#22987;&#21270;&#20026;&#23383;&#38754;&#24120;&#37327; 0</span>
-<span style="color: #5B6268;">// </span><span style="color: #5B6268;">C &#35821;&#35328;&#30340;&#20889;&#27861;&#65292;&#38656;&#35201;&#39318;&#20808; #include &lt;cstdlib&gt;</span>
-<span style="color: #ECBE7B;">int</span> *<span style="color: #dcaeea;">p3</span> = <span style="color: #a9a1e1;">NULL</span>;            <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#31561;&#20215;&#20110; int *p3 = 0;</span>
+<span style="color: #8f3f71;">int</span> *<span style="color: #076678;">p1</span> = <span style="color: #8f3f71;">nullptr</span>;         <span style="color: #a89984;">// </span><span style="color: #a89984;">&#31561;&#20215;&#20110; int *p1 = 0;</span>
+<span style="color: #8f3f71;">int</span> *<span style="color: #076678;">p2</span> = 0;               <span style="color: #a89984;">// </span><span style="color: #a89984;">&#30452;&#25509;&#23558; p2 &#21021;&#22987;&#21270;&#20026;&#23383;&#38754;&#24120;&#37327; 0</span>
+<span style="color: #a89984;">// </span><span style="color: #a89984;">C &#35821;&#35328;&#30340;&#20889;&#27861;&#65292;&#38656;&#35201;&#39318;&#20808; #include &lt;cstdlib&gt;</span>
+<span style="color: #8f3f71;">int</span> *<span style="color: #076678;">p3</span> = <span style="color: #8f3f71;">NULL</span>;            <span style="color: #a89984;">// </span><span style="color: #a89984;">&#31561;&#20215;&#20110; int *p3 = 0;</span>
 
-<span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"p1 is "</span> &lt;&lt; p1 &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-<span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"p2 is "</span> &lt;&lt; p2 &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-<span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"p3 is "</span> &lt;&lt; p3 &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
+<span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"p1 is "</span> &lt;&lt; p1 &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+<span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"p2 is "</span> &lt;&lt; p2 &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+<span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"p3 is "</span> &lt;&lt; p3 &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
 </pre>
 </div>
 
-<table>
-
-
-<colgroup>
-<col  class="org-left">
-
-<col  class="org-left">
-
-<col  class="org-right">
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left">p1</td>
-<td class="org-left">is</td>
-<td class="org-right">0</td>
-</tr>
-
-<tr>
-<td class="org-left">p2</td>
-<td class="org-left">is</td>
-<td class="org-right">0</td>
-</tr>
-
-<tr>
-<td class="org-left">p3</td>
-<td class="org-left">is</td>
-<td class="org-right">0</td>
-</tr>
-</tbody>
-</table>
+<pre class="example">
+p1 is 0
+p2 is 0
+p3 is 0
+</pre>
 </div>
 </div>
 
-<div id="outline-container-org0474ef3" class="outline-3">
-<h3 id="org0474ef3"><span class="section-number-3">1.8</span> <code>void*</code> 指针</h3>
+<div id="outline-container-org1f9e836" class="outline-3">
+<h3 id="org1f9e836"><span class="section-number-3">1.8.</span> <code>void*</code> 指针</h3>
 <div class="outline-text-3" id="text-1-8">
 <p>
 <code>void*</code> 指针是一类特殊的指针类型，只记录对象的地址而不记录对象的内存空间大小
 </p>
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #ECBE7B;">double</span> <span style="color: #dcaeea;">obj</span> = 3.14, *<span style="color: #dcaeea;">pd</span> = &amp;obj;
-<span style="color: #ECBE7B;">void</span> *<span style="color: #dcaeea;">pv</span> = &amp;obj;
+<pre class="src src-C++"><span style="color: #8f3f71;">double</span> <span style="color: #076678;">obj</span> = 3.14, *<span style="color: #076678;">pd</span> = &amp;obj;
+<span style="color: #8f3f71;">void</span> *<span style="color: #076678;">pv</span> = &amp;obj;
 pv = pd;
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org7822efa" class="outline-3">
-<h3 id="org7822efa"><span class="section-number-3">1.9</span> <code>const</code> 常量限定符</h3>
+<div id="outline-container-orgf62528d" class="outline-3">
+<h3 id="orgf62528d"><span class="section-number-3">1.9.</span> <code>const</code> 常量限定符</h3>
 </div>
-<div id="outline-container-org55ddc64" class="outline-3">
-<h3 id="org55ddc64"><span class="section-number-3">1.10</span> 命名空间的 <code>using</code> 声明</h3>
+<div id="outline-container-orge4b297c" class="outline-3">
+<h3 id="orge4b297c"><span class="section-number-3">1.10.</span> 命名空间的 <code>using</code> 声明</h3>
 <div class="outline-text-3" id="text-1-10">
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #51afef;">using</span> <span style="color: #a9a1e1;">std</span>::<span style="color: #a9a1e1;">cin</span>; <span style="color: #51afef;">using</span> <span style="color: #a9a1e1;">std</span>::<span style="color: #a9a1e1;">endl</span>;
+<pre class="src src-C++"><span style="color: #9d0006;">using</span> <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">cin</span>; <span style="color: #9d0006;">using</span> <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">endl</span>;
 
-<span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">i</span>;
-cin &gt;&gt; i;                 <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#27491;&#30830;&#65306;cin &#21644; std::cin &#21547;&#20041;&#30456;&#21516;</span>
-cout &lt;&lt; i;                <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#38169;&#35823;&#65306;&#27809;&#26377;&#23545;&#24212;&#30340; using &#22768;&#26126;&#65292;&#24517;&#39035;&#20351;&#29992;&#23436;&#25972;&#30340;&#21517;&#23383;</span>
-<span style="color: #a9a1e1;">std</span>::cout &lt;&lt; i &lt;&lt; endl&gt;;  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#27491;&#30830;&#65306;&#26174;&#24335;&#22320;&#20174; std &#20013;&#20351;&#29992; cout</span>
+<span style="color: #8f3f71;">int</span> <span style="color: #076678;">i</span>;
+cin &gt;&gt; i;                 <span style="color: #a89984;">// </span><span style="color: #a89984;">&#27491;&#30830;&#65306;cin &#21644; std::cin &#21547;&#20041;&#30456;&#21516;</span>
+cout &lt;&lt; i;                <span style="color: #a89984;">// </span><span style="color: #a89984;">&#38169;&#35823;&#65306;&#27809;&#26377;&#23545;&#24212;&#30340; using &#22768;&#26126;&#65292;&#24517;&#39035;&#20351;&#29992;&#23436;&#25972;&#30340;&#21517;&#23383;</span>
+<span style="color: #8f3f71;">std</span>::cout &lt;&lt; i &lt;&lt; endl&gt;;  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#27491;&#30830;&#65306;&#26174;&#24335;&#22320;&#20174; std &#20013;&#20351;&#29992; cout</span>
 </pre>
 </div>
 </div>
@@ -350,8 +325,8 @@ cout &lt;&lt; i;                <span style="color: #5B6268;">// </span><span st
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-05-28 Thur 22:03></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</div>
-      <div id="built">Built: <2021-05-31 Mon 18:29></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
+      <div id="built">Built: <2022-10-23 Sun 09:02></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

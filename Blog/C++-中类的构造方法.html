@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-31 Mon 18:29 -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2022-10-23 Sun 09:02 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>C++ 中类的构造方法</title>
-<meta name="generator" content="Org mode">
-<meta name="author" content="Cycoe">
+<meta name="author" content="Cycoe" />
+<meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
 <script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
@@ -49,7 +49,7 @@
   <div id="caption"></div>
 </div>
 </div>
-<div id="content">
+<div id="content" class="content">
 <header>
 <h1 class="title">C++ 中类的构造方法</h1>
 </header><p>
@@ -60,178 +60,108 @@ C++ 中实例化一个类时有多种方法，其中什么情况下会用到哪�
 <!-- more -->
 
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #51afef; font-weight: bold;">#include</span> <span style="color: #51afef;">&lt;</span><span style="color: #98be65;">iostream</span><span style="color: #51afef;">&gt;</span>
-<span style="color: #51afef; font-weight: bold;">#include</span> <span style="color: #51afef;">&lt;</span><span style="color: #98be65;">string</span><span style="color: #51afef;">&gt;</span>
+<pre class="src src-C++"><span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;iostream&gt;</span>
+<span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;string&gt;</span>
 
-<span style="color: #51afef;">class</span> <span style="color: #ECBE7B;">C</span> <span style="color: #51afef;">{</span>
-<span style="color: #51afef;">private</span>:
-  <span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">size_t</span> <span style="color: #dcaeea;">n</span> = 0;
-  <span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">string</span> <span style="color: #dcaeea;">s</span> = <span style="color: #98be65;">"Hello"</span>;
-<span style="color: #51afef;">public</span>:
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#40664;&#35748;&#26500;&#36896;&#20989;&#25968;&#65306;&#24403;&#22768;&#26126;&#23545;&#35937;&#22914; C c &#25110;&#35843;&#29992;&#40664;&#35748;&#26500;&#36896;&#20989;&#25968;&#22914; C() &#26102;&#35843;&#29992;</span>
-  <span style="color: #c678dd;">C</span><span style="color: #c678dd;">()</span> <span style="color: #c678dd;">{</span> <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Default constructor."</span> &lt;&lt; *<span style="color: #51afef;">this</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl; <span style="color: #c678dd;">}</span>
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#19968;&#20010;&#21442;&#25968;&#30340;&#26500;&#36896;&#20989;&#25968;</span>
-  <span style="color: #c678dd;">C</span><span style="color: #c678dd;">(</span><span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">size_t</span> <span style="color: #dcaeea;">n_</span><span style="color: #c678dd;">)</span>: <span style="color: #c678dd;">n</span><span style="color: #c678dd;">(</span>n_<span style="color: #c678dd;">)</span> <span style="color: #c678dd;">{</span>
+<span style="color: #9d0006;">class</span> <span style="color: #8f3f71;">C</span> {
+<span style="color: #9d0006;">private</span>:
+  <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #076678;">n</span> = 0;
+  <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">string</span> <span style="color: #076678;">s</span> = <span style="color: #79740e;">"Hello"</span>;
+<span style="color: #9d0006;">public</span>:
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#40664;&#35748;&#26500;&#36896;&#20989;&#25968;&#65306;&#24403;&#22768;&#26126;&#23545;&#35937;&#22914; C c &#25110;&#35843;&#29992;&#40664;&#35748;&#26500;&#36896;&#20989;&#25968;&#22914; C() &#26102;&#35843;&#29992;</span>
+  <span style="color: #b57614;">C</span>() { <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Default constructor."</span> &lt;&lt; *<span style="color: #9d0006;">this</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl; }
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#19968;&#20010;&#21442;&#25968;&#30340;&#26500;&#36896;&#20989;&#25968;</span>
+  <span style="color: #b57614;">C</span>(<span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #076678;">n_</span>): <span style="color: #b57614;">n</span>(n_) {
     n = 2;
-    <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Constructor with one argument."</span> &lt;&lt; *<span style="color: #51afef;">this</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  <span style="color: #c678dd;">}</span>
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#20004;&#20010;&#21442;&#25968;&#30340;&#26500;&#36896;&#20989;&#25968;&#65292;&#20882;&#21495;&#21518;&#20351;&#29992;&#20102;&#21021;&#22987;&#21270;&#21442;&#25968;&#21015;</span>
-  <span style="color: #c678dd;">C</span><span style="color: #c678dd;">(</span><span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">size_t</span> <span style="color: #dcaeea;">n_</span>, <span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">string</span> <span style="color: #dcaeea;">s_</span><span style="color: #c678dd;">)</span>: n<span style="color: #c678dd;">(</span>n_<span style="color: #c678dd;">)</span>, s<span style="color: #c678dd;">(</span>s_<span style="color: #c678dd;">)</span> <span style="color: #c678dd;">{</span>
-    <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Constructor with two arguments."</span> &lt;&lt; *<span style="color: #51afef;">this</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  <span style="color: #c678dd;">}</span>
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#25335;&#36125;&#26500;&#36896;&#20989;&#25968;</span>
-  <span style="color: #c678dd;">C</span><span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">C</span> <span style="color: #51afef;">const</span>&amp; <span style="color: #dcaeea;">c</span><span style="color: #c678dd;">)</span> <span style="color: #c678dd;">{</span>
+    <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Constructor with one argument."</span> &lt;&lt; *<span style="color: #9d0006;">this</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  }
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#20004;&#20010;&#21442;&#25968;&#30340;&#26500;&#36896;&#20989;&#25968;&#65292;&#20882;&#21495;&#21518;&#20351;&#29992;&#20102;&#21021;&#22987;&#21270;&#21442;&#25968;&#21015;</span>
+  <span style="color: #b57614;">C</span>(<span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #076678;">n_</span>, <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">string</span> <span style="color: #076678;">s_</span>): n(n_), s(s_) {
+    <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Constructor with two arguments."</span> &lt;&lt; *<span style="color: #9d0006;">this</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  }
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#25335;&#36125;&#26500;&#36896;&#20989;&#25968;</span>
+  <span style="color: #b57614;">C</span>(<span style="color: #8f3f71;">C</span> <span style="color: #9d0006;">const</span>&amp; <span style="color: #076678;">c</span>) {
     n = c.n;
     s = c.s;
-    <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Copy constructor."</span> &lt;&lt; *<span style="color: #51afef;">this</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  <span style="color: #c678dd;">}</span>
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#36171;&#20540;</span>
-  <span style="color: #ECBE7B;">C</span>&amp; <span style="color: #51afef;">operator</span><span style="color: #c678dd;">=</span> <span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">C</span> <span style="color: #51afef;">const</span>&amp; <span style="color: #dcaeea;">rhs</span><span style="color: #c678dd;">)</span> <span style="color: #c678dd;">{</span>
+    <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Copy constructor."</span> &lt;&lt; *<span style="color: #9d0006;">this</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  }
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#36171;&#20540;</span>
+  <span style="color: #8f3f71;">C</span>&amp; <span style="color: #9d0006;">operator</span><span style="color: #b57614;">=</span> (<span style="color: #8f3f71;">C</span> <span style="color: #9d0006;">const</span>&amp; <span style="color: #076678;">rhs</span>) {
     n = rhs.n;
     s = rhs.s;
-    <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Assignment."</span> &lt;&lt; *<span style="color: #51afef;">this</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-    <span style="color: #51afef;">return</span> *<span style="color: #51afef;">this</span>;
-  <span style="color: #c678dd;">}</span>
-  <span style="color: #51afef;">friend</span> <span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">ostream</span>&amp; <span style="color: #51afef;">operator</span><span style="color: #c678dd;">&lt;&lt;</span> <span style="color: #c678dd;">(</span><span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">ostream</span>&amp; <span style="color: #dcaeea;">os</span>, <span style="color: #ECBE7B;">C</span> <span style="color: #51afef;">const</span>&amp; <span style="color: #dcaeea;">c</span><span style="color: #c678dd;">)</span> <span style="color: #c678dd;">{</span>
-    <span style="color: #51afef;">return</span> os &lt;&lt; <span style="color: #98be65;">" n: "</span> &lt;&lt; c.n &lt;&lt; <span style="color: #98be65;">", s: "</span> &lt;&lt; c.s;
-  <span style="color: #c678dd;">}</span>
-<span style="color: #51afef;">}</span>;
+    <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Assignment."</span> &lt;&lt; *<span style="color: #9d0006;">this</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+    <span style="color: #9d0006;">return</span> *<span style="color: #9d0006;">this</span>;
+  }
+  <span style="color: #9d0006;">friend</span> <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">ostream</span>&amp; <span style="color: #9d0006;">operator</span><span style="color: #b57614;">&lt;&lt;</span> (<span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">ostream</span>&amp; <span style="color: #076678;">os</span>, <span style="color: #8f3f71;">C</span> <span style="color: #9d0006;">const</span>&amp; <span style="color: #076678;">c</span>) {
+    <span style="color: #9d0006;">return</span> os &lt;&lt; <span style="color: #79740e;">" n: "</span> &lt;&lt; c.n &lt;&lt; <span style="color: #79740e;">", s: "</span> &lt;&lt; c.s;
+  }
+};
 
-<span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">main</span><span style="color: #51afef;">()</span> <span style="color: #51afef;">{</span>
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#35843;&#29992;&#40664;&#35748;&#26500;&#36896;&#20989;&#25968;&#65292;&#31532;&#20108;&#31181;&#26041;&#27861;&#20250;&#29983;&#25104;&#19968;&#20010;&#21311;&#21517;&#23616;&#37096;&#21464;&#37327;</span>
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Construct c1: "</span>;
-  <span style="color: #ECBE7B;">C</span> <span style="color: #dcaeea;">c1</span>;
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Construct C(): "</span>;
-  <span style="color: #dcaeea;">C</span><span style="color: #c678dd;">()</span>;
+<span style="color: #8f3f71;">int</span> <span style="color: #b57614;">main</span>() {
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#35843;&#29992;&#40664;&#35748;&#26500;&#36896;&#20989;&#25968;&#65292;&#31532;&#20108;&#31181;&#26041;&#27861;&#20250;&#29983;&#25104;&#19968;&#20010;&#21311;&#21517;&#23616;&#37096;&#21464;&#37327;</span>
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Construct c1: "</span>;
+  <span style="color: #8f3f71;">C</span> <span style="color: #076678;">c1</span>;
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Construct C(): "</span>;
+  <span style="color: #076678;">C</span>();
 
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#35843;&#29992;&#25335;&#36125;&#26500;&#36896;&#20989;&#25968;&#65292;&#20197;&#19979;&#20004;&#31181;&#26041;&#24335;&#31561;&#20215;</span>
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Construct c2: "</span>;
-  <span style="color: #ECBE7B;">C</span> <span style="color: #dcaeea;">c2</span><span style="color: #c678dd;">(</span>c1<span style="color: #c678dd;">)</span>;
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Construct c3: "</span>;
-  <span style="color: #ECBE7B;">C</span> <span style="color: #dcaeea;">c3</span> = c1;
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Construct C4 with C(): "</span>;
-  <span style="color: #ECBE7B;">C</span> <span style="color: #dcaeea;">c4</span> = C<span style="color: #c678dd;">()</span>; <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#20174;&#35821;&#27861;&#30475;&#20250;&#36827;&#34892;&#19968;&#27425;&#40664;&#35748;&#26500;&#36896;&#21644;&#19968;&#27425;&#25335;&#36125;&#26500;&#36896;&#65292;C() &#29983;&#25104;&#20020;&#26102;&#23545;&#35937;&#19968;&#27425;</span>
-              <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#40664;&#35748;&#26500;&#36896;&#65292;&#29992;&#20020;&#26102;&#21464;&#37327;&#25335;&#36125;&#26500;&#36896; c4 &#19968;&#27425;&#65292;&#23454;&#38469;&#21482;&#26377;&#19968;&#27425;&#40664;&#35748;&#26500;&#36896;</span>
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#35843;&#29992;&#25335;&#36125;&#26500;&#36896;&#20989;&#25968;&#65292;&#20197;&#19979;&#20004;&#31181;&#26041;&#24335;&#31561;&#20215;</span>
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Construct c2: "</span>;
+  <span style="color: #8f3f71;">C</span> <span style="color: #076678;">c2</span>(c1);
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Construct c3: "</span>;
+  <span style="color: #8f3f71;">C</span> <span style="color: #076678;">c3</span> = c1;
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Construct C4 with C(): "</span>;
+  <span style="color: #8f3f71;">C</span> <span style="color: #076678;">c4</span> = C(); <span style="color: #a89984;">// </span><span style="color: #a89984;">&#20174;&#35821;&#27861;&#30475;&#20250;&#36827;&#34892;&#19968;&#27425;&#40664;&#35748;&#26500;&#36896;&#21644;&#19968;&#27425;&#25335;&#36125;&#26500;&#36896;&#65292;C() &#29983;&#25104;&#20020;&#26102;&#23545;&#35937;&#19968;&#27425;</span>
+              <span style="color: #a89984;">// </span><span style="color: #a89984;">&#40664;&#35748;&#26500;&#36896;&#65292;&#29992;&#20020;&#26102;&#21464;&#37327;&#25335;&#36125;&#26500;&#36896; c4 &#19968;&#27425;&#65292;&#23454;&#38469;&#21482;&#26377;&#19968;&#27425;&#40664;&#35748;&#26500;&#36896;</span>
 
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#35843;&#29992;&#20004;&#20010;&#21442;&#25968;&#30340;&#26500;&#36896;&#20989;&#25968;&#65292;&#20197;&#19979;&#22235;&#31181;&#26041;&#24335;&#31561;&#20215;&#12290;&#27492;&#22788;&#38656;&#35201;&#27880;&#24847;&#30340;&#26159;&#25104;&#21592;&#21021;&#22987;&#21270;&#30340;&#20808;&#21518;</span>
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#39034;&#24207;&#65292;&#26368;&#20808;&#21457;&#29983;&#30340;&#26159;&#22768;&#26126;&#25104;&#21592;&#26102;&#30340;&#21021;&#22987;&#21270;&#65292;&#28982;&#21518;&#26159;&#26500;&#36896;&#20989;&#25968;&#30340;&#21021;&#22987;&#21270;&#21442;&#25968;&#21015;&#65292;&#26368;&#21518;&#26159;</span>
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#26500;&#36896;&#20989;&#25968;&#20869;&#37096;&#30340;&#36171;&#20540;</span>
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Construct c5: "</span>;
-  <span style="color: #ECBE7B;">C</span> <span style="color: #dcaeea;">c5</span><span style="color: #c678dd;">(</span>1, <span style="color: #98be65;">"world"</span><span style="color: #c678dd;">)</span>;
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Construct c6: "</span>;
-  <span style="color: #ECBE7B;">C</span> <span style="color: #dcaeea;">c6</span><span style="color: #c678dd;">{</span>1, <span style="color: #98be65;">"world"</span><span style="color: #c678dd;">}</span>;
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Construct c7: "</span>;
-  <span style="color: #ECBE7B;">C</span> <span style="color: #dcaeea;">c7</span> = <span style="color: #c678dd;">{</span>1, <span style="color: #98be65;">"world"</span><span style="color: #c678dd;">}</span>;
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Construct C(1, \"world\"): "</span>;
-  C<span style="color: #c678dd;">(</span>1, <span style="color: #98be65;">"world"</span><span style="color: #c678dd;">)</span>;
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#35843;&#29992;&#20004;&#20010;&#21442;&#25968;&#30340;&#26500;&#36896;&#20989;&#25968;&#65292;&#20197;&#19979;&#22235;&#31181;&#26041;&#24335;&#31561;&#20215;&#12290;&#27492;&#22788;&#38656;&#35201;&#27880;&#24847;&#30340;&#26159;&#25104;&#21592;&#21021;&#22987;&#21270;&#30340;&#20808;&#21518;</span>
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#39034;&#24207;&#65292;&#26368;&#20808;&#21457;&#29983;&#30340;&#26159;&#22768;&#26126;&#25104;&#21592;&#26102;&#30340;&#21021;&#22987;&#21270;&#65292;&#28982;&#21518;&#26159;&#26500;&#36896;&#20989;&#25968;&#30340;&#21021;&#22987;&#21270;&#21442;&#25968;&#21015;&#65292;&#26368;&#21518;&#26159;</span>
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#26500;&#36896;&#20989;&#25968;&#20869;&#37096;&#30340;&#36171;&#20540;</span>
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Construct c5: "</span>;
+  <span style="color: #8f3f71;">C</span> <span style="color: #076678;">c5</span>(1, <span style="color: #79740e;">"world"</span>);
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Construct c6: "</span>;
+  <span style="color: #8f3f71;">C</span> <span style="color: #076678;">c6</span>{1, <span style="color: #79740e;">"world"</span>};
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Construct c7: "</span>;
+  <span style="color: #8f3f71;">C</span> <span style="color: #076678;">c7</span> = {1, <span style="color: #79740e;">"world"</span>};
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Construct C(1, \"world\"): "</span>;
+  C(1, <span style="color: #79740e;">"world"</span>);
 
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#35843;&#29992;&#19968;&#20010;&#21442;&#25968;&#30340;&#26500;&#36896;&#20989;&#25968;&#65292;&#20197;&#19979;&#20004;&#31181;&#26041;&#27861;&#31561;&#20215;&#12290;&#31532;&#20108;&#31181;&#26041;&#27861;&#35828;&#26126;&#24403;&#21482;&#26377;&#19968;&#20010;&#21442;&#25968;&#26102;&#21487;</span>
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#30465;&#30053;&#33457;&#25324;&#21495;&#65292;&#27492;&#26102;&#20250;&#38544;&#24335;&#22320;&#29992;&#21442;&#25968; 1 &#21435;&#26500;&#36896; C&#65288;&#20063;&#23601;&#26159;&#35828;&#23545;&#24212;&#30340;&#26500;&#36896;&#20989;&#25968;&#24517;&#39035;&#19981;&#20026;</span>
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">explicit &#30340;&#65289;&#65292;&#20063;&#35828;&#26126;&#20026;&#20160;&#20040; std::string s = "world"&#26159;&#21512;&#27861;&#30340;&#65292;&#21363;&#31561;&#20215;&#20110;</span>
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">std::string s{"world"}</span>
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Construct c8: "</span>;
-  <span style="color: #ECBE7B;">C</span> <span style="color: #dcaeea;">c8</span> = <span style="color: #c678dd;">{</span>1<span style="color: #c678dd;">}</span>;
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Construct c9: "</span>;
-  <span style="color: #ECBE7B;">C</span> <span style="color: #dcaeea;">c9</span> = 1;
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#35843;&#29992;&#19968;&#20010;&#21442;&#25968;&#30340;&#26500;&#36896;&#20989;&#25968;&#65292;&#20197;&#19979;&#20004;&#31181;&#26041;&#27861;&#31561;&#20215;&#12290;&#31532;&#20108;&#31181;&#26041;&#27861;&#35828;&#26126;&#24403;&#21482;&#26377;&#19968;&#20010;&#21442;&#25968;&#26102;&#21487;</span>
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#30465;&#30053;&#33457;&#25324;&#21495;&#65292;&#27492;&#26102;&#20250;&#38544;&#24335;&#22320;&#29992;&#21442;&#25968; 1 &#21435;&#26500;&#36896; C&#65288;&#20063;&#23601;&#26159;&#35828;&#23545;&#24212;&#30340;&#26500;&#36896;&#20989;&#25968;&#24517;&#39035;&#19981;&#20026;</span>
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">explicit &#30340;&#65289;&#65292;&#20063;&#35828;&#26126;&#20026;&#20160;&#20040; std::string s = "world"&#26159;&#21512;&#27861;&#30340;&#65292;&#21363;&#31561;&#20215;&#20110;</span>
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">std::string s{"world"}</span>
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Construct c8: "</span>;
+  <span style="color: #8f3f71;">C</span> <span style="color: #076678;">c8</span> = {1};
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Construct c9: "</span>;
+  <span style="color: #8f3f71;">C</span> <span style="color: #076678;">c9</span> = 1;
 
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#27492;&#22788;&#24182;&#27809;&#26377;&#21457;&#29983;&#26500;&#36896;&#65292;&#21482;&#26159;&#29992; c4 &#32473; c1 &#36171;&#20540;</span>
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Assignment c4 with c1: "</span>;
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#27492;&#22788;&#24182;&#27809;&#26377;&#21457;&#29983;&#26500;&#36896;&#65292;&#21482;&#26159;&#29992; c4 &#32473; c1 &#36171;&#20540;</span>
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Assignment c4 with c1: "</span>;
   c4 = c1;
-<span style="color: #51afef;">}</span>
+}
 </pre>
 </div>
 
-<table>
-
-
-<colgroup>
-<col  class="org-left">
-
-<col  class="org-left">
-
-<col  class="org-left">
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left">Construct c1: Default constructor. n: 0</td>
-<td class="org-left">s: Hello</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Construct C(): Default constructor. n: 0</td>
-<td class="org-left">s: Hello</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Construct c2: Copy constructor. n: 0</td>
-<td class="org-left">s: Hello</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Construct c3: Copy constructor. n: 0</td>
-<td class="org-left">s: Hello</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Construct C4 with C(): Default constructor. n: 0</td>
-<td class="org-left">s: Hello</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Construct c5: Constructor with two arguments. n: 1</td>
-<td class="org-left">s: world</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Construct c6: Constructor with two arguments. n: 1</td>
-<td class="org-left">s: world</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Construct c7: Constructor with two arguments. n: 1</td>
-<td class="org-left">s: world</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Construct C(1</td>
-<td class="org-left">world): Constructor with two arguments. n: 1</td>
-<td class="org-left">s: world</td>
-</tr>
-
-<tr>
-<td class="org-left">Construct c8: Constructor with one argument. n: 2</td>
-<td class="org-left">s: Hello</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Construct c9: Constructor with one argument. n: 2</td>
-<td class="org-left">s: Hello</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Assignment c4 with c1: Assignment. n: 0</td>
-<td class="org-left">s: Hello</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
+<pre class="example" id="org8bf4c6b">
+Construct c1: Default constructor. n: 0, s: Hello
+Construct C(): Default constructor. n: 0, s: Hello
+Construct c2: Copy constructor. n: 0, s: Hello
+Construct c3: Copy constructor. n: 0, s: Hello
+Construct C4 with C(): Default constructor. n: 0, s: Hello
+Construct c5: Constructor with two arguments. n: 1, s: world
+Construct c6: Constructor with two arguments. n: 1, s: world
+Construct c7: Constructor with two arguments. n: 1, s: world
+Construct C(1, "world"): Constructor with two arguments. n: 1, s: world
+Construct c8: Constructor with one argument. n: 2, s: Hello
+Construct c9: Constructor with one argument. n: 2, s: Hello
+Assignment c4 with c1: Assignment. n: 0, s: Hello
+</pre>
 </div>
 <div id="postamble" class="status">
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-06-15 Mon 21:10></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</div>
-      <div id="built">Built: <2021-05-31 Mon 18:29></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
+      <div id="built">Built: <2022-10-23 Sun 09:02></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

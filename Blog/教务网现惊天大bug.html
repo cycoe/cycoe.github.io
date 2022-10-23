@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-31 Mon 18:29 -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2022-10-23 Sun 09:02 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>教務網現驚天大 bug？！談談弱密碼如何暴露你的信息</title>
-<meta name="generator" content="Org mode">
-<meta name="author" content="Cycoe">
+<meta name="author" content="Cycoe" />
+<meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
 <script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
@@ -49,12 +49,12 @@
   <div id="caption"></div>
 </div>
 </div>
-<div id="content">
+<div id="content" class="content">
 <header>
 <h1 class="title">教務網現驚天大 bug？！談談弱密碼如何暴露你的信息</h1>
-</header><nav id="table-of-contents">
+</header><nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
 <li><a href="#漏洞發現">1. 漏洞發現</a></li>
 <li><a href="#漏洞驗證">2. 漏洞驗證</a></li>
@@ -69,13 +69,13 @@
 </nav>
 
 <div id="outline-container-漏洞發現" class="outline-2">
-<h2 id="漏洞發現"><span class="section-number-2">1</span> 漏洞發現</h2>
+<h2 id="漏洞發現"><span class="section-number-2">1.</span> 漏洞發現</h2>
 <div class="outline-text-2" id="text-漏洞發現">
 <p>
 最近在爲之前寫的爬蟲做批註的時候發現了一段有趣的代碼，代碼如下
 </p>
 
-<div class="HTML" id="orgb02f9b7">
+<div class="HTML" id="orgb419c59">
 <p>
 &lt;!&#x2013;more&#x2013;&gt;
 </p>
@@ -83,33 +83,33 @@
 </div>
 
 <div class="org-src-container">
-<pre class="src src-python">MisUtils.initAttempt<span style="color: #51afef;">()</span>
-<span style="color: #51afef;">while</span> MisUtils.descAttempt<span style="color: #51afef;">()</span>:
-    <span style="color: #51afef;">self</span>.<span style="color: #dcaeea;">response</span> = <span style="color: #51afef;">self</span>.session.send<span style="color: #51afef;">(</span>prepareBody<span style="color: #51afef;">)</span>
-    <span style="color: #51afef;">if</span> <span style="color: #51afef;">self</span>.response.status_code == 200:
-        <span style="color: #51afef;">break</span>
-<span style="color: #51afef;">if</span> <span style="color: #51afef;">not</span> MisUtils.descAttempt<span style="color: #51afef;">()</span>:
-    Logger.log<span style="color: #51afef;">(</span><span style="color: #98be65;">'Up to max attempts!'</span>, <span style="color: #c678dd;">[</span><span style="color: #98be65;">'Maybe remote server unreachable'</span><span style="color: #c678dd;">]</span>, level=Logger.error<span style="color: #51afef;">)</span>
-    <span style="color: #51afef;">return</span> <span style="color: #a9a1e1;">False</span>
+<pre class="src src-python">MisUtils.initAttempt()
+<span style="color: #9d0006;">while</span> MisUtils.descAttempt():
+    <span style="color: #9d0006;">self</span>.<span style="color: #076678;">response</span> = <span style="color: #9d0006;">self</span>.session.send(prepareBody)
+    <span style="color: #9d0006;">if</span> <span style="color: #9d0006;">self</span>.response.status_code == 200:
+        <span style="color: #9d0006;">break</span>
+<span style="color: #9d0006;">if</span> <span style="color: #9d0006;">not</span> MisUtils.descAttempt():
+    Logger.log(<span style="color: #79740e;">'Up to max attempts!'</span>, [<span style="color: #79740e;">'Maybe remote server unreachable'</span>], level=Logger.error)
+    <span style="color: #9d0006;">return</span> <span style="color: #8f3f71;">False</span>
 
-<span style="color: #51afef;">if</span> re.search<span style="color: #51afef;">(</span><span style="color: #98be65;">'&#29992;&#25142;&#21517;&#19981;&#23384;&#22312;'</span>, <span style="color: #51afef;">self</span>.response.text<span style="color: #51afef;">)</span>:
-    <span style="color: #51afef;">print</span><span style="color: #51afef;">(</span>Logger.log<span style="color: #c678dd;">(</span><span style="color: #98be65;">'No such a user!'</span>, <span style="color: #98be65;">[</span><span style="color: #98be65;">'Cleaning password file'</span><span style="color: #98be65;">]</span>, level=Logger.error<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
-    reInput = <span style="color: #a9a1e1;">True</span>
+<span style="color: #9d0006;">if</span> re.search(<span style="color: #79740e;">'&#29992;&#25142;&#21517;&#19981;&#23384;&#22312;'</span>, <span style="color: #9d0006;">self</span>.response.text):
+    <span style="color: #af3a03;">print</span>(Logger.log(<span style="color: #79740e;">'No such a user!'</span>, [<span style="color: #79740e;">'Cleaning password file'</span>], level=Logger.error))
+    reInput = <span style="color: #8f3f71;">True</span>
 
-<span style="color: #51afef;">elif</span> re.search<span style="color: #51afef;">(</span><span style="color: #98be65;">'&#23494;&#30908;&#37679;&#35492;'</span>, <span style="color: #51afef;">self</span>.response.text<span style="color: #51afef;">)</span>:
-    <span style="color: #51afef;">print</span><span style="color: #51afef;">(</span>Logger.log<span style="color: #c678dd;">(</span><span style="color: #98be65;">'Wrong password!'</span>, <span style="color: #98be65;">[</span><span style="color: #98be65;">'Cleaning password file'</span><span style="color: #98be65;">]</span>, level=Logger.error<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
-    reInput = <span style="color: #a9a1e1;">True</span>
+<span style="color: #9d0006;">elif</span> re.search(<span style="color: #79740e;">'&#23494;&#30908;&#37679;&#35492;'</span>, <span style="color: #9d0006;">self</span>.response.text):
+    <span style="color: #af3a03;">print</span>(Logger.log(<span style="color: #79740e;">'Wrong password!'</span>, [<span style="color: #79740e;">'Cleaning password file'</span>], level=Logger.error))
+    reInput = <span style="color: #8f3f71;">True</span>
 
-<span style="color: #51afef;">elif</span> re.search<span style="color: #51afef;">(</span><span style="color: #98be65;">'&#35531;&#36664;&#20837;&#39511;&#35657;&#30908;'</span>, <span style="color: #51afef;">self</span>.response.text<span style="color: #51afef;">)</span>:
-    <span style="color: #51afef;">print</span><span style="color: #51afef;">(</span>Logger.log<span style="color: #c678dd;">(</span><span style="color: #98be65;">'Please input vertify code!'</span>, <span style="color: #98be65;">[</span><span style="color: #98be65;">'Retrying...'</span><span style="color: #98be65;">]</span>, level=Logger.error<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+<span style="color: #9d0006;">elif</span> re.search(<span style="color: #79740e;">'&#35531;&#36664;&#20837;&#39511;&#35657;&#30908;'</span>, <span style="color: #9d0006;">self</span>.response.text):
+    <span style="color: #af3a03;">print</span>(Logger.log(<span style="color: #79740e;">'Please input vertify code!'</span>, [<span style="color: #79740e;">'Retrying...'</span>], level=Logger.error))
 
-<span style="color: #51afef;">elif</span> re.search<span style="color: #51afef;">(</span><span style="color: #98be65;">'&#39511;&#35657;&#30908;&#37679;&#35492;'</span>, <span style="color: #51afef;">self</span>.response.text<span style="color: #51afef;">)</span>:
-    <span style="color: #51afef;">print</span><span style="color: #51afef;">(</span>Logger.log<span style="color: #c678dd;">(</span><span style="color: #98be65;">'Wrong vertify code!'</span>, <span style="color: #98be65;">[</span><span style="color: #98be65;">'Retrying...'</span><span style="color: #98be65;">]</span>, level=Logger.error<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+<span style="color: #9d0006;">elif</span> re.search(<span style="color: #79740e;">'&#39511;&#35657;&#30908;&#37679;&#35492;'</span>, <span style="color: #9d0006;">self</span>.response.text):
+    <span style="color: #af3a03;">print</span>(Logger.log(<span style="color: #79740e;">'Wrong vertify code!'</span>, [<span style="color: #79740e;">'Retrying...'</span>], level=Logger.error))
 
-<span style="color: #51afef;">else</span>:
-    <span style="color: #51afef;">print</span><span style="color: #51afef;">(</span>Logger.log<span style="color: #c678dd;">(</span><span style="color: #98be65;">'Login successfully!'</span>, <span style="color: #98be65;">[</span><span style="color: #98be65;">'UserName: '</span> + MisUtils.confDict<span style="color: #a9a1e1;">[</span><span style="color: #98be65;">'userName'</span><span style="color: #a9a1e1;">]</span><span style="color: #98be65;">]</span>, level=Logger.error<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
-    MisUtils.dumpConfFile<span style="color: #51afef;">()</span>
-    <span style="color: #51afef;">break</span>
+<span style="color: #9d0006;">else</span>:
+    <span style="color: #af3a03;">print</span>(Logger.log(<span style="color: #79740e;">'Login successfully!'</span>, [<span style="color: #79740e;">'UserName: '</span> + MisUtils.confDict[<span style="color: #79740e;">'userName'</span>]], level=Logger.error))
+    MisUtils.dumpConfFile()
+    <span style="color: #9d0006;">break</span>
 </pre>
 </div>
 
@@ -130,7 +130,7 @@
 </div>
 
 <div id="outline-container-漏洞驗證" class="outline-2">
-<h2 id="漏洞驗證"><span class="section-number-2">2</span> 漏洞驗證</h2>
+<h2 id="漏洞驗證"><span class="section-number-2">2.</span> 漏洞驗證</h2>
 <div class="outline-text-2" id="text-漏洞驗證">
 <p>
 接下來去教務網上驗證一下整個驗證邏輯是否如所想的那樣
@@ -141,7 +141,7 @@
 彈出"用戶名不存在"的 JS 腳本</li>
 </ol>
 
-<figure id="org8d5dbdb">
+<figure id="org8942c9e">
 <img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login1.png" alt="login1.png">
 
 </figure>
@@ -149,7 +149,7 @@
 <li>再輸入我正確的學號，仍保持密碼和驗證碼都爲空，嘗試登錄彈出"密碼錯誤"的 JS 腳本</li>
 </ol>
 
-<figure id="org6ee1467">
+<figure id="org432680b">
 <img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login2.png" alt="login2.png">
 
 </figure>
@@ -157,7 +157,7 @@
 <li>輸入正確的學號和密碼，並保持驗證碼爲空，嘗試登錄彈出"請輸入驗證碼"的 JS 腳本</li>
 </ol>
 
-<figure id="orgc45a34e">
+<figure id="org77aab79">
 <img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login3.png" alt="login3.png">
 
 </figure>
@@ -165,7 +165,7 @@
 <li>輸入正確的學號和密碼，但是輸入錯誤的驗證碼，嘗試登錄彈出"驗證碼錯誤"的 JS 腳本</li>
 </ol>
 
-<figure id="orgb6c2c2e">
+<figure id="orgc79b3b4">
 <img src="https://raw.githubusercontent.com/cycoe/cycoe.github.io/master/images/posts/20171208/login4.png" alt="login4.png">
 
 </figure>
@@ -183,7 +183,7 @@
 </div>
 
 <div id="outline-container-漏洞利用" class="outline-2">
-<h2 id="漏洞利用"><span class="section-number-2">3</span> 漏洞利用</h2>
+<h2 id="漏洞利用"><span class="section-number-2">3.</span> 漏洞利用</h2>
 <div class="outline-text-2" id="text-漏洞利用">
 <p>
 通過上面的兩條信息可以至少做到兩件事情 ### 枚舉用戶名目前所有在讀研究生的入學時
@@ -194,7 +194,7 @@
 </div>
 
 <div id="outline-container-暴破" class="outline-3">
-<h3 id="暴破"><span class="section-number-3">3.1</span> 暴破</h3>
+<h3 id="暴破"><span class="section-number-3">3.1.</span> 暴破</h3>
 <div class="outline-text-3" id="text-暴破">
 <p>
 利用上一步得到的用戶名列表，再配合字典就可以進行在線的密碼暴破，這種破解方法一般
@@ -208,37 +208,37 @@
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #dcaeea;">big_month_</span> = <span style="color: #51afef;">[</span>1, 3, 5, 7, 8, 10, 12<span style="color: #51afef;">]</span>
-<span style="color: #dcaeea;">small_month_</span> = <span style="color: #51afef;">[</span>4, 6, 9, 11<span style="color: #51afef;">]</span>
+<pre class="src src-python"><span style="color: #076678;">big_month_</span> = [1, 3, 5, 7, 8, 10, 12]
+<span style="color: #076678;">small_month_</span> = [4, 6, 9, 11]
 
 
-<span style="color: #51afef;">def</span> <span style="color: #c678dd;">gen_</span><span style="color: #51afef;">(</span>begin, end<span style="color: #51afef;">)</span>:
-    <span style="color: #dcaeea;">password_</span> = <span style="color: #51afef;">[]</span>
-    <span style="color: #51afef;">for</span> year <span style="color: #51afef;">in</span> <span style="color: #c678dd;">range</span><span style="color: #51afef;">(</span>begin, end + 1<span style="color: #51afef;">)</span>:
-        <span style="color: #51afef;">for</span> month <span style="color: #51afef;">in</span> <span style="color: #c678dd;">range</span><span style="color: #51afef;">(</span>1, 13<span style="color: #51afef;">)</span>:
-            <span style="color: #51afef;">if</span> month <span style="color: #51afef;">in</span> <span style="color: #dcaeea;">big_month_</span>:
+<span style="color: #9d0006;">def</span> <span style="color: #b57614;">gen_</span>(begin, end):
+    <span style="color: #076678;">password_</span> = []
+    <span style="color: #9d0006;">for</span> year <span style="color: #9d0006;">in</span> <span style="color: #af3a03;">range</span>(begin, end + 1):
+        <span style="color: #9d0006;">for</span> month <span style="color: #9d0006;">in</span> <span style="color: #af3a03;">range</span>(1, 13):
+            <span style="color: #9d0006;">if</span> month <span style="color: #9d0006;">in</span> <span style="color: #076678;">big_month_</span>:
                 month_len = 31
-            <span style="color: #51afef;">elif</span> month <span style="color: #51afef;">in</span> <span style="color: #dcaeea;">small_month_</span>:
+            <span style="color: #9d0006;">elif</span> month <span style="color: #9d0006;">in</span> <span style="color: #076678;">small_month_</span>:
                 month_len = 30
-            <span style="color: #51afef;">elif</span> month == 2:
-                <span style="color: #51afef;">if</span> year % 4 != 0 <span style="color: #51afef;">or</span> <span style="color: #51afef;">(</span>year % 100 == 0 <span style="color: #51afef;">and</span> year % 400 != 0<span style="color: #51afef;">)</span>:
+            <span style="color: #9d0006;">elif</span> month == 2:
+                <span style="color: #9d0006;">if</span> year % 4 != 0 <span style="color: #9d0006;">or</span> (year % 100 == 0 <span style="color: #9d0006;">and</span> year % 400 != 0):
                     month_len = 28
-                <span style="color: #51afef;">else</span>:
+                <span style="color: #9d0006;">else</span>:
                     month_len = 29
-            <span style="color: #51afef;">else</span>:
+            <span style="color: #9d0006;">else</span>:
                 month_len = 31
 
-            <span style="color: #51afef;">for</span> day <span style="color: #51afef;">in</span> <span style="color: #c678dd;">range</span><span style="color: #51afef;">(</span>1, month_len + 1<span style="color: #51afef;">)</span>:
-                password_.append<span style="color: #51afef;">(</span><span style="color: #c678dd;">str</span><span style="color: #c678dd;">(</span>year<span style="color: #c678dd;">)</span> + <span style="color: #c678dd;">str</span><span style="color: #c678dd;">(</span>month<span style="color: #c678dd;">)</span>.zfill<span style="color: #c678dd;">(</span>2<span style="color: #c678dd;">)</span> + <span style="color: #c678dd;">str</span><span style="color: #c678dd;">(</span>day<span style="color: #c678dd;">)</span>.zfill<span style="color: #c678dd;">(</span>2<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+            <span style="color: #9d0006;">for</span> day <span style="color: #9d0006;">in</span> <span style="color: #af3a03;">range</span>(1, month_len + 1):
+                password_.append(<span style="color: #af3a03;">str</span>(year) + <span style="color: #af3a03;">str</span>(month).zfill(2) + <span style="color: #af3a03;">str</span>(day).zfill(2))
 
-    <span style="color: #51afef;">with</span> <span style="color: #c678dd;">open</span><span style="color: #51afef;">(</span><span style="color: #98be65;">'password.dict'</span>, <span style="color: #98be65;">'w'</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">as</span> fr:
-        <span style="color: #51afef;">for</span> password <span style="color: #51afef;">in</span> password_:
-            fr.write<span style="color: #51afef;">(</span>password<span style="color: #51afef;">)</span>
-            fr.write<span style="color: #51afef;">(</span><span style="color: #98be65;">'\n'</span><span style="color: #51afef;">)</span>
+    <span style="color: #9d0006;">with</span> <span style="color: #af3a03;">open</span>(<span style="color: #79740e;">'password.dict'</span>, <span style="color: #79740e;">'w'</span>) <span style="color: #9d0006;">as</span> fr:
+        <span style="color: #9d0006;">for</span> password <span style="color: #9d0006;">in</span> password_:
+            fr.write(password)
+            fr.write(<span style="color: #79740e;">'\n'</span>)
 
 
-<span style="color: #51afef;">def</span> <span style="color: #c678dd;">main</span><span style="color: #51afef;">()</span>:
-    gen_<span style="color: #51afef;">(</span>1994, 1996<span style="color: #51afef;">)</span>
+<span style="color: #9d0006;">def</span> <span style="color: #b57614;">main</span>():
+    gen_(1994, 1996)
 </pre>
 </div>
 
@@ -250,7 +250,7 @@
 </div>
 
 <div id="outline-container-總結" class="outline-2">
-<h2 id="總結"><span class="section-number-2">4</span> 總結</h2>
+<h2 id="總結"><span class="section-number-2">4.</span> 總結</h2>
 <div class="outline-text-2" id="text-總結">
 <p>
 最後結果怎麼樣？使用 100 個線程，並設置單個線程的訪問頻率爲 1次/秒進行暴破，10
@@ -270,8 +270,8 @@
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2017-12-07 Sun></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</div>
-      <div id="built">Built: <2021-05-31 Mon 18:29></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
+      <div id="built">Built: <2022-10-23 Sun 09:02></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

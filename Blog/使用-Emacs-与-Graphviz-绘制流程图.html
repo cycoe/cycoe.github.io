@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-31 Mon 18:29 -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2022-10-23 Sun 09:02 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>使用 Emacs 与 Graphviz 绘制流程图</title>
-<meta name="generator" content="Org mode">
-<meta name="author" content="Cycoe">
+<meta name="author" content="Cycoe" />
+<meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
 <script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
@@ -49,34 +49,34 @@
   <div id="caption"></div>
 </div>
 </div>
-<div id="content">
+<div id="content" class="content">
 <header>
 <h1 class="title">使用 Emacs 与 Graphviz 绘制流程图</h1>
-</header><nav id="table-of-contents">
+</header><nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgfb8a222">1. 安装</a>
+<li><a href="#org06bc494">1. 安装</a>
 <ul>
-<li><a href="#orgbd54181">1.1. Graphviz</a></li>
-<li><a href="#org6dc77ea">1.2. graphviz-dot-mode</a></li>
+<li><a href="#org76a0208">1.1. Graphviz</a></li>
+<li><a href="#orgf218cca">1.2. graphviz-dot-mode</a></li>
 </ul>
 </li>
-<li><a href="#org175e318">2. 布局器</a></li>
-<li><a href="#org1966ffb">3. 基本使用</a></li>
-<li><a href="#orgcd26cdd">4. 绘制属性</a>
+<li><a href="#org454352e">2. 布局器</a></li>
+<li><a href="#org5d1846b">3. 基本使用</a></li>
+<li><a href="#org31e230e">4. 绘制属性</a>
 <ul>
-<li><a href="#orgdc3089f">4.1. 节点</a></li>
-<li><a href="#org0550578">4.2. 边</a></li>
-<li><a href="#org234bbea">4.3. 边的方向</a></li>
+<li><a href="#orgd838073">4.1. 节点</a></li>
+<li><a href="#org88e8ec8">4.2. 边</a></li>
+<li><a href="#orge5bfc85">4.3. 边的方向</a></li>
 </ul>
 </li>
-<li><a href="#org7b93137">5. 子图</a></li>
+<li><a href="#orgf936207">5. 子图</a></li>
 </ul>
 </div>
 </nav>
 
-<figure id="org2e9fab1">
+<figure id="org358048a">
 <img src="使用-Emacs-与-Graphviz-绘制流程图/2020-03-11_10-40-29_app.png" alt="2020-03-11_10-40-29_app.png">
 
 </figure>
@@ -95,12 +95,12 @@
 义上的函数图像那种图，而是数据结构中的图，强调的关系。
 </p>
 
-<div id="outline-container-orgfb8a222" class="outline-2">
-<h2 id="orgfb8a222"><span class="section-number-2">1</span> 安装</h2>
+<div id="outline-container-org06bc494" class="outline-2">
+<h2 id="org06bc494"><span class="section-number-2">1.</span> 安装</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgbd54181" class="outline-3">
-<h3 id="orgbd54181"><span class="section-number-3">1.1</span> Graphviz</h3>
+<div id="outline-container-org76a0208" class="outline-3">
+<h3 id="org76a0208"><span class="section-number-3">1.1.</span> Graphviz</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Graphviz 本质上是一个命令行工具，在 Archlinux 上只需要通过 <code>sudo pacman -S
@@ -109,8 +109,8 @@ graphviz</code> 安装即可，其他系统类似。
 </div>
 </div>
 
-<div id="outline-container-org6dc77ea" class="outline-3">
-<h3 id="org6dc77ea"><span class="section-number-3">1.2</span> graphviz-dot-mode</h3>
+<div id="outline-container-orgf218cca" class="outline-3">
+<h3 id="orgf218cca"><span class="section-number-3">1.2.</span> graphviz-dot-mode</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Graphviz 在 Emacs 中的集成是通过 <code>graphviz-dot-mode</code> 这个包来实现的，只需要 <code>&lt;M-x&gt;
@@ -121,19 +121,19 @@ package-install graphviz-dot-mode &lt;RET&gt;</code> 即可。
 然后在 Emacs 配置中加入以下内容来启用
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #51afef;">(</span><span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">graphviz-dot-mode</span>
-  <span style="color: #c678dd;">:ensure</span> <span style="color: #dcaeea;">t</span>
-  <span style="color: #c678dd;">:config</span>
-  <span style="color: #c678dd;">(</span><span style="color: #51afef;">setq</span> graphviz-dot-indent-width 4<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+<pre class="src src-emacs-lisp">(<span style="color: #9d0006;">use-package</span> <span style="color: #8f3f71;">graphviz-dot-mode</span>
+  <span style="color: #af3a03;">:ensure</span> t
+  <span style="color: #af3a03;">:config</span>
+  (<span style="color: #9d0006;">setq</span> graphviz-dot-indent-width 4))
 
-<span style="color: #51afef;">(</span><span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">company-graphviz-dot</span><span style="color: #51afef;">)</span>
+(<span style="color: #9d0006;">use-package</span> <span style="color: #8f3f71;">company-graphviz-dot</span>)
 </pre>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org175e318" class="outline-2">
-<h2 id="org175e318"><span class="section-number-2">2</span> 布局器</h2>
+<div id="outline-container-org454352e" class="outline-2">
+<h2 id="org454352e"><span class="section-number-2">2.</span> 布局器</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Graphviz 中包含了众多的布局器：
@@ -148,8 +148,8 @@ Graphviz 中包含了众多的布局器：
 </div>
 </div>
 
-<div id="outline-container-org1966ffb" class="outline-2">
-<h2 id="org1966ffb"><span class="section-number-2">3</span> 基本使用</h2>
+<div id="outline-container-org5d1846b" class="outline-2">
+<h2 id="org5d1846b"><span class="section-number-2">3.</span> 基本使用</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Graphviz 构建组件为图，节点，边，用属性对其进行描述。
@@ -172,7 +172,7 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </div>
 
 
-<figure id="org095d587">
+<figure id="org7dec03c">
 <img src="使用-Emacs-与-Graphviz-绘制流程图/first.png" alt="first.png">
 
 </figure>
@@ -194,13 +194,13 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 用 Emacs Babel 进行绘制，需要如下所示的 Headers。
 </p>
 <div class="org-src-container">
-<pre class="src src-org"><span style="color: #5B6268; background-color: #23272e;">#+begin_src dot :file first.png :cmdline -Tpng :results silent</span>
-<span style="background-color: #23272e;">  digraph first{</span>
-<span style="background-color: #23272e;">      a-&gt;b;</span>
-<span style="background-color: #23272e;">      b-&gt;d;</span>
-<span style="background-color: #23272e;">      c-&gt;d;</span>
-<span style="background-color: #23272e;">  }</span>
-<span style="color: #5B6268; background-color: #23272e;">#+end_src</span>
+<pre class="src src-org"><span style="background-color: #ebdbb2;">#+begin_src dot :file first.png :cmdline -Tpng :results silent</span>
+<span style="background-color: #f2e5bc;">  digraph first{</span>
+<span style="background-color: #f2e5bc;">      a-&gt;b;</span>
+<span style="background-color: #f2e5bc;">      b-&gt;d;</span>
+<span style="background-color: #f2e5bc;">      c-&gt;d;</span>
+<span style="background-color: #f2e5bc;">  }</span>
+<span style="background-color: #ebdbb2;">#+end_src</span>
 </pre>
 </div>
 
@@ -210,8 +210,8 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </div>
 </div>
 
-<div id="outline-container-orgcd26cdd" class="outline-2">
-<h2 id="orgcd26cdd"><span class="section-number-2">4</span> 绘制属性</h2>
+<div id="outline-container-org31e230e" class="outline-2">
+<h2 id="org31e230e"><span class="section-number-2">4.</span> 绘制属性</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 一个图中可能有非常多的节点与边，如果每次都需要声明一个节点的属性会非常麻烦。类似
@@ -246,7 +246,7 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </div>
 
 <p>
-<a id="org71a70e2"></a>
+<a id="orgc77424e"></a>
 <img src="使用-Emacs-与-Graphviz-绘制流程图/property.png" alt="property.png">
 </p>
 
@@ -271,7 +271,7 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </p>
 
 
-<figure id="orgb5529b8">
+<figure id="org633635a">
 <img src="使用-Emacs-与-Graphviz-绘制流程图/Screenshot_20200311_143758_yfrBsd.png" alt="Screenshot_20200311_143758_yfrBsd.png">
 
 </figure></li>
@@ -290,7 +290,7 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </pre>
 </div>
 
-<figure id="org46c0468">
+<figure id="orga0093fd">
 <img src="使用-Emacs-与-Graphviz-绘制流程图/rankdir.png" alt="rankdir.png">
 
 </figure></li>
@@ -300,8 +300,8 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </ul>
 </div>
 
-<div id="outline-container-orgdc3089f" class="outline-3">
-<h3 id="orgdc3089f"><span class="section-number-3">4.1</span> 节点</h3>
+<div id="outline-container-orgd838073" class="outline-3">
+<h3 id="orgd838073"><span class="section-number-3">4.1.</span> 节点</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 节点的默认属性为 shape = ellipse, width = .75, height = 0.5 并且用节点标识符作为
@@ -309,7 +309,7 @@ Graphviz 构建组件为图，节点，边，用属性对其进行描述。
 </p>
 
 <p>
-如 <a href="#org71a70e2">图 1</a> 中所示，声明两个节点 <i>小蓝</i> 和 <i>小红/，/小蓝</i> 或 <i>小红</i> 就表示这个节点的节点标
+如 <a href="#orgc77424e">图 1</a> 中所示，声明两个节点 <i>小蓝</i> 和 <i>小红/，/小蓝</i> 或 <i>小红</i> 就表示这个节点的节点标
 识符，后面紧跟的是该节点的属性列表；另一种用法为 节点标识符:节点部分:方向[属性列
 表] <code>小蓝:body[style=filled color=lightblue]</code>, 这个为单一节点声明的方式。
 </p>
@@ -336,8 +336,8 @@ source 或 min 的子图</li>
 </div>
 </div>
 
-<div id="outline-container-org0550578" class="outline-3">
-<h3 id="org0550578"><span class="section-number-3">4.2</span> 边</h3>
+<div id="outline-container-org88e8ec8" class="outline-3">
+<h3 id="org88e8ec8"><span class="section-number-3">4.2.</span> 边</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 有向图中的的边用 <code>-&gt;</code> 表示，无向图用 <code>--</code> 表示。
@@ -354,7 +354,7 @@ source 或 min 的子图</li>
 </pre>
 </div>
 
-<figure id="org2f2cecd">
+<figure id="org9cb5917">
 <img src="使用-Emacs-与-Graphviz-绘制流程图/edge_color.png" alt="edge_color.png">
 
 </figure>
@@ -385,7 +385,7 @@ source 或 min 的子图</li>
 </pre>
 </div>
 
-<figure id="orgd10e4fe">
+<figure id="orgfbac18c">
 <img src="使用-Emacs-与-Graphviz-绘制流程图/edge_weight.png" alt="edge_weight.png">
 
 </figure></li>
@@ -410,7 +410,7 @@ none 或者 "", 无边
 </pre>
 </div>
 
-<figure id="org8e12ecd">
+<figure id="orgc9fdffa">
 <img src="使用-Emacs-与-Graphviz-绘制流程图/edge_splines_none.png" alt="edge_splines_none.png">
 
 </figure></li>
@@ -429,7 +429,7 @@ true 或者 spline, 样条线（无规则，可为直或者曲线）
 </pre>
 </div>
 
-<figure id="orgfa16e0c">
+<figure id="org8ecc3bd">
 <img src="使用-Emacs-与-Graphviz-绘制流程图/edge_splines_spline.png" alt="edge_splines_spline.png">
 
 </figure></li>
@@ -448,7 +448,7 @@ false 或者 line, 直线
 </pre>
 </div>
 
-<figure id="orga71ae45">
+<figure id="org9d5e119">
 <img src="使用-Emacs-与-Graphviz-绘制流程图/edge_splines_line.png" alt="edge_splines_line.png">
 
 </figure></li>
@@ -467,7 +467,7 @@ polyline, 折线
 </pre>
 </div>
 
-<figure id="orge74c5da">
+<figure id="orgb42e0cf">
 <img src="使用-Emacs-与-Graphviz-绘制流程图/edge_splines_polyline.png" alt="edge_splines_polyline.png">
 
 </figure></li>
@@ -486,7 +486,7 @@ curved, 曲弧线，看起来像贝塞尔曲线
 </pre>
 </div>
 
-<figure id="org9c5bd9b">
+<figure id="orgb81a5f9">
 <img src="使用-Emacs-与-Graphviz-绘制流程图/edge_splines_curved.png" alt="edge_splines_curved.png">
 
 </figure></li>
@@ -505,7 +505,7 @@ ortho, 正交折线
 </pre>
 </div>
 
-<figure id="org680aab3">
+<figure id="orgabfa1c4">
 <img src="使用-Emacs-与-Graphviz-绘制流程图/edge_splines_ortho.png" alt="edge_splines_ortho.png">
 
 </figure></li>
@@ -514,8 +514,8 @@ ortho, 正交折线
 </div>
 </div>
 
-<div id="outline-container-org234bbea" class="outline-3">
-<h3 id="org234bbea"><span class="section-number-3">4.3</span> 边的方向</h3>
+<div id="outline-container-orge5bfc85" class="outline-3">
+<h3 id="orge5bfc85"><span class="section-number-3">4.3.</span> 边的方向</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 <b>示例</b> 声明多部分节点，以及对各部分进行单独设置
@@ -550,7 +550,7 @@ node0:head[color=lightblue];
 </div>
 
 
-<figure id="org80b9011">
+<figure id="orgae0493c">
 <img src="使用-Emacs-与-Graphviz-绘制流程图/direction.png" alt="direction.png">
 
 </figure>
@@ -558,8 +558,8 @@ node0:head[color=lightblue];
 </div>
 </div>
 
-<div id="outline-container-org7b93137" class="outline-2">
-<h2 id="org7b93137"><span class="section-number-2">5</span> 子图</h2>
+<div id="outline-container-orgf936207" class="outline-2">
+<h2 id="orgf936207"><span class="section-number-2">5.</span> 子图</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 <b>subgraph</b> 必须配合 <b>cluster</b> 一起使用，用法为 =subgraph cluster* {} 。
@@ -599,7 +599,7 @@ node0:head[color=lightblue];
 </pre>
 </div>
 
-<figure id="orgd3943fd">
+<figure id="org8f7e451">
 <img src="使用-Emacs-与-Graphviz-绘制流程图/subgraph.png" alt="subgraph.png">
 
 </figure>
@@ -610,8 +610,8 @@ node0:head[color=lightblue];
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-03-11 Wed 10:37></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</div>
-      <div id="built">Built: <2021-05-31 Mon 18:29></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
+      <div id="built">Built: <2022-10-23 Sun 09:02></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

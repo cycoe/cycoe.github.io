@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-31 Mon 18:29 -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2022-10-23 Sun 09:02 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>反向 SSH 实现内网穿透</title>
-<meta name="generator" content="Org mode">
-<meta name="author" content="Cycoe">
+<meta name="author" content="Cycoe" />
+<meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
 <script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
@@ -49,12 +49,12 @@
   <div id="caption"></div>
 </div>
 </div>
-<div id="content">
+<div id="content" class="content">
 <header>
 <h1 class="title">反向 SSH 实现内网穿透</h1>
-</header><nav id="table-of-contents">
+</header><nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
 <li><a href="#ssh-协议与应用">1. SSH 协议与应用</a></li>
 <li><a href="#网络拓扑分析">2. 网络拓扑分析</a></li>
@@ -114,7 +114,7 @@ SSH连接至计算平台。这种方法包含几个明显的弊端：
 </ol>
 
 <div id="outline-container-ssh-协议与应用" class="outline-2">
-<h2 id="ssh-协议与应用"><span class="section-number-2">1</span> SSH 协议与应用</h2>
+<h2 id="ssh-协议与应用"><span class="section-number-2">1.</span> SSH 协议与应用</h2>
 <div class="outline-text-2" id="text-ssh-协议与应用">
 <blockquote>
 <p>
@@ -138,7 +138,7 @@ Client)。主机可以通过 SSH 客户端连接运行了 SSH 服务端的主机
 </div>
 
 <div id="outline-container-网络拓扑分析" class="outline-2">
-<h2 id="网络拓扑分析"><span class="section-number-2">2</span> 网络拓扑分析</h2>
+<h2 id="网络拓扑分析"><span class="section-number-2">2.</span> 网络拓扑分析</h2>
 <div class="outline-text-2" id="text-网络拓扑分析">
 <p>
 互联网是一张巨大的网，其中所有的主机都由有线或无线的方式相连，但并不代表任意两台
@@ -152,7 +152,7 @@ Client)。主机可以通过 SSH 客户端连接运行了 SSH 服务端的主机
 </p>
 
 
-<figure id="org7a0b6c8">
+<figure id="orgeebecbd">
 <img src="反向SSH实现内网穿透/topology.png" alt="topology.png">
 
 <figcaption><span class="figure-number">Figure 1: </span>网络拓扑分析</figcaption>
@@ -214,7 +214,7 @@ Client)。主机可以通过 SSH 客户端连接运行了 SSH 服务端的主机
 </div>
 
 <div id="outline-container-解决方法" class="outline-2">
-<h2 id="解决方法"><span class="section-number-2">3</span> 解决方法</h2>
+<h2 id="解决方法"><span class="section-number-2">3.</span> 解决方法</h2>
 <div class="outline-text-2" id="text-解决方法">
 <p>
 通俗地说：就是在主机 A 上做到 O 的反向代理；然后在 O 上做正向的代理实现本地端口
@@ -223,7 +223,7 @@ Client)。主机可以通过 SSH 客户端连接运行了 SSH 服务端的主机
 </div>
 
 <div id="outline-container-准备工作" class="outline-3">
-<h3 id="准备工作"><span class="section-number-3">3.1</span> 准备工作</h3>
+<h3 id="准备工作"><span class="section-number-3">3.1.</span> 准备工作</h3>
 <div class="outline-text-3" id="text-准备工作">
 <p>
 A、B、O 上都要安装 SSH Client，A、O 上需要安装 SSH Daemon。
@@ -234,18 +234,18 @@ A、B、O 上都要安装 SSH Client，A、O 上需要安装 SSH Daemon。
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#21453;&#21521;&#20195;&#29702;</span>
+<pre class="src src-sh"><span style="color: #a89984;"># </span><span style="color: #a89984;">&#21453;&#21521;&#20195;&#29702;</span>
 ssh -fCNR
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#27491;&#21521;&#20195;&#29702;</span>
+<pre class="src src-sh"><span style="color: #a89984;"># </span><span style="color: #a89984;">&#27491;&#21521;&#20195;&#29702;</span>
 ssh -fCNL
 </pre>
 </div>
 
-<pre class="example" id="orga0032c9">
+<pre class="example" id="org0a4fdec">
 -f 后台执行 ssh 指令
 -C 允许压缩数据
 -N 不执行远程指令
@@ -257,14 +257,14 @@ ssh -fCNL
 </div>
 
 <div id="outline-container-反向代理" class="outline-3">
-<h3 id="反向代理"><span class="section-number-3">3.2</span> 反向代理</h3>
+<h3 id="反向代理"><span class="section-number-3">3.2.</span> 反向代理</h3>
 <div class="outline-text-3" id="text-反向代理">
 <p>
 首先在 A 主机上操作，建立 A 到 O 的反向代理，具体命令为
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">ssh -fCNR <span style="color: #51afef;">[</span>O &#20027;&#26426; IP &#25110;&#30465;&#30053;<span style="color: #51afef;">]</span>:<span style="color: #51afef;">[</span>O &#20027;&#26426;&#31471;&#21475;<span style="color: #51afef;">]</span>:<span style="color: #51afef;">[</span>A &#20027;&#26426; IP <span style="color: #51afef;">]</span>:<span style="color: #51afef;">[</span>A &#20027;&#26426;&#31471;&#21475;<span style="color: #51afef;">]</span> <span style="color: #51afef;">[</span>O &#20027;&#26426;&#30340;&#29992;&#25143;&#21517;@O &#20027;&#26426; IP<span style="color: #51afef;">]</span>
+<pre class="src src-sh">ssh -fCNR [O &#20027;&#26426; IP &#25110;&#30465;&#30053;]:[O &#20027;&#26426;&#31471;&#21475;]:[A &#20027;&#26426; IP ]:[A &#20027;&#26426;&#31471;&#21475;] [O &#20027;&#26426;&#30340;&#29992;&#25143;&#21517;@O &#20027;&#26426; IP]
 </pre>
 </div>
 
@@ -289,7 +289,7 @@ ssh -fCNL
 </div>
 
 <div id="outline-container-正向代理" class="outline-3">
-<h3 id="正向代理"><span class="section-number-3">3.3</span> 正向代理</h3>
+<h3 id="正向代理"><span class="section-number-3">3.3.</span> 正向代理</h3>
 <div class="outline-text-3" id="text-正向代理">
 <p>
 接下来在 O 主机上操作。完成上一步的反向代理后，在主机 O 上运行如下命令应该就可以
@@ -312,7 +312,7 @@ ssh -fCNL
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">ssh -fCNL <span style="color: #51afef;">[</span>O &#20027;&#26426; IP &#25110;&#30465;&#30053;<span style="color: #51afef;">]</span>:<span style="color: #51afef;">[</span>&#36716;&#21457;&#31471;&#21475;<span style="color: #51afef;">]</span>:<span style="color: #51afef;">[</span>O &#20027;&#26426; IP<span style="color: #51afef;">]</span>:<span style="color: #51afef;">[</span>&#34987;&#36716;&#21457;&#31471;&#21475;<span style="color: #51afef;">]</span> <span style="color: #51afef;">[</span>&#30331;&#38470; O &#20027;&#26426;&#30340;&#29992;&#25143;&#21517;@O &#20027;&#26426;&#30340; IP<span style="color: #51afef;">]</span>
+<pre class="src src-sh">ssh -fCNL [O &#20027;&#26426; IP &#25110;&#30465;&#30053;]:[&#36716;&#21457;&#31471;&#21475;]:[O &#20027;&#26426; IP]:[&#34987;&#36716;&#21457;&#31471;&#21475;] [&#30331;&#38470; O &#20027;&#26426;&#30340;&#29992;&#25143;&#21517;@O &#20027;&#26426;&#30340; IP]
 </pre>
 </div>
 
@@ -334,7 +334,7 @@ ssh -fCNL
 </div>
 
 <div id="outline-container-展现奇迹的时候到了" class="outline-3">
-<h3 id="展现奇迹的时候到了"><span class="section-number-3">3.4</span> 展现奇迹的时候到了</h3>
+<h3 id="展现奇迹的时候到了"><span class="section-number-3">3.4.</span> 展现奇迹的时候到了</h3>
 <div class="outline-text-3" id="text-展现奇迹的时候到了">
 <p>
 到次为至，我们已经配置好了 A O 主机，那么我们可以从任意可联网的设备登录到计算平
@@ -353,7 +353,7 @@ ssh -fCNL
 </div>
 
 <div id="outline-container-这种反向代理是不稳定的" class="outline-3">
-<h3 id="这种反向代理是不稳定的"><span class="section-number-3">3.5</span> 这种反向代理是不稳定的</h3>
+<h3 id="这种反向代理是不稳定的"><span class="section-number-3">3.5.</span> 这种反向代理是不稳定的</h3>
 <div class="outline-text-3" id="text-这种反向代理是不稳定的">
 <p>
 不幸的是这种 ssh 连接会因为超时和网络堵塞等原因而关闭，那么从的外网连通内网的通
@@ -362,7 +362,7 @@ ssh -fCNL
 </div>
 
 <div id="outline-container-配置-ssh-key-实现免密登陆" class="outline-4">
-<h4 id="配置-ssh-key-实现免密登陆"><span class="section-number-4">3.5.1</span> 配置 ssh key 实现免密登陆</h4>
+<h4 id="配置-ssh-key-实现免密登陆"><span class="section-number-4">3.5.1.</span> 配置 ssh key 实现免密登陆</h4>
 <div class="outline-text-4" id="text-配置-ssh-key-实现免密登陆">
 <p>
 在使用 ssh 进行连接时，每次都需要输入密码，一方面不安全，另一方面也为我们接下来
@@ -374,7 +374,7 @@ ssh -fCNL
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">ssh-keygen -t rsa -C <span style="color: #98be65;">"youremail@example.com"</span>
+<pre class="src src-sh">ssh-keygen -t rsa -C <span style="color: #79740e;">"youremail@example.com"</span>
 </pre>
 </div>
 
@@ -395,7 +395,7 @@ ssh -fCNL
 </div>
 
 <div id="outline-container-用-autossh-建立稳定隧道" class="outline-4">
-<h4 id="用-autossh-建立稳定隧道"><span class="section-number-4">3.5.2</span> 用 autossh 建立稳定隧道</h4>
+<h4 id="用-autossh-建立稳定隧道"><span class="section-number-4">3.5.2.</span> 用 autossh 建立稳定隧道</h4>
 <div class="outline-text-4" id="text-用-autossh-建立稳定隧道">
 <p>
 从 A 主机到 O 主机的反向代理连接是不稳定的，也就是说，我们需要一个工具来时刻监听
@@ -411,7 +411,7 @@ CentOS 的官方仓库中并没有这个软件包，我们需要从源码编译�
 <pre class="src src-sh">sudo yum install wget gcc make
 wget http://www.harding.motd.ca/autossh/autossh-1.4e.tgz
 tar -xf autossh-1.4e.tgz
-<span style="color: #c678dd;">cd</span> autossh-1.4e
+<span style="color: #af3a03;">cd</span> autossh-1.4e
 ./configure
 make
 sudo make install
@@ -436,7 +436,7 @@ autossh 命令的参数与 ssh 一致，不同的是我们需要指出的 <code>
 </div>
 
 <div id="outline-container-配置自动启动" class="outline-4">
-<h4 id="配置自动启动"><span class="section-number-4">3.5.3</span> 配置自动启动</h4>
+<h4 id="配置自动启动"><span class="section-number-4">3.5.3.</span> 配置自动启动</h4>
 <div class="outline-text-4" id="text-配置自动启动">
 <p>
 我们需要将 autossh 命令配置在开机自动启动脚本中，免去了每次开机都需要重新运行脚
@@ -448,7 +448,7 @@ autossh 命令的参数与 ssh 一致，不同的是我们需要指出的 <code>
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">/bin/su -c <span style="color: #98be65;">'/usr/local/bin/autossh -M 7200 -fCNR 3333:localhost:22 server@123.123.123.123'</span> - cal
+<pre class="src src-sh">/bin/su -c <span style="color: #79740e;">'/usr/local/bin/autossh -M 7200 -fCNR 3333:localhost:22 server@123.123.123.123'</span> - cal
 </pre>
 </div>
 
@@ -474,12 +474,12 @@ A 主机。
 </div>
 
 <div id="outline-container-进一步优化" class="outline-3">
-<h3 id="进一步优化"><span class="section-number-3">3.6</span> 进一步优化</h3>
+<h3 id="进一步优化"><span class="section-number-3">3.6.</span> 进一步优化</h3>
 <div class="outline-text-3" id="text-进一步优化">
 </div>
 
 <div id="outline-container-保持活连接" class="outline-4">
-<h4 id="保持活连接"><span class="section-number-4">3.6.1</span> 保持活连接</h4>
+<h4 id="保持活连接"><span class="section-number-4">3.6.1.</span> 保持活连接</h4>
 <div class="outline-text-4" id="text-保持活连接">
 <p>
 在测试中发现，如果一个连接长时间空置，那么就会冻结。反向代理连接也是一样，此时便
@@ -492,9 +492,9 @@ A 主机。
 </p>
 
 <div class="org-src-container">
-<pre class="src src-conf"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">server &#27599;&#38548; 60 &#31186;&#21457;&#36865;&#19968;&#27425;&#35831;&#27714;&#32473; client&#65292;&#28982;&#21518; client &#21709;&#24212;&#65292;&#20174;&#32780;&#20445;&#25345;&#36830;&#25509;</span>
+<pre class="src src-conf"><span style="color: #a89984;"># </span><span style="color: #a89984;">server &#27599;&#38548; 60 &#31186;&#21457;&#36865;&#19968;&#27425;&#35831;&#27714;&#32473; client&#65292;&#28982;&#21518; client &#21709;&#24212;&#65292;&#20174;&#32780;&#20445;&#25345;&#36830;&#25509;</span>
 ClientAliveInterval 60
-<span style="color: #5B6268;"># </span><span style="color: #5B6268;">server &#21457;&#20986;&#35831;&#27714;&#21518;&#65292;&#23458;&#25143;&#31471;&#27809;&#26377;&#21709;&#24212;&#24471;&#27425;&#25968;&#36798;&#21040; 3&#65292;&#23601;&#33258;&#21160;&#26029;&#24320;&#36830;&#25509;&#65292;&#27491;&#24120;&#24773;&#20917;&#19979;&#65292;client &#19981;&#20250;&#19981;&#21709;&#24212;</span>
+<span style="color: #a89984;"># </span><span style="color: #a89984;">server &#21457;&#20986;&#35831;&#27714;&#21518;&#65292;&#23458;&#25143;&#31471;&#27809;&#26377;&#21709;&#24212;&#24471;&#27425;&#25968;&#36798;&#21040; 3&#65292;&#23601;&#33258;&#21160;&#26029;&#24320;&#36830;&#25509;&#65292;&#27491;&#24120;&#24773;&#20917;&#19979;&#65292;client &#19981;&#20250;&#19981;&#21709;&#24212;</span>
 ClientAliveCountMax 3
 </pre>
 </div>
@@ -502,7 +502,7 @@ ClientAliveCountMax 3
 </div>
 
 <div id="outline-container-windows-ssh-client-连接提示错误" class="outline-4">
-<h4 id="windows-ssh-client-连接提示错误"><span class="section-number-4">3.6.2</span> Windows SSH Client 连接提示错误</h4>
+<h4 id="windows-ssh-client-连接提示错误"><span class="section-number-4">3.6.2.</span> Windows SSH Client 连接提示错误</h4>
 <div class="outline-text-4" id="text-windows-ssh-client-连接提示错误">
 <p>
 使用 Windows 的 SSH Client 连接 Linux 运行的 SSH 服务端时，会提示 "ssh algorithm
@@ -515,7 +515,7 @@ negotiation failed" 错误，导致此问题的原因是 ssh升级后，为了�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-conf"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">add crypt format for window ssh client</span>
+<pre class="src src-conf"><span style="color: #a89984;"># </span><span style="color: #a89984;">add crypt format for window ssh client</span>
 Ciphers aes128-cbc,aes192-cbc,aes256-cbc,aes128-ctr,aes192-ctr,aes256-ctr,3des-cbc,arcfour128,arcfour256,arcfour,blowfish-cbc,cast128-cbc
 MACs hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-sha1-96,hmac-md5-96
 KexAlgorithms diffie-hellman-group1-sha1,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group-exchange-sha256,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group1-sha1,curve25519-sha256@libssh.org
@@ -527,7 +527,7 @@ KexAlgorithms diffie-hellman-group1-sha1,diffie-hellman-group14-sha1,diffie-hell
 </div>
 
 <div id="outline-container-参考文献" class="outline-2">
-<h2 id="参考文献"><span class="section-number-2">4</span> 参考文献</h2>
+<h2 id="参考文献"><span class="section-number-2">4.</span> 参考文献</h2>
 <div class="outline-text-2" id="text-参考文献">
 <p>
 <a href="https://www.cnblogs.com/zjutlitao/p/6223486.html">Windows SSH Client
@@ -541,8 +541,8 @@ KexAlgorithms diffie-hellman-group1-sha1,diffie-hellman-group14-sha1,diffie-hell
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2019-04-30 Tue 23:42></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</div>
-      <div id="built">Built: <2021-05-31 Mon 18:29></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
+      <div id="built">Built: <2022-10-23 Sun 09:02></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

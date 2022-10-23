@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-31 Mon 18:29 -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2022-10-23 Sun 09:02 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>与 C++ 的第五类接触-语句</title>
-<meta name="generator" content="Org mode">
-<meta name="author" content="Cycoe">
+<meta name="author" content="Cycoe" />
+<meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
 <script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
@@ -49,20 +49,20 @@
   <div id="caption"></div>
 </div>
 </div>
-<div id="content">
+<div id="content" class="content">
 <header>
 <h1 class="title">与 C++ 的第五类接触-语句</h1>
-</header><nav id="table-of-contents">
+</header><nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org1851268">1. 语句</a>
+<li><a href="#org5e3ea1a">1. 语句</a>
 <ul>
-<li><a href="#org94f875d">1.1. try 语句块与异常处理</a>
+<li><a href="#orgeb1e212">1.1. try 语句块与异常处理</a>
 <ul>
-<li><a href="#orgb9540a8">1.1.1. throw 表达式</a></li>
-<li><a href="#orgda291a3">1.1.2. <code>try</code> 语句块</a></li>
-<li><a href="#org0fa8d27">1.1.3. 异常类</a></li>
+<li><a href="#org50c6a86">1.1.1. throw 表达式</a></li>
+<li><a href="#org204d813">1.1.2. <code>try</code> 语句块</a></li>
+<li><a href="#orga71dab8">1.1.3. 异常类</a></li>
 </ul>
 </li>
 </ul>
@@ -72,12 +72,12 @@
 </nav>
 <!-- more -->
 
-<div id="outline-container-org1851268" class="outline-2">
-<h2 id="org1851268"><span class="section-number-2">1</span> 语句</h2>
+<div id="outline-container-org5e3ea1a" class="outline-2">
+<h2 id="org5e3ea1a"><span class="section-number-2">1.</span> 语句</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org94f875d" class="outline-3">
-<h3 id="org94f875d"><span class="section-number-3">1.1</span> try 语句块与异常处理</h3>
+<div id="outline-container-orgeb1e212" class="outline-3">
+<h3 id="orgeb1e212"><span class="section-number-3">1.1.</span> try 语句块与异常处理</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 在 C++ 中，异常处理包括：
@@ -89,24 +89,24 @@
 </ul>
 </div>
 
-<div id="outline-container-orgb9540a8" class="outline-4">
-<h4 id="orgb9540a8"><span class="section-number-4">1.1.1</span> throw 表达式</h4>
+<div id="outline-container-org50c6a86" class="outline-4">
+<h4 id="org50c6a86"><span class="section-number-4">1.1.1.</span> throw 表达式</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 如下代码片断的功能为检查两个 <code>Sales_item</code> 对象是否具有相同的 <code>ISBN</code> ，是的话输出两个
 对象的和，不是的话返回失败
 </p>
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #ECBE7B;">Sales_item</span> <span style="color: #dcaeea;">item1</span>, <span style="color: #dcaeea;">item2</span>;
+<pre class="src src-C++"><span style="color: #8f3f71;">Sales_item</span> <span style="color: #076678;">item1</span>, <span style="color: #076678;">item2</span>;
 cin &gt;&gt; item1 &gt;&gt; item2;
 
-<span style="color: #51afef;">if</span> <span style="color: #51afef;">(</span>item1.isbn<span style="color: #c678dd;">()</span> == item2.isbn<span style="color: #c678dd;">()</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
+<span style="color: #9d0006;">if</span> (item1.isbn() == item2.isbn()) {
   cout &lt;&lt; item1 + item2 &lt;&lt; endl;
-  <span style="color: #51afef;">return</span> 0;
- <span style="color: #51afef;">}</span> <span style="color: #51afef;">else</span> <span style="color: #51afef;">{</span>
-  cerr &lt;&lt; <span style="color: #98be65;">"Data must refer to same ISBN"</span> &lt;&lt; endl;
-  <span style="color: #51afef;">return</span> -1;
- <span style="color: #51afef;">}</span>
+  <span style="color: #9d0006;">return</span> 0;
+ } <span style="color: #9d0006;">else</span> {
+  cerr &lt;&lt; <span style="color: #79740e;">"Data must refer to same ISBN"</span> &lt;&lt; endl;
+  <span style="color: #9d0006;">return</span> -1;
+ }
 </pre>
 </div>
 
@@ -115,9 +115,9 @@ cin &gt;&gt; item1 &gt;&gt; item2;
 而是抛出一个异常
 </p>
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#33509; ISBN &#19981;&#30456;&#21516;&#25243;&#20986;&#24322;&#24120;</span>
-<span style="color: #51afef;">if</span> <span style="color: #51afef;">(</span>item1.isbn<span style="color: #c678dd;">()</span> != item2.isbn<span style="color: #c678dd;">()</span><span style="color: #51afef;">)</span>
-  <span style="color: #51afef;">throw</span> runtime_error<span style="color: #51afef;">(</span><span style="color: #98be65;">"Data must refer to same ISBN"</span><span style="color: #51afef;">)</span>;
+<pre class="src src-C++"><span style="color: #a89984;">// </span><span style="color: #a89984;">&#33509; ISBN &#19981;&#30456;&#21516;&#25243;&#20986;&#24322;&#24120;</span>
+<span style="color: #9d0006;">if</span> (item1.isbn() != item2.isbn())
+  <span style="color: #9d0006;">throw</span> runtime_error(<span style="color: #79740e;">"Data must refer to same ISBN"</span>);
 cout &lt;&lt; item1 + item2 &lt;&lt; endl;
 </pre>
 </div>
@@ -128,17 +128,17 @@ cout &lt;&lt; item1 + item2 &lt;&lt; endl;
 </div>
 </div>
 
-<div id="outline-container-orgda291a3" class="outline-4">
-<h4 id="orgda291a3"><span class="section-number-4">1.1.2</span> <code>try</code> 语句块</h4>
+<div id="outline-container-org204d813" class="outline-4">
+<h4 id="org204d813"><span class="section-number-4">1.1.2.</span> <code>try</code> 语句块</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #51afef;">try</span> <span style="color: #51afef;">{</span>
+<pre class="src src-C++"><span style="color: #9d0006;">try</span> {
   program-statements;
- <span style="color: #51afef;">}</span> <span style="color: #51afef;">catch</span> <span style="color: #51afef;">(</span>exception-declaration<span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
+ } <span style="color: #9d0006;">catch</span> (exception-declaration) {
   handler-statements;
- <span style="color: #51afef;">}</span> <span style="color: #51afef;">catch</span> <span style="color: #51afef;">(</span>exception-declaration<span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
+ } <span style="color: #9d0006;">catch</span> (exception-declaration) {
   handler-statements;
- <span style="color: #51afef;">}</span> <span style="color: #5B6268;">// </span><span style="color: #5B6268;">...</span>
+ } <span style="color: #a89984;">// </span><span style="color: #a89984;">...</span>
 </pre>
 </div>
 
@@ -147,34 +147,34 @@ cout &lt;&lt; item1 + item2 &lt;&lt; endl;
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #51afef;">while</span> <span style="color: #51afef;">(</span>cin &gt;&gt; item1 &gt;&gt; item2<span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
-  <span style="color: #51afef;">try</span> <span style="color: #c678dd;">{</span>
-    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#27492;&#22788;&#28155;&#21152;&#20004;&#20010; Sales_item &#23545;&#35937;&#30340;&#20195;&#30721;</span>
-    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#22914;&#26524;&#22833;&#36133;&#25243;&#20986;&#19968;&#20010; runtime_error &#24322;&#24120;</span>
-  <span style="color: #c678dd;">}</span> <span style="color: #51afef;">catch</span> <span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">runtime_error</span> <span style="color: #dcaeea;">err</span><span style="color: #c678dd;">)</span> <span style="color: #c678dd;">{</span>
-    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#25552;&#37266;&#29992;&#25143;&#20004;&#20010; ISBN &#24517;&#39035;&#19968;&#33268;&#65292;&#35810;&#38382;&#26159;&#21542;&#37325;&#26032;&#36755;&#20837;</span>
-    cout &lt;&lt; err.what<span style="color: #98be65;">()</span>
-         &lt;&lt; <span style="color: #98be65;">"\nTry Again?(y/n)"</span> &lt;&lt; endl;
-    <span style="color: #ECBE7B;">char</span> <span style="color: #dcaeea;">c</span>;
+<pre class="src src-C++"><span style="color: #9d0006;">while</span> (cin &gt;&gt; item1 &gt;&gt; item2) {
+  <span style="color: #9d0006;">try</span> {
+    <span style="color: #a89984;">// </span><span style="color: #a89984;">&#27492;&#22788;&#28155;&#21152;&#20004;&#20010; Sales_item &#23545;&#35937;&#30340;&#20195;&#30721;</span>
+    <span style="color: #a89984;">// </span><span style="color: #a89984;">&#22914;&#26524;&#22833;&#36133;&#25243;&#20986;&#19968;&#20010; runtime_error &#24322;&#24120;</span>
+  } <span style="color: #9d0006;">catch</span> (<span style="color: #8f3f71;">runtime_error</span> <span style="color: #076678;">err</span>) {
+    <span style="color: #a89984;">// </span><span style="color: #a89984;">&#25552;&#37266;&#29992;&#25143;&#20004;&#20010; ISBN &#24517;&#39035;&#19968;&#33268;&#65292;&#35810;&#38382;&#26159;&#21542;&#37325;&#26032;&#36755;&#20837;</span>
+    cout &lt;&lt; err.what()
+         &lt;&lt; <span style="color: #79740e;">"\nTry Again?(y/n)"</span> &lt;&lt; endl;
+    <span style="color: #8f3f71;">char</span> <span style="color: #076678;">c</span>;
     cin &gt;&gt; c;
-    <span style="color: #51afef;">if</span> <span style="color: #98be65;">(</span><span style="color: #51afef; font-weight: bold;">!</span>cin || c == <span style="color: #98be65;">'n'</span><span style="color: #98be65;">)</span>
-      <span style="color: #51afef;">break</span>;
-  <span style="color: #c678dd;">}</span>
- <span style="color: #51afef;">}</span>
+    <span style="color: #9d0006;">if</span> (!cin || c == <span style="color: #79740e;">'n'</span>)
+      <span style="color: #9d0006;">break</span>;
+  }
+ }
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org0fa8d27" class="outline-4">
-<h4 id="org0fa8d27"><span class="section-number-4">1.1.3</span> 异常类</h4>
+<div id="outline-container-orga71dab8" class="outline-4">
+<h4 id="orga71dab8"><span class="section-number-4">1.1.3.</span> 异常类</h4>
 <div class="outline-text-4" id="text-1-1-3">
 <p>
 <code>&lt;stdexcept&gt;</code> 中定义了一些异常类
 </p>
 
 
-<figure id="org3daf718">
+<figure id="org57c278a">
 <img src="./C++-学习记录/Screenshot_20200531_194606_v3CH8o.png" alt="Screenshot_20200531_194606_v3CH8o.png">
 
 <figcaption><span class="figure-number">Figure 1: </span>&lt;stdexcept&gt; 中定义的异常类</figcaption>
@@ -188,8 +188,8 @@ cout &lt;&lt; item1 + item2 &lt;&lt; endl;
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-06-02 Tue 23:12></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</div>
-      <div id="built">Built: <2021-05-31 Mon 18:29></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
+      <div id="built">Built: <2022-10-23 Sun 09:02></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

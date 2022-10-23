@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-31 Mon 18:29 -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2022-10-23 Sun 09:02 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>正交試驗設計</title>
-<meta name="generator" content="Org mode">
-<meta name="author" content="Cycoe">
+<meta name="author" content="Cycoe" />
+<meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
 <script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
@@ -31,8 +31,7 @@
              }
 });
 </script>
-<script type="text/javascript"
-        src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -71,12 +70,12 @@
   <div id="caption"></div>
 </div>
 </div>
-<div id="content">
+<div id="content" class="content">
 <header>
 <h1 class="title">正交試驗設計</h1>
-</header><nav id="table-of-contents">
+</header><nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
 <li><a href="#正交表的性質">1. 正交表的性質</a>
 <ul>
@@ -108,7 +107,7 @@
 </p>
 </blockquote>
 
-<div class="HTML" id="org78083af">
+<div class="HTML" id="orgb0ec117">
 <p>
 &lt;!&#x2013;more&#x2013;&gt;
 </p>
@@ -116,12 +115,12 @@
 </div>
 
 <div id="outline-container-正交表的性質" class="outline-2">
-<h2 id="正交表的性質"><span class="section-number-2">1</span> 正交表的性質</h2>
+<h2 id="正交表的性質"><span class="section-number-2">1.</span> 正交表的性質</h2>
 <div class="outline-text-2" id="text-正交表的性質">
 </div>
 
 <div id="outline-container-正交性" class="outline-3">
-<h3 id="正交性"><span class="section-number-3">1.1</span> 正交性</h3>
+<h3 id="正交性"><span class="section-number-3">1.1.</span> 正交性</h3>
 <div class="outline-text-3" id="text-正交性">
 <ol class="org-ol">
 <li>均勻分散性：任一列中，不同數字出現的次數相等；</li>
@@ -138,7 +137,7 @@
 </div>
 
 <div id="outline-container-分散均勻性" class="outline-3">
-<h3 id="分散均勻性"><span class="section-number-3">1.2</span> 分散均勻性</h3>
+<h3 id="分散均勻性"><span class="section-number-3">1.2.</span> 分散均勻性</h3>
 <div class="outline-text-3" id="text-分散均勻性">
 <ol class="org-ol">
 <li>任一列的各水平都出現，使得部分試驗中包含所有因素的所有水平；</li>
@@ -148,7 +147,7 @@
 </div>
 
 <div id="outline-container-綜合可比性" class="outline-3">
-<h3 id="綜合可比性"><span class="section-number-3">1.3</span> 綜合可比性</h3>
+<h3 id="綜合可比性"><span class="section-number-3">1.3.</span> 綜合可比性</h3>
 <div class="outline-text-3" id="text-綜合可比性">
 <ol class="org-ol">
 <li>任一列各水平出現的次數都相等；</li>
@@ -159,7 +158,7 @@
 </div>
 
 <div id="outline-container-拉丁方陣" class="outline-2">
-<h2 id="拉丁方陣"><span class="section-number-2">2</span> 拉丁方陣</h2>
+<h2 id="拉丁方陣"><span class="section-number-2">2.</span> 拉丁方陣</h2>
 <div class="outline-text-2" id="text-拉丁方陣">
 <p>
 拉丁方陣（Latin square）是一種 \(n\times n\) 的方陣，在這種 $n&times; n$的方陣裏，
@@ -167,17 +166,17 @@
 拉丁方。
 </p>
 <div class="org-src-container">
-<pre class="src src-latex"><span style="color: #51afef;">\begin</span>{<span style="color: #c678dd;">bmatrix</span>}
-    1 &amp; 2 &amp; 3<span style="color: #ECBE7B;">\\</span>
-    2 &amp; 3 &amp; 1<span style="color: #ECBE7B;">\\</span>
-    3 &amp; 1 &amp; 2<span style="color: #ECBE7B;">\\</span>
-<span style="color: #51afef;">\end</span>{<span style="color: #c678dd;">bmatrix</span>}
+<pre class="src src-latex"><span style="color: #9d0006;">\begin</span>{<span style="color: #b57614;">bmatrix</span>}
+    1 &amp; 2 &amp; 3<span style="color: #9d0006; font-weight: bold;">\\</span>
+    2 &amp; 3 &amp; 1<span style="color: #9d0006; font-weight: bold;">\\</span>
+    3 &amp; 1 &amp; 2<span style="color: #9d0006; font-weight: bold;">\\</span>
+<span style="color: #9d0006;">\end</span>{<span style="color: #b57614;">bmatrix</span>}
 </pre>
 </div>
 </div>
 
 <div id="outline-container-標準型" class="outline-3">
-<h3 id="標準型"><span class="section-number-3">2.1</span> 標準型</h3>
+<h3 id="標準型"><span class="section-number-3">2.1.</span> 標準型</h3>
 <div class="outline-text-3" id="text-標準型">
 <p>
 當一個拉丁方陣的第一行與第一列的元素按順序排列時，此爲這個拉丁方陣的標準型，英語
@@ -188,7 +187,7 @@ form"。
 </div>
 
 <div id="outline-container-構造拉丁方" class="outline-3">
-<h3 id="構造拉丁方"><span class="section-number-3">2.2</span> 構造拉丁方</h3>
+<h3 id="構造拉丁方"><span class="section-number-3">2.2.</span> 構造拉丁方</h3>
 <div class="outline-text-3" id="text-構造拉丁方">
 <p>
 同階的拉丁方有多個，構造其中的一個有一種通用的方法。
@@ -199,12 +198,12 @@ form"。
 上一行對應列元素上加一併對\(n\) 取模，即可表示爲如下矩陣。
 </p>
 <div class="org-src-container">
-<pre class="src src-latex"><span style="color: #51afef;">\begin</span>{<span style="color: #c678dd;">bmatrix</span>} 1 &amp;
-2 &amp; n &amp; 3 &amp; n-1 &amp; 4 &amp; n-2 &amp; <span style="color: #51afef;">\cdots</span><span style="color: #ECBE7B;">\\</span> 2 &amp; 3 &amp; n+1 &amp; 4 &amp; n &amp; 5 &amp; n-1 &amp;
-<span style="color: #51afef;">\cdots</span><span style="color: #ECBE7B;">\\</span> <span style="color: #51afef;">\vdots</span> &amp; <span style="color: #51afef;">\vdots</span> &amp; <span style="color: #51afef;">\vdots</span> &amp; <span style="color: #51afef;">\vdots</span> &amp; <span style="color: #51afef;">\vdots</span> &amp; <span style="color: #51afef;">\vdots</span> &amp; <span style="color: #51afef;">\ddots</span> &amp;
-<span style="color: #51afef;">\vdots</span><span style="color: #ECBE7B;">\\</span> i &amp; i+1 &amp; i+n-1 &amp; i+2 &amp; i+n-2 &amp; i+3 &amp; i+n-3 &amp; <span style="color: #51afef;">\cdots</span><span style="color: #ECBE7B;">\\</span> <span style="color: #51afef;">\vdots</span> &amp; <span style="color: #51afef;">\vdots</span>
-&amp; <span style="color: #51afef;">\vdots</span> &amp; <span style="color: #51afef;">\vdots</span> &amp; <span style="color: #51afef;">\vdots</span> &amp; <span style="color: #51afef;">\vdots</span> &amp; <span style="color: #51afef;">\ddots</span> &amp; <span style="color: #51afef;">\vdots</span><span style="color: #ECBE7B;">\\</span> n &amp; 1 &amp; n-1 &amp; 2 &amp; n-2 &amp;
-3 &amp; n-3 &amp; <span style="color: #51afef;">\cdots</span><span style="color: #ECBE7B;">\\</span> <span style="color: #51afef;">\end</span>{<span style="color: #c678dd;">bmatrix</span>} <span style="color: #51afef;">\mathrm</span>{mod}\ n
+<pre class="src src-latex"><span style="color: #9d0006;">\begin</span>{<span style="color: #b57614;">bmatrix</span>} 1 &amp;
+2 &amp; n &amp; 3 &amp; n-1 &amp; 4 &amp; n-2 &amp; <span style="color: #9d0006;">\cdots</span><span style="color: #9d0006; font-weight: bold;">\\</span> 2 &amp; 3 &amp; n+1 &amp; 4 &amp; n &amp; 5 &amp; n-1 &amp;
+<span style="color: #9d0006;">\cdots</span><span style="color: #9d0006; font-weight: bold;">\\</span> <span style="color: #9d0006;">\vdots</span> &amp; <span style="color: #9d0006;">\vdots</span> &amp; <span style="color: #9d0006;">\vdots</span> &amp; <span style="color: #9d0006;">\vdots</span> &amp; <span style="color: #9d0006;">\vdots</span> &amp; <span style="color: #9d0006;">\vdots</span> &amp; <span style="color: #9d0006;">\ddots</span> &amp;
+<span style="color: #9d0006;">\vdots</span><span style="color: #9d0006; font-weight: bold;">\\</span> i &amp; i+1 &amp; i+n-1 &amp; i+2 &amp; i+n-2 &amp; i+3 &amp; i+n-3 &amp; <span style="color: #9d0006;">\cdots</span><span style="color: #9d0006; font-weight: bold;">\\</span> <span style="color: #9d0006;">\vdots</span> &amp; <span style="color: #9d0006;">\vdots</span>
+&amp; <span style="color: #9d0006;">\vdots</span> &amp; <span style="color: #9d0006;">\vdots</span> &amp; <span style="color: #9d0006;">\vdots</span> &amp; <span style="color: #9d0006;">\vdots</span> &amp; <span style="color: #9d0006;">\ddots</span> &amp; <span style="color: #9d0006;">\vdots</span><span style="color: #9d0006; font-weight: bold;">\\</span> n &amp; 1 &amp; n-1 &amp; 2 &amp; n-2 &amp;
+3 &amp; n-3 &amp; <span style="color: #9d0006;">\cdots</span><span style="color: #9d0006; font-weight: bold;">\\</span> <span style="color: #9d0006;">\end</span>{<span style="color: #b57614;">bmatrix</span>} <span style="color: #9d0006;">\mathrm</span>{mod}\ n
 </pre>
 </div>
 
@@ -215,7 +214,7 @@ form"。
 </div>
 
 <div id="outline-container-正交拉丁方" class="outline-3">
-<h3 id="正交拉丁方"><span class="section-number-3">2.3</span> 正交拉丁方</h3>
+<h3 id="正交拉丁方"><span class="section-number-3">2.3.</span> 正交拉丁方</h3>
 <div class="outline-text-3" id="text-正交拉丁方">
 <p>
 設有兩個階數相同且爲 $n$的拉丁方陣\(A_1=(a^{(1)}_{i,j})_{n\times n},
@@ -224,28 +223,28 @@ A_2=(a^{(2)}_{i,j})_{n\times n}\)，其中將所有放置位置相同的元素�
 $((a<sup>(1)</sup><sub>i,j</sub>, a<sup>(2)</sup><sub>i,j</sub>))<sub>n&times; n</sub>$中每一個元素互不相同時，拉丁方陣
 \(A_1\) 和 $A<sub>2</sub>$是互相正交的。此時，\(A_1\) 和 \(A_2\) 即爲一對正交拉丁方。而在階數固
 定的情況下，所有兩兩正交的拉丁方所成的集合稱爲正交拉丁方族。如下面的兩個3 階拉丁
-方。
+方。 
 </p>
 <div class="org-src-container">
-<pre class="src src-latex"><span style="color: #51afef;">\begin</span>{<span style="color: #c678dd;">matrix</span>}
-A = <span style="color: #51afef;">\begin</span>{<span style="color: #c678dd;">bmatrix</span>}
-    1 &amp; 2 &amp; 3<span style="color: #ECBE7B;">\\</span>
-    2 &amp; 3 &amp; 1<span style="color: #ECBE7B;">\\</span>
-    3 &amp; 1 &amp; 2<span style="color: #ECBE7B;">\\</span>
-<span style="color: #51afef;">\end</span>{<span style="color: #c678dd;">bmatrix</span>} &amp;
-B = <span style="color: #51afef;">\begin</span>{<span style="color: #c678dd;">bmatrix</span>}
-    1 &amp; 2 &amp; 3<span style="color: #ECBE7B;">\\</span>
-    3 &amp; 1 &amp; 2<span style="color: #ECBE7B;">\\</span>
-    2 &amp; 3 &amp; 1<span style="color: #ECBE7B;">\\</span>
-<span style="color: #51afef;">\end</span>{<span style="color: #c678dd;">bmatrix</span>}
-<span style="color: #51afef;">\end</span>{<span style="color: #c678dd;">matrix</span>}
+<pre class="src src-latex"><span style="color: #9d0006;">\begin</span>{<span style="color: #b57614;">matrix</span>}
+A = <span style="color: #9d0006;">\begin</span>{<span style="color: #b57614;">bmatrix</span>}
+    1 &amp; 2 &amp; 3<span style="color: #9d0006; font-weight: bold;">\\</span>
+    2 &amp; 3 &amp; 1<span style="color: #9d0006; font-weight: bold;">\\</span>
+    3 &amp; 1 &amp; 2<span style="color: #9d0006; font-weight: bold;">\\</span>
+<span style="color: #9d0006;">\end</span>{<span style="color: #b57614;">bmatrix</span>} &amp;
+B = <span style="color: #9d0006;">\begin</span>{<span style="color: #b57614;">bmatrix</span>}
+    1 &amp; 2 &amp; 3<span style="color: #9d0006; font-weight: bold;">\\</span>
+    3 &amp; 1 &amp; 2<span style="color: #9d0006; font-weight: bold;">\\</span>
+    2 &amp; 3 &amp; 1<span style="color: #9d0006; font-weight: bold;">\\</span>
+<span style="color: #9d0006;">\end</span>{<span style="color: #b57614;">bmatrix</span>}
+<span style="color: #9d0006;">\end</span>{<span style="color: #b57614;">matrix</span>}
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-素數階拉丁方" class="outline-3">
-<h3 id="素數階拉丁方"><span class="section-number-3">2.4</span> 素數階拉丁方</h3>
+<h3 id="素數階拉丁方"><span class="section-number-3">2.4.</span> 素數階拉丁方</h3>
 <div class="outline-text-3" id="text-素數階拉丁方">
 <p>
 若 \(n\) 階拉丁方存在 \(r\) 個兩兩正交的拉丁方，那麼 \(r\leq n-1\)。素數階拉丁方（以
@@ -256,7 +255,7 @@ B = <span style="color: #51afef;">\begin</span>{<span style="color: #c678dd;">bm
 </div>
 
 <div id="outline-container-構造正交表" class="outline-2">
-<h2 id="構造正交表"><span class="section-number-2">3</span> 構造正交表</h2>
+<h2 id="構造正交表"><span class="section-number-2">3.</span> 構造正交表</h2>
 <div class="outline-text-2" id="text-構造正交表">
 <p>
 因爲素數階拉丁方都可構造完全的正交拉丁方族，則可繼續構造正交表。若把素數 \(n\) 作爲
@@ -270,23 +269,23 @@ B = <span style="color: #51afef;">\begin</span>{<span style="color: #c678dd;">bm
 </p>
 
 <div class="org-src-container">
-<pre class="src src-latex"><span style="color: #51afef;">\begin</span>{<span style="color: #c678dd;">matrix</span>}
-<span style="color: #51afef;">\begin</span>{<span style="color: #c678dd;">bmatrix</span>}
-    1 &amp; 2 &amp; 3<span style="color: #ECBE7B;">\\</span>
-    2 &amp; 3 &amp; 1<span style="color: #ECBE7B;">\\</span>
-    3 &amp; 1 &amp; 2<span style="color: #ECBE7B;">\\</span>
-<span style="color: #51afef;">\end</span>{<span style="color: #c678dd;">bmatrix</span>} &amp;
-<span style="color: #51afef;">\begin</span>{<span style="color: #c678dd;">bmatrix</span>}
-    1 &amp; 2 &amp; 3<span style="color: #ECBE7B;">\\</span>
-    3 &amp; 1 &amp; 2<span style="color: #ECBE7B;">\\</span>
-    2 &amp; 3 &amp; 1<span style="color: #ECBE7B;">\\</span>
-<span style="color: #51afef;">\end</span>{<span style="color: #c678dd;">bmatrix</span>} &amp; = &amp;
-<span style="color: #51afef;">\begin</span>{<span style="color: #c678dd;">bmatrix</span>}
-    11 &amp; 22 &amp; 33<span style="color: #ECBE7B;">\\</span>
-    23 &amp; 31 &amp; 12<span style="color: #ECBE7B;">\\</span>
-    32 &amp; 13 &amp; 21<span style="color: #ECBE7B;">\\</span>
-<span style="color: #51afef;">\end</span>{<span style="color: #c678dd;">bmatrix</span>} &amp;
-<span style="color: #51afef;">\end</span>{<span style="color: #c678dd;">matrix</span>}
+<pre class="src src-latex"><span style="color: #9d0006;">\begin</span>{<span style="color: #b57614;">matrix</span>}
+<span style="color: #9d0006;">\begin</span>{<span style="color: #b57614;">bmatrix</span>}
+    1 &amp; 2 &amp; 3<span style="color: #9d0006; font-weight: bold;">\\</span>
+    2 &amp; 3 &amp; 1<span style="color: #9d0006; font-weight: bold;">\\</span>
+    3 &amp; 1 &amp; 2<span style="color: #9d0006; font-weight: bold;">\\</span>
+<span style="color: #9d0006;">\end</span>{<span style="color: #b57614;">bmatrix</span>} &amp;
+<span style="color: #9d0006;">\begin</span>{<span style="color: #b57614;">bmatrix</span>}
+    1 &amp; 2 &amp; 3<span style="color: #9d0006; font-weight: bold;">\\</span>
+    3 &amp; 1 &amp; 2<span style="color: #9d0006; font-weight: bold;">\\</span>
+    2 &amp; 3 &amp; 1<span style="color: #9d0006; font-weight: bold;">\\</span>
+<span style="color: #9d0006;">\end</span>{<span style="color: #b57614;">bmatrix</span>} &amp; = &amp;
+<span style="color: #9d0006;">\begin</span>{<span style="color: #b57614;">bmatrix</span>}
+    11 &amp; 22 &amp; 33<span style="color: #9d0006; font-weight: bold;">\\</span>
+    23 &amp; 31 &amp; 12<span style="color: #9d0006; font-weight: bold;">\\</span>
+    32 &amp; 13 &amp; 21<span style="color: #9d0006; font-weight: bold;">\\</span>
+<span style="color: #9d0006;">\end</span>{<span style="color: #b57614;">bmatrix</span>} &amp;
+<span style="color: #9d0006;">\end</span>{<span style="color: #b57614;">matrix</span>}
 </pre>
 </div>
 
@@ -589,7 +588,7 @@ B = <span style="color: #51afef;">\begin</span>{<span style="color: #c678dd;">bm
 </div>
 
 <div id="outline-container-參考資料" class="outline-2">
-<h2 id="參考資料"><span class="section-number-2">4</span> 參考資料</h2>
+<h2 id="參考資料"><span class="section-number-2">4.</span> 參考資料</h2>
 <div class="outline-text-2" id="text-參考資料">
 <ul class="org-ul">
 <li><a href="https://baike.baidu.com/item/%E6%8B%89%E4%B8%81%E6%96%B9%E9%98%B5/4413910?fromtitle=%E6%8B%89%E4%B8%81%E6%96%B9&amp;fromid=7176085">百度百科-拉丁方</a></li>
@@ -604,8 +603,8 @@ B = <span style="color: #51afef;">\begin</span>{<span style="color: #c678dd;">bm
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2018-11-13 Tue 08:35:52></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</div>
-      <div id="built">Built: <2021-05-31 Mon 18:29></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
+      <div id="built">Built: <2022-10-23 Sun 09:02></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

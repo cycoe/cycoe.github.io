@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-31 Mon 18:29 -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2022-10-23 Sun 09:02 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Archlinux 无法通过亮度调节按键调节亮度的解决办法</title>
-<meta name="generator" content="Org mode">
-<meta name="author" content="Cycoe">
+<meta name="author" content="Cycoe" />
+<meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
 <script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
@@ -49,12 +49,12 @@
   <div id="caption"></div>
 </div>
 </div>
-<div id="content">
+<div id="content" class="content">
 <header>
 <h1 class="title">Archlinux 无法通过亮度调节按键调节亮度的解决办法</h1>
-</header><nav id="table-of-contents">
+</header><nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
 <li><a href="#使用-light-替代-acpilight">1. 使用 light 替代 acpilight</a></li>
 <li><a href="#使用-clight-利用摄像头自动调节亮度">2. 使用 clight 利用摄像头自动调节亮度</a></li>
@@ -106,19 +106,19 @@ acpilight 兼容 xbacklight 重启之后就可以通过下面命令控制亮度�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Get backlight brightness</span>
+<pre class="src src-sh"><span style="color: #a89984;"># </span><span style="color: #a89984;">Get backlight brightness</span>
 xbacklight -get
-<span style="color: #5B6268;"># </span><span style="color: #5B6268;">Set brightness</span>
+<span style="color: #a89984;"># </span><span style="color: #a89984;">Set brightness</span>
 xbacklight -set 70
-<span style="color: #5B6268;"># </span><span style="color: #5B6268;">Increase brightness</span>
+<span style="color: #a89984;"># </span><span style="color: #a89984;">Increase brightness</span>
 xbacklight -inc 10
-<span style="color: #5B6268;"># </span><span style="color: #5B6268;">Decrease brightness</span>
+<span style="color: #a89984;"># </span><span style="color: #a89984;">Decrease brightness</span>
 xbacklight -dec 10
 </pre>
 </div>
 
 <div id="outline-container-使用-light-替代-acpilight" class="outline-2">
-<h2 id="使用-light-替代-acpilight"><span class="section-number-2">1</span> 使用 light 替代 acpilight</h2>
+<h2 id="使用-light-替代-acpilight"><span class="section-number-2">1.</span> 使用 light 替代 acpilight</h2>
 <div class="outline-text-2" id="text-使用-light-替代-acpilight">
 <p>
 acpilight 是用 Python 写的脚本工具，由于我对于系统工具的洁癖，还是考虑找个 C 语
@@ -126,11 +126,11 @@ acpilight 是用 Python 写的脚本工具，由于我对于系统工具的洁�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Install light</span>
+<pre class="src src-sh"><span style="color: #a89984;"># </span><span style="color: #a89984;">Install light</span>
 sudo pacman -S light
-<span style="color: #5B6268;"># </span><span style="color: #5B6268;">Increase brightness</span>
+<span style="color: #a89984;"># </span><span style="color: #a89984;">Increase brightness</span>
 light -A 10
-<span style="color: #5B6268;"># </span><span style="color: #5B6268;">Decrease brightness</span>
+<span style="color: #a89984;"># </span><span style="color: #a89984;">Decrease brightness</span>
 light -U 10
 </pre>
 </div>
@@ -138,7 +138,7 @@ light -U 10
 </div>
 
 <div id="outline-container-使用-clight-利用摄像头自动调节亮度" class="outline-2">
-<h2 id="使用-clight-利用摄像头自动调节亮度"><span class="section-number-2">2</span> 使用 clight 利用摄像头自动调节亮度</h2>
+<h2 id="使用-clight-利用摄像头自动调节亮度"><span class="section-number-2">2.</span> 使用 clight 利用摄像头自动调节亮度</h2>
 <div class="outline-text-2" id="text-使用-clight-利用摄像头自动调节亮度">
 <blockquote>
 <p>
@@ -165,7 +165,7 @@ after a timeout.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Remember to enable Clightd systemd unit!</span>
+<pre class="src src-sh"><span style="color: #a89984;"># </span><span style="color: #a89984;">Remember to enable Clightd systemd unit!</span>
 sudo systemctl enable clightd.service
 </pre>
 </div>
@@ -185,10 +185,10 @@ sudo systemctl enable clightd.service
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #5B6268;">## </span><span style="color: #5B6268;">Gamma temperature during day and night</span>
-<span style="color: #5B6268;"># </span><span style="color: #5B6268;">gamma_temp = [ 6500, 6500 ];</span>
+<pre class="src src-sh"><span style="color: #a89984;">## </span><span style="color: #a89984;">Gamma temperature during day and night</span>
+<span style="color: #a89984;"># </span><span style="color: #a89984;">gamma_temp = [ 6500, 6500 ];</span>
 ...
-<span style="color: #5B6268;">## </span><span style="color: #5B6268;">Uncomment to disable gamma support</span>
+<span style="color: #a89984;">## </span><span style="color: #a89984;">Uncomment to disable gamma support</span>
 no_gamma = true;
 </pre>
 </div>
@@ -203,8 +203,8 @@ no_gamma = true;
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2019-11-09 Sat 01:50></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</div>
-      <div id="built">Built: <2021-05-31 Mon 18:29></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
+      <div id="built">Built: <2022-10-23 Sun 09:02></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

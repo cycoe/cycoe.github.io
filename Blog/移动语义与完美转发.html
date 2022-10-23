@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-31 Mon 18:29 -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2022-10-23 Sun 09:02 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>移动语义与完美转发</title>
-<meta name="generator" content="Org mode">
-<meta name="author" content="Cycoe">
+<meta name="author" content="Cycoe" />
+<meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="/static/css/default.css" />
 <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
 <script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
@@ -49,20 +49,20 @@
   <div id="caption"></div>
 </div>
 </div>
-<div id="content">
+<div id="content" class="content">
 <header>
 <h1 class="title">移动语义与完美转发</h1>
-</header><nav id="table-of-contents">
+</header><nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org62eb630">1. 左值与右值</a></li>
-<li><a href="#org622160e">2. 左值引用与右值引用</a></li>
-<li><a href="#orgdcf75a5">3. 移动构造与移动赋值</a></li>
-<li><a href="#org0c1bb6a">4. 引用折叠</a></li>
-<li><a href="#orgdb7110d">5. 完美转发</a></li>
-<li><a href="#org68500b0">6. 利用完美转发实现委托机制</a></li>
-<li><a href="#org4df1e73">7. 利用完美转发实现原位构造</a></li>
+<li><a href="#org8778a2e">1. 左值与右值</a></li>
+<li><a href="#org788ba98">2. 左值引用与右值引用</a></li>
+<li><a href="#org51fbc47">3. 移动构造与移动赋值</a></li>
+<li><a href="#orgfa6feab">4. 引用折叠</a></li>
+<li><a href="#org17a566b">5. 完美转发</a></li>
+<li><a href="#org462316c">6. 利用完美转发实现委托机制</a></li>
+<li><a href="#orgb62fd28">7. 利用完美转发实现原位构造</a></li>
 </ul>
 </div>
 </nav>
@@ -74,8 +74,8 @@
 
 <!-- more -->
 
-<div id="outline-container-org62eb630" class="outline-2">
-<h2 id="org62eb630"><span class="section-number-2">1</span> 左值与右值</h2>
+<div id="outline-container-org8778a2e" class="outline-2">
+<h2 id="org8778a2e"><span class="section-number-2">1.</span> 左值与右值</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 其实从 C 中就有了左值与右值的概念，当时理解的是“在赋值等号左边的是左值，在右边的
@@ -85,21 +85,21 @@
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">add</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">a</span>, <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">b</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span> <span style="color: #51afef;">return</span> a + b; <span style="color: #51afef;">}</span>
+<pre class="src src-C++"><span style="color: #8f3f71;">int</span> <span style="color: #b57614;">add</span>(<span style="color: #8f3f71;">int</span> <span style="color: #076678;">a</span>, <span style="color: #8f3f71;">int</span> <span style="color: #076678;">b</span>) { <span style="color: #9d0006;">return</span> a + b; }
 
-<span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">ret</span>;
-<span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#27809;&#38382;&#39064;&#65292;&#32473;&#24038;&#20540;&#36171;&#20540;</span>
-ret = add<span style="color: #51afef;">(</span>1, 2<span style="color: #51afef;">)</span>;
+<span style="color: #8f3f71;">int</span> <span style="color: #076678;">ret</span>;
+<span style="color: #a89984;">// </span><span style="color: #a89984;">&#27809;&#38382;&#39064;&#65292;&#32473;&#24038;&#20540;&#36171;&#20540;</span>
+ret = add(1, 2);
 
-<span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#38169;&#35823;&#65281;&#26080;&#27861;&#32473;&#21491;&#20540;&#36171;&#20540;</span>
-add<span style="color: #51afef;">(</span>1, 2<span style="color: #51afef;">)</span> = ret;
+<span style="color: #a89984;">// </span><span style="color: #a89984;">&#38169;&#35823;&#65281;&#26080;&#27861;&#32473;&#21491;&#20540;&#36171;&#20540;</span>
+add(1, 2) = ret;
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org622160e" class="outline-2">
-<h2 id="org622160e"><span class="section-number-2">2</span> 左值引用与右值引用</h2>
+<div id="outline-container-org788ba98" class="outline-2">
+<h2 id="org788ba98"><span class="section-number-2">2.</span> 左值引用与右值引用</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 <code>C++98</code> 中引入的左值引用就是给变量取一个别名，使用上和变量声明时的名字没有太大区别，
@@ -107,29 +107,29 @@ add<span style="color: #51afef;">(</span>1, 2<span style="color: #51afef;">)</sp
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">add</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">a</span>, <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">b</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span> <span style="color: #51afef;">return</span> a + b; <span style="color: #51afef;">}</span>
+<pre class="src src-C++"><span style="color: #8f3f71;">int</span> <span style="color: #b57614;">add</span>(<span style="color: #8f3f71;">int</span> <span style="color: #076678;">a</span>, <span style="color: #8f3f71;">int</span> <span style="color: #076678;">b</span>) { <span style="color: #9d0006;">return</span> a + b; }
 
-<span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">a</span> = 0;
+<span style="color: #8f3f71;">int</span> <span style="color: #076678;">a</span> = 0;
 
-<span style="color: #ECBE7B;">int</span>&amp; <span style="color: #dcaeea;">lRefA</span> = a;        <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#27491;&#30830;&#65306;&#23545;&#24038;&#20540;&#32465;&#23450;&#24038;&#20540;&#24341;&#29992;</span>
-<span style="color: #ECBE7B;">int</span>&amp; <span style="color: #dcaeea;">lRefN</span> = 0;        <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#38169;&#35823;&#65306;&#19981;&#33021;&#23545;&#21491;&#20540;&#32465;&#23450;&#24038;&#20540;&#24341;&#29992;&#65288;&#32534;&#35793;&#38169;&#35823;&#65289;</span>
+<span style="color: #8f3f71;">int</span>&amp; <span style="color: #076678;">lRefA</span> = a;        <span style="color: #a89984;">// </span><span style="color: #a89984;">&#27491;&#30830;&#65306;&#23545;&#24038;&#20540;&#32465;&#23450;&#24038;&#20540;&#24341;&#29992;</span>
+<span style="color: #8f3f71;">int</span>&amp; <span style="color: #076678;">lRefN</span> = 0;        <span style="color: #a89984;">// </span><span style="color: #a89984;">&#38169;&#35823;&#65306;&#19981;&#33021;&#23545;&#21491;&#20540;&#32465;&#23450;&#24038;&#20540;&#24341;&#29992;&#65288;&#32534;&#35793;&#38169;&#35823;&#65289;</span>
 
-<span style="color: #ECBE7B;">int</span>&amp;&amp; <span style="color: #dcaeea;">rRefA</span> = a;       <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#38169;&#35823;&#65306;&#19981;&#33021;&#23545;&#24038;&#20540;&#32465;&#23450;&#21491;&#20540;&#24341;&#29992;&#65288;&#32534;&#35793;&#38169;&#35823;&#65289;</span>
-<span style="color: #ECBE7B;">int</span>&amp;&amp; <span style="color: #dcaeea;">rRefN</span> = 0;       <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#27491;&#30830;&#65306;&#23545;&#21491;&#20540;&#32465;&#23450;&#21491;&#20540;&#24341;&#29992;</span>
-<span style="color: #ECBE7B;">int</span>&amp;&amp; <span style="color: #dcaeea;">ret</span> = add<span style="color: #51afef;">(</span>1, 2<span style="color: #51afef;">)</span>; <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#27491;&#30830;&#65306;&#23545;&#21491;&#20540;&#32465;&#23450;&#21491;&#20540;&#24341;&#29992;&#65292;&#27492;&#26102;&#36820;&#22238;&#30340;&#20020;&#26102;&#21464;&#37327;&#30340;&#29983;&#21629;&#21608;&#26399;&#30001; ret &#31649;&#29702;</span>
+<span style="color: #8f3f71;">int</span>&amp;&amp; <span style="color: #076678;">rRefA</span> = a;       <span style="color: #a89984;">// </span><span style="color: #a89984;">&#38169;&#35823;&#65306;&#19981;&#33021;&#23545;&#24038;&#20540;&#32465;&#23450;&#21491;&#20540;&#24341;&#29992;&#65288;&#32534;&#35793;&#38169;&#35823;&#65289;</span>
+<span style="color: #8f3f71;">int</span>&amp;&amp; <span style="color: #076678;">rRefN</span> = 0;       <span style="color: #a89984;">// </span><span style="color: #a89984;">&#27491;&#30830;&#65306;&#23545;&#21491;&#20540;&#32465;&#23450;&#21491;&#20540;&#24341;&#29992;</span>
+<span style="color: #8f3f71;">int</span>&amp;&amp; <span style="color: #076678;">ret</span> = add(1, 2); <span style="color: #a89984;">// </span><span style="color: #a89984;">&#27491;&#30830;&#65306;&#23545;&#21491;&#20540;&#32465;&#23450;&#21491;&#20540;&#24341;&#29992;&#65292;&#27492;&#26102;&#36820;&#22238;&#30340;&#20020;&#26102;&#21464;&#37327;&#30340;&#29983;&#21629;&#21608;&#26399;&#30001; ret &#31649;&#29702;</span>
 
-<span style="color: #5B6268;">/* </span><span style="color: #5B6268;">&#27880;&#24847;&#24120;&#37327;&#24038;&#20540;&#24341;&#29992;&#27604;&#36739;&#29305;&#27530;</span>
-<span style="color: #5B6268;"> * &#26082;&#21487;&#20197;&#32465;&#23450;&#24038;&#20540;&#20063;&#21487;&#20197;&#32465;&#23450;&#21491;&#20540;</span>
-<span style="color: #5B6268;"> */</span>
-<span style="color: #ECBE7B;">int</span> <span style="color: #51afef;">const</span>&amp; <span style="color: #dcaeea;">cLRefA</span> = a; <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#27491;&#30830;&#65306;&#24120;&#37327;&#24038;&#20540;&#24341;&#29992;&#21487;&#20197;&#32465;&#23450;&#24038;&#20540;</span>
-<span style="color: #ECBE7B;">int</span> <span style="color: #51afef;">const</span>&amp; <span style="color: #dcaeea;">cLRefN</span> = 0; <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#27491;&#30830;&#65306;&#24120;&#37327;&#24038;&#20540;&#24341;&#29992;&#21487;&#20197;&#32465;&#23450;&#21491;&#20540;</span>
+<span style="color: #a89984;">/* </span><span style="color: #a89984;">&#27880;&#24847;&#24120;&#37327;&#24038;&#20540;&#24341;&#29992;&#27604;&#36739;&#29305;&#27530;</span>
+<span style="color: #a89984;"> * &#26082;&#21487;&#20197;&#32465;&#23450;&#24038;&#20540;&#20063;&#21487;&#20197;&#32465;&#23450;&#21491;&#20540;</span>
+<span style="color: #a89984;"> */</span>
+<span style="color: #8f3f71;">int</span> <span style="color: #9d0006;">const</span>&amp; <span style="color: #076678;">cLRefA</span> = a; <span style="color: #a89984;">// </span><span style="color: #a89984;">&#27491;&#30830;&#65306;&#24120;&#37327;&#24038;&#20540;&#24341;&#29992;&#21487;&#20197;&#32465;&#23450;&#24038;&#20540;</span>
+<span style="color: #8f3f71;">int</span> <span style="color: #9d0006;">const</span>&amp; <span style="color: #076678;">cLRefN</span> = 0; <span style="color: #a89984;">// </span><span style="color: #a89984;">&#27491;&#30830;&#65306;&#24120;&#37327;&#24038;&#20540;&#24341;&#29992;&#21487;&#20197;&#32465;&#23450;&#21491;&#20540;</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgdcf75a5" class="outline-2">
-<h2 id="orgdcf75a5"><span class="section-number-2">3</span> 移动构造与移动赋值</h2>
+<div id="outline-container-org51fbc47" class="outline-2">
+<h2 id="org51fbc47"><span class="section-number-2">3.</span> 移动构造与移动赋值</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 在接触移动语义之前，先简单地实现一个 <code>String</code> 类来说明移动语义的应用场景。移动语义
@@ -138,437 +138,194 @@ add<span style="color: #51afef;">(</span>1, 2<span style="color: #51afef;">)</sp
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #51afef; font-weight: bold;">#include</span> <span style="color: #51afef;">&lt;</span><span style="color: #98be65;">vector</span><span style="color: #51afef;">&gt;</span>
-<span style="color: #51afef; font-weight: bold;">#include</span> <span style="color: #51afef;">&lt;</span><span style="color: #98be65;">iostream</span><span style="color: #51afef;">&gt;</span>
-<span style="color: #51afef; font-weight: bold;">#include</span> <span style="color: #51afef;">&lt;</span><span style="color: #98be65;">cstring</span><span style="color: #51afef;">&gt;</span>
-<span style="color: #51afef; font-weight: bold;">#include</span> <span style="color: #51afef;">&lt;</span><span style="color: #98be65;">algorithm</span><span style="color: #51afef;">&gt;</span>
+<pre class="src src-C++"><span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;vector&gt;</span>
+<span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;iostream&gt;</span>
+<span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;cstring&gt;</span>
+<span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;algorithm&gt;</span>
 
-<span style="color: #51afef;">class</span> <span style="color: #ECBE7B;">String</span>
-<span style="color: #51afef;">{</span>
-<span style="color: #51afef;">public</span>:
-  <span style="color: #51afef;">static</span> <span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">size_t</span> <span style="color: #dcaeea;">cpyCstrCnt</span>;
-  <span style="color: #51afef;">static</span> <span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">size_t</span> <span style="color: #dcaeea;">cpyAsgnCnt</span>;
-  <span style="color: #51afef;">static</span> <span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">size_t</span> <span style="color: #dcaeea;">movCstrCnt</span>;
-  <span style="color: #51afef;">static</span> <span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">size_t</span> <span style="color: #dcaeea;">dstrCnt</span>;
+<span style="color: #9d0006;">class</span> <span style="color: #8f3f71;">String</span>
+{
+<span style="color: #9d0006;">public</span>:
+  <span style="color: #9d0006;">static</span> <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #076678;">cpyCstrCnt</span>;
+  <span style="color: #9d0006;">static</span> <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #076678;">cpyAsgnCnt</span>;
+  <span style="color: #9d0006;">static</span> <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #076678;">movCstrCnt</span>;
+  <span style="color: #9d0006;">static</span> <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #076678;">dstrCnt</span>;
 
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#26500;&#36896;&#20989;&#25968;</span>
-  <span style="color: #c678dd;">String</span><span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">char</span> <span style="color: #51afef;">const</span>* <span style="color: #dcaeea;">cstr</span> = <span style="color: #a9a1e1;">nullptr</span><span style="color: #c678dd;">)</span>;
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#25335;&#36125;&#26500;&#36896;&#20989;&#25968;</span>
-  <span style="color: #c678dd;">String</span><span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">String</span> <span style="color: #51afef;">const</span>&amp; <span style="color: #dcaeea;">rhs</span><span style="color: #c678dd;">)</span>;
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#25335;&#36125;&#36171;&#20540;&#20989;&#25968;</span>
-  <span style="color: #ECBE7B;">String</span>&amp; <span style="color: #51afef;">operator</span><span style="color: #c678dd;">=</span><span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">String</span> <span style="color: #dcaeea;">rhs</span><span style="color: #c678dd;">)</span>;
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#31227;&#21160;&#26500;&#36896;&#20989;&#25968;</span>
-  <span style="color: #c678dd;">String</span><span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">String</span>&amp;&amp; <span style="color: #dcaeea;">rhs</span><span style="color: #c678dd;">)</span>;
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#26512;&#26500;&#20989;&#25968;</span>
-  ~<span style="color: #c678dd;">String</span><span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">void</span><span style="color: #c678dd;">)</span>;
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#26500;&#36896;&#20989;&#25968;</span>
+  <span style="color: #b57614;">String</span>(<span style="color: #8f3f71;">char</span> <span style="color: #9d0006;">const</span>* <span style="color: #076678;">cstr</span> = <span style="color: #8f3f71;">nullptr</span>);
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#25335;&#36125;&#26500;&#36896;&#20989;&#25968;</span>
+  <span style="color: #b57614;">String</span>(<span style="color: #8f3f71;">String</span> <span style="color: #9d0006;">const</span>&amp; <span style="color: #076678;">rhs</span>);
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#25335;&#36125;&#36171;&#20540;&#20989;&#25968;</span>
+  <span style="color: #8f3f71;">String</span>&amp; <span style="color: #9d0006;">operator</span><span style="color: #b57614;">=</span>(<span style="color: #8f3f71;">String</span> <span style="color: #076678;">rhs</span>);
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#31227;&#21160;&#26500;&#36896;&#20989;&#25968;</span>
+  <span style="color: #b57614;">String</span>(<span style="color: #8f3f71;">String</span>&amp;&amp; <span style="color: #076678;">rhs</span>);
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#26512;&#26500;&#20989;&#25968;</span>
+  ~<span style="color: #b57614;">String</span>(<span style="color: #8f3f71;">void</span>);
 
-<span style="color: #51afef;">private</span>:
-  <span style="color: #ECBE7B;">char</span>* <span style="color: #dcaeea;">str</span> = <span style="color: #a9a1e1;">nullptr</span>;
-<span style="color: #51afef;">}</span>;
+<span style="color: #9d0006;">private</span>:
+  <span style="color: #8f3f71;">char</span>* <span style="color: #076678;">str</span> = <span style="color: #8f3f71;">nullptr</span>;
+};
 
-<span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">size_t</span> <span style="color: #a9a1e1;">String</span>::<span style="color: #dcaeea;">cpyCstrCnt</span> = 0;
-<span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">size_t</span> <span style="color: #a9a1e1;">String</span>::<span style="color: #dcaeea;">cpyAsgnCnt</span> = 0;
-<span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">size_t</span> <span style="color: #a9a1e1;">String</span>::<span style="color: #dcaeea;">movCstrCnt</span> = 0;
-<span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">size_t</span> <span style="color: #a9a1e1;">String</span>::<span style="color: #dcaeea;">dstrCnt</span> = 0;
+<span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #8f3f71;">String</span>::<span style="color: #076678;">cpyCstrCnt</span> = 0;
+<span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #8f3f71;">String</span>::<span style="color: #076678;">cpyAsgnCnt</span> = 0;
+<span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #8f3f71;">String</span>::<span style="color: #076678;">movCstrCnt</span> = 0;
+<span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #8f3f71;">String</span>::<span style="color: #076678;">dstrCnt</span> = 0;
 
-<span style="color: #a9a1e1;">String</span>::<span style="color: #c678dd;">String</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">char</span> <span style="color: #51afef;">const</span>* <span style="color: #dcaeea;">cstr</span><span style="color: #51afef;">)</span> : str<span style="color: #51afef;">(</span><span style="color: #a9a1e1;">nullptr</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#22914;&#26524; cstr &#20026;&#31354;&#25110;&#20998;&#37197;&#20869;&#23384;&#22833;&#36133;&#65292;&#21017; str &#25351;&#21521; nullptr</span>
-  <span style="color: #51afef;">if</span> <span style="color: #c678dd;">(</span>cstr == <span style="color: #a9a1e1;">nullptr</span><span style="color: #c678dd;">)</span>
-  <span style="color: #c678dd;">{</span>
-    <span style="color: #51afef;">return</span>;
-  <span style="color: #c678dd;">}</span>
+<span style="color: #8f3f71;">String</span>::<span style="color: #b57614;">String</span>(<span style="color: #8f3f71;">char</span> <span style="color: #9d0006;">const</span>* <span style="color: #076678;">cstr</span>) : str(<span style="color: #8f3f71;">nullptr</span>)
+{
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#22914;&#26524; cstr &#20026;&#31354;&#25110;&#20998;&#37197;&#20869;&#23384;&#22833;&#36133;&#65292;&#21017; str &#25351;&#21521; nullptr</span>
+  <span style="color: #9d0006;">if</span> (cstr == <span style="color: #8f3f71;">nullptr</span>)
+  {
+    <span style="color: #9d0006;">return</span>;
+  }
 
-  str = <span style="color: #51afef;">new</span> <span style="color: #ECBE7B;">char</span><span style="color: #c678dd;">[</span>strlen<span style="color: #98be65;">(</span>cstr<span style="color: #98be65;">)</span> + 1<span style="color: #c678dd;">]</span>;
+  str = <span style="color: #9d0006;">new</span> <span style="color: #8f3f71;">char</span>[strlen(cstr) + 1];
 
-  <span style="color: #51afef;">if</span> <span style="color: #c678dd;">(</span>str == <span style="color: #a9a1e1;">nullptr</span><span style="color: #c678dd;">)</span>
-  <span style="color: #c678dd;">{</span>
-    <span style="color: #51afef;">return</span>;
-  <span style="color: #c678dd;">}</span>
+  <span style="color: #9d0006;">if</span> (str == <span style="color: #8f3f71;">nullptr</span>)
+  {
+    <span style="color: #9d0006;">return</span>;
+  }
 
-  strncpy<span style="color: #c678dd;">(</span>str, cstr, strlen<span style="color: #98be65;">(</span>cstr<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>;
-<span style="color: #51afef;">}</span>
+  strncpy(str, cstr, strlen(cstr));
+}
 
-<span style="color: #a9a1e1;">String</span>::<span style="color: #c678dd;">String</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">String</span> <span style="color: #51afef;">const</span>&amp; <span style="color: #dcaeea;">rhs</span><span style="color: #51afef;">)</span> : String<span style="color: #51afef;">(</span>rhs.str<span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
+<span style="color: #8f3f71;">String</span>::<span style="color: #b57614;">String</span>(<span style="color: #8f3f71;">String</span> <span style="color: #9d0006;">const</span>&amp; <span style="color: #076678;">rhs</span>) : String(rhs.str)
+{
   ++cpyCstrCnt;
-<span style="color: #51afef;">}</span>
+}
 
-<span style="color: #ECBE7B;">String</span>&amp; <span style="color: #a9a1e1;">String</span>::<span style="color: #51afef;">operator</span><span style="color: #c678dd;">=</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">String</span> <span style="color: #dcaeea;">rhs</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#27492;&#22788;&#20351;&#29992;&#20102;&#21517;&#20026; copy and swap &#25110; move and swap &#30340;&#25216;&#24039;&#65292;&#21487;&#21516;&#26102;&#29992;&#20110;&#25335;&#36125;&#36171;&#20540;&#21644;</span>
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#31227;&#21160;&#36171;&#20540;&#65292;&#20855;&#26377;&#24322;&#24120;&#23433;&#20840;&#21644;&#33258;&#36171;&#20540;&#23433;&#20840;&#12290;&#24403;&#20256;&#20837;&#24038;&#20540;&#26102;&#20250;&#38544;&#24335;&#25335;&#36125;&#26500;&#36896;&#19968;&#20010;&#20020;&#26102;&#37327;&#65292;</span>
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#24403;&#20256;&#20837;&#21491;&#20540;&#26102;&#20250;&#38544;&#31227;&#21160;&#26500;&#36896;&#19968;&#20010;&#20020;&#26102;&#37327;</span>
-  <span style="color: #a9a1e1;">std</span>::swap<span style="color: #c678dd;">(</span><span style="color: #51afef;">this</span>-&gt;str, rhs.str<span style="color: #c678dd;">)</span>;
+<span style="color: #8f3f71;">String</span>&amp; <span style="color: #8f3f71;">String</span>::<span style="color: #9d0006;">operator</span><span style="color: #b57614;">=</span>(<span style="color: #8f3f71;">String</span> <span style="color: #076678;">rhs</span>)
+{
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#27492;&#22788;&#20351;&#29992;&#20102;&#21517;&#20026; copy and swap &#25110; move and swap &#30340;&#25216;&#24039;&#65292;&#21487;&#21516;&#26102;&#29992;&#20110;&#25335;&#36125;&#36171;&#20540;&#21644;</span>
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#31227;&#21160;&#36171;&#20540;&#65292;&#20855;&#26377;&#24322;&#24120;&#23433;&#20840;&#21644;&#33258;&#36171;&#20540;&#23433;&#20840;&#12290;&#24403;&#20256;&#20837;&#24038;&#20540;&#26102;&#20250;&#38544;&#24335;&#25335;&#36125;&#26500;&#36896;&#19968;&#20010;&#20020;&#26102;&#37327;&#65292;</span>
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#24403;&#20256;&#20837;&#21491;&#20540;&#26102;&#20250;&#38544;&#31227;&#21160;&#26500;&#36896;&#19968;&#20010;&#20020;&#26102;&#37327;</span>
+  <span style="color: #8f3f71;">std</span>::swap(<span style="color: #9d0006;">this</span>-&gt;str, rhs.str);
 
   ++cpyAsgnCnt;
-<span style="color: #51afef;">}</span>
+}
 
-<span style="color: #a9a1e1;">String</span>::<span style="color: #c678dd;">String</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">String</span>&amp;&amp; <span style="color: #dcaeea;">rhs</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
+<span style="color: #8f3f71;">String</span>::<span style="color: #b57614;">String</span>(<span style="color: #8f3f71;">String</span>&amp;&amp; <span style="color: #076678;">rhs</span>)
+{
   str = rhs.str;
-  rhs.str = <span style="color: #a9a1e1;">nullptr</span>;
+  rhs.str = <span style="color: #8f3f71;">nullptr</span>;
   ++movCstrCnt;
-<span style="color: #51afef;">}</span>
+}
 
-<span style="color: #a9a1e1;">String</span>::~<span style="color: #c678dd;">String</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">void</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #51afef;">delete</span> <span style="color: #c678dd;">[]</span>str;
+<span style="color: #8f3f71;">String</span>::~<span style="color: #b57614;">String</span>(<span style="color: #8f3f71;">void</span>)
+{
+  <span style="color: #9d0006;">delete</span> []str;
   ++dstrCnt;
-<span style="color: #51afef;">}</span>
+}
 
-<span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">clearCnt</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">void</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #a9a1e1;">String</span>::cpyCstrCnt = 0;
-  <span style="color: #a9a1e1;">String</span>::cpyAsgnCnt = 0;
-  <span style="color: #a9a1e1;">String</span>::movCstrCnt = 0;
-  <span style="color: #a9a1e1;">String</span>::dstrCnt = 0;
-<span style="color: #51afef;">}</span>
+<span style="color: #8f3f71;">void</span> <span style="color: #b57614;">clearCnt</span>(<span style="color: #8f3f71;">void</span>)
+{
+  <span style="color: #8f3f71;">String</span>::cpyCstrCnt = 0;
+  <span style="color: #8f3f71;">String</span>::cpyAsgnCnt = 0;
+  <span style="color: #8f3f71;">String</span>::movCstrCnt = 0;
+  <span style="color: #8f3f71;">String</span>::dstrCnt = 0;
+}
 
-<span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">outputCnt</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">void</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Copy Construct: "</span> &lt;&lt; <span style="color: #a9a1e1;">String</span>::cpyCstrCnt &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Copy Assignment: "</span> &lt;&lt; <span style="color: #a9a1e1;">String</span>::cpyAsgnCnt &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Move Construct: "</span> &lt;&lt; <span style="color: #a9a1e1;">String</span>::movCstrCnt &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Destruct: "</span> &lt;&lt; <span style="color: #a9a1e1;">String</span>::dstrCnt &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-<span style="color: #51afef;">}</span>
+<span style="color: #8f3f71;">void</span> <span style="color: #b57614;">outputCnt</span>(<span style="color: #8f3f71;">void</span>)
+{
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Copy Construct: "</span> &lt;&lt; <span style="color: #8f3f71;">String</span>::cpyCstrCnt &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Copy Assignment: "</span> &lt;&lt; <span style="color: #8f3f71;">String</span>::cpyAsgnCnt &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Move Construct: "</span> &lt;&lt; <span style="color: #8f3f71;">String</span>::movCstrCnt &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Destruct: "</span> &lt;&lt; <span style="color: #8f3f71;">String</span>::dstrCnt &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+}
 
-<span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">main</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">void</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">vector</span><span style="color: #c678dd;">&lt;</span><span style="color: #ECBE7B;">String</span><span style="color: #c678dd;">&gt;</span> <span style="color: #dcaeea;">svec</span>;
-  svec.reserve<span style="color: #c678dd;">(</span>1000<span style="color: #c678dd;">)</span>;
+<span style="color: #8f3f71;">int</span> <span style="color: #b57614;">main</span>(<span style="color: #8f3f71;">void</span>)
+{
+  <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">String</span>&gt; <span style="color: #076678;">svec</span>;
+  svec.reserve(1000);
 
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">1. &#21521; push_back &#20256;&#20837;&#24038;&#20540;</span>
-  <span style="color: #ECBE7B;">String</span> <span style="color: #dcaeea;">s</span><span style="color: #c678dd;">(</span><span style="color: #98be65;">"Hello, world!"</span><span style="color: #c678dd;">)</span>;
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">push_back &#25343;&#21040;&#30340;&#26159; s &#30340;&#24038;&#20540;&#24341;&#29992;&#65292;&#25968;&#32452;&#20013;&#30340; String &#20351;&#29992;&#25335;&#36125;&#26500;&#36896;&#29983;&#25104;</span>
-  <span style="color: #51afef;">for</span> <span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">i</span> = 0; i &lt; 1000; ++i<span style="color: #c678dd;">)</span> <span style="color: #c678dd;">{</span> svec.push_back<span style="color: #98be65;">(</span>s<span style="color: #98be65;">)</span>; <span style="color: #c678dd;">}</span>
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">1. &#21521; push_back &#20256;&#20837;&#24038;&#20540;</span>
+  <span style="color: #8f3f71;">String</span> <span style="color: #076678;">s</span>(<span style="color: #79740e;">"Hello, world!"</span>);
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">push_back &#25343;&#21040;&#30340;&#26159; s &#30340;&#24038;&#20540;&#24341;&#29992;&#65292;&#25968;&#32452;&#20013;&#30340; String &#20351;&#29992;&#25335;&#36125;&#26500;&#36896;&#29983;&#25104;</span>
+  <span style="color: #9d0006;">for</span> (<span style="color: #8f3f71;">int</span> <span style="color: #076678;">i</span> = 0; i &lt; 1000; ++i) { svec.push_back(s); }
 
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"===== Construct String with left value ====="</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  outputCnt<span style="color: #c678dd;">()</span>;
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"===== Construct String with left value ====="</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  outputCnt();
 
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#28165;&#29702;</span>
-  svec.clear<span style="color: #c678dd;">()</span>;
-  clearCnt<span style="color: #c678dd;">()</span>;
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#28165;&#29702;</span>
+  svec.clear();
+  clearCnt();
 
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">2. &#21521; push_back &#20256;&#20837;&#21491;&#20540;&#65292;&#27492;&#22788;&#20351;&#29992;&#20102;&#38544;&#24335;&#26500;&#36896;&#65292;push_back &#25343;&#21040;&#30340;&#26159;&#20020;&#26102;&#37327;&#30340;&#21491;</span>
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#20540;&#24341;&#29992;&#65292;&#25968;&#32452;&#20013;&#20803;&#32032;&#20351;&#29992;&#31227;&#21160;&#26500;&#36896;&#29983;&#25104;</span>
-  <span style="color: #51afef;">for</span> <span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">i</span> = 0; i &lt; 1000; ++i<span style="color: #c678dd;">)</span> <span style="color: #c678dd;">{</span> svec.push_back<span style="color: #98be65;">(</span><span style="color: #98be65;">"Hello, world!"</span><span style="color: #98be65;">)</span>; <span style="color: #c678dd;">}</span>
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">2. &#21521; push_back &#20256;&#20837;&#21491;&#20540;&#65292;&#27492;&#22788;&#20351;&#29992;&#20102;&#38544;&#24335;&#26500;&#36896;&#65292;push_back &#25343;&#21040;&#30340;&#26159;&#20020;&#26102;&#37327;&#30340;&#21491;</span>
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#20540;&#24341;&#29992;&#65292;&#25968;&#32452;&#20013;&#20803;&#32032;&#20351;&#29992;&#31227;&#21160;&#26500;&#36896;&#29983;&#25104;</span>
+  <span style="color: #9d0006;">for</span> (<span style="color: #8f3f71;">int</span> <span style="color: #076678;">i</span> = 0; i &lt; 1000; ++i) { svec.push_back(<span style="color: #79740e;">"Hello, world!"</span>); }
 
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"===== Construct String with right value ====="</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  outputCnt<span style="color: #c678dd;">()</span>;
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"===== Construct String with right value ====="</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  outputCnt();
 
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#28165;&#29702;</span>
-  svec.clear<span style="color: #c678dd;">()</span>;
-  clearCnt<span style="color: #c678dd;">()</span>;
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#28165;&#29702;</span>
+  svec.clear();
+  clearCnt();
 
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">3. &#20351;&#29992; std::move &#21578;&#35785;&#32534;&#35793;&#22120;&#23558;&#19968;&#20010;&#21464;&#37327;&#24403;&#20316;&#21491;&#20540;&#65288;&#20351;&#29992;&#31227;&#21160;&#35821;&#20041;&#65289;&#65292;&#23558;&#21407;&#21464;&#37327;&#30340;</span>
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#36164;&#28304;&#25511;&#21046;&#26435;&#31227;&#20132;&#32473;&#26032;&#21464;&#37327;&#65292;&#21516;&#26102;&#20316;&#20026;&#35843;&#29992;&#32773;&#35201;&#20445;&#35777;&#19981;&#20877;&#20351;&#29992;&#21407;&#21464;&#37327;</span>
-  svec.push_back<span style="color: #c678dd;">(</span><span style="color: #a9a1e1;">std</span>::move<span style="color: #98be65;">(</span>s<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>;
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">3. &#20351;&#29992; std::move &#21578;&#35785;&#32534;&#35793;&#22120;&#23558;&#19968;&#20010;&#21464;&#37327;&#24403;&#20316;&#21491;&#20540;&#65288;&#20351;&#29992;&#31227;&#21160;&#35821;&#20041;&#65289;&#65292;&#23558;&#21407;&#21464;&#37327;&#30340;</span>
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#36164;&#28304;&#25511;&#21046;&#26435;&#31227;&#20132;&#32473;&#26032;&#21464;&#37327;&#65292;&#21516;&#26102;&#20316;&#20026;&#35843;&#29992;&#32773;&#35201;&#20445;&#35777;&#19981;&#20877;&#20351;&#29992;&#21407;&#21464;&#37327;</span>
+  svec.push_back(<span style="color: #8f3f71;">std</span>::move(s));
 
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"===== Construct String with std::move ====="</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  outputCnt<span style="color: #c678dd;">()</span>;
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"===== Construct String with std::move ====="</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  outputCnt();
 
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#28165;&#29702;</span>
-  svec.clear<span style="color: #c678dd;">()</span>;
-  clearCnt<span style="color: #c678dd;">()</span>;
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#28165;&#29702;</span>
+  svec.clear();
+  clearCnt();
 
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">4. &#25335;&#36125;&#36171;&#20540;</span>
-  <span style="color: #ECBE7B;">String</span> <span style="color: #dcaeea;">a</span><span style="color: #c678dd;">(</span><span style="color: #98be65;">"Hello, C++!"</span><span style="color: #c678dd;">)</span>;
-  <span style="color: #ECBE7B;">String</span> <span style="color: #dcaeea;">b</span>;
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">4. &#25335;&#36125;&#36171;&#20540;</span>
+  <span style="color: #8f3f71;">String</span> <span style="color: #076678;">a</span>(<span style="color: #79740e;">"Hello, C++!"</span>);
+  <span style="color: #8f3f71;">String</span> <span style="color: #076678;">b</span>;
   b = a;
 
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"===== Copy Assignment ====="</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  outputCnt<span style="color: #c678dd;">()</span>;
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"===== Copy Assignment ====="</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  outputCnt();
 
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#28165;&#29702;</span>
-  svec.clear<span style="color: #c678dd;">()</span>;
-  clearCnt<span style="color: #c678dd;">()</span>;
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#28165;&#29702;</span>
+  svec.clear();
+  clearCnt();
 
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">5. &#31227;&#21160;&#36171;&#20540;</span>
-  <span style="color: #ECBE7B;">String</span> <span style="color: #dcaeea;">c</span>;
-  c = <span style="color: #a9a1e1;">std</span>::move<span style="color: #c678dd;">(</span>b<span style="color: #c678dd;">)</span>;
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">5. &#31227;&#21160;&#36171;&#20540;</span>
+  <span style="color: #8f3f71;">String</span> <span style="color: #076678;">c</span>;
+  c = <span style="color: #8f3f71;">std</span>::move(b);
 
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"===== Move Assignment ====="</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  outputCnt<span style="color: #c678dd;">()</span>;
-<span style="color: #51afef;">}</span>
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"===== Move Assignment ====="</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  outputCnt();
+}
 </pre>
 </div>
 
-<table>
-
-
-<colgroup>
-<col  class="org-left">
-
-<col  class="org-left">
-
-<col  class="org-right">
-
-<col  class="org-left">
-
-<col  class="org-left">
-
-<col  class="org-left">
-
-<col  class="org-left">
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left"><code>===</code></td>
-<td class="org-left">Construct</td>
-<td class="org-right">String</td>
-<td class="org-left">with</td>
-<td class="org-left">left</td>
-<td class="org-left">value</td>
-<td class="org-left"><code>===</code></td>
-</tr>
-
-<tr>
-<td class="org-left">Copy</td>
-<td class="org-left">Construct:</td>
-<td class="org-right">1000</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Copy</td>
-<td class="org-left">Assignment:</td>
-<td class="org-right">0</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Move</td>
-<td class="org-left">Construct:</td>
-<td class="org-right">0</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Destruct:</td>
-<td class="org-left">0</td>
-<td class="org-right">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>===</code></td>
-<td class="org-left">Construct</td>
-<td class="org-right">String</td>
-<td class="org-left">with</td>
-<td class="org-left">right</td>
-<td class="org-left">value</td>
-<td class="org-left"><code>===</code></td>
-</tr>
-
-<tr>
-<td class="org-left">Copy</td>
-<td class="org-left">Construct:</td>
-<td class="org-right">0</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Copy</td>
-<td class="org-left">Assignment:</td>
-<td class="org-right">0</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Move</td>
-<td class="org-left">Construct:</td>
-<td class="org-right">1000</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Destruct:</td>
-<td class="org-left">1000</td>
-<td class="org-right">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>===</code></td>
-<td class="org-left">Construct</td>
-<td class="org-right">String</td>
-<td class="org-left">with</td>
-<td class="org-left">std::move</td>
-<td class="org-left"><code>===</code></td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Copy</td>
-<td class="org-left">Construct:</td>
-<td class="org-right">0</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Copy</td>
-<td class="org-left">Assignment:</td>
-<td class="org-right">0</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Move</td>
-<td class="org-left">Construct:</td>
-<td class="org-right">1</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Destruct:</td>
-<td class="org-left">0</td>
-<td class="org-right">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>===</code></td>
-<td class="org-left">Copy</td>
-<td class="org-right">Assignment</td>
-<td class="org-left"><code>===</code></td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Copy</td>
-<td class="org-left">Construct:</td>
-<td class="org-right">1</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Copy</td>
-<td class="org-left">Assignment:</td>
-<td class="org-right">1</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Move</td>
-<td class="org-left">Construct:</td>
-<td class="org-right">0</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Destruct:</td>
-<td class="org-left">1</td>
-<td class="org-right">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>===</code></td>
-<td class="org-left">Move</td>
-<td class="org-right">Assignment</td>
-<td class="org-left"><code>===</code></td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Copy</td>
-<td class="org-left">Construct:</td>
-<td class="org-right">0</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Copy</td>
-<td class="org-left">Assignment:</td>
-<td class="org-right">1</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Move</td>
-<td class="org-left">Construct:</td>
-<td class="org-right">1</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Destruct:</td>
-<td class="org-left">1</td>
-<td class="org-right">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
+<pre class="example" id="org430ab6d">
+===== Construct String with left value =====
+Copy Construct: 1000
+Copy Assignment: 0
+Move Construct: 0
+Destruct: 0
+===== Construct String with right value =====
+Copy Construct: 0
+Copy Assignment: 0
+Move Construct: 1000
+Destruct: 1000
+===== Construct String with std::move =====
+Copy Construct: 0
+Copy Assignment: 0
+Move Construct: 1
+Destruct: 0
+===== Copy Assignment =====
+Copy Construct: 1
+Copy Assignment: 1
+Move Construct: 0
+Destruct: 1
+===== Move Assignment =====
+Copy Construct: 0
+Copy Assignment: 1
+Move Construct: 1
+Destruct: 1
+</pre>
 </div>
 </div>
 
-<div id="outline-container-org0c1bb6a" class="outline-2">
-<h2 id="org0c1bb6a"><span class="section-number-2">4</span> 引用折叠</h2>
+<div id="outline-container-orgfa6feab" class="outline-2">
+<h2 id="orgfa6feab"><span class="section-number-2">4.</span> 引用折叠</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 引用折叠规则出现在函数泛型模板中，可总结为：
@@ -579,56 +336,42 @@ add<span style="color: #51afef;">(</span>1, 2<span style="color: #51afef;">)</sp
 </ol>
 
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #51afef; font-weight: bold;">#include</span> <span style="color: #51afef;">&lt;</span><span style="color: #98be65;">iostream</span><span style="color: #51afef;">&gt;</span>
+<pre class="src src-C++"><span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;iostream&gt;</span>
 
-<span style="color: #51afef;">template</span> <span style="color: #51afef;">&lt;</span><span style="color: #51afef;">typename</span> <span style="color: #ECBE7B;">T</span><span style="color: #51afef;">&gt;</span>
-<span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">f</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">T</span>&amp;&amp; <span style="color: #dcaeea;">p</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #51afef;">if</span> <span style="color: #c678dd;">(</span><span style="color: #a9a1e1;">std</span>::<span style="color: #a9a1e1;">is_same</span><span style="color: #98be65;">&lt;</span><span style="color: #ECBE7B;">T</span>, <span style="color: #ECBE7B;">int</span><span style="color: #98be65;">&gt;</span>::value<span style="color: #c678dd;">)</span>
-    <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"int"</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  <span style="color: #51afef;">else</span> <span style="color: #51afef;">if</span> <span style="color: #c678dd;">(</span><span style="color: #a9a1e1;">std</span>::<span style="color: #a9a1e1;">is_same</span><span style="color: #98be65;">&lt;</span><span style="color: #ECBE7B;">T</span>, <span style="color: #ECBE7B;">int</span>&amp;<span style="color: #98be65;">&gt;</span>::value<span style="color: #c678dd;">)</span>
-    <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"int&amp;"</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  <span style="color: #51afef;">else</span> <span style="color: #51afef;">if</span> <span style="color: #c678dd;">(</span><span style="color: #a9a1e1;">std</span>::<span style="color: #a9a1e1;">is_same</span><span style="color: #98be65;">&lt;</span><span style="color: #ECBE7B;">T</span>, <span style="color: #ECBE7B;">int</span>&amp;&amp;<span style="color: #98be65;">&gt;</span>::value<span style="color: #c678dd;">)</span>
-    <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"int&amp;&amp;"</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  <span style="color: #51afef;">else</span>
-    <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Unknown type"</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-<span style="color: #51afef;">}</span>
+<span style="color: #9d0006;">template</span> &lt;<span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">T</span>&gt;
+<span style="color: #8f3f71;">void</span> <span style="color: #b57614;">f</span>(<span style="color: #8f3f71;">T</span>&amp;&amp; <span style="color: #076678;">p</span>)
+{
+  <span style="color: #9d0006;">if</span> (<span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">is_same</span>&lt;<span style="color: #8f3f71;">T</span>, <span style="color: #8f3f71;">int</span>&gt;::value)
+    <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"int"</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  <span style="color: #9d0006;">else</span> <span style="color: #9d0006;">if</span> (<span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">is_same</span>&lt;<span style="color: #8f3f71;">T</span>, <span style="color: #8f3f71;">int</span>&amp;&gt;::value)
+    <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"int&amp;"</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  <span style="color: #9d0006;">else</span> <span style="color: #9d0006;">if</span> (<span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">is_same</span>&lt;<span style="color: #8f3f71;">T</span>, <span style="color: #8f3f71;">int</span>&amp;&amp;&gt;::value)
+    <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"int&amp;&amp;"</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  <span style="color: #9d0006;">else</span>
+    <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Unknown type"</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+}
 
-<span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">main</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">void</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">i</span> = 0;
-  <span style="color: #ECBE7B;">int</span>&amp;&amp; <span style="color: #dcaeea;">j</span> = 1;
+<span style="color: #8f3f71;">int</span> <span style="color: #b57614;">main</span>(<span style="color: #8f3f71;">void</span>)
+{
+  <span style="color: #8f3f71;">int</span> <span style="color: #076678;">i</span> = 0;
+  <span style="color: #8f3f71;">int</span>&amp;&amp; <span style="color: #076678;">j</span> = 1;
 
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">i &#20026;&#24038;&#20540;&#65292;T &#34987;&#25512;&#26029;&#20026; int&amp; &#26102; T&amp;&amp; &#20026; int&amp;&amp;&amp;&#65292;&#25240;&#21472;&#20026; int&amp; &#28385;&#36275;&#26465;&#20214;</span>
-  f<span style="color: #c678dd;">(</span>i<span style="color: #c678dd;">)</span>;
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">j &#26159;&#32465;&#23450;&#21040; 1 &#30340;&#21491;&#20540;&#24341;&#29992;&#65292;&#20294; j &#20316;&#20026;&#19968;&#20010;&#20855;&#21517;&#21464;&#37327;&#26412;&#36523;&#20026;&#24038;&#20540;&#65292;&#22240;&#27492; T &#34987;&#25512;&#26029;&#20026; int&amp;</span>
-  f<span style="color: #c678dd;">(</span>j<span style="color: #c678dd;">)</span>;
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">1 &#20026;&#21491;&#20540;&#65292;&#22240;&#27492; T &#34987;&#25512;&#26029;&#20026; int &#26102; T&amp;&amp; &#20026; int&amp;&amp; &#28385;&#36275;&#26465;&#20214;</span>
-  f<span style="color: #c678dd;">(</span>1<span style="color: #c678dd;">)</span>;
-<span style="color: #51afef;">}</span>
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">i &#20026;&#24038;&#20540;&#65292;T &#34987;&#25512;&#26029;&#20026; int&amp; &#26102; T&amp;&amp; &#20026; int&amp;&amp;&amp;&#65292;&#25240;&#21472;&#20026; int&amp; &#28385;&#36275;&#26465;&#20214;</span>
+  f(i);
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">j &#26159;&#32465;&#23450;&#21040; 1 &#30340;&#21491;&#20540;&#24341;&#29992;&#65292;&#20294; j &#20316;&#20026;&#19968;&#20010;&#20855;&#21517;&#21464;&#37327;&#26412;&#36523;&#20026;&#24038;&#20540;&#65292;&#22240;&#27492; T &#34987;&#25512;&#26029;&#20026; int&amp;</span>
+  f(j);
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">1 &#20026;&#21491;&#20540;&#65292;&#22240;&#27492; T &#34987;&#25512;&#26029;&#20026; int &#26102; T&amp;&amp; &#20026; int&amp;&amp; &#28385;&#36275;&#26465;&#20214;</span>
+  f(1);
+}
 </pre>
 </div>
 
-<table>
+<pre class="example">
+int&amp;
+int&amp;
+int
+</pre>
 
-
-<colgroup>
-<col  class="org-left">
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left">int&amp;</td>
-</tr>
-
-<tr>
-<td class="org-left">int&amp;</td>
-</tr>
-
-<tr>
-<td class="org-left">int</td>
-</tr>
-</tbody>
-</table>
 
 <p>
 <code>T&amp;&amp;</code> 表现出一种特性，能通过引用折叠规则保持传入参数的引用性质，因此也被称为通过引
@@ -637,8 +380,8 @@ add<span style="color: #51afef;">(</span>1, 2<span style="color: #51afef;">)</sp
 </div>
 </div>
 
-<div id="outline-container-orgdb7110d" class="outline-2">
-<h2 id="orgdb7110d"><span class="section-number-2">5</span> 完美转发</h2>
+<div id="outline-container-org17a566b" class="outline-2">
+<h2 id="org17a566b"><span class="section-number-2">5.</span> 完美转发</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 转发就是通过一个函数将参数交由另一个函数进行处理，原参数可能是左值也可能是右值，
@@ -646,112 +389,53 @@ add<span style="color: #51afef;">(</span>1, 2<span style="color: #51afef;">)</sp
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #51afef; font-weight: bold;">#include</span> <span style="color: #51afef;">&lt;</span><span style="color: #98be65;">iostream</span><span style="color: #51afef;">&gt;</span>
+<pre class="src src-C++"><span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;iostream&gt;</span>
 
-<span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">handle</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">int</span>&amp; <span style="color: #dcaeea;">i</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Handle int&amp;"</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-<span style="color: #51afef;">}</span>
+<span style="color: #8f3f71;">void</span> <span style="color: #b57614;">handle</span>(<span style="color: #8f3f71;">int</span>&amp; <span style="color: #076678;">i</span>)
+{
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Handle int&amp;"</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+}
 
-<span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">handle</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">int</span>&amp;&amp; <span style="color: #dcaeea;">i</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Handle int&amp;&amp;"</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-<span style="color: #51afef;">}</span>
+<span style="color: #8f3f71;">void</span> <span style="color: #b57614;">handle</span>(<span style="color: #8f3f71;">int</span>&amp;&amp; <span style="color: #076678;">i</span>)
+{
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Handle int&amp;&amp;"</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+}
 
-<span style="color: #51afef;">template</span><span style="color: #51afef;">&lt;</span><span style="color: #51afef;">typename</span> <span style="color: #ECBE7B;">T</span><span style="color: #51afef;">&gt;</span>
-<span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">forward</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">T</span>&amp;&amp; <span style="color: #dcaeea;">i</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  handle<span style="color: #c678dd;">(</span>i<span style="color: #c678dd;">)</span>;
-<span style="color: #51afef;">}</span>
+<span style="color: #9d0006;">template</span>&lt;<span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">T</span>&gt;
+<span style="color: #8f3f71;">void</span> <span style="color: #b57614;">forward</span>(<span style="color: #8f3f71;">T</span>&amp;&amp; <span style="color: #076678;">i</span>)
+{
+  handle(i);
+}
 
-<span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">main</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">void</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">i</span> = 0;
+<span style="color: #8f3f71;">int</span> <span style="color: #b57614;">main</span>(<span style="color: #8f3f71;">void</span>)
+{
+  <span style="color: #8f3f71;">int</span> <span style="color: #076678;">i</span> = 0;
 
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"===== Before forward ====="</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  handle<span style="color: #c678dd;">(</span>i<span style="color: #c678dd;">)</span>;
-  handle<span style="color: #c678dd;">(</span>0<span style="color: #c678dd;">)</span>;
-  handle<span style="color: #c678dd;">(</span><span style="color: #a9a1e1;">std</span>::move<span style="color: #98be65;">(</span>i<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>;
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"===== Before forward ====="</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  handle(i);
+  handle(0);
+  handle(<span style="color: #8f3f71;">std</span>::move(i));
 
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"===== After forward ====="</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  forward<span style="color: #c678dd;">(</span>i<span style="color: #c678dd;">)</span>;            <span style="color: #5B6268;">// </span><span style="color: #5B6268;">i &#26159;&#24038;&#20540;&#36716;&#21457;&#21518;&#20173;&#20026;&#24038;&#20540;&#24341;&#29992;</span>
-  forward<span style="color: #c678dd;">(</span>0<span style="color: #c678dd;">)</span>;            <span style="color: #5B6268;">// </span><span style="color: #5B6268;">0 &#26159;&#21491;&#20540;&#65292;forward &#20989;&#25968;&#20013;&#20351;&#29992; i &#32465;&#23450;&#20102; 0 &#30340;&#21491;&#20540;&#24341;&#29992;&#65292;</span>
-                         <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#20294; i &#26412;&#36523;&#26159;&#24038;&#20540;&#65292;&#36716;&#21457;&#21518;&#24341;&#29992;&#31867;&#22411;&#38169;&#35823;</span>
-  forward<span style="color: #c678dd;">(</span><span style="color: #a9a1e1;">std</span>::move<span style="color: #98be65;">(</span>i<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>; <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#19982;&#19978;&#26465;&#21516;</span>
-<span style="color: #51afef;">}</span>
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"===== After forward ====="</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  forward(i);            <span style="color: #a89984;">// </span><span style="color: #a89984;">i &#26159;&#24038;&#20540;&#36716;&#21457;&#21518;&#20173;&#20026;&#24038;&#20540;&#24341;&#29992;</span>
+  forward(0);            <span style="color: #a89984;">// </span><span style="color: #a89984;">0 &#26159;&#21491;&#20540;&#65292;forward &#20989;&#25968;&#20013;&#20351;&#29992; i &#32465;&#23450;&#20102; 0 &#30340;&#21491;&#20540;&#24341;&#29992;&#65292;</span>
+                         <span style="color: #a89984;">// </span><span style="color: #a89984;">&#20294; i &#26412;&#36523;&#26159;&#24038;&#20540;&#65292;&#36716;&#21457;&#21518;&#24341;&#29992;&#31867;&#22411;&#38169;&#35823;</span>
+  forward(<span style="color: #8f3f71;">std</span>::move(i)); <span style="color: #a89984;">// </span><span style="color: #a89984;">&#19982;&#19978;&#26465;&#21516;</span>
+}
 </pre>
 </div>
 
-<table>
+<pre class="example">
+===== Before forward =====
+Handle int&amp;
+Handle int&amp;&amp;
+Handle int&amp;&amp;
+===== After forward =====
+Handle int&amp;
+Handle int&amp;
+Handle int&amp;
+</pre>
 
-
-<colgroup>
-<col  class="org-left">
-
-<col  class="org-left">
-
-<col  class="org-left">
-
-<col  class="org-left">
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left"><code>===</code></td>
-<td class="org-left">Before</td>
-<td class="org-left">forward</td>
-<td class="org-left"><code>===</code></td>
-</tr>
-
-<tr>
-<td class="org-left">Handle</td>
-<td class="org-left">int&amp;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Handle</td>
-<td class="org-left">int&amp;&amp;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Handle</td>
-<td class="org-left">int&amp;&amp;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>===</code></td>
-<td class="org-left">After</td>
-<td class="org-left">forward</td>
-<td class="org-left"><code>===</code></td>
-</tr>
-
-<tr>
-<td class="org-left">Handle</td>
-<td class="org-left">int&amp;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Handle</td>
-<td class="org-left">int&amp;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Handle</td>
-<td class="org-left">int&amp;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
 
 <p>
 可以看到在经过转发之后参数的引用类型发生了变化，因此不是完美转发。 <code>C++11</code> 提供了
@@ -759,143 +443,71 @@ add<span style="color: #51afef;">(</span>1, 2<span style="color: #51afef;">)</sp
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #51afef; font-weight: bold;">#include</span> <span style="color: #51afef;">&lt;</span><span style="color: #98be65;">iostream</span><span style="color: #51afef;">&gt;</span>
+<pre class="src src-C++"><span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;iostream&gt;</span>
 
-<span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">handle</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">int</span>&amp; <span style="color: #dcaeea;">i</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Handle int&amp;"</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-<span style="color: #51afef;">}</span>
+<span style="color: #8f3f71;">void</span> <span style="color: #b57614;">handle</span>(<span style="color: #8f3f71;">int</span>&amp; <span style="color: #076678;">i</span>)
+{
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Handle int&amp;"</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+}
 
-<span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">handle</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">int</span>&amp;&amp; <span style="color: #dcaeea;">i</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Handle int&amp;&amp;"</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-<span style="color: #51afef;">}</span>
+<span style="color: #8f3f71;">void</span> <span style="color: #b57614;">handle</span>(<span style="color: #8f3f71;">int</span>&amp;&amp; <span style="color: #076678;">i</span>)
+{
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Handle int&amp;&amp;"</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+}
 
-<span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">handle</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">int</span> <span style="color: #51afef;">const</span>&amp; <span style="color: #dcaeea;">i</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Handle int const&amp;"</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-<span style="color: #51afef;">}</span>
+<span style="color: #8f3f71;">void</span> <span style="color: #b57614;">handle</span>(<span style="color: #8f3f71;">int</span> <span style="color: #9d0006;">const</span>&amp; <span style="color: #076678;">i</span>)
+{
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Handle int const&amp;"</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+}
 
-<span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">handle</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">int</span> <span style="color: #51afef;">const</span>&amp;&amp; <span style="color: #dcaeea;">i</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Handle int const&amp;&amp;"</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-<span style="color: #51afef;">}</span>
+<span style="color: #8f3f71;">void</span> <span style="color: #b57614;">handle</span>(<span style="color: #8f3f71;">int</span> <span style="color: #9d0006;">const</span>&amp;&amp; <span style="color: #076678;">i</span>)
+{
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Handle int const&amp;&amp;"</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+}
 
-<span style="color: #51afef;">template</span><span style="color: #51afef;">&lt;</span><span style="color: #51afef;">typename</span> <span style="color: #ECBE7B;">T</span><span style="color: #51afef;">&gt;</span>
-<span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">forward</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">T</span>&amp;&amp; <span style="color: #dcaeea;">i</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  handle<span style="color: #c678dd;">(</span><span style="color: #a9a1e1;">std</span>::forward<span style="color: #98be65;">&lt;</span><span style="color: #ECBE7B;">T</span><span style="color: #98be65;">&gt;(</span>i<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>;
-<span style="color: #51afef;">}</span>
+<span style="color: #9d0006;">template</span>&lt;<span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">T</span>&gt;
+<span style="color: #8f3f71;">void</span> <span style="color: #b57614;">forward</span>(<span style="color: #8f3f71;">T</span>&amp;&amp; <span style="color: #076678;">i</span>)
+{
+  handle(<span style="color: #8f3f71;">std</span>::forward&lt;<span style="color: #8f3f71;">T</span>&gt;(i));
+}
 
-<span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">main</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">void</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">i</span> = 0;
-  <span style="color: #ECBE7B;">int</span> <span style="color: #51afef;">const</span> <span style="color: #dcaeea;">ci</span> = 1;
+<span style="color: #8f3f71;">int</span> <span style="color: #b57614;">main</span>(<span style="color: #8f3f71;">void</span>)
+{
+  <span style="color: #8f3f71;">int</span> <span style="color: #076678;">i</span> = 0;
+  <span style="color: #8f3f71;">int</span> <span style="color: #9d0006;">const</span> <span style="color: #076678;">ci</span> = 1;
 
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"===== Before forward ====="</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  handle<span style="color: #c678dd;">(</span>i<span style="color: #c678dd;">)</span>;
-  handle<span style="color: #c678dd;">(</span>0<span style="color: #c678dd;">)</span>;
-  handle<span style="color: #c678dd;">(</span>ci<span style="color: #c678dd;">)</span>;
-  handle<span style="color: #c678dd;">(</span><span style="color: #a9a1e1;">std</span>::move<span style="color: #98be65;">(</span>ci<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>;
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"===== Before forward ====="</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  handle(i);
+  handle(0);
+  handle(ci);
+  handle(<span style="color: #8f3f71;">std</span>::move(ci));
 
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"===== After forward ====="</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  forward<span style="color: #c678dd;">(</span>i<span style="color: #c678dd;">)</span>;
-  forward<span style="color: #c678dd;">(</span>0<span style="color: #c678dd;">)</span>;
-  forward<span style="color: #c678dd;">(</span>ci<span style="color: #c678dd;">)</span>;
-  forward<span style="color: #c678dd;">(</span><span style="color: #a9a1e1;">std</span>::move<span style="color: #98be65;">(</span>ci<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>;
-<span style="color: #51afef;">}</span>
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"===== After forward ====="</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  forward(i);
+  forward(0);
+  forward(ci);
+  forward(<span style="color: #8f3f71;">std</span>::move(ci));
+}
 </pre>
 </div>
 
-<table>
-
-
-<colgroup>
-<col  class="org-left">
-
-<col  class="org-left">
-
-<col  class="org-left">
-
-<col  class="org-left">
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left"><code>===</code></td>
-<td class="org-left">Before</td>
-<td class="org-left">forward</td>
-<td class="org-left"><code>===</code></td>
-</tr>
-
-<tr>
-<td class="org-left">Handle</td>
-<td class="org-left">int&amp;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Handle</td>
-<td class="org-left">int&amp;&amp;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Handle</td>
-<td class="org-left">int</td>
-<td class="org-left">const&amp;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Handle</td>
-<td class="org-left">int</td>
-<td class="org-left">const&amp;&amp;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>===</code></td>
-<td class="org-left">After</td>
-<td class="org-left">forward</td>
-<td class="org-left"><code>===</code></td>
-</tr>
-
-<tr>
-<td class="org-left">Handle</td>
-<td class="org-left">int&amp;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Handle</td>
-<td class="org-left">int&amp;&amp;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Handle</td>
-<td class="org-left">int</td>
-<td class="org-left">const&amp;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Handle</td>
-<td class="org-left">int</td>
-<td class="org-left">const&amp;&amp;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
+<pre class="example" id="org3ba9390">
+===== Before forward =====
+Handle int&amp;
+Handle int&amp;&amp;
+Handle int const&amp;
+Handle int const&amp;&amp;
+===== After forward =====
+Handle int&amp;
+Handle int&amp;&amp;
+Handle int const&amp;
+Handle int const&amp;&amp;
+</pre>
 </div>
 </div>
 
-<div id="outline-container-org68500b0" class="outline-2">
-<h2 id="org68500b0"><span class="section-number-2">6</span> 利用完美转发实现委托机制</h2>
+<div id="outline-container-org462316c" class="outline-2">
+<h2 id="org462316c"><span class="section-number-2">6.</span> 利用完美转发实现委托机制</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 完美转发看起来非常完美，那到底有什么用呢？完美转发在标准库中有很多应用，主要涉及
@@ -903,93 +515,57 @@ add<span style="color: #51afef;">(</span>1, 2<span style="color: #51afef;">)</sp
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #51afef; font-weight: bold;">#include</span> <span style="color: #51afef;">&lt;</span><span style="color: #98be65;">iostream</span><span style="color: #51afef;">&gt;</span>
+<pre class="src src-C++"><span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;iostream&gt;</span>
 
-<span style="color: #51afef;">template</span><span style="color: #51afef;">&lt;</span><span style="color: #51afef;">typename</span> <span style="color: #ECBE7B;">T</span><span style="color: #51afef;">&gt;</span>
-<span style="color: #51afef;">class</span> <span style="color: #ECBE7B;">Delegate</span>;
+<span style="color: #9d0006;">template</span>&lt;<span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">T</span>&gt;
+<span style="color: #9d0006;">class</span> <span style="color: #8f3f71;">Delegate</span>;
 
-<span style="color: #51afef;">template</span><span style="color: #51afef;">&lt;</span><span style="color: #51afef;">typename</span> <span style="color: #ECBE7B;">Return</span>, <span style="color: #51afef;">typename</span><span style="color: #c678dd;">...</span> <span style="color: #ECBE7B;">Args</span><span style="color: #51afef;">&gt;</span>
-<span style="color: #51afef;">class</span> <span style="color: #ECBE7B;">Delegate</span><span style="color: #51afef;">&lt;</span>Return<span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">Args</span><span style="color: #c678dd;">...</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">&gt;</span>
-<span style="color: #51afef;">{</span>
-<span style="color: #51afef;">public</span>:
-  <span style="color: #51afef;">using</span> <span style="color: #ECBE7B;">FuncType</span> = Return <span style="color: #c678dd;">(</span>*<span style="color: #c678dd;">)(</span><span style="color: #ECBE7B;">Args</span><span style="color: #c678dd;">...</span><span style="color: #c678dd;">)</span>;
-  <span style="color: #c678dd;">Delegate</span><span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">FuncType</span> <span style="color: #dcaeea;">func</span><span style="color: #c678dd;">)</span> : __func<span style="color: #c678dd;">(</span>func<span style="color: #c678dd;">)</span> <span style="color: #c678dd;">{</span> <span style="color: #c678dd;">}</span>
-  <span style="color: #ECBE7B;">Return</span> <span style="color: #51afef;">operator</span><span style="color: #c678dd;">()</span><span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">Args</span><span style="color: #c678dd;">...</span> <span style="color: #dcaeea;">args</span><span style="color: #c678dd;">)</span>
-  <span style="color: #c678dd;">{</span>
-    <span style="color: #51afef;">return</span> __func<span style="color: #98be65;">(</span><span style="color: #a9a1e1;">std</span>::forward<span style="color: #a9a1e1;">&lt;</span><span style="color: #ECBE7B;">Args</span><span style="color: #a9a1e1;">&gt;(</span><span style="color: #dcaeea;">args</span><span style="color: #a9a1e1;">)</span><span style="color: #c678dd;">...</span><span style="color: #98be65;">)</span>;
-  <span style="color: #c678dd;">}</span>
+<span style="color: #9d0006;">template</span>&lt;<span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">Return</span>, <span style="color: #9d0006;">typename</span>... <span style="color: #8f3f71;">Args</span>&gt;
+<span style="color: #9d0006;">class</span> <span style="color: #8f3f71;">Delegate</span>&lt;Return(<span style="color: #8f3f71;">Args</span>...)&gt;
+{
+<span style="color: #9d0006;">public</span>:
+  <span style="color: #9d0006;">using</span> <span style="color: #8f3f71;">FuncType</span> = Return (*)(<span style="color: #8f3f71;">Args</span>...);
+  <span style="color: #b57614;">Delegate</span>(<span style="color: #8f3f71;">FuncType</span> <span style="color: #076678;">func</span>) : __func(func) { }
+  <span style="color: #8f3f71;">Return</span> <span style="color: #9d0006;">operator</span><span style="color: #b57614;">()</span>(<span style="color: #8f3f71;">Args</span>... <span style="color: #076678;">args</span>)
+  {
+    <span style="color: #9d0006;">return</span> __func(<span style="color: #8f3f71;">std</span>::forward&lt;<span style="color: #8f3f71;">Args</span>&gt;(<span style="color: #076678;">args</span>)...);
+  }
 
-<span style="color: #51afef;">private</span>:
-  <span style="color: #ECBE7B;">FuncType</span> <span style="color: #dcaeea;">__func</span>;
-<span style="color: #51afef;">}</span>;
+<span style="color: #9d0006;">private</span>:
+  <span style="color: #8f3f71;">FuncType</span> <span style="color: #076678;">__func</span>;
+};
 
-<span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">add</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">a</span>, <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">b</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"a + b = "</span> &lt;&lt; a + b &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-<span style="color: #51afef;">}</span>
+<span style="color: #8f3f71;">void</span> <span style="color: #b57614;">add</span>(<span style="color: #8f3f71;">int</span> <span style="color: #076678;">a</span>, <span style="color: #8f3f71;">int</span> <span style="color: #076678;">b</span>)
+{
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"a + b = "</span> &lt;&lt; a + b &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+}
 
-<span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">multiply</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">a</span>, <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">b</span>, <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">c</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"a * b * c = "</span> &lt;&lt; a * b * c &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-<span style="color: #51afef;">}</span>
+<span style="color: #8f3f71;">void</span> <span style="color: #b57614;">multiply</span>(<span style="color: #8f3f71;">int</span> <span style="color: #076678;">a</span>, <span style="color: #8f3f71;">int</span> <span style="color: #076678;">b</span>, <span style="color: #8f3f71;">int</span> <span style="color: #076678;">c</span>)
+{
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"a * b * c = "</span> &lt;&lt; a * b * c &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+}
 
-<span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">main</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">void</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#22996;&#25176;&#20570;&#21152;&#27861;&#35745;&#31639;</span>
-  <span style="color: #ECBE7B;">Delegate</span><span style="color: #c678dd;">&lt;</span><span style="color: #ECBE7B;">void</span><span style="color: #98be65;">(</span><span style="color: #ECBE7B;">int</span>, <span style="color: #ECBE7B;">int</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">&gt;</span> <span style="color: #dcaeea;">delegateAdd</span><span style="color: #c678dd;">(</span>add<span style="color: #c678dd;">)</span>;
-  delegateAdd<span style="color: #c678dd;">(</span>1, 2<span style="color: #c678dd;">)</span>;
+<span style="color: #8f3f71;">int</span> <span style="color: #b57614;">main</span>(<span style="color: #8f3f71;">void</span>)
+{
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#22996;&#25176;&#20570;&#21152;&#27861;&#35745;&#31639;</span>
+  <span style="color: #8f3f71;">Delegate</span>&lt;<span style="color: #8f3f71;">void</span>(<span style="color: #8f3f71;">int</span>, <span style="color: #8f3f71;">int</span>)&gt; <span style="color: #076678;">delegateAdd</span>(add);
+  delegateAdd(1, 2);
 
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#22996;&#25176;&#20570;&#20056;&#27861;&#35745;&#31639;</span>
-  <span style="color: #ECBE7B;">Delegate</span><span style="color: #c678dd;">&lt;</span><span style="color: #ECBE7B;">void</span><span style="color: #98be65;">(</span><span style="color: #ECBE7B;">int</span>, <span style="color: #ECBE7B;">int</span>, <span style="color: #ECBE7B;">int</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">&gt;</span> <span style="color: #dcaeea;">delegateMultiply</span><span style="color: #c678dd;">(</span>multiply<span style="color: #c678dd;">)</span>;
-  delegateMultiply<span style="color: #c678dd;">(</span>1, 2, 3<span style="color: #c678dd;">)</span>;
-<span style="color: #51afef;">}</span>
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#22996;&#25176;&#20570;&#20056;&#27861;&#35745;&#31639;</span>
+  <span style="color: #8f3f71;">Delegate</span>&lt;<span style="color: #8f3f71;">void</span>(<span style="color: #8f3f71;">int</span>, <span style="color: #8f3f71;">int</span>, <span style="color: #8f3f71;">int</span>)&gt; <span style="color: #076678;">delegateMultiply</span>(multiply);
+  delegateMultiply(1, 2, 3);
+}
 </pre>
 </div>
 
-<table>
-
-
-<colgroup>
-<col  class="org-left">
-
-<col  class="org-left">
-
-<col  class="org-left">
-
-<col  class="org-left">
-
-<col  class="org-right">
-
-<col  class="org-left">
-
-<col  class="org-right">
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left">a</td>
-<td class="org-left">+</td>
-<td class="org-left">b</td>
-<td class="org-left">=</td>
-<td class="org-right">3</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-right">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">a</td>
-<td class="org-left">*</td>
-<td class="org-left">b</td>
-<td class="org-left">*</td>
-<td class="org-right">c</td>
-<td class="org-left">=</td>
-<td class="org-right">6</td>
-</tr>
-</tbody>
-</table>
+<pre class="example">
+a + b = 3
+a * b * c = 6
+</pre>
 </div>
 </div>
-<div id="outline-container-org4df1e73" class="outline-2">
-<h2 id="org4df1e73"><span class="section-number-2">7</span> 利用完美转发实现原位构造</h2>
+<div id="outline-container-orgb62fd28" class="outline-2">
+<h2 id="orgb62fd28"><span class="section-number-2">7.</span> 利用完美转发实现原位构造</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 完美转发在 STL 中有大量的应用，比如 <code>std::vector::emplace_bakc</code> 和 <code>std::make_share</code>
@@ -998,243 +574,159 @@ add<span style="color: #51afef;">(</span>1, 2<span style="color: #51afef;">)</sp
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #51afef; font-weight: bold;">#include</span> <span style="color: #51afef;">&lt;</span><span style="color: #98be65;">memory</span><span style="color: #51afef;">&gt;</span>
-<span style="color: #51afef; font-weight: bold;">#include</span> <span style="color: #51afef;">&lt;</span><span style="color: #98be65;">iostream</span><span style="color: #51afef;">&gt;</span>
-<span style="color: #51afef; font-weight: bold;">#include</span> <span style="color: #51afef;">&lt;</span><span style="color: #98be65;">cstring</span><span style="color: #51afef;">&gt;</span>
+<pre class="src src-C++"><span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;memory&gt;</span>
+<span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;iostream&gt;</span>
+<span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;cstring&gt;</span>
 
-<span style="color: #51afef;">template</span><span style="color: #51afef;">&lt;</span><span style="color: #51afef;">typename</span> <span style="color: #ECBE7B;">T</span><span style="color: #51afef;">&gt;</span>
-<span style="color: #51afef;">class</span> <span style="color: #ECBE7B;">vector</span>
-<span style="color: #51afef;">{</span>
-<span style="color: #51afef;">public</span>:
-  <span style="color: #c678dd;">vector</span><span style="color: #c678dd;">()</span> : __data<span style="color: #c678dd;">(</span><span style="color: #a9a1e1;">nullptr</span><span style="color: #c678dd;">)</span>, __size<span style="color: #c678dd;">(</span>0<span style="color: #c678dd;">)</span> <span style="color: #c678dd;">{</span> __data = __alloc.allocate<span style="color: #98be65;">(</span>1000<span style="color: #98be65;">)</span>; <span style="color: #c678dd;">}</span>
-  <span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">push_back</span><span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">T</span>&amp;&amp; <span style="color: #dcaeea;">item</span><span style="color: #c678dd;">)</span>;
-  <span style="color: #51afef;">template</span><span style="color: #c678dd;">&lt;</span><span style="color: #51afef;">typename</span><span style="color: #c678dd;">...</span> <span style="color: #ECBE7B;">Args</span><span style="color: #c678dd;">&gt;</span>
-  <span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">emplace_back</span><span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">Args</span><span style="color: #c678dd;">...</span> <span style="color: #dcaeea;">args</span><span style="color: #c678dd;">)</span>;
+<span style="color: #9d0006;">template</span>&lt;<span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">T</span>&gt;
+<span style="color: #9d0006;">class</span> <span style="color: #8f3f71;">vector</span>
+{
+<span style="color: #9d0006;">public</span>:
+  <span style="color: #b57614;">vector</span>() : __data(<span style="color: #8f3f71;">nullptr</span>), __size(0) { __data = __alloc.allocate(1000); }
+  <span style="color: #8f3f71;">void</span> <span style="color: #b57614;">push_back</span>(<span style="color: #8f3f71;">T</span>&amp;&amp; <span style="color: #076678;">item</span>);
+  <span style="color: #9d0006;">template</span>&lt;<span style="color: #9d0006;">typename</span>... <span style="color: #8f3f71;">Args</span>&gt;
+  <span style="color: #8f3f71;">void</span> <span style="color: #b57614;">emplace_back</span>(<span style="color: #8f3f71;">Args</span>... <span style="color: #076678;">args</span>);
 
-<span style="color: #51afef;">private</span>:
-  <span style="color: #ECBE7B;">T</span>* <span style="color: #dcaeea;">__data</span>;
-  <span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">size_t</span> <span style="color: #dcaeea;">__size</span>;
-  <span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">allocator</span><span style="color: #c678dd;">&lt;</span><span style="color: #ECBE7B;">T</span><span style="color: #c678dd;">&gt;</span> <span style="color: #dcaeea;">__alloc</span>;
-<span style="color: #51afef;">}</span>;
+<span style="color: #9d0006;">private</span>:
+  <span style="color: #8f3f71;">T</span>* <span style="color: #076678;">__data</span>;
+  <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #076678;">__size</span>;
+  <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">allocator</span>&lt;<span style="color: #8f3f71;">T</span>&gt; <span style="color: #076678;">__alloc</span>;
+};
 
-<span style="color: #51afef;">template</span><span style="color: #51afef;">&lt;</span><span style="color: #51afef;">typename</span> <span style="color: #ECBE7B;">T</span><span style="color: #51afef;">&gt;</span>
-<span style="color: #ECBE7B;">void</span> <span style="color: #a9a1e1;">vector</span><span style="color: #51afef;">&lt;</span><span style="color: #ECBE7B;">T</span><span style="color: #51afef;">&gt;</span>::<span style="color: #c678dd;">push_back</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">T</span>&amp;&amp; <span style="color: #dcaeea;">item</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#27492;&#22788;&#23558;&#20256;&#20837;&#30340;&#21491;&#20540; item &#23436;&#32654;&#36716;&#21457;&#32473; String &#30340;&#31227;&#21160;&#26500;&#36896;&#20989;&#25968;&#65292;&#22240;&#27492;&#20351;&#29992; push_back</span>
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#33267;&#23569;&#28041;&#21450;&#19968;&#27425;&#20989;&#25968;&#22806;&#30340;&#40664;&#35748;&#26500;&#36896;&#65288;&#20063;&#21487;&#33021;&#26159;&#25335;&#36125;&#26500;&#36896;&#31561;&#30456;&#36817;&#24320;&#38144;&#30340;&#26041;&#24335;&#65289;&#21644;&#19968;&#27425;&#31227;&#21160;&#26500;&#36896;</span>
-  __alloc.construct<span style="color: #c678dd;">(</span>__data + __size++, <span style="color: #a9a1e1;">std</span>::forward<span style="color: #98be65;">&lt;</span><span style="color: #ECBE7B;">T</span><span style="color: #98be65;">&gt;(</span>item<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>;
-<span style="color: #51afef;">}</span>
+<span style="color: #9d0006;">template</span>&lt;<span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">T</span>&gt;
+<span style="color: #8f3f71;">void</span> <span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">T</span>&gt;::<span style="color: #b57614;">push_back</span>(<span style="color: #8f3f71;">T</span>&amp;&amp; <span style="color: #076678;">item</span>)
+{
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#27492;&#22788;&#23558;&#20256;&#20837;&#30340;&#21491;&#20540; item &#23436;&#32654;&#36716;&#21457;&#32473; String &#30340;&#31227;&#21160;&#26500;&#36896;&#20989;&#25968;&#65292;&#22240;&#27492;&#20351;&#29992; push_back</span>
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#33267;&#23569;&#28041;&#21450;&#19968;&#27425;&#20989;&#25968;&#22806;&#30340;&#40664;&#35748;&#26500;&#36896;&#65288;&#20063;&#21487;&#33021;&#26159;&#25335;&#36125;&#26500;&#36896;&#31561;&#30456;&#36817;&#24320;&#38144;&#30340;&#26041;&#24335;&#65289;&#21644;&#19968;&#27425;&#31227;&#21160;&#26500;&#36896;</span>
+  __alloc.construct(__data + __size++, <span style="color: #8f3f71;">std</span>::forward&lt;<span style="color: #8f3f71;">T</span>&gt;(item));
+}
 
-<span style="color: #51afef;">template</span><span style="color: #51afef;">&lt;</span><span style="color: #51afef;">typename</span> <span style="color: #ECBE7B;">T</span><span style="color: #51afef;">&gt;</span>
-<span style="color: #51afef;">template</span><span style="color: #51afef;">&lt;</span><span style="color: #51afef;">typename</span><span style="color: #c678dd;">...</span> <span style="color: #ECBE7B;">Args</span><span style="color: #51afef;">&gt;</span>
-<span style="color: #ECBE7B;">void</span> <span style="color: #a9a1e1;">vector</span><span style="color: #51afef;">&lt;</span><span style="color: #ECBE7B;">T</span><span style="color: #51afef;">&gt;</span>::<span style="color: #c678dd;">emplace_back</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">Args</span><span style="color: #c678dd;">...</span> <span style="color: #dcaeea;">args</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#27492;&#22788;&#23558;&#20256;&#20837;&#30340;&#21464;&#21442;&#23436;&#32654;&#36716;&#21457;&#32473; String &#30340;&#40664;&#35748;&#26500;&#36896;&#20989;&#25968;&#65292;&#20351;&#29992; allocator::construct</span>
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#26041;&#24335;&#22312;&#24050;&#20998;&#37197;&#20869;&#23384;&#19978;&#36827;&#34892;&#21407;&#20301;&#26500;&#36896;&#65292;&#21482;&#28041;&#21450;&#19968;&#27425;&#40664;&#35748;&#26500;&#36896;</span>
-  __alloc.construct<span style="color: #c678dd;">(</span>__data + __size++, <span style="color: #a9a1e1;">std</span>::forward<span style="color: #98be65;">&lt;</span><span style="color: #ECBE7B;">Args</span><span style="color: #98be65;">&gt;(</span>args<span style="color: #98be65;">)</span><span style="color: #c678dd;">...</span><span style="color: #c678dd;">)</span>;
-<span style="color: #51afef;">}</span>
+<span style="color: #9d0006;">template</span>&lt;<span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">T</span>&gt;
+<span style="color: #9d0006;">template</span>&lt;<span style="color: #9d0006;">typename</span>... <span style="color: #8f3f71;">Args</span>&gt;
+<span style="color: #8f3f71;">void</span> <span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">T</span>&gt;::<span style="color: #b57614;">emplace_back</span>(<span style="color: #8f3f71;">Args</span>... <span style="color: #076678;">args</span>)
+{
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#27492;&#22788;&#23558;&#20256;&#20837;&#30340;&#21464;&#21442;&#23436;&#32654;&#36716;&#21457;&#32473; String &#30340;&#40664;&#35748;&#26500;&#36896;&#20989;&#25968;&#65292;&#20351;&#29992; allocator::construct</span>
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#26041;&#24335;&#22312;&#24050;&#20998;&#37197;&#20869;&#23384;&#19978;&#36827;&#34892;&#21407;&#20301;&#26500;&#36896;&#65292;&#21482;&#28041;&#21450;&#19968;&#27425;&#40664;&#35748;&#26500;&#36896;</span>
+  __alloc.construct(__data + __size++, <span style="color: #8f3f71;">std</span>::forward&lt;<span style="color: #8f3f71;">Args</span>&gt;(args)...);
+}
 
-<span style="color: #51afef;">class</span> <span style="color: #ECBE7B;">String</span>
-<span style="color: #51afef;">{</span>
-<span style="color: #51afef;">public</span>:
-  <span style="color: #51afef;">static</span> <span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">size_t</span> <span style="color: #dcaeea;">dftCstrCnt</span>;
-  <span style="color: #51afef;">static</span> <span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">size_t</span> <span style="color: #dcaeea;">cpyCstrCnt</span>;
-  <span style="color: #51afef;">static</span> <span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">size_t</span> <span style="color: #dcaeea;">movCstrCnt</span>;
-  <span style="color: #51afef;">static</span> <span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">size_t</span> <span style="color: #dcaeea;">dstrCnt</span>;
+<span style="color: #9d0006;">class</span> <span style="color: #8f3f71;">String</span>
+{
+<span style="color: #9d0006;">public</span>:
+  <span style="color: #9d0006;">static</span> <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #076678;">dftCstrCnt</span>;
+  <span style="color: #9d0006;">static</span> <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #076678;">cpyCstrCnt</span>;
+  <span style="color: #9d0006;">static</span> <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #076678;">movCstrCnt</span>;
+  <span style="color: #9d0006;">static</span> <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #076678;">dstrCnt</span>;
 
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#26500;&#36896;&#20989;&#25968;</span>
-  <span style="color: #c678dd;">String</span><span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">char</span> <span style="color: #51afef;">const</span>* <span style="color: #dcaeea;">cstr</span> = <span style="color: #a9a1e1;">nullptr</span><span style="color: #c678dd;">)</span>;
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#25335;&#36125;&#26500;&#36896;&#20989;&#25968;</span>
-  <span style="color: #c678dd;">String</span><span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">String</span> <span style="color: #51afef;">const</span>&amp; <span style="color: #dcaeea;">rhs</span><span style="color: #c678dd;">)</span>;
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#31227;&#21160;&#26500;&#36896;&#20989;&#25968;</span>
-  <span style="color: #c678dd;">String</span><span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">String</span>&amp;&amp; <span style="color: #dcaeea;">rhs</span><span style="color: #c678dd;">)</span>;
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#26512;&#26500;&#20989;&#25968;</span>
-  ~<span style="color: #c678dd;">String</span><span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">void</span><span style="color: #c678dd;">)</span>;
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#26500;&#36896;&#20989;&#25968;</span>
+  <span style="color: #b57614;">String</span>(<span style="color: #8f3f71;">char</span> <span style="color: #9d0006;">const</span>* <span style="color: #076678;">cstr</span> = <span style="color: #8f3f71;">nullptr</span>);
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#25335;&#36125;&#26500;&#36896;&#20989;&#25968;</span>
+  <span style="color: #b57614;">String</span>(<span style="color: #8f3f71;">String</span> <span style="color: #9d0006;">const</span>&amp; <span style="color: #076678;">rhs</span>);
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#31227;&#21160;&#26500;&#36896;&#20989;&#25968;</span>
+  <span style="color: #b57614;">String</span>(<span style="color: #8f3f71;">String</span>&amp;&amp; <span style="color: #076678;">rhs</span>);
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#26512;&#26500;&#20989;&#25968;</span>
+  ~<span style="color: #b57614;">String</span>(<span style="color: #8f3f71;">void</span>);
 
-<span style="color: #51afef;">private</span>:
-  <span style="color: #ECBE7B;">char</span>* <span style="color: #dcaeea;">str</span> = <span style="color: #a9a1e1;">nullptr</span>;
-<span style="color: #51afef;">}</span>;
+<span style="color: #9d0006;">private</span>:
+  <span style="color: #8f3f71;">char</span>* <span style="color: #076678;">str</span> = <span style="color: #8f3f71;">nullptr</span>;
+};
 
-<span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">size_t</span> <span style="color: #a9a1e1;">String</span>::<span style="color: #dcaeea;">dftCstrCnt</span> = 0;
-<span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">size_t</span> <span style="color: #a9a1e1;">String</span>::<span style="color: #dcaeea;">cpyCstrCnt</span> = 0;
-<span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">size_t</span> <span style="color: #a9a1e1;">String</span>::<span style="color: #dcaeea;">movCstrCnt</span> = 0;
-<span style="color: #a9a1e1;">std</span>::<span style="color: #ECBE7B;">size_t</span> <span style="color: #a9a1e1;">String</span>::<span style="color: #dcaeea;">dstrCnt</span> = 0;
+<span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #8f3f71;">String</span>::<span style="color: #076678;">dftCstrCnt</span> = 0;
+<span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #8f3f71;">String</span>::<span style="color: #076678;">cpyCstrCnt</span> = 0;
+<span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #8f3f71;">String</span>::<span style="color: #076678;">movCstrCnt</span> = 0;
+<span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #8f3f71;">String</span>::<span style="color: #076678;">dstrCnt</span> = 0;
 
-<span style="color: #a9a1e1;">String</span>::<span style="color: #c678dd;">String</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">char</span> <span style="color: #51afef;">const</span>* <span style="color: #dcaeea;">cstr</span><span style="color: #51afef;">)</span> : str<span style="color: #51afef;">(</span><span style="color: #a9a1e1;">nullptr</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">&#22914;&#26524; cstr &#20026;&#31354;&#25110;&#20998;&#37197;&#20869;&#23384;&#22833;&#36133;&#65292;&#21017; str &#25351;&#21521; nullptr</span>
-  <span style="color: #51afef;">if</span> <span style="color: #c678dd;">(</span>cstr == <span style="color: #a9a1e1;">nullptr</span><span style="color: #c678dd;">)</span>
-    <span style="color: #c678dd;">{</span>
-      <span style="color: #51afef;">return</span>;
-    <span style="color: #c678dd;">}</span>
+<span style="color: #8f3f71;">String</span>::<span style="color: #b57614;">String</span>(<span style="color: #8f3f71;">char</span> <span style="color: #9d0006;">const</span>* <span style="color: #076678;">cstr</span>) : str(<span style="color: #8f3f71;">nullptr</span>)
+{
+  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#22914;&#26524; cstr &#20026;&#31354;&#25110;&#20998;&#37197;&#20869;&#23384;&#22833;&#36133;&#65292;&#21017; str &#25351;&#21521; nullptr</span>
+  <span style="color: #9d0006;">if</span> (cstr == <span style="color: #8f3f71;">nullptr</span>)
+    {
+      <span style="color: #9d0006;">return</span>;
+    }
 
-  str = <span style="color: #51afef;">new</span> <span style="color: #ECBE7B;">char</span><span style="color: #c678dd;">[</span>strlen<span style="color: #98be65;">(</span>cstr<span style="color: #98be65;">)</span> + 1<span style="color: #c678dd;">]</span>;
+  str = <span style="color: #9d0006;">new</span> <span style="color: #8f3f71;">char</span>[strlen(cstr) + 1];
 
-  <span style="color: #51afef;">if</span> <span style="color: #c678dd;">(</span>str == <span style="color: #a9a1e1;">nullptr</span><span style="color: #c678dd;">)</span>
-    <span style="color: #c678dd;">{</span>
-      <span style="color: #51afef;">return</span>;
-    <span style="color: #c678dd;">}</span>
+  <span style="color: #9d0006;">if</span> (str == <span style="color: #8f3f71;">nullptr</span>)
+    {
+      <span style="color: #9d0006;">return</span>;
+    }
 
-  strncpy<span style="color: #c678dd;">(</span>str, cstr, strlen<span style="color: #98be65;">(</span>cstr<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>;
+  strncpy(str, cstr, strlen(cstr));
 
   ++dftCstrCnt;
-<span style="color: #51afef;">}</span>
+}
 
-<span style="color: #a9a1e1;">String</span>::<span style="color: #c678dd;">String</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">String</span> <span style="color: #51afef;">const</span>&amp; <span style="color: #dcaeea;">rhs</span><span style="color: #51afef;">)</span> : String<span style="color: #51afef;">(</span>rhs.str<span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
+<span style="color: #8f3f71;">String</span>::<span style="color: #b57614;">String</span>(<span style="color: #8f3f71;">String</span> <span style="color: #9d0006;">const</span>&amp; <span style="color: #076678;">rhs</span>) : String(rhs.str)
+{
   ++cpyCstrCnt;
-<span style="color: #51afef;">}</span>
+}
 
-<span style="color: #a9a1e1;">String</span>::<span style="color: #c678dd;">String</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">String</span>&amp;&amp; <span style="color: #dcaeea;">rhs</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
+<span style="color: #8f3f71;">String</span>::<span style="color: #b57614;">String</span>(<span style="color: #8f3f71;">String</span>&amp;&amp; <span style="color: #076678;">rhs</span>)
+{
   str = rhs.str;
-  rhs.str = <span style="color: #a9a1e1;">nullptr</span>;
+  rhs.str = <span style="color: #8f3f71;">nullptr</span>;
   ++movCstrCnt;
-<span style="color: #51afef;">}</span>
+}
 
-<span style="color: #a9a1e1;">String</span>::~<span style="color: #c678dd;">String</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">void</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #51afef;">delete</span> <span style="color: #c678dd;">[]</span>str;
+<span style="color: #8f3f71;">String</span>::~<span style="color: #b57614;">String</span>(<span style="color: #8f3f71;">void</span>)
+{
+  <span style="color: #9d0006;">delete</span> []str;
   ++dstrCnt;
-<span style="color: #51afef;">}</span>
+}
 
-<span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">clearCnt</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">void</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #a9a1e1;">String</span>::dftCstrCnt = 0;
-  <span style="color: #a9a1e1;">String</span>::cpyCstrCnt = 0;
-  <span style="color: #a9a1e1;">String</span>::movCstrCnt = 0;
-  <span style="color: #a9a1e1;">String</span>::dstrCnt = 0;
-<span style="color: #51afef;">}</span>
+<span style="color: #8f3f71;">void</span> <span style="color: #b57614;">clearCnt</span>(<span style="color: #8f3f71;">void</span>)
+{
+  <span style="color: #8f3f71;">String</span>::dftCstrCnt = 0;
+  <span style="color: #8f3f71;">String</span>::cpyCstrCnt = 0;
+  <span style="color: #8f3f71;">String</span>::movCstrCnt = 0;
+  <span style="color: #8f3f71;">String</span>::dstrCnt = 0;
+}
 
-<span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">outputCnt</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">void</span><span style="color: #51afef;">)</span>
-<span style="color: #51afef;">{</span>
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Default Construct: "</span> &lt;&lt; <span style="color: #a9a1e1;">String</span>::dftCstrCnt &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Copy Construct: "</span> &lt;&lt; <span style="color: #a9a1e1;">String</span>::cpyCstrCnt &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Move Construct: "</span> &lt;&lt; <span style="color: #a9a1e1;">String</span>::movCstrCnt &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Destruct: "</span> &lt;&lt; <span style="color: #a9a1e1;">String</span>::dstrCnt &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-<span style="color: #51afef;">}</span>
+<span style="color: #8f3f71;">void</span> <span style="color: #b57614;">outputCnt</span>(<span style="color: #8f3f71;">void</span>)
+{
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Default Construct: "</span> &lt;&lt; <span style="color: #8f3f71;">String</span>::dftCstrCnt &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Copy Construct: "</span> &lt;&lt; <span style="color: #8f3f71;">String</span>::cpyCstrCnt &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Move Construct: "</span> &lt;&lt; <span style="color: #8f3f71;">String</span>::movCstrCnt &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Destruct: "</span> &lt;&lt; <span style="color: #8f3f71;">String</span>::dstrCnt &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+}
 
-<span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">main</span><span style="color: #51afef;">()</span>
-<span style="color: #51afef;">{</span>
-  ::<span style="color: #ECBE7B;">vector</span><span style="color: #c678dd;">&lt;</span><span style="color: #ECBE7B;">String</span><span style="color: #c678dd;">&gt;</span> <span style="color: #dcaeea;">svec1</span>;
+<span style="color: #8f3f71;">int</span> <span style="color: #b57614;">main</span>()
+{
+  ::<span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">String</span>&gt; <span style="color: #076678;">svec1</span>;
 
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"===== Use push back ====="</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  <span style="color: #51afef;">for</span> <span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">i</span> = 0; i &lt; 1000; ++i<span style="color: #c678dd;">)</span>
-    <span style="color: #c678dd;">{</span>
-      svec1.push_back<span style="color: #98be65;">(</span><span style="color: #a9a1e1;">std</span>::move<span style="color: #a9a1e1;">(</span>String<span style="color: #4db5bd;">(</span><span style="color: #98be65;">"Hello"</span><span style="color: #4db5bd;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>;
-    <span style="color: #c678dd;">}</span>
-  outputCnt<span style="color: #c678dd;">()</span>;
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"===== Use push back ====="</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  <span style="color: #9d0006;">for</span> (<span style="color: #8f3f71;">int</span> <span style="color: #076678;">i</span> = 0; i &lt; 1000; ++i)
+    {
+      svec1.push_back(<span style="color: #8f3f71;">std</span>::move(String(<span style="color: #79740e;">"Hello"</span>)));
+    }
+  outputCnt();
 
-  clearCnt<span style="color: #c678dd;">()</span>;
+  clearCnt();
 
-  ::<span style="color: #ECBE7B;">vector</span><span style="color: #c678dd;">&lt;</span><span style="color: #ECBE7B;">String</span><span style="color: #c678dd;">&gt;</span> <span style="color: #dcaeea;">svec2</span>;
+  ::<span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">String</span>&gt; <span style="color: #076678;">svec2</span>;
 
-  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"===== Use emplace back ====="</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::endl;
-  <span style="color: #51afef;">for</span> <span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">i</span> = 0; i &lt; 1000; ++i<span style="color: #c678dd;">)</span>
-    <span style="color: #c678dd;">{</span>
-      svec2.emplace_back<span style="color: #98be65;">(</span><span style="color: #98be65;">"Hello"</span><span style="color: #98be65;">)</span>;
-    <span style="color: #c678dd;">}</span>
-  outputCnt<span style="color: #c678dd;">()</span>;
-<span style="color: #51afef;">}</span>
+  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"===== Use emplace back ====="</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  <span style="color: #9d0006;">for</span> (<span style="color: #8f3f71;">int</span> <span style="color: #076678;">i</span> = 0; i &lt; 1000; ++i)
+    {
+      svec2.emplace_back(<span style="color: #79740e;">"Hello"</span>);
+    }
+  outputCnt();
+}
 </pre>
 </div>
 
-<table>
-
-
-<colgroup>
-<col  class="org-left">
-
-<col  class="org-left">
-
-<col  class="org-right">
-
-<col  class="org-left">
-
-<col  class="org-left">
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left"><code>===</code></td>
-<td class="org-left">Use</td>
-<td class="org-right">push</td>
-<td class="org-left">back</td>
-<td class="org-left"><code>===</code></td>
-</tr>
-
-<tr>
-<td class="org-left">Default</td>
-<td class="org-left">Construct:</td>
-<td class="org-right">1000</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Copy</td>
-<td class="org-left">Construct:</td>
-<td class="org-right">0</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Move</td>
-<td class="org-left">Construct:</td>
-<td class="org-right">1000</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Destruct:</td>
-<td class="org-left">1000</td>
-<td class="org-right">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>===</code></td>
-<td class="org-left">Use</td>
-<td class="org-right">emplace</td>
-<td class="org-left">back</td>
-<td class="org-left"><code>===</code></td>
-</tr>
-
-<tr>
-<td class="org-left">Default</td>
-<td class="org-left">Construct:</td>
-<td class="org-right">1000</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Copy</td>
-<td class="org-left">Construct:</td>
-<td class="org-right">0</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Move</td>
-<td class="org-left">Construct:</td>
-<td class="org-right">0</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Destruct:</td>
-<td class="org-left">0</td>
-<td class="org-right">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
+<pre class="example" id="org6abff8d">
+===== Use push back =====
+Default Construct: 1000
+Copy Construct: 0
+Move Construct: 1000
+Destruct: 1000
+===== Use emplace back =====
+Default Construct: 1000
+Copy Construct: 0
+Move Construct: 0
+Destruct: 0
+</pre>
 </div>
 </div>
 </div>
@@ -1242,8 +734,8 @@ add<span style="color: #51afef;">(</span>1, 2<span style="color: #51afef;">)</sp
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-08-15 Sat 22:43></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.0.50 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</div>
-      <div id="built">Built: <2021-05-31 Mon 18:29></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
+      <div id="built">Built: <2022-10-23 Sun 09:02></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
