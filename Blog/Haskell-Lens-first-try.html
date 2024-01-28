@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-01-28 Sun 14:10 -->
+<!-- 2024-01-28 Sun 18:50 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Haskell &#x2013; 初识 Lens</title>
@@ -89,6 +89,11 @@
 </pre>
 </div>
 
+<pre class="example">
+Name {_first = "Cycoe", _last = "Joo"}
+</pre>
+
+
 <p>
 如果我们想要方便地对 first name 进行修改，我们可以定义一个 <code>setFirst</code> 工具函数。接收一个 Name 和新的 first name，返回新的 Name 对象，这种形式的函数被称为 setter 函数
 </p>
@@ -106,6 +111,11 @@
 <span style="color: #ef2929;">setFirst</span> name <span style="color: #ff1f8b;">"Handsome"</span>
 </pre>
 </div>
+
+<pre class="example">
+Name {_first = "Handsome", _last = "Joo"}
+</pre>
+
 
 <p>
 那么有没有什么办法可以通过一个统一的数据类型表示 setter 和 getter 函数呢？当然有，那就是已经被发现的 Lens 类型。Lens 含义是透镜，它的功能就是提供对数据结构内部成员进行查看（view）、写入（set）和变换（over）的能力。
@@ -181,6 +191,10 @@ Lens 被定义为一个高阶函数，接收一个将成员类型 <code>a</code>
 <span style="color: #18b2b2;">:</span>t firstL
 </pre>
 </div>
+
+<pre class="example">
+firstL :: Functor f =&gt; (String -&gt; f String) -&gt; Name -&gt; f Name
+</pre>
 </div>
 </div>
 
@@ -242,6 +256,11 @@ getConst <span style="color: #ef2929;">$</span> (<span style="color: #ff8700;">+
 </pre>
 </div>
 
+<pre class="example">
+1
+</pre>
+
+
 <p>
 那么我们就可以实现 <code>view</code> 函数了
 </p>
@@ -271,6 +290,10 @@ getConst <span style="color: #ef2929;">$</span> (<span style="color: #ff8700;">+
 <pre class="src src-haskell">name <span style="color: #ef2929;">^.</span> firstL
 </pre>
 </div>
+
+<pre class="example">
+Cycoe
+</pre>
 </div>
 </div>
 </div>
@@ -279,7 +302,7 @@ getConst <span style="color: #ef2929;">$</span> (<span style="color: #ff8700;">+
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2024-01-27 Sat 22:56></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.2 (<a href="https://orgmode.org">Org</a> mode 9.6.15)</div>
-      <div id="built">Built: <2024-01-28 Sun 14:10></div>
+      <div id="built">Built: <2024-01-28 Sun 18:50></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
