@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-10-23 Sun 09:02 -->
+<!-- 2024-01-27 Sat 21:20 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gnuplot 绘图第八弹-3D 绘图</title>
@@ -56,22 +56,22 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org95f979f">1. 绘制表面</a></li>
-<li><a href="#orgae6afcd">2. 坐标映射</a></li>
-<li><a href="#orgb73b156">3. 给表面上色</a></li>
-<li><a href="#org9b0743e">4. 等高线图</a></li>
-<li><a href="#org6a24f72">5. 矢量图</a></li>
-<li><a href="#orgd17d54d">6. 热力图</a></li>
-<li><a href="#orgc866d6c">7. 同时绘制热力图和等高线图</a></li>
-<li><a href="#org6260c60">8. 同时绘制热力图和表面</a></li>
-<li><a href="#org12c9225">9. 使用参数方程绘制路径</a></li>
-<li><a href="#org531edea">10. 使用参数方程绘制表面</a></li>
+<li><a href="#orgf22a222">1. 绘制表面</a></li>
+<li><a href="#org4015600">2. 坐标映射</a></li>
+<li><a href="#orgbf5bf32">3. 给表面上色</a></li>
+<li><a href="#org04c5159">4. 等高线图</a></li>
+<li><a href="#orgdbd7a44">5. 矢量图</a></li>
+<li><a href="#org52d9f05">6. 热力图</a></li>
+<li><a href="#orge187d44">7. 同时绘制热力图和等高线图</a></li>
+<li><a href="#org30ddacc">8. 同时绘制热力图和表面</a></li>
+<li><a href="#orge18f378">9. 使用参数方程绘制路径</a></li>
+<li><a href="#orga784d17">10. 使用参数方程绘制表面</a></li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-org95f979f" class="outline-2">
-<h2 id="org95f979f"><span class="section-number-2">1.</span> 绘制表面</h2>
+<div id="outline-container-orgf22a222" class="outline-2">
+<h2 id="orgf22a222"><span class="section-number-2">1.</span> 绘制表面</h2>
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
 <pre class="src src-gnuplot"># 网格的采样数
@@ -91,15 +91,15 @@ splot besj0(x**2 + y**2)
 </div>
 
 
-<figure id="org73a666e">
+<figure id="org5086cfa">
 <img src="./Gnuplot-绘图第八弹-3D-绘图/c8-surface.png" alt="c8-surface.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-orgae6afcd" class="outline-2">
-<h2 id="orgae6afcd"><span class="section-number-2">2.</span> 坐标映射</h2>
+<div id="outline-container-org4015600" class="outline-2">
+<h2 id="org4015600"><span class="section-number-2">2.</span> 坐标映射</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 <pre class="src src-gnuplot"># 将数据解释为圆柱形坐标系
@@ -119,15 +119,15 @@ splot '++' using 1:2:(sin($2)) with lines
 </div>
 
 
-<figure id="orgd001543">
+<figure id="org3944ee2">
 <img src="./Gnuplot-绘图第八弹-3D-绘图/c8-coordinate-map.png" alt="c8-coordinate-map.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-orgb73b156" class="outline-2">
-<h2 id="orgb73b156"><span class="section-number-2">3.</span> 给表面上色</h2>
+<div id="outline-container-orgbf5bf32" class="outline-2">
+<h2 id="orgbf5bf32"><span class="section-number-2">3.</span> 给表面上色</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-gnuplot">set iso 100
@@ -145,7 +145,7 @@ splot besj0(x**2 + y**2)
 </div>
 
 
-<figure id="org648b004">
+<figure id="org41dfdcd">
 <img src="./Gnuplot-绘图第八弹-3D-绘图/c8-color-surface.png" alt="c8-color-surface.png">
 
 </figure>
@@ -167,15 +167,15 @@ splot besj0(x**2 + y**2)
 </div>
 
 
-<figure id="org4c2033f">
+<figure id="orgb6e4938">
 <img src="./Gnuplot-绘图第八弹-3D-绘图/c8-color-with-line.png" alt="c8-color-with-line.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-org9b0743e" class="outline-2">
-<h2 id="org9b0743e"><span class="section-number-2">4.</span> 等高线图</h2>
+<div id="outline-container-org04c5159" class="outline-2">
+<h2 id="org04c5159"><span class="section-number-2">4.</span> 等高线图</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-gnuplot"># 设置等高线的数量
@@ -195,7 +195,7 @@ splot sin(x) + cos(2*y)
 </div>
 
 
-<figure id="org58981f2">
+<figure id="org246ef42">
 <img src="./Gnuplot-绘图第八弹-3D-绘图/c8-contour-plot.png" alt="c8-contour-plot.png">
 
 </figure>
@@ -219,15 +219,15 @@ splot sin(x) + cos(2*y) with lines ls 1
 </div>
 
 
-<figure id="org135ed2b">
+<figure id="orgd7cd9fe">
 <img src="./Gnuplot-绘图第八弹-3D-绘图/c8-contour-with-surface.png" alt="c8-contour-with-surface.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-org6a24f72" class="outline-2">
-<h2 id="org6a24f72"><span class="section-number-2">5.</span> 矢量图</h2>
+<div id="outline-container-orgdbd7a44" class="outline-2">
+<h2 id="orgdbd7a44"><span class="section-number-2">5.</span> 矢量图</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-gnuplot">set xrange [0:pi]
@@ -242,7 +242,7 @@ plot '++' using 1:2:(-a*sin($1)*cos($2)):(a*cos($1)*sin($2))\
 </div>
 
 
-<figure id="org428f8d5">
+<figure id="org63807c0">
 <img src="./Gnuplot-绘图第八弹-3D-绘图/c8-vector-plot.png" alt="c8-vector-plot.png">
 
 </figure>
@@ -264,15 +264,15 @@ splot '++' using 1:2:(2*a*cos($2)*sin($1)):\
 </div>
 
 
-<figure id="org6eff5d5">
+<figure id="org96079a1">
 <img src="./Gnuplot-绘图第八弹-3D-绘图/c8-vector-splot.png" alt="c8-vector-splot.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-orgd17d54d" class="outline-2">
-<h2 id="orgd17d54d"><span class="section-number-2">6.</span> 热力图</h2>
+<div id="outline-container-org52d9f05" class="outline-2">
+<h2 id="org52d9f05"><span class="section-number-2">6.</span> 热力图</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 <pre class="src src-gnuplot">set xrange [-4:4]
@@ -288,7 +288,7 @@ splot sin(y**2 + x**2) - cos(x**2)
 </div>
 
 
-<figure id="org52f5aea">
+<figure id="org052390c">
 <img src="./Gnuplot-绘图第八弹-3D-绘图/c8-heat-map.png" alt="c8-heat-map.png">
 
 </figure>
@@ -300,7 +300,7 @@ replot
 </div>
 
 
-<figure id="orgebdd166">
+<figure id="org9566f9e">
 <img src="./Gnuplot-绘图第八弹-3D-绘图/c8-heat-map-more-colors.png" alt="c8-heat-map-more-colors.png">
 
 </figure>
@@ -312,15 +312,15 @@ replot
 </div>
 
 
-<figure id="org593a47c">
+<figure id="org7817c8a">
 <img src="./Gnuplot-绘图第八弹-3D-绘图/c8-heat-map-four-colors.png" alt="c8-heat-map-four-colors.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-orgc866d6c" class="outline-2">
-<h2 id="orgc866d6c"><span class="section-number-2">7.</span> 同时绘制热力图和等高线图</h2>
+<div id="outline-container-orge187d44" class="outline-2">
+<h2 id="orge187d44"><span class="section-number-2">7.</span> 同时绘制热力图和等高线图</h2>
 <div class="outline-text-2" id="text-7">
 <div class="org-src-container">
 <pre class="src src-gnuplot">set xrange [0:pi]
@@ -341,15 +341,15 @@ splot '++' using 1:2:($1**2-$2**2):(sin($1**2+$2**2)) w l lw 2
 </div>
 
 
-<figure id="orgb093c26">
+<figure id="org234bb4d">
 <img src="./Gnuplot-绘图第八弹-3D-绘图/c8-contours-and-heat-plot.png" alt="c8-contours-and-heat-plot.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-org6260c60" class="outline-2">
-<h2 id="org6260c60"><span class="section-number-2">8.</span> 同时绘制热力图和表面</h2>
+<div id="outline-container-org30ddacc" class="outline-2">
+<h2 id="org30ddacc"><span class="section-number-2">8.</span> 同时绘制热力图和表面</h2>
 <div class="outline-text-2" id="text-8">
 <div class="org-src-container">
 <pre class="src src-gnuplot">set iso 40
@@ -369,7 +369,7 @@ splot f(x,y) with pm3d at b, f(x,y) with lines
 </div>
 
 
-<figure id="orgc91be4c">
+<figure id="orgd1b3019">
 <img src="./Gnuplot-绘图第八弹-3D-绘图/c8-surface-and-heat-plot.png" alt="c8-surface-and-heat-plot.png">
 
 </figure>
@@ -394,7 +394,7 @@ splot f(x,y) with pm3d at b, f(x,y) with lines, a with lines lt -100
 </div>
 
 
-<figure id="org4381080">
+<figure id="orga9c6ac4">
 <img src="./Gnuplot-绘图第八弹-3D-绘图/c8-intersect-surface.png" alt="c8-intersect-surface.png">
 
 </figure>
@@ -409,15 +409,15 @@ splot '++' using 1:2:(a):(sin($1)*cos($2)) with pm3d at b,\
 </div>
 
 
-<figure id="org6b622bb">
+<figure id="orgd0a1ece">
 <img src="./Gnuplot-绘图第八弹-3D-绘图/c8-intersect-surface-m.png" alt="c8-intersect-surface-m.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-org12c9225" class="outline-2">
-<h2 id="org12c9225"><span class="section-number-2">9.</span> 使用参数方程绘制路径</h2>
+<div id="outline-container-orge18f378" class="outline-2">
+<h2 id="orge18f378"><span class="section-number-2">9.</span> 使用参数方程绘制路径</h2>
 <div class="outline-text-2" id="text-9">
 <div class="org-src-container">
 <pre class="src src-gnuplot">set samp 100
@@ -432,15 +432,15 @@ splot cos(u),sin(3*u),cos(5*u) lw 2
 </div>
 
 
-<figure id="org3742b55">
+<figure id="org91b3b39">
 <img src="./Gnuplot-绘图第八弹-3D-绘图/c8-path.png" alt="c8-path.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-org531edea" class="outline-2">
-<h2 id="org531edea"><span class="section-number-2">10.</span> 使用参数方程绘制表面</h2>
+<div id="outline-container-orga784d17" class="outline-2">
+<h2 id="orga784d17"><span class="section-number-2">10.</span> 使用参数方程绘制表面</h2>
 <div class="outline-text-2" id="text-10">
 <div class="org-src-container">
 <pre class="src src-gnuplot">set param
@@ -458,7 +458,7 @@ set view 50, 60
 </div>
 
 
-<figure id="orgf8e6905">
+<figure id="org34a4b35">
 <img src="./Gnuplot-绘图第八弹-3D-绘图/c8-parametric-surfaces.png" alt="c8-parametric-surfaces.png">
 
 </figure>
@@ -483,7 +483,7 @@ splot cos(u)*cos(v), sin(u)*cos(v), sin(u) with pm3d
 </div>
 
 
-<figure id="org0f48ac4">
+<figure id="org9938419">
 <img src="./Gnuplot-绘图第八弹-3D-绘图/c8-parametric-surfaces-color.png" alt="c8-parametric-surfaces-color.png">
 
 </figure>
@@ -494,8 +494,8 @@ splot cos(u)*cos(v), sin(u)*cos(v), sin(u) with pm3d
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-05-07 Thu 22:06></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
-      <div id="built">Built: <2022-10-23 Sun 09:02></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.1 (<a href="https://orgmode.org">Org</a> mode 9.6.6)</div>
+      <div id="built">Built: <2024-01-27 Sat 21:20></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

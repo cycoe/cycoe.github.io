@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-10-23 Sun 09:02 -->
+<!-- 2024-01-27 Sat 21:20 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>实现快速排序的泛型模板</title>
@@ -56,81 +56,81 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgedbc7f8">1. 快速排序泛型模板</a></li>
+<li><a href="#org872476f">1. 快速排序泛型模板</a></li>
 </ul>
 </div>
 </nav>
 <!-- more -->
 
-<div id="outline-container-orgedbc7f8" class="outline-2">
-<h2 id="orgedbc7f8"><span class="section-number-2">1.</span> 快速排序泛型模板</h2>
+<div id="outline-container-org872476f" class="outline-2">
+<h2 id="org872476f"><span class="section-number-2">1.</span> 快速排序泛型模板</h2>
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;iostream&gt;</span>
-<span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;string&gt;</span>
-<span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;vector&gt;</span>
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #ff1f8b;">&lt;iostream&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #ff1f8b;">&lt;string&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #ff1f8b;">&lt;vector&gt;</span>
 
-<span style="color: #9d0006;">template</span>&lt;<span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">Iter</span>&gt;
-<span style="color: #8f3f71;">void</span> <span style="color: #b57614;">print_items</span>(<span style="color: #8f3f71;">Iter</span> <span style="color: #076678;">__beg</span>, <span style="color: #8f3f71;">Iter</span> <span style="color: #076678;">__end</span>)
+<span style="color: #00af00;">template</span>&lt;<span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">Iter</span>&gt;
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">print_items</span>(<span style="color: #18b2b2;">Iter</span> <span style="color: #ff8700;">__beg</span>, <span style="color: #18b2b2;">Iter</span> <span style="color: #ff8700;">__end</span>)
 {
-  <span style="color: #9d0006;">if</span> (__beg == __end)
-    <span style="color: #9d0006;">return</span>;
+  <span style="color: #00af00;">if</span> (__beg == __end)
+    <span style="color: #00af00;">return</span>;
 
-  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"["</span>;
-  <span style="color: #9d0006;">while</span> (__beg + 1 &lt; __end) {
-    <span style="color: #8f3f71;">std</span>::cout &lt;&lt; *__beg++ &lt;&lt; <span style="color: #79740e;">", "</span>;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"["</span>;
+  <span style="color: #00af00;">while</span> (__beg + 1 &lt; __end) {
+    <span style="color: #1f5bff;">std</span>::cout &lt;&lt; *__beg++ &lt;&lt; <span style="color: #ff1f8b;">", "</span>;
   }
-  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; *__beg &lt;&lt; <span style="color: #79740e;">"]"</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; *__beg &lt;&lt; <span style="color: #ff1f8b;">"]"</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
 }
 
-<span style="color: #a89984;">// </span><span style="color: #a89984;">&#24555;&#36895;&#25490;&#24207;&#20869;&#37096;&#23454;&#29616;&#26041;&#27861;</span>
-<span style="color: #9d0006;">template</span>&lt;<span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">Iter</span>&gt;
-<span style="color: #8f3f71;">Iter</span> <span style="color: #b57614;">quick_sort_helper</span>(<span style="color: #8f3f71;">Iter</span> <span style="color: #076678;">__beg</span>, <span style="color: #8f3f71;">Iter</span> <span style="color: #076678;">__end</span>)
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#24555;&#36895;&#25490;&#24207;&#20869;&#37096;&#23454;&#29616;&#26041;&#27861;</span>
+<span style="color: #00af00;">template</span>&lt;<span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">Iter</span>&gt;
+<span style="color: #18b2b2;">Iter</span> <span style="color: #ef2929;">quick_sort_helper</span>(<span style="color: #18b2b2;">Iter</span> <span style="color: #ff8700;">__beg</span>, <span style="color: #18b2b2;">Iter</span> <span style="color: #ff8700;">__end</span>)
 {
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#23558;&#31532;&#19968;&#20010;&#20803;&#32032;&#35760;&#24405;&#24182;&#20316;&#20026;&#22522;&#20934;&#20540;</span>
-  <span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">Iter</span>::<span style="color: #8f3f71;">value_type</span> <span style="color: #076678;">pivot</span> = *__beg;
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#23558;&#23614;&#21518;&#25351;&#38024;&#21521;&#21069;&#31227;&#21160;&#65292;&#25351;&#21521;&#26368;&#21518;&#19968;&#20010;&#20803;&#32032;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23558;&#31532;&#19968;&#20010;&#20803;&#32032;&#35760;&#24405;&#24182;&#20316;&#20026;&#22522;&#20934;&#20540;</span>
+  <span style="color: #00af00;">typename</span> <span style="color: #1f5bff;">Iter</span>::<span style="color: #18b2b2;">value_type</span> <span style="color: #ff8700;">pivot</span> = *__beg;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23558;&#23614;&#21518;&#25351;&#38024;&#21521;&#21069;&#31227;&#21160;&#65292;&#25351;&#21521;&#26368;&#21518;&#19968;&#20010;&#20803;&#32032;</span>
   --__end;
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#24403;&#24038;&#25351;&#38024;&#19981;&#31561;&#20110;&#21491;&#25351;&#38024;&#26102;</span>
-  <span style="color: #9d0006;">while</span> (__beg &lt; __end) {
-    <span style="color: #a89984;">// </span><span style="color: #a89984;">&#20174;&#21491;&#20391;&#25214;&#21040;&#31532;&#19968;&#20010;&#27604;&#22522;&#20934;&#20540;&#23567;&#30340;&#20803;&#32032;&#65292;&#24182;&#19982;&#22522;&#20934;&#20301;&#32622;&#20114;&#25442;</span>
-    <span style="color: #9d0006;">while</span> (!(*__end &lt; pivot) &amp;&amp; __beg &lt; __end) --__end;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#24403;&#24038;&#25351;&#38024;&#19981;&#31561;&#20110;&#21491;&#25351;&#38024;&#26102;</span>
+  <span style="color: #00af00;">while</span> (__beg &lt; __end) {
+    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20174;&#21491;&#20391;&#25214;&#21040;&#31532;&#19968;&#20010;&#27604;&#22522;&#20934;&#20540;&#23567;&#30340;&#20803;&#32032;&#65292;&#24182;&#19982;&#22522;&#20934;&#20301;&#32622;&#20114;&#25442;</span>
+    <span style="color: #00af00;">while</span> (<span style="color: #cc0000;">!</span>(*__end &lt; pivot) &amp;&amp; __beg &lt; __end) --__end;
     *__beg = *__end;
-    <span style="color: #a89984;">// </span><span style="color: #a89984;">&#20174;&#24038;&#20391;&#25214;&#21040;&#31532;&#19968;&#20010;&#27604;&#22522;&#20934;&#20540;&#20013;&#30340;&#20803;&#32032;&#65292;&#24182;&#19982;&#22522;&#20934;&#20301;&#32622;&#20114;&#25442;</span>
-    <span style="color: #9d0006;">while</span> (!(pivot &lt; *__beg) &amp;&amp; __beg &lt; __end) ++__beg;
+    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20174;&#24038;&#20391;&#25214;&#21040;&#31532;&#19968;&#20010;&#27604;&#22522;&#20934;&#20540;&#20013;&#30340;&#20803;&#32032;&#65292;&#24182;&#19982;&#22522;&#20934;&#20301;&#32622;&#20114;&#25442;</span>
+    <span style="color: #00af00;">while</span> (<span style="color: #cc0000;">!</span>(pivot &lt; *__beg) &amp;&amp; __beg &lt; __end) ++__beg;
     *__end = *__beg;
   }
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#24674;&#22797;&#22522;&#20934;&#20301;&#32622;&#30340;&#20540;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#24674;&#22797;&#22522;&#20934;&#20301;&#32622;&#30340;&#20540;</span>
   *__beg = pivot;
-  <span style="color: #9d0006;">return</span> __beg;
+  <span style="color: #00af00;">return</span> __beg;
 }
 
-<span style="color: #a89984;">// </span><span style="color: #a89984;">&#24555;&#36895;&#25490;&#24207;</span>
-<span style="color: #9d0006;">template</span>&lt;<span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">Iter</span>&gt;
-<span style="color: #8f3f71;">void</span> <span style="color: #b57614;">quick_sort</span>(<span style="color: #8f3f71;">Iter</span> <span style="color: #076678;">__beg</span>, <span style="color: #8f3f71;">Iter</span> <span style="color: #076678;">__end</span>)
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#24555;&#36895;&#25490;&#24207;</span>
+<span style="color: #00af00;">template</span>&lt;<span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">Iter</span>&gt;
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">quick_sort</span>(<span style="color: #18b2b2;">Iter</span> <span style="color: #ff8700;">__beg</span>, <span style="color: #18b2b2;">Iter</span> <span style="color: #ff8700;">__end</span>)
 {
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#27492;&#22788; __end &#26159;&#23614;&#21518;&#25351;&#38024;&#65292;&#24403;&#21482;&#26377;&#19968;&#20010;&#20803;&#32032;&#26102;&#26080;&#26080;&#38656;&#25490;&#24207;&#65292;&#30452;&#25509;&#36339;&#20986;</span>
-  <span style="color: #9d0006;">if</span> (__beg + 1 &lt; __end) {
-    <span style="color: #a89984;">// </span><span style="color: #a89984;">&#33719;&#21462;&#22522;&#20934;&#20301;&#32622;&#36845;&#20195;&#22120;</span>
-    <span style="color: #8f3f71;">Iter</span> <span style="color: #076678;">mid</span> = quick_sort_helper(__beg, __end);
-    <span style="color: #a89984;">// </span><span style="color: #a89984;">&#23545;&#22522;&#20934;&#20301;&#32622;&#21069;&#38754;&#30340;&#20803;&#32032;&#36827;&#34892;&#25490;&#24207;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27492;&#22788; __end &#26159;&#23614;&#21518;&#25351;&#38024;&#65292;&#24403;&#21482;&#26377;&#19968;&#20010;&#20803;&#32032;&#26102;&#26080;&#26080;&#38656;&#25490;&#24207;&#65292;&#30452;&#25509;&#36339;&#20986;</span>
+  <span style="color: #00af00;">if</span> (__beg + 1 &lt; __end) {
+    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#33719;&#21462;&#22522;&#20934;&#20301;&#32622;&#36845;&#20195;&#22120;</span>
+    <span style="color: #18b2b2;">Iter</span> <span style="color: #ff8700;">mid</span> = quick_sort_helper(__beg, __end);
+    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23545;&#22522;&#20934;&#20301;&#32622;&#21069;&#38754;&#30340;&#20803;&#32032;&#36827;&#34892;&#25490;&#24207;</span>
     quick_sort(__beg, mid);
-    <span style="color: #a89984;">// </span><span style="color: #a89984;">&#23545;&#22522;&#20934;&#20301;&#32622;&#21518;&#38754;&#30340;&#20803;&#32032;&#36827;&#34892;&#25490;&#24207;</span>
+    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23545;&#22522;&#20934;&#20301;&#32622;&#21518;&#38754;&#30340;&#20803;&#32032;&#36827;&#34892;&#25490;&#24207;</span>
     quick_sort(mid + 1, __end);
   }
 }
 
-<span style="color: #8f3f71;">int</span> <span style="color: #b57614;">main</span>()
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span>()
 {
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#23545; std::vector&lt;int&gt; &#36827;&#34892;&#25490;&#24207;</span>
-  <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">int</span>&gt; <span style="color: #076678;">ivec</span>{3, 1, 2, 5, 4};
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23545; std::vector&lt;int&gt; &#36827;&#34892;&#25490;&#24207;</span>
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">vector</span>&lt;<span style="color: #18b2b2;">int</span>&gt; <span style="color: #ff8700;">ivec</span>{3, 1, 2, 5, 4};
   print_items(ivec.cbegin(), ivec.cend());
 
   quick_sort(ivec.begin(), ivec.end());
   print_items(ivec.cbegin(), ivec.cend());
 
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#23545; std::vector&lt;std::string&gt; &#36827;&#34892;&#25490;&#24207;</span>
-  <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">std</span>::string&gt; <span style="color: #076678;">svec</span>{<span style="color: #79740e;">"hello"</span>, <span style="color: #79740e;">"world"</span>, <span style="color: #79740e;">"devil"</span>, <span style="color: #79740e;">"C++"</span>};
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23545; std::vector&lt;std::string&gt; &#36827;&#34892;&#25490;&#24207;</span>
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">vector</span>&lt;<span style="color: #1f5bff;">std</span>::string&gt; <span style="color: #ff8700;">svec</span>{<span style="color: #ff1f8b;">"hello"</span>, <span style="color: #ff1f8b;">"world"</span>, <span style="color: #ff1f8b;">"devil"</span>, <span style="color: #ff1f8b;">"C++"</span>};
   print_items(svec.cbegin(), svec.cend());
 
   quick_sort(svec.begin(), svec.end());
@@ -145,89 +145,89 @@
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;iostream&gt;</span>
-<span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;string&gt;</span>
-<span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;vector&gt;</span>
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #ff1f8b;">&lt;iostream&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #ff1f8b;">&lt;string&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #ff1f8b;">&lt;vector&gt;</span>
 
-<span style="color: #9d0006;">template</span>&lt;<span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">Iter</span>&gt;
-<span style="color: #8f3f71;">void</span> <span style="color: #b57614;">print_items</span>(<span style="color: #8f3f71;">Iter</span> <span style="color: #076678;">__beg</span>, <span style="color: #8f3f71;">Iter</span> <span style="color: #076678;">__end</span>)
+<span style="color: #00af00;">template</span>&lt;<span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">Iter</span>&gt;
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">print_items</span>(<span style="color: #18b2b2;">Iter</span> <span style="color: #ff8700;">__beg</span>, <span style="color: #18b2b2;">Iter</span> <span style="color: #ff8700;">__end</span>)
 {
-  <span style="color: #9d0006;">if</span> (__beg == __end)
-    <span style="color: #9d0006;">return</span>;
+  <span style="color: #00af00;">if</span> (__beg == __end)
+    <span style="color: #00af00;">return</span>;
 
-  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"["</span>;
-  <span style="color: #9d0006;">while</span> (__beg + 1 &lt; __end) {
-    <span style="color: #8f3f71;">std</span>::cout &lt;&lt; *__beg++ &lt;&lt; <span style="color: #79740e;">", "</span>;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"["</span>;
+  <span style="color: #00af00;">while</span> (__beg + 1 &lt; __end) {
+    <span style="color: #1f5bff;">std</span>::cout &lt;&lt; *__beg++ &lt;&lt; <span style="color: #ff1f8b;">", "</span>;
   }
-  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; *__beg &lt;&lt; <span style="color: #79740e;">"]"</span> &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; *__beg &lt;&lt; <span style="color: #ff1f8b;">"]"</span> &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
 }
 
-<span style="color: #a89984;">// </span><span style="color: #a89984;">&#24555;&#36895;&#25490;&#24207;&#20869;&#37096;&#23454;&#29616;&#26041;&#27861;</span>
-<span style="color: #9d0006;">template</span>&lt;<span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">Iter</span>, <span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">Cmpr</span>&gt;
-<span style="color: #8f3f71;">Iter</span> <span style="color: #b57614;">quick_sort_helper</span>(<span style="color: #8f3f71;">Iter</span> <span style="color: #076678;">__beg</span>, <span style="color: #8f3f71;">Iter</span> <span style="color: #076678;">__end</span>, <span style="color: #8f3f71;">Cmpr</span> <span style="color: #076678;">__cmpr</span>)
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#24555;&#36895;&#25490;&#24207;&#20869;&#37096;&#23454;&#29616;&#26041;&#27861;</span>
+<span style="color: #00af00;">template</span>&lt;<span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">Iter</span>, <span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">Cmpr</span>&gt;
+<span style="color: #18b2b2;">Iter</span> <span style="color: #ef2929;">quick_sort_helper</span>(<span style="color: #18b2b2;">Iter</span> <span style="color: #ff8700;">__beg</span>, <span style="color: #18b2b2;">Iter</span> <span style="color: #ff8700;">__end</span>, <span style="color: #18b2b2;">Cmpr</span> <span style="color: #ff8700;">__cmpr</span>)
 {
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#23558;&#31532;&#19968;&#20010;&#20803;&#32032;&#35760;&#24405;&#24182;&#20316;&#20026;&#22522;&#20934;&#20540;</span>
-  <span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">Iter</span>::<span style="color: #8f3f71;">value_type</span> <span style="color: #076678;">pivot</span> = *__beg;
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#23558;&#23614;&#21518;&#25351;&#38024;&#21521;&#21069;&#31227;&#21160;&#65292;&#25351;&#21521;&#26368;&#21518;&#19968;&#20010;&#20803;&#32032;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23558;&#31532;&#19968;&#20010;&#20803;&#32032;&#35760;&#24405;&#24182;&#20316;&#20026;&#22522;&#20934;&#20540;</span>
+  <span style="color: #00af00;">typename</span> <span style="color: #1f5bff;">Iter</span>::<span style="color: #18b2b2;">value_type</span> <span style="color: #ff8700;">pivot</span> = *__beg;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23558;&#23614;&#21518;&#25351;&#38024;&#21521;&#21069;&#31227;&#21160;&#65292;&#25351;&#21521;&#26368;&#21518;&#19968;&#20010;&#20803;&#32032;</span>
   --__end;
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#24403;&#24038;&#25351;&#38024;&#19981;&#31561;&#20110;&#21491;&#25351;&#38024;&#26102;</span>
-  <span style="color: #9d0006;">while</span> (__beg &lt; __end) {
-    <span style="color: #a89984;">// </span><span style="color: #a89984;">&#20174;&#21491;&#20391;&#25214;&#21040;&#31532;&#19968;&#20010;&#27604;&#22522;&#20934;&#20540;&#23567;&#30340;&#20803;&#32032;&#65292;&#24182;&#19982;&#22522;&#20934;&#20301;&#32622;&#20114;&#25442;</span>
-    <span style="color: #9d0006;">while</span> (!(__cmpr(*__end, pivot)) &amp;&amp; __beg &lt; __end) --__end;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#24403;&#24038;&#25351;&#38024;&#19981;&#31561;&#20110;&#21491;&#25351;&#38024;&#26102;</span>
+  <span style="color: #00af00;">while</span> (__beg &lt; __end) {
+    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20174;&#21491;&#20391;&#25214;&#21040;&#31532;&#19968;&#20010;&#27604;&#22522;&#20934;&#20540;&#23567;&#30340;&#20803;&#32032;&#65292;&#24182;&#19982;&#22522;&#20934;&#20301;&#32622;&#20114;&#25442;</span>
+    <span style="color: #00af00;">while</span> (<span style="color: #cc0000;">!</span>(__cmpr(*__end, pivot)) &amp;&amp; __beg &lt; __end) --__end;
     *__beg = *__end;
-    <span style="color: #a89984;">// </span><span style="color: #a89984;">&#20174;&#24038;&#20391;&#25214;&#21040;&#31532;&#19968;&#20010;&#27604;&#22522;&#20934;&#20540;&#20013;&#30340;&#20803;&#32032;&#65292;&#24182;&#19982;&#22522;&#20934;&#20301;&#32622;&#20114;&#25442;</span>
-    <span style="color: #9d0006;">while</span> (!(__cmpr(pivot, *__beg)) &amp;&amp; __beg &lt; __end) ++__beg;
+    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20174;&#24038;&#20391;&#25214;&#21040;&#31532;&#19968;&#20010;&#27604;&#22522;&#20934;&#20540;&#20013;&#30340;&#20803;&#32032;&#65292;&#24182;&#19982;&#22522;&#20934;&#20301;&#32622;&#20114;&#25442;</span>
+    <span style="color: #00af00;">while</span> (<span style="color: #cc0000;">!</span>(__cmpr(pivot, *__beg)) &amp;&amp; __beg &lt; __end) ++__beg;
     *__end = *__beg;
   }
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#24674;&#22797;&#22522;&#20934;&#20301;&#32622;&#30340;&#20540;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#24674;&#22797;&#22522;&#20934;&#20301;&#32622;&#30340;&#20540;</span>
   *__beg = pivot;
-  <span style="color: #9d0006;">return</span> __beg;
+  <span style="color: #00af00;">return</span> __beg;
 }
 
-<span style="color: #a89984;">// </span><span style="color: #a89984;">&#24555;&#36895;&#25490;&#24207;</span>
-<span style="color: #9d0006;">template</span>&lt;<span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">Iter</span>, <span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">Cmpr</span>&gt;
-<span style="color: #8f3f71;">void</span> <span style="color: #b57614;">quick_sort</span>(<span style="color: #8f3f71;">Iter</span> <span style="color: #076678;">__beg</span>, <span style="color: #8f3f71;">Iter</span> <span style="color: #076678;">__end</span>, <span style="color: #8f3f71;">Cmpr</span> <span style="color: #076678;">__cmpr</span>)
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#24555;&#36895;&#25490;&#24207;</span>
+<span style="color: #00af00;">template</span>&lt;<span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">Iter</span>, <span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">Cmpr</span>&gt;
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">quick_sort</span>(<span style="color: #18b2b2;">Iter</span> <span style="color: #ff8700;">__beg</span>, <span style="color: #18b2b2;">Iter</span> <span style="color: #ff8700;">__end</span>, <span style="color: #18b2b2;">Cmpr</span> <span style="color: #ff8700;">__cmpr</span>)
 {
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#27492;&#22788; __end &#26159;&#23614;&#21518;&#25351;&#38024;&#65292;&#24403;&#21482;&#26377;&#19968;&#20010;&#20803;&#32032;&#26102;&#26080;&#26080;&#38656;&#25490;&#24207;&#65292;&#30452;&#25509;&#36339;&#20986;</span>
-  <span style="color: #9d0006;">if</span> (__beg + 1 &lt; __end) {
-    <span style="color: #a89984;">// </span><span style="color: #a89984;">&#33719;&#21462;&#22522;&#20934;&#20301;&#32622;&#36845;&#20195;&#22120;</span>
-    <span style="color: #8f3f71;">Iter</span> <span style="color: #076678;">mid</span> = quick_sort_helper(__beg, __end, __cmpr);
-    <span style="color: #a89984;">// </span><span style="color: #a89984;">&#23545;&#22522;&#20934;&#20301;&#32622;&#21069;&#38754;&#30340;&#20803;&#32032;&#36827;&#34892;&#25490;&#24207;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27492;&#22788; __end &#26159;&#23614;&#21518;&#25351;&#38024;&#65292;&#24403;&#21482;&#26377;&#19968;&#20010;&#20803;&#32032;&#26102;&#26080;&#26080;&#38656;&#25490;&#24207;&#65292;&#30452;&#25509;&#36339;&#20986;</span>
+  <span style="color: #00af00;">if</span> (__beg + 1 &lt; __end) {
+    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#33719;&#21462;&#22522;&#20934;&#20301;&#32622;&#36845;&#20195;&#22120;</span>
+    <span style="color: #18b2b2;">Iter</span> <span style="color: #ff8700;">mid</span> = quick_sort_helper(__beg, __end, __cmpr);
+    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23545;&#22522;&#20934;&#20301;&#32622;&#21069;&#38754;&#30340;&#20803;&#32032;&#36827;&#34892;&#25490;&#24207;</span>
     quick_sort(__beg, mid, __cmpr);
-    <span style="color: #a89984;">// </span><span style="color: #a89984;">&#23545;&#22522;&#20934;&#20301;&#32622;&#21518;&#38754;&#30340;&#20803;&#32032;&#36827;&#34892;&#25490;&#24207;</span>
+    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23545;&#22522;&#20934;&#20301;&#32622;&#21518;&#38754;&#30340;&#20803;&#32032;&#36827;&#34892;&#25490;&#24207;</span>
     quick_sort(mid + 1, __end, __cmpr);
   }
 }
 
-<span style="color: #9d0006;">struct</span> <span style="color: #8f3f71;">Point</span> {
-  <span style="color: #9d0006;">friend</span> <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">ostream</span>&amp; <span style="color: #9d0006;">operator</span><span style="color: #b57614;">&lt;&lt;</span>(<span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">ostream</span>&amp; <span style="color: #076678;">os</span>, <span style="color: #8f3f71;">Point</span> <span style="color: #9d0006;">const</span>&amp; <span style="color: #076678;">p</span>) {
-    <span style="color: #9d0006;">return</span> <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Point("</span> &lt;&lt; p.x &lt;&lt; <span style="color: #79740e;">", "</span> &lt;&lt; p.y &lt;&lt; <span style="color: #79740e;">")"</span>;
+<span style="color: #00af00;">struct</span> <span style="color: #18b2b2;">Point</span> {
+  <span style="color: #00af00;">friend</span> <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span>&amp; <span style="color: #00af00;">operator</span><span style="color: #ef2929;">&lt;&lt;</span>(<span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">ostream</span>&amp; <span style="color: #ff8700;">os</span>, <span style="color: #18b2b2;">Point</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">p</span>) {
+    <span style="color: #00af00;">return</span> <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Point("</span> &lt;&lt; p.x &lt;&lt; <span style="color: #ff1f8b;">", "</span> &lt;&lt; p.y &lt;&lt; <span style="color: #ff1f8b;">")"</span>;
   }
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#40664;&#35748;&#26500;&#36896;</span>
-  <span style="color: #b57614;">Point</span>(<span style="color: #8f3f71;">double</span> <span style="color: #076678;">__x</span> = 0.0, <span style="color: #8f3f71;">double</span> <span style="color: #076678;">__y</span> = 0.0) : x(__x), y(__y) { }
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#25335;&#36125;&#26500;&#36896;</span>
-  <span style="color: #b57614;">Point</span>(<span style="color: #8f3f71;">Point</span> <span style="color: #9d0006;">const</span>&amp; <span style="color: #076678;">p</span>) {
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#40664;&#35748;&#26500;&#36896;</span>
+  <span style="color: #ef2929;">Point</span>(<span style="color: #18b2b2;">double</span> <span style="color: #ff8700;">__x</span> = 0.0, <span style="color: #18b2b2;">double</span> <span style="color: #ff8700;">__y</span> = 0.0) : x(__x), y(__y) { }
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#25335;&#36125;&#26500;&#36896;</span>
+  <span style="color: #ef2929;">Point</span>(<span style="color: #18b2b2;">Point</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">p</span>) {
     x = p.x;
     y = p.y;
   }
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#36171;&#20540;</span>
-  <span style="color: #8f3f71;">Point</span>&amp; <span style="color: #9d0006;">operator</span><span style="color: #b57614;">=</span>(<span style="color: #8f3f71;">Point</span> <span style="color: #9d0006;">const</span>&amp; <span style="color: #076678;">p</span>) {
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#36171;&#20540;</span>
+  <span style="color: #18b2b2;">Point</span>&amp; <span style="color: #00af00;">operator</span><span style="color: #ef2929;">=</span>(<span style="color: #18b2b2;">Point</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">p</span>) {
     x = p.x;
     y = p.y;
-    <span style="color: #9d0006;">return</span> *<span style="color: #9d0006;">this</span>;
+    <span style="color: #00af00;">return</span> *<span style="color: #00af00;">this</span>;
   }
-  <span style="color: #8f3f71;">double</span> <span style="color: #076678;">x</span> = 0.0;
-  <span style="color: #8f3f71;">double</span> <span style="color: #076678;">y</span> = 0.0;
+  <span style="color: #18b2b2;">double</span> <span style="color: #ff8700;">x</span> = 0.0;
+  <span style="color: #18b2b2;">double</span> <span style="color: #ff8700;">y</span> = 0.0;
 };
 
-<span style="color: #8f3f71;">int</span> <span style="color: #b57614;">main</span>()
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span>()
 {
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#23545; std::vector&lt;Point&gt; &#36827;&#34892;&#25490;&#24207;</span>
-  <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">Point</span>&gt; <span style="color: #076678;">pvec</span>{{3, 2}, {1, 2}, {2, 4}, {1, 0}};
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23545; std::vector&lt;Point&gt; &#36827;&#34892;&#25490;&#24207;</span>
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">vector</span>&lt;<span style="color: #18b2b2;">Point</span>&gt; <span style="color: #ff8700;">pvec</span>{{3, 2}, {1, 2}, {2, 4}, {1, 0}};
   print_items(pvec.cbegin(), pvec.cend());
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#27604;&#36739;&#20108;&#32500;&#24179;&#38754;&#19978;&#30340;&#28857;&#21040;&#21407;&#28857;&#30340;&#36317;&#31163;</span>
-  quick_sort(pvec.begin(), pvec.end(), [](<span style="color: #8f3f71;">Point</span> <span style="color: #9d0006;">const</span>&amp; <span style="color: #076678;">a</span>, <span style="color: #8f3f71;">Point</span> <span style="color: #9d0006;">const</span>&amp; <span style="color: #076678;">b</span>) {
-    <span style="color: #9d0006;">return</span> a.x * a.x + a.y * a.y &lt; b.x * b.x + b.y * b.y;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27604;&#36739;&#20108;&#32500;&#24179;&#38754;&#19978;&#30340;&#28857;&#21040;&#21407;&#28857;&#30340;&#36317;&#31163;</span>
+  quick_sort(pvec.begin(), pvec.end(), [](<span style="color: #18b2b2;">Point</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">a</span>, <span style="color: #18b2b2;">Point</span> <span style="color: #00af00;">const</span>&amp; <span style="color: #ff8700;">b</span>) {
+    <span style="color: #00af00;">return</span> a.x * a.x + a.y * a.y &lt; b.x * b.x + b.y * b.y;
   });
   print_items(pvec.cbegin(), pvec.cend());
 }
@@ -240,8 +240,8 @@
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-07-08 Wed 13:30></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
-      <div id="built">Built: <2022-10-23 Sun 09:02></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.1 (<a href="https://orgmode.org">Org</a> mode 9.6.6)</div>
+      <div id="built">Built: <2024-01-27 Sat 21:20></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

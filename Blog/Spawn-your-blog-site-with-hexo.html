@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-10-23 Sun 09:02 -->
+<!-- 2024-01-27 Sat 21:20 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Spawn your blog site with hexo</title>
@@ -131,7 +131,7 @@ Hexo 既然是由 NodeJS 驅動的，那必然 NodeJS 環境是必不可少，�
 </ul>
 
 
-<figure id="orgd9907b2">
+<figure id="orga9402c7">
 <img src="./Spawn-your-blog-site-with-hexo/hexo_dir.png" alt="hexo_dir.png">
 
 </figure>
@@ -209,7 +209,7 @@ Markdown文件生成網頁結構，結果保存在 <code>public</code> 目錄下
 </p>
 
 
-<figure id="orgb308b36">
+<figure id="org003c21a">
 <img src="./Spawn-your-blog-site-with-hexo/html_dir.png" alt="html_dir.png">
 
 </figure>
@@ -296,9 +296,9 @@ Hook 的事件放在裸倉庫目錄的 hooks 文件夾下，這裏我們新建�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #a89984;">#</span><span style="color: #a89984;">!/bin/</span><span style="color: #9d0006;">bash</span>
-<span style="color: #af3a03;">cd</span> /home/ubuntu/www/blog  <span style="color: #a89984;"># </span><span style="color: #a89984;">cd &#21040;&#32178;&#38913;&#30340;&#23637;&#31034;&#20489;&#24235;</span>
-<span style="color: #af3a03;">unset</span> GIT_DIR  <span style="color: #a89984;"># </span><span style="color: #a89984;">&#38750;&#24120;&#37325;&#35201;&#65281;&#22914;&#26524;&#19981;&#35299;&#32129; GIT_DIR &#29872;&#22659;&#35722;&#37327;&#28961;&#27861;&#20999;&#25563;&#36335;&#24465;</span>
+<pre class="src src-sh"><span style="color: #b2b2b2; font-style: italic;">#</span><span style="color: #b2b2b2; font-style: italic;">!/bin/</span><span style="color: #00af00;">bash</span>
+<span style="color: #b218b2;">cd</span> /home/ubuntu/www/blog  <span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">cd &#21040;&#32178;&#38913;&#30340;&#23637;&#31034;&#20489;&#24235;</span>
+<span style="color: #b218b2;">unset</span> GIT_DIR  <span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#38750;&#24120;&#37325;&#35201;&#65281;&#22914;&#26524;&#19981;&#35299;&#32129; GIT_DIR &#29872;&#22659;&#35722;&#37327;&#28961;&#27861;&#20999;&#25563;&#36335;&#24465;</span>
 git config --list
 git pull origin master
 </pre>
@@ -376,8 +376,8 @@ npm install hexo-renderer-kramed --save
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #a89984;">//  </span><span style="color: #a89984;">escape: /^\\([\\`*{}\[\]()#$+\-.!_&gt;])/,</span>
-escape: <span style="color: #79740e;">/^\\([`*\[\]()#$+\-.!_&gt;])/</span>,
+<pre class="src src-js"><span style="color: #b2b2b2; font-style: italic;">//  </span><span style="color: #b2b2b2; font-style: italic;">escape: /^\\([\\`*{}\[\]()#$+\-.!_&gt;])/,</span>
+escape: <span style="color: #ff1f8b;">/^\\([`*\[\]()#$+\-.!_&gt;])/</span>,
 </pre>
 </div>
 
@@ -387,8 +387,8 @@ escape: <span style="color: #79740e;">/^\\([`*\[\]()#$+\-.!_&gt;])/</span>,
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #a89984;">//  </span><span style="color: #a89984;">em: /^\b_((?:__|[\s\S])+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,</span>
-em: <span style="color: #79740e;">/^\*((?:\*\*|[\s\S])+?)\*(?!\*)/</span>,
+<pre class="src src-js"><span style="color: #b2b2b2; font-style: italic;">//  </span><span style="color: #b2b2b2; font-style: italic;">em: /^\b_((?:__|[\s\S])+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,</span>
+em: <span style="color: #ff1f8b;">/^\*((?:\*\*|[\s\S])+?)\*(?!\*)/</span>,
 </pre>
 </div>
 
@@ -445,8 +445,8 @@ mathjax: true
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2018-04-14 Sat 13:50></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
-      <div id="built">Built: <2022-10-23 Sun 09:02></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.1 (<a href="https://orgmode.org">Org</a> mode 9.6.6)</div>
+      <div id="built">Built: <2024-01-27 Sat 21:20></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

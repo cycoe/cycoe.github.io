@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-10-23 Sun 09:02 -->
+<!-- 2024-01-27 Sat 21:20 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>正交試驗設計</title>
@@ -11,27 +11,38 @@
 <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
 <script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
 <script language="JavaScript" type="text/javascript" src="/static/js/main.js"></script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
 </script>
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+</script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -107,7 +118,7 @@
 </p>
 </blockquote>
 
-<div class="HTML" id="orgb0ec117">
+<div class="HTML" id="org3975e09">
 <p>
 &lt;!&#x2013;more&#x2013;&gt;
 </p>
@@ -166,11 +177,11 @@
 拉丁方。
 </p>
 <div class="org-src-container">
-<pre class="src src-latex"><span style="color: #9d0006;">\begin</span>{<span style="color: #b57614;">bmatrix</span>}
-    1 &amp; 2 &amp; 3<span style="color: #9d0006; font-weight: bold;">\\</span>
-    2 &amp; 3 &amp; 1<span style="color: #9d0006; font-weight: bold;">\\</span>
-    3 &amp; 1 &amp; 2<span style="color: #9d0006; font-weight: bold;">\\</span>
-<span style="color: #9d0006;">\end</span>{<span style="color: #b57614;">bmatrix</span>}
+<pre class="src src-latex"><span style="color: #00af00;">\begin</span>{<span style="color: #ef2929;">bmatrix</span>}
+    1 &amp; 2 &amp; 3<span style="color: #cc0000; font-weight: bold;">\\</span>
+    2 &amp; 3 &amp; 1<span style="color: #cc0000; font-weight: bold;">\\</span>
+    3 &amp; 1 &amp; 2<span style="color: #cc0000; font-weight: bold;">\\</span>
+<span style="color: #00af00;">\end</span>{<span style="color: #ef2929;">bmatrix</span>}
 </pre>
 </div>
 </div>
@@ -198,12 +209,12 @@ form"。
 上一行對應列元素上加一併對\(n\) 取模，即可表示爲如下矩陣。
 </p>
 <div class="org-src-container">
-<pre class="src src-latex"><span style="color: #9d0006;">\begin</span>{<span style="color: #b57614;">bmatrix</span>} 1 &amp;
-2 &amp; n &amp; 3 &amp; n-1 &amp; 4 &amp; n-2 &amp; <span style="color: #9d0006;">\cdots</span><span style="color: #9d0006; font-weight: bold;">\\</span> 2 &amp; 3 &amp; n+1 &amp; 4 &amp; n &amp; 5 &amp; n-1 &amp;
-<span style="color: #9d0006;">\cdots</span><span style="color: #9d0006; font-weight: bold;">\\</span> <span style="color: #9d0006;">\vdots</span> &amp; <span style="color: #9d0006;">\vdots</span> &amp; <span style="color: #9d0006;">\vdots</span> &amp; <span style="color: #9d0006;">\vdots</span> &amp; <span style="color: #9d0006;">\vdots</span> &amp; <span style="color: #9d0006;">\vdots</span> &amp; <span style="color: #9d0006;">\ddots</span> &amp;
-<span style="color: #9d0006;">\vdots</span><span style="color: #9d0006; font-weight: bold;">\\</span> i &amp; i+1 &amp; i+n-1 &amp; i+2 &amp; i+n-2 &amp; i+3 &amp; i+n-3 &amp; <span style="color: #9d0006;">\cdots</span><span style="color: #9d0006; font-weight: bold;">\\</span> <span style="color: #9d0006;">\vdots</span> &amp; <span style="color: #9d0006;">\vdots</span>
-&amp; <span style="color: #9d0006;">\vdots</span> &amp; <span style="color: #9d0006;">\vdots</span> &amp; <span style="color: #9d0006;">\vdots</span> &amp; <span style="color: #9d0006;">\vdots</span> &amp; <span style="color: #9d0006;">\ddots</span> &amp; <span style="color: #9d0006;">\vdots</span><span style="color: #9d0006; font-weight: bold;">\\</span> n &amp; 1 &amp; n-1 &amp; 2 &amp; n-2 &amp;
-3 &amp; n-3 &amp; <span style="color: #9d0006;">\cdots</span><span style="color: #9d0006; font-weight: bold;">\\</span> <span style="color: #9d0006;">\end</span>{<span style="color: #b57614;">bmatrix</span>} <span style="color: #9d0006;">\mathrm</span>{mod}\ n
+<pre class="src src-latex"><span style="color: #00af00;">\begin</span>{<span style="color: #ef2929;">bmatrix</span>} 1 &amp;
+2 &amp; n &amp; 3 &amp; n-1 &amp; 4 &amp; n-2 &amp; <span style="color: #00af00;">\cdots</span><span style="color: #cc0000; font-weight: bold;">\\</span> 2 &amp; 3 &amp; n+1 &amp; 4 &amp; n &amp; 5 &amp; n-1 &amp;
+<span style="color: #00af00;">\cdots</span><span style="color: #cc0000; font-weight: bold;">\\</span> <span style="color: #00af00;">\vdots</span> &amp; <span style="color: #00af00;">\vdots</span> &amp; <span style="color: #00af00;">\vdots</span> &amp; <span style="color: #00af00;">\vdots</span> &amp; <span style="color: #00af00;">\vdots</span> &amp; <span style="color: #00af00;">\vdots</span> &amp; <span style="color: #00af00;">\ddots</span> &amp;
+<span style="color: #00af00;">\vdots</span><span style="color: #cc0000; font-weight: bold;">\\</span> i &amp; i+1 &amp; i+n-1 &amp; i+2 &amp; i+n-2 &amp; i+3 &amp; i+n-3 &amp; <span style="color: #00af00;">\cdots</span><span style="color: #cc0000; font-weight: bold;">\\</span> <span style="color: #00af00;">\vdots</span> &amp; <span style="color: #00af00;">\vdots</span>
+&amp; <span style="color: #00af00;">\vdots</span> &amp; <span style="color: #00af00;">\vdots</span> &amp; <span style="color: #00af00;">\vdots</span> &amp; <span style="color: #00af00;">\vdots</span> &amp; <span style="color: #00af00;">\ddots</span> &amp; <span style="color: #00af00;">\vdots</span><span style="color: #cc0000; font-weight: bold;">\\</span> n &amp; 1 &amp; n-1 &amp; 2 &amp; n-2 &amp;
+3 &amp; n-3 &amp; <span style="color: #00af00;">\cdots</span><span style="color: #cc0000; font-weight: bold;">\\</span> <span style="color: #00af00;">\end</span>{<span style="color: #ef2929;">bmatrix</span>} <span style="color: #00af00;">\mathrm</span>{mod}\ n
 </pre>
 </div>
 
@@ -226,18 +237,18 @@ $((a<sup>(1)</sup><sub>i,j</sub>, a<sup>(2)</sup><sub>i,j</sub>))<sub>n&times; n
 方。 
 </p>
 <div class="org-src-container">
-<pre class="src src-latex"><span style="color: #9d0006;">\begin</span>{<span style="color: #b57614;">matrix</span>}
-A = <span style="color: #9d0006;">\begin</span>{<span style="color: #b57614;">bmatrix</span>}
-    1 &amp; 2 &amp; 3<span style="color: #9d0006; font-weight: bold;">\\</span>
-    2 &amp; 3 &amp; 1<span style="color: #9d0006; font-weight: bold;">\\</span>
-    3 &amp; 1 &amp; 2<span style="color: #9d0006; font-weight: bold;">\\</span>
-<span style="color: #9d0006;">\end</span>{<span style="color: #b57614;">bmatrix</span>} &amp;
-B = <span style="color: #9d0006;">\begin</span>{<span style="color: #b57614;">bmatrix</span>}
-    1 &amp; 2 &amp; 3<span style="color: #9d0006; font-weight: bold;">\\</span>
-    3 &amp; 1 &amp; 2<span style="color: #9d0006; font-weight: bold;">\\</span>
-    2 &amp; 3 &amp; 1<span style="color: #9d0006; font-weight: bold;">\\</span>
-<span style="color: #9d0006;">\end</span>{<span style="color: #b57614;">bmatrix</span>}
-<span style="color: #9d0006;">\end</span>{<span style="color: #b57614;">matrix</span>}
+<pre class="src src-latex"><span style="color: #00af00;">\begin</span>{<span style="color: #ef2929;">matrix</span>}
+A = <span style="color: #00af00;">\begin</span>{<span style="color: #ef2929;">bmatrix</span>}
+    1 &amp; 2 &amp; 3<span style="color: #cc0000; font-weight: bold;">\\</span>
+    2 &amp; 3 &amp; 1<span style="color: #cc0000; font-weight: bold;">\\</span>
+    3 &amp; 1 &amp; 2<span style="color: #cc0000; font-weight: bold;">\\</span>
+<span style="color: #00af00;">\end</span>{<span style="color: #ef2929;">bmatrix</span>} &amp;
+B = <span style="color: #00af00;">\begin</span>{<span style="color: #ef2929;">bmatrix</span>}
+    1 &amp; 2 &amp; 3<span style="color: #cc0000; font-weight: bold;">\\</span>
+    3 &amp; 1 &amp; 2<span style="color: #cc0000; font-weight: bold;">\\</span>
+    2 &amp; 3 &amp; 1<span style="color: #cc0000; font-weight: bold;">\\</span>
+<span style="color: #00af00;">\end</span>{<span style="color: #ef2929;">bmatrix</span>}
+<span style="color: #00af00;">\end</span>{<span style="color: #ef2929;">matrix</span>}
 </pre>
 </div>
 </div>
@@ -269,23 +280,23 @@ B = <span style="color: #9d0006;">\begin</span>{<span style="color: #b57614;">bm
 </p>
 
 <div class="org-src-container">
-<pre class="src src-latex"><span style="color: #9d0006;">\begin</span>{<span style="color: #b57614;">matrix</span>}
-<span style="color: #9d0006;">\begin</span>{<span style="color: #b57614;">bmatrix</span>}
-    1 &amp; 2 &amp; 3<span style="color: #9d0006; font-weight: bold;">\\</span>
-    2 &amp; 3 &amp; 1<span style="color: #9d0006; font-weight: bold;">\\</span>
-    3 &amp; 1 &amp; 2<span style="color: #9d0006; font-weight: bold;">\\</span>
-<span style="color: #9d0006;">\end</span>{<span style="color: #b57614;">bmatrix</span>} &amp;
-<span style="color: #9d0006;">\begin</span>{<span style="color: #b57614;">bmatrix</span>}
-    1 &amp; 2 &amp; 3<span style="color: #9d0006; font-weight: bold;">\\</span>
-    3 &amp; 1 &amp; 2<span style="color: #9d0006; font-weight: bold;">\\</span>
-    2 &amp; 3 &amp; 1<span style="color: #9d0006; font-weight: bold;">\\</span>
-<span style="color: #9d0006;">\end</span>{<span style="color: #b57614;">bmatrix</span>} &amp; = &amp;
-<span style="color: #9d0006;">\begin</span>{<span style="color: #b57614;">bmatrix</span>}
-    11 &amp; 22 &amp; 33<span style="color: #9d0006; font-weight: bold;">\\</span>
-    23 &amp; 31 &amp; 12<span style="color: #9d0006; font-weight: bold;">\\</span>
-    32 &amp; 13 &amp; 21<span style="color: #9d0006; font-weight: bold;">\\</span>
-<span style="color: #9d0006;">\end</span>{<span style="color: #b57614;">bmatrix</span>} &amp;
-<span style="color: #9d0006;">\end</span>{<span style="color: #b57614;">matrix</span>}
+<pre class="src src-latex"><span style="color: #00af00;">\begin</span>{<span style="color: #ef2929;">matrix</span>}
+<span style="color: #00af00;">\begin</span>{<span style="color: #ef2929;">bmatrix</span>}
+    1 &amp; 2 &amp; 3<span style="color: #cc0000; font-weight: bold;">\\</span>
+    2 &amp; 3 &amp; 1<span style="color: #cc0000; font-weight: bold;">\\</span>
+    3 &amp; 1 &amp; 2<span style="color: #cc0000; font-weight: bold;">\\</span>
+<span style="color: #00af00;">\end</span>{<span style="color: #ef2929;">bmatrix</span>} &amp;
+<span style="color: #00af00;">\begin</span>{<span style="color: #ef2929;">bmatrix</span>}
+    1 &amp; 2 &amp; 3<span style="color: #cc0000; font-weight: bold;">\\</span>
+    3 &amp; 1 &amp; 2<span style="color: #cc0000; font-weight: bold;">\\</span>
+    2 &amp; 3 &amp; 1<span style="color: #cc0000; font-weight: bold;">\\</span>
+<span style="color: #00af00;">\end</span>{<span style="color: #ef2929;">bmatrix</span>} &amp; = &amp;
+<span style="color: #00af00;">\begin</span>{<span style="color: #ef2929;">bmatrix</span>}
+    11 &amp; 22 &amp; 33<span style="color: #cc0000; font-weight: bold;">\\</span>
+    23 &amp; 31 &amp; 12<span style="color: #cc0000; font-weight: bold;">\\</span>
+    32 &amp; 13 &amp; 21<span style="color: #cc0000; font-weight: bold;">\\</span>
+<span style="color: #00af00;">\end</span>{<span style="color: #ef2929;">bmatrix</span>} &amp;
+<span style="color: #00af00;">\end</span>{<span style="color: #ef2929;">matrix</span>}
 </pre>
 </div>
 
@@ -603,8 +614,8 @@ B = <span style="color: #9d0006;">\begin</span>{<span style="color: #b57614;">bm
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2018-11-13 Tue 08:35:52></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
-      <div id="built">Built: <2022-10-23 Sun 09:02></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.1 (<a href="https://orgmode.org">Org</a> mode 9.6.6)</div>
+      <div id="built">Built: <2024-01-27 Sat 21:20></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

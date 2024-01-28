@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-10-23 Sun 09:02 -->
+<!-- 2024-01-27 Sat 21:20 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>在 SSD 上使用 Btrfs 文件系統的相關優化</title>
@@ -79,8 +79,8 @@
 </p>
 
 <div class="org-src-container">
-<pre class="src src-conf"><span style="color: #a89984;">#</span><span style="color: #a89984;">&lt;file system&gt;&lt;mount point&gt;&lt;type&gt;&lt;options&gt;&lt;dump&gt;&lt;pass&gt;</span>
-<span style="color: #076678;">UUID</span>=&lt;&#30053;&gt;/ btrfs defaults,ssd,discard,noatime,compress=lzo,subvol=@
+<pre class="src src-conf"><span style="color: #b2b2b2; font-style: italic;">#</span><span style="color: #b2b2b2; font-style: italic;">&lt;file system&gt;&lt;mount point&gt;&lt;type&gt;&lt;options&gt;&lt;dump&gt;&lt;pass&gt;</span>
+<span style="color: #ff8700;">UUID</span>=&lt;&#30053;&gt;/ btrfs defaults,ssd,discard,noatime,compress=lzo,subvol=@
 </pre>
 </div>
 </div>
@@ -138,8 +138,8 @@ SSD
 以下掛載參數：
 </p>
 <div class="org-src-container">
-<pre class="src src-conf"><span style="color: #076678;">compress</span>=lzo
-<span style="color: #076678;">compress</span>=zlib
+<pre class="src src-conf"><span style="color: #ff8700;">compress</span>=lzo
+<span style="color: #ff8700;">compress</span>=zlib
 </pre>
 </div>
 
@@ -172,7 +172,7 @@ SSD 結構不同於傳統硬盤，尋址時間短，I/O 調度算法可選擇 no
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">cat /sys/block/sdX/queue/scheduler <span style="color: #a89984;"># </span><span style="color: #a89984;">sdX &#25351;&#20320;&#30340;&#35373;&#20633;</span>
+<pre class="src src-sh">cat /sys/block/sdX/queue/scheduler <span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">sdX &#25351;&#20320;&#30340;&#35373;&#20633;</span>
 sudo tee /sys/block/sdX/queue/scheduler &lt;&lt;&lt; noop
 </pre>
 </div>
@@ -184,7 +184,7 @@ sudo tee /sys/block/sdX/queue/scheduler &lt;&lt;&lt; noop
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">sudo touch /etc/udev/rules.d/60-ssd-scheduler.rules <span style="color: #a89984;">#</span><span style="color: #a89984;">&#21109;&#24314;&#35442;&#25991;&#20214;</span>
+<pre class="src src-sh">sudo touch /etc/udev/rules.d/60-ssd-scheduler.rules <span style="color: #b2b2b2; font-style: italic;">#</span><span style="color: #b2b2b2; font-style: italic;">&#21109;&#24314;&#35442;&#25991;&#20214;</span>
 </pre>
 </div>
 
@@ -193,8 +193,8 @@ sudo tee /sys/block/sdX/queue/scheduler &lt;&lt;&lt; noop
 </p>
 
 <div class="org-src-container">
-<pre class="src src-conf"><span style="color: #a89984;"># </span><span style="color: #a89984;">set deadline scheduler for non-rotating disks</span>
-<span style="color: #076678;">ACTION</span>==<span style="color: #79740e;">"add|change"</span>, KERNEL==<span style="color: #79740e;">"sd[a-z]"</span>, ATTR{queue/rotational}==<span style="color: #79740e;">"0"</span>, ATTR{queue/scheduler}=<span style="color: #79740e;">"noop"</span>
+<pre class="src src-conf"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">set deadline scheduler for non-rotating disks</span>
+<span style="color: #ff8700;">ACTION</span>==<span style="color: #ff1f8b;">"add|change"</span>, KERNEL==<span style="color: #ff1f8b;">"sd[a-z]"</span>, ATTR{queue/rotational}==<span style="color: #ff1f8b;">"0"</span>, ATTR{queue/scheduler}=<span style="color: #ff1f8b;">"noop"</span>
 </pre>
 </div>
 </div>
@@ -204,8 +204,8 @@ sudo tee /sys/block/sdX/queue/scheduler &lt;&lt;&lt; noop
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2017-03-25 Sat></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
-      <div id="built">Built: <2022-10-23 Sun 09:02></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.1 (<a href="https://orgmode.org">Org</a> mode 9.6.6)</div>
+      <div id="built">Built: <2024-01-27 Sat 21:20></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

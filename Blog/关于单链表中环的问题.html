@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-10-23 Sun 09:02 -->
+<!-- 2024-01-27 Sat 21:20 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>关于单链表中环的问题</title>
@@ -56,15 +56,15 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf06aa80">1. 问题分析</a></li>
-<li><a href="#org2cda959">2. 代码实现</a></li>
+<li><a href="#orgd346a85">1. 问题分析</a></li>
+<li><a href="#org4bfd119">2. 代码实现</a></li>
 </ul>
 </div>
 </nav>
 <!-- more -->
 
-<div id="outline-container-orgf06aa80" class="outline-2">
-<h2 id="orgf06aa80"><span class="section-number-2">1.</span> 问题分析</h2>
+<div id="outline-container-orgd346a85" class="outline-2">
+<h2 id="orgd346a85"><span class="section-number-2">1.</span> 问题分析</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 判断链表中是否有环是非常经典的算法题，其中涉及到许多链表相关的知识并可扩展出很多
@@ -74,202 +74,202 @@
 </div>
 </div>
 
-<div id="outline-container-org2cda959" class="outline-2">
-<h2 id="org2cda959"><span class="section-number-2">2.</span> 代码实现</h2>
+<div id="outline-container-org4bfd119" class="outline-2">
+<h2 id="org4bfd119"><span class="section-number-2">2.</span> 代码实现</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;iostream&gt;</span>
-<span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;fmt/core.h&gt;</span>
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #ff1f8b;">&lt;iostream&gt;</span>
+<span style="color: #b218b2;">#include</span> <span style="color: #ff1f8b;">&lt;fmt/core.h&gt;</span>
 
-<span style="color: #9d0006;">template</span>&lt;<span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">T</span>&gt;
-<span style="color: #9d0006;">struct</span> <span style="color: #8f3f71;">Node</span> {
-  <span style="color: #b57614;">Node</span>(<span style="color: #8f3f71;">T</span> <span style="color: #076678;">__value</span>, <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">T</span>&gt;* <span style="color: #076678;">__next</span> = <span style="color: #8f3f71;">nullptr</span>) : value(__value), next(__next) { }
-  <span style="color: #8f3f71;">Node</span>* <span style="color: #076678;">next</span> = <span style="color: #8f3f71;">nullptr</span>;
-  <span style="color: #8f3f71;">T</span> <span style="color: #076678;">value</span>;
+<span style="color: #00af00;">template</span>&lt;<span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span>&gt;
+<span style="color: #00af00;">struct</span> <span style="color: #18b2b2;">Node</span> {
+  <span style="color: #ef2929;">Node</span>(<span style="color: #18b2b2;">T</span> <span style="color: #ff8700;">__value</span>, <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">T</span>&gt;* <span style="color: #ff8700;">__next</span> = <span style="color: #1f5bff;">nullptr</span>) : value(__value), next(__next) { }
+  <span style="color: #18b2b2;">Node</span>* <span style="color: #ff8700;">next</span> = <span style="color: #1f5bff;">nullptr</span>;
+  <span style="color: #18b2b2;">T</span> <span style="color: #ff8700;">value</span>;
 };
 
-<span style="color: #a89984;">// </span><span style="color: #a89984;">&#32473;&#19968;&#20010;&#21333;&#38142;&#34920;&#65292;&#21028;&#26029;&#20854;&#20013;&#26159;&#21542;&#26377;&#29615;&#30340;&#23384;&#22312;</span>
-<span style="color: #9d0006;">template</span>&lt;<span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">T</span>&gt;
-<span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">T</span>&gt;* <span style="color: #b57614;">exist_loop</span>(<span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">T</span>&gt;* <span style="color: #076678;">head</span>)
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#32473;&#19968;&#20010;&#21333;&#38142;&#34920;&#65292;&#21028;&#26029;&#20854;&#20013;&#26159;&#21542;&#26377;&#29615;&#30340;&#23384;&#22312;</span>
+<span style="color: #00af00;">template</span>&lt;<span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span>&gt;
+<span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">T</span>&gt;* <span style="color: #ef2929;">exist_loop</span>(<span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">T</span>&gt;* <span style="color: #ff8700;">head</span>)
 {
-  <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">T</span>&gt;* <span style="color: #076678;">fast</span> = head;
-  <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">T</span>&gt;* <span style="color: #076678;">slow</span> = head;
+  <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">T</span>&gt;* <span style="color: #ff8700;">fast</span> = head;
+  <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">T</span>&gt;* <span style="color: #ff8700;">slow</span> = head;
 
-  <span style="color: #9d0006;">while</span> (slow &amp;&amp; fast-&gt;next) {
+  <span style="color: #00af00;">while</span> (<span style="color: #18b2b2;">slow</span> &amp;&amp; <span style="color: #ff8700;">fast</span>-&gt;next) {
     slow = slow-&gt;next;
     fast = fast-&gt;next-&gt;next;
-    <span style="color: #9d0006;">if</span> (slow == fast)
-      <span style="color: #9d0006;">return</span> slow;
+    <span style="color: #00af00;">if</span> (slow == fast)
+      <span style="color: #00af00;">return</span> slow;
   }
-  <span style="color: #9d0006;">return</span> <span style="color: #8f3f71;">nullptr</span>;
+  <span style="color: #00af00;">return</span> <span style="color: #1f5bff;">nullptr</span>;
 }
 
-<span style="color: #9d0006;">template</span>&lt;<span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">T</span>&gt;
-<span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">T</span>&gt;* <span style="color: #b57614;">find_loop_entry</span>(<span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">T</span>&gt;* <span style="color: #076678;">head</span>, <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">T</span>&gt;* <span style="color: #076678;">meet</span>)
+<span style="color: #00af00;">template</span>&lt;<span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span>&gt;
+<span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">T</span>&gt;* <span style="color: #ef2929;">find_loop_entry</span>(<span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">T</span>&gt;* <span style="color: #ff8700;">head</span>, <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">T</span>&gt;* <span style="color: #ff8700;">meet</span>)
 {
-  <span style="color: #9d0006;">while</span>(head &amp;&amp; meet) {
-    <span style="color: #9d0006;">if</span> (head == meet)
-      <span style="color: #9d0006;">return</span> head;
+  <span style="color: #00af00;">while</span>(<span style="color: #18b2b2;">head</span> &amp;&amp; <span style="color: #ff8700;">meet</span>) {
+    <span style="color: #00af00;">if</span> (head == meet)
+      <span style="color: #00af00;">return</span> head;
     head = head-&gt;next;
     meet = meet-&gt;next;
   }
-  <span style="color: #9d0006;">return</span> <span style="color: #8f3f71;">nullptr</span>;
+  <span style="color: #00af00;">return</span> <span style="color: #1f5bff;">nullptr</span>;
 }
 
-<span style="color: #9d0006;">template</span>&lt;<span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">T</span>&gt;
-<span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #b57614;">count_loop_size</span>(<span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">T</span>&gt;* <span style="color: #076678;">node</span>)
+<span style="color: #00af00;">template</span>&lt;<span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span>&gt;
+<span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">size_t</span> <span style="color: #ef2929;">count_loop_size</span>(<span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">T</span>&gt;* <span style="color: #ff8700;">node</span>)
 {
-  <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">T</span>&gt;* <span style="color: #076678;">fast</span> = node;
-  <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">T</span>&gt;* <span style="color: #076678;">slow</span> = node;
-  <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #076678;">size</span> = 0;
+  <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">T</span>&gt;* <span style="color: #ff8700;">fast</span> = node;
+  <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">T</span>&gt;* <span style="color: #ff8700;">slow</span> = node;
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">size</span> = 0;
 
-  <span style="color: #9d0006;">while</span> (slow &amp;&amp; fast-&gt;next) {
+  <span style="color: #00af00;">while</span> (<span style="color: #18b2b2;">slow</span> &amp;&amp; <span style="color: #ff8700;">fast</span>-&gt;next) {
     slow = slow-&gt;next;
     fast = fast-&gt;next-&gt;next;
     ++size;
-    <span style="color: #9d0006;">if</span> (slow == fast)
-      <span style="color: #9d0006;">return</span> size;
+    <span style="color: #00af00;">if</span> (slow == fast)
+      <span style="color: #00af00;">return</span> size;
   }
-  <span style="color: #9d0006;">return</span> 0;
+  <span style="color: #00af00;">return</span> 0;
 }
 
-<span style="color: #9d0006;">template</span>&lt;<span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">T</span>&gt;
-<span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #b57614;">count_distance</span>(<span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">T</span>&gt;* <span style="color: #076678;">start</span>, <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">T</span>&gt;* <span style="color: #076678;">end</span>)
+<span style="color: #00af00;">template</span>&lt;<span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span>&gt;
+<span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">size_t</span> <span style="color: #ef2929;">count_distance</span>(<span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">T</span>&gt;* <span style="color: #ff8700;">start</span>, <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">T</span>&gt;* <span style="color: #ff8700;">end</span>)
 {
-  <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #076678;">distance</span> = 0;
-  <span style="color: #9d0006;">while</span> (start != end &amp;&amp; start) {
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">distance</span> = 0;
+  <span style="color: #00af00;">while</span> (start != end &amp;&amp; start) {
     ++distance;
     start = start-&gt;next;
   }
-  <span style="color: #9d0006;">return</span> distance;
+  <span style="color: #00af00;">return</span> distance;
 }
 
-<span style="color: #9d0006;">template</span>&lt;<span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">T</span>&gt;
-<span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">T</span>&gt;* <span style="color: #b57614;">find_opposite</span>(<span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">T</span>&gt;* <span style="color: #076678;">node</span>)
+<span style="color: #00af00;">template</span>&lt;<span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span>&gt;
+<span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">T</span>&gt;* <span style="color: #ef2929;">find_opposite</span>(<span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">T</span>&gt;* <span style="color: #ff8700;">node</span>)
 {
-  <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">T</span>&gt;* <span style="color: #076678;">fast</span> = node;
-  <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">T</span>&gt;* <span style="color: #076678;">slow</span> = node;
+  <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">T</span>&gt;* <span style="color: #ff8700;">fast</span> = node;
+  <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">T</span>&gt;* <span style="color: #ff8700;">slow</span> = node;
 
-  <span style="color: #9d0006;">while</span> (slow &amp;&amp; fast-&gt;next) {
+  <span style="color: #00af00;">while</span> (<span style="color: #18b2b2;">slow</span> &amp;&amp; <span style="color: #ff8700;">fast</span>-&gt;next) {
     slow = slow-&gt;next;
     fast = fast-&gt;next-&gt;next;
-    <span style="color: #9d0006;">if</span> (fast == node)
-      <span style="color: #9d0006;">return</span> slow;
+    <span style="color: #00af00;">if</span> (fast == node)
+      <span style="color: #00af00;">return</span> slow;
   }
-  <span style="color: #9d0006;">return</span> fast;
+  <span style="color: #00af00;">return</span> fast;
 }
 
-<span style="color: #9d0006;">template</span>&lt;<span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">T</span>&gt;
-<span style="color: #8f3f71;">void</span> <span style="color: #b57614;">delete_loop_link</span>(<span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">T</span>&gt;* <span style="color: #076678;">head</span>, <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">T</span>&gt;* <span style="color: #076678;">loop_entry</span>)
+<span style="color: #00af00;">template</span>&lt;<span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span>&gt;
+<span style="color: #18b2b2;">void</span> <span style="color: #ef2929;">delete_loop_link</span>(<span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">T</span>&gt;* <span style="color: #ff8700;">head</span>, <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">T</span>&gt;* <span style="color: #ff8700;">loop_entry</span>)
 {
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#26377;&#29615;&#38142;&#34920;&#30340;&#37322;&#25918;&#21487;&#20998;&#20026;&#20004;&#27493;</span>
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">1. &#31532;&#19968;&#27493;&#26159;&#37322;&#25918;&#29615;</span>
-  <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">T</span>&gt;* <span style="color: #076678;">curr</span> = loop_entry;
-  <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">T</span>&gt;* <span style="color: #076678;">tmp</span> = curr;
-  <span style="color: #9d0006;">do</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#26377;&#29615;&#38142;&#34920;&#30340;&#37322;&#25918;&#21487;&#20998;&#20026;&#20004;&#27493;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">1. &#31532;&#19968;&#27493;&#26159;&#37322;&#25918;&#29615;</span>
+  <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">T</span>&gt;* <span style="color: #ff8700;">curr</span> = loop_entry;
+  <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">T</span>&gt;* <span style="color: #ff8700;">tmp</span> = curr;
+  <span style="color: #00af00;">do</span>
     {
       tmp = curr;
       curr = curr-&gt;next;
-      <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #8f3f71;">fmt</span>::format(<span style="color: #79740e;">"Node({0}) "</span>, tmp-&gt;value);
-      <span style="color: #9d0006;">delete</span> tmp;
-    } <span style="color: #9d0006;">while</span> (curr &amp;&amp; curr != loop_entry);
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">2. &#31532;&#20108;&#27493;&#26159;&#37322;&#25918;&#29615;&#21069;&#38754;&#30340;&#38142;&#34920;</span>
+      <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #1f5bff;">fmt</span>::format(<span style="color: #ff1f8b;">"Node({0}) "</span>, tmp-&gt;value);
+      <span style="color: #00af00;">delete</span> tmp;
+    } <span style="color: #00af00;">while</span> (<span style="color: #18b2b2;">curr</span> &amp;&amp; <span style="color: #ff8700;">curr</span> != loop_entry);
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">2. &#31532;&#20108;&#27493;&#26159;&#37322;&#25918;&#29615;&#21069;&#38754;&#30340;&#38142;&#34920;</span>
   curr = head;
-  <span style="color: #9d0006;">while</span> (curr &amp;&amp; curr != loop_entry) {
+  <span style="color: #00af00;">while</span> (<span style="color: #18b2b2;">curr</span> &amp;&amp; <span style="color: #ff8700;">curr</span> != loop_entry) {
     tmp = curr;
     curr = curr-&gt;next;
-    <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #8f3f71;">fmt</span>::format(<span style="color: #79740e;">"Node({0}) "</span>, tmp-&gt;value);
-    <span style="color: #9d0006;">delete</span> tmp;
+    <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #1f5bff;">fmt</span>::format(<span style="color: #ff1f8b;">"Node({0}) "</span>, tmp-&gt;value);
+    <span style="color: #00af00;">delete</span> tmp;
   }
 }
 
-<span style="color: #9d0006;">template</span>&lt;<span style="color: #9d0006;">typename</span> <span style="color: #8f3f71;">T</span>&gt;
-<span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">T</span>&gt;* <span style="color: #b57614;">end_link_to</span>(<span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">T</span>&gt;* <span style="color: #076678;">head</span>, <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">T</span>&gt;* <span style="color: #076678;">node</span>)
+<span style="color: #00af00;">template</span>&lt;<span style="color: #00af00;">typename</span> <span style="color: #18b2b2;">T</span>&gt;
+<span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">T</span>&gt;* <span style="color: #ef2929;">end_link_to</span>(<span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">T</span>&gt;* <span style="color: #ff8700;">head</span>, <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">T</span>&gt;* <span style="color: #ff8700;">node</span>)
 {
-  <span style="color: #9d0006;">for</span> (; head-&gt;next; head = head-&gt;next);
+  <span style="color: #00af00;">for</span> (; head-&gt;next; head = head-&gt;next);
   head-&gt;next = node;
-  <span style="color: #9d0006;">return</span> head;
+  <span style="color: #00af00;">return</span> head;
 }
 
-<span style="color: #8f3f71;">int</span> <span style="color: #b57614;">main</span>()
+<span style="color: #18b2b2;">int</span> <span style="color: #ef2929;">main</span>()
 {
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#21019;&#24314;&#38142;&#34920;</span>
-  <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">int</span>&gt;* <span style="color: #076678;">head</span> = <span style="color: #9d0006;">new</span> <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">int</span>&gt; {1};
-  <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">int</span>&gt;* <span style="color: #076678;">curr</span> = head;
-  <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">int</span>&gt;* <span style="color: #076678;">loop_node</span> = head;     <span style="color: #a89984;">// </span><span style="color: #a89984;">&#29615;&#20986;&#29616;&#30340;&#33410;&#28857;</span>
-  <span style="color: #9d0006;">for</span> (<span style="color: #8f3f71;">int</span> <span style="color: #076678;">i</span> = 2; i &lt; 8; ++i) {
-    curr-&gt;next = <span style="color: #9d0006;">new</span> <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">int</span>&gt; {i};
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#21019;&#24314;&#38142;&#34920;</span>
+  <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">int</span>&gt;* <span style="color: #ff8700;">head</span> = <span style="color: #00af00;">new</span> <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">int</span>&gt; {1};
+  <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">int</span>&gt;* <span style="color: #ff8700;">curr</span> = head;
+  <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">int</span>&gt;* <span style="color: #ff8700;">loop_node</span> = head;     <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#29615;&#20986;&#29616;&#30340;&#33410;&#28857;</span>
+  <span style="color: #00af00;">for</span> (<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">i</span> = 2; i &lt; 8; ++i) {
+    curr-&gt;next = <span style="color: #00af00;">new</span> <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">int</span>&gt; {i};
     curr = curr-&gt;next;
-    <span style="color: #9d0006;">if</span> (i == 4)
-      loop_node = curr;            <span style="color: #a89984;">// </span><span style="color: #a89984;">&#23558; 4 &#36825;&#20010;&#33410;&#28857;&#20316;&#20026;&#29615;&#30340;&#20837;&#21475;</span>
+    <span style="color: #00af00;">if</span> (i == 4)
+      loop_node = curr;            <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23558; 4 &#36825;&#20010;&#33410;&#28857;&#20316;&#20026;&#29615;&#30340;&#20837;&#21475;</span>
   }
 
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">1. &#32473;&#19968;&#20010;&#21333;&#38142;&#34920;&#65292;&#21028;&#26029;&#20854;&#20013;&#26159;&#21542;&#26377;&#29615;&#30340;&#23384;&#22312;</span>
-  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #8f3f71;">fmt</span>::format(<span style="color: #79740e;">"Loop {0}."</span>, (exist_loop(head)? <span style="color: #79740e;">"exists"</span>: <span style="color: #79740e;">"doesn't exist"</span>))
-            &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">Node(7) &#36830;&#21040; Node(4)</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">1. &#32473;&#19968;&#20010;&#21333;&#38142;&#34920;&#65292;&#21028;&#26029;&#20854;&#20013;&#26159;&#21542;&#26377;&#29615;&#30340;&#23384;&#22312;</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #1f5bff;">fmt</span>::format(<span style="color: #ff1f8b;">"Loop {0}."</span>, (exist_loop(head)? <span style="color: #ff1f8b;">"exists"</span>: <span style="color: #ff1f8b;">"doesn't exist"</span>))
+            &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">Node(7) &#36830;&#21040; Node(4)</span>
   curr-&gt;next = loop_node;
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#24555;&#24930;&#25351;&#38024;&#30456;&#36935;&#30340;&#33410;&#28857;</span>
-  <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">int</span>&gt;* <span style="color: #076678;">meet</span> = exist_loop(head);
-  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #8f3f71;">fmt</span>::format(<span style="color: #79740e;">"Loop {0}."</span>, (meet? <span style="color: #79740e;">"exists"</span>: <span style="color: #79740e;">"doesn't exist"</span>))
-            &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#24555;&#24930;&#25351;&#38024;&#30456;&#36935;&#30340;&#33410;&#28857;</span>
+  <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">int</span>&gt;* <span style="color: #ff8700;">meet</span> = exist_loop(head);
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #1f5bff;">fmt</span>::format(<span style="color: #ff1f8b;">"Loop {0}."</span>, (meet? <span style="color: #ff1f8b;">"exists"</span>: <span style="color: #ff1f8b;">"doesn't exist"</span>))
+            &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
 
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">2. &#22914;&#26524;&#23384;&#22312;&#29615;&#65292;&#25214;&#20986;&#29615;&#30340;&#20837;&#21475;&#28857;</span>
-  <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">int</span>&gt;* <span style="color: #076678;">loop_entry</span> = find_loop_entry(head, meet);
-  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #8f3f71;">fmt</span>::format(<span style="color: #79740e;">"Loop entry is Node({0})."</span>, loop_entry-&gt;value) &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">2. &#22914;&#26524;&#23384;&#22312;&#29615;&#65292;&#25214;&#20986;&#29615;&#30340;&#20837;&#21475;&#28857;</span>
+  <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">int</span>&gt;* <span style="color: #ff8700;">loop_entry</span> = find_loop_entry(head, meet);
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #1f5bff;">fmt</span>::format(<span style="color: #ff1f8b;">"Loop entry is Node({0})."</span>, loop_entry-&gt;value) &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
 
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">3. &#22914;&#26524;&#23384;&#22312;&#29615;&#65292;&#27714;&#20986;&#29615;&#19978;&#33410;&#28857;&#30340;&#20010;&#25968;</span>
-  <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #076678;">loop_size</span> = count_loop_size(meet);
-  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #8f3f71;">fmt</span>::format(<span style="color: #79740e;">"Loop size is {0}."</span>, loop_size) &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">3. &#22914;&#26524;&#23384;&#22312;&#29615;&#65292;&#27714;&#20986;&#29615;&#19978;&#33410;&#28857;&#30340;&#20010;&#25968;</span>
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">loop_size</span> = count_loop_size(meet);
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #1f5bff;">fmt</span>::format(<span style="color: #ff1f8b;">"Loop size is {0}."</span>, loop_size) &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
 
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">4. &#22914;&#26524;&#23384;&#22312;&#29615;&#65292;&#27714;&#20986;&#38142;&#34920;&#30340;&#38271;&#24230;</span>
-  <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">size_t</span> <span style="color: #076678;">noloop_size</span> = count_distance(head, loop_entry);
-  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #8f3f71;">fmt</span>::format(<span style="color: #79740e;">"Link size is {0}."</span>, noloop_size + loop_size) &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">4. &#22914;&#26524;&#23384;&#22312;&#29615;&#65292;&#27714;&#20986;&#38142;&#34920;&#30340;&#38271;&#24230;</span>
+  <span style="color: #1f5bff;">std</span>::<span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">noloop_size</span> = count_distance(head, loop_entry);
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #1f5bff;">fmt</span>::format(<span style="color: #ff1f8b;">"Link size is {0}."</span>, noloop_size + loop_size) &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
 
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">5. &#22914;&#26524;&#23384;&#22312;&#29615;&#65292;&#27714;&#20986;&#29615;&#19978;&#36317;&#31163;&#20219;&#24847;&#19968;&#20010;&#33410;&#28857;&#26368;&#36828;&#30340;&#28857;&#65288;&#23545;&#38754;&#33410;&#28857;&#65289;</span>
-  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #8f3f71;">fmt</span>::format(<span style="color: #79740e;">"Original node is Node({0})."</span>, meet-&gt;value) &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
-  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #8f3f71;">fmt</span>::format(<span style="color: #79740e;">"Opposite node is Node({0})."</span>, find_opposite(meet)-&gt;value)
-            &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">5. &#22914;&#26524;&#23384;&#22312;&#29615;&#65292;&#27714;&#20986;&#29615;&#19978;&#36317;&#31163;&#20219;&#24847;&#19968;&#20010;&#33410;&#28857;&#26368;&#36828;&#30340;&#28857;&#65288;&#23545;&#38754;&#33410;&#28857;&#65289;</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #1f5bff;">fmt</span>::format(<span style="color: #ff1f8b;">"Original node is Node({0})."</span>, meet-&gt;value) &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #1f5bff;">fmt</span>::format(<span style="color: #ff1f8b;">"Opposite node is Node({0})."</span>, find_opposite(meet)-&gt;value)
+            &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
 
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">6. &#37322;&#25918;&#26377;&#29615;&#38142;&#34920;</span>
-  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Delete link: "</span>;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">6. &#37322;&#25918;&#26377;&#29615;&#38142;&#34920;</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Delete link: "</span>;
   delete_loop_link(head, loop_entry);
-  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
-  head = <span style="color: #8f3f71;">nullptr</span>;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  head = <span style="color: #1f5bff;">nullptr</span>;
 
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#21019;&#24314;&#20004;&#26465;&#30456;&#20132;&#30340;&#38142;&#34920;</span>
-  <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">int</span>&gt;* <span style="color: #076678;">head_1</span> = <span style="color: #9d0006;">new</span> <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">int</span>&gt; {1};
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#21019;&#24314;&#20004;&#26465;&#30456;&#20132;&#30340;&#38142;&#34920;</span>
+  <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">int</span>&gt;* <span style="color: #ff8700;">head_1</span> = <span style="color: #00af00;">new</span> <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">int</span>&gt; {1};
   curr = head_1;
-  <span style="color: #9d0006;">for</span> (<span style="color: #8f3f71;">int</span> <span style="color: #076678;">i</span> = 2; i &lt; 8; ++i) {
-    curr-&gt;next = <span style="color: #9d0006;">new</span> <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">int</span>&gt; {i};
+  <span style="color: #00af00;">for</span> (<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">i</span> = 2; i &lt; 8; ++i) {
+    curr-&gt;next = <span style="color: #00af00;">new</span> <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">int</span>&gt; {i};
     curr = curr-&gt;next;
-    <span style="color: #9d0006;">if</span> (i == 4)
-      loop_node = curr;            <span style="color: #a89984;">// </span><span style="color: #a89984;">&#23558; Node(4) &#36825;&#20010;&#33410;&#28857;&#20316;&#20026;&#20004;&#26465;&#38142;&#34920;&#30340;&#20132;&#28857;</span>
+    <span style="color: #00af00;">if</span> (i == 4)
+      loop_node = curr;            <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23558; Node(4) &#36825;&#20010;&#33410;&#28857;&#20316;&#20026;&#20004;&#26465;&#38142;&#34920;&#30340;&#20132;&#28857;</span>
   }
-  <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">int</span>&gt;* <span style="color: #076678;">head_2</span> = <span style="color: #9d0006;">new</span> <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">int</span>&gt; {8};
-  head_2-&gt;next = <span style="color: #9d0006;">new</span> <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">int</span>&gt; {9};
-  head_2-&gt;next-&gt;next = <span style="color: #9d0006;">new</span> <span style="color: #8f3f71;">Node</span>&lt;<span style="color: #8f3f71;">int</span>&gt; {10};
+  <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">int</span>&gt;* <span style="color: #ff8700;">head_2</span> = <span style="color: #00af00;">new</span> <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">int</span>&gt; {8};
+  head_2-&gt;next = <span style="color: #00af00;">new</span> <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">int</span>&gt; {9};
+  head_2-&gt;next-&gt;next = <span style="color: #00af00;">new</span> <span style="color: #18b2b2;">Node</span>&lt;<span style="color: #18b2b2;">int</span>&gt; {10};
 
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">7.&#65288;&#25193;&#23637;&#65289;&#22914;&#20309;&#21028;&#26029;&#20004;&#20010;&#26080;&#29615;&#38142;&#34920;&#26159;&#21542;&#30456;&#20132;</span>
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#39318;&#20808;&#23558;&#19968;&#26465;&#38142;&#30340;&#26411;&#23614;&#36830;&#21040;&#38142;&#30340;&#24320;&#22836;&#65292;&#24418;&#25104;&#26377;&#29615;&#38142;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">7.&#65288;&#25193;&#23637;&#65289;&#22914;&#20309;&#21028;&#26029;&#20004;&#20010;&#26080;&#29615;&#38142;&#34920;&#26159;&#21542;&#30456;&#20132;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#39318;&#20808;&#23558;&#19968;&#26465;&#38142;&#30340;&#26411;&#23614;&#36830;&#21040;&#38142;&#30340;&#24320;&#22836;&#65292;&#24418;&#25104;&#26377;&#29615;&#38142;</span>
   end_link_to(head_1, head_1);
-  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #8f3f71;">fmt</span>::format(<span style="color: #79740e;">"Cross {0}."</span>, (exist_loop(head_2)? <span style="color: #79740e;">"exists"</span>: <span style="color: #79740e;">"doesn't exist"</span>))
-            &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;   <span style="color: #a89984;">// </span><span style="color: #a89984;">&#26816;&#26597;&#26159;&#21542;&#30456;&#20132;</span>
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#23558;&#31532;&#20108;&#26465;&#38142;&#30340;&#26368;&#21518;&#36830;&#21040; Node(4)</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #1f5bff;">fmt</span>::format(<span style="color: #ff1f8b;">"Cross {0}."</span>, (exist_loop(head_2)? <span style="color: #ff1f8b;">"exists"</span>: <span style="color: #ff1f8b;">"doesn't exist"</span>))
+            &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#26816;&#26597;&#26159;&#21542;&#30456;&#20132;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23558;&#31532;&#20108;&#26465;&#38142;&#30340;&#26368;&#21518;&#36830;&#21040; Node(4)</span>
   end_link_to(head_2, loop_node);
-  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #8f3f71;">fmt</span>::format(<span style="color: #79740e;">"Cross {0}."</span>, (exist_loop(head_2)? <span style="color: #79740e;">"exists"</span>: <span style="color: #79740e;">"doesn't exist"</span>))
-            &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;   <span style="color: #a89984;">// </span><span style="color: #a89984;">&#26816;&#26597;&#26159;&#21542;&#30456;&#20132;</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #1f5bff;">fmt</span>::format(<span style="color: #ff1f8b;">"Cross {0}."</span>, (exist_loop(head_2)? <span style="color: #ff1f8b;">"exists"</span>: <span style="color: #ff1f8b;">"doesn't exist"</span>))
+            &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#26816;&#26597;&#26159;&#21542;&#30456;&#20132;</span>
 
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">8.&#65288;&#25193;&#23637;&#65289;&#22914;&#26524;&#30456;&#20132;&#65292;&#27714;&#20986;&#31532;&#19968;&#20010;&#30456;&#20132;&#30340;&#33410;&#28857;</span>
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#30456;&#20132;&#28857;&#20063;&#23601;&#26159;&#25104;&#29615;&#21518;&#30340;&#20837;&#21475;&#28857;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">8.&#65288;&#25193;&#23637;&#65289;&#22914;&#26524;&#30456;&#20132;&#65292;&#27714;&#20986;&#31532;&#19968;&#20010;&#30456;&#20132;&#30340;&#33410;&#28857;</span>
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#30456;&#20132;&#28857;&#20063;&#23601;&#26159;&#25104;&#29615;&#21518;&#30340;&#20837;&#21475;&#28857;</span>
   loop_entry = find_loop_entry(head_2, exist_loop(head_2));
-  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #8f3f71;">fmt</span>::format(<span style="color: #79740e;">"Cross node is Node({0})."</span>, loop_entry-&gt;value) &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #1f5bff;">fmt</span>::format(<span style="color: #ff1f8b;">"Cross node is Node({0})."</span>, loop_entry-&gt;value) &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
 
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">9. &#37322;&#25918;&#26377;&#29615;&#38142;&#34920;</span>
-  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #79740e;">"Delete link: "</span>;
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">9. &#37322;&#25918;&#26377;&#29615;&#38142;&#34920;</span>
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #ff1f8b;">"Delete link: "</span>;
   delete_loop_link(head_2, loop_entry);
-  <span style="color: #8f3f71;">std</span>::cout &lt;&lt; <span style="color: #8f3f71;">std</span>::endl;
-  head_1 = head_2 = <span style="color: #8f3f71;">nullptr</span>;
+  <span style="color: #1f5bff;">std</span>::cout &lt;&lt; <span style="color: #1f5bff;">std</span>::endl;
+  head_1 = head_2 = <span style="color: #1f5bff;">nullptr</span>;
 }
 </pre>
 </div>
@@ -280,8 +280,8 @@
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-07-04 Sat 18:06></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
-      <div id="built">Built: <2022-10-23 Sun 09:02></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.1 (<a href="https://orgmode.org">Org</a> mode 9.6.6)</div>
+      <div id="built">Built: <2024-01-27 Sat 21:20></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

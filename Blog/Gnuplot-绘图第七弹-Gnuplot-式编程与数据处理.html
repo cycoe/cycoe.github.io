@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-10-23 Sun 09:02 -->
+<!-- 2024-01-27 Sat 21:20 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gnuplot 绘图第七弹-Gnuplot 式编程与数据处理</title>
@@ -56,10 +56,10 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2aa911f">1. <code>for</code> 循环</a></li>
-<li><a href="#orgc757003">2. <code>a:b:c</code> 三目运算符</a></li>
-<li><a href="#orgdd164ef">3. 平滑曲线</a></li>
-<li><a href="#org1f843fc">4. 拟合曲线</a></li>
+<li><a href="#orgb4f77e3">1. <code>for</code> 循环</a></li>
+<li><a href="#org6a1c009">2. <code>a:b:c</code> 三目运算符</a></li>
+<li><a href="#org1e7eed6">3. 平滑曲线</a></li>
+<li><a href="#org3b0f4cc">4. 拟合曲线</a></li>
 </ul>
 </div>
 </nav>
@@ -69,8 +69,8 @@
 
 <!-- more -->
 
-<div id="outline-container-org2aa911f" class="outline-2">
-<h2 id="org2aa911f"><span class="section-number-2">1.</span> <code>for</code> 循环</h2>
+<div id="outline-container-orgb4f77e3" class="outline-2">
+<h2 id="orgb4f77e3"><span class="section-number-2">1.</span> <code>for</code> 循环</h2>
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
 <pre class="src src-gnuplot">set term pngcairo mono dashed enhanced
@@ -81,15 +81,15 @@ plot [0:3] for [n=1:10:2] besj0(n*x) title "J_0(".n."x)"
 </div>
 
 
-<figure id="orgc8802ba">
+<figure id="org3316218">
 <img src="./Gnuplot-绘图第七弹-Gnuplot-式编程与数据处理/c7-for.png" alt="c7-for.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-orgc757003" class="outline-2">
-<h2 id="orgc757003"><span class="section-number-2">2.</span> <code>a:b:c</code> 三目运算符</h2>
+<div id="outline-container-org6a1c009" class="outline-2">
+<h2 id="org6a1c009"><span class="section-number-2">2.</span> <code>a:b:c</code> 三目运算符</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 <pre class="src src-gnuplot">set samples 2000
@@ -100,15 +100,15 @@ plot [-20:20] f(x), g(x)
 </div>
 
 
-<figure id="orgbcb9178">
+<figure id="orga3c59d6">
 <img src="./Gnuplot-绘图第七弹-Gnuplot-式编程与数据处理/c7-multi-section.png" alt="c7-multi-section.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-orgdd164ef" class="outline-2">
-<h2 id="orgdd164ef"><span class="section-number-2">3.</span> 平滑曲线</h2>
+<div id="outline-container-org1e7eed6" class="outline-2">
+<h2 id="org1e7eed6"><span class="section-number-2">3.</span> 平滑曲线</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-gnuplot">set samples 500
@@ -125,15 +125,15 @@ plot '~/random.dat' w l lw 0.5 title "Original",\
 </div>
 
 
-<figure id="org1fbf1c8">
+<figure id="org893e1a9">
 <img src="./Gnuplot-绘图第七弹-Gnuplot-式编程与数据处理/c7-smooth.png" alt="c7-smooth.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-org1f843fc" class="outline-2">
-<h2 id="org1f843fc"><span class="section-number-2">4.</span> 拟合曲线</h2>
+<div id="outline-container-org3b0f4cc" class="outline-2">
+<h2 id="org3b0f4cc"><span class="section-number-2">4.</span> 拟合曲线</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-gnuplot">set key right top box
@@ -148,7 +148,7 @@ plot '~/random.dat' w l lw 0.5 title "Original",\
 </div>
 
 
-<figure id="orgc77d341">
+<figure id="org3ee7812">
 <img src="./Gnuplot-绘图第七弹-Gnuplot-式编程与数据处理/c7-fit.png" alt="c7-fit.png">
 
 </figure>
@@ -159,8 +159,8 @@ plot '~/random.dat' w l lw 0.5 title "Original",\
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-05-07 Thu 20:48></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
-      <div id="built">Built: <2022-10-23 Sun 09:02></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.1 (<a href="https://orgmode.org">Org</a> mode 9.6.6)</div>
+      <div id="built">Built: <2024-01-27 Sat 21:20></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

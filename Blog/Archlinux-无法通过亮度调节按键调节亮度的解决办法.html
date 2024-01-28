@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-10-23 Sun 09:02 -->
+<!-- 2024-01-27 Sat 21:20 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Archlinux 无法通过亮度调节按键调节亮度的解决办法</title>
@@ -106,13 +106,13 @@ acpilight 兼容 xbacklight 重启之后就可以通过下面命令控制亮度�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #a89984;"># </span><span style="color: #a89984;">Get backlight brightness</span>
+<pre class="src src-sh"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Get backlight brightness</span>
 xbacklight -get
-<span style="color: #a89984;"># </span><span style="color: #a89984;">Set brightness</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Set brightness</span>
 xbacklight -set 70
-<span style="color: #a89984;"># </span><span style="color: #a89984;">Increase brightness</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Increase brightness</span>
 xbacklight -inc 10
-<span style="color: #a89984;"># </span><span style="color: #a89984;">Decrease brightness</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Decrease brightness</span>
 xbacklight -dec 10
 </pre>
 </div>
@@ -126,11 +126,11 @@ acpilight 是用 Python 写的脚本工具，由于我对于系统工具的洁�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #a89984;"># </span><span style="color: #a89984;">Install light</span>
+<pre class="src src-sh"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Install light</span>
 sudo pacman -S light
-<span style="color: #a89984;"># </span><span style="color: #a89984;">Increase brightness</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Increase brightness</span>
 light -A 10
-<span style="color: #a89984;"># </span><span style="color: #a89984;">Decrease brightness</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Decrease brightness</span>
 light -U 10
 </pre>
 </div>
@@ -165,7 +165,7 @@ after a timeout.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #a89984;"># </span><span style="color: #a89984;">Remember to enable Clightd systemd unit!</span>
+<pre class="src src-sh"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">Remember to enable Clightd systemd unit!</span>
 sudo systemctl enable clightd.service
 </pre>
 </div>
@@ -185,10 +185,10 @@ sudo systemctl enable clightd.service
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #a89984;">## </span><span style="color: #a89984;">Gamma temperature during day and night</span>
-<span style="color: #a89984;"># </span><span style="color: #a89984;">gamma_temp = [ 6500, 6500 ];</span>
+<pre class="src src-sh"><span style="color: #b2b2b2; font-style: italic;">## </span><span style="color: #b2b2b2; font-style: italic;">Gamma temperature during day and night</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">gamma_temp = [ 6500, 6500 ];</span>
 ...
-<span style="color: #a89984;">## </span><span style="color: #a89984;">Uncomment to disable gamma support</span>
+<span style="color: #b2b2b2; font-style: italic;">## </span><span style="color: #b2b2b2; font-style: italic;">Uncomment to disable gamma support</span>
 no_gamma = true;
 </pre>
 </div>
@@ -203,8 +203,8 @@ no_gamma = true;
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2019-11-09 Sat 01:50></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
-      <div id="built">Built: <2022-10-23 Sun 09:02></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.1 (<a href="https://orgmode.org">Org</a> mode 9.6.6)</div>
+      <div id="built">Built: <2024-01-27 Sat 21:20></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

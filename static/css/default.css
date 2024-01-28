@@ -1,3 +1,4 @@
+
 /******************************************************
  * I copied these styles from markdotto.com, who is
  * the creator of bootstrap, and I also did some
@@ -407,21 +408,17 @@ pre:hover {
 }
 
 .code-type-flag {
+  display: block;
   color: #666;
-  position: absolute;
+  background: #b7c7ff;
+  position: relative;
   top: 0;
   right: 0;
-  margin: 8px 13px 0;
+  text-align: center;
+  margin: 0px 0px 5px 0px;
   padding: 0px 5px 0px 5px;
   border: 2px solid #b7c7ff;
   border-radius: 5px;
-  animation-name: fade-in;
-  animation-duration: 0.6s;
-  /* z-index: -1; */
-}
-
-pre:hover .code-type-flag {
-  display: none;
 }
 
 blockquote {

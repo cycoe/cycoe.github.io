@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-10-23 Sun 09:02 -->
+<!-- 2024-01-27 Sat 21:20 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gnuplot 绘图第一弹-二维数据绘图</title>
@@ -56,9 +56,9 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org8e3fc8d">1. 调色板</a></li>
-<li><a href="#org10cb7b1">2. Hello World</a></li>
-<li><a href="#org79de1d7">3. 绘制曲线的同时指定坐标范围</a></li>
+<li><a href="#org8db08b5">1. 调色板</a></li>
+<li><a href="#orgb6c3ef8">2. Hello World</a></li>
+<li><a href="#orgaf4906c">3. 绘制曲线的同时指定坐标范围</a></li>
 </ul>
 </div>
 </nav>
@@ -76,8 +76,8 @@ like Octave. Gnuplot has been supported and under active development since 1986.
 
 <!-- more -->
 
-<div id="outline-container-org8e3fc8d" class="outline-2">
-<h2 id="org8e3fc8d"><span class="section-number-2">1.</span> 调色板</h2>
+<div id="outline-container-org8db08b5" class="outline-2">
+<h2 id="org8db08b5"><span class="section-number-2">1.</span> 调色板</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 在 Gnuplot 的交互式命令行中使用 <code>test</code> 命令可以调出调色板，查看 Gnuplot 支持的样式
@@ -89,7 +89,7 @@ like Octave. Gnuplot has been supported and under active development since 1986.
 </div>
 
 
-<figure id="org82dc72e">
+<figure id="orgbcaf545">
 <img src="./Gnuplot-绘图第一弹-二维数据绘图/test.png" alt="test.png">
 
 </figure>
@@ -110,15 +110,15 @@ test
 </div>
 
 
-<figure id="org8927890">
+<figure id="org60ded38">
 <img src="./Gnuplot-绘图第一弹-二维数据绘图/test-pngcairo.png" alt="test-pngcairo.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-org10cb7b1" class="outline-2">
-<h2 id="org10cb7b1"><span class="section-number-2">2.</span> Hello World</h2>
+<div id="outline-container-orgb6c3ef8" class="outline-2">
+<h2 id="orgb6c3ef8"><span class="section-number-2">2.</span> Hello World</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 <pre class="src src-gnuplot">reset
@@ -127,15 +127,15 @@ plot besj0(x)
 </div>
 
 
-<figure id="org7f8bf06">
+<figure id="orgfb6d9d8">
 <img src="Gnuplot-绘图第一弹-二维数据绘图/c1-simple.png" alt="c1-simple.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-org79de1d7" class="outline-2">
-<h2 id="org79de1d7"><span class="section-number-2">3.</span> 绘制曲线的同时指定坐标范围</h2>
+<div id="outline-container-orgaf4906c" class="outline-2">
+<h2 id="orgaf4906c"><span class="section-number-2">3.</span> 绘制曲线的同时指定坐标范围</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-gnuplot">plot [][-3:1.5] (sin(1/x) - cos(x))*erfc(x)
@@ -143,7 +143,7 @@ plot besj0(x)
 </div>
 
 
-<figure id="orgd9bbd86">
+<figure id="orgb533633">
 <img src="Gnuplot-绘图第一弹-二维数据绘图/c1-xrange.png" alt="c1-xrange.png">
 
 </figure>
@@ -167,7 +167,7 @@ unset table
 </div>
 
 
-<figure id="orged10e25">
+<figure id="orgf1dbeed">
 <img src="Gnuplot-绘图第一弹-二维数据绘图/c1-multipe-lines.png" alt="c1-multipe-lines.png">
 
 </figure>
@@ -181,7 +181,7 @@ unset table
 </div>
 
 
-<figure id="orgb1460fc">
+<figure id="org94cf9a3">
 <img src="Gnuplot-绘图第一弹-二维数据绘图/c1-use-file-data.png" alt="c1-use-file-data.png">
 
 </figure>
@@ -197,7 +197,7 @@ plot sin(1/x) axis x1y1,100*cos(x) axis x1y2
 </div>
 
 
-<figure id="orgfc28474">
+<figure id="org8422cc6">
 <img src="Gnuplot-绘图第一弹-二维数据绘图/c1-double-y.png" alt="c1-double-y.png">
 
 </figure>
@@ -215,7 +215,7 @@ plot sin(1/x) axis x1y1, 100*cos(x-1) axis x2y2
 </div>
 
 
-<figure id="orgf6e4fd8">
+<figure id="org6e77cc0">
 <img src="Gnuplot-绘图第一弹-二维数据绘图/c1-set-sample.png" alt="c1-set-sample.png">
 
 </figure>
@@ -230,7 +230,7 @@ plot 'f1.dat' with points pt 7
 </div>
 
 
-<figure id="orga8a595c">
+<figure id="org0217606">
 <img src="Gnuplot-绘图第一弹-二维数据绘图/c1-scatter.png" alt="c1-scatter.png">
 
 </figure>
@@ -252,7 +252,7 @@ plot [-6:6]  besj0(x) with boxes, sin(x) with boxes, cos(x) with boxes
 </div>
 
 
-<figure id="orgd679837">
+<figure id="org0068390">
 <img src="Gnuplot-绘图第一弹-二维数据绘图/c1-boxes.png" alt="c1-boxes.png">
 
 </figure>
@@ -267,7 +267,7 @@ plot '+' using 1:(sin($1)):(cos($1)+1) with circles
 </div>
 
 
-<figure id="org04c69b6">
+<figure id="org50f4b57">
 <img src="Gnuplot-绘图第一弹-二维数据绘图/c1-plot-circles.png" alt="c1-plot-circles.png">
 
 </figure>
@@ -283,7 +283,7 @@ plot [0:20] besy0(x) with filledcurves above y1=0
 </div>
 
 
-<figure id="org5c55dd4">
+<figure id="org5fa7d36">
 <img src="Gnuplot-绘图第一弹-二维数据绘图/c1-fill-curves.png" alt="c1-fill-curves.png">
 
 </figure>
@@ -300,7 +300,7 @@ plot [0:1] '+' using 1:(-$1):(-$1**2) with filledcurves, -x lw 3 notitle, -x**2 
 </div>
 
 
-<figure id="org465cb6d">
+<figure id="orge12f0dc">
 <img src="Gnuplot-绘图第一弹-二维数据绘图/c1-fill-between-lines.png" alt="c1-fill-between-lines.png">
 
 </figure>
@@ -315,7 +315,7 @@ plot [-10:10] sin(x) with histeps
 </div>
 
 
-<figure id="org2757e04">
+<figure id="org2bae0f4">
 <img src="Gnuplot-绘图第一弹-二维数据绘图/c1-histeps.png" alt="c1-histeps.png">
 
 </figure>
@@ -332,7 +332,7 @@ plot [0:20] '+' using (cos($1)), '' using (sin($1))
 </div>
 
 
-<figure id="org3f56e61">
+<figure id="org7065163">
 <img src="Gnuplot-绘图第一弹-二维数据绘图/c1-histograms.png" alt="c1-histograms.png">
 
 </figure>
@@ -351,7 +351,7 @@ plot [0:20] '+' using (cos($1)), '' using (sin($1))
 </div>
 
 
-<figure id="org40a2e2a">
+<figure id="org25936f3">
 <img src="Gnuplot-绘图第一弹-二维数据绘图/c1-histograms-rowstacked.png" alt="c1-histograms-rowstacked.png">
 
 </figure>
@@ -371,7 +371,7 @@ plot [0:10] '+' using 1:(sin($1)):(0.5*cos($1)) with errorbars,\
 </div>
 
 
-<figure id="org9da5abd">
+<figure id="orga16cb09">
 <img src="Gnuplot-绘图第一弹-二维数据绘图/c1-error-bars.png" alt="c1-error-bars.png">
 
 </figure>
@@ -386,7 +386,7 @@ plot [0:10] '+' using 1:(sin($1)):(0.5*cos($1)) with boxerrorbars
 </div>
 
 
-<figure id="org37393af">
+<figure id="orgb386992">
 <img src="Gnuplot-绘图第一弹-二维数据绘图/c1-boxerrorbars.png" alt="c1-boxerrorbars.png">
 
 </figure>
@@ -401,7 +401,7 @@ plot [0:2*pi] sin(x) with impulses lw 2
 </div>
 
 
-<figure id="orgce0c8cf">
+<figure id="org9bf30fb">
 <img src="Gnuplot-绘图第一弹-二维数据绘图/c1-impulse.png" alt="c1-impulse.png">
 
 </figure>
@@ -417,7 +417,7 @@ plot sin(7*t), cos(11*t) notitle
 </div>
 
 
-<figure id="orge62a915">
+<figure id="orgc307b11">
 <img src="Gnuplot-绘图第一弹-二维数据绘图/c1-parametric-curves.png" alt="c1-parametric-curves.png">
 
 </figure>
@@ -439,7 +439,7 @@ plot [0:12*pi] t
 </div>
 
 
-<figure id="orge374f7f">
+<figure id="orgf84ca27">
 <img src="Gnuplot-绘图第一弹-二维数据绘图/c1-polar-axis.png" alt="c1-polar-axis.png">
 
 </figure>
@@ -450,8 +450,8 @@ plot [0:12*pi] t
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-05-05 Tue 13:19></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
-      <div id="built">Built: <2022-10-23 Sun 09:02></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.1 (<a href="https://orgmode.org">Org</a> mode 9.6.6)</div>
+      <div id="built">Built: <2024-01-27 Sat 21:20></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

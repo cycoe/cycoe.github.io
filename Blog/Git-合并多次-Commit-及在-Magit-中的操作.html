@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-10-23 Sun 09:02 -->
+<!-- 2024-01-27 Sat 21:20 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Git 合并多次 Commit 及在 Magit 中的操作</title>
@@ -56,9 +56,9 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org45edf42">1. 查看 Git 记录</a></li>
-<li><a href="#org7f2e510">2. 合并记录</a></li>
-<li><a href="#orgb8774e8">3. 使用 Magit 合并记录</a></li>
+<li><a href="#org77b9d71">1. 查看 Git 记录</a></li>
+<li><a href="#orgd70c216">2. 合并记录</a></li>
+<li><a href="#org41ac2d1">3. 使用 Magit 合并记录</a></li>
 </ul>
 </div>
 </nav>
@@ -71,8 +71,8 @@
 
 <!-- more -->
 
-<div id="outline-container-org45edf42" class="outline-2">
-<h2 id="org45edf42"><span class="section-number-2">1.</span> 查看 Git 记录</h2>
+<div id="outline-container-org77b9d71" class="outline-2">
+<h2 id="org77b9d71"><span class="section-number-2">1.</span> 查看 Git 记录</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 使用 <code>git log</code> 可以查看最近的提交记录，可以看到我最近提交了三个具有同样信息的
@@ -80,14 +80,14 @@ Commit。
 </p>
 
 
-<figure id="org60a4f7d">
+<figure id="org02556ba">
 <img src="./Git-合并多次-Commit-及在-Magit-中的操作/Screenshot_20200420_212329_vcag6x.png" alt="Screenshot_20200420_212329_vcag6x.png">
 
 </figure>
 </div>
 </div>
-<div id="outline-container-org7f2e510" class="outline-2">
-<h2 id="org7f2e510"><span class="section-number-2">2.</span> 合并记录</h2>
+<div id="outline-container-orgd70c216" class="outline-2">
+<h2 id="orgd70c216"><span class="section-number-2">2.</span> 合并记录</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 执行 <code>git rebase -i HEAD~3</code> 对最近的三个 Commit 进行合并，其实此处的真实含义是以当
@@ -96,7 +96,7 @@ Commit。
 </p>
 
 
-<figure id="org182e850">
+<figure id="org8c9fdfd">
 <img src="./Git-合并多次-Commit-及在-Magit-中的操作/Screenshot_20200420_212420_e22p6F.png" alt="Screenshot_20200420_212420_e22p6F.png">
 
 </figure>
@@ -107,7 +107,7 @@ Commit。
 </p>
 
 
-<figure id="org917e0b4">
+<figure id="org049304a">
 <img src="./Git-合并多次-Commit-及在-Magit-中的操作/Screenshot_20200420_212920_pS9Kzy.png" alt="Screenshot_20200420_212920_pS9Kzy.png">
 
 </figure>
@@ -118,15 +118,15 @@ rebase --continue</code> 重新回到当前的过程。
 </p>
 
 
-<figure id="orgcf18e6a">
+<figure id="org1768ee9">
 <img src="./Git-合并多次-Commit-及在-Magit-中的操作/Screenshot_20200420_213131_bxEGbB.png" alt="Screenshot_20200420_213131_bxEGbB.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-orgb8774e8" class="outline-2">
-<h2 id="orgb8774e8"><span class="section-number-2">3.</span> 使用 Magit 合并记录</h2>
+<div id="outline-container-org41ac2d1" class="outline-2">
+<h2 id="org41ac2d1"><span class="section-number-2">3.</span> 使用 Magit 合并记录</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 使用 Magit 进行记录合并与 Git 命令行是相似的。将光标放在要作为基的 Commit 上，并
@@ -134,7 +134,7 @@ rebase --continue</code> 重新回到当前的过程。
 </p>
 
 
-<figure id="org42852e7">
+<figure id="org0ec745a">
 <img src="./Git-合并多次-Commit-及在-Magit-中的操作/Screenshot_20200420_213548_6oXCeJ.png" alt="Screenshot_20200420_213548_6oXCeJ.png">
 
 </figure>
@@ -144,7 +144,7 @@ rebase --continue</code> 重新回到当前的过程。
 </p>
 
 
-<figure id="orgdb0bdf8">
+<figure id="org3666e01">
 <img src="./Git-合并多次-Commit-及在-Magit-中的操作/Screenshot_20200420_213644_fC9olF.png" alt="Screenshot_20200420_213644_fC9olF.png">
 
 </figure>
@@ -160,8 +160,8 @@ rebase --continue</code> 重新回到当前的过程。
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-04-20 Mon 20:56></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
-      <div id="built">Built: <2022-10-23 Sun 09:02></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.1 (<a href="https://orgmode.org">Org</a> mode 9.6.6)</div>
+      <div id="built">Built: <2024-01-27 Sat 21:20></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

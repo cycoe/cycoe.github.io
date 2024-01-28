@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-10-23 Sun 09:02 -->
+<!-- 2024-01-27 Sat 21:20 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>与 C++ 的第三类接触-字符串、向量和数组</title>
@@ -56,47 +56,47 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgdbcd36b">1. 字符串、向量和数组</a>
+<li><a href="#orgd9b12b3">1. 字符串、向量和数组</a>
 <ul>
-<li><a href="#org1edcb9c">1.1. 标准库 <code>string</code></a>
+<li><a href="#org2d251a7">1.1. 标准库 <code>string</code></a>
 <ul>
-<li><a href="#org5753c29">1.1.1. 定义和初始化</a></li>
-<li><a href="#org137a97b">1.1.2. 为 string 对象赋值</a></li>
-<li><a href="#orge82509d">1.1.3. 读写 string 对象</a></li>
-<li><a href="#orgbe4f43b">1.1.4. 使用 <code>getline</code> 读取一整行</a></li>
-<li><a href="#orga24c128">1.1.5. <code>empty</code> 和 <code>size</code></a></li>
-<li><a href="#orgf96d5d5">1.1.6. 比较 string 对象</a></li>
-<li><a href="#orgcc88e06">1.1.7. string 对象相加</a></li>
-<li><a href="#org9788fb7">1.1.8. 字面值与 string 对象相加</a></li>
-<li><a href="#org2006aae">1.1.9. 处理 string 对象中的字符</a></li>
-<li><a href="#orgd303dfa">1.1.10. 使用字符串数组初始化 string 对象</a></li>
-<li><a href="#orgbba427d">1.1.11. 从 string 对象中获取 C 风格的字符串数组指针</a></li>
+<li><a href="#orgc98f1cc">1.1.1. 定义和初始化</a></li>
+<li><a href="#orgbdc7bb7">1.1.2. 为 string 对象赋值</a></li>
+<li><a href="#orgc5a4420">1.1.3. 读写 string 对象</a></li>
+<li><a href="#orgdaddf78">1.1.4. 使用 <code>getline</code> 读取一整行</a></li>
+<li><a href="#org1bf9108">1.1.5. <code>empty</code> 和 <code>size</code></a></li>
+<li><a href="#orga2e8674">1.1.6. 比较 string 对象</a></li>
+<li><a href="#org32e02fd">1.1.7. string 对象相加</a></li>
+<li><a href="#orgdd6d0b1">1.1.8. 字面值与 string 对象相加</a></li>
+<li><a href="#orgdc8e066">1.1.9. 处理 string 对象中的字符</a></li>
+<li><a href="#org08696aa">1.1.10. 使用字符串数组初始化 string 对象</a></li>
+<li><a href="#org0c10aa4">1.1.11. 从 string 对象中获取 C 风格的字符串数组指针</a></li>
 </ul>
 </li>
-<li><a href="#org84adb76">1.2. 标准库类型 <code>vector</code></a>
+<li><a href="#org4a399df">1.2. 标准库类型 <code>vector</code></a>
 <ul>
-<li><a href="#orgbe9660a">1.2.1. 定义和初始化</a></li>
-<li><a href="#org5efb980">1.2.2. 向 vector 对象中添加元素</a></li>
-<li><a href="#orgd86de1c">1.2.3. 其它 vector 操作</a></li>
-<li><a href="#org74df55f">1.2.4. 用数组初始化 vector 对象</a></li>
+<li><a href="#orgcefa01c">1.2.1. 定义和初始化</a></li>
+<li><a href="#org6efebde">1.2.2. 向 vector 对象中添加元素</a></li>
+<li><a href="#org9f40407">1.2.3. 其它 vector 操作</a></li>
+<li><a href="#org78560a1">1.2.4. 用数组初始化 vector 对象</a></li>
 </ul>
 </li>
-<li><a href="#org8becb86">1.3. 迭代器</a>
+<li><a href="#org05a1515">1.3. 迭代器</a>
 <ul>
-<li><a href="#orgbd75f63">1.3.1. 迭代器运算</a></li>
-<li><a href="#org3504f87">1.3.2. <code>begin</code> 和 <code>end</code> 运算符</a></li>
-<li><a href="#org0cda1c3">1.3.3. 迭代器算数运算</a></li>
+<li><a href="#org61475e1">1.3.1. 迭代器运算</a></li>
+<li><a href="#org9579036">1.3.2. <code>begin</code> 和 <code>end</code> 运算符</a></li>
+<li><a href="#org412fc67">1.3.3. 迭代器算数运算</a></li>
 </ul>
 </li>
-<li><a href="#orgd916945">1.4. 数组</a>
+<li><a href="#orgf2d1c6d">1.4. 数组</a>
 <ul>
-<li><a href="#org34ad2bb">1.4.1. 范围 for 语句</a></li>
-<li><a href="#orgbc4862f">1.4.2. 数组中的自动类型推断</a></li>
-<li><a href="#org5d0d371">1.4.3. 标准库函数 <code>begin</code> 和 <code>end</code></a></li>
-<li><a href="#org61c1fe5">1.4.4. 指针的差值</a></li>
-<li><a href="#orge42b8c3">1.4.5. 多维数组与下标</a></li>
-<li><a href="#orgd2d2e73">1.4.6. 多维数组与指针</a></li>
-<li><a href="#orga3f1d45">1.4.7. 类型别名简化多维数组指针</a></li>
+<li><a href="#orgb4f3e01">1.4.1. 范围 for 语句</a></li>
+<li><a href="#orge2d9232">1.4.2. 数组中的自动类型推断</a></li>
+<li><a href="#org60a6b44">1.4.3. 标准库函数 <code>begin</code> 和 <code>end</code></a></li>
+<li><a href="#orgb581fc6">1.4.4. 指针的差值</a></li>
+<li><a href="#org3bce0dc">1.4.5. 多维数组与下标</a></li>
+<li><a href="#org6d0ff11">1.4.6. 多维数组与指针</a></li>
+<li><a href="#org2c7924e">1.4.7. 类型别名简化多维数组指针</a></li>
 </ul>
 </li>
 </ul>
@@ -105,33 +105,33 @@
 </div>
 </nav>
 
-<div id="outline-container-orgdbcd36b" class="outline-2">
-<h2 id="orgdbcd36b"><span class="section-number-2">1.</span> 字符串、向量和数组</h2>
+<div id="outline-container-orgd9b12b3" class="outline-2">
+<h2 id="orgd9b12b3"><span class="section-number-2">1.</span> 字符串、向量和数组</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org1edcb9c" class="outline-3">
-<h3 id="org1edcb9c"><span class="section-number-3">1.1.</span> 标准库 <code>string</code></h3>
+<div id="outline-container-org2d251a7" class="outline-3">
+<h3 id="org2d251a7"><span class="section-number-3">1.1.</span> 标准库 <code>string</code></h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 引入头文件与声明命名空间
 </p>
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;string&gt;</span>
-<span style="color: #9d0006;">using</span> <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">string</span>;
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #ff1f8b;">&lt;string&gt;</span>
+<span style="color: #00af00;">using</span> <span style="color: #1f5bff;">std</span>::<span style="color: #1f5bff;">string</span>;
 </pre>
 </div>
 </div>
-<div id="outline-container-org5753c29" class="outline-4">
-<h4 id="org5753c29"><span class="section-number-4">1.1.1.</span> 定义和初始化</h4>
+<div id="outline-container-orgc98f1cc" class="outline-4">
+<h4 id="orgc98f1cc"><span class="section-number-4">1.1.1.</span> 定义和初始化</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #9d0006;">using</span> <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">string</span>;
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #1f5bff;">std</span>::<span style="color: #1f5bff;">string</span>;
 
-<span style="color: #8f3f71;">string</span> <span style="color: #076678;">s1</span>;            <span style="color: #a89984;">// </span><span style="color: #a89984;">&#40664;&#35748;&#21021;&#22987;&#21270;&#65292;s1 &#26159;&#19968;&#20010;&#31354;&#23383;&#31526;&#20018;</span>
-<span style="color: #8f3f71;">string</span> <span style="color: #076678;">s2</span> = s1;       <span style="color: #a89984;">// </span><span style="color: #a89984;">s2 &#26159; s1 &#30340;&#21103;&#26412;</span>
-<span style="color: #8f3f71;">string</span> <span style="color: #076678;">s3</span> = <span style="color: #79740e;">"hello"</span>;  <span style="color: #a89984;">// </span><span style="color: #a89984;">s3 &#26159;&#23383;&#31526;&#20018;&#23383;&#38754;&#20540;&#30340;&#21103;&#26412;</span>
-<span style="color: #8f3f71;">string</span> <span style="color: #076678;">s4</span>(<span style="color: #79740e;">"hello"</span>);   <span style="color: #a89984;">// </span><span style="color: #a89984;">s4 &#30340;&#20869;&#23481;&#20026; "hello"</span>
-<span style="color: #8f3f71;">string</span> <span style="color: #076678;">s5</span>(10, <span style="color: #79740e;">'c'</span>);   <span style="color: #a89984;">// </span><span style="color: #a89984;">s5 &#30340;&#20869;&#23481;&#20026; "cccccccccc"</span>
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s1</span>;            <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#40664;&#35748;&#21021;&#22987;&#21270;&#65292;s1 &#26159;&#19968;&#20010;&#31354;&#23383;&#31526;&#20018;</span>
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s2</span> = s1;       <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">s2 &#26159; s1 &#30340;&#21103;&#26412;</span>
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s3</span> = <span style="color: #ff1f8b;">"hello"</span>;  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">s3 &#26159;&#23383;&#31526;&#20018;&#23383;&#38754;&#20540;&#30340;&#21103;&#26412;</span>
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s4</span>(<span style="color: #ff1f8b;">"hello"</span>);   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">s4 &#30340;&#20869;&#23481;&#20026; "hello"</span>
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s5</span>(10, <span style="color: #ff1f8b;">'c'</span>);   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">s5 &#30340;&#20869;&#23481;&#20026; "cccccccccc"</span>
 </pre>
 </div>
 
@@ -140,18 +140,18 @@ s2, s3 的初始化方法为拷贝初始化，s4, s5 的初始化方法为直接
 </p>
 </div>
 </div>
-<div id="outline-container-org137a97b" class="outline-4">
-<h4 id="org137a97b"><span class="section-number-4">1.1.2.</span> 为 string 对象赋值</h4>
+<div id="outline-container-orgbdc7bb7" class="outline-4">
+<h4 id="orgbdc7bb7"><span class="section-number-4">1.1.2.</span> 为 string 对象赋值</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #9d0006;">using</span> <span style="color: #9d0006;">namespace</span> <span style="color: #8f3f71;">std</span>;
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
 
-<span style="color: #8f3f71;">string</span> <span style="color: #076678;">s1</span>, <span style="color: #076678;">s2</span>(10, <span style="color: #79740e;">'c'</span>);
-s1 = s2;       <span style="color: #a89984;">// </span><span style="color: #a89984;">&#29992; s2 &#30340;&#20540;&#36171;&#20540; s1&#65292;&#30456;&#24403;&#20110;&#25335;&#36125;&#20102; string &#23545;&#35937;</span>
-s2 = <span style="color: #79740e;">"Hello"</span>;  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#29992;&#23383;&#38754;&#20540;&#24120;&#37327;&#36171;&#20540; s2</span>
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s1</span>, <span style="color: #ff8700;">s2</span>(10, <span style="color: #ff1f8b;">'c'</span>);
+s1 = s2;       <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#29992; s2 &#30340;&#20540;&#36171;&#20540; s1&#65292;&#30456;&#24403;&#20110;&#25335;&#36125;&#20102; string &#23545;&#35937;</span>
+s2 = <span style="color: #ff1f8b;">"Hello"</span>;  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#29992;&#23383;&#38754;&#20540;&#24120;&#37327;&#36171;&#20540; s2</span>
 
-cout &lt;&lt; <span style="color: #79740e;">"s1 is: "</span> &lt;&lt; s1 &lt;&lt; endl;
-cout &lt;&lt; <span style="color: #79740e;">"s2 is: "</span> &lt;&lt; s2 &lt;&lt; endl;
+cout &lt;&lt; <span style="color: #ff1f8b;">"s1 is: "</span> &lt;&lt; s1 &lt;&lt; endl;
+cout &lt;&lt; <span style="color: #ff1f8b;">"s2 is: "</span> &lt;&lt; s2 &lt;&lt; endl;
 </pre>
 </div>
 
@@ -162,15 +162,15 @@ s2 is: Hello
 </div>
 </div>
 
-<div id="outline-container-orge82509d" class="outline-4">
-<h4 id="orge82509d"><span class="section-number-4">1.1.3.</span> 读写 string 对象</h4>
+<div id="outline-container-orgc5a4420" class="outline-4">
+<h4 id="orgc5a4420"><span class="section-number-4">1.1.3.</span> 读写 string 对象</h4>
 <div class="outline-text-4" id="text-1-1-3">
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #9d0006;">using</span> <span style="color: #9d0006;">namespace</span> <span style="color: #8f3f71;">std</span>;
-<span style="color: #8f3f71;">string</span> <span style="color: #076678;">s</span>;            <span style="color: #a89984;">// </span><span style="color: #a89984;">&#22768;&#26126;&#19968;&#20010;&#31354;&#23383;&#31526;&#20018;</span>
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s</span>;            <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#22768;&#26126;&#19968;&#20010;&#31354;&#23383;&#31526;&#20018;</span>
 
 cin &gt;&gt; s;
-s = <span style="color: #79740e;">"Hello"</span>;
+s = <span style="color: #ff1f8b;">"Hello"</span>;
 cout &lt;&lt; s &lt;&lt; endl;
 </pre>
 </div>
@@ -181,25 +181,25 @@ Hello
 </div>
 </div>
 
-<div id="outline-container-orgbe4f43b" class="outline-4">
-<h4 id="orgbe4f43b"><span class="section-number-4">1.1.4.</span> 使用 <code>getline</code> 读取一整行</h4>
+<div id="outline-container-orgdaddf78" class="outline-4">
+<h4 id="orgdaddf78"><span class="section-number-4">1.1.4.</span> 使用 <code>getline</code> 读取一整行</h4>
 <div class="outline-text-4" id="text-1-1-4">
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #9d0006;">using</span> <span style="color: #9d0006;">namespace</span> <span style="color: #8f3f71;">std</span>;
-<span style="color: #8f3f71;">string</span> <span style="color: #076678;">line</span>;
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">line</span>;
 
-<span style="color: #a89984;">// </span><span style="color: #a89984;">getline &#27599;&#27425;&#35835;&#21462;&#21040;&#25442;&#34892;&#31526;&#65288;&#21253;&#25324;&#25442;&#34892;&#31526;&#65289;&#65292;&#23384;&#20837; string &#23545;&#35937;&#20013;&#65288;&#19981;&#21253;&#25324;&#25442;&#34892;&#31526;&#65289;</span>
-<span style="color: #9d0006;">while</span> (getline(cin, line))
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">getline &#27599;&#27425;&#35835;&#21462;&#21040;&#25442;&#34892;&#31526;&#65288;&#21253;&#25324;&#25442;&#34892;&#31526;&#65289;&#65292;&#23384;&#20837; string &#23545;&#35937;&#20013;&#65288;&#19981;&#21253;&#25324;&#25442;&#34892;&#31526;&#65289;</span>
+<span style="color: #00af00;">while</span> (getline(cin, line))
   cout &lt;&lt; line &lt;&lt; endl;
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orga24c128" class="outline-4">
-<h4 id="orga24c128"><span class="section-number-4">1.1.5.</span> <code>empty</code> 和 <code>size</code></h4>
+<div id="outline-container-org1bf9108" class="outline-4">
+<h4 id="org1bf9108"><span class="section-number-4">1.1.5.</span> <code>empty</code> 和 <code>size</code></h4>
 <div class="outline-text-4" id="text-1-1-5">
-<table id="org2e79ced">
+<table id="org25027e8">
 <caption class="t-above"><span class="table-number">Table 1:</span> 多行文本</caption>
 
 <colgroup>
@@ -229,17 +229,17 @@ Hello
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #9d0006;">using</span> <span style="color: #9d0006;">namespace</span> <span style="color: #8f3f71;">std</span>;
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
 
-<span style="color: #8f3f71;">string</span> <span style="color: #076678;">s</span>;
-<span style="color: #8f3f71;">int</span> <span style="color: #076678;">row</span>;
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s</span>;
+<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">row</span>;
 
-<span style="color: #9d0006;">for</span> (row = 0; row &lt; lines_rows; row++) {
+<span style="color: #00af00;">for</span> (row = 0; row &lt; lines_rows; row++) {
   s = lines[row][0];
-  <span style="color: #9d0006;">if</span> (s.empty()) {
-    cout &lt;&lt; <span style="color: #79740e;">"Line "</span> &lt;&lt; row + 1 &lt;&lt; <span style="color: #79740e;">" is empty"</span> &lt;&lt; endl;
-  } <span style="color: #9d0006;">else</span> {
-    cout &lt;&lt; <span style="color: #79740e;">"Line "</span> &lt;&lt; row + 1 &lt;&lt; <span style="color: #79740e;">"'s length is "</span> &lt;&lt; s.size() &lt;&lt; endl;
+  <span style="color: #00af00;">if</span> (s.empty()) {
+    cout &lt;&lt; <span style="color: #ff1f8b;">"Line "</span> &lt;&lt; row + 1 &lt;&lt; <span style="color: #ff1f8b;">" is empty"</span> &lt;&lt; endl;
+  } <span style="color: #00af00;">else</span> {
+    cout &lt;&lt; <span style="color: #ff1f8b;">"Line "</span> &lt;&lt; row + 1 &lt;&lt; <span style="color: #ff1f8b;">"'s length is "</span> &lt;&lt; s.size() &lt;&lt; endl;
   }
 }
 </pre>
@@ -254,22 +254,22 @@ Line 4's length is 20
 </div>
 </div>
 
-<div id="outline-container-orgf96d5d5" class="outline-4">
-<h4 id="orgf96d5d5"><span class="section-number-4">1.1.6.</span> 比较 string 对象</h4>
+<div id="outline-container-orga2e8674" class="outline-4">
+<h4 id="orga2e8674"><span class="section-number-4">1.1.6.</span> 比较 string 对象</h4>
 <div class="outline-text-4" id="text-1-1-6">
 <p>
 类似于 C 中的 <code>strcmp</code> 函数，依次比较各字符的字典序
 </p>
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #9d0006;">using</span> <span style="color: #9d0006;">namespace</span> <span style="color: #8f3f71;">std</span>;
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
 
-<span style="color: #8f3f71;">string</span> <span style="color: #076678;">s1</span>(<span style="color: #79740e;">"hello"</span>);
-<span style="color: #8f3f71;">string</span> <span style="color: #076678;">s2</span>(<span style="color: #79740e;">"world"</span>);
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s1</span>(<span style="color: #ff1f8b;">"hello"</span>);
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s2</span>(<span style="color: #ff1f8b;">"world"</span>);
 
-<span style="color: #9d0006;">if</span> (s1 &gt; s2)
-  cout &lt;&lt; <span style="color: #79740e;">"s1 is bigger than s2."</span> &lt;&lt; endl;
-<span style="color: #9d0006;">else</span>
-  cout &lt;&lt; <span style="color: #79740e;">"s2 is bigger than s1."</span> &lt;&lt; endl;
+<span style="color: #00af00;">if</span> (s1 &gt; s2)
+  cout &lt;&lt; <span style="color: #ff1f8b;">"s1 is bigger than s2."</span> &lt;&lt; endl;
+<span style="color: #00af00;">else</span>
+  cout &lt;&lt; <span style="color: #ff1f8b;">"s2 is bigger than s1."</span> &lt;&lt; endl;
 </pre>
 </div>
 
@@ -279,14 +279,14 @@ s2 is bigger than s1.
 </div>
 </div>
 
-<div id="outline-container-orgcc88e06" class="outline-4">
-<h4 id="orgcc88e06"><span class="section-number-4">1.1.7.</span> string 对象相加</h4>
+<div id="outline-container-org32e02fd" class="outline-4">
+<h4 id="org32e02fd"><span class="section-number-4">1.1.7.</span> string 对象相加</h4>
 <div class="outline-text-4" id="text-1-1-7">
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #9d0006;">using</span> <span style="color: #9d0006;">namespace</span> <span style="color: #8f3f71;">std</span>;
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
 
-<span style="color: #8f3f71;">string</span> <span style="color: #076678;">s1</span> = <span style="color: #79740e;">"Hello, "</span>;
-<span style="color: #8f3f71;">string</span> <span style="color: #076678;">s2</span> = <span style="color: #79740e;">"world."</span>;
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s1</span> = <span style="color: #ff1f8b;">"Hello, "</span>;
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s2</span> = <span style="color: #ff1f8b;">"world."</span>;
 cout &lt;&lt; s1 + s2 &lt;&lt; endl;
 s1 += s2;
 cout &lt;&lt; s1 &lt;&lt; endl;
@@ -300,15 +300,15 @@ Hello, world.
 </div>
 </div>
 
-<div id="outline-container-org9788fb7" class="outline-4">
-<h4 id="org9788fb7"><span class="section-number-4">1.1.8.</span> 字面值与 string 对象相加</h4>
+<div id="outline-container-orgdd6d0b1" class="outline-4">
+<h4 id="orgdd6d0b1"><span class="section-number-4">1.1.8.</span> 字面值与 string 对象相加</h4>
 <div class="outline-text-4" id="text-1-1-8">
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #9d0006;">using</span> <span style="color: #9d0006;">namespace</span> <span style="color: #8f3f71;">std</span>;
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
 
-<span style="color: #8f3f71;">string</span> <span style="color: #076678;">s1</span> = <span style="color: #79740e;">"hello"</span>, <span style="color: #076678;">s2</span> = <span style="color: #79740e;">"world"</span>;
-<span style="color: #a89984;">// </span><span style="color: #a89984;">&#38656;&#35201;&#20445;&#35777;&#27599;&#27425;&#21152;&#27861;&#36816;&#31639;&#26102;&#33267;&#23569;&#26377;&#19968;&#20010;&#26159; string &#23545;&#35937;</span>
-<span style="color: #8f3f71;">string</span> <span style="color: #076678;">s3</span> = s1 + <span style="color: #79740e;">", "</span> + s2 + <span style="color: #79740e;">'!'</span>;
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s1</span> = <span style="color: #ff1f8b;">"hello"</span>, <span style="color: #ff8700;">s2</span> = <span style="color: #ff1f8b;">"world"</span>;
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#38656;&#35201;&#20445;&#35777;&#27599;&#27425;&#21152;&#27861;&#36816;&#31639;&#26102;&#33267;&#23569;&#26377;&#19968;&#20010;&#26159; string &#23545;&#35937;</span>
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s3</span> = s1 + <span style="color: #ff1f8b;">", "</span> + s2 + <span style="color: #ff1f8b;">'!'</span>;
 cout &lt;&lt; s3 &lt;&lt; endl;
 </pre>
 </div>
@@ -319,19 +319,19 @@ hello, world!
 </div>
 </div>
 
-<div id="outline-container-org2006aae" class="outline-4">
-<h4 id="org2006aae"><span class="section-number-4">1.1.9.</span> 处理 string 对象中的字符</h4>
+<div id="outline-container-orgdc8e066" class="outline-4">
+<h4 id="orgdc8e066"><span class="section-number-4">1.1.9.</span> 处理 string 对象中的字符</h4>
 <div class="outline-text-4" id="text-1-1-9">
 <p>
 用基于范围的 for 语句遍历 string 对象中的字符
 </p>
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #9d0006;">using</span> <span style="color: #9d0006;">namespace</span> <span style="color: #8f3f71;">std</span>;
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
 
-<span style="color: #8f3f71;">string</span> <span style="color: #076678;">str</span>(<span style="color: #79740e;">"some string"</span>);
-<span style="color: #a89984;">// </span><span style="color: #a89984;">&#22522;&#20110;&#33539;&#22260;&#30340; for &#35821;&#21477;</span>
-<span style="color: #9d0006;">for</span> (<span style="color: #9d0006;">auto</span> <span style="color: #076678;">c</span> : str)
-  cout &lt;&lt; c &lt;&lt; <span style="color: #79740e;">" | "</span>;
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">str</span>(<span style="color: #ff1f8b;">"some string"</span>);
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#22522;&#20110;&#33539;&#22260;&#30340; for &#35821;&#21477;</span>
+<span style="color: #00af00;">for</span> (<span style="color: #00af00;">auto</span> <span style="color: #ff8700;">c</span> : str)
+  cout &lt;&lt; c &lt;&lt; <span style="color: #ff1f8b;">" | "</span>;
 </pre>
 </div>
 
@@ -344,15 +344,15 @@ s | o | m | e |   | s | t | r | i | n | g |
 统计 string 对象中的标点符号个数
 </p>
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #9d0006;">using</span> <span style="color: #9d0006;">namespace</span> <span style="color: #8f3f71;">std</span>;
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
 
-<span style="color: #8f3f71;">string</span> <span style="color: #076678;">s</span>(<span style="color: #79740e;">"Hello, world!!!"</span>);
-<span style="color: #9d0006;">decltype</span>(s.size()) <span style="color: #076678;">punct_count</span> = 0;
-<span style="color: #9d0006;">for</span> (<span style="color: #9d0006;">auto</span> <span style="color: #076678;">c</span> : s)
-  <span style="color: #9d0006;">if</span> (ispunct(c))
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s</span>(<span style="color: #ff1f8b;">"Hello, world!!!"</span>);
+<span style="color: #00af00;">decltype</span>(s.size()) <span style="color: #ff8700;">punct_count</span> = 0;
+<span style="color: #00af00;">for</span> (<span style="color: #00af00;">auto</span> <span style="color: #ff8700;">c</span> : s)
+  <span style="color: #00af00;">if</span> (ispunct(c))
     ++punct_count;
 
-cout &lt;&lt; punct_count &lt;&lt; <span style="color: #79740e;">" punctuation characters in "</span> &lt;&lt; s &lt;&lt; endl;
+cout &lt;&lt; punct_count &lt;&lt; <span style="color: #ff1f8b;">" punctuation characters in "</span> &lt;&lt; s &lt;&lt; endl;
 </pre>
 </div>
 
@@ -365,19 +365,19 @@ cout &lt;&lt; punct_count &lt;&lt; <span style="color: #79740e;">" punctuation c
 更改 string 对象中的字符，此时需要使用引用
 </p>
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #9d0006;">using</span> <span style="color: #9d0006;">namespace</span> <span style="color: #8f3f71;">std</span>;
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
 
-<span style="color: #8f3f71;">string</span> <span style="color: #076678;">s1</span>(<span style="color: #79740e;">"Talk is cheap, "</span>);
-<span style="color: #a89984;">// </span><span style="color: #a89984;">&#20351;&#29992;&#33539;&#22260;&#30340; for &#24490;&#29615;</span>
-<span style="color: #9d0006;">for</span> (<span style="color: #9d0006;">auto</span> &amp;<span style="color: #076678;">c</span> : s1)
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s1</span>(<span style="color: #ff1f8b;">"Talk is cheap, "</span>);
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20351;&#29992;&#33539;&#22260;&#30340; for &#24490;&#29615;</span>
+<span style="color: #00af00;">for</span> (<span style="color: #00af00;">auto</span> &amp;<span style="color: #ff8700;">c</span> : s1)
   c = toupper(c);
 
 cout &lt;&lt; s1 &lt;&lt; endl;
 
-<span style="color: #8f3f71;">string</span> <span style="color: #076678;">s2</span>(<span style="color: #79740e;">"show me the code!"</span>);
-<span style="color: #a89984;">// </span><span style="color: #a89984;">&#20351;&#29992;&#20256;&#32479;&#30340; for &#24490;&#29615;</span>
-<span style="color: #9d0006;">for</span> (<span style="color: #9d0006;">decltype</span>(s2.size()) <span style="color: #076678;">i</span> = 0; i &lt; s2.size(); i++)
-  <span style="color: #a89984;">// </span><span style="color: #a89984;">string &#23545;&#35937;&#30340;&#32034;&#24341;&#36820;&#22238;&#25351;&#21521;&#23545;&#24212;&#23383;&#31526;&#30340;&#19968;&#20010;&#24341;&#29992;</span>
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s2</span>(<span style="color: #ff1f8b;">"show me the code!"</span>);
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20351;&#29992;&#20256;&#32479;&#30340; for &#24490;&#29615;</span>
+<span style="color: #00af00;">for</span> (<span style="color: #00af00;">decltype</span>(s2.size()) <span style="color: #ff8700;">i</span> = 0; i &lt; s2.size(); i++)
+  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">string &#23545;&#35937;&#30340;&#32034;&#24341;&#36820;&#22238;&#25351;&#21521;&#23545;&#24212;&#23383;&#31526;&#30340;&#19968;&#20010;&#24341;&#29992;</span>
   s2[i] = toupper(s2[i]);
 
 cout &lt;&lt; s2 &lt;&lt; endl;
@@ -391,14 +391,14 @@ SHOW ME THE CODE!
 </div>
 </div>
 
-<div id="outline-container-orgd303dfa" class="outline-4">
-<h4 id="orgd303dfa"><span class="section-number-4">1.1.10.</span> 使用字符串数组初始化 string 对象</h4>
+<div id="outline-container-org08696aa" class="outline-4">
+<h4 id="org08696aa"><span class="section-number-4">1.1.10.</span> 使用字符串数组初始化 string 对象</h4>
 <div class="outline-text-4" id="text-1-1-10">
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #9d0006;">using</span> <span style="color: #9d0006;">namespace</span> <span style="color: #8f3f71;">std</span>;
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
 
-<span style="color: #8f3f71;">char</span> <span style="color: #076678;">str</span>[] = <span style="color: #79740e;">"Hello, world!"</span>;   <span style="color: #a89984;">// </span><span style="color: #a89984;">&#21021;&#22987;&#21270; C &#39118;&#26684;&#30340;&#23383;&#31526;&#20018;</span>
-<span style="color: #8f3f71;">string</span> <span style="color: #b57614;">s</span>(str);                  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#20351;&#29992;&#23383;&#31526;&#20018;&#25968;&#32452;&#21021;&#22987;&#21270; string &#23545;&#35937;</span>
+<span style="color: #18b2b2;">char</span> <span style="color: #ff8700;">str</span>[] = <span style="color: #ff1f8b;">"Hello, world!"</span>;   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#21021;&#22987;&#21270; C &#39118;&#26684;&#30340;&#23383;&#31526;&#20018;</span>
+<span style="color: #18b2b2;">string</span> <span style="color: #ef2929;">s</span>(str);                  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20351;&#29992;&#23383;&#31526;&#20018;&#25968;&#32452;&#21021;&#22987;&#21270; string &#23545;&#35937;</span>
 cout &lt;&lt; s &lt;&lt; endl;
 </pre>
 </div>
@@ -409,16 +409,16 @@ Hello, world!
 </div>
 </div>
 
-<div id="outline-container-orgbba427d" class="outline-4">
-<h4 id="orgbba427d"><span class="section-number-4">1.1.11.</span> 从 string 对象中获取 C 风格的字符串数组指针</h4>
+<div id="outline-container-org0c10aa4" class="outline-4">
+<h4 id="org0c10aa4"><span class="section-number-4">1.1.11.</span> 从 string 对象中获取 C 风格的字符串数组指针</h4>
 <div class="outline-text-4" id="text-1-1-11">
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #9d0006;">using</span> <span style="color: #9d0006;">namespace</span> <span style="color: #8f3f71;">std</span>;
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
 
-<span style="color: #8f3f71;">string</span> <span style="color: #076678;">s</span>(<span style="color: #79740e;">"Hello, world!"</span>);
-<span style="color: #a89984;">// </span><span style="color: #a89984;">&#33719;&#21462; C &#39118;&#26684;&#30340;&#23383;&#31526;&#20018;&#25968;&#32452;&#25351;&#38024;&#65292;&#24182;&#19988;&#25351;&#21521; string &#20013;&#30340;&#23383;&#31526;&#20018;&#25968;&#32452;</span>
-<span style="color: #a89984;">// </span><span style="color: #a89984;">&#19981;&#24212;&#35813;&#20351;&#29992;&#35813;&#25351;&#38024;&#20462;&#25913;&#25968;&#32452;&#20869;&#23481;&#65292;&#22240;&#27492;&#20351;&#29992; const &#38480;&#23450;&#31526;</span>
-<span style="color: #9d0006;">const</span> <span style="color: #8f3f71;">char</span> *<span style="color: #076678;">str</span> = s.c_str();
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s</span>(<span style="color: #ff1f8b;">"Hello, world!"</span>);
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#33719;&#21462; C &#39118;&#26684;&#30340;&#23383;&#31526;&#20018;&#25968;&#32452;&#25351;&#38024;&#65292;&#24182;&#19988;&#25351;&#21521; string &#20013;&#30340;&#23383;&#31526;&#20018;&#25968;&#32452;</span>
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#19981;&#24212;&#35813;&#20351;&#29992;&#35813;&#25351;&#38024;&#20462;&#25913;&#25968;&#32452;&#20869;&#23481;&#65292;&#22240;&#27492;&#20351;&#29992; const &#38480;&#23450;&#31526;</span>
+<span style="color: #00af00;">const</span> <span style="color: #18b2b2;">char</span> *<span style="color: #ff8700;">str</span> = s.c_str();
 cout &lt;&lt; str &lt;&lt; endl;
 </pre>
 </div>
@@ -430,33 +430,33 @@ Hello, world!
 </div>
 </div>
 
-<div id="outline-container-org84adb76" class="outline-3">
-<h3 id="org84adb76"><span class="section-number-3">1.2.</span> 标准库类型 <code>vector</code></h3>
+<div id="outline-container-org4a399df" class="outline-3">
+<h3 id="org4a399df"><span class="section-number-3">1.2.</span> 标准库类型 <code>vector</code></h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 引入头文件与声明命名空间， <code>vector</code> 是一个类模板
 </p>
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;vector&gt;</span>
-<span style="color: #9d0006;">using</span> <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">vector</span>;
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #ff1f8b;">&lt;vector&gt;</span>
+<span style="color: #00af00;">using</span> <span style="color: #1f5bff;">std</span>::<span style="color: #1f5bff;">vector</span>;
 </pre>
 </div>
 </div>
-<div id="outline-container-orgbe9660a" class="outline-4">
-<h4 id="orgbe9660a"><span class="section-number-4">1.2.1.</span> 定义和初始化</h4>
+<div id="outline-container-orgcefa01c" class="outline-4">
+<h4 id="orgcefa01c"><span class="section-number-4">1.2.1.</span> 定义和初始化</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #af3a03;">#include</span> <span style="color: #79740e;">&lt;vector&gt;</span>
-<span style="color: #9d0006;">using</span> <span style="color: #8f3f71;">std</span>::<span style="color: #8f3f71;">vector</span>;
+<pre class="src src-C++"><span style="color: #b218b2;">#include</span> <span style="color: #ff1f8b;">&lt;vector&gt;</span>
+<span style="color: #00af00;">using</span> <span style="color: #1f5bff;">std</span>::<span style="color: #1f5bff;">vector</span>;
 
-<span style="color: #8f3f71;">vector</span>&lt;T&gt; <span style="color: #076678;">v1</span>;                 <span style="color: #a89984;">// </span><span style="color: #a89984;">v1 &#26159;&#19968;&#20010;&#31354; vector &#65292;&#23427;&#28508;&#22312;&#30340;&#20803;&#32032;&#26159; T &#31867;&#22411;</span>
-<span style="color: #8f3f71;">vector</span>&lt;T&gt; <span style="color: #b57614;">v2</span>(v1);             <span style="color: #a89984;">// </span><span style="color: #a89984;">v2 &#21253;&#21547;&#26377; v1 &#25152;&#26377;&#20803;&#32032;&#30340;&#21103;&#26412;</span>
-<span style="color: #8f3f71;">vector</span>&lt;T&gt; <span style="color: #076678;">v3</span> = v1;            <span style="color: #a89984;">// </span><span style="color: #a89984;">&#31561;&#20215;&#20110; v3(v1)</span>
-<span style="color: #8f3f71;">vector</span>&lt;T&gt; <span style="color: #b57614;">v4</span>(n, val);         <span style="color: #a89984;">// </span><span style="color: #a89984;">&#21253;&#21547; n &#20010;&#37325;&#22797;&#30340; val</span>
-<span style="color: #8f3f71;">vector</span>&lt;T&gt; <span style="color: #b57614;">v5</span>(n);              <span style="color: #a89984;">// </span><span style="color: #a89984;">&#21253;&#21547; n &#20010;&#37325;&#22797;&#30340; T &#31867;&#22411;&#20803;&#32032;&#24182;&#25191;&#34892;&#40664;&#35748;&#21021;&#22987;&#21270;</span>
-<span style="color: #8f3f71;">vector</span>&lt;T&gt; <span style="color: #076678;">v6</span>{a, b, c...};     <span style="color: #a89984;">// </span><span style="color: #a89984;">&#29992; a, b, c... &#25191;&#34892;&#21021;&#22987;&#21270;</span>
-<span style="color: #8f3f71;">vector</span>&lt;T&gt; <span style="color: #076678;">v7</span> = {a, b, c...};  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#31561;&#20215;&#20110; v7{a, b, c...}</span>
-<span style="color: #8f3f71;">vector</span>&lt;T&gt; <span style="color: #076678;">v8</span> = (a, b, c...);  <span style="color: #a89984;">// </span><span style="color: #a89984;">&#38169;&#35823;</span>
+<span style="color: #18b2b2;">vector</span>&lt;T&gt; <span style="color: #ff8700;">v1</span>;                 <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">v1 &#26159;&#19968;&#20010;&#31354; vector &#65292;&#23427;&#28508;&#22312;&#30340;&#20803;&#32032;&#26159; T &#31867;&#22411;</span>
+<span style="color: #18b2b2;">vector</span>&lt;T&gt; <span style="color: #ef2929;">v2</span>(v1);             <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">v2 &#21253;&#21547;&#26377; v1 &#25152;&#26377;&#20803;&#32032;&#30340;&#21103;&#26412;</span>
+<span style="color: #18b2b2;">vector</span>&lt;T&gt; <span style="color: #ff8700;">v3</span> = v1;            <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#31561;&#20215;&#20110; v3(v1)</span>
+<span style="color: #18b2b2;">vector</span>&lt;T&gt; <span style="color: #ef2929;">v4</span>(n, val);         <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#21253;&#21547; n &#20010;&#37325;&#22797;&#30340; val</span>
+<span style="color: #18b2b2;">vector</span>&lt;T&gt; <span style="color: #ef2929;">v5</span>(n);              <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#21253;&#21547; n &#20010;&#37325;&#22797;&#30340; T &#31867;&#22411;&#20803;&#32032;&#24182;&#25191;&#34892;&#40664;&#35748;&#21021;&#22987;&#21270;</span>
+<span style="color: #18b2b2;">vector</span>&lt;T&gt; <span style="color: #ff8700;">v6</span>{a, b, c...};     <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#29992; a, b, c... &#25191;&#34892;&#21021;&#22987;&#21270;</span>
+<span style="color: #18b2b2;">vector</span>&lt;T&gt; <span style="color: #ff8700;">v7</span> = {a, b, c...};  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#31561;&#20215;&#20110; v7{a, b, c...}</span>
+<span style="color: #18b2b2;">vector</span>&lt;T&gt; <span style="color: #ff8700;">v8</span> = (a, b, c...);  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#38169;&#35823;</span>
 </pre>
 </div>
 
@@ -464,8 +464,8 @@ Hello, world!
 默认初始化
 </p>
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">int</span>&gt; <span style="color: #076678;">ivec</span>(10);     <span style="color: #a89984;">// </span><span style="color: #a89984;">10 &#20010;&#20803;&#32032;&#65292;&#27599;&#20010;&#37117;&#21021;&#22987;&#21270;&#20026; 0</span>
-<span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">string</span>&gt; <span style="color: #076678;">svec</span>(10);  <span style="color: #a89984;">// </span><span style="color: #a89984;">10 &#20010;&#20803;&#32032;&#65292;&#27599;&#20010;&#37117;&#26086;&#19979;&#20154;&#31354; string &#23545;&#35937;</span>
+<pre class="src src-C++"><span style="color: #18b2b2;">vector</span>&lt;<span style="color: #18b2b2;">int</span>&gt; <span style="color: #ff8700;">ivec</span>(10);     <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">10 &#20010;&#20803;&#32032;&#65292;&#27599;&#20010;&#37117;&#21021;&#22987;&#21270;&#20026; 0</span>
+<span style="color: #18b2b2;">vector</span>&lt;<span style="color: #18b2b2;">string</span>&gt; <span style="color: #ff8700;">svec</span>(10);  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">10 &#20010;&#20803;&#32032;&#65292;&#27599;&#20010;&#37117;&#26086;&#19979;&#20154;&#31354; string &#23545;&#35937;</span>
 </pre>
 </div>
 
@@ -475,33 +475,33 @@ Hello, world!
 的元素无法使用列表初始化时，会 fallback 到默认的圆括号实例化对象。
 </p>
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">int</span>&gt; <span style="color: #076678;">v1</span>(10);      <span style="color: #a89984;">// </span><span style="color: #a89984;">v1 &#26377; 10 &#20010;&#20803;&#32032;&#65292;&#27599;&#20010;&#20540;&#37117;&#26159; 0</span>
-<span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">int</span>&gt; <span style="color: #076678;">v2</span>{10};      <span style="color: #a89984;">// </span><span style="color: #a89984;">v2 &#26377; 1 &#20010;&#20803;&#32032;&#65292;&#20540;&#20026; 10</span>
-<span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">int</span>&gt; <span style="color: #076678;">v3</span>(10, 1);   <span style="color: #a89984;">// </span><span style="color: #a89984;">v3 &#26377; 10 &#20010;&#20803;&#32032;&#65292;&#27599;&#20010;&#20540;&#37117;&#26159; 1</span>
-<span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">int</span>&gt; <span style="color: #076678;">v4</span>{10, 1};   <span style="color: #a89984;">// </span><span style="color: #a89984;">v4 &#26377; 2 &#20010;&#20803;&#32032;&#65292;&#20540;&#20998;&#21035;&#26159; 10 &#21644; 1</span>
+<pre class="src src-C++"><span style="color: #18b2b2;">vector</span>&lt;<span style="color: #18b2b2;">int</span>&gt; <span style="color: #ff8700;">v1</span>(10);      <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">v1 &#26377; 10 &#20010;&#20803;&#32032;&#65292;&#27599;&#20010;&#20540;&#37117;&#26159; 0</span>
+<span style="color: #18b2b2;">vector</span>&lt;<span style="color: #18b2b2;">int</span>&gt; <span style="color: #ff8700;">v2</span>{10};      <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">v2 &#26377; 1 &#20010;&#20803;&#32032;&#65292;&#20540;&#20026; 10</span>
+<span style="color: #18b2b2;">vector</span>&lt;<span style="color: #18b2b2;">int</span>&gt; <span style="color: #ff8700;">v3</span>(10, 1);   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">v3 &#26377; 10 &#20010;&#20803;&#32032;&#65292;&#27599;&#20010;&#20540;&#37117;&#26159; 1</span>
+<span style="color: #18b2b2;">vector</span>&lt;<span style="color: #18b2b2;">int</span>&gt; <span style="color: #ff8700;">v4</span>{10, 1};   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">v4 &#26377; 2 &#20010;&#20803;&#32032;&#65292;&#20540;&#20998;&#21035;&#26159; 10 &#21644; 1</span>
 
-<span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">string</span>&gt; <span style="color: #076678;">v5</span>{<span style="color: #79740e;">"hi"</span>};      <span style="color: #a89984;">// </span><span style="color: #a89984;">&#21015;&#34920;&#21021;&#22987;&#21270;&#65306;v5 &#26377;&#19968;&#20010;&#20803;&#32032;</span>
-<span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">string</span>&gt; <span style="color: #076678;">v6</span>(<span style="color: #79740e;">"hi"</span>);      <span style="color: #a89984;">// </span><span style="color: #a89984;">&#38169;&#35823;&#65306;&#19981;&#33021;&#20351;&#29992;&#23383;&#31526;&#20018;&#23383;&#38754;&#20540;&#26500;&#24314; vector &#23545;&#35937;</span>
-<span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">string</span>&gt; <span style="color: #076678;">v7</span>{10};        <span style="color: #a89984;">// </span><span style="color: #a89984;">v7 &#26377; 10 &#20010;&#40664;&#35748;&#21021;&#22987;&#21270;&#30340;&#20803;&#32032;</span>
-<span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">string</span>&gt; <span style="color: #076678;">v8</span>{10, <span style="color: #79740e;">"hi"</span>};  <span style="color: #a89984;">// </span><span style="color: #a89984;">v8 &#26377; 10 &#20010;&#20540;&#20026; "hi" &#30340;&#20803;&#32032;</span>
+<span style="color: #18b2b2;">vector</span>&lt;<span style="color: #18b2b2;">string</span>&gt; <span style="color: #ff8700;">v5</span>{<span style="color: #ff1f8b;">"hi"</span>};      <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#21015;&#34920;&#21021;&#22987;&#21270;&#65306;v5 &#26377;&#19968;&#20010;&#20803;&#32032;</span>
+<span style="color: #18b2b2;">vector</span>&lt;<span style="color: #18b2b2;">string</span>&gt; <span style="color: #ff8700;">v6</span>(<span style="color: #ff1f8b;">"hi"</span>);      <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#38169;&#35823;&#65306;&#19981;&#33021;&#20351;&#29992;&#23383;&#31526;&#20018;&#23383;&#38754;&#20540;&#26500;&#24314; vector &#23545;&#35937;</span>
+<span style="color: #18b2b2;">vector</span>&lt;<span style="color: #18b2b2;">string</span>&gt; <span style="color: #ff8700;">v7</span>{10};        <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">v7 &#26377; 10 &#20010;&#40664;&#35748;&#21021;&#22987;&#21270;&#30340;&#20803;&#32032;</span>
+<span style="color: #18b2b2;">vector</span>&lt;<span style="color: #18b2b2;">string</span>&gt; <span style="color: #ff8700;">v8</span>{10, <span style="color: #ff1f8b;">"hi"</span>};  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">v8 &#26377; 10 &#20010;&#20540;&#20026; "hi" &#30340;&#20803;&#32032;</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org5efb980" class="outline-4">
-<h4 id="org5efb980"><span class="section-number-4">1.2.2.</span> 向 vector 对象中添加元素</h4>
+<div id="outline-container-org6efebde" class="outline-4">
+<h4 id="org6efebde"><span class="section-number-4">1.2.2.</span> 向 vector 对象中添加元素</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #9d0006;">using</span> <span style="color: #9d0006;">namespace</span> <span style="color: #8f3f71;">std</span>;
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
 
-<span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">int</span>&gt; <span style="color: #076678;">iv</span>;
-<span style="color: #9d0006;">for</span> (<span style="color: #8f3f71;">int</span> <span style="color: #076678;">i</span> = 0; i &lt; 10; i++) {
+<span style="color: #18b2b2;">vector</span>&lt;<span style="color: #18b2b2;">int</span>&gt; <span style="color: #ff8700;">iv</span>;
+<span style="color: #00af00;">for</span> (<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">i</span> = 0; i &lt; 10; i++) {
   iv.push_back(i);
 }
-<span style="color: #a89984;">// </span><span style="color: #a89984;">&#22914;&#26524;&#24490;&#29615;&#20307;&#20869;&#37096;&#21253;&#21547;&#26377;&#25913;&#21464; vector &#38271;&#24230;&#30340;&#35821;&#21477;&#65292;&#21017;&#19981;&#33021;&#20351;&#29992;&#33539;&#22260; for &#24490;&#29615;</span>
-<span style="color: #9d0006;">for</span> (<span style="color: #9d0006;">auto</span> <span style="color: #076678;">num</span> : iv) {
-  cout &lt;&lt; num &lt;&lt; <span style="color: #79740e;">", "</span>;
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#22914;&#26524;&#24490;&#29615;&#20307;&#20869;&#37096;&#21253;&#21547;&#26377;&#25913;&#21464; vector &#38271;&#24230;&#30340;&#35821;&#21477;&#65292;&#21017;&#19981;&#33021;&#20351;&#29992;&#33539;&#22260; for &#24490;&#29615;</span>
+<span style="color: #00af00;">for</span> (<span style="color: #00af00;">auto</span> <span style="color: #ff8700;">num</span> : iv) {
+  cout &lt;&lt; num &lt;&lt; <span style="color: #ff1f8b;">", "</span>;
 }
 </pre>
 </div>
@@ -512,14 +512,14 @@ Hello, world!
 </div>
 </div>
 
-<div id="outline-container-orgd86de1c" class="outline-4">
-<h4 id="orgd86de1c"><span class="section-number-4">1.2.3.</span> 其它 vector 操作</h4>
+<div id="outline-container-org9f40407" class="outline-4">
+<h4 id="org9f40407"><span class="section-number-4">1.2.3.</span> 其它 vector 操作</h4>
 <div class="outline-text-4" id="text-1-2-3">
 <p>
 vector 对象的其它操作与 string 对象类似
 </p>
 
-<table id="org08ff252">
+<table id="org6fe8cd3">
 <caption class="t-above"><span class="table-number">Table 2:</span> 一些单词</caption>
 
 <colgroup>
@@ -542,20 +542,20 @@ vector 对象的其它操作与 string 对象类似
 </table>
 
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #9d0006;">using</span> <span style="color: #9d0006;">namespace</span> <span style="color: #8f3f71;">std</span>;
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
 
-<span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">string</span>&gt; <span style="color: #076678;">vstrings</span>;
-<span style="color: #a89984;">// </span><span style="color: #a89984;">&#23558; string &#23545;&#35937;&#21152;&#20837;&#21040; vector &#20013;</span>
-<span style="color: #9d0006;">for</span> (<span style="color: #8f3f71;">int</span> <span style="color: #076678;">col</span> = 0; col &lt; input_cols; col++) {
+<span style="color: #18b2b2;">vector</span>&lt;<span style="color: #18b2b2;">string</span>&gt; <span style="color: #ff8700;">vstrings</span>;
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23558; string &#23545;&#35937;&#21152;&#20837;&#21040; vector &#20013;</span>
+<span style="color: #00af00;">for</span> (<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">col</span> = 0; col &lt; input_cols; col++) {
   vstrings.push_back(input[0][col]);
 }
-<span style="color: #a89984;">// </span><span style="color: #a89984;">&#23558; vector &#23545;&#35937;&#20013;&#30340;&#27599;&#20010; string &#23545;&#35937;&#20013;&#30340;&#27599;&#20010;&#23383;&#31526;&#36716;&#25442;&#20026;&#22823;&#20889;&#65292;&#27880;&#24847; *&#24341;&#29992;*</span>
-<span style="color: #9d0006;">for</span> (<span style="color: #8f3f71;">string</span> &amp;<span style="color: #076678;">s</span> : vstrings) {
-  <span style="color: #9d0006;">for</span> (<span style="color: #9d0006;">auto</span> &amp;<span style="color: #076678;">c</span> : s) {
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#23558; vector &#23545;&#35937;&#20013;&#30340;&#27599;&#20010; string &#23545;&#35937;&#20013;&#30340;&#27599;&#20010;&#23383;&#31526;&#36716;&#25442;&#20026;&#22823;&#20889;&#65292;&#27880;&#24847; *&#24341;&#29992;*</span>
+<span style="color: #00af00;">for</span> (<span style="color: #18b2b2;">string</span> &amp;<span style="color: #ff8700;">s</span> : vstrings) {
+  <span style="color: #00af00;">for</span> (<span style="color: #00af00;">auto</span> &amp;<span style="color: #ff8700;">c</span> : s) {
     c = toupper(c);
   }
 }
-<span style="color: #9d0006;">for</span> (<span style="color: #8f3f71;">string</span> <span style="color: #076678;">s</span> : vstrings) {
+<span style="color: #00af00;">for</span> (string <span style="color: #18b2b2;">s</span> : vstrings) {
   cout &lt;&lt; s &lt;&lt;endl;
 }
 </pre>
@@ -569,23 +569,23 @@ STUPID
 </pre>
 </div>
 </div>
-<div id="outline-container-org74df55f" class="outline-4">
-<h4 id="org74df55f"><span class="section-number-4">1.2.4.</span> 用数组初始化 vector 对象</h4>
+<div id="outline-container-org78560a1" class="outline-4">
+<h4 id="org78560a1"><span class="section-number-4">1.2.4.</span> 用数组初始化 vector 对象</h4>
 <div class="outline-text-4" id="text-1-2-4">
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #9d0006;">using</span> <span style="color: #9d0006;">namespace</span> <span style="color: #8f3f71;">std</span>;
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
 
-<span style="color: #8f3f71;">int</span> <span style="color: #076678;">int_arr</span>[] = {0, 1, 2, 3, 4};
-<span style="color: #a89984;">// </span><span style="color: #a89984;">&#25351;&#26126;&#25968;&#32452;&#30340; begin &#21644; end &#25351;&#38024;</span>
-<span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">int</span>&gt; <span style="color: #b57614;">ivec1</span>(<span style="color: #8f3f71;">begin</span>(<span style="color: #076678;">int_arr</span>), <span style="color: #8f3f71;">end</span>(<span style="color: #076678;">int_arr</span>));
-<span style="color: #9d0006;">for</span> (<span style="color: #9d0006;">auto</span> <span style="color: #076678;">i</span> : ivec1) {
-  cout &lt;&lt; i &lt;&lt; <span style="color: #79740e;">", "</span>;
+<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">int_arr</span>[] = {0, 1, 2, 3, 4};
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#25351;&#26126;&#25968;&#32452;&#30340; begin &#21644; end &#25351;&#38024;</span>
+<span style="color: #18b2b2;">vector</span>&lt;<span style="color: #18b2b2;">int</span>&gt; <span style="color: #ef2929;">ivec1</span>(<span style="color: #18b2b2;">begin</span>(<span style="color: #ff8700;">int_arr</span>), <span style="color: #18b2b2;">end</span>(<span style="color: #ff8700;">int_arr</span>));
+<span style="color: #00af00;">for</span> (<span style="color: #00af00;">auto</span> <span style="color: #ff8700;">i</span> : ivec1) {
+  cout &lt;&lt; i &lt;&lt; <span style="color: #ff1f8b;">", "</span>;
 }
 cout &lt;&lt; endl;
 
-<span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">int</span>&gt; <span style="color: #b57614;">ivec2</span>(int_arr, int_arr + 5);
-<span style="color: #9d0006;">for</span> (<span style="color: #9d0006;">auto</span> <span style="color: #076678;">i</span> : ivec2) {
-  cout &lt;&lt; i &lt;&lt; <span style="color: #79740e;">". "</span>;
+<span style="color: #18b2b2;">vector</span>&lt;<span style="color: #18b2b2;">int</span>&gt; <span style="color: #ef2929;">ivec2</span>(int_arr, int_arr + 5);
+<span style="color: #00af00;">for</span> (<span style="color: #00af00;">auto</span> <span style="color: #ff8700;">i</span> : ivec2) {
+  cout &lt;&lt; i &lt;&lt; <span style="color: #ff1f8b;">". "</span>;
 }
 cout &lt;&lt; endl;
 </pre>
@@ -599,8 +599,8 @@ cout &lt;&lt; endl;
 </div>
 </div>
 
-<div id="outline-container-org8becb86" class="outline-3">
-<h3 id="org8becb86"><span class="section-number-3">1.3.</span> 迭代器</h3>
+<div id="outline-container-org05a1515" class="outline-3">
+<h3 id="org05a1515"><span class="section-number-3">1.3.</span> 迭代器</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 C++ 中的迭代器与 Python 中的含义有一些区别，Python 中的迭代器指的是可迭代的容器，
@@ -609,40 +609,40 @@ C++ 中的迭代器与 Python 中的含义有一些区别，Python 中的迭代�
 </p>
 
 
-<figure id="org6e4c534">
+<figure id="org9b47cef">
 <img src="./C++-学习记录/Screenshot_20200529_121858_HkqmoF.png" alt="Screenshot_20200529_121858_HkqmoF.png">
 
 <figcaption><span class="figure-number">Figure 1: </span>迭代器与迭代器类型</figcaption>
 </figure>
 
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #8f3f71;">vector</span>&lt;T&gt; <span style="color: #076678;">vec</span>;
-<span style="color: #a89984;">// </span><span style="color: #a89984;">&#30001;&#32534;&#35793;&#22120;&#20915;&#23450; b &#21644; e &#30340;&#31867;&#22411;</span>
-<span style="color: #a89984;">// </span><span style="color: #a89984;">b &#34920;&#31034;&#31532;&#19968;&#20010;&#20803;&#32032;&#65292;e &#34920;&#31034; vec &#23614;&#20803;&#32032;&#30340;&#19979;&#19968;&#20301;&#32622;&#65292;&#22240;&#27492;&#20063;&#34987;&#31216;&#20026;&#23614;&#21518;&#36845;&#20195;&#22120;</span>
-<span style="color: #9d0006;">auto</span> <span style="color: #076678;">b</span> = vec.begin(), <span style="color: #076678;">e</span> = vec.end();
+<pre class="src src-C++"><span style="color: #18b2b2;">vector</span>&lt;T&gt; <span style="color: #ff8700;">vec</span>;
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#30001;&#32534;&#35793;&#22120;&#20915;&#23450; b &#21644; e &#30340;&#31867;&#22411;</span>
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">b &#34920;&#31034;&#31532;&#19968;&#20010;&#20803;&#32032;&#65292;e &#34920;&#31034; vec &#23614;&#20803;&#32032;&#30340;&#19979;&#19968;&#20301;&#32622;&#65292;&#22240;&#27492;&#20063;&#34987;&#31216;&#20026;&#23614;&#21518;&#36845;&#20195;&#22120;</span>
+<span style="color: #00af00;">auto</span> <span style="color: #ff8700;">b</span> = vec.begin(), <span style="color: #ff8700;">e</span> = vec.end();
 
-<span style="color: #a89984;">// </span><span style="color: #a89984;">&#20107;&#23454;&#19978;&#26631;&#20934;&#24211;&#20351;&#29992; iterator &#21644; const_interator &#26469;&#34920;&#31034;&#36845;&#20195;&#22120;&#30340;&#31867;&#22411;</span>
-<span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">int</span>&gt;::<span style="color: #8f3f71;">iterator</span> <span style="color: #076678;">it1</span>;         <span style="color: #a89984;">// </span><span style="color: #a89984;">&#35835;&#20889; vector&lt;int&gt; &#30340;&#20803;&#32032;</span>
-<span style="color: #8f3f71;">string</span>::<span style="color: #8f3f71;">iterator</span> <span style="color: #076678;">it2</span>;              <span style="color: #a89984;">// </span><span style="color: #a89984;">&#35835;&#20889; string &#23545;&#35937;&#20013;&#30340;&#23383;&#31526;</span>
-<span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">int</span>&gt;::<span style="color: #8f3f71;">const_iterator</span> <span style="color: #076678;">it3</span>;   <span style="color: #a89984;">// </span><span style="color: #a89984;">&#21482;&#33021;&#35835;</span>
-<span style="color: #8f3f71;">string</span>::<span style="color: #8f3f71;">const_iterator</span> <span style="color: #076678;">it4</span>;        <span style="color: #a89984;">// </span><span style="color: #a89984;">&#21482;&#33021;&#35835;</span>
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20107;&#23454;&#19978;&#26631;&#20934;&#24211;&#20351;&#29992; iterator &#21644; const_interator &#26469;&#34920;&#31034;&#36845;&#20195;&#22120;&#30340;&#31867;&#22411;</span>
+<span style="color: #1f5bff;">vector</span>&lt;<span style="color: #18b2b2;">int</span>&gt;::<span style="color: #18b2b2;">iterator</span> <span style="color: #ff8700;">it1</span>;         <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#35835;&#20889; vector&lt;int&gt; &#30340;&#20803;&#32032;</span>
+<span style="color: #1f5bff;">string</span>::<span style="color: #18b2b2;">iterator</span> <span style="color: #ff8700;">it2</span>;              <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#35835;&#20889; string &#23545;&#35937;&#20013;&#30340;&#23383;&#31526;</span>
+<span style="color: #1f5bff;">vector</span>&lt;<span style="color: #18b2b2;">int</span>&gt;::<span style="color: #18b2b2;">const_iterator</span> <span style="color: #ff8700;">it3</span>;   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#21482;&#33021;&#35835;</span>
+<span style="color: #1f5bff;">string</span>::<span style="color: #18b2b2;">const_iterator</span> <span style="color: #ff8700;">it4</span>;        <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#21482;&#33021;&#35835;</span>
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgbd75f63" class="outline-4">
-<h4 id="orgbd75f63"><span class="section-number-4">1.3.1.</span> 迭代器运算</h4>
+<div id="outline-container-org61475e1" class="outline-4">
+<h4 id="org61475e1"><span class="section-number-4">1.3.1.</span> 迭代器运算</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <div class="org-src-container">
-<pre class="src src-C++">*iter;            <span style="color: #a89984;">// </span><span style="color: #a89984;">&#36820;&#22238; iter &#25152;&#25351;&#20803;&#32032;&#30340;&#24341;&#29992;</span>
-iter-&gt;mem;        <span style="color: #a89984;">// </span><span style="color: #a89984;">&#31561;&#20215;&#20110; (*iter).mem</span>
-++iter;           <span style="color: #a89984;">// </span><span style="color: #a89984;">&#25351;&#21521;&#23481;&#22120;&#20013;&#30340;&#19979;&#19968;&#20803;&#32032;</span>
---iter;           <span style="color: #a89984;">// </span><span style="color: #a89984;">&#25351;&#21521;&#23481;&#22120;&#20013;&#30340;&#19978;&#19968;&#20803;&#32032;</span>
-iter + n;         <span style="color: #a89984;">// </span><span style="color: #a89984;">&#36820;&#22238;&#26032;&#36845;&#20195;&#22120;&#21521;&#21069;&#31227;&#21160; n &#20010;&#21333;&#20301;</span>
-iter - n;         <span style="color: #a89984;">// </span><span style="color: #a89984;">&#36820;&#22238;&#26032;&#36845;&#20195;&#22120;&#21521;&#21518;&#31227;&#21160; n &#20010;&#21333;&#20301;</span>
-iter1 == iter2;   <span style="color: #a89984;">// </span><span style="color: #a89984;">&#26159;&#21542;&#25351;&#21521;&#21516;&#19968;&#20803;&#32032;</span>
-iter1 != iter2;   <span style="color: #a89984;">// </span><span style="color: #a89984;">&#26159;&#21542;&#25351;&#21521;&#21516;&#19968;&#20803;&#32032;</span>
-iter1 - iter2;    <span style="color: #a89984;">// </span><span style="color: #a89984;">&#36820;&#22238;&#36845;&#20195;&#22120;&#30340;&#36317;&#31163;</span>
+<pre class="src src-C++">*iter;            <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#36820;&#22238; iter &#25152;&#25351;&#20803;&#32032;&#30340;&#24341;&#29992;</span>
+iter-&gt;mem;        <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#31561;&#20215;&#20110; (*iter).mem</span>
+++iter;           <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#25351;&#21521;&#23481;&#22120;&#20013;&#30340;&#19979;&#19968;&#20803;&#32032;</span>
+--iter;           <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#25351;&#21521;&#23481;&#22120;&#20013;&#30340;&#19978;&#19968;&#20803;&#32032;</span>
+iter + n;         <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#36820;&#22238;&#26032;&#36845;&#20195;&#22120;&#21521;&#21069;&#31227;&#21160; n &#20010;&#21333;&#20301;</span>
+iter - n;         <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#36820;&#22238;&#26032;&#36845;&#20195;&#22120;&#21521;&#21518;&#31227;&#21160; n &#20010;&#21333;&#20301;</span>
+iter1 == iter2;   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#26159;&#21542;&#25351;&#21521;&#21516;&#19968;&#20803;&#32032;</span>
+iter1 != iter2;   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#26159;&#21542;&#25351;&#21521;&#21516;&#19968;&#20803;&#32032;</span>
+iter1 - iter2;    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#36820;&#22238;&#36845;&#20195;&#22120;&#30340;&#36317;&#31163;</span>
 </pre>
 </div>
 
@@ -650,14 +650,14 @@ iter1 - iter2;    <span style="color: #a89984;">// </span><span style="color: #a
 将字符串改为大写的两种方式，对比下标运算与迭代器
 </p>
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #9d0006;">using</span> <span style="color: #9d0006;">namespace</span> <span style="color: #8f3f71;">std</span>;
-<span style="color: #8f3f71;">string</span> <span style="color: #076678;">s1</span>(<span style="color: #79740e;">"Keep it simple stupid"</span>);
-<span style="color: #9d0006;">for</span> (<span style="color: #8f3f71;">int</span> <span style="color: #076678;">i</span> = 0; i &lt; s1.size(); i++)
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s1</span>(<span style="color: #ff1f8b;">"Keep it simple stupid"</span>);
+<span style="color: #00af00;">for</span> (<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">i</span> = 0; i &lt; s1.size(); i++)
   s1[i] = toupper(s1[i]);
 cout &lt;&lt; s1 &lt;&lt; endl;
 
-<span style="color: #8f3f71;">string</span> <span style="color: #076678;">s2</span>(<span style="color: #79740e;">"Keep it simple stupid"</span>);
-<span style="color: #9d0006;">for</span> (<span style="color: #9d0006;">auto</span> <span style="color: #076678;">iter</span> = s2.begin(); iter != s2.end(); iter++)
+<span style="color: #18b2b2;">string</span> <span style="color: #ff8700;">s2</span>(<span style="color: #ff1f8b;">"Keep it simple stupid"</span>);
+<span style="color: #00af00;">for</span> (<span style="color: #00af00;">auto</span> <span style="color: #ff8700;">iter</span> = s2.begin(); iter != s2.end(); iter++)
   *iter = toupper(*iter);
 cout &lt;&lt; s2 &lt;&lt; endl;
 </pre>
@@ -670,18 +670,18 @@ KEEP IT SIMPLE STUPID
 </div>
 </div>
 
-<div id="outline-container-org3504f87" class="outline-4">
-<h4 id="org3504f87"><span class="section-number-4">1.3.2.</span> <code>begin</code> 和 <code>end</code> 运算符</h4>
+<div id="outline-container-org9579036" class="outline-4">
+<h4 id="org9579036"><span class="section-number-4">1.3.2.</span> <code>begin</code> 和 <code>end</code> 运算符</h4>
 <div class="outline-text-4" id="text-1-3-2">
 <p>
 默认情况下 begin 和 end 返回的迭代器具体类型由容器的类型决定
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">int</span>&gt; <span style="color: #076678;">v</span>;
-<span style="color: #9d0006;">const</span> <span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">int</span>&gt; <span style="color: #076678;">cv</span>;
-<span style="color: #9d0006;">auto</span> <span style="color: #076678;">it</span> = v.begin();      <span style="color: #a89984;">// </span><span style="color: #a89984;">it &#30340;&#31867;&#22411;&#26159; vector&lt;int&gt;::iterator</span>
-<span style="color: #9d0006;">auto</span> <span style="color: #076678;">cit</span> = cv.begin();    <span style="color: #a89984;">// </span><span style="color: #a89984;">cit &#30340;&#31867;&#22411;&#26159; vector&lt;int&gt;::const_iterator</span>
+<pre class="src src-C++"><span style="color: #18b2b2;">vector</span>&lt;<span style="color: #18b2b2;">int</span>&gt; <span style="color: #ff8700;">v</span>;
+<span style="color: #00af00;">const</span> <span style="color: #18b2b2;">vector</span>&lt;<span style="color: #18b2b2;">int</span>&gt; <span style="color: #ff8700;">cv</span>;
+<span style="color: #00af00;">auto</span> <span style="color: #ff8700;">it</span> = v.begin();      <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">it &#30340;&#31867;&#22411;&#26159; vector&lt;int&gt;::iterator</span>
+<span style="color: #00af00;">auto</span> <span style="color: #ff8700;">cit</span> = cv.begin();    <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">cit &#30340;&#31867;&#22411;&#26159; vector&lt;int&gt;::const_iterator</span>
 </pre>
 </div>
 
@@ -691,22 +691,22 @@ C++ 11 标准引入了两个新函数 <code>cbegin</code> 和 <code>cend</code> 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #9d0006;">auto</span> <span style="color: #076678;">cit</span> = v.cbegin();
+<pre class="src src-C++"><span style="color: #00af00;">auto</span> <span style="color: #ff8700;">cit</span> = v.cbegin();
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org0cda1c3" class="outline-4">
-<h4 id="org0cda1c3"><span class="section-number-4">1.3.3.</span> 迭代器算数运算</h4>
+<div id="outline-container-org412fc67" class="outline-4">
+<h4 id="org412fc67"><span class="section-number-4">1.3.3.</span> 迭代器算数运算</h4>
 <div class="outline-text-4" id="text-1-3-3">
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #9d0006;">using</span> <span style="color: #9d0006;">namespace</span> <span style="color: #8f3f71;">std</span>;
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
 
-<span style="color: #8f3f71;">vector</span>&lt;<span style="color: #8f3f71;">int</span>&gt; <span style="color: #076678;">vi</span>(10);
-<span style="color: #a89984;">// </span><span style="color: #a89984;">&#20004;&#20010;&#36845;&#20195;&#22120;&#30340;&#24046;&#26159; difference_type &#31867;&#22411;</span>
-cout &lt;&lt; <span style="color: #79740e;">"Begin - end is: "</span> &lt;&lt; vi.begin() - vi.end() &lt;&lt; endl;
-cout &lt;&lt; <span style="color: #79740e;">"End - begin is: "</span> &lt;&lt; vi.end() - vi.begin() &lt;&lt; endl;
+<span style="color: #18b2b2;">vector</span>&lt;<span style="color: #18b2b2;">int</span>&gt; <span style="color: #ff8700;">vi</span>(10);
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20004;&#20010;&#36845;&#20195;&#22120;&#30340;&#24046;&#26159; difference_type &#31867;&#22411;</span>
+cout &lt;&lt; <span style="color: #ff1f8b;">"Begin - end is: "</span> &lt;&lt; vi.begin() - vi.end() &lt;&lt; endl;
+cout &lt;&lt; <span style="color: #ff1f8b;">"End - begin is: "</span> &lt;&lt; vi.end() - vi.begin() &lt;&lt; endl;
 </pre>
 </div>
 
@@ -717,8 +717,8 @@ End - begin is: 10
 </div>
 </div>
 </div>
-<div id="outline-container-orgd916945" class="outline-3">
-<h3 id="orgd916945"><span class="section-number-3">1.4.</span> 数组</h3>
+<div id="outline-container-orgf2d1c6d" class="outline-3">
+<h3 id="orgf2d1c6d"><span class="section-number-3">1.4.</span> 数组</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 C++ 中的数组与 C 中基本一致，也同时支持指针和下标索引操作。定义数组时必须指针数
@@ -726,27 +726,27 @@ C++ 中的数组与 C 中基本一致，也同时支持指针和下标索引操�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #8f3f71;">int</span> *<span style="color: #076678;">ptrs</span>[10];             <span style="color: #a89984;">// </span><span style="color: #a89984;">ptrs &#26159;&#21547;&#26377; 10 &#20010;&#25972;&#22411;&#25351;&#38024;&#30340;&#25968;&#32452;</span>
-<span style="color: #8f3f71;">int</span> &amp;<span style="color: #076678;">refs</span>[10] = ...;       <span style="color: #a89984;">// </span><span style="color: #a89984;">&#38169;&#35823;&#65306;&#19981;&#23384;&#22312;&#24341;&#29992;&#30340;&#25968;&#32452;</span>
-<span style="color: #8f3f71;">int</span> (*<span style="color: #076678;">Parray</span>)[10] = &amp;arr;  <span style="color: #a89984;">// </span><span style="color: #a89984;">Parray &#25351;&#21521;&#19968;&#20010;&#21547;&#26377; 10 &#20010;&#25972;&#25968;&#30340;&#25968;&#32452;</span>
-<span style="color: #8f3f71;">int</span> (&amp;<span style="color: #076678;">arrRef</span>)[10] = arr;   <span style="color: #a89984;">// </span><span style="color: #a89984;">arrRef &#24341;&#29992;&#19968;&#20010;&#21547;&#26377; 10 &#20010;&#25972;&#25968;&#30340;&#25968;&#32452;</span>
+<pre class="src src-C++"><span style="color: #18b2b2;">int</span> *<span style="color: #ff8700;">ptrs</span>[10];             <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">ptrs &#26159;&#21547;&#26377; 10 &#20010;&#25972;&#22411;&#25351;&#38024;&#30340;&#25968;&#32452;</span>
+<span style="color: #18b2b2;">int</span> &amp;<span style="color: #ff8700;">refs</span>[10] = ...;       <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#38169;&#35823;&#65306;&#19981;&#23384;&#22312;&#24341;&#29992;&#30340;&#25968;&#32452;</span>
+<span style="color: #18b2b2;">int</span> (*<span style="color: #ff8700;">Parray</span>)[10] = &amp;arr;  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">Parray &#25351;&#21521;&#19968;&#20010;&#21547;&#26377; 10 &#20010;&#25972;&#25968;&#30340;&#25968;&#32452;</span>
+<span style="color: #18b2b2;">int</span> (&amp;<span style="color: #ff8700;">arrRef</span>)[10] = arr;   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">arrRef &#24341;&#29992;&#19968;&#20010;&#21547;&#26377; 10 &#20010;&#25972;&#25968;&#30340;&#25968;&#32452;</span>
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org34ad2bb" class="outline-4">
-<h4 id="org34ad2bb"><span class="section-number-4">1.4.1.</span> 范围 for 语句</h4>
+<div id="outline-container-orgb4f3e01" class="outline-4">
+<h4 id="orgb4f3e01"><span class="section-number-4">1.4.1.</span> 范围 for 语句</h4>
 <div class="outline-text-4" id="text-1-4-1">
 <p>
 数组也可以使用范围 for 语句
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #9d0006;">using</span> <span style="color: #9d0006;">namespace</span> <span style="color: #8f3f71;">std</span>;
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
 
-<span style="color: #8f3f71;">int</span> <span style="color: #076678;">arr</span>[] = {0, 1, 2, 3, 4};
-<span style="color: #9d0006;">for</span> (<span style="color: #9d0006;">auto</span> <span style="color: #076678;">i</span> : arr)
-  cout &lt;&lt; i &lt;&lt; <span style="color: #79740e;">" | "</span>;
+<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">arr</span>[] = {0, 1, 2, 3, 4};
+<span style="color: #00af00;">for</span> (<span style="color: #00af00;">auto</span> <span style="color: #ff8700;">i</span> : arr)
+  cout &lt;&lt; i &lt;&lt; <span style="color: #ff1f8b;">" | "</span>;
 cout &lt;&lt; endl;
 </pre>
 </div>
@@ -757,39 +757,39 @@ cout &lt;&lt; endl;
 </div>
 </div>
 
-<div id="outline-container-orgbc4862f" class="outline-4">
-<h4 id="orgbc4862f"><span class="section-number-4">1.4.2.</span> 数组中的自动类型推断</h4>
+<div id="outline-container-orge2d9232" class="outline-4">
+<h4 id="orge2d9232"><span class="section-number-4">1.4.2.</span> 数组中的自动类型推断</h4>
 <div class="outline-text-4" id="text-1-4-2">
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #8f3f71;">int</span> <span style="color: #076678;">a1</span>[] =  {0, 1, 2, 3, 4};
-<span style="color: #9d0006;">auto</span> <span style="color: #b57614;">a2</span>(a1);                        <span style="color: #a89984;">// </span><span style="color: #a89984;">a2 &#26159;&#19968;&#20010;&#25972;&#22411;&#25351;&#38024;&#65292;&#25351;&#21521; a1 &#30340;&#31532;&#19968;&#20010;&#20803;&#32032;</span>
+<pre class="src src-C++"><span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">a1</span>[] =  {0, 1, 2, 3, 4};
+<span style="color: #00af00;">auto</span> <span style="color: #ef2929;">a2</span>(a1);                        <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">a2 &#26159;&#19968;&#20010;&#25972;&#22411;&#25351;&#38024;&#65292;&#25351;&#21521; a1 &#30340;&#31532;&#19968;&#20010;&#20803;&#32032;</span>
 
-<span style="color: #9d0006;">decltype</span>(a1) <span style="color: #076678;">a3</span> = {0, 1, 2, 3, 4};  <span style="color: #a89984;">// </span><span style="color: #a89984;">a3 &#26159;&#19968;&#20010;&#25968;&#32452;&#23545;&#35937;</span>
-a3 = a1;                            <span style="color: #a89984;">// </span><span style="color: #a89984;">&#38169;&#35823;&#65306;&#19981;&#33021;&#29992;&#25351;&#38024;&#32473;&#25968;&#32452;&#36171;&#20540;</span>
-a3[0] = 2;                          <span style="color: #a89984;">// </span><span style="color: #a89984;">&#27491;&#30830;</span>
+<span style="color: #00af00;">decltype</span>(a1) <span style="color: #ff8700;">a3</span> = {0, 1, 2, 3, 4};  <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">a3 &#26159;&#19968;&#20010;&#25968;&#32452;&#23545;&#35937;</span>
+a3 = a1;                            <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#38169;&#35823;&#65306;&#19981;&#33021;&#29992;&#25351;&#38024;&#32473;&#25968;&#32452;&#36171;&#20540;</span>
+a3[0] = 2;                          <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#27491;&#30830;</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org5d0d371" class="outline-4">
-<h4 id="org5d0d371"><span class="section-number-4">1.4.3.</span> 标准库函数 <code>begin</code> 和 <code>end</code></h4>
+<div id="outline-container-org60a6b44" class="outline-4">
+<h4 id="org60a6b44"><span class="section-number-4">1.4.3.</span> 标准库函数 <code>begin</code> 和 <code>end</code></h4>
 <div class="outline-text-4" id="text-1-4-3">
 <p>
 C++ 11 新标准引入了 <code>begin</code> 和 <code>end</code> 函数，定义在 <code>iterator</code> 头文件中
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #9d0006;">using</span> <span style="color: #9d0006;">namespace</span> <span style="color: #8f3f71;">std</span>;
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
 
-<span style="color: #8f3f71;">int</span> <span style="color: #076678;">ia</span>[] = {0, 1, 2, 3, 4};
-<span style="color: #8f3f71;">int</span> *<span style="color: #076678;">begin_</span> = begin(ia);
-<span style="color: #8f3f71;">int</span> *<span style="color: #076678;">end_</span> = end(ia);
-<span style="color: #a89984;">// </span><span style="color: #a89984;">&#19979;&#26631;&#22914;&#25351;&#38024;&#65292;begin_[0] &#31561;&#20215;&#20110; *(begin_ + 0)</span>
-<span style="color: #a89984;">//             </span><span style="color: #a89984;">end_[-1] &#31561;&#20215;&#20110; *(end_ - 1)</span>
-<span style="color: #a89984;">// </span><span style="color: #a89984;">&#38656;&#27880;&#24847;&#65306;&#26631;&#20934;&#24211;&#31867;&#22411;&#22914; string &#21644; vector &#30340;&#19979;&#26631;&#19981;&#33021;&#26159;&#36127;&#20540;</span>
-cout &lt;&lt; <span style="color: #79740e;">"First elements is: "</span> &lt;&lt; begin_[0] &lt;&lt; endl;
-cout &lt;&lt; <span style="color: #79740e;">"Last elements is: "</span> &lt;&lt; end_[-1] &lt;&lt; endl;
+<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">ia</span>[] = {0, 1, 2, 3, 4};
+<span style="color: #18b2b2;">int</span> *<span style="color: #ff8700;">begin_</span> = begin(ia);
+<span style="color: #18b2b2;">int</span> *<span style="color: #ff8700;">end_</span> = end(ia);
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#19979;&#26631;&#22914;&#25351;&#38024;&#65292;begin_[0] &#31561;&#20215;&#20110; *(begin_ + 0)</span>
+<span style="color: #b2b2b2; font-style: italic;">//             </span><span style="color: #b2b2b2; font-style: italic;">end_[-1] &#31561;&#20215;&#20110; *(end_ - 1)</span>
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#38656;&#27880;&#24847;&#65306;&#26631;&#20934;&#24211;&#31867;&#22411;&#22914; string &#21644; vector &#30340;&#19979;&#26631;&#19981;&#33021;&#26159;&#36127;&#20540;</span>
+cout &lt;&lt; <span style="color: #ff1f8b;">"First elements is: "</span> &lt;&lt; begin_[0] &lt;&lt; endl;
+cout &lt;&lt; <span style="color: #ff1f8b;">"Last elements is: "</span> &lt;&lt; end_[-1] &lt;&lt; endl;
 </pre>
 </div>
 
@@ -800,8 +800,8 @@ Last elements is: 4
 </div>
 </div>
 
-<div id="outline-container-org61c1fe5" class="outline-4">
-<h4 id="org61c1fe5"><span class="section-number-4">1.4.4.</span> 指针的差值</h4>
+<div id="outline-container-orgb581fc6" class="outline-4">
+<h4 id="orgb581fc6"><span class="section-number-4">1.4.4.</span> 指针的差值</h4>
 <div class="outline-text-4" id="text-1-4-4">
 <p>
 指针的差值与迭代器类似，同样只能对同种类型的指针作差，更近一步，参与运算的两个指
@@ -810,25 +810,25 @@ Last elements is: 4
 </p>
 </div>
 </div>
-<div id="outline-container-orge42b8c3" class="outline-4">
-<h4 id="orge42b8c3"><span class="section-number-4">1.4.5.</span> 多维数组与下标</h4>
+<div id="outline-container-org3bce0dc" class="outline-4">
+<h4 id="org3bce0dc"><span class="section-number-4">1.4.5.</span> 多维数组与下标</h4>
 <div class="outline-text-4" id="text-1-4-5">
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #9d0006;">using</span> <span style="color: #9d0006;">namespace</span> <span style="color: #8f3f71;">std</span>;
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
 
-<span style="color: #9d0006;">constexpr</span> <span style="color: #8f3f71;">size_t</span> <span style="color: #076678;">rows</span> = 3, <span style="color: #076678;">cols</span> = 4;
-<span style="color: #8f3f71;">int</span> <span style="color: #076678;">ia</span>[rows][cols];
-<span style="color: #9d0006;">for</span> (<span style="color: #8f3f71;">size_t</span> <span style="color: #076678;">i</span> = 0; i != rows; i++) {
-  <span style="color: #9d0006;">for</span> (<span style="color: #8f3f71;">size_t</span> <span style="color: #076678;">j</span> = 0; j != cols; j++) {
+<span style="color: #00af00;">constexpr</span> <span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">rows</span> = 3, <span style="color: #ff8700;">cols</span> = 4;
+<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">ia</span>[rows][cols];
+<span style="color: #00af00;">for</span> (<span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">i</span> = 0; i != rows; i++) {
+  <span style="color: #00af00;">for</span> (<span style="color: #18b2b2;">size_t</span> <span style="color: #ff8700;">j</span> = 0; j != cols; j++) {
     ia[i][j] = i * cols + j;
   }
 }
 
-<span style="color: #a89984;">// </span><span style="color: #a89984;">&#36825;&#20010;&#24490;&#29615;&#20013;&#27809;&#26377;&#20219;&#20309;&#20889;&#25805;&#20316;&#65292;&#20294;&#36824;&#26159;&#23558;&#22806;&#23618;&#30340;&#25511;&#21046;&#21464;&#37327;&#22768;&#26126;&#25104;&#20102;&#24341;&#29992;&#31867;&#22411;</span>
-<span style="color: #a89984;">// </span><span style="color: #a89984;">&#36825;&#26159;&#20026;&#20102;&#36991;&#20813;&#25968;&#32452;&#34987;&#33258;&#21160;&#36716;&#25104;&#25351;&#38024;</span>
-<span style="color: #9d0006;">for</span> (<span style="color: #9d0006;">const</span> <span style="color: #9d0006;">auto</span> &amp;<span style="color: #076678;">row</span> : ia) {
-  <span style="color: #9d0006;">for</span> (<span style="color: #9d0006;">auto</span> <span style="color: #076678;">col</span> : row)
-    cout &lt;&lt; col &lt;&lt; <span style="color: #79740e;">", "</span>;
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#36825;&#20010;&#24490;&#29615;&#20013;&#27809;&#26377;&#20219;&#20309;&#20889;&#25805;&#20316;&#65292;&#20294;&#36824;&#26159;&#23558;&#22806;&#23618;&#30340;&#25511;&#21046;&#21464;&#37327;&#22768;&#26126;&#25104;&#20102;&#24341;&#29992;&#31867;&#22411;</span>
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#36825;&#26159;&#20026;&#20102;&#36991;&#20813;&#25968;&#32452;&#34987;&#33258;&#21160;&#36716;&#25104;&#25351;&#38024;</span>
+<span style="color: #00af00;">for</span> (<span style="color: #00af00;">const</span> <span style="color: #00af00;">auto</span> &amp;<span style="color: #ff8700;">row</span> : ia) {
+  <span style="color: #00af00;">for</span> (<span style="color: #00af00;">auto</span> <span style="color: #ff8700;">col</span> : row)
+    cout &lt;&lt; col &lt;&lt; <span style="color: #ff1f8b;">", "</span>;
   cout &lt;&lt; endl;
 }
 </pre>
@@ -842,27 +842,27 @@ Last elements is: 4
 </div>
 </div>
 
-<div id="outline-container-orgd2d2e73" class="outline-4">
-<h4 id="orgd2d2e73"><span class="section-number-4">1.4.6.</span> 多维数组与指针</h4>
+<div id="outline-container-org6d0ff11" class="outline-4">
+<h4 id="org6d0ff11"><span class="section-number-4">1.4.6.</span> 多维数组与指针</h4>
 <div class="outline-text-4" id="text-1-4-6">
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #9d0006;">using</span> <span style="color: #9d0006;">namespace</span> <span style="color: #8f3f71;">std</span>;
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
 
-<span style="color: #8f3f71;">int</span> <span style="color: #076678;">ia</span>[3][4];
-<span style="color: #8f3f71;">int</span> (*<span style="color: #076678;">p</span>)[4] = ia;   <span style="color: #a89984;">// </span><span style="color: #a89984;">p &#25351;&#21521;&#21547;&#26377; 4 &#20010; int &#30340;&#25968;&#32452;</span>
+<span style="color: #18b2b2;">int</span> <span style="color: #ff8700;">ia</span>[3][4];
+<span style="color: #18b2b2;">int</span> (*<span style="color: #ff8700;">p</span>)[4] = ia;   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">p &#25351;&#21521;&#21547;&#26377; 4 &#20010; int &#30340;&#25968;&#32452;</span>
 p = &amp;ia[2];
 
-<span style="color: #a89984;">// </span><span style="color: #a89984;">&#20351;&#29992; auto &#33258;&#21160;&#25512;&#26029;&#25968;&#32452;&#25351;&#38024;&#31867;&#22411;</span>
-<span style="color: #9d0006;">for</span> (<span style="color: #9d0006;">auto</span> <span style="color: #076678;">p</span> = ia; p != ia + 3; p++) {
-  <span style="color: #9d0006;">for</span> (<span style="color: #9d0006;">auto</span> <span style="color: #076678;">q</span> = *p; q != *p + 4; q++) {
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20351;&#29992; auto &#33258;&#21160;&#25512;&#26029;&#25968;&#32452;&#25351;&#38024;&#31867;&#22411;</span>
+<span style="color: #00af00;">for</span> (<span style="color: #00af00;">auto</span> <span style="color: #ff8700;">p</span> = ia; p != ia + 3; p++) {
+  <span style="color: #00af00;">for</span> (<span style="color: #00af00;">auto</span> <span style="color: #ff8700;">q</span> = *p; q != *p + 4; q++) {
     *q = q - *ia;
   }
 }
 
-<span style="color: #a89984;">// </span><span style="color: #a89984;">&#20351;&#29992; begin &#21644; end &#20989;&#25968;</span>
-<span style="color: #9d0006;">for</span> (<span style="color: #9d0006;">auto</span> <span style="color: #076678;">p</span> = begin(ia); p != end(ia); p++) {
-  <span style="color: #9d0006;">for</span> (<span style="color: #9d0006;">auto</span> <span style="color: #076678;">q</span> = begin(*p); q != end(*p); q++) {
-    cout &lt;&lt; *q &lt;&lt; <span style="color: #79740e;">", "</span>;
+<span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#20351;&#29992; begin &#21644; end &#20989;&#25968;</span>
+<span style="color: #00af00;">for</span> (<span style="color: #00af00;">auto</span> <span style="color: #ff8700;">p</span> = begin(ia); p != end(ia); p++) {
+  <span style="color: #00af00;">for</span> (<span style="color: #00af00;">auto</span> <span style="color: #ff8700;">q</span> = begin(*p); q != end(*p); q++) {
+    cout &lt;&lt; *q &lt;&lt; <span style="color: #ff1f8b;">", "</span>;
   }
   cout &lt;&lt; endl;
 }
@@ -877,17 +877,17 @@ p = &amp;ia[2];
 </div>
 </div>
 
-<div id="outline-container-orga3f1d45" class="outline-4">
-<h4 id="orga3f1d45"><span class="section-number-4">1.4.7.</span> 类型别名简化多维数组指针</h4>
+<div id="outline-container-org2c7924e" class="outline-4">
+<h4 id="org2c7924e"><span class="section-number-4">1.4.7.</span> 类型别名简化多维数组指针</h4>
 <div class="outline-text-4" id="text-1-4-7">
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #9d0006;">using</span> <span style="color: #9d0006;">namespace</span> <span style="color: #8f3f71;">std</span>;
+<pre class="src src-C++"><span style="color: #00af00;">using</span> <span style="color: #00af00;">namespace</span> <span style="color: #1f5bff;">std</span>;
 
-<span style="color: #9d0006;">using</span> <span style="color: #8f3f71;">int_array</span> = <span style="color: #8f3f71;">int</span>[4];   <span style="color: #a89984;">// </span><span style="color: #a89984;">&#26032;&#26631;&#20934;&#30340;&#31867;&#22411;&#21035;&#21517;&#22768;&#26126;</span>
-<span style="color: #9d0006;">typedef</span> <span style="color: #8f3f71;">int</span> <span style="color: #8f3f71;">int_array</span>[4];   <span style="color: #a89984;">// </span><span style="color: #a89984;">&#31561;&#20215;&#30340; typedef &#31867;&#22411;&#21035;&#21517;</span>
+<span style="color: #00af00;">using</span> <span style="color: #18b2b2;">int_array</span> = <span style="color: #18b2b2;">int</span>[4];   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#26032;&#26631;&#20934;&#30340;&#31867;&#22411;&#21035;&#21517;&#22768;&#26126;</span>
+<span style="color: #00af00;">typedef</span> <span style="color: #18b2b2;">int</span> <span style="color: #18b2b2;">int_array</span>[4];   <span style="color: #b2b2b2; font-style: italic;">// </span><span style="color: #b2b2b2; font-style: italic;">&#31561;&#20215;&#30340; typedef &#31867;&#22411;&#21035;&#21517;</span>
 
-<span style="color: #9d0006;">for</span> (<span style="color: #8f3f71;">int_array</span> *<span style="color: #076678;">p</span> = ia; p != ia + 3; p++)
-  <span style="color: #9d0006;">for</span> (<span style="color: #8f3f71;">int</span> *<span style="color: #076678;">q</span> = *p; q != 4; q++)
+<span style="color: #00af00;">for</span> (<span style="color: #18b2b2;">int_array</span> *<span style="color: #ff8700;">p</span> = ia; p != ia + 3; p++)
+  <span style="color: #00af00;">for</span> (<span style="color: #18b2b2;">int</span> *<span style="color: #ff8700;">q</span> = *p; q != 4; q++)
     *q = q - *ia;
 </pre>
 </div>
@@ -900,8 +900,8 @@ p = &amp;ia[2];
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-05-30 Sat 21:03></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
-      <div id="built">Built: <2022-10-23 Sun 09:02></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.1 (<a href="https://orgmode.org">Org</a> mode 9.6.6)</div>
+      <div id="built">Built: <2024-01-27 Sat 21:20></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

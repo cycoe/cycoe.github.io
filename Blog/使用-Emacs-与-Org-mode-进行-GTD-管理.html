@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-10-23 Sun 09:02 -->
+<!-- 2024-01-27 Sat 21:20 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>使用 Emacs 与 Org mode 进行 GTD 管理</title>
@@ -56,18 +56,18 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4c32021">1. 基本想法</a></li>
-<li><a href="#org76a8028">2. 整体流程</a></li>
-<li><a href="#org505d852">3. 任务拆分</a></li>
-<li><a href="#orgdde691b">4. 为任务添加更多属性</a></li>
-<li><a href="#orgd7885e2">5. 查看任务概览</a></li>
-<li><a href="#orgf68f1ed">6. 任务完成</a></li>
-<li><a href="#org411a41c">7. 任务回顾</a></li>
+<li><a href="#orgbe9d6ae">1. 基本想法</a></li>
+<li><a href="#org256b6e7">2. 整体流程</a></li>
+<li><a href="#org68088e1">3. 任务拆分</a></li>
+<li><a href="#org30c2e01">4. 为任务添加更多属性</a></li>
+<li><a href="#org7527fb6">5. 查看任务概览</a></li>
+<li><a href="#orgc3c4f30">6. 任务完成</a></li>
+<li><a href="#org250efac">7. 任务回顾</a></li>
 </ul>
 </div>
 </nav>
 
-<figure id="org935dd57">
+<figure id="org12b4877">
 <img src="使用-Emacs-与-Org-mode-进行-GTD-管理/2020-03-10_17-49-36_1200px-Emacs-logo.svg.png" alt="2020-03-10_17-49-36_1200px-Emacs-logo.svg.png">
 
 </figure>
@@ -81,8 +81,8 @@
 
 <!-- more -->
 
-<div id="outline-container-org4c32021" class="outline-2">
-<h2 id="org4c32021"><span class="section-number-2">1.</span> 基本想法</h2>
+<div id="outline-container-orgbe9d6ae" class="outline-2">
+<h2 id="orgbe9d6ae"><span class="section-number-2">1.</span> 基本想法</h2>
 <div class="outline-text-2" id="text-1">
 <ol class="org-ol">
 <li>从空间尺度上，不同项目隶属于不同的 Org 文件，而不同的 Org 文件加入到不同的
@@ -95,8 +95,8 @@ agenda 中，实现基于项目的管理方式。</li>
 </div>
 </div>
 
-<div id="outline-container-org76a8028" class="outline-2">
-<h2 id="org76a8028"><span class="section-number-2">2.</span> 整体流程</h2>
+<div id="outline-container-org256b6e7" class="outline-2">
+<h2 id="org256b6e7"><span class="section-number-2">2.</span> 整体流程</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 参照 <i>皮波迪</i> 的博客 <a href="https://www.cnblogs.com/quantumman/p/10808174.html">以 Emacs Org mode 为核心的任务管理方案</a>，设计适合自己的工作流。
@@ -117,31 +117,31 @@ agenda 中，实现基于项目的管理方式。</li>
 </ol>
 
 
-<figure id="org48683d2">
+<figure id="org49f17b6">
 <img src="./使用-Emacs-与-Org-mode-进行-GTD-管理/workflow.png" alt="workflow.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-org505d852" class="outline-2">
-<h2 id="org505d852"><span class="section-number-2">3.</span> 任务拆分</h2>
+<div id="outline-container-org68088e1" class="outline-2">
+<h2 id="org68088e1"><span class="section-number-2">3.</span> 任务拆分</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 对于耗时较长的非周期任务，需要拆分成更小的任务来进行处理。大型的任务可以作为单独
 的项目放在单独的 Org 文件中，并使用如下的代码为该项目设定一个单独的 agenda。
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #9d0006;">setq</span> org-agenda-custom-commands
-      '((<span style="color: #79740e;">"n"</span> <span style="color: #79740e;">"Agenda and all TODOs"</span>
-         ((agenda <span style="color: #79740e;">""</span> nil)
-          (alltodo <span style="color: #79740e;">""</span> nil))
+<pre class="src src-emacs-lisp">(<span style="color: #00af00;">setq</span> org-agenda-custom-commands
+      '((<span style="color: #ff1f8b;">"n"</span> <span style="color: #ff1f8b;">"Agenda and all TODOs"</span>
+         ((agenda <span style="color: #ff1f8b;">""</span> nil)
+          (alltodo <span style="color: #ff1f8b;">""</span> nil))
          nil)
-        (<span style="color: #79740e;">"pc"</span> <span style="color: #79740e;">"Learn Org"</span> agenda <span style="color: #79740e;">""</span>
+        (<span style="color: #ff1f8b;">"pc"</span> <span style="color: #ff1f8b;">"Learn Org"</span> agenda <span style="color: #ff1f8b;">""</span>
          ((org-agenda-files
-           '(<span style="color: #79740e;">"~/Orgs/learn-org.org"</span>))
-          (org-agenda-overriding-header <span style="color: #79740e;">"Agenda for learning org mode"</span>))
-         (<span style="color: #79740e;">"~/export/learn-org.html"</span>))))
+           '(<span style="color: #ff1f8b;">"~/Orgs/learn-org.org"</span>))
+          (org-agenda-overriding-header <span style="color: #ff1f8b;">"Agenda for learning org mode"</span>))
+         (<span style="color: #ff1f8b;">"~/export/learn-org.html"</span>))))
 </pre>
 </div>
 <p>
@@ -153,8 +153,8 @@ agenda 上方显示的标题， <code>"~/export/learn-org.html"</code> 为导出
 </div>
 </div>
 
-<div id="outline-container-orgdde691b" class="outline-2">
-<h2 id="orgdde691b"><span class="section-number-2">4.</span> 为任务添加更多属性</h2>
+<div id="outline-container-org30c2e01" class="outline-2">
+<h2 id="org30c2e01"><span class="section-number-2">4.</span> 为任务添加更多属性</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 标签是一种非线性的组织方式，Org mode 中的每一个 headline 都支持标签。在 headline
@@ -168,8 +168,8 @@ agenda 上方显示的标题， <code>"~/export/learn-org.html"</code> 为导出
 </div>
 </div>
 
-<div id="outline-container-orgd7885e2" class="outline-2">
-<h2 id="orgd7885e2"><span class="section-number-2">5.</span> 查看任务概览</h2>
+<div id="outline-container-org7527fb6" class="outline-2">
+<h2 id="org7527fb6"><span class="section-number-2">5.</span> 查看任务概览</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以列视图的模式显示出来。
@@ -184,29 +184,29 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #9d0006;">setq</span> org-columns-default-format <span style="color: #79740e;">"%50ITEM(Task)</span>
-<span style="color: #79740e;">%3PRIORITY(Priority) %5TODO(Status) %8EFFORT(Effort){:}</span>
-<span style="color: #79740e;">%20SCHEDULED %20DEADLINE"</span>)
+<pre class="src src-emacs-lisp">(<span style="color: #00af00;">setq</span> org-columns-default-format <span style="color: #ff1f8b;">"%50ITEM(Task)</span>
+<span style="color: #ff1f8b;">%3PRIORITY(Priority) %5TODO(Status) %8EFFORT(Effort){:}</span>
+<span style="color: #ff1f8b;">%20SCHEDULED %20DEADLINE"</span>)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgf68f1ed" class="outline-2">
-<h2 id="orgf68f1ed"><span class="section-number-2">6.</span> 任务完成</h2>
+<div id="outline-container-orgc3c4f30" class="outline-2">
+<h2 id="orgc3c4f30"><span class="section-number-2">6.</span> 任务完成</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #9d0006;">setq</span>
- <span style="color: #a89984;">;; </span><span style="color: #a89984;">&#24403;&#26631;&#31614;&#36716;&#25442;&#20026; done &#26102;&#33258;&#21160;&#35760;&#24405; close &#26102;&#38388;</span>
- <span style="color: #a89984;">;; </span><span style="color: #a89984;">&#24403;&#26631;&#31614;&#36716;&#25442;&#20026; done &#26102;&#33258;&#21160; clock out</span>
+<pre class="src src-emacs-lisp">(<span style="color: #00af00;">setq</span>
+ <span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">&#24403;&#26631;&#31614;&#36716;&#25442;&#20026; done &#26102;&#33258;&#21160;&#35760;&#24405; close &#26102;&#38388;</span>
+ <span style="color: #b2b2b2; font-style: italic;">;; </span><span style="color: #b2b2b2; font-style: italic;">&#24403;&#26631;&#31614;&#36716;&#25442;&#20026; done &#26102;&#33258;&#21160; clock out</span>
  org-log-done '(time . org-clock-out))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org411a41c" class="outline-2">
-<h2 id="org411a41c"><span class="section-number-2">7.</span> 任务回顾</h2>
+<div id="outline-container-org250efac" class="outline-2">
+<h2 id="org250efac"><span class="section-number-2">7.</span> 任务回顾</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 <code>&lt;C-c C-x C-d&gt;</code> 查看各个任务的耗时与总和。
@@ -219,8 +219,8 @@ Org mode 中有一种叫做列视图的模式，可以将 headline 的属性以�
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-03-06 Fri 19:51></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
-      <div id="built">Built: <2022-10-23 Sun 09:02></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.1 (<a href="https://orgmode.org">Org</a> mode 9.6.6)</div>
+      <div id="built">Built: <2024-01-27 Sat 21:20></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

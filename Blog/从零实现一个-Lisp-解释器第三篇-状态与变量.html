@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-01-27 Sat 21:20 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>从零实现一个 Lisp 解释器第三篇－状态与变量</title>
+<meta name="author" content="Cycoe" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="/static/css/default.css" />
+<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+<script language="JavaScript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="/static/js/main.js"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div id="top-container">
+  <a id="site-name" href="/">Cycoe<span id="at-home">@Home</span></a>
+  <div id="banner">Keep It Simple Stupid</div>
+</div>
+
+<div id="top-nav">
+  <div id="nav-wrapper">
+    <div class="nav-btn" id="toc-wrapper">
+      <span class="vertical-align">Ξ</span>
+      <div id="go-top">
+        <a href="javascript:window.scrollTo(0,0)" style="color: black !important; border-bottom: none !important;" class="tooltip" title="Go to the top of the page">
+        <span class="top">&uarr;</span>
+        </a></div>
+    </div>
+    <div id="nav-left-wrapper">
+      <a class="nav-btn" id="photo-entry" href="/Photo/index.html" title="Photo">Photo</a>
+      <a class="nav-btn" id="about-entry" href="/about.html" title="About Me">About</a>
+      <div id="nav-title-wrapper">
+        <span id="nav-title">从零实现一个 Lisp 解释器第三篇－状态与变量</span>
+        <span id="nav-date">Written @<2023-03-04 Sat 10:44></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div id="img-modal" class="modal">
+  <!-- The Close Button -->
+  <span class="close">&times;</span>
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content" id="img-wrapper">
+  <!-- Modal Caption (Image Text) -->
+  <div id="caption"></div>
+</div>
+</div>
+<div id="content" class="content">
+<header>
+<h1 class="title">从零实现一个 Lisp 解释器第三篇－状态与变量</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org860e677">1. 本系列链接</a></li>
+<li><a href="#orgad9201c">2. 什么是状态？</a></li>
+<li><a href="#org8c234c0">3. 实现状态</a></li>
+<li><a href="#org9e8c0b3">4. 为解释器实现一个 Shell</a></li>
+<li><a href="#orgf969c26">5. 设置变量</a></li>
+<li><a href="#orgc4ba792">6. 使用状态单子管理状态</a></li>
+<li><a href="#org39212f4">7. 异常处理</a></li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-org860e677" class="outline-2">
+<h2 id="org860e677"><span class="section-number-2">1.</span> 本系列链接</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li><a href="从零实现一个-Lisp-解释器第一篇-类型定义与解析.html">从零实现一个-Lisp-解释器第一篇-类型定义与解析.html</a></li>
+<li><a href="从零实现一个-Lisp-解释器第二篇-函数.html">从零实现一个-Lisp-解释器第二篇-函数.html</a></li>
+<li><a href="从零实现一个-Lisp-解释器第三篇-状态与变量.html">从零实现一个-Lisp-解释器第三篇-状态与变量.html</a></li>
+<li><a href="从零实现一个-Lisp-解释器第四篇-lambda-函数与控制语句.html">从零实现一个-Lisp-解释器第四篇-lambda-函数与控制语句.html</a></li>
+</ul>
+
+<p>
+完整代码地址：<a href="https://github.com/cycoe/lisp-interpretor">https://github.com/cycoe/lisp-interpretor</a>
+</p>
+
+<p>
+参考博客：<a href="https://www.defmacro.org/ramblings/lisp-in-haskell.html">https://www.defmacro.org/ramblings/lisp-in-haskell.html</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgad9201c" class="outline-2">
+<h2 id="orgad9201c"><span class="section-number-2">2.</span> 什么是状态？</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+在上一篇中，我们已经实现了 LispFunc 和 LispList 对函数进行表示和调用。
+但这种调用关系其实存在一种限制，我们只能调用 symbols 里面定义好的函数
+和变量，无法在函数运行过程中向 symbols 中添加变量或者对其中的变量进行
+修改。这也就意味着我们每次对相同的表达式进行求值一定得到相同的结果。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(+ a 1 2 3)
+(+ a 1 2 3)
+</pre>
+</div>
+
+<p>
+假设上式中的 <code>a</code> 定义在 symbols 中并且值为 1，那么我们不管在何时何地对
+<code>(+ a 1 2 3)</code> 进行求值结果一定为 7。也就是说我们目前实现的解释器是无状
+态的，特定的输入一定对应着特定的输出，也就没有变量。没有变量也就意味着
+无法处理外部世界的输入，而与外部世界交互正是程序最重要的功能之一。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8c234c0" class="outline-2">
+<h2 id="org8c234c0"><span class="section-number-2">3.</span> 实现状态</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+我们可以将 Lisp 程序中的状态想象为一个始终伴随表达式求值过程的一个盒子，
+每一次求值过程都有可能会对盒子中的内容进行查看（读取）或修改。 一种实
+现方式就是在每次求值时将状态也作为参数传入，再将新的状态作为输出的一部
+分返回，作为下一次求值的输入。那么我们可以这样改写我们的 Lisp 表达式定
+义和 <code>eval</code> 函数。
+</p>
+
+<p>
+首先我们对 LispFunc 类型的签名进行修改，让它能接受一个状态和若干个参数，
+并且返回由新的状态和求值后结果组成的元组。这里我们新增了一个 LispQuot
+类型，这个类型和 LispFunc 具有完全一样的类型签名。但它的特殊之处在于我
+们在对这类函数进行调用时不预先对参数进行求值，这将在后面我们实现一些特
+殊函数时用到。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #00af00;">data</span> <span style="color: #18b2b2;">LispExpr</span> <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">LispInt</span> <span style="color: #18b2b2;">Integer</span>
+              <span style="color: #ff8700;">|</span> <span style="color: #18b2b2;">LispSymbol</span> <span style="color: #18b2b2;">String</span>
+              <span style="color: #ff8700;">|</span> <span style="color: #18b2b2;">LispFunc</span> (<span style="color: #18b2b2;">Context</span> <span style="color: #ff8700;">-&gt;</span> [<span style="color: #18b2b2;">LispExpr</span>] <span style="color: #ff8700;">-&gt;</span> (<span style="color: #18b2b2;">Context</span>, <span style="color: #18b2b2;">LispExpr</span>))
+              <span style="color: #ff8700;">|</span> <span style="color: #18b2b2;">LispQuot</span> (<span style="color: #18b2b2;">Context</span> <span style="color: #ff8700;">-&gt;</span> [<span style="color: #18b2b2;">LispExpr</span>] <span style="color: #ff8700;">-&gt;</span> (<span style="color: #18b2b2;">Context</span>, <span style="color: #18b2b2;">LispExpr</span>))
+              <span style="color: #ff8700;">|</span> <span style="color: #18b2b2;">LispList</span> [<span style="color: #18b2b2;">LispExpr</span>]
+</pre>
+</div>
+
+<p>
+<code>eval</code> 函数也需要做一些调整，LispInt、LispSymbol、LispFunc 和 LispQuot
+类型在求值时不会对状态做修改，因此直接返回原始状态即可。LispList 在求
+值时根据调用的函数是 LispFunc 还是 LispQuot 类型分别进行处理。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #ef2929;">eval</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Context</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">LispExpr</span> <span style="color: #ff8700;">-&gt;</span> (<span style="color: #18b2b2;">Context</span>, <span style="color: #18b2b2;">LispExpr</span>)
+<span style="color: #ef2929;">eval</span> ctx (<span style="color: #18b2b2;">LispInt</span> i)        <span style="color: #ff8700;">=</span> (ctx, <span style="color: #18b2b2;">LispInt</span> i)
+<span style="color: #ef2929;">eval</span> ctx (<span style="color: #18b2b2;">LispSymbol</span> s)     <span style="color: #ff8700;">=</span> (ctx, ctx <span style="color: #ff8700;">Map.!</span> s)
+<span style="color: #ef2929;">eval</span> ctx (<span style="color: #18b2b2;">LispFunc</span> f)       <span style="color: #ff8700;">=</span> (ctx, <span style="color: #18b2b2;">LispFunc</span> f)
+<span style="color: #ef2929;">eval</span> ctx (<span style="color: #18b2b2;">LispQuot</span> f)       <span style="color: #ff8700;">=</span> (ctx, <span style="color: #18b2b2;">LispQuot</span> f)
+<span style="color: #ef2929;">eval</span> ctx (<span style="color: #18b2b2;">LispList</span> (x<span style="color: #18b2b2;">:</span>xs))  <span style="color: #ff8700;">=</span>
+  <span style="color: #00af00;">let</span> (new_ctx, fn) <span style="color: #ff8700;">=</span> eval ctx x
+      (last_ctx, eval_args) <span style="color: #ff8700;">=</span> mapAccumL eval new_ctx xs
+      apply (<span style="color: #18b2b2;">LispFunc</span> f) <span style="color: #ff8700;">=</span> f last_ctx eval_args
+      apply (<span style="color: #18b2b2;">LispQuot</span> f) <span style="color: #ff8700;">=</span> f new_ctx xs
+      apply <span style="color: #00af00;">_</span>            <span style="color: #ff8700;">=</span> undefined
+  <span style="color: #00af00;">in</span>  apply fn
+</pre>
+</div>
+
+<p>
+同样的生成加减乘除算符的函数也需要将状态作为参数，虽然它不会对状态做修
+改，只需将状态作为参数传入井原封不动地传出即可。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #ef2929;">intBinaryOp</span> <span style="color: #ff8700;">::</span> (<span style="color: #18b2b2;">Integer</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Integer</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Integer</span>) <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Context</span> <span style="color: #ff8700;">-&gt;</span> [<span style="color: #18b2b2;">LispExpr</span>] <span style="color: #ff8700;">-&gt;</span> (<span style="color: #18b2b2;">Context</span>, <span style="color: #18b2b2;">LispExpr</span>)
+<span style="color: #ef2929;">intBinaryOp</span> op ctx (x<span style="color: #18b2b2;">:</span>xs) <span style="color: #ff8700;">=</span> (ctx, <span style="color: #18b2b2;">LispInt</span> <span style="color: #ff8700;">$</span> foldl op (unwrapInt x) (map unwrapInt xs)) <span style="color: #00af00;">where</span>
+  unwrapInt <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">LispExpr</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Integer</span>
+  unwrapInt (<span style="color: #18b2b2;">LispInt</span> i) <span style="color: #ff8700;">=</span> i
+  unwrapInt <span style="color: #00af00;">_</span>           <span style="color: #ff8700;">=</span> undefined
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9e8c0b3" class="outline-2">
+<h2 id="org9e8c0b3"><span class="section-number-2">4.</span> 为解释器实现一个 Shell</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+在为我们的解释器增加变量的功能之前，我们需要先为它实现一个 Shell。这个
+Shell 将是我们和 Lisp 程序进行交互的地方，同时它也将承担起在整个交互过
+程中保存状态的角色，让我们可以免于手动进行状态传递。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #ef2929;">shell</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Context</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">InputT</span> <span style="color: #18b2b2;">IO</span> <span style="color: #18b2b2;">()</span>
+<span style="color: #ef2929;">shell</span> ctx <span style="color: #ff8700;">=</span> <span style="color: #00af00;">do</span>
+  mline <span style="color: #ff8700;">&lt;-</span> getInputLine <span style="color: #ff1f8b;">"lisp&gt; "</span>
+  <span style="color: #00af00;">case</span> mline <span style="color: #00af00;">of</span>
+    <span style="color: #18b2b2;">Nothing</span>   <span style="color: #ff8700;">-&gt;</span> shell ctx
+    <span style="color: #18b2b2;">Just</span> line <span style="color: #ff8700;">-&gt;</span> <span style="color: #00af00;">case</span> runParser lispP <span style="color: #ff1f8b;">""</span> <span style="color: #ff1f8b;">"Lisp interpretor"</span> line <span style="color: #00af00;">of</span>
+      <span style="color: #18b2b2;">Left</span> error <span style="color: #ff8700;">-&gt;</span> outputStrLn <span style="color: #ff8700;">$</span> show error
+      <span style="color: #18b2b2;">Right</span> expr <span style="color: #ff8700;">-&gt;</span> <span style="color: #00af00;">do</span>
+        outputStrLn (show (ctx', expr'))
+        shell ctx' <span style="color: #00af00;">where</span>
+          (ctx', expr') <span style="color: #ff8700;">=</span> eval ctx expr
+</pre>
+</div>
+
+<p>
+这里的关键在于每当我们输入一个合法的 Lisp 表达式时，我们对表达式进行求
+值，将得到的新状态和结果打印出来，并将新状态重新传给 shell 函数开始下
+一次输入。 <code>lisp&gt;</code> 是我们定义的 Lisp Shell 提示符，我们在其中输入 <code>(+
+1 2 3)</code> 会得到结果为 6。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell">ghci<span style="color: #ef2929;">&gt;</span> runInputT defaultSettings (shell symbols)
+lisp<span style="color: #ef2929;">&gt;</span> (<span style="color: #ff8700;">+</span> 1 2 3)
+(fromList [(<span style="color: #ff1f8b;">"*"</span>,<span style="color: #ff8700;">&lt;</span>function<span style="color: #ff8700;">&gt;</span>),(<span style="color: #ff1f8b;">"+"</span>,<span style="color: #ff8700;">&lt;</span>function<span style="color: #ff8700;">&gt;</span>),(<span style="color: #ff1f8b;">"-"</span>,<span style="color: #ff8700;">&lt;</span>function<span style="color: #ff8700;">&gt;</span>),(<span style="color: #ff1f8b;">"/"</span>,<span style="color: #ff8700;">&lt;</span>function<span style="color: #ff8700;">&gt;</span>)],6)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf969c26" class="outline-2">
+<h2 id="orgf969c26"><span class="section-number-2">5.</span> 设置变量</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+万事俱备，我们可以简单地实现设置变量的函数。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #ef2929;">lispSet</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Context</span> <span style="color: #ff8700;">-&gt;</span> [<span style="color: #18b2b2;">LispExpr</span>] <span style="color: #ff8700;">-&gt;</span> (<span style="color: #18b2b2;">Context</span>, <span style="color: #18b2b2;">LispExpr</span>)
+<span style="color: #ef2929;">lispSet</span> ctx [<span style="color: #18b2b2;">LispSymbol</span> s, expr] <span style="color: #ff8700;">=</span> (Map.insert s expr ctx, expr)
+
+<span style="color: #ef2929;">symbols</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Context</span>
+<span style="color: #ef2929;">symbols</span> <span style="color: #ff8700;">=</span> Map.fromList
+  [ (<span style="color: #ff1f8b;">"set"</span>, <span style="color: #18b2b2;">LispQuot</span> lispSet)
+  , (<span style="color: #ff1f8b;">"+"</span>, <span style="color: #18b2b2;">LispFunc</span> (intBinaryOp (<span style="color: #ff8700;">+</span>)))
+  , (<span style="color: #ff1f8b;">"-"</span>, <span style="color: #18b2b2;">LispFunc</span> (intBinaryOp (<span style="color: #ff8700;">-</span>)))
+  , (<span style="color: #ff1f8b;">"*"</span>, <span style="color: #18b2b2;">LispFunc</span> (intBinaryOp (<span style="color: #ff8700;">*</span>)))
+  , (<span style="color: #ff1f8b;">"/"</span>, <span style="color: #18b2b2;">LispFunc</span> (intBinaryOp div))
+  ]
+</pre>
+</div>
+
+<p>
+这个函数将传入的 LispSymbol 和表达式作为键值对插入到状态中，并将新的状
+态和表达式返回。我们可以试一下设置变量并使用变量进行求值。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell">lisp<span style="color: #ef2929;">&gt;</span> (set a 1)
+(fromList [(<span style="color: #ff1f8b;">"*"</span>,<span style="color: #ff8700;">&lt;</span>function<span style="color: #ff8700;">&gt;</span>),(<span style="color: #ff1f8b;">"+"</span>,<span style="color: #ff8700;">&lt;</span>function<span style="color: #ff8700;">&gt;</span>),(<span style="color: #ff1f8b;">"-"</span>,<span style="color: #ff8700;">&lt;</span>function<span style="color: #ff8700;">&gt;</span>),(<span style="color: #ff1f8b;">"/"</span>,<span style="color: #ff8700;">&lt;</span>function<span style="color: #ff8700;">&gt;</span>),(<span style="color: #ff1f8b;">"a"</span>,1),(<span style="color: #ff1f8b;">"set"</span>,<span style="color: #ff8700;">&lt;</span>special<span style="color: #ff8700;">-</span>form<span style="color: #ff8700;">&gt;</span>)],1)
+lisp<span style="color: #ef2929;">&gt;</span> (<span style="color: #ff8700;">+</span> a 10)
+(fromList [(<span style="color: #ff1f8b;">"*"</span>,<span style="color: #ff8700;">&lt;</span>function<span style="color: #ff8700;">&gt;</span>),(<span style="color: #ff1f8b;">"+"</span>,<span style="color: #ff8700;">&lt;</span>function<span style="color: #ff8700;">&gt;</span>),(<span style="color: #ff1f8b;">"-"</span>,<span style="color: #ff8700;">&lt;</span>function<span style="color: #ff8700;">&gt;</span>),(<span style="color: #ff1f8b;">"/"</span>,<span style="color: #ff8700;">&lt;</span>function<span style="color: #ff8700;">&gt;</span>),(<span style="color: #ff1f8b;">"a"</span>,1),(<span style="color: #ff1f8b;">"set"</span>,<span style="color: #ff8700;">&lt;</span>special<span style="color: #ff8700;">-</span>form<span style="color: #ff8700;">&gt;</span>)],11)
+</pre>
+</div>
+
+<p>
+我们成功将变量 <code>a = 1</code> 保存到了状态中，现在我们得到一个可以保存变量的
+Lisp 解释器！
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc4ba792" class="outline-2">
+<h2 id="orgc4ba792"><span class="section-number-2">6.</span> 使用状态单子管理状态</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+我们的解释器已经支持管理状态，但是所有函数在定义时都需要显式地将状态传
+入并将新状态返回，导致很多冗余代码且不利于维护。Haskell 中有定义了单子
+（Monad）类型类用于表示这种后一步计算依赖前一步结果的计算模式，State
+单子就是其中的一个实例，用于对状态进行管理。这里我们使用 State Monad
+Transformer 来定义我们的状态，方便后续的异常处理流程。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #00af00;">data</span> <span style="color: #18b2b2;">LispExpr</span> <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">LispInt</span> <span style="color: #18b2b2;">Integer</span>
+              <span style="color: #ff8700;">|</span> <span style="color: #18b2b2;">LispSymbol</span> <span style="color: #18b2b2;">String</span>
+              <span style="color: #ff8700;">|</span> <span style="color: #18b2b2;">LispFunc</span> ([<span style="color: #18b2b2;">LispExpr</span>] <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">LispState</span>)
+              <span style="color: #ff8700;">|</span> <span style="color: #18b2b2;">LispQuot</span> ([<span style="color: #18b2b2;">LispExpr</span>] <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">LispState</span>)
+              <span style="color: #ff8700;">|</span> <span style="color: #18b2b2;">LispList</span> [<span style="color: #18b2b2;">LispExpr</span>]
+
+<span style="color: #00af00;">type</span> <span style="color: #18b2b2;">Context</span>   <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">Map.Map</span> <span style="color: #18b2b2;">String</span> <span style="color: #18b2b2;">LispExpr</span>
+<span style="color: #00af00;">type</span> <span style="color: #18b2b2;">LispState</span> <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">StateT</span> <span style="color: #18b2b2;">Context</span> <span style="color: #18b2b2;">IO</span> <span style="color: #18b2b2;">LispExpr</span>
+</pre>
+</div>
+
+<p>
+上面我们定义了从 IO 单子基础上变换出的 <code>LispState</code> 状态单子类型，并且
+将 LispFunc 和 LispQuot 构造函数的类型做了修改。同样的 <code>eval</code> 函数也需
+要返回我们定义的状态单子，并且我们可以看到经过改造后我们的 <code>apply</code> 函
+数比之前更加精简。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #ef2929;">eval</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">LispExpr</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">LispState</span>
+<span style="color: #ef2929;">eval</span> (<span style="color: #18b2b2;">LispInt</span> i)        <span style="color: #ff8700;">=</span> return <span style="color: #ff8700;">$</span> <span style="color: #18b2b2;">LispInt</span> i
+<span style="color: #ef2929;">eval</span> (<span style="color: #18b2b2;">LispFunc</span> f)       <span style="color: #ff8700;">=</span> return <span style="color: #ff8700;">$</span> <span style="color: #18b2b2;">LispFunc</span> f
+<span style="color: #ef2929;">eval</span> (<span style="color: #18b2b2;">LispQuot</span> f)       <span style="color: #ff8700;">=</span> return <span style="color: #ff8700;">$</span> <span style="color: #18b2b2;">LispQuot</span> f
+<span style="color: #ef2929;">eval</span> (<span style="color: #18b2b2;">LispSymbol</span> s)     <span style="color: #ff8700;">=</span> flip (<span style="color: #ff8700;">Map.!</span>) s <span style="color: #ff8700;">&lt;$&gt;</span> get
+<span style="color: #ef2929;">eval</span> (<span style="color: #18b2b2;">LispList</span> (x<span style="color: #18b2b2;">:</span>xs))  <span style="color: #ff8700;">=</span> <span style="color: #00af00;">do</span>
+  fn <span style="color: #ff8700;">&lt;-</span> eval x
+  apply fn <span style="color: #00af00;">where</span>
+    apply (<span style="color: #18b2b2;">LispQuot</span> f) <span style="color: #ff8700;">=</span> f xs
+    apply (<span style="color: #18b2b2;">LispFunc</span> f) <span style="color: #ff8700;">=</span> mapM eval xs <span style="color: #ff8700;">&gt;&gt;=</span> f
+</pre>
+</div>
+
+<p>
+我们自己定义的内置函数也需要修改类型签名。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #ef2929;">lispSet</span> <span style="color: #ff8700;">::</span> [<span style="color: #18b2b2;">LispExpr</span>] <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">LispState</span>
+<span style="color: #ef2929;">lispSet</span> [<span style="color: #18b2b2;">LispSymbol</span> s, expr] <span style="color: #ff8700;">=</span> <span style="color: #00af00;">do</span>
+  modify <span style="color: #ff8700;">$</span> Map.insert s expr
+  return expr
+
+<span style="color: #ef2929;">intBinaryOp</span> <span style="color: #ff8700;">::</span> (<span style="color: #18b2b2;">Integer</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Integer</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Integer</span>) <span style="color: #ff8700;">-&gt;</span> [<span style="color: #18b2b2;">LispExpr</span>] <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">LispState</span>
+<span style="color: #ef2929;">intBinaryOp</span> op (x<span style="color: #18b2b2;">:</span>xs) <span style="color: #ff8700;">=</span> return <span style="color: #ff8700;">.</span> <span style="color: #18b2b2;">LispInt</span> <span style="color: #ff8700;">$</span> foldl op (unwrapInt x) (map unwrapInt xs) <span style="color: #00af00;">where</span>
+  unwrapInt <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">LispExpr</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Integer</span>
+  unwrapInt (<span style="color: #18b2b2;">LispInt</span> i) <span style="color: #ff8700;">=</span> i
+</pre>
+</div>
+
+<p>
+最后我们在 shell 函数调用 eval 的地方也要做一些修改，使用 <code>runStateT</code>
+对整个状态进行求值。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #ef2929;">shell</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Context</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">InputT</span> <span style="color: #18b2b2;">IO</span> <span style="color: #18b2b2;">()</span>
+<span style="color: #ef2929;">shell</span> ctx <span style="color: #ff8700;">=</span> <span style="color: #00af00;">do</span>
+  mline <span style="color: #ff8700;">&lt;-</span> getInputLine <span style="color: #ff1f8b;">"lisp&gt; "</span>
+  <span style="color: #00af00;">case</span> mline <span style="color: #00af00;">of</span>
+    <span style="color: #18b2b2;">Nothing</span>   <span style="color: #ff8700;">-&gt;</span> shell ctx
+    <span style="color: #18b2b2;">Just</span> line <span style="color: #ff8700;">-&gt;</span> <span style="color: #00af00;">case</span> runParser lispP <span style="color: #ff1f8b;">""</span> <span style="color: #ff1f8b;">"Lisp interpretor"</span> line <span style="color: #00af00;">of</span>
+      <span style="color: #18b2b2;">Left</span> error <span style="color: #ff8700;">-&gt;</span> outputStrLn <span style="color: #ff8700;">$</span> show error
+      <span style="color: #18b2b2;">Right</span> expr <span style="color: #ff8700;">-&gt;</span> <span style="color: #00af00;">do</span>
+        (expr', ctx') <span style="color: #ff8700;">&lt;-</span> liftIO <span style="color: #ff8700;">$</span> runStateT (eval expr) ctx
+        outputStrLn (show (ctx', expr'))
+        shell ctx'
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org39212f4" class="outline-2">
+<h2 id="org39212f4"><span class="section-number-2">7.</span> 异常处理</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+使用 StateT 单子进行状态管理的另一大好处就是易于编写异常处理的代码，只
+需要重新定义一个 <code>ExceptT</code> 异常单子变换，井使用它替换 StateT 单子中的
+IO 即可。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #00af00;">type</span> <span style="color: #18b2b2;">LispError</span> <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">ExceptT</span> <span style="color: #18b2b2;">String</span> <span style="color: #18b2b2;">IO</span>
+<span style="color: #00af00;">type</span> <span style="color: #18b2b2;">LispState</span> <span style="color: #ff8700;">=</span> <span style="color: #18b2b2;">StateT</span> <span style="color: #18b2b2;">Context</span> <span style="color: #18b2b2;">LispError</span> <span style="color: #18b2b2;">LispExpr</span>
+</pre>
+</div>
+
+<p>
+在 eval 函数中我们可以对之前没有处理的异常做一些处理，比如当我们对
+List 进行求值并且 List 中的第一个表达式无法被求值为 LispFunc 或
+LispQuot 这种函数类型时，我们提示用户无法将该表达式求值为函数；当用户
+对空列表进行求值时，我们同样可以抛出异常方便定位问题。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #ef2929;">eval</span> (<span style="color: #18b2b2;">LispList</span> (x<span style="color: #18b2b2;">:</span>xs))  <span style="color: #ff8700;">=</span> <span style="color: #00af00;">do</span>
+  fn <span style="color: #ff8700;">&lt;-</span> eval x
+  apply fn <span style="color: #00af00;">where</span>
+    apply (<span style="color: #18b2b2;">LispQuot</span> f) <span style="color: #ff8700;">=</span> f xs
+    apply (<span style="color: #18b2b2;">LispFunc</span> f) <span style="color: #ff8700;">=</span> mapM eval xs <span style="color: #ff8700;">&gt;&gt;=</span> f
+    apply expr         <span style="color: #ff8700;">=</span> throwError <span style="color: #ff8700;">$</span> <span style="color: #ff1f8b;">"[eval] "</span> <span style="color: #ff8700;">++</span> show expr <span style="color: #ff8700;">++</span> <span style="color: #ff1f8b;">" cannot call as function"</span>
+<span style="color: #ef2929;">eval</span> (<span style="color: #18b2b2;">LispList</span> <span style="color: #18b2b2;">[]</span>) <span style="color: #ff8700;">=</span> throwError <span style="color: #ff1f8b;">"[eval] Cannot eval empty list"</span>
+</pre>
+</div>
+
+<p>
+最后在 <code>shell</code> 函数对我们的状态单子进行求值时需要加一层判断，如果单子
+求值为 <code>Left error</code> 时打印异常，如果为 <code>Right</code> 时打印表达式的求值结果。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #ef2929;">shell</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Context</span> <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">InputT</span> <span style="color: #18b2b2;">IO</span> <span style="color: #18b2b2;">()</span>
+<span style="color: #ef2929;">shell</span> ctx <span style="color: #ff8700;">=</span> <span style="color: #00af00;">do</span>
+  mline <span style="color: #ff8700;">&lt;-</span> getInputLine <span style="color: #ff1f8b;">"lisp&gt; "</span>
+  <span style="color: #00af00;">case</span> mline <span style="color: #00af00;">of</span>
+    <span style="color: #18b2b2;">Nothing</span>   <span style="color: #ff8700;">-&gt;</span> shell ctx
+    <span style="color: #18b2b2;">Just</span> line <span style="color: #ff8700;">-&gt;</span> <span style="color: #00af00;">case</span> runParser lispP <span style="color: #ff1f8b;">""</span> <span style="color: #ff1f8b;">"Lisp interpretor"</span> line <span style="color: #00af00;">of</span>
+      <span style="color: #18b2b2;">Left</span> error <span style="color: #ff8700;">-&gt;</span> outputStrLn <span style="color: #ff8700;">$</span> show error
+      <span style="color: #18b2b2;">Right</span> expr <span style="color: #ff8700;">-&gt;</span> <span style="color: #00af00;">do</span>
+        result <span style="color: #ff8700;">&lt;-</span> liftIO <span style="color: #ff8700;">$</span> runExceptT (runStateT (eval expr) ctx)
+        <span style="color: #00af00;">case</span> result <span style="color: #00af00;">of</span>
+          <span style="color: #18b2b2;">Left</span> error <span style="color: #ff8700;">-&gt;</span> outputStrLn error <span style="color: #ff8700;">&gt;&gt;</span> shell ctx
+          <span style="color: #18b2b2;">Right</span> (expr', ctx') <span style="color: #ff8700;">-&gt;</span> <span style="color: #00af00;">do</span>
+            outputStrLn (show (ctx', expr'))
+            shell ctx'
+</pre>
+</div>
+
+<p>
+通过这两种单子变换的使用可以发现，Haskell 中的单子是一个非常强大的类型
+类，对单子的抽象使得调用者对状态的处理不感知，极大地提高了代码的可读性。
+下面我们试一下我们的解释器是否可以正确的抛出和捕获异常。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell">ghci<span style="color: #ef2929;">&gt;</span> runInputT defaultSettings (shell symbols)
+lisp<span style="color: #ef2929;">&gt;</span> (set a 1)
+(fromList [(<span style="color: #ff1f8b;">"*"</span>,<span style="color: #ff8700;">&lt;</span>function<span style="color: #ff8700;">&gt;</span>),(<span style="color: #ff1f8b;">"+"</span>,<span style="color: #ff8700;">&lt;</span>function<span style="color: #ff8700;">&gt;</span>),(<span style="color: #ff1f8b;">"-"</span>,<span style="color: #ff8700;">&lt;</span>function<span style="color: #ff8700;">&gt;</span>),(<span style="color: #ff1f8b;">"/"</span>,<span style="color: #ff8700;">&lt;</span>function<span style="color: #ff8700;">&gt;</span>),(<span style="color: #ff1f8b;">"a"</span>,1),(<span style="color: #ff1f8b;">"set"</span>,<span style="color: #ff8700;">&lt;</span>special<span style="color: #ff8700;">-</span>form<span style="color: #ff8700;">&gt;</span>)],1)
+lisp<span style="color: #ef2929;">&gt;</span> <span style="color: #18b2b2;">()</span>
+[eval] <span style="color: #18b2b2;">Cannot</span> eval empty list
+lisp<span style="color: #ef2929;">&gt;</span> (a 1)
+[eval] 1 cannot call as function
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="author-info">
+      <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
+      <div id="date">Date: <2023-03-04 Sat 10:44></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.1 (<a href="https://orgmode.org">Org</a> mode 9.6.6)</div>
+      <div id="built">Built: <2024-01-27 Sat 21:20></div>
+      </div><div id="copyright">
+    <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
+</div>
+</div>
+</body>
+</html>

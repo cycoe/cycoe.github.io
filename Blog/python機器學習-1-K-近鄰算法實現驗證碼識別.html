@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-10-23 Sun 09:02 -->
+<!-- 2024-01-27 Sat 21:20 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>[python機器學習-1] K 近鄰算法實現驗證碼識別</title>
@@ -75,7 +75,7 @@ as measured by P, improves with experience E.
 </blockquote>
 
 
-<figure id="org4662af2">
+<figure id="orge983851">
 <img src="http://p1.bpimg.com/587851/b8e80b83eb2b7e31.jpg" alt="b8e80b83eb2b7e31.jpg">
 
 <figcaption><span class="figure-number">Figure 1: </span>image1</figcaption>
@@ -88,7 +88,7 @@ as measured by P, improves with experience E.
 法複雜度理論和編程等等。因爲不是本科涉及的內容，只能一點一點的補。
 </p>
 
-<div class="HTML" id="org04449e3">
+<div class="HTML" id="org836843f">
 <p>
 &lt;!&#x2013;more&#x2013;&gt;
 </p>
@@ -175,20 +175,20 @@ k-近鄰算法的原理很簡單，即選取 m 個已分類的樣本作爲訓練
 <h3 id="分類函數"><span class="section-number-3">3.1.</span> 分類函數</h3>
 <div class="outline-text-3" id="text-分類函數">
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #9d0006;">def</span> <span style="color: #b57614;">classify0</span>(inX, dataSet, labels, k): <span style="color: #a89984;">#</span><span style="color: #a89984;">&#36664;&#20837;(&#24453;&#28204;&#27171;&#26412;&#21521;&#37327;&#65292;&#35347;&#32244;&#27171;&#26412;&#30697;&#38499;&#65292;&#27161;&#31844;&#21521;&#37327;&#65292;k)</span>
-    <span style="color: #076678;">dataSetSize</span> = dataSet.shape[0] <span style="color: #a89984;">#</span><span style="color: #a89984;">shape&#20989;&#25976;&#29992;&#20358;&#35712;&#21462;&#30697;&#38499;&#30340;&#32173;&#30340;&#38263;&#24230;&#65292;&#36820;&#22238;&#20540;&#29234;(4L,2L)</span>
-    <span style="color: #076678;">diffMat</span> = tile(inX, (dataSetSize, 1)) - dataSet <span style="color: #a89984;">#</span><span style="color: #a89984;">tile&#20989;&#25976;&#29992;&#20358;&#37325;&#35079; A=[1,2] tile(A,(2,3)) -&gt; [[1,2,1,2&#65292;1,2], [1,2,1,2,1,2]]</span>
-    <span style="color: #076678;">sqDiffMat</span> = diffMat**2
-    <span style="color: #076678;">sqDistances</span> = sqDiffMat.<span style="color: #af3a03;">sum</span>(axis=1)
-    distances = sqDistances**0.5
+<pre class="src src-python"><span style="color: #00af00;">def</span> <span style="color: #ef2929;">classify0</span>(inX, dataSet, labels, k): <span style="color: #b2b2b2; font-style: italic;">#</span><span style="color: #b2b2b2; font-style: italic;">&#36664;&#20837;(&#24453;&#28204;&#27171;&#26412;&#21521;&#37327;&#65292;&#35347;&#32244;&#27171;&#26412;&#30697;&#38499;&#65292;&#27161;&#31844;&#21521;&#37327;&#65292;k)</span>
+    <span style="color: #ff8700;">dataSetSize</span> = dataSet.shape[0] <span style="color: #b2b2b2; font-style: italic;">#</span><span style="color: #b2b2b2; font-style: italic;">shape&#20989;&#25976;&#29992;&#20358;&#35712;&#21462;&#30697;&#38499;&#30340;&#32173;&#30340;&#38263;&#24230;&#65292;&#36820;&#22238;&#20540;&#29234;(4L,2L)</span>
+    <span style="color: #ff8700;">diffMat</span> = tile(inX, (dataSetSize, 1)) - dataSet <span style="color: #b2b2b2; font-style: italic;">#</span><span style="color: #b2b2b2; font-style: italic;">tile&#20989;&#25976;&#29992;&#20358;&#37325;&#35079; A=[1,2] tile(A,(2,3)) -&gt; [[1,2,1,2&#65292;1,2], [1,2,1,2,1,2]]</span>
+    <span style="color: #ff8700;">sqDiffMat</span> = diffMat**2
+    <span style="color: #ff8700;">sqDistances</span> = sqDiffMat.<span style="color: #b218b2;">sum</span>(axis=1)
+    <span style="color: #ff8700;">distances</span> = sqDistances**0.5
 
-    sortedDistIndicies = distances.argsort()
-    classCount = {}
-    <span style="color: #9d0006;">for</span> i <span style="color: #9d0006;">in</span> <span style="color: #af3a03;">range</span>(k):
-        votedLabel = labels[sortedDistIndicies[i]]
-        classCount[<span style="color: #076678;">votedLabel</span>] = classCount.get(votedLabel, 0) + 1 <span style="color: #a89984;">#</span><span style="color: #a89984;">dict.get(key, default_value)&#20989;&#25976;&#29992;&#20358;&#21462;&#37749;&#23565;&#25033;&#30340;&#20540;&#65292;&#33509;&#37749;&#19981;&#23384;&#22312;&#21063;&#20540;&#29234;defalut_vlaue</span>
-    sortedClassCount = <span style="color: #af3a03;">sorted</span>(classCount.items(), key=operator.itemgetter(1), reverse=<span style="color: #8f3f71;">True</span>) <span style="color: #a89984;">#</span><span style="color: #a89984;">operator.itemgetter(1)&#34920;&#31034;&#26681;&#25818;&#22810;&#32026;&#21015;&#34920;&#30340;&#31532;&#20108;&#20491;&#20803;&#32032;&#36914;&#34892;&#25490;&#24207;</span>
-    <span style="color: #9d0006;">return</span> sortedClassCount[0][0]
+    <span style="color: #ff8700;">sortedDistIndicies</span> = distances.argsort()
+    <span style="color: #ff8700;">classCount</span> = {}
+    <span style="color: #00af00;">for</span> i <span style="color: #00af00;">in</span> <span style="color: #b218b2;">range</span>(k):
+        <span style="color: #ff8700;">votedLabel</span> = labels[sortedDistIndicies[i]]
+        <span style="color: #ff8700;">classCount</span>[votedLabel] = classCount.get(votedLabel, 0) + 1 <span style="color: #b2b2b2; font-style: italic;">#</span><span style="color: #b2b2b2; font-style: italic;">dict.get(key, default_value)&#20989;&#25976;&#29992;&#20358;&#21462;&#37749;&#23565;&#25033;&#30340;&#20540;&#65292;&#33509;&#37749;&#19981;&#23384;&#22312;&#21063;&#20540;&#29234;defalut_vlaue</span>
+    <span style="color: #ff8700;">sortedClassCount</span> = <span style="color: #b218b2;">sorted</span>(classCount.items(), key=operator.itemgetter(1), reverse=<span style="color: #1f5bff;">True</span>) <span style="color: #b2b2b2; font-style: italic;">#</span><span style="color: #b2b2b2; font-style: italic;">operator.itemgetter(1)&#34920;&#31034;&#26681;&#25818;&#22810;&#32026;&#21015;&#34920;&#30340;&#31532;&#20108;&#20491;&#20803;&#32032;&#36914;&#34892;&#25490;&#24207;</span>
+    <span style="color: #00af00;">return</span> sortedClassCount[0][0]
 </pre>
 </div>
 </div>
@@ -199,8 +199,8 @@ k-近鄰算法的原理很簡單，即選取 m 個已分類的樣本作爲訓練
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2017-03-12 Sun></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
-      <div id="built">Built: <2022-10-23 Sun 09:02></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.1 (<a href="https://orgmode.org">Org</a> mode 9.6.6)</div>
+      <div id="built">Built: <2024-01-27 Sat 21:20></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

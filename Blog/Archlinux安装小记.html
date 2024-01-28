@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-10-23 Sun 09:02 -->
+<!-- 2024-01-27 Sat 21:20 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Archlinux 安裝小記</title>
@@ -100,7 +100,7 @@
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell">mount /dev/sdxY /mnt    <span style="color: #a89984;"># </span><span style="color: #a89984;">&#25499;&#36617;&#26681;&#20998;&#21312;</span>
+<pre class="src src-shell">mount /dev/sdxY /mnt    <span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#25499;&#36617;&#26681;&#20998;&#21312;</span>
 
 mkdir /mnt/home
 mkdir /mnt/boot
@@ -118,12 +118,12 @@ mount /dev/sdxY /mnt/boot/grub
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell">mount /dev/sdxY /mnt        <span style="color: #a89984;">#</span><span style="color: #a89984;">&#25499;&#36617;&#26681;&#20998;&#21312;</span>
-<span style="color: #af3a03;">cd</span> /mnt
-btrfs subvolume create @    <span style="color: #a89984;">#</span><span style="color: #a89984;">&#21109;&#24314;&#21517;&#29234; @ &#30340;&#23376;&#21367;</span>
-<span style="color: #af3a03;">cd</span> ~
+<pre class="src src-shell">mount /dev/sdxY /mnt        <span style="color: #b2b2b2; font-style: italic;">#</span><span style="color: #b2b2b2; font-style: italic;">&#25499;&#36617;&#26681;&#20998;&#21312;</span>
+<span style="color: #b218b2;">cd</span> /mnt
+btrfs subvolume create @    <span style="color: #b2b2b2; font-style: italic;">#</span><span style="color: #b2b2b2; font-style: italic;">&#21109;&#24314;&#21517;&#29234; @ &#30340;&#23376;&#21367;</span>
+<span style="color: #b218b2;">cd</span> ~
 umount /mnt
-mount /dev/sdxY /mnt -o <span style="color: #076678;">subvol</span>=@,<span style="color: #076678;">compress</span>=lzo
+mount /dev/sdxY /mnt -o <span style="color: #ff8700;">subvol</span>=@,<span style="color: #ff8700;">compress</span>=lzo
 </pre>
 </div>
 
@@ -170,7 +170,7 @@ mount /dev/sdxY /mnt -o <span style="color: #076678;">subvol</span>=@,<span styl
 <li></li>
 </ul>
 <div class="org-src-container">
-<pre class="src src-shell"><span style="color: #a89984;"># </span><span style="color: #a89984;">nano /etc/locale.gen</span>
+<pre class="src src-shell"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">nano /etc/locale.gen</span>
 en_US.UTF-8 UTF-8
 zh_CN.UTF-8 UTF-8
 zh_TW.UTF-8 UTF-8
@@ -183,8 +183,8 @@ zh_TW.UTF-8 UTF-8
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2017-07-09 Sun></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
-      <div id="built">Built: <2022-10-23 Sun 09:02></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.1 (<a href="https://orgmode.org">Org</a> mode 9.6.6)</div>
+      <div id="built">Built: <2024-01-27 Sat 21:20></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

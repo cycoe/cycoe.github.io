@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-10-23 Sun 09:02 -->
+<!-- 2024-01-27 Sat 21:20 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>使用 matplotlib 进行科学绘图第一弹-matplotlib 初体验</title>
@@ -66,7 +66,7 @@
 </div>
 </nav>
 
-<figure id="orgfe80d87">
+<figure id="org52ef0bc">
 <img src="https://matplotlib.org/_static/logo2_compressed.svg" alt="logo2_compressed.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 1: </span>matplotlib</figcaption>
@@ -108,11 +108,11 @@ matplotlib 有两种明确的编程风格，一种是类似于 matlab 的命令�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #9d0006;">from</span> matplotlib <span style="color: #9d0006;">import</span> pyplot <span style="color: #9d0006;">as</span> plt
-<span style="color: #9d0006;">import</span> numpy <span style="color: #9d0006;">as</span> np
+<pre class="src src-python"><span style="color: #00af00;">from</span> matplotlib <span style="color: #00af00;">import</span> pyplot <span style="color: #00af00;">as</span> plt
+<span style="color: #00af00;">import</span> numpy <span style="color: #00af00;">as</span> np
 
-<span style="color: #076678;">x</span> = np.linspace(0, 10, 100)
-<span style="color: #076678;">y</span> = np.sin(x)
+<span style="color: #ff8700;">x</span> = np.linspace(0, 10, 100)
+<span style="color: #ff8700;">y</span> = np.sin(x)
 plt.plot(x, y)
 plt.xlim(0, 10)
 plt.legend()
@@ -125,13 +125,13 @@ plt.show()
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #9d0006;">from</span> matplotlib <span style="color: #9d0006;">import</span> pyplot <span style="color: #9d0006;">as</span> plt
-<span style="color: #9d0006;">import</span> numpy <span style="color: #9d0006;">as</span> np
+<pre class="src src-python"><span style="color: #00af00;">from</span> matplotlib <span style="color: #00af00;">import</span> pyplot <span style="color: #00af00;">as</span> plt
+<span style="color: #00af00;">import</span> numpy <span style="color: #00af00;">as</span> np
 
-<span style="color: #076678;">x</span> = np.linspace(0, 10, 100)
-<span style="color: #076678;">y</span> = np.sin(x)
-<span style="color: #076678;">fig</span> = plt.figure()
-<span style="color: #076678;">ax</span> = fig.add_subplot(111)
+<span style="color: #ff8700;">x</span> = np.linspace(0, 10, 100)
+<span style="color: #ff8700;">y</span> = np.sin(x)
+<span style="color: #ff8700;">fig</span> = plt.figure()
+<span style="color: #ff8700;">ax</span> = fig.add_subplot(111)
 ax.plot(x, y)
 ax.set_xlim(0, 10)
 ax.legend()
@@ -149,18 +149,18 @@ plt.show()
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #a89984;"># </span><span style="color: #a89984;">&#20174; matplotlib &#20013;&#24341;&#20837; pyplot</span>
-<span style="color: #9d0006;">from</span> matplotlib <span style="color: #9d0006;">import</span> pyplot <span style="color: #9d0006;">as</span> plt
+<pre class="src src-python"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#20174; matplotlib &#20013;&#24341;&#20837; pyplot</span>
+<span style="color: #00af00;">from</span> matplotlib <span style="color: #00af00;">import</span> pyplot <span style="color: #00af00;">as</span> plt
 
-<span style="color: #a89984;"># </span><span style="color: #a89984;">&#32472;&#21046;&#25240;&#32447;&#22270;</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#32472;&#21046;&#25240;&#32447;&#22270;</span>
 plt.plot([1, 2], [1, 2])
-<span style="color: #a89984;"># </span><span style="color: #a89984;">&#26174;&#31034;&#22270;&#20687;</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#26174;&#31034;&#22270;&#20687;</span>
 plt.show()
 </pre>
 </div>
 
 
-<figure id="org0c469fb">
+<figure id="org201709c">
 <img src="使用matplotlib进行科学绘图第一弹-matplotlib初体验/first_blood.png" alt="first_blood.png">
 
 <figcaption><span class="figure-number">Figure 2: </span>第一张图</figcaption>
@@ -171,16 +171,16 @@ plt.show()
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #a89984;"># </span><span style="color: #a89984;">&#20174; matplotlib &#20013;&#24341;&#20837; pyplot</span>
-<span style="color: #9d0006;">from</span> matplotlib <span style="color: #9d0006;">import</span> pyplot <span style="color: #9d0006;">as</span> plt
+<pre class="src src-python"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#20174; matplotlib &#20013;&#24341;&#20837; pyplot</span>
+<span style="color: #00af00;">from</span> matplotlib <span style="color: #00af00;">import</span> pyplot <span style="color: #00af00;">as</span> plt
 
-<span style="color: #a89984;"># </span><span style="color: #a89984;">&#29983;&#25104; figure &#23545;&#35937;&#65292;figure &#23601;&#26159;&#19968;&#24352;&#22270;</span>
-<span style="color: #076678;">fig</span> = plt.figure()
-<span style="color: #a89984;"># </span><span style="color: #a89984;">&#28155;&#21152;&#23376;&#22270; ax</span>
-<span style="color: #076678;">ax</span> = fig.add_subplot(111)
-<span style="color: #a89984;"># </span><span style="color: #a89984;">&#32472;&#21046;&#25240;&#32447;&#22270;</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#29983;&#25104; figure &#23545;&#35937;&#65292;figure &#23601;&#26159;&#19968;&#24352;&#22270;</span>
+<span style="color: #ff8700;">fig</span> = plt.figure()
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#28155;&#21152;&#23376;&#22270; ax</span>
+<span style="color: #ff8700;">ax</span> = fig.add_subplot(111)
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#32472;&#21046;&#25240;&#32447;&#22270;</span>
 ax.plot([1, 2], [1, 2])
-<span style="color: #a89984;"># </span><span style="color: #a89984;">&#26174;&#31034;&#22270;&#20687;</span>
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#26174;&#31034;&#22270;&#20687;</span>
 plt.show()
 </pre>
 </div>
@@ -198,12 +198,12 @@ plt.show()
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #a89984;"># </span><span style="color: #a89984;">&#35774;&#32622;&#23376;&#22270;&#26631;&#39064;</span>
-ax.set_title(<span style="color: #79740e;">"My First Plot"</span>)
-<span style="color: #a89984;"># </span><span style="color: #a89984;">&#35774;&#32622; x &#36724;&#26631;&#31614;</span>
-ax.set_xlabel(<span style="color: #79740e;">'x'</span>)
-<span style="color: #a89984;"># </span><span style="color: #a89984;">&#35774;&#32622; y &#36724;&#26631;&#31614;</span>
-ax.set_ylabel(<span style="color: #79740e;">'y'</span>)
+<pre class="src src-python"><span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622;&#23376;&#22270;&#26631;&#39064;</span>
+ax.set_title(<span style="color: #ff1f8b;">"My First Plot"</span>)
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622; x &#36724;&#26631;&#31614;</span>
+ax.set_xlabel(<span style="color: #ff1f8b;">'x'</span>)
+<span style="color: #b2b2b2; font-style: italic;"># </span><span style="color: #b2b2b2; font-style: italic;">&#35774;&#32622; y &#36724;&#26631;&#31614;</span>
+ax.set_ylabel(<span style="color: #ff1f8b;">'y'</span>)
 </pre>
 </div>
 
@@ -212,12 +212,12 @@ ax.set_ylabel(<span style="color: #79740e;">'y'</span>)
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python">fig.suptitle(<span style="color: #79740e;">"Total Title"</span>)
+<pre class="src src-python">fig.suptitle(<span style="color: #ff1f8b;">"Total Title"</span>)
 </pre>
 </div>
 
 
-<figure id="org43cbed3">
+<figure id="org039ac74">
 <img src="使用matplotlib进行科学绘图第一弹-matplotlib初体验/first_completed_figure.png" alt="first_completed_figure.png">
 
 <figcaption><span class="figure-number">Figure 3: </span>第一张完整图</figcaption>
@@ -234,8 +234,8 @@ ax.set_ylabel(<span style="color: #79740e;">'y'</span>)
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2019-12-05 Thu 22:55></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
-      <div id="built">Built: <2022-10-23 Sun 09:02></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.1 (<a href="https://orgmode.org">Org</a> mode 9.6.6)</div>
+      <div id="built">Built: <2024-01-27 Sat 21:20></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

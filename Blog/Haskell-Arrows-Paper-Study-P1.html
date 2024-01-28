@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-10-23 Sun 12:05 -->
+<!-- 2024-01-27 Sat 21:20 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Haskell Arrows 库论文研读——第一弹</title>
@@ -56,22 +56,22 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org7e06859">1. Point-free 编程</a></li>
-<li><a href="#orgb6feb38">2. Arrow 类型类</a></li>
+<li><a href="#org1a789f9">1. Point-free 编程</a></li>
+<li><a href="#org472c8ac">2. Arrow 类型类</a></li>
 </ul>
 </div>
 </nav>
 <!-- more -->
 
-<div id="outline-container-org7e06859" class="outline-2">
-<h2 id="org7e06859"><span class="section-number-2">1.</span> Point-free 编程</h2>
+<div id="outline-container-org1a789f9" class="outline-2">
+<h2 id="org1a789f9"><span class="section-number-2">1.</span> Point-free 编程</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 编写一个统计字符串中指定单词的个数的函数
 </p>
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #b57614;">count</span> w <span style="color: #076678;">=</span> length <span style="color: #076678;">.</span> filter (<span style="color: #076678;">==</span>w) <span style="color: #076678;">.</span> words
-<span style="color: #b57614;">count</span> <span style="color: #79740e;">"hello"</span> <span style="color: #79740e;">"hello world. hello cycoe."</span>
+<pre class="src src-haskell"><span style="color: #ef2929;">count</span> w <span style="color: #ff8700;">=</span> length <span style="color: #ff8700;">.</span> filter (<span style="color: #ff8700;">==</span>w) <span style="color: #ff8700;">.</span> words
+<span style="color: #ef2929;">count</span> <span style="color: #ff1f8b;">"hello"</span> <span style="color: #ff1f8b;">"hello world. hello cycoe."</span>
 </pre>
 </div>
 
@@ -80,7 +80,7 @@
 加上 <code>print</code> 和 <code>readFile</code>
 </p>
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #b57614;">count</span> w <span style="color: #076678;">=</span> print <span style="color: #076678;">.</span> length <span style="color: #076678;">.</span> filter (<span style="color: #076678;">==</span>w) <span style="color: #076678;">.</span> words <span style="color: #076678;">.</span> readFile
+<pre class="src src-haskell"><span style="color: #ef2929;">count</span> w <span style="color: #ff8700;">=</span> print <span style="color: #ff8700;">.</span> length <span style="color: #ff8700;">.</span> filter (<span style="color: #ff8700;">==</span>w) <span style="color: #ff8700;">.</span> words <span style="color: #ff8700;">.</span> readFile
 </pre>
 </div>
 
@@ -90,8 +90,8 @@
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #b57614;">count</span> w <span style="color: #076678;">=</span> (<span style="color: #076678;">&gt;&gt;=</span> print) <span style="color: #076678;">.</span>
-          liftM (length <span style="color: #076678;">.</span> filter (<span style="color: #076678;">==</span>w) <span style="color: #076678;">.</span> words) <span style="color: #076678;">.</span>
+<pre class="src src-haskell"><span style="color: #ef2929;">count</span> w <span style="color: #ff8700;">=</span> (<span style="color: #ff8700;">&gt;&gt;=</span> print) <span style="color: #ff8700;">.</span>
+          liftM (length <span style="color: #ff8700;">.</span> filter (<span style="color: #ff8700;">==</span>w) <span style="color: #ff8700;">.</span> words) <span style="color: #ff8700;">.</span>
           readFile
 </pre>
 </div>
@@ -101,7 +101,7 @@
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #9d0006;">type</span> <span style="color: #8f3f71;">Kleisli</span> m a b <span style="color: #076678;">=</span> a <span style="color: #076678;">-&gt;</span> m b
+<pre class="src src-haskell"><span style="color: #00af00;">type</span> <span style="color: #18b2b2;">Kleisli</span> m a b <span style="color: #ff8700;">=</span> a <span style="color: #ff8700;">-&gt;</span> m b
 </pre>
 </div>
 
@@ -110,8 +110,8 @@
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #b57614;">readFile</span> <span style="color: #076678;">::</span> <span style="color: #8f3f71;">Kleisli</span> <span style="color: #8f3f71;">IO</span> <span style="color: #8f3f71;">String</span> <span style="color: #8f3f71;">String</span>
-<span style="color: #b57614;">print</span> <span style="color: #076678;">::</span> <span style="color: #8f3f71;">Show</span> a <span style="color: #076678;">=&gt;</span> <span style="color: #8f3f71;">Kleisli</span> <span style="color: #8f3f71;">IO</span> a <span style="color: #8f3f71;">()</span>
+<pre class="src src-haskell"><span style="color: #ef2929;">readFile</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Kleisli</span> <span style="color: #18b2b2;">IO</span> <span style="color: #18b2b2;">String</span> <span style="color: #18b2b2;">String</span>
+<span style="color: #ef2929;">print</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Show</span> a <span style="color: #ff8700;">=&gt;</span> <span style="color: #18b2b2;">Kleisli</span> <span style="color: #18b2b2;">IO</span> a <span style="color: #18b2b2;">()</span>
 </pre>
 </div>
 
@@ -120,8 +120,8 @@
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell">(<span style="color: #b57614;">&gt;&gt;&gt;</span>) <span style="color: #8f3f71;">:</span> <span style="color: #8f3f71;">Monad</span> m <span style="color: #076678;">=&gt;</span> <span style="color: #8f3f71;">Kleisli</span> m a b <span style="color: #076678;">-&gt;</span> <span style="color: #8f3f71;">Kleisli</span> m b c <span style="color: #076678;">-&gt;</span> <span style="color: #8f3f71;">Kleisli</span> m a c
-(f <span style="color: #076678;">&gt;&gt;&gt;</span> g) a <span style="color: #076678;">=</span> <span style="color: #9d0006;">do</span> b <span style="color: #076678;">&lt;-</span> f a
+<pre class="src src-haskell">(<span style="color: #ef2929;">&gt;&gt;&gt;</span>) <span style="color: #18b2b2;">:</span> <span style="color: #18b2b2;">Monad</span> m <span style="color: #ff8700;">=&gt;</span> <span style="color: #18b2b2;">Kleisli</span> m a b <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Kleisli</span> m b c <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Kleisli</span> m a c
+(f <span style="color: #ff8700;">&gt;&gt;&gt;</span> g) a <span style="color: #ff8700;">=</span> <span style="color: #00af00;">do</span> b <span style="color: #ff8700;">&lt;-</span> f a
                  g b
 </pre>
 </div>
@@ -131,7 +131,7 @@
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #b57614;">printFile</span> <span style="color: #076678;">=</span> readFile <span style="color: #076678;">&gt;&gt;&gt;</span> print
+<pre class="src src-haskell"><span style="color: #ef2929;">printFile</span> <span style="color: #ff8700;">=</span> readFile <span style="color: #ff8700;">&gt;&gt;&gt;</span> print
 </pre>
 </div>
 
@@ -141,8 +141,8 @@
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #b57614;">arr</span> <span style="color: #076678;">::</span> <span style="color: #8f3f71;">Monad</span> m <span style="color: #076678;">=&gt;</span> (a <span style="color: #076678;">-&gt;</span> b) <span style="color: #076678;">-&gt;</span> <span style="color: #8f3f71;">Kleisli</span> m a b
-<span style="color: #b57614;">arr</span> f <span style="color: #076678;">=</span> return <span style="color: #076678;">.</span> f
+<pre class="src src-haskell"><span style="color: #ef2929;">arr</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Monad</span> m <span style="color: #ff8700;">=&gt;</span> (a <span style="color: #ff8700;">-&gt;</span> b) <span style="color: #ff8700;">-&gt;</span> <span style="color: #18b2b2;">Kleisli</span> m a b
+<span style="color: #ef2929;">arr</span> f <span style="color: #ff8700;">=</span> return <span style="color: #ff8700;">.</span> f
 </pre>
 </div>
 
@@ -151,27 +151,27 @@
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #b57614;">count</span> w <span style="color: #076678;">=</span> readFile <span style="color: #076678;">&gt;&gt;&gt;</span>
-          arr words <span style="color: #076678;">&gt;&gt;&gt;</span> arr (filter (<span style="color: #076678;">==</span>w)) <span style="color: #076678;">&gt;&gt;&gt;</span> arr length <span style="color: #076678;">&gt;&gt;&gt;</span>
+<pre class="src src-haskell"><span style="color: #ef2929;">count</span> w <span style="color: #ff8700;">=</span> readFile <span style="color: #ff8700;">&gt;&gt;&gt;</span>
+          arr words <span style="color: #ff8700;">&gt;&gt;&gt;</span> arr (filter (<span style="color: #ff8700;">==</span>w)) <span style="color: #ff8700;">&gt;&gt;&gt;</span> arr length <span style="color: #ff8700;">&gt;&gt;&gt;</span>
           print
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgb6feb38" class="outline-2">
-<h2 id="orgb6feb38"><span class="section-number-2">2.</span> Arrow 类型类</h2>
+<div id="outline-container-org472c8ac" class="outline-2">
+<h2 id="org472c8ac"><span class="section-number-2">2.</span> Arrow 类型类</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Arrow 类型类表示实现了 <code>arr</code> 和 <code>&gt;&gt;&gt;</code> 接口的类型
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #9d0006;">class</span> <span style="color: #8f3f71;">Arrow</span> arr <span style="color: #9d0006;">where</span>
-  arr <span style="color: #076678;">::</span> (a <span style="color: #076678;">-&gt;</span> b) <span style="color: #076678;">-&gt;</span> arr a b
-  arr <span style="color: #076678;">=</span> id
-  (<span style="color: #076678;">&gt;&gt;&gt;</span>) <span style="color: #076678;">::</span> arr a b <span style="color: #076678;">-&gt;</span> arr b c <span style="color: #076678;">-&gt;</span> arr a c
-  (<span style="color: #076678;">&gt;&gt;&gt;</span>) <span style="color: #076678;">=</span> flip (<span style="color: #076678;">.</span>)
+<pre class="src src-haskell"><span style="color: #00af00;">class</span> <span style="color: #18b2b2;">Arrow</span> arr <span style="color: #00af00;">where</span>
+  arr <span style="color: #ff8700;">::</span> (a <span style="color: #ff8700;">-&gt;</span> b) <span style="color: #ff8700;">-&gt;</span> arr a b
+  arr <span style="color: #ff8700;">=</span> id
+  (<span style="color: #ff8700;">&gt;&gt;&gt;</span>) <span style="color: #ff8700;">::</span> arr a b <span style="color: #ff8700;">-&gt;</span> arr b c <span style="color: #ff8700;">-&gt;</span> arr a c
+  (<span style="color: #ff8700;">&gt;&gt;&gt;</span>) <span style="color: #ff8700;">=</span> flip (<span style="color: #ff8700;">.</span>)
 </pre>
 </div>
 </div>
@@ -181,8 +181,8 @@ Arrow 类型类表示实现了 <code>arr</code> 和 <code>&gt;&gt;&gt;</code> �
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2022-10-23 Sun 15:17></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
-      <div id="built">Built: <2022-10-23 Sun 12:05></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.1 (<a href="https://orgmode.org">Org</a> mode 9.6.6)</div>
+      <div id="built">Built: <2024-01-27 Sat 21:20></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

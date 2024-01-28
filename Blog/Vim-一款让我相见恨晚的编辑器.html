@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-10-23 Sun 09:02 -->
+<!-- 2024-01-27 Sat 21:20 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Vim &#x2013; 一款讓我相見恨晚的編輯器</title>
@@ -100,7 +100,7 @@ Vim是一款古老且強大的編輯器，從其誕生之日起到現在已經�
 </p>
 
 
-<figure id="org9b82794">
+<figure id="orgd0cc42e">
 <img src="Vim-一款让我相见恨晚的编辑器/learning_curve.jpg" alt="learning_curve.jpg">
 
 <figcaption><span class="figure-number">Figure 1: </span>常见编辑器的学习曲线</figcaption>
@@ -162,7 +162,7 @@ Overflow 上有個專門的問題
 </p>
 
 
-<figure id="orgde00152">
+<figure id="orgbd82610">
 <img src="Vim-一款让我相见恨晚的编辑器/exit_vim.jpg" alt="exit_vim.jpg">
 
 <figcaption><span class="figure-number">Figure 2: </span>如何退出 Vim</figcaption>
@@ -346,7 +346,7 @@ Plug 'junegunn/limelight.vim'                                     " dim others
 Plug 'junegunn/goyo.vim'                                          " provide a dim writing environment
 Plug 'w0rp/ale'                                                   " syntax error check
 Plug 'Valloric/YouCompleteMe',                                    " auto complete
-	    \{ 'do': './install.py --clang-completer' }
+            \{ 'do': './install.py --clang-completer' }
 Plug 'SirVer/ultisnips'                                           " auto complete string
 Plug 'honza/vim-snippets'                                         " complete rules for ultisnips
 Plug 'junegunn/vim-easy-align'                                    " align tool
@@ -471,9 +471,9 @@ let g:ycm_use_ultisnips_completer=1                         " 查詢 ultisnips �
 let g:ycm_key_invoke_completion = '&lt;c-z&gt;'                   " 手動觸發補全的按鍵
 " 使 YCM 能在輸入兩個字母的時候自動基於語義補全
 let g:ycm_semantic_triggers =  {
-	    \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-	    \ 'cs,lua,javascript': ['re!\w{2}'],
-	    \ }
+            \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+            \ 'cs,lua,javascript': ['re!\w{2}'],
+            \ }
 nnoremap &lt;leader&gt;d :YcmCompleter GoToDefinitionElseDeclaration&lt;CR&gt; " goto definition
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif            " 離開插入模式後自動關閉預覽窗口
 autocmd VimEnter * EchoDocEnable
@@ -512,9 +512,9 @@ nmap &lt;silent&gt; &lt;C-j&gt; &lt;Plug&gt;(ale_next_wrap)
 " let b:ale_linters = ['flake8', 'pylint']
 " set fixers for different file types
 let b:ale_fixers = {
-	    \ 'python': ['isort', 'autopep8'],
-	    \ 'cpp': ['clang-format'],
-	    \ 'markdown': ['prettier']}
+            \ 'python': ['isort', 'autopep8'],
+            \ 'cpp': ['clang-format'],
+            \ 'markdown': ['prettier']}
 " let g:ale_linters_explicit = 1
 let g:ale_completion_delay = 500                     " 補全的延遲
 let g:ale_echo_delay = 20                            " 回顯的延遲
@@ -551,8 +551,8 @@ C++ 格式化工具。
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2018-08-12 Sun 22:34></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5)</div>
-      <div id="built">Built: <2022-10-23 Sun 09:02></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.1 (<a href="https://orgmode.org">Org</a> mode 9.6.6)</div>
+      <div id="built">Built: <2024-01-27 Sat 21:20></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
