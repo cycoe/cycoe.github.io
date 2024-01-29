@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-01-29 Mon 23:04 -->
+<!-- 2024-01-29 Mon 23:10 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Haskell &#x2013; 初识 Lens</title>
@@ -253,6 +253,10 @@ firstL :: Functor f =&gt; (String -&gt; f String) -&gt; Name -&gt; f Name
 </pre>
 </div>
 
+<p>
+我们可以尝试定义一个 <code>Const</code> 函子的实例，并且内部保存数字 1。我们在上面作用函数 <code>(+10)</code> ，通过 <code>runConst</code> 函数获取内部值可以发现保存的值仍为 1
+</p>
+
 <div class="org-src-container">
 <pre class="src src-haskell"><span style="color: #ffd700;">c</span> <span style="color: #ff8700;">=</span> <span style="color: #00d7af;">Const</span> 1
 runConst <span style="color: #ffd700;">$</span> (<span style="color: #ff8700;">+</span>10) <span style="color: #ff8700;">&lt;$&gt;</span> c
@@ -367,6 +371,12 @@ Cycoe
 </pre>
 </div>
 
+<pre class="example">
+1
+1
+</pre>
+
+
 <p>
 那么我们可以利用这个函数和 <code>Identity</code> 组合出一个新的函数 <code>Identity . const a</code> ，这个函数不管接收什么参数都会返回我们绑定的变量 <code>a</code> ，那么我们的 <code>set</code> 函数可以实现为
 </p>
@@ -400,6 +410,10 @@ Cycoe
 <pre class="src src-haskell">firstL <span style="color: #ffd700;">.~</span> <span style="color: #ff4ea3;">"Handsome"</span> <span style="color: #ff8700;">$</span> name
 </pre>
 </div>
+
+<pre class="example">
+Name {_first = "Handsome", _last = "Joo"}
+</pre>
 </div>
 </div>
 
@@ -440,6 +454,10 @@ Cycoe
 firstL <span style="color: #ffd700;">%~</span> (map toUpper) <span style="color: #ff8700;">$</span> name
 </pre>
 </div>
+
+<pre class="example">
+Name {_first = "CYCOE", _last = "Joo"}
+</pre>
 </div>
 </div>
 
@@ -457,7 +475,7 @@ firstL <span style="color: #ffd700;">%~</span> (map toUpper) <span style="color:
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2024-01-27 Sat 22:56></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.2 (<a href="https://orgmode.org">Org</a> mode 9.6.15)</div>
-      <div id="built">Built: <2024-01-29 Mon 23:04></div>
+      <div id="built">Built: <2024-01-29 Mon 23:10></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
