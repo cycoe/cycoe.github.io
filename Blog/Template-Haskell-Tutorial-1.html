@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-02-03 Sat 22:13 -->
+<!-- 2024-02-04 Sun 22:40 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Template Haskell 旅程 &#x2013; 第一弹</title>
@@ -60,6 +60,7 @@
 <li><a href="#org1011671">2. 动机</a></li>
 <li><a href="#org09cf647">3. <code>Q Monad</code></a></li>
 <li><a href="#org3934716">4. Splicing</a></li>
+<li><a href="#org562fa52">5. TH 的限制</a></li>
 </ul>
 </div>
 </nav>
@@ -205,9 +206,11 @@ TH 有以下应用：
 </div>
 
 <pre class="example">
-4
-4
-22
+&lt;interactive&gt;:157:3-8: error: Variable not in scope: myFunc :: ExpQ
+&lt;interactive&gt;:164:2-7: error: Variable not in scope: myFunc :: ExpQ
+&lt;interactive&gt;:166:18-23: error:
+    Variable not in scope: myFunc :: ExpQ
+&lt;interactive&gt;:167:1: error: Variable not in scope: f :: t0 -&gt; t
 </pre>
 
 
@@ -216,7 +219,7 @@ TH 有以下应用：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-:eval">makeLens ''MyRecord -- 是的！我们后面也会介绍这种引号语法
+<pre class="src src-:eval">makeLens ''MyRecord    -- 是的！我们后面也会介绍这种引号语法
 $(makeLens ''MyRecord) -- 上面的表示与这行相同
 </pre>
 </div>
@@ -226,13 +229,92 @@ $(makeLens ''MyRecord) -- 上面的表示与这行相同
 </p>
 </div>
 </div>
+
+<div id="outline-container-org562fa52" class="outline-2">
+<h2 id="org562fa52"><span class="section-number-2">5.</span> TH 的限制</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+目前使用 TH 有如下限制：
+</p>
+<ul class="org-ul">
+<li>编译单元的约束——也就是说接合内部只可以使用已编译好的函数，比如定义在别的模块中使用了接合的函数。这是个很讨厌的限制，迫使开发者需要提供一个针对 TH 代码的独立模块，一般命名为 <code>TH</code> ；</li>
+<li><p>
+TH 经常需要你按特定的方式编排你的函数定义，下面引用 GHC 用户手册中的内容来说明：
+</p>
+<blockquote>
+<p>
+顶层的接合将源码文件分割成了许多声明代码块。一个声明代码块由一个顶层的接合声明以及紧随其后的代码组成，直到遇到下一个顶层的接合声明。只有顶层的接合声明会将代码分割，接合表达式不会。模块中的第一个声明代码块包含了从头开始到第一个顶层的接合声明为止的所有顶层定义。
+</p>
+
+<p>
+每个声明代码块都只能在自己块的内部互相递归引用（译注：正常情况下同一个模块中的 Haskell 代码都可以互相引用）。代码块可以引用前面块的定义，不能引用后面的。
+</p>
+</blockquote></li>
+</ul>
+
+<p>
+让我们看一下例子。假设我们想要使用 <code>lens</code> 库去生成一些 <code>lens</code> ，我们会写如下的代码：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #80A0C2;">import</span> <span style="color: #ECCC87;">Control.Lens</span>              <span style="color: #6c6c6c; font-style: italic;">-- </span><span style="color: #747474; font-style: italic;">&#24341;&#20837; Lens &#24211;</span>
+<span style="color: #ECCC87;">:</span>{
+<span style="color: #80A0C2;">data</span> <span style="color: #ECCC87;">MyRecord</span> <span style="color: #dac6d6;">=</span> <span style="color: #ECCC87;">MyRecord</span>         <span style="color: #6c6c6c; font-style: italic;">-- </span><span style="color: #747474; font-style: italic;">&lt;&lt;&lt; &#31532;&#19968;&#20010;&#22768;&#26126;&#20195;&#30721;&#22359;</span>
+  { _myRecordFoo <span style="color: #dac6d6;">::</span> <span style="color: #ECCC87;">Int</span>
+  , _myRecordBar <span style="color: #dac6d6;">::</span> <span style="color: #ECCC87;">Int</span>
+  , _myRecordBaz <span style="color: #dac6d6;">::</span> <span style="color: #ECCC87;">Int</span>
+  }
+<span style="color: #ECCC87;">:</span>}
+
+<span style="color: #ECCC87;">:</span>{
+<span style="color: #8EBCBB;">getRecordFoo</span> <span style="color: #dac6d6;">::</span> <span style="color: #ECCC87;">MyRecord</span> <span style="color: #dac6d6;">-&gt;</span> <span style="color: #ECCC87;">Int</span>
+<span style="color: #8EBCBB;">getRecordFoo</span> <span style="color: #dac6d6;">=</span> view myRecordFoo
+<span style="color: #ECCC87;">:</span>}
+
+<span style="color: #8EBCBB;">makeLenses</span> ''<span style="color: #ECCC87;">MyRecord</span>            <span style="color: #6c6c6c; font-style: italic;">-- </span><span style="color: #747474; font-style: italic;">&lt;&lt;&lt; &#31532;&#20108;&#20010;&#22768;&#26126;&#20195;&#30721;&#22359;</span>
+<span style="color: #7d7d7d; font-style: italic;">-- ^ &#29983;&#25104; lenses: 'myRecordFoo', 'myRecordBar' &#21644; 'myRecordBaz'.</span>
+</pre>
+</div>
+
+<p>
+很可惜，这个代码无法通过编译。第一个声明代码块中包含了 <code>MyRecord</code> 和 <code>getRecordFoo</code> 的定义，但是此时还未生成 lens ，也就是说 <code>myRecordFoo</code> 不在 <code>getRecordFoo</code> 函数的作用域之内。
+</p>
+
+<p>
+我们可以通过将 <code>getRecordFoo</code> 放到 <code>makeLenses ''MyRecord</code> 接合之后来解决这个问题：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #80A0C2;">import</span> <span style="color: #ECCC87;">Control.Lens</span>              <span style="color: #6c6c6c; font-style: italic;">-- </span><span style="color: #747474; font-style: italic;">&#24341;&#20837; Lens &#24211;</span>
+<span style="color: #ECCC87;">:</span>{
+<span style="color: #80A0C2;">data</span> <span style="color: #ECCC87;">MyRecord</span> <span style="color: #dac6d6;">=</span> <span style="color: #ECCC87;">MyRecord</span>         <span style="color: #6c6c6c; font-style: italic;">-- </span><span style="color: #747474; font-style: italic;">&lt;&lt;&lt; &#31532;&#19968;&#20010;&#22768;&#26126;&#20195;&#30721;&#22359;</span>
+  { _myRecordFoo <span style="color: #dac6d6;">::</span> <span style="color: #ECCC87;">Int</span>
+  , _myRecordBar <span style="color: #dac6d6;">::</span> <span style="color: #ECCC87;">Int</span>
+  , _myRecordBaz <span style="color: #dac6d6;">::</span> <span style="color: #ECCC87;">Int</span>
+  }
+<span style="color: #ECCC87;">:</span>}
+
+<span style="color: #8EBCBB;">makeLenses</span> ''<span style="color: #ECCC87;">MyRecord</span>            <span style="color: #6c6c6c; font-style: italic;">-- </span><span style="color: #747474; font-style: italic;">&lt;&lt;&lt; &#31532;&#20108;&#20010;&#22768;&#26126;&#20195;&#30721;&#22359;</span>
+
+<span style="color: #ECCC87;">:</span>{
+<span style="color: #8EBCBB;">getRecordFoo</span> <span style="color: #dac6d6;">::</span> <span style="color: #ECCC87;">MyRecord</span> <span style="color: #dac6d6;">-&gt;</span> <span style="color: #ECCC87;">Int</span>  <span style="color: #6c6c6c; font-style: italic;">-- </span><span style="color: #747474; font-style: italic;">&#33021;&#20174;&#21069;&#19968;&#20010;&#20195;&#30721;&#22359;&#20013;&#8220;&#30475;&#21040;&#8221; MyRecord &#20989;&#25968;&#20102;</span>
+<span style="color: #8EBCBB;">getRecordFoo</span> <span style="color: #dac6d6;">=</span> view myRecordFoo
+<span style="color: #ECCC87;">:</span>}
+</pre>
+</div>
+
+<p>
+现在，第一个声明代码块由 <code>MyRecord</code> 组成，“看不到” <code>getRecordFoo</code> 的实现。如果你需要“看到”它的话，你只能将所有使用了 <code>getRecordFoo</code> 的函数移到第二个代码块，也就是 <code>makeLenses ''MyRecord</code> 之后。在大部分场景下这不是个大问题（毕竟大部分的语言都要求将函数定义写在调用处之前），尽管如此如果我们习惯了 Haskell 本身这种不关心定义顺序的特性，这个限制还是有些令人遗憾的。
+</p>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2024-02-03 Sat 12:00></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.2 (<a href="https://orgmode.org">Org</a> mode 9.6.15)</div>
-      <div id="built">Built: <2024-02-03 Sat 22:13></div>
+      <div id="built">Built: <2024-02-04 Sun 22:40></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
