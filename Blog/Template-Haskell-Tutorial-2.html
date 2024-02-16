@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-02-04 Sun 22:40 -->
+<!-- 2024-02-16 Fri 21:27 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Template Haskell 旅程 &#x2013; 第二弹</title>
@@ -57,6 +57,7 @@
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
 <li><a href="#orgd6f7372">1. 引用</a></li>
+<li><a href="#org0ff906a">2. 带类型的表达式</a></li>
 </ul>
 </div>
 </nav>
@@ -70,7 +71,7 @@
 </p>
 
 <p>
-幸运的是，有一种叫做引用的方法可以从任意 Haskell 代码中获取语法树。通过启用 <code>TemplateHaskell</code> 扩展我们将获得 4 种类型的引用：
+幸运的是，有一种叫做引用的方法可以从任意 Haskell 代码中获取语法树。通过启用 <code>TemplateHaskell</code> 扩展我们将获得 5 种类型（译注：此处原文为 4 种应为笔误）的引用：
 </p>
 
 <table>
@@ -93,35 +94,122 @@
 <tbody>
 <tr>
 <td class="org-left">声明</td>
-<td class="org-left"><code>[\textbar{}d ... \textbar{}]</code></td>
+<td class="org-left"><code>[\vert{}d ... \vert{}]</code></td>
 <td class="org-left"><code>Q [Dec]</code></td>
 </tr>
 
 <tr>
 <td class="org-left">表达式</td>
-<td class="org-left"><code>[\textbar{}e ... \textbar{}]</code></td>
+<td class="org-left"><code>[\vert{}e ... \vert{}]</code></td>
 <td class="org-left"><code>Q Exp</code></td>
 </tr>
 
 <tr>
 <td class="org-left">带类型的表达式</td>
-<td class="org-left"><code>[\textbar{}\textbar ... \textbar{}\textbar{}]</code></td>
+<td class="org-left"><code>[\vert{}\vert ... \vert{}\vert{}]</code></td>
 <td class="org-left"><code>Q (TExp a)</code></td>
 </tr>
 
 <tr>
 <td class="org-left">类型</td>
-<td class="org-left"><code>[\textbar{}t ... \textbar{}]</code></td>
+<td class="org-left"><code>[\vert{}t ... \vert{}]</code></td>
 <td class="org-left"><code>Q Type</code></td>
 </tr>
 
 <tr>
 <td class="org-left">模式</td>
-<td class="org-left"><code>[\textbar{}p ... \textbar{}]</code></td>
+<td class="org-left"><code>[\vert{}p ... \vert{}]</code></td>
 <td class="org-left"><code>Q Pat</code></td>
 </tr>
 </tbody>
 </table>
+
+<p>
+相同的代码在不同的上下文中代表不同的含义，因此我们需要这几种不同类型的引用。比如：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell">[e<span style="color: #ff8700;">|</span> <span style="color: #18b2b2;">Just</span> x <span style="color: #ff8700;">|</span>] <span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">&#34920;&#36798;&#24335;</span>
+[p<span style="color: #ff8700;">|</span> <span style="color: #18b2b2;">Just</span> x <span style="color: #ff8700;">|</span>] <span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">&#27169;&#24335;</span>
+</pre>
+</div>
+
+<pre class="example">
+&lt;interactive&gt;:2:12-13: error: parse error on input ‘|]’
+&lt;interactive&gt;:3:12-13: error: parse error on input ‘|]’
+</pre>
+
+
+<p>
+其中表达式是最常用的，因此不带具体类型的引用语法 <code>[| ... |]</code> 等价于 <code>[e| ... |]</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell">[<span style="color: #ff8700;">|</span> <span style="color: #18b2b2;">Just</span> x <span style="color: #ff8700;">|</span>] <span style="color: #b2b2b2; font-style: italic;">-- </span><span style="color: #b2b2b2; font-style: italic;">&#21516;&#26679;&#26159;&#34920;&#36798;&#24335;</span>
+</pre>
+</div>
+
+<pre class="example">
+&lt;interactive&gt;:5:1-12: error:
+    • Syntax error on [| Just x |]
+      Perhaps you intended to use TemplateHaskell or TemplateHaskellQuotes
+    • In the Template Haskell quotation [| Just x |]
+</pre>
+
+
+<p>
+引用不仅可以用于快速探索 Haskell 代码片段的表示方式，还可用于生成抽象语法树：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #18b2b2;">:</span>{
+<span style="color: #ef2929;">myFunc</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Q</span> <span style="color: #18b2b2;">Exp</span>
+<span style="color: #ef2929;">myFunc</span> <span style="color: #ff8700;">=</span> [<span style="color: #ff8700;">|</span> <span style="color: #ff8700;">\</span>x <span style="color: #ff8700;">-&gt;</span> x <span style="color: #ff8700;">+</span> 1 <span style="color: #ff8700;">|</span>]
+<span style="color: #18b2b2;">:</span>}
+</pre>
+</div>
+
+<p>
+你肯定也觉得这个版本的 <code>myFunc</code> 更短更易理解（译注：相较于上一篇博客中介绍的手动构造语法树的方法）。更牛逼的地方在于引用内部也可以使用接合：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #18b2b2;">:</span>{
+<span style="color: #ef2929;">add2</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Q</span> <span style="color: #18b2b2;">Exp</span>
+<span style="color: #ef2929;">add2</span> <span style="color: #ff8700;">=</span> [<span style="color: #ff8700;">|</span> <span style="color: #ff8700;">$</span>myFunc <span style="color: #ff8700;">.</span> <span style="color: #ff8700;">$</span>myFunc <span style="color: #ff8700;">|</span>]
+<span style="color: #18b2b2;">:</span>}
+</pre>
+</div>
+
+<p>
+通过这种方式书写模板更符合编程习惯，只需要在不同代码片段中使用接合就可以改变算法。不过需要注意的是截止 GHC 8.2.2 版本，暂不支持在声明的引用中使用声明的接合。
+</p>
+
+<p>
+下面我们试一下生成的 <code>add2</code> 函数：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #ef2929;">runQ</span> add2
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0ff906a" class="outline-2">
+<h2 id="org0ff906a"><span class="section-number-2">2.</span> 带类型的表达式</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+带类型的表达式的引用有一点特殊，它是生成 <code>TExp a</code> 类型的唯一方式，也就是说它是 <code>TExp</code> 类型的构造方法。使用带类型的表达式，编译器就能确定指定的类型与内部的类型相对应。比如，我们尝试使用引用带类型的表达式的方式重写 <code>myFunc</code> 函数：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #18b2b2;">:</span>{
+<span style="color: #ef2929;">myFuncTyped</span> <span style="color: #ff8700;">::</span> (<span style="color: #18b2b2;">Quote</span> m, <span style="color: #18b2b2;">Num</span> a) <span style="color: #ff8700;">=&gt;</span> <span style="color: #18b2b2;">Code</span> m (a <span style="color: #ff8700;">-&gt;</span> a)
+<span style="color: #ef2929;">myFuncTyped</span> <span style="color: #ff8700;">=</span> [<span style="color: #ff8700;">||</span> <span style="color: #ff8700;">\</span>x <span style="color: #ff8700;">-&gt;</span> x <span style="color: #ff8700;">+</span> 1 <span style="color: #ff8700;">||</span>]
+<span style="color: #18b2b2;">:</span>}
+</pre>
+</div>
 </div>
 </div>
 </div>
@@ -130,7 +218,7 @@
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2024-02-04 Sun 22:20></div>
       <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.2 (<a href="https://orgmode.org">Org</a> mode 9.6.15)</div>
-      <div id="built">Built: <2024-02-04 Sun 22:40></div>
+      <div id="built">Built: <2024-02-16 Fri 21:27></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
