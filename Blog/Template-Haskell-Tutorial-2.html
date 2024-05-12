@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-02-16 Fri 21:27 -->
+<!-- 2024-05-12 Sun 20:13 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Template Haskell 旅程 &#x2013; 第二弹</title>
@@ -193,6 +193,12 @@
 <pre class="src src-haskell"><span style="color: #ef2929;">runQ</span> add2
 </pre>
 </div>
+
+<pre class="example">
+&lt;interactive&gt;:7:1-4: error: Variable not in scope: runQ :: t0 -&gt; t
+
+&lt;interactive&gt;:7:6-9: error: Variable not in scope: add2
+</pre>
 </div>
 </div>
 
@@ -205,11 +211,17 @@
 
 <div class="org-src-container">
 <pre class="src src-haskell"><span style="color: #18b2b2;">:</span>{
-<span style="color: #ef2929;">myFuncTyped</span> <span style="color: #ff8700;">::</span> (<span style="color: #18b2b2;">Quote</span> m, <span style="color: #18b2b2;">Num</span> a) <span style="color: #ff8700;">=&gt;</span> <span style="color: #18b2b2;">Code</span> m (a <span style="color: #ff8700;">-&gt;</span> a)
+<span style="color: #ef2929;">myFuncTyped</span> <span style="color: #ff8700;">::</span> <span style="color: #18b2b2;">Num</span> a <span style="color: #ff8700;">=&gt;</span> <span style="color: #18b2b2;">Code</span> <span style="color: #18b2b2;">Q</span> (a <span style="color: #ff8700;">-&gt;</span> a)
 <span style="color: #ef2929;">myFuncTyped</span> <span style="color: #ff8700;">=</span> [<span style="color: #ff8700;">||</span> <span style="color: #ff8700;">\</span>x <span style="color: #ff8700;">-&gt;</span> x <span style="color: #ff8700;">+</span> 1 <span style="color: #ff8700;">||</span>]
 <span style="color: #18b2b2;">:</span>}
 </pre>
 </div>
+
+<blockquote>
+<p>
+译注：此处原文中的类型为 <code>Q (TExp a)</code> ，但在译者的 GHC9.0.2 版本的编译器中带类型的引用表达式被推断为类型 <code>Num a =&gt; Code Q (a -&gt; a)</code> 。 <code>Code</code> 的类型定义为 <code>newtype Code m a = Code {examineCode :: m (TExp a)}</code> ，可以看到新的 <code>Code</code>
+</p>
+</blockquote>
 </div>
 </div>
 </div>
@@ -217,8 +229,8 @@
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2024-02-04 Sun 22:20></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.2 (<a href="https://orgmode.org">Org</a> mode 9.6.15)</div>
-      <div id="built">Built: <2024-02-16 Fri 21:27></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.3 (<a href="https://orgmode.org">Org</a> mode 9.6.15)</div>
+      <div id="built">Built: <2024-05-12 Sun 20:13></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>

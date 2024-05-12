@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-01-27 Sat 21:20 -->
+<!-- 2024-05-12 Sun 20:13 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>移动语义与完美转发</title>
@@ -202,6 +202,7 @@ add(1, 2) = ret;
   <span style="color: #1f5bff;">std</span>::swap(<span style="color: #00af00;">this</span>-&gt;str, rhs.str);
 
   ++cpyAsgnCnt;
+  <span style="color: #00af00;">return</span> *<span style="color: #00af00;">this</span>;
 }
 
 <span style="color: #1f5bff;">String</span>::<span style="color: #ef2929;">String</span>(<span style="color: #18b2b2;">String</span>&amp;&amp; <span style="color: #ff8700;">rhs</span>)
@@ -294,33 +295,276 @@ add(1, 2) = ret;
 </pre>
 </div>
 
-<pre class="example" id="orgdd1088b">
-===== Construct String with left value =====
-Copy Construct: 1000
-Copy Assignment: 0
-Move Construct: 0
-Destruct: 0
-===== Construct String with right value =====
-Copy Construct: 0
-Copy Assignment: 0
-Move Construct: 1000
-Destruct: 1000
-===== Construct String with std::move =====
-Copy Construct: 0
-Copy Assignment: 0
-Move Construct: 1
-Destruct: 0
-===== Copy Assignment =====
-Copy Construct: 1
-Copy Assignment: 1
-Move Construct: 0
-Destruct: 1
-===== Move Assignment =====
-Copy Construct: 0
-Copy Assignment: 1
-Move Construct: 1
-Destruct: 1
-</pre>
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-right">
+
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><code>===</code></td>
+<td class="org-left">Construct</td>
+<td class="org-right">String</td>
+<td class="org-left">with</td>
+<td class="org-left">left</td>
+<td class="org-left">value</td>
+<td class="org-left"><code>===</code></td>
+</tr>
+
+<tr>
+<td class="org-left">Copy</td>
+<td class="org-left">Construct:</td>
+<td class="org-right">1000</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Copy</td>
+<td class="org-left">Assignment:</td>
+<td class="org-right">0</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Move</td>
+<td class="org-left">Construct:</td>
+<td class="org-right">0</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Destruct:</td>
+<td class="org-left">0</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>===</code></td>
+<td class="org-left">Construct</td>
+<td class="org-right">String</td>
+<td class="org-left">with</td>
+<td class="org-left">right</td>
+<td class="org-left">value</td>
+<td class="org-left"><code>===</code></td>
+</tr>
+
+<tr>
+<td class="org-left">Copy</td>
+<td class="org-left">Construct:</td>
+<td class="org-right">0</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Copy</td>
+<td class="org-left">Assignment:</td>
+<td class="org-right">0</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Move</td>
+<td class="org-left">Construct:</td>
+<td class="org-right">1000</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Destruct:</td>
+<td class="org-left">1000</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>===</code></td>
+<td class="org-left">Construct</td>
+<td class="org-right">String</td>
+<td class="org-left">with</td>
+<td class="org-left">std::move</td>
+<td class="org-left"><code>===</code></td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Copy</td>
+<td class="org-left">Construct:</td>
+<td class="org-right">0</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Copy</td>
+<td class="org-left">Assignment:</td>
+<td class="org-right">0</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Move</td>
+<td class="org-left">Construct:</td>
+<td class="org-right">1</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Destruct:</td>
+<td class="org-left">0</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>===</code></td>
+<td class="org-left">Copy</td>
+<td class="org-right">Assignment</td>
+<td class="org-left"><code>===</code></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Copy</td>
+<td class="org-left">Construct:</td>
+<td class="org-right">1</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Copy</td>
+<td class="org-left">Assignment:</td>
+<td class="org-right">1</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Move</td>
+<td class="org-left">Construct:</td>
+<td class="org-right">0</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Destruct:</td>
+<td class="org-left">1</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>===</code></td>
+<td class="org-left">Move</td>
+<td class="org-right">Assignment</td>
+<td class="org-left"><code>===</code></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Copy</td>
+<td class="org-left">Construct:</td>
+<td class="org-right">0</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Copy</td>
+<td class="org-left">Assignment:</td>
+<td class="org-right">1</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Move</td>
+<td class="org-left">Construct:</td>
+<td class="org-right">1</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Destruct:</td>
+<td class="org-left">1</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
@@ -366,12 +610,26 @@ Destruct: 1
 </pre>
 </div>
 
-<pre class="example">
-int&amp;
-int&amp;
-int
-</pre>
+<table>
 
+
+<colgroup>
+<col  class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">int&amp;</td>
+</tr>
+
+<tr>
+<td class="org-left">int&amp;</td>
+</tr>
+
+<tr>
+<td class="org-left">int</td>
+</tr>
+</tbody>
+</table>
 
 <p>
 <code>T&amp;&amp;</code> 表现出一种特性，能通过引用折叠规则保持传入参数的引用性质，因此也被称为通过引
@@ -425,17 +683,76 @@ int
 </pre>
 </div>
 
-<pre class="example">
-===== Before forward =====
-Handle int&amp;
-Handle int&amp;&amp;
-Handle int&amp;&amp;
-===== After forward =====
-Handle int&amp;
-Handle int&amp;
-Handle int&amp;
-</pre>
+<table>
 
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><code>===</code></td>
+<td class="org-left">Before</td>
+<td class="org-left">forward</td>
+<td class="org-left"><code>===</code></td>
+</tr>
+
+<tr>
+<td class="org-left">Handle</td>
+<td class="org-left">int&amp;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Handle</td>
+<td class="org-left">int&amp;&amp;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Handle</td>
+<td class="org-left">int&amp;&amp;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>===</code></td>
+<td class="org-left">After</td>
+<td class="org-left">forward</td>
+<td class="org-left"><code>===</code></td>
+</tr>
+
+<tr>
+<td class="org-left">Handle</td>
+<td class="org-left">int&amp;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Handle</td>
+<td class="org-left">int&amp;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Handle</td>
+<td class="org-left">int&amp;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
 
 <p>
 可以看到在经过转发之后参数的引用类型发生了变化，因此不是完美转发。 <code>C++11</code> 提供了
@@ -491,18 +808,90 @@ Handle int&amp;
 </pre>
 </div>
 
-<pre class="example" id="orgd04d80d">
-===== Before forward =====
-Handle int&amp;
-Handle int&amp;&amp;
-Handle int const&amp;
-Handle int const&amp;&amp;
-===== After forward =====
-Handle int&amp;
-Handle int&amp;&amp;
-Handle int const&amp;
-Handle int const&amp;&amp;
-</pre>
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><code>===</code></td>
+<td class="org-left">Before</td>
+<td class="org-left">forward</td>
+<td class="org-left"><code>===</code></td>
+</tr>
+
+<tr>
+<td class="org-left">Handle</td>
+<td class="org-left">int&amp;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Handle</td>
+<td class="org-left">int&amp;&amp;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Handle</td>
+<td class="org-left">int</td>
+<td class="org-left">const&amp;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Handle</td>
+<td class="org-left">int</td>
+<td class="org-left">const&amp;&amp;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>===</code></td>
+<td class="org-left">After</td>
+<td class="org-left">forward</td>
+<td class="org-left"><code>===</code></td>
+</tr>
+
+<tr>
+<td class="org-left">Handle</td>
+<td class="org-left">int&amp;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Handle</td>
+<td class="org-left">int&amp;&amp;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Handle</td>
+<td class="org-left">int</td>
+<td class="org-left">const&amp;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Handle</td>
+<td class="org-left">int</td>
+<td class="org-left">const&amp;&amp;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
@@ -558,10 +947,46 @@ Handle int const&amp;&amp;
 </pre>
 </div>
 
-<pre class="example">
-a + b = 3
-a * b * c = 6
-</pre>
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-right">
+
+<col  class="org-left">
+
+<col  class="org-right">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">a</td>
+<td class="org-left">+</td>
+<td class="org-left">b</td>
+<td class="org-left">=</td>
+<td class="org-right">3</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">a</td>
+<td class="org-left">*</td>
+<td class="org-left">b</td>
+<td class="org-left">*</td>
+<td class="org-right">c</td>
+<td class="org-left">=</td>
+<td class="org-right">6</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div id="outline-container-orge9890d7" class="outline-2">
@@ -715,18 +1140,102 @@ a * b * c = 6
 </pre>
 </div>
 
-<pre class="example" id="org83473a8">
-===== Use push back =====
-Default Construct: 1000
-Copy Construct: 0
-Move Construct: 1000
-Destruct: 1000
-===== Use emplace back =====
-Default Construct: 1000
-Copy Construct: 0
-Move Construct: 0
-Destruct: 0
-</pre>
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-right">
+
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><code>===</code></td>
+<td class="org-left">Use</td>
+<td class="org-right">push</td>
+<td class="org-left">back</td>
+<td class="org-left"><code>===</code></td>
+</tr>
+
+<tr>
+<td class="org-left">Default</td>
+<td class="org-left">Construct:</td>
+<td class="org-right">1000</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Copy</td>
+<td class="org-left">Construct:</td>
+<td class="org-right">0</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Move</td>
+<td class="org-left">Construct:</td>
+<td class="org-right">1000</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Destruct:</td>
+<td class="org-left">1000</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>===</code></td>
+<td class="org-left">Use</td>
+<td class="org-right">emplace</td>
+<td class="org-left">back</td>
+<td class="org-left"><code>===</code></td>
+</tr>
+
+<tr>
+<td class="org-left">Default</td>
+<td class="org-left">Construct:</td>
+<td class="org-right">1000</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Copy</td>
+<td class="org-left">Construct:</td>
+<td class="org-right">0</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Move</td>
+<td class="org-left">Construct:</td>
+<td class="org-right">0</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Destruct:</td>
+<td class="org-left">0</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -734,8 +1243,8 @@ Destruct: 0
 <div id="author-info">
       <div id="author">Author: Cycoe (cycoejoo@163.com)</div>
       <div id="date">Date: <2020-08-15 Sat 22:43></div>
-      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.1 (<a href="https://orgmode.org">Org</a> mode 9.6.6)</div>
-      <div id="built">Built: <2024-01-27 Sat 21:20></div>
+      <div id="generator">Generator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.3 (<a href="https://orgmode.org">Org</a> mode 9.6.15)</div>
+      <div id="built">Built: <2024-05-12 Sun 20:13></div>
       </div><div id="copyright">
     <img id="cc" src="/static/img/Cc-logo-128x128.png" height="14px" width="14px"/>本站文章如未特殊声明，默认采用<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/" target="_blank">署名-非商业性使用-相同方式共享 2.5 中国大陆</a>进行许可。
 </div>
